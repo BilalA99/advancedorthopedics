@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { LocationPermissionDialog } from "@/components/locationpermissiondialog"
 import { useGeolocation } from "@/providers/geolocationcontext"
+import { CONSENT_UPDATED_EVENT, hasFunctionalConsent } from "@/lib/consent"
 interface DelayedLocationPopupProps {
   delayInSeconds?: number
   sessionStorageKey?: string
@@ -13,8 +14,19 @@ export function DelayedLocationPopup({
   sessionStorageKey = "location_popup_shown",
 }: DelayedLocationPopupProps) {
   const [showPopup, setShowPopup] = useState(false)
-  const { location, onSetLocation } = useGeolocation()
+  const [functionalAllowed, setFunctionalAllowed] = useState(false)
+  const { onSetLocation } = useGeolocation()
+
   useEffect(() => {
+    setFunctionalAllowed(hasFunctionalConsent())
+
+    const handleConsentUpdated = () => setFunctionalAllowed(hasFunctionalConsent())
+    window.addEventListener(CONSENT_UPDATED_EVENT, handleConsentUpdated)
+    return () => window.removeEventListener(CONSENT_UPDATED_EVENT, handleConsentUpdated)
+  }, [])
+
+  useEffect(() => {
+    if (!functionalAllowed) return
     // Check if the popup has already been shown in this session
     const hasBeenShown = sessionStorage.getItem(sessionStorageKey)
     const locationPermissionDenied = localStorage.getItem("location_permission_denied")
@@ -28,11 +40,10 @@ export function DelayedLocationPopup({
       // Clean up the timer if the component unmounts
       return () => clearTimeout(timer)
     }
-  }, [])
+  }, [delayInSeconds, functionalAllowed, sessionStorageKey])
 
   const handleLocationGranted = (position: GeolocationPosition) => {
     // Here you would typically call an API to find the nearest clinic
-    console.log("Location granted:", position.coords)
     localStorage.setItem("location_permission_denied", "false")
     onSetLocation({
       latitude: position.coords.latitude,
@@ -46,7 +57,6 @@ export function DelayedLocationPopup({
   }
 
   const handleLocationDenied = () => {
-    console.log("Location access denied")
     // You could set a flag in localStorage to remember the user's preference
     localStorage.setItem("location_permission_denied", "true")
     setShowPopup(false)

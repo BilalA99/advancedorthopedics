@@ -4,6 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Phone, Calendar, Shield, Zap } from 'lucide-react';
 import BookAnAppoitmentButton from './BookAnAppoitmentButton';
+import { pushPhoneClickEvent } from '@/utils/enhancedConversions';
 
 interface StateCTAProps {
   stateName: string;
@@ -86,13 +87,10 @@ export default function StateCTA({ stateName, phoneNumber, phoneNumberRaw }: Sta
                 href={`tel:+1${phoneNumberRaw}`}
                 className="text-2xl font-bold flex items-center gap-3 hover:text-white transition-all border-b-2 border-white/40 group-hover:border-white pb-1"
                 onClick={() => {
-                  if (typeof window !== "undefined" && window.dataLayer) {
-                    window.dataLayer.push({
-                      event: 'call_click',
-                      phone_number: phoneNumberRaw,
-                      location: `StateCTA-${stateName}`
-                    });
-                  }
+                  pushPhoneClickEvent({
+                    location: `StateCTA-${stateName}`,
+                    page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+                  });
                 }}
               >
                 <Phone className="w-6 h-6 sm:w-7 sm:h-7 flex-shrink-0" />

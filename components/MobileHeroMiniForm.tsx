@@ -5,7 +5,7 @@ import { Phone, User, ArrowRight, CheckCircle, Loader2, Mail, ChevronDown, Shiel
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { pushFormSubmit } from '@/utils/enhancedConversions';
+import { pushEvent, pushFormSubmit } from '@/utils/enhancedConversions';
 import { getAttributionData } from '@/lib/gclid';
 import { formatPhoneInput } from '@/lib/phone-formatter';
 import { STATE_OPTIONS } from '@/lib/stateUtils';
@@ -85,11 +85,10 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
       setError('Please enter a valid phone number');
       return;
     }
-    if (typeof window !== 'undefined' && window.dataLayer && pageType === 'state') {
-      window.dataLayer.push({
-        event: 'state_location_form_open',
+    if (pageType === 'state') {
+      pushEvent('lead_form_start', {
         state_name: stateName,
-        page_path: window.location.pathname,
+        page_path: typeof window !== 'undefined' ? window.location.pathname : '',
         cta_position: 'mobile_hero_top_fold',
       });
     }

@@ -2,10 +2,10 @@
 import React from 'react'
 import Image from 'next/image'
 import Logo from '../public/newlogo4.png'
-import { motion } from "framer-motion";
 import Link from 'next/link';
 import { STATE_METADATA, VALID_STATE_SLUGS, getClinicsByState } from '@/lib/locationRedirects';
 import { CONTACT_INFO, GENERAL_EMAIL } from '@/lib/contact-routing';
+import { OPEN_COOKIE_PREFERENCES_EVENT } from '@/lib/consent';
 const socials = [
     {
         icon: () => (<svg xmlns="http://www.w3.org/2000/svg" width="14" height="18" viewBox="0 0 14 18" fill="none">
@@ -214,6 +214,18 @@ export default function Footer() {
                     >
                         Privacy Policy
                     </Link>
+                    <button
+                        type="button"
+                        onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_PREFERENCES_EVENT))}
+                        style={{
+                            fontFamily: 'var(--font-public-sans)',
+                            fontWeight: 400,
+                            color: '#5E96F0'
+                        }}
+                        className="text-left"
+                    >
+                        Cookie Preferences
+                    </button>
                     <Link href={'/insurance-policy'}
                         style={{
                             fontFamily: 'var(--font-public-sans)',

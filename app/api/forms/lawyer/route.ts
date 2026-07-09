@@ -41,16 +41,6 @@ export async function POST(request: Request) {
   try {
     const body: LawyerPayload = await request.json();
 
-    if (body.gclid) {
-      console.log("[LawyerForm] GCLID:", body.gclid, "UTM:", {
-        source: body.utm_source,
-        medium: body.utm_medium,
-        campaign: body.utm_campaign,
-        term: body.utm_term,
-        content: body.utm_content,
-      });
-    }
-
     await sendLawyerContactEmail(body);
     await sendLawyerConfirmationEmail({
       attorneyName: body.attorneyName,

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { pushPhoneClickEvent } from '@/utils/enhancedConversions';
 
 interface PhoneTextLinkProps {
   className?: string;
@@ -22,13 +23,10 @@ export function PhoneTextLink({
   const cleanPhone = phoneNumber.replace(/[^\d]/g, '');
 
   const handleClick = () => {
-    if (typeof window !== "undefined" && window.dataLayer) {
-      window.dataLayer.push({
-        event: 'call_click',
-        phone_number: cleanPhone,
-        location: trackLocation
-      });
-    }
+    pushPhoneClickEvent({
+      location: trackLocation,
+      page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+    });
   };
 
   return (

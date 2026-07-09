@@ -21,6 +21,7 @@ import Link from "next/link"
 import { getAttributionData } from "@/lib/gclid"
 import { useRouter } from "next/navigation"
 import { appendPreparedUploads } from "@/lib/client-upload"
+import { pushFormSubmit } from "@/utils/enhancedConversions"
 const formSchema = z.object({
     name: z.string().min(2, "name must be at least 2 characters"),
     email: z.string().email("Invalid email address"),
@@ -62,10 +63,12 @@ export default function BookAnAppointmentPopup() {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
             setLoading(true)
+            const firstName = values.name.split(' ')[0] || values.name
+            const lastName = values.name.split(' ').slice(1).join(' ') || ''
 
             const payload = new FormData()
-            payload.append('firstName', values.name.split(' ')[0] || values.name)
-            payload.append('lastName', values.name.split(' ').slice(1).join(' ') || '')
+            payload.append('firstName', firstName)
+            payload.append('lastName', lastName)
             payload.append('email', values.email)
             payload.append('phone', values.phone)
             payload.append('reason', values.reason)
@@ -100,13 +103,18 @@ export default function BookAnAppointmentPopup() {
                 return
             }
 
-            if (typeof window !== 'undefined' && window.dataLayer) {
-                window.dataLayer.push({
-                    event: 'form_submission',
-                    formName: 'BookAnAppointmentPopup',
-                    pagePath: window.location.pathname,
-                });
+            if (!res.ok) {
+                return
             }
+
+            pushFormSubmit({
+                form_name: 'BookAnAppointmentPopup',
+                state: '',
+                email: values.email,
+                phone: values.phone,
+                firstName,
+                lastName,
+            })
 
             router.push('/thank-you')
         } catch (error) {

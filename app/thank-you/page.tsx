@@ -7,7 +7,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import { restoreECFromSession, formatPhoneToE164 } from "@/utils/enhancedConversions";
+import { restoreECFromSession } from "@/utils/enhancedConversions";
 import { getReviewLink, getReviewLocations } from "@/lib/reviewLinks";
 
 export default function ThankYouPage() {
@@ -23,45 +23,6 @@ export default function ThankYouPage() {
     // Restore enhanced conversion data from sessionStorage immediately
     // This ensures the data is available when Google Ads conversion tags fire
     restoreECFromSession(); // pushes {event:'ec_restore', enhanced_conversion_data:{...}}
-
-    // Also push the data silently (without event) to ensure it's in dataLayer
-    // This helps with cases where the conversion tag fires before the event
-    if (typeof window !== 'undefined') {
-      try {
-        const country = (sessionStorage.getItem('ec_country') || 'US').trim().toUpperCase();
-        const rawPhone = sessionStorage.getItem('ec_phone') || '';
-
-        const ec = {
-          email: (sessionStorage.getItem('ec_email') || '').trim().toLowerCase(),
-          phone_number: formatPhoneToE164(rawPhone, country),
-          address: {
-            first_name: (sessionStorage.getItem('ec_first') || '').trim(),
-            last_name: (sessionStorage.getItem('ec_last') || '').trim(),
-            country: country,
-            postal_code: (sessionStorage.getItem('ec_postal') || '').trim(),
-          },
-        };
-
-        // Check if we have valid data before pushing
-        if (ec.email || ec.phone_number) {
-          (window as any).dataLayer = (window as any).dataLayer || [];
-          (window as any).dataLayer.push({
-            enhanced_conversion_data: {
-              email: ec.email || undefined,
-              phone_number: ec.phone_number || undefined,
-              address: {
-                first_name: ec.address.first_name || undefined,
-                last_name: ec.address.last_name || undefined,
-                country: ec.address.country || "US",
-                postal_code: ec.address.postal_code || undefined,
-              },
-            },
-          });
-        }
-      } catch (error) {
-        // Silently fail if sessionStorage is not available
-      }
-    }
   }, []);
 
   useEffect(() => {
