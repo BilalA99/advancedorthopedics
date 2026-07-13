@@ -121,7 +121,7 @@ export default function PersonalInjuryLayout({
                 "Cervical and Lumbar Injections",
                 "Fracture Management",
                 "Expert Witness Report",
-                "Physical Therapy Referral",
+                "Outside Rehabilitation Guidance",
                 "Minimally Invasive Surgery",
               ],
               symptoms: [

@@ -336,7 +336,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "What is the fastest way to recover from hip surgery?",
-      answer: "The fastest recovery comes from <strong>early ambulation</strong> (walking the day of surgery) and strictly following physical therapy exercises. Choosing the <strong>Direct Anterior Approach</strong> often leads to faster early recovery due to muscle preservation."
+      answer: "The fastest recovery comes from <strong>early ambulation</strong> (walking the day of surgery) and strictly following rehabilitation exercises. Choosing the <strong>Direct Anterior Approach</strong> often leads to faster early recovery due to muscle preservation."
     },
     {
       question: "Can I sleep on my side after hip replacement?",
@@ -536,7 +536,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "What is the recovery timeline?",
-      answer: "Patients wear a sling for <strong>3 to 6 weeks</strong>. Physical therapy starts immediately to prevent stiffness. Full return to sports and heavy activity typically takes <strong>4 to 6 months</strong>."
+      answer: "Patients wear a sling for <strong>3 to 6 weeks</strong>. Rehabilitation starts immediately to prevent stiffness. Full return to sports and heavy activity typically takes <strong>4 to 6 months</strong>."
     },
     {
       question: "How long does the implant last?",
@@ -596,7 +596,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "How long does it take to heal completely?",
-      answer: "The tendon heals to the bone in about 3 months, but full strength recovery takes <strong>6 to 9 months</strong>. Patience with physical therapy is key to a good outcome."
+      answer: "The tendon heals to the bone in about 3 months, but full strength recovery takes <strong>6 to 9 months</strong>. Patience with rehabilitation is key to a good outcome."
     },
     {
       question: "Can I lift my arm immediately?",
@@ -652,7 +652,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "How long in a boot after ankle surgery?",
-      answer: "Patients typically spend <strong>2 weeks in a cast</strong> followed by <strong>4 weeks in a walking boot</strong>. Physical therapy usually begins at the 6-week mark."
+      answer: "Patients typically spend <strong>2 weeks in a cast</strong> followed by <strong>4 weeks in a walking boot</strong>. Rehabilitation usually begins at the 6-week mark."
     },
     {
       question: "Will my ankle be stiff?",
@@ -708,7 +708,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
   "back-pain-treatment": [
     {
       question: "What is the best treatment for lower back pain?",
-      answer: "Most acute back pain resolves with <strong>active rest</strong>, anti-inflammatories (NSAIDs), and physical therapy. For chronic pain, a multimodal approach including injections, lifestyle changes, and core strengthening is best."
+      answer: "Most acute back pain resolves with <strong>active rest</strong>, anti-inflammatories (NSAIDs), and rehabilitation. For chronic pain, a multimodal approach including injections, lifestyle changes, and core strengthening is best."
     },
     {
       question: "When does back pain require an MRI?",
@@ -812,7 +812,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "How long do injections last?",
-      answer: "Duration varies wildly from <strong>3 weeks to 3 months</strong> or more. They often provide a window of relief to allow physical therapy to correct the underlying mechanical issue."
+      answer: "Duration varies wildly from <strong>3 weeks to 3 months</strong> or more. They often provide a window of relief to allow rehabilitation to correct the underlying mechanical issue."
     },
     {
       question: "Are injections painful?",
@@ -1115,8 +1115,8 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
       answer: "TENS units block pain signals temporarily by stimulating the nerves. They are good for managing chronic muscle pain but do not fix structural problems."
     },
     {
-      question: "How effective is physical therapy?",
-      answer: "<strong>Physical therapy</strong> is the first line of defense and is effective for 70-80% of back and neck pain cases by strengthening the core muscles that support the spine."
+      question: "How effective is rehabilitation?",
+      answer: "<strong>Rehabilitation</strong> is the first line of defense and is effective for 70-80% of back and neck pain cases by strengthening the core muscles that support the spine."
     },
     {
       question: "What is spinal decompression therapy?",
@@ -1192,7 +1192,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "Is stem cell therapy covered by insurance?",
-      answer: "Currently, most insurance plans consider it <strong>investigational</strong> and do not cover it. It is usually a self-pay procedure."
+      answer: "Currently, many PPO insurance plans may consider it <strong>investigational</strong> and do not cover it. It is usually a self-pay procedure."
     },
     {
       question: "Does it regrow cartilage?",
@@ -1219,8 +1219,8 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
       answer: "The risk is generally low (<strong>less than 1-2%</strong>) for elective orthopedic surgeries. Antibiotics are given before and after surgery to prevent this."
     },
     {
-      question: "Do I need physical therapy after surgery?",
-      answer: "Yes. <strong>Physical therapy</strong> is crucial for breaking down scar tissue, regaining motion, and strengthening muscles to support the surgical repair."
+      question: "Do I need rehabilitation after surgery?",
+      answer: "Yes. <strong>Rehabilitation</strong> is crucial for breaking down scar tissue, regaining motion, and strengthening muscles to support the surgical repair."
     }
   ],
 
@@ -1295,7 +1295,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
       answer: "Nerve recovery is gradual. <strong>Numbness typically improves over weeks to months</strong> after surgery. Patients with more severe or long-standing compression may have slower recovery. Some residual numbness may persist, making early intervention important."
     },
     {
-      question: "Will I need physical therapy after cubital tunnel surgery?",
+      question: "Will I need rehabilitation after cubital tunnel surgery?",
       answer: "Most patients benefit from <strong>hand therapy</strong> after surgery to restore motion and strength. Therapy includes scar management, nerve gliding exercises, and gradual strengthening. Your surgeon will guide the therapy program based on your procedure."
     },
     {
@@ -1367,7 +1367,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
       answer: "Recovery varies by procedure. <strong>Simple loose body removal</strong> allows return to activities in 4-6 weeks. <strong>Capsular release for stiffness</strong> requires intensive therapy and 3-4 months for full recovery."
     },
     {
-      question: "Will I need physical therapy after elbow arthroscopy?",
+      question: "Will I need rehabilitation after elbow arthroscopy?",
       answer: "<strong>Yes, therapy is essential</strong>, especially for stiffness surgery. The elbow is prone to scarring, so early motion and aggressive therapy are critical to maintaining the gains achieved during surgery."
     },
     {
@@ -1515,7 +1515,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
       answer: "Most patients regain <strong>functional motion</strong> (enough for daily activities), though some loss of extension is common. Starting motion early and following therapy protocols maximizes recovery."
     },
     {
-      question: "Why is physical therapy so important after elbow fracture surgery?",
+      question: "Why is rehabilitation so important after elbow fracture surgery?",
       answer: "The elbow is highly prone to <strong>stiffness after injury</strong>. Without proper therapy, scar tissue can limit motion permanently. Therapy maintains motion gained during surgery and prevents contracture."
     },
     {
@@ -1541,7 +1541,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
       answer: "Risks include cement leakage (usually without symptoms), infection (rare), bleeding, nerve irritation, and adjacent level fractures. The procedure has a strong safety record when performed by experienced specialists using imaging guidance."
     },
     {
-      question: "Do I need physical therapy after kyphoplasty?",
+      question: "Do I need rehabilitation after kyphoplasty?",
       answer: "Sometimes. PT depends on your functional status and stability. Many patients benefit from gentle strengthening and balance exercises to prevent falls and improve bone health. Your specialist will determine if formal PT is needed."
     }
   ],
@@ -1604,7 +1604,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "What is recovery like after thoracic spine surgery?",
-      answer: "Varies widely based on procedure complexity and reason for surgery. Hospital stay may be 3-7 days. Brace use is common. Return to light activities takes 6-12 weeks; full recovery can take 6-12 months. Physical therapy is typically important."
+      answer: "Varies widely based on procedure complexity and reason for surgery. Hospital stay may be 3-7 days. Brace use is common. Return to light activities takes 6-12 weeks; full recovery can take 6-12 months. Rehabilitation is typically important."
     },
     {
       question: "Do I need a second opinion for thoracic spine surgery?",
@@ -1630,7 +1630,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "What are alternatives to SI joint fusion?",
-      answer: "Continued physical therapy focusing on pelvic stability, repeated SI joint injections (every 3-6 months), radiofrequency ablation of SI joint nerves (less commonly performed), and activity modification. Fusion is reserved for confirmed SI pain failing comprehensive conservative care."
+      answer: "Continued rehabilitation focusing on pelvic stability, repeated SI joint injections (every 3-6 months), radiofrequency ablation of SI joint nerves (less commonly performed), and activity modification. Fusion is reserved for confirmed SI pain failing comprehensive conservative care."
     }
   ],
   "cervical-laminectomy": [
@@ -1728,7 +1728,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "Why does my bursitis keep coming back?",
-      answer: "Recurrence usually indicates underlying biomechanical or overuse issues weren't fully addressed. Contributing factors include muscle imbalances, poor mechanics, training errors, or activities repeatedly irritating the bursa. Physical therapy targeting these underlying factors is key to preventing recurrence."
+      answer: "Recurrence usually indicates underlying biomechanical or overuse issues weren't fully addressed. Contributing factors include muscle imbalances, poor mechanics, training errors, or activities repeatedly irritating the bursa. Rehabilitation targeting these underlying factors is key to preventing recurrence."
     },
     {
       question: "Do I need imaging for bursitis?",
@@ -1736,7 +1736,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "Will a cortisone injection cure my bursitis?",
-      answer: "It can dramatically reduce bursa inflammation and pain, providing significant relief. However, injection alone doesn't address underlying mechanical causes. Combine injection with physical therapy, activity modification, and correction of contributing factors for best long-term results."
+      answer: "It can dramatically reduce bursa inflammation and pain, providing significant relief. However, injection alone doesn't address underlying mechanical causes. Combine injection with rehabilitation, activity modification, and correction of contributing factors for best long-term results."
     },
     {
       question: "When should I see a specialist for bursitis?",
@@ -1750,7 +1750,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "Should I rest completely with tendonitis?",
-      answer: "Short-term relative rest (1-2 weeks) to calm acute flare-ups, then progressive loading is usually best. Complete rest weakens the tendon. The key is finding the 'therapeutic window'—enough load to stimulate healing without aggravating symptoms. Physical therapy guides this process."
+      answer: "Short-term relative rest (1-2 weeks) to calm acute flare-ups, then progressive loading is usually best. Complete rest weakens the tendon. The key is finding the 'therapeutic window'—enough load to stimulate healing without aggravating symptoms. Rehabilitation guides this process."
     },
     {
       question: "When do I need MRI for tendonitis?",
@@ -1798,7 +1798,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "What is the recovery time for hip labral repair?",
-      answer: "Recovery takes <strong>4 to 6 months</strong> for return to sports. Patients use crutches for 2-4 weeks to protect the repair. Physical therapy progresses from passive motion to strengthening. Full healing and return to impact activities takes 6-12 months."
+      answer: "Recovery takes <strong>4 to 6 months</strong> for return to sports. Patients use crutches for 2-4 weeks to protect the repair. Rehabilitation progresses from passive motion to strengthening. Full healing and return to impact activities takes 6-12 months."
     },
     {
       question: "What are the risks of hip labral repair surgery?",
@@ -1846,7 +1846,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "What is the recovery time for hip fracture surgery?",
-      answer: "Initial recovery takes <strong>3 to 4 months</strong> for basic mobility. Full recovery varies by age, health, and fracture type, taking 6-12 months. Elderly patients may not return to pre-fracture function. Physical therapy is crucial for regaining strength and preventing falls."
+      answer: "Initial recovery takes <strong>3 to 4 months</strong> for basic mobility. Full recovery varies by age, health, and fracture type, taking 6-12 months. Elderly patients may not return to pre-fracture function. Rehabilitation is crucial for regaining strength and preventing falls."
     },
     {
       question: "What are the complications of hip fracture surgery?",
@@ -1864,7 +1864,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "How long does revision hip replacement take to heal?",
-      answer: "Recovery typically takes <strong>6 to 12 months</strong>, longer than primary replacement. Patients use crutches/walker for 6-12 weeks. Physical therapy is more intensive. Some revisions requiring bone grafting or custom implants need extended protected weight-bearing."
+      answer: "Recovery typically takes <strong>6 to 12 months</strong>, longer than primary replacement. Patients use crutches/walker for 6-12 weeks. Rehabilitation is more intensive. Some revisions requiring bone grafting or custom implants need extended protected weight-bearing."
     },
     {
       question: "What are the risks of revision hip surgery?",
@@ -1886,7 +1886,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "What is the recovery time for hip impingement surgery?",
-      answer: "Recovery takes <strong>4 to 6 months</strong> for return to sports. Patients use crutches for 2-3 weeks. Physical therapy begins immediately focusing on motion, then progressive strengthening. Full return to impact activities and sports requires 6-9 months."
+      answer: "Recovery takes <strong>4 to 6 months</strong> for return to sports. Patients use crutches for 2-3 weeks. Rehabilitation begins immediately focusing on motion, then progressive strengthening. Full return to impact activities and sports requires 6-9 months."
     },
     {
       question: "What are the results of hip impingement surgery?",
@@ -1926,7 +1926,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "When is hip bursectomy recommended?",
-      answer: "Surgery is considered after <strong>6-12 months of failed conservative treatment</strong> including physical therapy, injections, activity modification, and NSAIDs. Persistent pain limiting daily activities and sleep despite multiple injections indicates surgical candidacy."
+      answer: "Surgery is considered after <strong>6-12 months of failed conservative treatment</strong> including rehabilitation, injections, activity modification, and NSAIDs. Persistent pain limiting daily activities and sleep despite multiple injections indicates surgical candidacy."
     },
     {
       question: "What does hip bursectomy surgery involve?",
@@ -1934,7 +1934,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "What is the recovery time for hip bursectomy?",
-      answer: "Most patients resume <strong>light activities within 2-4 weeks</strong> and return to full activities by 6-12 weeks. Physical therapy focuses on IT band stretching, hip strengthening, and correcting biomechanical issues. Success rates exceed 85% when underlying causes are addressed."
+      answer: "Most patients resume <strong>light activities within 2-4 weeks</strong> and return to full activities by 6-12 weeks. Rehabilitation focuses on IT band stretching, hip strengthening, and correcting biomechanical issues. Success rates exceed 85% when underlying causes are addressed."
     },
     {
       question: "Can hip bursitis come back after surgery?",
@@ -2084,7 +2084,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "How long does revision knee replacement take to heal?",
-      answer: "Recovery typically takes <strong>6 to 12 months</strong>, significantly longer than primary replacement. Physical therapy is more intensive. Some revisions requiring bone grafting, stems, or augments need extended protected weight-bearing and gradual motion progression."
+      answer: "Recovery typically takes <strong>6 to 12 months</strong>, significantly longer than primary replacement. Rehabilitation is more intensive. Some revisions requiring bone grafting, stems, or augments need extended protected weight-bearing and gradual motion progression."
     },
     {
       question: "What are the risks of revision knee replacement?",
@@ -2106,7 +2106,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "What is the recovery time for shoulder replacement?",
-      answer: "Initial recovery takes <strong>6 to 12 weeks</strong> with sling use for 4-6 weeks. Full recovery and return to activities requires 4-6 months. Physical therapy begins immediately focusing on passive motion, then progressive strengthening. Heavy lifting restrictions are permanent."
+      answer: "Initial recovery takes <strong>6 to 12 weeks</strong> with sling use for 4-6 weeks. Full recovery and return to activities requires 4-6 months. Rehabilitation begins immediately focusing on passive motion, then progressive strengthening. Heavy lifting restrictions are permanent."
     },
     {
       question: "How long does a shoulder replacement last?",
@@ -2128,7 +2128,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "What is the recovery time for reverse shoulder replacement?",
-      answer: "Recovery takes <strong>3 to 6 months</strong> for most activities. Patients wear a sling for 4-6 weeks. Physical therapy begins immediately with passive motion, progressing to active motion and strengthening. Forward elevation improves quickly; rotation recovery is more gradual."
+      answer: "Recovery takes <strong>3 to 6 months</strong> for most activities. Patients wear a sling for 4-6 weeks. Rehabilitation begins immediately with passive motion, progressing to active motion and strengthening. Forward elevation improves quickly; rotation recovery is more gradual."
     },
     {
       question: "What are the advantages of reverse shoulder replacement?",
@@ -2150,7 +2150,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "What is the recovery time for labral repair?",
-      answer: "Recovery varies by tear location. <strong>Bankart repair: 4-6 months</strong> for return to sports. SLAP repair: 6-9 months due to biceps tendon involvement. Patients wear a sling for 4-6 weeks. Physical therapy progresses from motion to strengthening."
+      answer: "Recovery varies by tear location. <strong>Bankart repair: 4-6 months</strong> for return to sports. SLAP repair: 6-9 months due to biceps tendon involvement. Patients wear a sling for 4-6 weeks. Rehabilitation progresses from motion to strengthening."
     },
     {
       question: "What is the success rate of shoulder labral repair?",
@@ -2172,7 +2172,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "What is the recovery time for biceps tenodesis?",
-      answer: "Recovery takes <strong>3 to 4 months</strong> for return to full activities. Patients avoid lifting with the affected arm for 6 weeks to allow tendon healing. Physical therapy focuses on shoulder motion initially, then progressive strengthening. Sports return requires 4-6 months."
+      answer: "Recovery takes <strong>3 to 4 months</strong> for return to full activities. Patients avoid lifting with the affected arm for 6 weeks to allow tendon healing. Rehabilitation focuses on shoulder motion initially, then progressive strengthening. Sports return requires 4-6 months."
     },
     {
       question: "What is the difference between tenodesis and tenotomy?",
@@ -2198,7 +2198,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "What is the recovery time for shoulder stabilization?",
-      answer: "Recovery takes <strong>6 to 9 months</strong> for return to contact sports. Patients wear a sling for 4-6 weeks. Physical therapy progresses cautiously to avoid re-injury. Strengthening begins at 3 months. Full contact sports clearance requires 6-9 months with functional testing."
+      answer: "Recovery takes <strong>6 to 9 months</strong> for return to contact sports. Patients wear a sling for 4-6 weeks. Rehabilitation progresses cautiously to avoid re-injury. Strengthening begins at 3 months. Full contact sports clearance requires 6-9 months with functional testing."
     },
     {
       question: "What is the success rate of shoulder stabilization surgery?",
@@ -2216,7 +2216,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "What is the recovery time for acromioplasty?",
-      answer: "Recovery takes <strong>3 to 6 months</strong> for full return to activities. Patients typically avoid overhead activities for 6 weeks. Physical therapy begins immediately with motion, progressing to rotator cuff strengthening. Most patients return to work in 2-4 weeks."
+      answer: "Recovery takes <strong>3 to 6 months</strong> for full return to activities. Patients typically avoid overhead activities for 6 weeks. Rehabilitation begins immediately with motion, progressing to rotator cuff strengthening. Most patients return to work in 2-4 weeks."
     },
     {
       question: "What is the success rate of acromioplasty?",
@@ -2224,7 +2224,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "Is acromioplasty still recommended?",
-      answer: "Recent evidence questions <strong>isolated acromioplasty's effectiveness</strong> for impingement without rotator cuff tears, showing similar results to physical therapy alone. It's now primarily performed alongside rotator cuff repair. Conservative treatment should be exhausted before considering surgery."
+      answer: "Recent evidence questions <strong>isolated acromioplasty's effectiveness</strong> for impingement without rotator cuff tears, showing similar results to rehabilitation alone. It's now primarily performed alongside rotator cuff repair. Conservative treatment should be exhausted before considering surgery."
     }
   ],
   "shoulder-fracture-surgery": [
@@ -2256,7 +2256,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "Who is a candidate for SI joint injection?",
-      answer: "Candidates include patients with <strong>lower back or buttock pain</strong> suspected from SI joint dysfunction, pain not responding to physical therapy, pain with provocative tests (FABER, Gaenslen's), or to confirm SI joint as pain source before considering <a href=\"/treatments/si-joint-fusion\">SI joint fusion</a>."
+      answer: "Candidates include patients with <strong>lower back or buttock pain</strong> suspected from SI joint dysfunction, pain not responding to rehabilitation, pain with provocative tests (FABER, Gaenslen's), or to confirm SI joint as pain source before considering <a href=\"/treatments/si-joint-fusion\">SI joint fusion</a>."
     },
     {
       question: "What is the recovery time after SI joint injection?",
@@ -2264,7 +2264,7 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     },
     {
       question: "How effective are SI joint injections?",
-      answer: "Diagnostic accuracy is high, with <strong>75%+ relief confirming SI joint</strong> as pain source. Therapeutic relief varies: 50-80% experience significant pain reduction lasting months. Combining injections with physical therapy strengthening core and hips provides better long-term results."
+      answer: "Diagnostic accuracy is high, with <strong>75%+ relief confirming SI joint</strong> as pain source. Therapeutic relief varies: 50-80% experience significant pain reduction lasting months. Combining injections with rehabilitation strengthening core and hips provides better long-term results."
     },
     {
       question: "What are the risks of SI joint injection?",
@@ -2348,7 +2348,7 @@ export const getTreatmentFaqs = (slug: string, title: string): FAQItem[] => {
   return [
     {
       question: `What is the recovery time for ${title}?`,
-      answer: `Recovery from <strong>${title}</strong> varies by patient severity. Generally, patients start physical therapy within the first few weeks, with return to full activity typically between 3 to 6 months.`
+      answer: `Recovery from <strong>${title}</strong> varies by patient severity. Generally, patients start rehabilitation within the first few weeks, with return to full activity typically between 3 to 6 months.`
     },
     {
       question: `Is ${title} covered by insurance?`,

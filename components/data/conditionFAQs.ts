@@ -1418,7 +1418,7 @@ export interface FAQItem {
       },
       {
         question: "What treatments are available for chronic wrist pain?",
-        answer: "Treatment depends on the cause and may include <strong>splinting, anti-inflammatory medications, physical therapy, and injections</strong>. When conservative care fails, surgical options range from <a href=\"/treatments/wrist-arthroscopy\">wrist arthroscopy</a> to fracture fixation to joint fusion or replacement."
+        answer: "Treatment depends on the cause and may include <strong>splinting, anti-inflammatory medications, rehabilitation, and injections</strong>. When conservative care fails, surgical options range from <a href=\"/treatments/wrist-arthroscopy\">wrist arthroscopy</a> to fracture fixation to joint fusion or replacement."
       }
     ],
     "hand-pain": [
@@ -1436,7 +1436,7 @@ export interface FAQItem {
       },
       {
         question: "What is the best treatment for hand pain?",
-        answer: "Treatment depends on the diagnosis. Options include <strong>rest, splinting, anti-inflammatory medications, physical therapy, and corticosteroid injections</strong>. Surgical options range from <a href=\"/treatments/trigger-finger-release\">trigger finger release</a> to <a href=\"/treatments/carpal-tunnel-release\">carpal tunnel release</a> to joint fusion or replacement."
+        answer: "Treatment depends on the diagnosis. Options include <strong>rest, splinting, anti-inflammatory medications, rehabilitation, and corticosteroid injections</strong>. Surgical options range from <a href=\"/treatments/trigger-finger-release\">trigger finger release</a> to <a href=\"/treatments/carpal-tunnel-release\">carpal tunnel release</a> to joint fusion or replacement."
       },
       {
         question: "When should I see a hand specialist?",
@@ -1520,7 +1520,7 @@ export interface FAQItem {
       },
       {
         question: "Can a TFCC tear heal without surgery?",
-        answer: "<strong>Some TFCC tears can heal with conservative treatment</strong>, especially degenerative tears. Treatment includes splinting, anti-inflammatory medications, and physical therapy. Traumatic tears, especially those causing instability, may require <a href=\"/treatments/wrist-arthroscopy\">surgical repair</a>."
+        answer: "<strong>Some TFCC tears can heal with conservative treatment</strong>, especially degenerative tears. Treatment includes splinting, anti-inflammatory medications, and rehabilitation. Traumatic tears, especially those causing instability, may require <a href=\"/treatments/wrist-arthroscopy\">surgical repair</a>."
       },
       {
         question: "What is TFCC surgery like?",
@@ -1608,7 +1608,7 @@ export interface FAQItem {
       },
       {
         question: "Can knee pain be treated without surgery?",
-        answer: "Yes, most knee pain responds well to <strong>conservative treatments</strong> including rest, ice, physical therapy, anti-inflammatory medications, and targeted injections. Surgery is typically reserved for cases where non-surgical options fail or when structural damage requires repair."
+        answer: "Yes, most knee pain responds well to <strong>conservative treatments</strong> including rest, ice, rehabilitation, anti-inflammatory medications, and targeted injections. Surgery is typically reserved for cases where non-surgical options fail or when structural damage requires repair."
       },
       {
         question: "What tests diagnose the cause of knee pain?",
@@ -1634,7 +1634,7 @@ export interface FAQItem {
       },
       {
         question: "What non-surgical treatments help knee arthritis?",
-        answer: "Effective non-surgical options include <strong>physical therapy for quadriceps strengthening</strong>, NSAIDs for inflammation, cortisone or hyaluronic acid injections, bracing for stability, and weight loss to reduce joint stress. Low-impact exercises like swimming preserve mobility without accelerating degeneration."
+        answer: "Effective non-surgical options include <strong>rehabilitation for quadriceps strengthening</strong>, NSAIDs for inflammation, cortisone or hyaluronic acid injections, bracing for stability, and weight loss to reduce joint stress. Low-impact exercises like swimming preserve mobility without accelerating degeneration."
       },
       {
         question: "When is knee replacement surgery recommended for arthritis?",
@@ -1648,7 +1648,7 @@ export interface FAQItem {
       },
       {
         question: "Can a PCL tear heal without surgery?",
-        answer: "Yes, many isolated PCL tears heal with <strong>non-surgical treatment</strong> because the PCL has better blood supply than the ACL. Conservative management includes bracing, physical therapy emphasizing quadriceps strengthening, and activity modification. Surgery is reserved for grade III tears or combined ligament injuries."
+        answer: "Yes, many isolated PCL tears heal with <strong>non-surgical treatment</strong> because the PCL has better blood supply than the ACL. Conservative management includes bracing, rehabilitation emphasizing quadriceps strengthening, and activity modification. Surgery is reserved for grade III tears or combined ligament injuries."
       },
       {
         question: "What are the symptoms of a torn PCL?",
@@ -1682,7 +1682,7 @@ export interface FAQItem {
       },
       {
         question: "What treatments are available for cartilage damage?",
-        answer: "Treatment depends on defect size and location. Options include <strong>arthroscopic debridement for small tears</strong>, meniscus repair, microfracture to stimulate healing, cartilage transplantation (OATS, ACI), or partial knee replacement for localized arthritis. Conservative care includes physical therapy and injections."
+        answer: "Treatment depends on defect size and location. Options include <strong>arthroscopic debridement for small tears</strong>, meniscus repair, microfracture to stimulate healing, cartilage transplantation (OATS, ACI), or partial knee replacement for localized arthritis. Conservative care includes rehabilitation and injections."
       }
     ],
     "knee-instability": [
@@ -1692,7 +1692,7 @@ export interface FAQItem {
       },
       {
         question: "Can knee instability be fixed without surgery?",
-        answer: "Mild instability from <strong>partial ligament tears</strong> may respond to physical therapy focusing on quadriceps and hamstring strengthening, along with bracing for support. However, complete ACL tears or multi-ligament injuries typically require surgical reconstruction to restore stability for active lifestyles."
+        answer: "Mild instability from <strong>partial ligament tears</strong> may respond to rehabilitation focusing on quadriceps and hamstring strengthening, along with bracing for support. However, complete ACL tears or multi-ligament injuries typically require surgical reconstruction to restore stability for active lifestyles."
       },
       {
         question: "What are the symptoms of an unstable knee?",
@@ -1740,7 +1740,7 @@ export interface FAQItem {
       },
       {
         question: "How is patellofemoral pain syndrome treated?",
-        answer: "Treatment focuses on <strong>physical therapy to strengthen the VMO</strong> and hip abductors, stretching tight structures, patellar taping or bracing, activity modification, and correcting biomechanics with orthotics. Ice and NSAIDs manage symptoms. Surgery is rarely needed."
+        answer: "Treatment focuses on <strong>rehabilitation to strengthen the VMO</strong> and hip abductors, stretching tight structures, patellar taping or bracing, activity modification, and correcting biomechanics with orthotics. Ice and NSAIDs manage symptoms. Surgery is rarely needed."
       },
       {
         question: "Can I continue running with runner's knee?",
@@ -1762,7 +1762,7 @@ export interface FAQItem {
       },
       {
         question: "Can chondromalacia patella be reversed?",
-        answer: "Early-stage cartilage softening may improve with <strong>aggressive physical therapy</strong> and activity modification, but advanced damage is irreversible. Treatment aims to prevent progression through proper patellar tracking, strengthening weak muscles (VMO, hip abductors), and reducing compressive forces."
+        answer: "Early-stage cartilage softening may improve with <strong>aggressive rehabilitation</strong> and activity modification, but advanced damage is irreversible. Treatment aims to prevent progression through proper patellar tracking, strengthening weak muscles (VMO, hip abductors), and reducing compressive forces."
       },
       {
         question: "What activities should I avoid with chondromalacia?",
@@ -1784,7 +1784,7 @@ export interface FAQItem {
       },
       {
         question: "Can IT band syndrome be treated without stopping running?",
-        answer: "Yes, but <strong>training volume must be reduced</strong> significantly while addressing underlying causes. Cross-training with swimming maintains fitness. Combine reduced mileage with physical therapy, foam rolling, hip strengthening, and biomechanical corrections. Complete rest accelerates recovery but isn't always necessary."
+        answer: "Yes, but <strong>training volume must be reduced</strong> significantly while addressing underlying causes. Cross-training with swimming maintains fitness. Combine reduced mileage with rehabilitation, foam rolling, hip strengthening, and biomechanical corrections. Complete rest accelerates recovery but isn't always necessary."
       },
       {
         question: "How is IT band syndrome treated?",
@@ -1806,7 +1806,7 @@ export interface FAQItem {
       },
       {
         question: "Can shoulder pain be treated without surgery?",
-        answer: "Yes, most shoulder pain responds to <strong>conservative treatment</strong> including rest, physical therapy, anti-inflammatory medications, and corticosteroid injections. Surgery is typically reserved for complete rotator cuff tears, severe arthritis, or instability that fails non-surgical management."
+        answer: "Yes, most shoulder pain responds to <strong>conservative treatment</strong> including rest, rehabilitation, anti-inflammatory medications, and corticosteroid injections. Surgery is typically reserved for complete rotator cuff tears, severe arthritis, or instability that fails non-surgical management."
       },
       {
         question: "What tests diagnose the cause of shoulder pain?",
@@ -1828,11 +1828,11 @@ export interface FAQItem {
       },
       {
         question: "Can shoulder impingement heal on its own?",
-        answer: "Mild cases may improve with <strong>activity modification and rest</strong>, but most require targeted treatment. Physical therapy, NSAIDs, and corticosteroid injections address inflammation. Without treatment, chronic impingement can lead to progressive rotator cuff damage and tears."
+        answer: "Mild cases may improve with <strong>activity modification and rest</strong>, but most require targeted treatment. Rehabilitation, NSAIDs, and corticosteroid injections address inflammation. Without treatment, chronic impingement can lead to progressive rotator cuff damage and tears."
       },
       {
         question: "How is shoulder impingement treated?",
-        answer: "Treatment begins with <strong>physical therapy strengthening rotator cuff</strong> and scapular stabilizers, NSAIDs, activity modification, and subacromial injections. If conservative care fails after 3-6 months, <a href=\"/treatments/shoulder-arthroscopy\">arthroscopic acromioplasty</a> removes the bone spur and creates more space."
+        answer: "Treatment begins with <strong>rehabilitation strengthening rotator cuff</strong> and scapular stabilizers, NSAIDs, activity modification, and subacromial injections. If conservative care fails after 3-6 months, <a href=\"/treatments/shoulder-arthroscopy\">arthroscopic acromioplasty</a> removes the bone spur and creates more space."
       },
       {
         question: "How long does shoulder impingement take to heal?",
@@ -1850,7 +1850,7 @@ export interface FAQItem {
       },
       {
         question: "Can frozen shoulder be cured?",
-        answer: "Most cases resolve naturally over <strong>18 to 24 months</strong>, though some residual stiffness may persist. Treatment accelerates recovery through physical therapy, corticosteroid injections, hydrodilatation, or manipulation under anesthesia. Arthroscopic capsular release is reserved for refractory cases."
+        answer: "Most cases resolve naturally over <strong>18 to 24 months</strong>, though some residual stiffness may persist. Treatment accelerates recovery through rehabilitation, corticosteroid injections, hydrodilatation, or manipulation under anesthesia. Arthroscopic capsular release is reserved for refractory cases."
       },
       {
         question: "What treatments help frozen shoulder?",
@@ -1894,7 +1894,7 @@ export interface FAQItem {
       },
       {
         question: "Can biceps tendonitis heal without surgery?",
-        answer: "Yes, most cases respond to <strong>rest, physical therapy, and anti-inflammatory medications</strong>. Avoiding aggravating activities and strengthening the rotator cuff reduces stress on the biceps tendon. Corticosteroid injections provide relief but should be used cautiously due to rupture risk."
+        answer: "Yes, most cases respond to <strong>rest, rehabilitation, and anti-inflammatory medications</strong>. Avoiding aggravating activities and strengthening the rotator cuff reduces stress on the biceps tendon. Corticosteroid injections provide relief but should be used cautiously due to rupture risk."
       },
       {
         question: "What happens if the biceps tendon ruptures?",
@@ -1920,7 +1920,7 @@ export interface FAQItem {
       },
       {
         question: "Can AC joint arthritis be treated without surgery?",
-        answer: "Yes, most cases respond to <strong>activity modification, NSAIDs, and physical therapy</strong> strengthening rotator cuff muscles. Corticosteroid injections provide temporary relief. Avoiding overhead activities and sleeping on the opposite side reduces symptoms."
+        answer: "Yes, most cases respond to <strong>activity modification, NSAIDs, and rehabilitation</strong> strengthening rotator cuff muscles. Corticosteroid injections provide temporary relief. Avoiding overhead activities and sleeping on the opposite side reduces symptoms."
       },
       {
         question: "When is surgery needed for AC joint arthritis?",
@@ -1942,7 +1942,7 @@ export interface FAQItem {
       },
       {
         question: "How is shoulder bursitis treated?",
-        answer: "Treatment begins with <strong>rest, ice, and NSAIDs</strong> to reduce inflammation. Physical therapy improves mechanics and strengthens stabilizers. Corticosteroid injections directly into the bursa provide significant relief. Chronic cases may require arthroscopic debridement."
+        answer: "Treatment begins with <strong>rest, ice, and NSAIDs</strong> to reduce inflammation. Rehabilitation improves mechanics and strengthens stabilizers. Corticosteroid injections directly into the bursa provide significant relief. Chronic cases may require arthroscopic debridement."
       },
       {
         question: "How long does shoulder bursitis take to heal?",
@@ -1960,11 +1960,11 @@ export interface FAQItem {
       },
       {
         question: "Can rotator cuff tendonitis lead to a tear?",
-        answer: "Yes, chronic untreated tendonitis weakens the tendon structure through <strong>repetitive inflammation and micro-tears</strong>, increasing the risk of complete rotator cuff rupture. Early treatment with physical therapy and activity modification prevents progression to irreparable tears."
+        answer: "Yes, chronic untreated tendonitis weakens the tendon structure through <strong>repetitive inflammation and micro-tears</strong>, increasing the risk of complete rotator cuff rupture. Early treatment with rehabilitation and activity modification prevents progression to irreparable tears."
       },
       {
         question: "How is rotator cuff tendonitis treated?",
-        answer: "Treatment includes <strong>rest from aggravating activities, ice, NSAIDs, and physical therapy</strong> focusing on rotator cuff strengthening and scapular stabilization. Corticosteroid injections reduce inflammation. Addressing underlying impingement or poor mechanics prevents recurrence."
+        answer: "Treatment includes <strong>rest from aggravating activities, ice, NSAIDs, and rehabilitation</strong> focusing on rotator cuff strengthening and scapular stabilization. Corticosteroid injections reduce inflammation. Addressing underlying impingement or poor mechanics prevents recurrence."
       },
       {
         question: "How long does rotator cuff tendonitis take to heal?",
@@ -1982,7 +1982,7 @@ export interface FAQItem {
       },
       {
         question: "Can hip pain be treated without surgery?",
-        answer: "Yes, many hip conditions respond to <strong>physical therapy, activity modification, and anti-inflammatory medications</strong>. Weight loss reduces joint stress. Corticosteroid injections provide diagnostic and therapeutic relief. Surgery is considered when conservative care fails."
+        answer: "Yes, many hip conditions respond to <strong>rehabilitation, activity modification, and anti-inflammatory medications</strong>. Weight loss reduces joint stress. Corticosteroid injections provide diagnostic and therapeutic relief. Surgery is considered when conservative care fails."
       },
       {
         question: "What tests diagnose the cause of hip pain?",
@@ -2008,7 +2008,7 @@ export interface FAQItem {
       },
       {
         question: "What non-surgical treatments help hip arthritis?",
-        answer: "Effective options include <strong>low-impact exercises (swimming, cycling)</strong>, physical therapy for hip strengthening, NSAIDs, corticosteroid or hyaluronic acid injections, assistive devices (cane), and weight reduction. Maintaining motion delays need for surgery."
+        answer: "Effective options include <strong>low-impact exercises (swimming, cycling)</strong>, rehabilitation for hip strengthening, NSAIDs, corticosteroid or hyaluronic acid injections, assistive devices (cane), and weight reduction. Maintaining motion delays need for surgery."
       },
       {
         question: "When is hip replacement surgery recommended?",
@@ -2026,7 +2026,7 @@ export interface FAQItem {
       },
       {
         question: "Can a hip labral tear heal without surgery?",
-        answer: "Small tears may stabilize with <strong>rest, physical therapy, and activity modification</strong>. However, the labrum has poor blood supply limiting healing. Symptomatic tears causing mechanical symptoms or associated with FAI typically require <a href=\"/treatments/hip-arthroscopy-treatment\">arthroscopic repair</a>."
+        answer: "Small tears may stabilize with <strong>rest, rehabilitation, and activity modification</strong>. However, the labrum has poor blood supply limiting healing. Symptomatic tears causing mechanical symptoms or associated with FAI typically require <a href=\"/treatments/hip-arthroscopy-treatment\">arthroscopic repair</a>."
       },
       {
         question: "How is a hip labral tear diagnosed?",
@@ -2034,7 +2034,7 @@ export interface FAQItem {
       },
       {
         question: "What is the recovery time for labral tear surgery?",
-        answer: "Recovery from <a href=\"/treatments/hip-labral-repair\">hip labral repair</a> takes <strong>4 to 6 months</strong> for return to sports. Patients use crutches for 2-4 weeks protecting the repair. Physical therapy progresses from motion to strengthening. Full healing takes up to a year."
+        answer: "Recovery from <a href=\"/treatments/hip-labral-repair\">hip labral repair</a> takes <strong>4 to 6 months</strong> for return to sports. Patients use crutches for 2-4 weeks protecting the repair. Rehabilitation progresses from motion to strengthening. Full healing takes up to a year."
       }
     ],
     "avascular-necrosis": [
@@ -2070,7 +2070,7 @@ export interface FAQItem {
       },
       {
         question: "Can hip bursitis be treated without surgery?",
-        answer: "Yes, over <strong>90% of cases resolve</strong> with conservative treatment including rest, ice, NSAIDs, physical therapy (IT band stretching, hip strengthening), activity modification, and corticosteroid injections. Surgery (bursectomy) is rarely needed."
+        answer: "Yes, over <strong>90% of cases resolve</strong> with conservative treatment including rest, ice, NSAIDs, rehabilitation (IT band stretching, hip strengthening), activity modification, and corticosteroid injections. Surgery (bursectomy) is rarely needed."
       },
       {
         question: "What are the symptoms of hip bursitis?",
@@ -2096,7 +2096,7 @@ export interface FAQItem {
       },
       {
         question: "What is the recovery time for hip fracture surgery?",
-        answer: "Patients typically walk with assistance <strong>within 1-2 days</strong> after surgery. Full recovery takes 3-6 months depending on fracture type and treatment. Physical therapy is crucial for regaining strength and preventing falls. Mortality risk is significant in elderly patients."
+        answer: "Patients typically walk with assistance <strong>within 1-2 days</strong> after surgery. Full recovery takes 3-6 months depending on fracture type and treatment. Rehabilitation is crucial for regaining strength and preventing falls. Mortality risk is significant in elderly patients."
       },
       {
         question: "What causes hip fractures in the elderly?",
@@ -2140,7 +2140,7 @@ export interface FAQItem {
       },
       {
         question: "What is the best treatment for running injuries?",
-        answer: "Initial treatment follows RICE protocol (rest, ice, compression, elevation). <strong>Relative rest</strong> with cross-training maintains fitness. Physical therapy addresses biomechanics and strength deficits. Gradual return-to-running programs prevent re-injury."
+        answer: "Initial treatment follows RICE protocol (rest, ice, compression, elevation). <strong>Relative rest</strong> with cross-training maintains fitness. Rehabilitation addresses biomechanics and strength deficits. Gradual return-to-running programs prevent re-injury."
       },
       {
         question: "How long do running injuries take to heal?",
@@ -2162,7 +2162,7 @@ export interface FAQItem {
       },
       {
         question: "Can I golf with a rotator cuff tear?",
-        answer: "Minor rotator cuff tendonitis may allow <strong>modified play with proper warm-up</strong>. Complete tears typically require treatment before returning. Physical therapy strengthening remaining cuff muscles and scapular stabilizers may enable play in some cases."
+        answer: "Minor rotator cuff tendonitis may allow <strong>modified play with proper warm-up</strong>. Complete tears typically require treatment before returning. Rehabilitation strengthening remaining cuff muscles and scapular stabilizers may enable play in some cases."
       },
       {
         question: "How long does golfer's elbow take to heal?",
@@ -2188,7 +2188,7 @@ export interface FAQItem {
       },
       {
         question: "How long does tennis elbow take to heal?",
-        answer: "Tennis elbow typically improves in <strong>6 to 12 weeks</strong> with rest, physical therapy, bracing, and avoiding aggravating activities. Chronic cases may require 6-12 months. Platelet-rich plasma (PRP) injections may accelerate healing in refractory cases."
+        answer: "Tennis elbow typically improves in <strong>6 to 12 weeks</strong> with rest, rehabilitation, bracing, and avoiding aggravating activities. Chronic cases may require 6-12 months. Platelet-rich plasma (PRP) injections may accelerate healing in refractory cases."
       }
     ],
     "pickleball-injuries": [
@@ -2422,7 +2422,7 @@ export interface FAQItem {
       },
       {
         question: "Can ankle arthritis be treated without surgery?",
-        answer: "Yes, initial treatment includes <strong>activity modification, bracing, physical therapy</strong>, NSAIDs, corticosteroid injections, and custom orthotics. Weight loss reduces joint stress. Many patients manage symptoms successfully without surgery for years."
+        answer: "Yes, initial treatment includes <strong>activity modification, bracing, rehabilitation</strong>, NSAIDs, corticosteroid injections, and custom orthotics. Weight loss reduces joint stress. Many patients manage symptoms successfully without surgery for years."
       },
       {
         question: "When is surgery needed for ankle arthritis?",
@@ -2488,7 +2488,7 @@ export interface FAQItem {
       },
       {
         question: "Can ankle instability be fixed without surgery?",
-        answer: "Many cases improve with <strong>dedicated physical therapy</strong> emphasizing peroneal strengthening, proprioceptive training (balance board), and functional exercises. Bracing provides support. Surgery is reserved for persistent instability despite 3-6 months of therapy."
+        answer: "Many cases improve with <strong>dedicated rehabilitation</strong> emphasizing peroneal strengthening, proprioceptive training (balance board), and functional exercises. Bracing provides support. Surgery is reserved for persistent instability despite 3-6 months of therapy."
       },
       {
         question: "What are the symptoms of ankle instability?",
@@ -2510,11 +2510,11 @@ export interface FAQItem {
       },
       {
         question: "Can lumbar stenosis be treated without surgery?",
-        answer: "Yes, many patients improve with <strong>physical therapy, epidural steroid injections</strong>, activity modification, assistive devices (cane), and pain management. Weight loss reduces spinal stress. Surgery is considered when conservative care fails and symptoms limit quality of life."
+        answer: "Yes, many patients improve with <strong>rehabilitation, epidural steroid injections</strong>, activity modification, assistive devices (cane), and pain management. Weight loss reduces spinal stress. Surgery is considered when conservative care fails and symptoms limit quality of life."
       },
       {
         question: "What is the best treatment for lumbar stenosis?",
-        answer: "Treatment depends on severity. <strong>Epidural injections</strong> provide temporary relief. Physical therapy strengthens core and improves flexibility. When symptoms significantly limit walking/daily activities despite conservative care, <a href=\"/treatments/lumbar-laminectomy-surgery\">decompression surgery</a> (laminectomy) relieves pressure on nerves."
+        answer: "Treatment depends on severity. <strong>Epidural injections</strong> provide temporary relief. Rehabilitation strengthens core and improves flexibility. When symptoms significantly limit walking/daily activities despite conservative care, <a href=\"/treatments/lumbar-laminectomy-surgery\">decompression surgery</a> (laminectomy) relieves pressure on nerves."
       },
       {
         question: "How is lumbar stenosis diagnosed?",
@@ -2536,7 +2536,7 @@ export interface FAQItem {
       },
       {
         question: "What is the best treatment for whiplash?",
-        answer: "Early treatment includes <strong>gentle activity as tolerated</strong> rather than rigid collar immobilization, ice/heat therapy, NSAIDs, and physical therapy focusing on range of motion and strengthening. Muscle relaxants may help acute spasms. Avoid prolonged immobilization."
+        answer: "Early treatment includes <strong>gentle activity as tolerated</strong> rather than rigid collar immobilization, ice/heat therapy, NSAIDs, and rehabilitation focusing on range of motion and strengthening. Muscle relaxants may help acute spasms. Avoid prolonged immobilization."
       },
       {
         question: "Can whiplash cause long-term problems?",
@@ -2554,15 +2554,15 @@ export interface FAQItem {
       },
       {
         question: "Can chronic pain be cured?",
-        answer: "While complete cure may not be possible, chronic pain can be <strong>effectively managed</strong> through multimodal approaches including physical therapy, medications, injections, psychological support, lifestyle modifications, and sometimes surgical interventions addressing underlying structural problems."
+        answer: "While complete cure may not be possible, chronic pain can be <strong>effectively managed</strong> through multimodal approaches including rehabilitation, medications, injections, psychological support, lifestyle modifications, and sometimes surgical interventions addressing underlying structural problems."
       },
       {
         question: "What are the best treatments for chronic pain?",
-        answer: "Effective management combines <strong>physical therapy, graded exercise programs</strong>, medications (NSAIDs, neuropathic pain drugs, occasional opioids), interventional procedures (nerve blocks, spinal cord stimulation), cognitive behavioral therapy, and addressing sleep and mental health."
+        answer: "Effective management combines <strong>rehabilitation, graded exercise programs</strong>, medications (NSAIDs, neuropathic pain drugs, occasional opioids), interventional procedures (nerve blocks, spinal cord stimulation), cognitive behavioral therapy, and addressing sleep and mental health."
       },
       {
-        question: "How does physical therapy help chronic pain?",
-        answer: "<strong>Physical therapy</strong> breaks the pain-inactivity cycle through graded exercise, improving strength and flexibility, reducing fear-avoidance behaviors, and restoring function. It modulates pain signals through movement and helps patients regain confidence in their bodies."
+        question: "How does rehabilitation help chronic pain?",
+        answer: "<strong>Rehabilitation</strong> breaks the pain-inactivity cycle through graded exercise, improving strength and flexibility, reducing fear-avoidance behaviors, and restoring function. It modulates pain signals through movement and helps patients regain confidence in their bodies."
       }
     ],
     "nerve-pain": [
@@ -2598,7 +2598,7 @@ export interface FAQItem {
       },
       {
         question: "Can radiculopathy heal without surgery?",
-        answer: "Yes, <strong>80-90% of radiculopathy cases improve</strong> with conservative treatment including rest, physical therapy, anti-inflammatory medications, and epidural steroid injections. Symptoms often resolve as disc herniations shrink and inflammation subsides over 6-12 weeks."
+        answer: "Yes, <strong>80-90% of radiculopathy cases improve</strong> with conservative treatment including rest, rehabilitation, anti-inflammatory medications, and epidural steroid injections. Symptoms often resolve as disc herniations shrink and inflammation subsides over 6-12 weeks."
       },
       {
         question: "When is surgery needed for radiculopathy?",
