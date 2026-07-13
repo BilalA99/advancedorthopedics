@@ -7,10 +7,10 @@ import { useEffect, useState } from "react"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import BookAnAppoitmentButton from "./BookAnAppoitmentButton"
 import { getAttributionData } from "@/lib/gclid"
 import { useRouter } from "next/navigation"
+import { pushFormSubmit } from "@/utils/enhancedConversions"
 
 const formSchema = z.object({
   name: z.string().min(2, "name must be at least 2 characters"),
@@ -22,7 +22,6 @@ const formSchema = z.object({
 
 export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor?: string }) {
   const [attribution, setAttribution] = useState({ gclid: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '', utm_content: '' })
-  const [disabled, setDisabled] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -41,7 +40,6 @@ export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    setDisabled(true)
     try {
       const nameParts = values.name.trim().split(' ')
       const firstName = nameParts[0] || values.name
@@ -70,12 +68,18 @@ export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor
         return
       }
       if (res.ok) {
+        pushFormSubmit({
+          form_name: 'MiniContactForm',
+          state: '',
+          email: values.email,
+          phone: values.phone,
+          firstName,
+          lastName,
+        })
         router.push('/thank-you')
       }
     } catch (error) {
       console.error('[MiniContactForm] Submit failed', error)
-    } finally {
-      setDisabled(false)
     }
   }
 

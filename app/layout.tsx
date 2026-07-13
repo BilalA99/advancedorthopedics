@@ -5,11 +5,11 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { MapProvider } from "@/providers/map-provider";
 import { GeolocationProvider } from "@/providers/geolocationcontext";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { DelayedLocationPopup } from "@/components/delayedlocationpopup";
 import Script from "next/script";
 import TanstackProvider from "@/providers/tanstack";
 import GclidCapture from "@/components/GclidCapture";
+import CookieConsentManager from "@/components/CookieConsentManager";
 import { buildCanonical, SITE_URL, canonicalForOg } from "@/lib/seo";
 import { getOgImageForPath } from "@/lib/og";
 
@@ -215,9 +215,6 @@ export default function RootLayout({
       <head>
         {/* Preconnect to CDN for performance */}
         <link rel="preconnect" href="https://mountainspineortho.b-cdn.net" crossOrigin="" />
-        {/* Preconnect to Google Maps (lazy-loaded; warming the handshake saves ~100-200ms when it does mount) */}
-        <link rel="preconnect" href="https://maps.googleapis.com" crossOrigin="" />
-        <link rel="preconnect" href="https://maps.gstatic.com" crossOrigin="" />
         {/* Favicons and icons for SEO and device support */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -226,6 +223,22 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
         <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
         <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+        <Script id="google-consent-default" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){ window.dataLayer.push(arguments); }
+            window.gtag = window.gtag || gtag;
+            gtag('consent', 'default', {
+              ad_storage: 'denied',
+              analytics_storage: 'denied',
+              ad_user_data: 'denied',
+              ad_personalization: 'denied',
+              functionality_storage: 'denied',
+              personalization_storage: 'denied',
+              security_storage: 'granted'
+            });
+          `}
+        </Script>
         {/* Google tag (gtag.js) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-XXHSYV3NMD"
@@ -234,9 +247,9 @@ export default function RootLayout({
         <Script id="gtag-init" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-XXHSYV3NMD');
+            window.gtag = window.gtag || function gtag(){dataLayer.push(arguments);}
+            window.gtag('js', new Date());
+            window.gtag('config', 'G-XXHSYV3NMD');
           `}
         </Script>
         {/* Google Tag Manager */}
@@ -264,12 +277,8 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalOrgSchema) }}
         />
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T57SB8NQ"
-            height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe>
-        </noscript>
         <GclidCapture />
+        <CookieConsentManager />
         <TanstackProvider>
           <NavBar />
           <MapProvider>
@@ -280,11 +289,6 @@ export default function RootLayout({
             </GeolocationProvider>
           </MapProvider>
         </TanstackProvider>
-        <Script
-          id="callrail-dni"
-          src="//cdn.callrail.com/companies/773929113/e6e5de417599bf7a871c/12/swap.js"
-          strategy="afterInteractive"
-        />
       </body>
     </html>
   );

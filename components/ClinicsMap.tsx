@@ -8,6 +8,18 @@ import { useGeolocation } from '@/providers/geolocationcontext';
 import { Select, SelectContent, SelectItem, SelectTrigger } from './ui/select';
 import { clinics } from './data/clinics';
 import Link from 'next/link';
+import {
+  CONSENT_UPDATED_EVENT,
+  OPEN_COOKIE_PREFERENCES_EVENT,
+  hasFunctionalConsent,
+} from '@/lib/consent';
+import { pushEvent } from '@/utils/enhancedConversions';
+
+type ClinicsMapProps = {
+  startingClinic?: { id: number, name: string, lat: number, lng: number, address: string, link?: string, embedSrc?: string },
+  showEmbed?: boolean,
+  stateName?: string,
+};
 //Map's styling
 export const defaultMapContainerStyle = {
   width: '100%',
@@ -29,11 +41,25 @@ const defaultMapOptions = {
 
 // Assume icons are defined here or imported. IMPORTANT: Accessing window.google requires the library to be loaded.
 
-export default function ClinicsMap({ startingClinic, showEmbed = false, stateName }: {
-  startingClinic?: { id: number, name: string, lat: number, lng: number, address: string, link?: string, embedSrc?: string },
-  showEmbed?: boolean,
-  stateName?: string,
-}) {
+export default function ClinicsMap(props: ClinicsMapProps) {
+  const [functionalAllowed, setFunctionalAllowed] = useState(false);
+
+  useEffect(() => {
+    setFunctionalAllowed(hasFunctionalConsent());
+
+    const handleConsentUpdated = () => setFunctionalAllowed(hasFunctionalConsent());
+    window.addEventListener(CONSENT_UPDATED_EVENT, handleConsentUpdated);
+    return () => window.removeEventListener(CONSENT_UPDATED_EVENT, handleConsentUpdated);
+  }, []);
+
+  if (!functionalAllowed) {
+    return <MapConsentPlaceholder {...props} />;
+  }
+
+  return <ClinicsMapInner {...props} />;
+}
+
+function ClinicsMapInner({ startingClinic, showEmbed = false, stateName }: ClinicsMapProps) {
   const { location } = useGeolocation();
   
   // Load Google Maps API
@@ -272,6 +298,64 @@ export default function ClinicsMap({ startingClinic, showEmbed = false, stateNam
   )
 }
 
+function MapConsentPlaceholder({ startingClinic, stateName }: ClinicsMapProps) {
+  const directionsUrl =
+    startingClinic?.link ||
+    (startingClinic?.address
+      ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(startingClinic.address)}`
+      : '/locations');
+
+  const openMapPreferences = () => {
+    // Opens the existing Cookie Preferences panel with Functional pre-checked.
+    // Nothing is written to consent storage here — the user must explicitly
+    // click "Save Preferences" / "Accept All" in that panel, so this never
+    // silently records a full analytics/marketing decision on the user's behalf.
+    window.dispatchEvent(
+      new CustomEvent(OPEN_COOKIE_PREFERENCES_EVENT, { detail: { preselect: { functional: true } } })
+    );
+  };
+
+  return (
+    <section className="bg-white w-full py-[50px]">
+      <div className="max-w-[1440px] w-full px-4 md:px-[40px] mx-auto">
+        <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 md:p-8">
+          <h2 className="text-2xl font-semibold text-[#252932]" style={{ fontFamily: "var(--font-public-sans)" }}>
+            Find Orthopedic Care Near You
+          </h2>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-[#424959]">
+            Embedded maps are optional functional cookies. Manage your cookie preferences to enable the map, or open
+            directions in Google Maps without loading any extra cookies.
+          </p>
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+            <button
+              type="button"
+              onClick={openMapPreferences}
+              className="min-h-11 rounded-md bg-[#0A50EC] px-5 text-sm font-semibold text-white hover:bg-[#252932]"
+            >
+              Manage Cookie Preferences
+            </button>
+            <Link
+              href={directionsUrl}
+              target={directionsUrl.startsWith('http') ? '_blank' : undefined}
+              rel={directionsUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
+              onClick={() => {
+                pushEvent('directions_click', {
+                  location_name: startingClinic?.name || '',
+                  page_path: window.location.pathname,
+                });
+              }}
+              className="inline-flex min-h-11 items-center justify-center rounded-md border border-[#0A50EC] px-5 text-sm font-semibold text-[#0A50EC] hover:bg-blue-50"
+            >
+              Open Directions
+            </Link>
+          </div>
+          {stateName ? <p className="mt-4 text-xs text-slate-500">Showing {stateName} location map controls.</p> : null}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 
 const DropdownIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -367,7 +451,16 @@ function MapOverlayCard({ selectedClinic, handleMarkerClick }: { selectedClinic?
         </Select>
       </div>
 
-      <Link href={selectedClinic?.link || '/locations'} className='shadow-2xl p-1 rounded-md w-full items-center justify-center border flex'>
+      <Link
+        href={selectedClinic?.link || '/locations'}
+        onClick={() => {
+          pushEvent('directions_click', {
+            location_name: selectedClinic?.name || '',
+            page_path: window.location.pathname,
+          });
+        }}
+        className='shadow-2xl p-1 rounded-md w-full items-center justify-center border flex'
+      >
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path d="M18.5 21.5L12.5 6.5M21.5 4.5L2.5 8.5" stroke="#7E869E" strokeOpacity="0.25" />
           <path d="M2.5 5.7C2.5 4.57989 2.5 4.01984 2.71799 3.59202C2.90973 3.21569 3.21569 2.90973 3.59202 2.71799C4.01984 2.5 4.5799 2.5 5.7 2.5H18.3C19.4201 2.5 19.9802 2.5 20.408 2.71799C20.7843 2.90973 21.0903 3.21569 21.282 3.59202C21.5 4.01984 21.5 4.5799 21.5 5.7V18.3C21.5 19.4201 21.5 19.9802 21.282 20.408C21.0903 20.7843 20.7843 21.0903 20.408 21.282C19.9802 21.5 19.4201 21.5 18.3 21.5H5.7C4.57989 21.5 4.01984 21.5 3.59202 21.282C3.21569 21.0903 2.90973 20.7843 2.71799 20.408C2.5 19.9802 2.5 19.4201 2.5 18.3V5.7Z" stroke="#222222" strokeLinecap="round" />
@@ -421,6 +514,5 @@ function findNearestClinicNameGoogle(clinics, userLocation, google) {
       nearestClinic = clinic;
     }
   }
-  console.log('Nearest Clinic', nearestClinic)
   return nearestClinic ? nearestClinic : null;
 }

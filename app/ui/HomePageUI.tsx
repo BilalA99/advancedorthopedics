@@ -23,6 +23,7 @@ import ClinicsMap from "@/components/ClinicsMap";
 import ContactUsSection from "@/components/ContactUsSection";
 import RatingsAndReviews from "@/components/RatingsAndReviews";
 import { DoctorContactForm } from "@/components/DoctorContactForm";
+import { pushPhoneClickEvent } from "@/utils/enhancedConversions";
 import { Doctors } from "@/components/data/doctors";
 
 // Animation & UI Imports
@@ -147,13 +148,10 @@ export default function HomePageUI() {
                     href="tel:+15612239959"
                     className="hover:text-[#0A50EC] hover:underline transition-colors duration-200 text-lg font-bold text-white"
                     onClick={() => {
-                      if (typeof window !== "undefined" && window.dataLayer) {
-                        window.dataLayer.push({
-                          event: 'call_click',
-                          phone_number: '5612239959',
-                          location: 'HomeHero'
-                        });
-                      }
+                      pushPhoneClickEvent({
+                        location: 'HomeHero',
+                        page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+                      });
                     }}
                     style={{
                       fontFamily: "var(--font-inter)",

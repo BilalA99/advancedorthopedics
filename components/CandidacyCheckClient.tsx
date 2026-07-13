@@ -33,8 +33,9 @@ const associationLogoAlt: Record<string, string> = {
   'Serpent': 'Medical caduceus symbol representing healthcare excellence',
   'SMIS': 'Society for Minimally Invasive Spine Surgery (SMISS) member'
 };
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { getAttributionData } from '@/lib/gclid'
+import { pushFormSubmit } from '@/utils/enhancedConversions'
 // Reverted form schema to match the "Candidacy Check" steps from the image
 const formSchema = z.object({
   // Step 1 Questions
@@ -146,6 +147,7 @@ export default function CandidacyCheckClient() {
   const [appointmentConfirm, setAppointmentConfirm] = useState(false);
   const [disabled, setDisabled] = useState(false)
   const [attribution, setAttribution] = useState({ gclid: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '', utm_content: '' })
+  const router = useRouter()
 
   React.useEffect(() => {
     setAttribution(getAttributionData())
@@ -175,10 +177,18 @@ export default function CandidacyCheckClient() {
     setDisabled(true)
     const data = await sendCandidacyEmail({ ...values, email_optout: "false", ...attribution });
     if (data) {
+      pushFormSubmit({
+        form_name: 'CandidacyCheckForm',
+        state: values.state,
+        email: values.email,
+        phone: values.phone,
+        firstName: values.first_name,
+        lastName: values.last_name,
+      })
       //setAppointmentConfirm(true);
       form.reset();
       setDisabled(false)
-      redirect('/thank-you')
+      router.push('/thank-you')
     }
   }
 
@@ -444,7 +454,7 @@ export default function CandidacyCheckClient() {
                   setConditionStep(Math.min(3, conditionStep + 1))
                 }
                 else {
-                  form.handleSubmit(onSubmit, (e) => console.log(e))()
+                  form.handleSubmit(onSubmit)()
                 }
               }}
               className={`${disabled ? "hover:cursor-not-allowed bg-[#252932]" : 'hover:cursor-pointer'} self-end max-h-[56px] w-fit h-full px-[32px] py-[16px] space-x-[10px] rounded-[62px] relative flex bg-[#0A50EC] text-white text-[14px] font-semibold justify-center items-center hover:cursor-pointer`}

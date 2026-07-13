@@ -37,6 +37,7 @@ import LocationFAQSection from '@/components/LocationFAQSection'
 import { LocationNAP } from '@/components/LocationNAP'
 import LocationSeoSections from '@/components/LocationSeoSections'
 import LocationGallerySection from '@/components/LocationGallerySection'
+import TrackedOutboundLink from '@/components/TrackedOutboundLink'
 import { findClinicByStateAndLocation, getAllLocationParams, isValidStateSlug, STATE_METADATA } from '@/lib/locationRedirects'
 import { ReviewLocationCapture } from '@/components/ReviewLocationCapture'
 import { STATE_PHONE_NUMBERS, MAIN_PHONE_DISPLAY } from '@/lib/locationConstants'
@@ -247,10 +248,15 @@ export default async function LocationDetails(
                         <div className="z-[2] px-4 mt-3 sm:hidden block">
                             <div className="flex flex-col space-y-3 w-full max-w-[480px] mx-auto">
                                 {/* Get Directions - light grey */}
-                                <Link
+                                <TrackedOutboundLink
                                     href={(locationData.link || (locationData.address ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(locationData.address)}` : `https://www.google.com/maps/dir/?api=1&destination=${locationData.lat},${locationData.lng}`))}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    eventName="directions_click"
+                                    eventParams={{
+                                        location_name: locationData.name,
+                                        location_state: state,
+                                    }}
                                     className="w-full h-[52px] rounded-[16px] bg-[#E5E7EB] text-[#252932] flex flex-row items-center justify-center gap-2 font-[500] text-[15px] shadow-sm active:scale-[0.98] transition-all duration-200"
                                     style={{ fontFamily: 'var(--font-public-sans)' }}
                                 >
@@ -259,7 +265,7 @@ export default async function LocationDetails(
                                         <circle cx="12" cy="10" r="3" />
                                     </svg>
                                     <span className="whitespace-nowrap">Get Directions</span>
-                                </Link>
+                                </TrackedOutboundLink>
 
                                 {/* Checkmark Items - Mobile */}
                                 <div className="flex flex-col space-y-2 mt-4 w-full">
@@ -307,10 +313,15 @@ export default async function LocationDetails(
                                     </div>
                                 </div>
                                 <div className="lg:flex hidden">
-                                    <Link 
+                                    <TrackedOutboundLink
                                         href={(locationData.link || (locationData.address ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(locationData.address)}` : `https://www.google.com/maps/dir/?api=1&destination=${locationData.lat},${locationData.lng}`))} 
                                         target="_blank" 
                                         rel="noopener noreferrer" 
+                                        eventName="directions_click"
+                                        eventParams={{
+                                            location_name: locationData.name,
+                                            location_state: state,
+                                        }}
                                         className="h-full max-h-[56px] group flex flex-row items-center justify-center hover:cursor-pointer px-[24px] py-[16px] rounded-[62px] bg-[#E5E7EB] text-[#252932] w-fit font-[500] text-[14px] hover:bg-[#D1D5DB] transition-colors"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 flex-shrink-0">
@@ -328,7 +339,7 @@ export default async function LocationDetails(
                                                 <path d="M12.3982 0.768483C12.0402 0.410504 11.4598 0.410506 11.1018 0.768488C10.7438 1.12647 10.7438 1.70687 11.1018 2.06485L14.1203 5.08333H1.66667C1.16041 5.08333 0.75 5.49374 0.75 6C0.75 6.50626 1.16041 6.91667 1.66667 6.91667H14.1203L11.1018 9.93516C10.7439 10.2931 10.7439 10.3735 11.1019 11.2315C11.4598 11.5895 12.0402 11.5895 12.3982 11.2315L16.9766 6.65303C16.9935 6.63637 17.0098 6.61905 17.0254 6.60112C17.0873 6.52997 17.1365 6.45154 17.1728 6.36885C17.2221 6.25677 17.2496 6.13294 17.25 6.00273L17.25 6C17.25 5.99717 17.25 5.99434 17.25 5.99152C17.2489 5.87623 17.2266 5.76602 17.1867 5.66463C17.142 5.55068 17.0736 5.44387 16.9815 5.35178L12.3982 0.768483Z" fill="currentColor" />
                                             </svg>
                                         </div>
-                                    </Link>
+                                    </TrackedOutboundLink>
                                 </div>
 
                                 {/* Checkmark Items - Desktop */}

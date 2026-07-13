@@ -606,7 +606,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                     <form
                                         ref={formRef}
                                         className="sm:space-y-6 space-y-2 p-1 overflow-y-auto flex-1 pr-2 relative"
-                                        onSubmit={form.handleSubmit(onSubmit, () => { console.log('error') })}
+                                        onSubmit={form.handleSubmit(onSubmit)}
                                     >
                                         <input type="hidden" name="country" value="US" />
                                         <div className="w-full  space-y-6">
@@ -978,9 +978,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                             <button
                                                 className="w-full self-center flex items-center justify-center"
                                                 disabled={disabled}
-                                                onClick={
-                                                    form.handleSubmit(onSubmit, () => { console.log('error') })
-                                                }
+                                                onClick={form.handleSubmit(onSubmit)}
                                             >
                                                 {disabled ? (
                                                     <div className="max-h-[56px] group h-full px-[32px] py-[16px] hover:bg-[#252932] rounded-[62px] relative flex bg-[#0A50EC] text-white text-[14px] font-semibold w-full justify-center items-center hover:cursor-not-allowed">

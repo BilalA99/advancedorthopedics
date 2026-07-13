@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { resolveContactByPathname } from '@/lib/contact-routing';
 import Link from 'next/link';
 import { cn } from "@/lib/utils"
+import { pushPhoneClickEvent } from '@/utils/enhancedConversions';
 import {
   Accordion,
   AccordionContent,
@@ -1194,13 +1195,10 @@ export default function NavBar() {
               href={contact.phoneHref}
               className="hover:text-[#0A50EC] hover:underline transition-colors duration-200 text-[#252932] font-bold"
               onClick={() => {
-                if (typeof window !== "undefined" && window.dataLayer) {
-                  window.dataLayer.push({
-                    event: 'call_click',
-                    phone_number: contact.phoneTel,
-                    location: 'NavBar'
-                  });
-                }
+                pushPhoneClickEvent({
+                  location: 'NavBar',
+                  page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+                });
               }}
               style={{
                 fontFamily: "var(--font-inter)",
@@ -1282,13 +1280,10 @@ export default function NavBar() {
                       href={contact.phoneHref}
                       className="hover:text-[#0A50EC] hover:underline transition-colors duration-200 text-[#252932] font-bold"
                       onClick={() => {
-                        if (typeof window !== "undefined" && window.dataLayer) {
-                          window.dataLayer.push({
-                            event: 'call_click',
-                            phone_number: contact.phoneTel,
-                            location: 'NavBar'
-                          });
-                        }
+                        pushPhoneClickEvent({
+                          location: 'NavBar',
+                          page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+                        });
                       }}
                       style={{
                         fontFamily: "var(--font-inter)",

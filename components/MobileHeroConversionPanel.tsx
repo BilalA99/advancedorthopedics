@@ -2,6 +2,7 @@
 
 import React from 'react';
 import MobileHeroMiniForm from '@/components/MobileHeroMiniForm';
+import { pushPhoneClickEvent } from '@/utils/enhancedConversions';
 
 interface MobileHeroConversionPanelProps {
   pageType: 'homepage' | 'location' | 'state';
@@ -32,33 +33,20 @@ export default function MobileHeroConversionPanel({
     : 'Call Now';
 
   const handleCallClick = () => {
-    if (typeof window !== 'undefined' && window.dataLayer) {
-      if (pageType === 'location') {
-        window.dataLayer.push({
-          event: 'location_call_click',
-          location_name: locationName,
-          location_slug: locationSlug,
-          phone_number: phone,
-          page_path: window.location.pathname,
-          cta_position: 'mobile_hero_top_fold',
-        });
-      } else if (pageType === 'state') {
-        window.dataLayer.push({
-          event: 'state_location_call_click',
-          state_name: stateName,
-          phone_number: phone,
-          page_path: window.location.pathname,
-          cta_position: 'mobile_hero_top_fold',
-        });
-      } else {
-        window.dataLayer.push({
-          event: 'homepage_call_click',
-          phone_number: phone,
-          page_path: window.location.pathname,
-          cta_position: 'mobile_hero_top_fold',
-        });
-      }
-    }
+    // Primary event stays page-type-specific for segmentation; pushPhoneClickEvent
+    // also fires the legacy sitewide 'call_click' alias so existing GTM triggers
+    // that expect a call event on every phone tap (not just non-location pages)
+    // keep firing.
+    pushPhoneClickEvent(
+      {
+        location_name: pageType === 'location' ? locationName : undefined,
+        location_slug: pageType === 'location' ? locationSlug : undefined,
+        state_name: pageType === 'state' ? stateName : undefined,
+        page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+        cta_position: 'mobile_hero_top_fold',
+      },
+      pageType === 'location' ? 'location_phone_click' : 'phone_click'
+    );
   };
 
   return (
