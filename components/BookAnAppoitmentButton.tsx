@@ -23,7 +23,7 @@ import BookAnAppointmentClient from "./BookAnAppointmentClient"
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
-import { pushFormSubmit } from "@/utils/enhancedConversions"
+import { pushAppointmentCtaClick, pushFormSubmit } from "@/utils/enhancedConversions"
 import { STATE_OPTIONS, slugFromPathname, normalizeState } from "@/lib/stateUtils"
 import { getAttributionData } from "@/lib/gclid"
 import { ScrollProgress } from "@/components/ui/scroll-progress"
@@ -107,14 +107,10 @@ export default function BookAnAppoitmentButton({
     }, [])
 
     const handleOpen = () => {
-        console.log('Opening dialog...')
-        if (typeof window !== "undefined" && window.dataLayer) {
-            window.dataLayer.push({
-                event: 'booking_click',
-                button_location: 'BookAnAppoitmentButton',
-                pagePath: window.location.pathname,
-            });
-        }
+        pushAppointmentCtaClick({
+            button_location: 'BookAnAppoitmentButton',
+            page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+        });
         setOpen(true)
     }
     const handleClose = () => {
@@ -277,7 +273,7 @@ export default function BookAnAppoitmentButton({
                         <form
                             ref={formRef}
                             className="space-y-6 p-1 sm:p-1 overflow-y-auto flex-1 pr-2 relative"
-                            onSubmit={form.handleSubmit(onSubmit, () => { console.log('error') })}
+                            onSubmit={form.handleSubmit(onSubmit)}
                         >
                             <input type="hidden" name="country" value="US" />
                             {/* <ScrollProgress className="top-[65px]" color="#0A50EC" /> */}

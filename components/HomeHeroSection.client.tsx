@@ -6,6 +6,7 @@ import BookAnAppoitmentButton from "@/components/BookAnAppoitmentButton";
 import HeroContactFormIdle from "@/components/HeroContactFormIdle.client";
 import MobileHeroConversionPanel from "@/components/MobileHeroConversionPanel";
 import { Marquee } from "@/components/magicui/marquee";
+import { pushPhoneClickEvent } from "@/utils/enhancedConversions";
 
 // Image Asset Imports
 import AAOS from '@/public/AAOS.png';
@@ -33,14 +34,6 @@ function HeroPhoneCTA({ timePeriod }: { timePeriod: TimePeriod }) {
   const defaultPhoneText = '(561) 223-9959';
   const defaultPhoneHref = 'tel:+15612239959';
 
-  const getDisplayedPhone = () => {
-    if (typeof document === 'undefined') {
-      return defaultPhoneText;
-    }
-    const phoneNode = document.querySelector('[data-callrail-phone="hero-mobile-phone"]');
-    return phoneNode?.textContent?.trim() || defaultPhoneText;
-  };
-
   return (
     <div className="w-full mb-3 rounded-2xl border border-white/25 bg-white/10 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.18)] px-4 py-3 text-white">
       <div className="flex items-center justify-between gap-3">
@@ -60,15 +53,10 @@ function HeroPhoneCTA({ timePeriod }: { timePeriod: TimePeriod }) {
           data-phone="+15612239959"
           className="ctm-phone-number shrink-0 rounded-full bg-white text-[#0A50EC] px-3 py-2 text-sm font-bold shadow-sm hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white/70"
           onClick={() => {
-            const displayPhone = getDisplayedPhone();
-            const cleanPhone = displayPhone.replace(/\D/g, '');
-            if (typeof window !== "undefined" && window.dataLayer) {
-              window.dataLayer.push({
-                event: 'call_click',
-                phone_number: cleanPhone || '5612239959',
-                location: 'HomeHero'
-              });
-            }
+            pushPhoneClickEvent({
+              location: 'HomeHero',
+              page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+            });
           }}
         >
           <span className="inline-flex items-center gap-1.5">
@@ -338,13 +326,10 @@ export default function HomeHeroSection() {
                   href="tel:+15612239959"
                   className={`${timePeriod !== 'night' ? 'hover:text-[#0A50EC]' : 'hover:text-gray-200'} hover:underline transition-colors duration-200 text-lg font-bold ${timePeriod !== 'night' ? 'text-[#424959]' : 'text-white'}`}
                   onClick={() => {
-                    if (typeof window !== "undefined" && window.dataLayer) {
-                      window.dataLayer.push({
-                        event: 'call_click',
-                        phone_number: '5612239959',
-                        location: 'HomeHero'
-                      });
-                    }
+                    pushPhoneClickEvent({
+                      location: 'HomeHero',
+                      page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+                    });
                   }}
                   style={{
                     fontFamily: "var(--font-inter)",

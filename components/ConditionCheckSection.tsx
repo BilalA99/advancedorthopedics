@@ -10,8 +10,9 @@ import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { sendConditionCheckEmail } from '@/components/email/sendcontactemail'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { getAttributionData } from '@/lib/gclid'
+import { pushFormSubmit } from '@/utils/enhancedConversions'
 
 
 const formSchema = z.object({
@@ -66,6 +67,7 @@ export default function ConditionCheckSection({
   const [openAppointmentConfirm, setAppointmentConfirm] = useState(false)
   const [disabled, setDisabled] = useState(false)
   const [attribution, setAttribution] = useState({ gclid: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '', utm_content: '' })
+  const router = useRouter()
 
   useEffect(() => {
     setAttribution(getAttributionData())
@@ -108,10 +110,18 @@ export default function ConditionCheckSection({
       utm_content: attribution.utm_content,
     })
     if (data) {
+      pushFormSubmit({
+        form_name: 'ConditionCheckForm',
+        state: values.state,
+        email: values.email,
+        phone: values.phone,
+        firstName: values.first_name,
+        lastName: values.last_name,
+      })
       ConditionForm.reset()
       //setAppointmentConfirm(true)
-      redirect('/thank-you')
       setDisabled(false)
+      router.push('/thank-you')
     }
   }
   return (

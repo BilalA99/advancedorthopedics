@@ -8,6 +8,7 @@ import SlidingDiv from "@/components/SlidingAnimation";
 import { Marquee } from "@/components/magicui/marquee";
 import Reveal from './RevealAnimation';
 import { Clock, Phone } from 'lucide-react';
+import { pushPhoneClickEvent } from '@/utils/enhancedConversions';
 
 // Image Asset Imports
 import AAOS from '@/public/AAOS.png';
@@ -106,13 +107,10 @@ export default function StateHero({ stateName, stateAbbr, h1, subheading, phoneN
                     href={`tel:+1${phoneNumberRaw}`}
                     className="text-2xl font-bold text-[#252932] hover:text-[#0A50EC] transition-colors"
                     onClick={() => {
-                      if (typeof window !== "undefined" && window.dataLayer) {
-                        window.dataLayer.push({
-                          event: 'call_click',
-                          phone_number: phoneNumberRaw,
-                          location: `StateHero-${stateName}`
-                        });
-                      }
+                      pushPhoneClickEvent({
+                        location: `StateHero-${stateName}`,
+                        page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+                      });
                     }}
                   >
                     {phoneNumber}

@@ -2,10 +2,19 @@
 // GCLID + UTM Capture Utility
 // Used for Google Ads offline conversion attribution
 // Mountain Spine & Orthopedics — NJ/NY Expansion
+import { hasMarketingConsent } from './consent';
 
 const GCLID_COOKIE_NAME = 'mso_gclid';
 const GCLID_COOKIE_EXPIRY_DAYS = 90;
 const UTM_COOKIE_EXPIRY_DAYS = 30;
+
+const AD_CLICK_PARAMS = [
+  'gclid',
+  'gbraid',
+  'wbraid',
+  'fbclid',
+  'msclkid',
+] as const;
 
 const UTM_PARAMS = [
   'utm_source',
@@ -16,6 +25,7 @@ const UTM_PARAMS = [
 ] as const;
 
 type UtmParam = typeof UTM_PARAMS[number];
+type AdClickParam = typeof AD_CLICK_PARAMS[number];
 
 /**
  * Reads a single query parameter from the current URL
@@ -66,9 +76,16 @@ function getCookie(name: string): string | null {
  */
 export function captureGclid(): void {
   const gclidFromUrl = getQueryParam('gclid');
-  if (gclidFromUrl) {
+  if (gclidFromUrl && hasMarketingConsent()) {
     setCookie(GCLID_COOKIE_NAME, gclidFromUrl, GCLID_COOKIE_EXPIRY_DAYS);
   }
+
+  AD_CLICK_PARAMS.forEach((param) => {
+    const value = getQueryParam(param);
+    if (value && hasMarketingConsent()) {
+      setCookie(param, value, GCLID_COOKIE_EXPIRY_DAYS);
+    }
+  });
 }
 
 /**
@@ -78,7 +95,7 @@ export function captureGclid(): void {
 export function captureUtmParams(): void {
   UTM_PARAMS.forEach((param) => {
     const value = getQueryParam(param);
-    if (value) {
+    if (value && hasMarketingConsent()) {
       setCookie(param, value, UTM_COOKIE_EXPIRY_DAYS);
     }
   });
@@ -90,7 +107,7 @@ export function captureUtmParams(): void {
  * Returns empty string (never null) so it's safe to use directly in form values.
  */
 export function getStoredGclid(): string {
-  return getCookie(GCLID_COOKIE_NAME) ?? '';
+  return getQueryParam('gclid') ?? getCookie(GCLID_COOKIE_NAME) ?? getCookie('gclid') ?? '';
 }
 
 /**
@@ -100,7 +117,19 @@ export function getStoredGclid(): string {
 export function getStoredUtmParams(): Record<UtmParam, string> {
   const result = {} as Record<UtmParam, string>;
   UTM_PARAMS.forEach((param) => {
-    result[param] = getCookie(param) ?? '';
+    result[param] = getQueryParam(param) ?? getCookie(param) ?? '';
+  });
+  return result;
+}
+
+export function getStoredAdClickParams(): Record<AdClickParam, string> {
+  const result = {} as Record<AdClickParam, string>;
+  AD_CLICK_PARAMS.forEach((param) => {
+    if (param === 'gclid') {
+      result[param] = getStoredGclid();
+      return;
+    }
+    result[param] = getQueryParam(param) ?? getCookie(param) ?? '';
   });
   return result;
 }

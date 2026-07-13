@@ -1,4 +1,6 @@
 // utils/enhancedConversions.ts
+import { hasMarketingConsent, hasMeasurementConsent } from "@/lib/consent";
+
 /**
  * Enhanced Conversions for Google Ads
  * 
@@ -104,6 +106,7 @@ export function normalizeEC(v: ECIn): ECOut {
  */
 export function persistEC(v: ECIn) {
   if (typeof window === 'undefined') return;
+  if (!hasMarketingConsent()) return;
   const n = normalizeEC(v);
   try {
     sessionStorage.setItem('ec_email', n.email || '');
@@ -126,6 +129,7 @@ export function persistEC(v: ECIn) {
  */
 export function pushEC(v: ECIn, eventName: string = 'ec_capture') {
   if (typeof window === 'undefined') return;
+  if (!hasMarketingConsent()) return;
   const n = normalizeEC(v);
   
   // Initialize dataLayer if it doesn't exist
@@ -155,6 +159,7 @@ export function pushEC(v: ECIn, eventName: string = 'ec_capture') {
  */
 export function pushECSilent(v: ECIn) {
   if (typeof window === 'undefined') return;
+  if (!hasMarketingConsent()) return;
   const n = normalizeEC(v);
   (window as any).dataLayer = (window as any).dataLayer || [];
   (window as any).dataLayer.push({
@@ -181,6 +186,7 @@ export function pushECSilent(v: ECIn) {
  */
 export function restoreECFromSession(eventName: string = 'ec_restore') {
   if (typeof window === 'undefined') return;
+  if (!hasMarketingConsent()) return;
   try {
     const country = (sessionStorage.getItem('ec_country') || 'US').trim().toUpperCase();
     const rawPhone = sessionStorage.getItem('ec_phone') || '';
@@ -227,8 +233,44 @@ export function captureAndPersistEC(v: ECIn, eventName: string = 'ec_capture') {
 /** Generic custom event push helper (keeps analytics code tidy) */
 export function pushEvent(name: string, params: Record<string, any> = {}) {
   if (typeof window === 'undefined') return;
+  if (!hasMeasurementConsent()) return;
   (window as any).dataLayer = (window as any).dataLayer || [];
   (window as any).dataLayer.push({ event: name, ...params });
+}
+
+export function pushMarketingEvent(name: string, params: Record<string, any> = {}) {
+  if (typeof window === 'undefined') return;
+  if (!hasMarketingConsent()) return;
+  (window as any).dataLayer = (window as any).dataLayer || [];
+  (window as any).dataLayer.push({ event: name, ...params });
+}
+
+/**
+ * Phone click tracking — single entry point for every "tel:" CTA sitewide.
+ *
+ * Pushes the current event name (default `phone_click`, or a page-type-specific
+ * variant like `location_phone_click`) AND the legacy `call_click` event so any
+ * GTM trigger/Google Ads conversion still bound to the old event name keeps firing.
+ * Call this instead of pushEvent('phone_click', ...) / pushEvent('call_click', ...)
+ * directly — do not push 'call_click' anywhere else, to avoid double-firing.
+ */
+export function pushPhoneClickEvent(params: Record<string, any> = {}, eventName: string = 'phone_click') {
+  pushEvent(eventName, params);
+  if (eventName !== 'call_click') {
+    pushEvent('call_click', params);
+  }
+}
+
+/**
+ * Appointment CTA click tracking — single entry point for "open booking dialog" CTAs.
+ *
+ * Pushes `appointment_cta_click` AND the legacy `booking_click` event so any
+ * GTM trigger still bound to the old event name keeps firing. Call this instead
+ * of pushEvent('appointment_cta_click', ...) directly.
+ */
+export function pushAppointmentCtaClick(params: Record<string, any> = {}) {
+  pushEvent('appointment_cta_click', params);
+  pushEvent('booking_click', params);
 }
 
 /**
@@ -274,22 +316,33 @@ export function pushFormSubmit({
     country,
   };
 
-  // 1. Persist enhanced conversion data to sessionStorage (for thank-you page restore)
-  persistEC(ecData);
+  if (hasMarketingConsent()) {
+    persistEC(ecData);
+    pushEC(ecData);
+  }
 
-  // 2. Push enhanced conversion data to dataLayer (for GTM EC tag)
-  pushEC(ecData);
-
-  // 3. Push standardized form_submit event (for GTM conversion + state segmentation)
-  (window as any).dataLayer = (window as any).dataLayer || [];
-  (window as any).dataLayer.push({
-    event: 'form_submit',
-    form_name,
-    state: state || '',
-    ...(email ? { email } : {}),
-    // Always use E.164 in dataLayer so GTM audience rules work without transformation
-    ...(normalizedPhone ? { phone: normalizedPhone } : {}),
-  });
+  if (hasMeasurementConsent()) {
+    (window as any).dataLayer = (window as any).dataLayer || [];
+    (window as any).dataLayer.push({
+      event: 'lead_form_submit_success',
+      form_name,
+      state: state || '',
+      page_path: window.location.pathname,
+    });
+    (window as any).dataLayer.push({
+      event: 'form_submit',
+      form_name,
+      state: state || '',
+      page_path: window.location.pathname,
+    });
+    // Legacy alias — some GTM triggers/Ads conversions may still be bound to the
+    // old 'form_submission' event name with its original camelCase field names.
+    (window as any).dataLayer.push({
+      event: 'form_submission',
+      formName: form_name,
+      pagePath: window.location.pathname,
+    });
+  }
 }
 
 /**
@@ -297,7 +350,6 @@ export function pushFormSubmit({
  * Useful for troubleshooting in browser console
  * 
  * Usage in browser console:
- *   import { verifyECData } from '@/utils/enhancedConversions';
  *   verifyECData();
  */
 export function verifyECData(): boolean {
@@ -309,20 +361,19 @@ export function verifyECData(): boolean {
   const dataLayer = (window as any).dataLayer || [];
   let found = false;
 
-  console.log('Checking dataLayer for enhanced_conversion_data...');
+  console.log('Checking dataLayer for enhanced_conversion_data presence...');
   
   for (let i = dataLayer.length - 1; i >= 0; i--) {
     const item = dataLayer[i];
     if (item && item.enhanced_conversion_data) {
       found = true;
-      console.log('✓ Found enhanced_conversion_data:', item.enhanced_conversion_data);
+      console.log('Found enhanced_conversion_data.');
       return true;
     }
   }
 
   if (!found) {
-    console.warn('✗ No enhanced_conversion_data found in dataLayer');
-    console.log('Current dataLayer:', dataLayer);
+    console.warn('No enhanced_conversion_data found in dataLayer');
   }
 
   return found;

@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import { pushPhoneClickEvent } from '@/utils/enhancedConversions';
 
 interface PhoneLinkProps {
   phone: string;
@@ -14,14 +15,10 @@ export function PhoneLink({ phone, className = '', children, trackLocation = 'Un
   const displayPhone = children || phone;
 
   const handleClick = () => {
-    // Track the phone click event
-    if (typeof window !== "undefined" && window.dataLayer) {
-      window.dataLayer.push({
-        event: 'call_click',
-        phone_number: cleanPhone,
-        location: trackLocation
-      });
-    }
+    pushPhoneClickEvent({
+      location: trackLocation,
+      page_path: typeof window !== 'undefined' ? window.location.pathname : '',
+    });
   };
 
   return (

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { X, Phone, MapPin } from 'lucide-react'
+import { CONSENT_UPDATED_EVENT, hasFunctionalConsent } from '@/lib/consent'
 
 type InjuryType = 'car-accident' | 'slip-and-fall' | 'work-injury' | 'personal-injury'
 type StateCode = 'FL' | 'NJ' | 'NY' | 'PA'
@@ -106,6 +107,15 @@ export default function InjuryUrgencyBanner({ injuryType }: Props) {
   const [dismissed, setDismissed] = useState(false)
   const [geoBlocked, setGeoBlocked] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [functionalAllowed, setFunctionalAllowed] = useState(false)
+
+  useEffect(() => {
+    setFunctionalAllowed(hasFunctionalConsent())
+
+    const handleConsentUpdated = () => setFunctionalAllowed(hasFunctionalConsent())
+    window.addEventListener(CONSENT_UPDATED_EVENT, handleConsentUpdated)
+    return () => window.removeEventListener(CONSENT_UPDATED_EVENT, handleConsentUpdated)
+  }, [])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -119,6 +129,12 @@ export default function InjuryUrgencyBanner({ injuryType }: Props) {
     const cached = sessionStorage.getItem('mso-state') as StateCode | null
     if (cached && stateBounds[cached]) {
       setDetectedState(cached)
+      setIsLoading(false)
+      return
+    }
+
+    if (!functionalAllowed) {
+      setGeoBlocked(true)
       setIsLoading(false)
       return
     }
@@ -146,7 +162,7 @@ export default function InjuryUrgencyBanner({ injuryType }: Props) {
       },
       { timeout: 5000 }
     )
-  }, [])
+  }, [functionalAllowed])
 
   function handleStateSelect(state: StateCode) {
     sessionStorage.setItem('mso-state', state)
