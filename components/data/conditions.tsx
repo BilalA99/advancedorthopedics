@@ -1363,48 +1363,51 @@ export const conditionContentPlaceholders: ConditionContent[] = [
         metaDesc: "Struggling with leg pain when walking? Our FL, NJ, NY, & PA specialists provide advanced non-surgical and surgical care for lumbar spinal stenosis."
     },
     {
-        title: "Whiplash",
+        title: "Whiplash Injury",
         slug: "whiplash",
         tag: "Neck",
         additionalTags: ["Spine"],
         categories: ["pain-management"],
-        subtitle: "Comprehensive Recovery for Cervical Strain Injuries",
+        subtitle: "Whiplash Injury Evaluation and Treatment After Accidents",
         overview: {
-            heading: "What is Whiplash?",
-            body: "Whiplash is a neck injury caused by a forceful, rapid back-and-forth movement of the neck, typically during an auto accident. It results in strain to the muscles, ligaments, and discs of the cervical spine."
+            heading: "What Is a Whiplash Injury?",
+            body: "A whiplash injury is a neck sprain-strain pattern caused by sudden acceleration and deceleration, most often after a rear-end auto collision, side-impact crash, fall, or sports impact. The force can irritate cervical muscles, ligaments, facet joints, discs, and nerve roots, which is why a careful orthopedic evaluation matters when pain persists or neurological symptoms appear."
         },
-        detailedOverview: "<p>While whiplash often resolves within a few weeks, some patients experience chronic pain and headaches. Our team provides early intervention and <strong>precision diagnostics</strong> to ensure a full recovery and prevent long-term disability.</p>",
+        detailedOverview: "<p><strong>Whiplash treatment</strong> should be matched to the injury pattern, not the generic label. Many patients improve with time, activity guidance, medication, and outside rehabilitation or home exercises. Others need imaging and spine evaluation because the crash or fall unmasked a <a href=\"/conditions/cervical-herniated-disc\" class=\"text-blue-600 hover:underline\">cervical disc injury</a>, nerve irritation, facet joint pain, or instability.</p><p>Mountain Spine & Orthopedics evaluates whiplash injury patients across the same clinical pathway used for other neck and spine injuries: mechanism of injury, neurological exam, range of motion, red flags, prior imaging, and response to early care. For patients hurt in a collision or fall, this page connects naturally with our <a href=\"/injuries/car-accident\" class=\"text-blue-600 hover:underline\">car accident injury</a> and <a href=\"/injuries/slip-and-fall\" class=\"text-blue-600 hover:underline\">slip-and-fall injury</a> resources.</p>",
         symptoms: {
-            heading: "Common Symptoms",
-            intro: "Symptoms may not appear until 24 hours after the injury:",
+            heading: "Whiplash Injury Symptoms",
+            intro: "Symptoms can begin immediately or build over the first 24 to 72 hours after the injury:",
             list: [
                 "Neck pain and stiffness",
-                "Pain that worsens with neck movement",
-                "Loss of range of motion in the neck",
-                "Headaches, usually starting at the base of the skull",
-                "Tenderness or pain in the shoulder and upper back"
+                "Headaches starting near the base of the skull",
+                "Pain spreading into the shoulder blade, upper back, or arm",
+                "Reduced neck motion or pain with rotation",
+                "Muscle spasms, tenderness, or fatigue while holding the head upright",
+                "Numbness, tingling, or weakness that may suggest nerve irritation",
+                "Dizziness, visual symptoms, or concussion-like complaints that require appropriate medical evaluation"
             ]
         },
         heroImage: "https://mountainspineortho.b-cdn.net/conditions-thumbnails/mountain-spine-orthopedics--condition--neck-pain--thumbnail.png",
         heroImageAlt: "Illustration of the whiplash mechanism and neck strain",
         causes: {
-            heading: "Causes and Risk Factors",
-            body: "Rear-end motor vehicle accidents are the most frequent cause. Other triggers include contact sports, physical abuse, or accidental falls that snap the head backward and forward."
+            heading: "Common Causes and Risk Factors",
+            body: "Auto accidents are the most common setting for whiplash injury, especially rear-end collisions, but falls, contact sports, and sudden workplace impacts can cause the same neck acceleration pattern. Risk is higher when the head is turned at impact, the collision is unexpected, there is a prior history of neck pain or disc disease, or symptoms include arm pain, numbness, weakness, severe headache, or worsening neurological complaints."
         },
         conservativeCare: {
-            heading: "Non-Surgical Recovery Path",
-            body: "Most whiplash injuries respond well to a structured recovery plan.",
+            heading: "Whiplash Treatment Path",
+            body: "Most whiplash injuries are treated without surgery, but persistent or worsening symptoms should be evaluated for deeper cervical spine injury.",
             methods: [
-                "Early mobilization and rehabilitation",
-                "Heat or cold therapy for inflammation",
-                "Over-the-counter pain relievers",
-                "Muscle relaxants for acute spasms",
-                "Ergonomic workstation and sleep adjustments"
+                "Focused exam to separate muscle strain from disc, facet, or nerve symptoms",
+                "Short-term medication guidance when appropriate for pain, inflammation, or muscle spasm",
+                "Heat, ice, posture changes, and activity modification during the acute phase",
+                "Outside rehabilitation or guided home exercises for gradual motion and strength restoration",
+                "MRI or additional imaging when symptoms suggest disc injury, nerve compression, fracture risk, or instability",
+                "Injection or spine consultation when facet pain, nerve irritation, or chronic symptoms persist"
             ]
         },
         surgeryOption: {
-            heading: "Specialized Intervention",
-            description: "Surgery is rarely needed for whiplash unless imaging reveals severe disc damage or structural instability from the injury.",
+            heading: "When a Spine Specialist Should Review Whiplash",
+            description: "Surgery is not typical for whiplash alone, but a surgical review may be needed if imaging shows a traumatic disc herniation, progressive nerve compression, fracture, or cervical instability after the injury.",
             slug: "cervical-herniated-disc"
         },
         internalLinks: [
@@ -1415,9 +1418,9 @@ export const conditionContentPlaceholders: ConditionContent[] = [
             { slug: "second-opinion", text: "Free Second Opinion" },
             { slug: "tingling-numbness", text: "Nerve Irritation" }
         ],
-        keywords: ["whiplash", "neck strain", "auto accident injury", "neck pain FL, NJ, NY, & PA"],
-        metaTitle: "Whiplash Injury Specialist | Mountain Spine & Orthopedics",
-        metaDesc: "Recover from neck pain and stiffness after a whiplash injury. Our FL, NJ, NY, & PA specialists offer early intervention and advanced care for a full recovery."
+        keywords: ["whiplash injury", "whiplash treatment", "auto accident neck injury", "neck strain after car accident", "cervical sprain treatment", "neck pain after crash FL, NJ, NY, & PA"],
+        metaTitle: "Whiplash Injury Treatment | Auto Accident Neck Pain Specialists",
+        metaDesc: "Whiplash injury treatment for neck pain after car accidents, falls, and impact injuries. Spine specialists evaluate disc, nerve, and ligament symptoms. PPO Insurance Accepted."
     }
 ];
 
