@@ -378,7 +378,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -925,7 +925,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -1438,7 +1438,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -1970,7 +1970,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -2487,7 +2487,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -3008,7 +3008,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -3538,7 +3538,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -4051,7 +4051,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -4569,7 +4569,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -5081,7 +5081,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -5649,7 +5649,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -6015,7 +6015,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -6384,7 +6384,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -6744,7 +6744,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -7107,7 +7107,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -7473,7 +7473,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -7855,7 +7855,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -8211,7 +8211,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -8552,7 +8552,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -8885,7 +8885,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -9221,7 +9221,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -9432,7 +9432,7 @@ export const clinics: ClinicsProps[] = [
           <Link href="/conditions/failed-back-surgery-syndrome" className="text-[#0A50EC] underline">Failed Back Surgery Syndrome</Link>
           <Link href="/conditions/adult-degenerative-scoliosis" className="text-[#0A50EC] underline">Adult Degenerative Scoliosis</Link>
           <Link href="/conditions/adjacent-segment-disease" className="text-[#0A50EC] underline">Adjacent Segment Disease</Link>
-          <Link href="/conditions/cervical-deformities" className="text-[#0A50EC] underline">Cervical Deformities</Link>
+          <Link href="/conditions/spine-deformities" className="text-[#0A50EC] underline">Cervical Deformities</Link>
           <Link href="/conditions/spine-deformities" className="text-[#0A50EC] underline">Spine Deformities</Link>
           <Link href="/conditions/spinal-compression-fractures" className="text-[#0A50EC] underline">Spinal Compression Fractures</Link>
           <Link href="/conditions/kyphosis" className="text-[#0A50EC] underline">Kyphosis</Link>
@@ -9619,7 +9619,7 @@ export const clinics: ClinicsProps[] = [
           <Link href="/conditions/failed-back-surgery-syndrome" className="text-[#0A50EC] underline">Failed Back Surgery Syndrome</Link>
           <Link href="/conditions/adult-degenerative-scoliosis" className="text-[#0A50EC] underline">Adult Degenerative Scoliosis</Link>
           <Link href="/conditions/adjacent-segment-disease" className="text-[#0A50EC] underline">Adjacent Segment Disease</Link>
-          <Link href="/conditions/cervical-deformities" className="text-[#0A50EC] underline">Cervical Deformities</Link>
+          <Link href="/conditions/spine-deformities" className="text-[#0A50EC] underline">Cervical Deformities</Link>
           <Link href="/conditions/spine-deformities" className="text-[#0A50EC] underline">Spine Deformities</Link>
           <Link href="/conditions/spinal-compression-fractures" className="text-[#0A50EC] underline">Spinal Compression Fractures</Link>
           <Link href="/conditions/kyphosis" className="text-[#0A50EC] underline">Kyphosis</Link>

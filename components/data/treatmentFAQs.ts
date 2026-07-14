@@ -21,6 +21,14 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     {
       question: "What are the risks of revision spine surgery?",
       answer: "Risks include a higher rate of infection, dural tears (spinal fluid leak), and nerve injury compared to primary surgery. Utilizing a specialized <strong>orthopedic spine surgeon</strong> who uses intraoperative neuromonitoring drastically reduces these risks."
+    },
+    {
+      question: "What is pseudarthrosis after spinal fusion?",
+      answer: "<strong>Pseudarthrosis</strong> is a failed fusion or nonunion where the intended bone bridge never becomes solid. It can create painful micromotion, clicking, loose hardware, or persistent nerve symptoms after surgery."
+    },
+    {
+      question: "How is failed spinal fusion treated?",
+      answer: "A confirmed failed fusion may require <strong>revision spinal surgery</strong> to remove or revise hardware, clear fibrous nonunion tissue, add new bone graft or biologics when appropriate, and create a more stable fusion environment."
     }
   ],
 
@@ -141,6 +149,10 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     {
       question: "What is the 'dark side' of spinal fusion?",
       answer: "The 'dark side' refers to <strong>Adjacent Segment Disease</strong>, where the discs above and below the fusion wear out faster due to increased stress. This can occur years later, potentially requiring additional surgery. Minimally invasive techniques aim to reduce this risk."
+    },
+    {
+      question: "What is AxiaLIF or axial lumbar interbody fusion?",
+      answer: "<strong>AxiaLIF</strong> is a specialized L5-S1 fusion approach that reaches the disc space through a small presacral corridor near the tailbone. It is considered only for selected lumbosacral anatomy and is part of the broader spinal fusion decision."
     }
   ],
 
@@ -561,6 +573,10 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     {
       question: "Can hip arthroscopy prevent hip replacement?",
       answer: "Yes, by correcting impingement (FAI) early, <strong>hip arthroscopy</strong> can prevent further cartilage damage and potentially delay or eliminate the need for hip replacement later in life."
+    },
+    {
+      question: "Can hip arthroscopy remove loose bodies?",
+      answer: "<strong>Yes.</strong> Symptomatic loose cartilage or bone fragments can be removed arthroscopically when they cause locking, catching, sudden sharp pain, swelling, or mechanical wear inside the hip joint."
     }
   ],
 
@@ -661,26 +677,6 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
     {
       question: "When can I return to sports?",
       answer: "Return to straight-line running is often possible at <strong>3 to 4 months</strong>, with cutting sports (soccer, basketball) allowed at <strong>4 to 6 months</strong> once strength is restored."
-    }
-  ],
-
-  // 34. Axial Fusion Surgery
-  "axial-fusion-surgery": [
-    {
-      question: "What is AxialIF (AxiaLIF)?",
-      answer: "<strong>Axial Lumbar Interbody Fusion</strong> is a minimally invasive fusion of the L5-S1 level performed through a tiny incision near the tailbone. It avoids cutting back muscles or retracting nerves."
-    },
-    {
-      question: "What are the benefits of axial fusion?",
-      answer: "It offers minimal blood loss, very small scarring, and often less post-operative pain than traditional posterior fusion. It preserves the structural integrity of the spinal discs' outer walls."
-    },
-    {
-      question: "What is the recovery time?",
-      answer: "Patients often go home the next day. Walking is immediate. Fusion healing follows the standard <strong>6 to 12 month</strong> timeline, but functional recovery is faster due to the tissue-sparing approach."
-    },
-    {
-      question: "Is everyone a candidate?",
-      answer: "No. It is specifically for <strong>L5-S1</strong> pathology. Patients with severe rectal issues, sacral fractures, or specific anatomical variances may not be eligible."
     }
   ],
 

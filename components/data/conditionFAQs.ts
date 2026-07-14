@@ -444,28 +444,6 @@ export interface FAQItem {
         answer: "Yes, chronic compression can lead to <strong>permanent neuropathy</strong> or muscle atrophy. Seek care if you experience profound weakness or loss of sensation."
       }
     ],
-    "cervical-deformities": [
-      {
-        question: "What is cervical kyphosis?",
-        answer: "Cervical kyphosis is a condition where the normal inward curve of the neck reverses, causing a <strong>forward hunch</strong>. It can strain muscles and compress the spinal cord."
-      },
-      {
-        question: "Can cervical deformities be corrected?",
-        answer: "<strong>Yes.</strong> Mild cases may improve with therapy. Severe, rigid deformities require <strong>osteotomy surgery</strong> to realign the vertebrae and relieve spinal cord pressure."
-      },
-      {
-        question: "What causes cervical deformity?",
-        answer: "Causes include <strong>degenerative disc disease, previous failed surgeries, trauma</strong>, or systemic conditions like Ankylosing Spondylitis."
-      },
-      {
-        question: "What are the symptoms of cervical deformity?",
-        answer: "Symptoms include <strong>inability to look straight ahead</strong>, severe neck pain, and difficulty swallowing. Cord compression may cause balance issues and hand numbness."
-      },
-      {
-        question: "Is surgery risky for cervical deformity?",
-        answer: "Corrective surgery is complex but effective. It carries risks like nerve injury, so it is performed by specialized spine surgeons using <strong>neuromonitoring</strong> to ensure safety."
-      }
-    ],
     "disc-tear": [
       {
         question: "What does an annular tear feel like?",
@@ -730,28 +708,6 @@ export interface FAQItem {
         answer: "Not necessarily. You need a supportive pillow that keeps the <strong>neck aligned with the spine</strong>. A contoured cervical pillow is often best for side/back sleepers."
       }
     ],
-"pseudarthrosis-revision-surgery": [
-      {
-        question: "What is spinal pseudarthrosis?",
-        answer: "Pseudarthrosis is a <strong>failed fusion</strong>—the bone graft did not grow to connect the vertebrae, creating a painful 'false joint' with motion."
-      },
-      {
-        question: "How do you treat pseudarthrosis?",
-        answer: "It requires <strong><a href=\"/treatments/revision-spinal-surgery\">revision surgery</a></strong> to clean the site, apply new bone graft (often with BMP), and typically replace/upgrade the hardware for better stability."
-      },
-      {
-        question: "What are the signs of pseudarthrosis?",
-        answer: "Signs include <strong>persistent back pain</strong> that never went away after surgery, or clicking/popping sounds from the hardware."
-      },
-      {
-        question: "Why did my spinal fusion fail?",
-        answer: "Risk factors include <strong>smoking (nicotine inhibits bone growth)</strong>, diabetes, steroid use, or excessive motion at the surgical site during healing."
-      },
-      {
-        question: "Is revision surgery successful?",
-        answer: "<strong>Yes</strong>, but it is more complex. Using advanced biologics (stem cells/BMP) and stricter post-op protocols improves the success rate of the second attempt."
-      }
-    ],
     "shoulder-arthritis": [
       {
         question: "What are the symptoms of shoulder arthritis?",
@@ -868,8 +824,16 @@ export interface FAQItem {
         answer: "Common types include <strong><a href=\"/conditions/adult-degenerative-scoliosis\">Scoliosis</a></strong> (sideways curve), <strong><a href=\"/conditions/kyphosis\">Kyphosis</a></strong> (forward hunch), and <strong>Lordosis</strong> (excessive swayback)."
       },
       {
+        question: "Is cervical kyphosis a spine deformity?",
+        answer: "<strong>Yes.</strong> Cervical kyphosis is a neck alignment deformity where the normal inward curve reverses. It can cause neck pain, difficulty maintaining a level gaze, arm symptoms, or spinal cord compression in severe cases."
+      },
+      {
         question: "Can adult spine deformities be fixed?",
         answer: "<strong>Yes.</strong> Surgery can reconstruct the spine. It is a major procedure involving osteotomies (bone cuts) and long-segment fusion."
+      },
+      {
+        question: "What causes cervical deformity?",
+        answer: "Cervical deformity can develop from degenerative disc disease, prior cervical fusion or laminectomy, trauma, inflammatory arthritis, untreated fractures, low bone density, or congenital alignment problems."
       },
       {
         question: "Do spine deformities affect organs?",
@@ -2101,28 +2065,6 @@ export interface FAQItem {
       {
         question: "What causes hip fractures in the elderly?",
         answer: "The primary cause is <strong>osteoporosis weakening bones</strong> combined with falls. Risk factors include advanced age, low vitamin D, poor balance, vision problems, and medications causing dizziness. Prevention focuses on fall prevention and bone health."
-      }
-    ],
-    "loose-bodies-hip": [
-      {
-        question: "What are loose bodies in the hip?",
-        answer: "<strong>Loose bodies</strong> are fragments of cartilage, bone, or both floating freely within the hip joint. They result from trauma, arthritis, osteochondritis dissecans, or synovial chondromatosis. They cause mechanical symptoms by getting caught between joint surfaces."
-      },
-      {
-        question: "What are the symptoms of loose bodies in the hip?",
-        answer: "Symptoms include <strong>sudden sharp pain with certain movements</strong>, catching or locking sensations, grinding or clicking, intermittent swelling, and episodes where the hip \"gives way.\" Symptoms vary based on loose body size and location."
-      },
-      {
-        question: "Can loose bodies in the hip go away on their own?",
-        answer: "No, loose bodies do not dissolve or reattach. Small asymptomatic fragments may not require treatment. <strong>Symptomatic loose bodies</strong> causing mechanical symptoms or joint damage require <a href=\"/treatments/hip-arthroscopy-treatment\">arthroscopic removal</a> to prevent progressive cartilage wear."
-      },
-      {
-        question: "How are hip loose bodies diagnosed?",
-        answer: "<strong>X-rays may show calcified loose bodies</strong>, but cartilaginous fragments are invisible. CT scans detect smaller fragments. MRI reveals cartilage damage and non-calcified bodies. Clinical examination shows catching and limited motion in specific positions."
-      },
-      {
-        question: "What is the treatment for loose bodies in the hip?",
-        answer: "Treatment is <strong>arthroscopic removal</strong> of symptomatic fragments, along with addressing the underlying cause (smoothing damaged cartilage, treating arthritis). Recovery typically takes 6-12 weeks. Untreated loose bodies accelerate joint degeneration."
       }
     ],
     "running-injuries": [

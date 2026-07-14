@@ -221,24 +221,6 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "keywords": ["Ankle ligament reconstruction", "chronic ankle instability surgery", "FL, NJ, NY, & PA orthopedic foot ankle", "torn ankle ligament operation", "foot and ankle care", "Brostrom procedure for ankle", "ankle stabilization techniques", "recurrent ankle sprain treatment", "lateral ankle repair", "ankle ligament repair FL, NJ, NY, & PA"]
 },
 {
-  "title": "Axial Fusion Surgery",
-  "tag": "Lower Spine",
-  "card_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--axial-fusion-surgery--thumbnail.png',
-  "inTxt_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--axial-fusion-surgery--thumbnail.png',
-  "body": "Axial fusion is a minimally invasive surgery to stabilize the L5-S1 vertebrae via a small presacral incision, offering relief for specific lower back pain. Explore options.",
-  "detail": "Axial Lumbar Interbody Fusion (AxiaLIF) is a minimally invasive technique for <a href=\"/conditions/degenerative-disc-disease\" class=\"text-blue-600 hover:underline\">painful degenerative disc disease</a> or instability at L5-S1. Accessed via a small incision near the tailbone, it avoids major back muscle disruption. A specialized instrument removes the damaged disc and inserts a fusion device (threaded rod with bone graft), restoring disc height and promoting L5-S1 vertebral fusion for lasting spinal stability. This is a targeted lumbosacral spine surgery.",
-  "conditions_treated": "Indicated for symptomatic conditions at L5-S1: Degenerative disc disease causing chronic low back pain/instability, Isthmic or degenerative spondylolisthesis (L5 on S1, Grade I/II), Collapsed L5-S1 disc, or Failed previous L5-S1 surgery requiring revision and <a href=\"/treatments/lumbar-fusion-surgery\" class=\"text-blue-600 hover:underline\">lumbar spine fusion</a>. It addresses specific L5-S1 pathology and provides lumbosacral stabilization.",
-  "procedure_info": "After consultation and imaging (MRI, CT), AxiaLIF is performed under general anesthesia. A small incision near the buttocks allows percutaneous access to the L5-S1 disc space. The damaged disc is removed, and a specialized FDA-approved fusion device (threaded rod with bone graft) is inserted to restore disc height and facilitate L5-S1 interbody fusion. This is a targeted approach for lumbosacral fusion, a less invasive fusion technique.",
-  "recovery_info": "Recovery is generally faster than traditional open lumbar fusion. Hospital stay 1-2 nights. A lumbar brace is often worn. Rehabilitation focuses on core strengthening. Solid bone fusion takes several months. This minimally invasive spine surgery allows quicker back muscle function recovery and improved spinal support, promoting faster return to daily activities.",
-  "benefits": (
-  <ul><li>Provides effective relief of chronic low back pain originating from L5-S1 disc pathology and instability.</li><li>Is a minimally invasive approach with less muscle damage and potentially faster initial recovery.</li><li>Restores disc height and proper spinal alignment at the lumbosacral junction.</li><li>Achieves long-term stabilization of the L5-S1 spinal segment through fusion.</li><li>Preserves function in the large back muscles due to the presacral surgical approach.</li><li>Offers a durable solution for specific L5-S1 conditions.</li></ul>
-),
-  "why_choose_us": "Our spine specialists are experienced in cutting-edge minimally invasive fusion techniques like AxiaLIF. Our practice uses comprehensive diagnostics and advanced imaging techniques to ensure axial fusion is the most appropriate treatment for your specific L5-S1 condition, optimizing outcomes in FL, NJ, NY, & PA.",
-  "schedule": "Chronic low back pain or L5-S1 disc instability? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
-  "slug": "axial-fusion-surgery",
-  "keywords": ["Axial fusion surgery", "AxiaLIF", "FL, NJ, NY, & PA orthopedic spine", "L5-S1 interbody fusion", "minimally invasive spine procedure", "spine health care FL, NJ, NY, & PA", "presacral approach fusion", "low back pain L5-S1 treatment"]
-},
-{
   "title": "Hybrid Cervical Spine Surgery",
   "tag": "Neck",
   "card_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--hybrid-cervical-spine-surgery--thumbnail.png',
@@ -1002,12 +984,12 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     heroDescription: "Revision spine surgery evaluates persistent or recurrent symptoms after prior spine surgery and corrects confirmed structural problems such as nonunion, instability, recurrent stenosis, or hardware failure.",
     overview: {
       heading: "When Prior Spine Surgery Needs a Second Look",
-      body: "<p><strong>Revision spinal surgery</strong> is considered when pain, weakness, numbness, deformity, or instability persists or returns after a prior decompression, disc surgery, or <a href=\"/treatments/spinal-fusion\" class=\"text-blue-600 hover:underline\">spinal fusion</a>. The goal is not simply to repeat surgery. The goal is to identify a correctable structural reason for the ongoing symptoms.</p><p>Possible causes include <strong>pseudarthrosis</strong> (failed fusion), recurrent stenosis, recurrent disc herniation, adjacent segment disease, flatback or sagittal imbalance, progressive <a href=\"/conditions/adult-degenerative-scoliosis\" class=\"text-blue-600 hover:underline\">adult degenerative scoliosis</a>, misplaced or loosened hardware, fractured instrumentation, infection, or nerve compression from bone, disc, or scar. Mountain Spine & Orthopedics begins with prior operative reports, CT, MRI, standing X-rays, flexion-extension imaging when needed, and a neurologic exam before recommending any revision plan. PPO Insurance Accepted.</p>",
+      body: "<p><strong>Revision spinal surgery</strong> is considered when pain, weakness, numbness, deformity, or instability persists or returns after a prior decompression, disc surgery, or <a href=\"/treatments/spinal-fusion\" class=\"text-blue-600 hover:underline\">spinal fusion</a>. The goal is not simply to repeat surgery. The goal is to identify a correctable structural reason for the ongoing symptoms.</p><p>Possible causes include <strong>pseudarthrosis</strong> (failed fusion or nonunion), recurrent stenosis, recurrent disc herniation, adjacent segment disease, flatback or sagittal imbalance, progressive <a href=\"/conditions/adult-degenerative-scoliosis\" class=\"text-blue-600 hover:underline\">adult degenerative scoliosis</a>, misplaced or loosened hardware, fractured instrumentation, infection, or nerve compression from bone, disc, or scar. Pseudarthrosis creates persistent micromotion at a level that was supposed to heal into solid bone, which can produce deep pain, grinding or clicking, continued nerve symptoms, and hardware loosening.</p><p>Mountain Spine & Orthopedics begins with prior operative reports, CT, MRI, standing X-rays, flexion-extension imaging when needed, and a neurologic exam before recommending any revision plan. When failed fusion is suspected, thin-slice CT helps assess bone bridging and implant integrity, while risk factors such as nicotine use, diabetes, poor nutrition, steroid exposure, vitamin D deficiency, and multilevel fusion history are reviewed before planning another operation. PPO Insurance Accepted.</p>",
     },
     candidates: {
       heading: "Who Is a Candidate for Revision Spinal Surgery?",
       list: [
-        "Patients whose prior fusion resulted in **pseudarthrosis** — the bone never solidly fused together",
+        "Patients whose prior fusion resulted in **pseudarthrosis** or nonunion — the bone never solidly fused together",
         "Individuals with loose, fractured, or malpositioned **spinal instrumentation** (screws, rods, or cages)",
         "Patients who had <a href=\"/treatments/lumbar-fusion-surgery\" class=\"text-blue-600 hover:underline\">**lumbar fusion surgery**</a> and now have pain at adjacent levels (**adjacent segment disease**)",
         "Those with recurrent **herniated disc** or **spinal stenosis** at the same level after prior decompression",
@@ -1023,7 +1005,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "**Surgical planning**: Determining whether the revision requires hardware removal only, extension of the fusion construct, deformity correction, or all three",
         "**Hardware management**: Careful extraction of loose, broken, or malpositioned screws, rods, and interbody cages without further injury to surrounding structures",
         "**Nerve decompression**: Meticulous removal of scar tissue (epidural fibrosis), bone spurs, or recurrent disc material compressing nerve roots",
-        "**Fusion correction**: Placement of new interbody cages — using <a href=\"/treatments/oblique-lumbar-interbody-fusion\" class=\"text-blue-600 hover:underline\">**OLIF**</a> or <a href=\"/treatments/extreme-lateral-interbody-fusion-surgery\" class=\"text-blue-600 hover:underline\">**XLIF**</a> lateral approaches when appropriate to avoid prior scar — packed with bone graft or biologics to achieve solid fusion",
+        "**Fusion correction**: Removal of failed or loose hardware when needed, debridement of fibrous nonunion tissue, and placement of new interbody cages — using <a href=\"/treatments/oblique-lumbar-interbody-fusion\" class=\"text-blue-600 hover:underline\">**OLIF**</a> or <a href=\"/treatments/extreme-lateral-interbody-fusion-surgery\" class=\"text-blue-600 hover:underline\">**XLIF**</a> lateral approaches when appropriate to avoid prior scar — packed with bone graft or biologics to achieve solid fusion",
         "**Alignment restoration**: Correction of **sagittal imbalance** or coronal deformity using osteotomies and new pedicle screw constructs to restore proper spinal alignment",
       ],
     },
@@ -1401,7 +1383,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     heroDescription: "Spinal fusion surgery stabilizes the spine, corrects scoliosis and spinal deformity, and relieves nerve compression when conservative care is no longer sufficient. PPO Insurance Accepted.",
     overview: {
       heading: "Spinal Fusion for Scoliosis, Instability & Chronic Back Pain",
-      body: "<p><strong>Spinal fusion surgery</strong> stabilizes two or more vertebrae so they heal into one solid segment. It may be considered when pain or nerve symptoms are driven by confirmed instability, deformity, spondylolisthesis, recurrent stenosis with instability risk, pseudarthrosis, traumatic instability, or selected cases of severe degenerative disc disease.</p><p>Fusion is not the right answer for every back or neck pain complaint. The decision depends on whether imaging, standing alignment, neurologic findings, and symptoms all point to a structural problem that fusion can reasonably address. Mountain Spine & Orthopedics performs fusion across cervical, thoracic, and lumbar levels, including <a href=\"/treatments/lumbar-fusion-surgery\" class=\"underline text-[#252932] hover:text-[#2358AC]\">lumbar fusion surgery</a>, with minimally invasive approaches considered when anatomy and goals support them. PPO Insurance Accepted.</p>",
+      body: "<p><strong>Spinal fusion surgery</strong> stabilizes two or more vertebrae so they heal into one solid segment. It may be considered when pain or nerve symptoms are driven by confirmed instability, deformity, spondylolisthesis, recurrent stenosis with instability risk, pseudarthrosis, traumatic instability, or selected cases of severe degenerative disc disease.</p><p>Fusion is not the right answer for every back or neck pain complaint. The decision depends on whether imaging, standing alignment, neurologic findings, and symptoms all point to a structural problem that fusion can reasonably address. Mountain Spine & Orthopedics performs fusion across cervical, thoracic, and lumbar levels, including <a href=\"/treatments/lumbar-fusion-surgery\" class=\"underline text-[#252932] hover:text-[#2358AC]\">lumbar fusion surgery</a>, with minimally invasive approaches considered when anatomy and goals support them.</p><p>For selected L5-S1 pathology, the fusion discussion may include specialized access options such as Axial Lumbar Interbody Fusion (AxiaLIF), a presacral approach that reaches the L5-S1 disc space through a small incision near the tailbone. This technique is not a general substitute for lumbar fusion; it is considered only when the anatomy, diagnosis, and surgical goals fit a targeted lumbosacral fusion. PPO Insurance Accepted.</p>",
     },
     candidates: {
       heading: "When is Spinal Fusion Recommended?",
@@ -1410,6 +1392,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "Degenerative disc disease or <a href=\"/conditions/spondylolisthesis\" class=\"underline text-[#252932] hover:text-[#2358AC]\">spondylolisthesis</a> causing spinal instability and chronic back or leg pain",
         "Spinal stenosis producing severe neurogenic claudication unresponsive to injections and conservative care",
         "Prior spine surgery with adjacent segment disease or pseudarthrosis (failed fusion requiring revision)",
+        "Selected L5-S1 degenerative disc disease, collapsed disc space, or low-grade spondylolisthesis where a targeted lumbosacral fusion approach is anatomically appropriate",
         "<a href=\"/conditions/spine-deformities\" class=\"underline text-[#252932] hover:text-[#2358AC]\">Spinal deformity</a> including kyphosis or sagittal imbalance requiring surgical correction",
         "Severe spinal fractures, trauma, or spinal instability from infection or tumor",
       ],
@@ -1421,6 +1404,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "<a href=\"/treatments/understanding-tlif-surgery\" class=\"underline text-[#252932] hover:text-[#2358AC]\">TLIF (Transforaminal Lumbar Interbody Fusion)</a>: Posterior approach with excellent access for decompression and single or multilevel fusion — the workhorse of scoliosis and degenerative disc surgery",
         "<a href=\"/treatments/anterior-lumbar-interbody-fusion\" class=\"underline text-[#252932] hover:text-[#2358AC]\">ALIF (Anterior Lumbar Interbody Fusion)</a>: Anterior approach allowing large cage placement to restore lordosis — particularly valuable in scoliosis correction and sagittal balance restoration",
         "<a href=\"/treatments/oblique-lumbar-interbody-fusion\" class=\"underline text-[#252932] hover:text-[#2358AC]\">OLIF</a> or <a href=\"/treatments/extreme-lateral-interbody-fusion-surgery\" class=\"underline text-[#252932] hover:text-[#2358AC]\">XLIF</a>: Lateral approaches used in minimally invasive multilevel scoliosis correction, avoiding posterior muscle disruption",
+        "AxiaLIF / axial lumbar interbody fusion: A specialized presacral L5-S1 approach that may restore disc height and place graft or instrumentation while avoiding posterior muscle disruption in carefully selected patients",
         "Posterior instrumentation: Pedicle screw and rod fixation, often combined with interbody fusion in multilevel scoliosis surgery for maximum correction and stability",
         "Bone grafting: Autograft, allograft, or synthetic graft is placed to stimulate solid bone fusion over 6–12 months",
       ],
@@ -2781,7 +2765,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     heroDescription: "Hip arthroscopy uses small incisions and an arthroscope to diagnose and treat hip pathology, including labral tears and impingement.",
     overview: {
       heading: "Minimally Invasive Hip Preservation",
-      body: "**Hip Arthroscopy Treatment** is a specialized, <strong>minimally invasive procedure</strong> used to diagnose and treat problems inside the hip joint. Unlike traditional open surgery, it uses small incisions and a camera (arthroscope) to access the joint with minimal tissue disruption. This approach is highly effective for treating <strong>Femoroacetabular Impingement (FAI)</strong> and <strong>labral tears</strong>—conditions that cause deep groin pain, mechanical catching, and restricted hip motion in active individuals.<br/><br/>Athletes and active patients often present with <strong>hip pain during pivoting, cutting, or deep squatting</strong>—movements that stress the labrum and impinging bone. Hip arthroscopy allows surgeons to reshape abnormal bone (CAM or Pincer lesions), repair or reconstruct the labrum, and remove inflamed tissue or loose bodies. The goal is to preserve the natural hip joint, relieve pain, and delay or prevent the onset of hip osteoarthritis. For those experiencing persistent <a href=\"/conditions/hip\" class=\"text-blue-600 hover:underline\">hip conditions</a>, early evaluation can determine if arthroscopy is appropriate.<br/><br/>According to <a href=\"https://orthoinfo.aaos.org/en/diseases--conditions/overuse-injuries-in-children/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">AAOS guidance on overuse injuries</a>, repetitive hip stress in athletes can lead to labral damage that may benefit from surgical intervention when conservative measures fail. Hip arthroscopy has become a valuable tool in sports medicine for returning athletes to their activities with restored hip function and pain relief.",
+      body: "**Hip Arthroscopy Treatment** is a specialized, <strong>minimally invasive procedure</strong> used to diagnose and treat problems inside the hip joint. Unlike traditional open surgery, it uses small incisions and a camera (arthroscope) to access the joint with minimal tissue disruption. This approach is highly effective for treating <strong>Femoroacetabular Impingement (FAI)</strong> and <strong>labral tears</strong>—conditions that cause deep groin pain, mechanical catching, and restricted hip motion in active individuals.<br/><br/>Athletes and active patients often present with <strong>hip pain during pivoting, cutting, or deep squatting</strong>—movements that stress the labrum and impinging bone. Hip arthroscopy allows surgeons to reshape abnormal bone (CAM or Pincer lesions), repair or reconstruct the labrum, and remove inflamed tissue or loose bodies. Loose bodies are small cartilage or bone fragments that float within the joint after trauma, arthritis, avascular necrosis, osteochondritis dissecans, synovial chondromatosis, or prior injury. They can wedge between joint surfaces and cause sudden sharp pain, popping, catching, locking, swelling, and episodic loss of motion. The goal is to preserve the natural hip joint, relieve pain, and delay or prevent the onset of hip osteoarthritis. For those experiencing persistent <a href=\"/conditions/hip\" class=\"text-blue-600 hover:underline\">hip conditions</a>, early evaluation can determine if arthroscopy is appropriate.<br/><br/>According to <a href=\"https://orthoinfo.aaos.org/en/diseases--conditions/overuse-injuries-in-children/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">AAOS guidance on overuse injuries</a>, repetitive hip stress in athletes can lead to labral damage that may benefit from surgical intervention when conservative measures fail. Hip arthroscopy has become a valuable tool in sports medicine for returning athletes to their activities with restored hip function and pain relief.",
     },
     candidates: {
       heading: "Who Hip Arthroscopy Helps Most",
@@ -2793,7 +2777,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "Young, active patients <strong>without significant arthritis</strong> who want to preserve their natural hip",
         "Athletes who have <strong>failed conservative treatment</strong> including rest, therapy, and injections",
         "Patients with <a href=\"/conditions/hip-dysplasia\" class=\"text-blue-600 hover:underline\">hip dysplasia</a> or borderline dysplasia who may benefit from labral repair",
-        "Individuals with <a href=\"/conditions/loose-bodies-hip\" class=\"text-blue-600 hover:underline\">loose bodies</a> in the hip causing mechanical symptoms",
+        "Individuals with loose bodies in the hip causing locking, catching, or intermittent sharp mechanical pain",
       ],
     },
     procedure: {
@@ -2803,7 +2787,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "Small incisions (portals) are made for the camera and instruments",
         "The surgeon trims or re-attaches the torn labrum using anchors",
         "Bone spurs causing impingement (CAM or Pincer lesions) are shaved down",
-        "Inflamed tissue or loose bodies are removed",
+        "Inflamed tissue, synovial irritation, or loose cartilage and bone fragments are removed when they are causing mechanical symptoms",
         "The hip is moved dynamically to ensure impingement is resolved",
       ],
     },
@@ -2814,7 +2798,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     },
     benefits: [
       "Preserves the natural hip joint",
-      "Relieves deep groin pain and mechanical symptoms",
+      "Relieves deep groin pain, catching, locking, and other mechanical symptoms",
       "Corrects the structural cause of hip damage (FAI)",
       "Minimally invasive with small scars and less pain than open surgery",
       "Can prevent premature arthritis in young, active patients"
@@ -3648,72 +3632,6 @@ export const treatmentContentBatch1: TreatmentContent[] = [
       body: "**We accept most major insurance plans. PPO preferred.** Ankle ligament reconstruction is a medically necessary procedure for chronic instability and is widely covered by insurance carriers.",
     },
     schedule: "Ankle pain, instability, or difficulty walking affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
-  },
-  {
-    id: "axial-fusion-surgery",
-    slug: "axial-fusion-surgery",
-    metaTitle: "Axial Fusion Surgery (AxiaLIF) | L5-S1 Minimally Invasive Fusion",
-    metaDescription: "AxiaLIF is a minimally invasive presacral approach for L5-S1 fusion. Treat degenerative disc disease and instability with less muscle disruption and faster recovery.",
-    keywords: [
-      "Axial fusion surgery",
-      "AxiaLIF procedure",
-      "L5-S1 interbody fusion",
-      "minimally invasive spine surgery",
-      "presacral approach fusion",
-      "lumbosacral stabilization",
-      "degenerative disc disease L5-S1",
-      "minimally invasive lumbar fusion"
-    ],
-    title: "Axial Fusion Surgery",
-    tag: "Lower Spine",
-    additionalTags: ["Spine"],
-    heroImage: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--axial-fusion-surgery--thumbnail.png',
-    card_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--axial-fusion-surgery--thumbnail.png',
-    inTxt_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--axial-fusion-surgery--thumbnail.png',
-    heroImageAlt: "Medical illustration showing AxiaLIF presacral approach to L5-S1 fusion",
-    heroDescription: "Stabilize your L5-S1 segment with Axial Fusion Surgery, a minimally invasive technique that accesses the spine through a small presacral incision.",
-    overview: {
-      heading: "Minimally Invasive L5-S1 Stabilization",
-      body: "**Axial Fusion Surgery** (AxiaLIF - Axial Lumbar Interbody Fusion) is a specialized minimally invasive technique for treating <a href=\"https://mountainspineorthopedics.com/conditions/degenerative-disc-disease\" class=\"text-blue-600 hover:underline\">**painful degenerative disc disease**</a> or instability at the L5-S1 level. Unlike traditional approaches that cut through back muscles, this procedure accesses the spine through a small incision near the tailbone (presacral approach). A specialized instrument removes the damaged disc and inserts a fusion device—a threaded rod with **bone graft**—restoring disc height and promoting L5-S1 vertebral fusion for lasting spinal stability. This targeted **lumbosacral spine surgery** preserves back muscle function while achieving solid fusion.",
-    },
-    candidates: {
-      heading: "Ideal Candidates for Axial Fusion",
-      list: [
-        "Patients with symptomatic **Degenerative Disc Disease** at L5-S1 causing chronic low back pain or instability",
-        "Individuals with isthmic or degenerative **Spondylolisthesis** (L5 on S1, Grade I/II)",
-        "Those with collapsed L5-S1 disc space requiring restoration",
-        "Patients needing revision surgery after failed previous L5-S1 procedures",
-        "Individuals seeking a less invasive alternative to traditional **Lumbar Fusion Surgery**",
-      ],
-    },
-    procedure: {
-      heading: "The AxiaLIF Procedure",
-      steps: [
-        "After consultation and imaging (MRI, CT), the procedure is performed under general anesthesia",
-        "A small incision near the buttocks allows percutaneous access to the L5-S1 disc space",
-        "The damaged disc is completely removed to decompress nerve roots",
-        "A specialized FDA-approved fusion device (threaded rod with **bone graft**) is inserted",
-        "This restores disc height and facilitates L5-S1 interbody fusion",
-        "The incision is closed, and a lumbar brace may be applied for support",
-      ],
-    },
-    recovery: {
-      heading: "Recovery Timeline",
-      timeline: "3-6 Months for Solid Fusion",
-      details: "Recovery from **Axial Fusion Surgery** is generally faster than traditional open lumbar fusion due to minimal muscle disruption. Hospital stay is typically 1-2 nights. A lumbar brace is often worn for support. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> focuses on core strengthening to support the healing fusion. Solid bone fusion takes several months, monitored with X-rays. This **minimally invasive spine surgery** allows quicker back muscle function recovery and improved spinal support, promoting faster return to daily activities.",
-    },
-    benefits: [
-      "Provides effective relief of chronic low back pain originating from L5-S1 disc pathology and instability",
-      "Minimally invasive approach with less muscle damage and potentially faster initial recovery",
-      "Restores disc height and proper spinal alignment at the lumbosacral junction",
-      "Achieves long-term stabilization of the L5-S1 spinal segment through fusion",
-      "Preserves function in the large back muscles due to the presacral surgical approach"
-    ],
-    insurance: {
-      heading: "Insurance Coverage for Axial Fusion",
-      body: "**We accept most major insurance plans. PPO preferred.** AxiaLIF is a medically necessary procedure for L5-S1 instability and is covered by most insurance carriers.",
-    },
-    schedule: "Back pain, leg pain, or spinal instability at L5-S1 affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
   {
     id: "hybrid-cervical-spine-surgery",
