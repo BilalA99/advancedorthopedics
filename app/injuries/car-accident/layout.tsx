@@ -130,7 +130,7 @@ export default function CarAccidentLayout({
                 "MRI and Diagnostic Imaging",
                 "Cervical Injections",
                 "Lumbar Injections",
-                "Physical Therapy Referral",
+                "Outside Rehabilitation Guidance",
                 "Minimally Invasive Spine Surgery",
                 "Fracture Management",
               ],

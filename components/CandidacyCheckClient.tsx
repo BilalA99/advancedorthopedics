@@ -133,7 +133,7 @@ const faqItems: { question: string, answer: JSX.Element }[] = [
 
 const Testimonial = (
   <p>
-    Request a Free Candidacy Evaluation from Our Spine Team: <br /> <br />Knowing your options starts with the right diagnosis. That's why Mountain Spine & Orthopedics offers free spine surgery candidacy checks. We help determine which treatments may be a fit for your condition at no cost to you. Whether you need a physical therapy referral or surgery, you'll get expert advice based on your specific needs.    </p>
+    Request a Free Candidacy Evaluation from Our Spine Team: <br /> <br />Knowing your options starts with the right diagnosis. That's why Mountain Spine & Orthopedics offers free spine surgery candidacy checks. We help determine which treatments may be a fit for your condition at no cost to you. Whether you need a outside rehabilitation guidance or surgery, you'll get expert advice based on your specific needs.    </p>
 )
 
 const Header = (

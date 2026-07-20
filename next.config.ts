@@ -82,8 +82,11 @@ const nextConfig: NextConfig = {
     
     // --- CONDITION TO TREATMENT MIGRATION (surgery pages) ---
     {"source":"/conditions/degenerative-disc-disease-surgery","destination":"/treatments/degenerative-disc-disease-surgery","permanent":true},
-    // REMOVED: destination page doesn't exist - keeping pseudarthrosis-revision-surgery in conditions
-    // {"source":"/conditions/pseudarthrosis-revision-surgery","destination":"/treatments/pseudarthrosis-revision-surgery","permanent":true},
+    // --- SEO CONSOLIDATIONS: near-zero-demand pages merged into stronger canonical parents ---
+    {"source":"/conditions/cervical-deformities","destination":"/conditions/spine-deformities","statusCode":301},
+    {"source":"/conditions/pseudarthrosis-revision-surgery","destination":"/treatments/revision-spinal-surgery","statusCode":301},
+    {"source":"/conditions/loose-bodies-hip","destination":"/treatments/hip-arthroscopy-treatment","statusCode":301},
+    {"source":"/treatments/axial-fusion-surgery","destination":"/treatments/spinal-fusion","statusCode":301},
     {"source":"/conditions/aging-management","destination":"/treatments/aging-management","permanent":true},
     {"source":"/conditions/ankle-arthroscopy","destination":"/treatments/ankle-arthroscopy-minimally-invasive-surgery","permanent":true},
     {"source":"/conditions/ankle-replacement","destination":"/treatments/ankle-replacement-surgery","permanent":true},

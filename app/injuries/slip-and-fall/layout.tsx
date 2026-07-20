@@ -130,7 +130,7 @@ export default function SlipAndFallLayout({
                 "MRI and Diagnostic Imaging",
                 "Lumbar and Cervical Injections",
                 "Surgical Consultation",
-                "Physical Therapy Referral",
+                "Outside Rehabilitation Guidance",
               ],
               symptoms: [
                 "Hip Pain",

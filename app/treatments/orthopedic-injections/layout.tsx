@@ -365,7 +365,7 @@ const consolidatedSchema = {
           name: 'Does insurance cover orthopedic injections?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Yes. PPO and major insurance plans cover medically necessary orthopedic injections, including cortisone shots, epidural steroid injections, facet joint injections, and SI joint injections, when ordered by a physician for a documented diagnosis. Mountain Spine & Orthopedics accepts Aetna, Blue Cross Blue Shield, Cigna, UnitedHealthcare, and other major PPO carriers. Call our office or use our online insurance verification tool to confirm your specific coverage before your appointment.',
+            text: 'Yes. PPO insurance plans cover medically necessary orthopedic injections, including cortisone shots, epidural steroid injections, facet joint injections, and SI joint injections, when ordered by a physician for a documented diagnosis. Mountain Spine & Orthopedics accepts Aetna, Blue Cross Blue Shield, Cigna, UnitedHealthcare, and other PPO carriers. Call our office or use our online insurance verification tool to confirm your specific coverage before your appointment.',
           },
         },
         {
