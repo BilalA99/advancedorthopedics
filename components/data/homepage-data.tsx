@@ -321,7 +321,7 @@ export const OrthoConditionsWeTreat: OrthoConditionItem[] = [
       },
       {
         name: 'Axial Fusion Surgery',
-        slug: 'axial-fusion-surgery'
+        slug: 'spinal-fusion'
       }
     ]
   },

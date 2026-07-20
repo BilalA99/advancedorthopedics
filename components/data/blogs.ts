@@ -237,7 +237,7 @@ Orthopedic & Laser Spine Surgery knows the importance of stretching techniques f
           sub_stories: [
             {
               header: "How Rehabilitation May Fit Into Recovery",
-              body: "If physical therapy is recommended, the physical therapist we refer you to can help guide your safe return to activity and teach you proper body mechanics to prevent future problems.",
+              body: "If rehabilitation is recommended, the physical therapist we refer you to can help guide your safe return to activity and teach you proper body mechanics to prevent future problems.",
               video: "",
               img: undefined,
             },

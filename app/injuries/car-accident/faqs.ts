@@ -9,7 +9,7 @@ export const carAccidentFaqs = [
   },
   {
     q: "What does New York's $50,000 no-fault benefit cover after a car accident?",
-    a: "New York offers $50,000 in no-fault medical coverage — the highest in the country. This covers orthopedic evaluations, MRI and X-ray imaging, injections, physical therapy referrals, and surgical care. You must file a no-fault claim within 30 days of the accident and seek treatment promptly. Our New York City (Midtown, 535 Fifth Ave) clinic is an authorized no-fault provider with same-week appointment availability.",
+    a: "New York offers $50,000 in no-fault medical coverage — the highest in the country. This covers orthopedic evaluations, MRI and X-ray imaging, injections, outside rehabilitation guidance, and surgical care. You must file a no-fault claim within 30 days of the accident and seek treatment promptly. Our New York City (Midtown, 535 Fifth Ave) clinic is an authorized no-fault provider with same-week appointment availability.",
   },
   {
     q: "What is the difference between limited tort and full tort in Pennsylvania car accident cases?",
@@ -37,6 +37,6 @@ export const carAccidentFaqs = [
   },
   {
     q: "Do car accident injury treatments ever require surgery?",
-    a: "The majority of car accident orthopedic injuries are treated non-surgically with targeted injections, activity modification, bracing, and referral for physical therapy or pain management. When conservative care has been exhausted and a structural injury — such as a large herniated disc causing nerve damage, or an unstable fracture — requires intervention, our board-certified orthopedic surgeons offer minimally invasive procedures with significantly faster recovery times than traditional open surgery.",
+    a: "The majority of car accident orthopedic injuries are treated non-surgically with targeted injections, activity modification, bracing, and outside rehabilitation guidance or pain management. When conservative care has been exhausted and a structural injury — such as a large herniated disc causing nerve damage, or an unstable fracture — requires intervention, our board-certified orthopedic surgeons offer minimally invasive procedures with significantly faster recovery times than traditional open surgery.",
   },
 ];

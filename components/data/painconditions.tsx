@@ -62,7 +62,7 @@ export const conditions: ConditionInfoProp[] = [
         diagnose:
             "To find the source of your pain, our specialists will talk with you about your symptoms and perform a physical exam. Often, this is enough to start a treatment plan. If needed, we offer a complimentary review of your MRI or X-rays to get a clearer picture of what's happening inside your spine.",
         treatment:
-            "Most lower back pain gets better without surgery. We focus first on non-surgical options like targeted physical therapy (if recommended) to build core strength, anti-inflammatory medications, and guided injections to calm irritated nerves. If your pain continues, our surgeons are experts in minimally invasive procedures that offer lasting relief with a quicker recovery.",
+            "Most lower back pain gets better without surgery. We focus first on non-surgical options like targeted outside rehabilitation to build core strength, anti-inflammatory medications, and guided injections to calm irritated nerves. If your pain continues, our surgeons are experts in minimally invasive procedures that offer lasting relief with a quicker recovery.",
         pain_info:
             "Living with back pain is draining. It can flare up unexpectedly and make simple tasks feel monumental. Our approach is to break this cycle of pain and inflammation. We combine effective pain management with education on posture and movement to help you regain control and get back to your daily activities without fear of a flare-up.",
         prevent:
@@ -191,7 +191,7 @@ export const conditions: ConditionInfoProp[] = [
                             >
                                 Surgery is not always necessary for lower back pain. In fact,
                                 many patients experience significant relief through
-                                non-surgical treatments such as physical therapy (if recommended), spinal
+                                non-surgical treatments such as outside rehabilitation, spinal
                                 injections, or medications that improve body mechanics and
                                 reduce inflammation. However, if conservative treatments fail
                                 or if there is significant damage to spinal discs or nerves,
@@ -467,7 +467,7 @@ export const conditions: ConditionInfoProp[] = [
                             >
                                 At Mountain Spine & Orthopedics, we create personalized
                                 treatment plans tailored to your condition and lifestyle.
-                                Treatment options may include physical therapy (if recommended) to improve
+                                Treatment options may include outside rehabilitation to improve
                                 strength, flexibility, and posture, as well as medications like
                                 non-steroidal anti-inflammatory drugs (NSAIDs) to reduce pain
                                 and swelling. For patients with nerve irritation, epidural
@@ -542,7 +542,7 @@ export const conditions: ConditionInfoProp[] = [
         diagnose:
             "Diagnosing a herniated disc starts with a conversation about your specific symptoms and a physical exam. To confirm it, an MRI is the best tool because it clearly shows the disc and the compressed nerve. We offer a complimentary MRI review at our Florida clinics to ensure you get an accurate diagnosis.",
         treatment:
-            "The good news is that most herniated discs heal with non-surgical care. We focus on relieving the pressure on the nerve through targeted physical therapy (if recommended), anti-inflammatory medications, and Orthopedic Injections — including epidural steroid injections that deliver powerful medicine right to the source of the pain. If symptoms don't improve, a minimally invasive surgery called a microdiscectomy can be highly effective at providing lasting relief.",
+            "The good news is that most herniated discs heal with non-surgical care. We focus on relieving the pressure on the nerve through targeted outside rehabilitation, anti-inflammatory medications, and Orthopedic Injections — including epidural steroid injections that deliver powerful medicine right to the source of the pain. If symptoms don't improve, a minimally invasive surgery called a microdiscectomy can be highly effective at providing lasting relief.",
         pain_info:
             "The leg pain (sciatica) from a herniated disc is often described as feeling like an electric shock and can be far worse than the back pain itself. This is nerve pain, and our primary goal is to calm that irritated nerve. Our treatments are designed to reduce inflammation and give the nerve space to heal, so you can get back to your life.",
         prevent:
@@ -635,7 +635,7 @@ export const conditions: ConditionInfoProp[] = [
                                 The right treatment for a lumbar herniated disc depends on how
                                 severe your symptoms are and how much they impact your daily
                                 life. Most cases respond well to conservative care, including
-                                rest, heat and ice therapy, physical therapy (if recommended), and
+                                rest, heat and ice therapy, outside rehabilitation, and
                                 anti-inflammatory medications. These methods aim to reduce
                                 nerve irritation, restore movement, and strengthen the muscles
                                 that support the spine. If pain persists or worsens despite
@@ -677,7 +677,7 @@ export const conditions: ConditionInfoProp[] = [
                                 The right treatment for a lumbar herniated disc depends on how
                                 severe your symptoms are and how much they impact your daily
                                 life. Most cases respond well to conservative care, including
-                                rest, heat and ice therapy, physical therapy (if recommended), and
+                                rest, heat and ice therapy, outside rehabilitation, and
                                 anti-inflammatory medications. These methods aim to reduce
                                 nerve irritation, restore movement, and strengthen the muscles
                                 that support the spine. If pain persists or worsens despite
@@ -723,7 +723,7 @@ export const conditions: ConditionInfoProp[] = [
                                 If you're experiencing symptoms of a lumbar herniated disc,
                                 there are several treatment options available depending on the
                                 severity of your condition. If your pain is mild and manageable,
-                                starting with home care and guided physical therapy (if recommended) can often
+                                starting with home care and guided outside rehabilitation can often
                                 lead to improvement. Applying heat or ice, taking
                                 anti-inflammatory medications such as ibuprofen or naproxen, and
                                 making lifestyle adjustments like avoiding long periods of
@@ -811,7 +811,7 @@ export const conditions: ConditionInfoProp[] = [
         diagnose:
             "A conversation about your symptoms and a physical exam helps us understand which nerve might be affected. To confirm the diagnosis, an MRI is the best way to see the nerve and the surrounding tissue. Our complimentary MRI review helps us pinpoint the exact location of the stenosis and plan the most effective, targeted treatment for you.",
         treatment:
-            "Our first goal is to relieve your pain without surgery. This often involves physical therapy (if recommended) to improve posture and strength, anti-inflammatory medications, and <a href=\"/treatments/orthopedic-injections\" class=\"text-blue-600 hover:underline\">Orthopedic Injections</a> — including targeted <a href=\"/treatments/epidural-steroid-injection\" class=\"text-blue-600 hover:underline\">epidural steroid injections</a> to calm the inflamed nerve. If the pain is severe or you have significant weakness, a minimally invasive procedure like a <a href=\"/treatments/endoscopic-foraminotomy-surgery\" class=\"text-blue-600 hover:underline\">foraminotomy</a> can be performed to open up the 'doorway' and give the nerve more space.",
+            "Our first goal is to relieve your pain without surgery. This often involves outside rehabilitation to improve posture and strength, anti-inflammatory medications, and <a href=\"/treatments/orthopedic-injections\" class=\"text-blue-600 hover:underline\">Orthopedic Injections</a> — including targeted <a href=\"/treatments/epidural-steroid-injection\" class=\"text-blue-600 hover:underline\">epidural steroid injections</a> to calm the inflamed nerve. If the pain is severe or you have significant weakness, a minimally invasive procedure like a <a href=\"/treatments/endoscopic-foraminotomy-surgery\" class=\"text-blue-600 hover:underline\">foraminotomy</a> can be performed to open up the 'doorway' and give the nerve more space.",
         pain_info:
             "Nerve pain is frustrating because it can be unpredictable and sharp. Certain positions, like turning your head or sitting for too long, might trigger a jolt of pain. Our team focuses on calming the nerve inflammation and teaching you ways to move and sit that reduce pressure on the nerve, giving it a chance to heal.",
         prevent:
@@ -970,7 +970,7 @@ export const conditions: ConditionInfoProp[] = [
                                     or naproxen can reduce pain and swelling.
                                 </li>
                                 <li>
-                                    Physical Therapy (via Referral): Specific exercises can help improve
+                                    Outside Rehabilitation Guidance: Specific exercises can help improve
                                     flexibility, strengthen supporting muscles (core, back), and
                                     improve posture, potentially creating more space for the
                                     nerve.
@@ -1270,7 +1270,7 @@ export const conditions: ConditionInfoProp[] = [
                                 thickened ligaments) typically does not resolve on its own.
                                 However, symptoms can sometimes improve or fluctuate with
                                 conservative treatments that reduce inflammation (like
-                                injections) or improve biomechanics (like physical therapy (if recommended)),
+                                injections) or improve biomechanics (like outside rehabilitation),
                                 effectively managing the condition without surgery.
                             </p>
                             <h3
@@ -1358,13 +1358,13 @@ export const conditions: ConditionInfoProp[] = [
         diagnose:
             "Because sciatica is a symptom, a thorough diagnosis is crucial. Our specialists will perform a physical exam, testing your muscle strength and reflexes. To find the source of the nerve pressure, an MRI is the most effective tool. We offer a complimentary MRI review to pinpoint the cause and develop a targeted treatment plan for you.",
         treatment:
-            "Treatment for sciatica focuses on taking pressure off the nerve. This is often achieved with non-surgical methods like physical therapy (if recommended), specialized stretching, and anti-inflammatory medications. An epidural steroid injection can also provide powerful, targeted relief by reducing inflammation around the nerve. If your pain is severe and persistent, we may discuss minimally invasive surgery to remove what's pressing on the nerve.",
+            "Treatment for sciatica focuses on taking pressure off the nerve. This is often achieved with non-surgical methods like outside rehabilitation, specialized stretching, and anti-inflammatory medications. An epidural steroid injection can also provide powerful, targeted relief by reducing inflammation around the nerve. If your pain is severe and persistent, we may discuss minimally invasive surgery to remove what's pressing on the nerve.",
         pain_info:
             "Living with sciatica is challenging because the pain can be unpredictable and severe. It can make simple things like getting out of a chair or driving a car extremely painful. Our multidisciplinary approach focuses on calming the irritated nerve to provide immediate relief while also addressing the underlying structural issue to prevent the pain from coming back.",
         prevent:
             "Regular exercise that strengthens your core is one of the best ways to prevent sciatica. It's also important to maintain good posture, especially when sitting, and to use proper techniques when lifting. These habits help protect your lower back from the types of strain that can lead to a pinched nerve.",
         why_choose_us:
-            "At Mountain Spine & Orthopedics, we understand how debilitating sciatica can be. Our specialists in Florida are experts at getting to the root cause of your pain. With a complimentary MRI review and a free second opinion, we provide a clear diagnosis and a full spectrum of care, including physical therapy (if recommended) and minimally invasive surgery, to resolve your pain and restore your mobility.",
+            "At Mountain Spine & Orthopedics, we understand how debilitating sciatica can be. Our specialists in Florida are experts at getting to the root cause of your pain. With a complimentary MRI review and a free second opinion, we provide a clear diagnosis and a full spectrum of care, including outside rehabilitation and minimally invasive surgery, to resolve your pain and restore your mobility.",
         schedule:
             "If radiating leg pain is disrupting your life, schedule a consultation with Mountain Spine & Orthopedics. Let us help you find the cause of your sciatica and start on the path to lasting relief.",
         side_img: "https://mountainspineortho.b-cdn.net/public/sciaticaside.png",
@@ -1451,7 +1451,7 @@ export const conditions: ConditionInfoProp[] = [
                                 especially when the underlying condition compressing the sciatic
                                 nerve is addressed. Treatment may include anti-inflammatory
                                 medication, stretching exercises, heat and ice therapy, and
-                                physical therapy (if recommended). These methods aim to relieve pressure, reduce
+                                outside rehabilitation. These methods aim to relieve pressure, reduce
                                 inflammation, and restore mobility.
                                 <br />
                                 <br />
@@ -1606,7 +1606,7 @@ export const conditions: ConditionInfoProp[] = [
         diagnose:
             "Diagnosing tailbone pain is usually straightforward based on your symptoms. Our specialist will talk with you about the pain and may gently press on the area to confirm the location. Sometimes, an X-ray or a diagnostic injection of a local anesthetic is used to confirm the coccyx is the source of the pain and to rule out other issues.",
         treatment:
-            "Most tailbone pain can be managed effectively with simple, non-surgical treatments. Using a special donut-shaped or wedge cushion when you sit can take the pressure off the area immediately. We may also recommend gentle physical therapy (if recommended) or an anti-inflammatory medication. For persistent pain, a targeted steroid injection can provide significant relief. Surgery is very rarely needed.",
+            "Most tailbone pain can be managed effectively with simple, non-surgical treatments. Using a special donut-shaped or wedge cushion when you sit can take the pressure off the area immediately. We may also recommend gentle outside rehabilitation or an anti-inflammatory medication. For persistent pain, a targeted steroid injection can provide significant relief. Surgery is very rarely needed.",
         pain_info:
             "The pain from coccydynia is very specific and can be incredibly disruptive to your daily routine, making work and travel difficult. Our treatment approach focuses on reducing the direct pressure and inflammation. By combining ergonomic solutions like cushions with medical treatment, we can break the cycle of pain and allow the injured area to heal.",
         prevent:
@@ -1740,7 +1740,7 @@ export const conditions: ConditionInfoProp[] = [
                                 <br />
                                 <br />
                                 If the pain persists beyond a few weeks, stronger pain
-                                relievers, physical therapy (if recommended), or injections may be recommended.
+                                relievers, outside rehabilitation, or injections may be recommended.
                                 Surgery (coccygectomy) is reserved for severe cases when all
                                 other options have failed.
                             </p>
@@ -2046,7 +2046,7 @@ export const conditions: ConditionInfoProp[] = [
             </div>
         ),
         treatment:
-            "Because this condition can progress, treatment is focused on relieving pressure on the spinal cord. Non-surgical options like physical therapy (if recommended) can help, but if you have clear signs of cord compression (myelopathy), surgery is often recommended to prevent further neurological issues. Our surgeons are experts in advanced, motion-preserving procedures like laminoplasty, which creates more space for the spinal cord without fusing the neck.",
+            "Because this condition can progress, treatment is focused on relieving pressure on the spinal cord. Non-surgical options like outside rehabilitation can help, but if you have clear signs of cord compression (myelopathy), surgery is often recommended to prevent further neurological issues. Our surgeons are experts in advanced, motion-preserving procedures like laminoplasty, which creates more space for the spinal cord without fusing the neck.",
         pain_info:
             "While neck pain can be a symptom, the more concerning issues are the neurological ones, like hand clumsiness and balance problems. These can develop gradually, and it's easy to dismiss them as just 'getting older.' Our goal is to intervene before these symptoms become permanent, protecting your mobility and quality of life for the long term.",
         prevent:
@@ -2309,7 +2309,7 @@ export const conditions: ConditionInfoProp[] = [
             </div>
         ),
         treatment:
-            "Most people with a cervical herniated disc get better without surgery. We focus on calming the nerve pain with options like physical therapy (if recommended), anti-inflammatory medications, and targeted steroid injections. If the pain is severe and doesn't improve, or if you have significant arm weakness, surgical options like an Anterior Cervical Discectomy and Fusion (ACDF) or an artificial disc replacement can provide excellent relief by removing the pressure on the nerve.",
+            "Most people with a cervical herniated disc get better without surgery. We focus on calming the nerve pain with options like outside rehabilitation, anti-inflammatory medications, and targeted steroid injections. If the pain is severe and doesn't improve, or if you have significant arm weakness, surgical options like an Anterior Cervical Discectomy and Fusion (ACDF) or an artificial disc replacement can provide excellent relief by removing the pressure on the nerve.",
         pain_info:
             "The arm pain from a cervical herniated disc is often much worse than the neck pain itself. This nerve pain can be intense and interfere with sleep and daily activities. Our priority is to relieve that arm pain quickly and effectively while giving the nerve time and space to heal properly.",
         prevent:
@@ -2349,7 +2349,7 @@ export const conditions: ConditionInfoProp[] = [
                                 press against surrounding spinal nerves. This can lead to
                                 symptoms such as neck pain, numbness, tingling, or weakness in
                                 the shoulders, arms, or hands. Treatment options range from
-                                conservative therapies like rest and physical therapy (if recommended) to more
+                                conservative therapies like rest and outside rehabilitation to more
                                 advanced solutions, including cervical spine surgery.
                             </p>
 
@@ -2442,7 +2442,7 @@ export const conditions: ConditionInfoProp[] = [
                                 often be managed with rest, ice, heat therapy, and
                                 anti-inflammatory medications. Muscle relaxants or prescription
                                 pain relievers may also be used. If pain continues, physicians
-                                may suggest physical therapy (if recommended) to help strengthen the surrounding
+                                may suggest outside rehabilitation to help strengthen the surrounding
                                 neck muscles. In some cases, nerve root blocks or epidural
                                 steroid injections are used to reduce inflammation and nerve
                                 pressure. Our team at Mountain Spine & Orthopedics will help
@@ -2796,7 +2796,7 @@ export const conditions: ConditionInfoProp[] = [
                             >
                                 At Mountain Spine & Orthopedics, we create personalized
                                 treatment plans tailored to your condition and lifestyle.
-                                Treatment options may include physical therapy (if recommended) to improve
+                                Treatment options may include outside rehabilitation to improve
                                 strength, flexibility, and posture, as well as medications like
                                 non-steroidal anti-inflammatory drugs (NSAIDs) to reduce pain
                                 and swelling. For patients with nerve irritation, epidural
@@ -2869,7 +2869,7 @@ export const conditions: ConditionInfoProp[] = [
         diagnose:
             "Diagnosing arthritis starts with a conversation about your symptoms and a physical exam to check your joints. X-rays are very helpful to see the extent of cartilage loss or bone spurs. In some cases, blood tests or an MRI may be needed to get a clearer picture. We offer a complimentary MRI review to ensure you get a precise diagnosis.",
         treatment:
-            "Treatment for arthritis focuses on relieving pain and keeping you active. Non-surgical options are the first line of defense, including physical therapy (if recommended) to strengthen muscles around the joint, anti-inflammatory medications, and targeted injections like cortisone or viscosupplementation ('gel shots'). For severe cases, minimally invasive surgery or joint replacement may be recommended.",
+            "Treatment for arthritis focuses on relieving pain and keeping you active. Non-surgical options are the first line of defense, including outside rehabilitation to strengthen muscles around the joint, anti-inflammatory medications, and targeted injections like cortisone or viscosupplementation ('gel shots'). For severe cases, minimally invasive surgery or joint replacement may be recommended.",
         pain_info:
             "Arthritis pain can be a dull, constant ache or a sharp pain that flares up with activity. Our comprehensive approach is designed to reduce inflammation, protect your remaining cartilage, and teach you strategies to manage your pain so you can stay as active as possible.",
         prevent:
@@ -3130,7 +3130,7 @@ export const conditions: ConditionInfoProp[] = [
         diagnose:
             "To diagnose a pinched nerve, our specialists will talk to you about your symptoms and perform a physical exam. An MRI is often used to see exactly where the nerve is being compressed. We offer a complimentary MRI review to help get an accurate diagnosis and find the right treatment path.",
         treatment:
-            "The goal of treatment is to relieve the pressure on the nerve. Many people find relief with rest and non-surgical treatments like physical therapy (if recommended) and anti-inflammatory medication. Targeted steroid injections can also be very effective. If the pressure is severe, minimally invasive surgery may be recommended to create more space for the nerve.",
+            "The goal of treatment is to relieve the pressure on the nerve. Many people find relief with rest and non-surgical treatments like outside rehabilitation and anti-inflammatory medication. Targeted steroid injections can also be very effective. If the pressure is severe, minimally invasive surgery may be recommended to create more space for the nerve.",
         pain_info:
             "The radiating, electric-like pain of a pinched nerve can be very disruptive. Our approach focuses on calming the irritated nerve and addressing the underlying cause of the compression. We help you find relief so you can get back to your daily activities without pain.",
         prevent:
@@ -3329,7 +3329,7 @@ export const conditions: ConditionInfoProp[] = [
                                 A pinched nerve doesn’t have to control your life. With early
                                 intervention and the right treatment strategy, most patients
                                 experience relief without surgery. Non-surgical options may
-                                include physical therapy (if recommended), anti-inflammatory medication, activity
+                                include outside rehabilitation, anti-inflammatory medication, activity
                                 modification, ergonomic adjustments, and corticosteroid
                                 injections. When conservative care fails to relieve pressure on
                                 the nerve, minimally invasive surgical solutions such as
@@ -3775,7 +3775,7 @@ export const conditions: ConditionInfoProp[] = [
                             nonsteroidal anti inflammatory medication. Night splints hold the
                             foot in gentle dorsiflexion during sleep, preventing painful
                             morning tightness. Custom orthotic inserts cushion the heel and
-                            support the arch, while targeted physical therapy (if recommended) strengthens
+                            support the arch, while targeted outside rehabilitation strengthens
                             intrinsic foot muscles for long term stability.
                             <br />
                             <br />
@@ -4332,7 +4332,7 @@ export const conditions: ConditionInfoProp[] = [
         what_sym: "Ankle arthroscopy isn't a condition, but a treatment for symptoms that don't improve with conservative care. You might be a candidate if you have persistent ankle pain, a feeling of 'catching' or 'locking' in the joint, chronic ankle instability that leads to frequent sprains, or swelling that just won't go away.",
         risk_fac: "This is a treatment. The conditions leading to it are often caused by previous injuries like severe ankle sprains or fractures that didn't heal properly, or from 'wear and tear' arthritis that creates painful bone spurs or loose cartilage.",
         diagnose: "The decision to recommend ankle arthroscopy is made after a thorough evaluation. This includes a physical exam and imaging studies. An MRI is particularly useful as it gives a detailed view of the ankle's soft tissues. We offer a complimentary MRI review to help determine if arthroscopy is the right choice for you.",
-        treatment: "During the procedure, your surgeon can remove loose pieces of bone or cartilage, smooth out damaged cartilage, treat bone spurs that cause impingement, and even repair ligaments. Because it's minimally invasive, there is less scarring and post-operative pain, and a carefully guided physical therapy (if recommended) program can restore your strength and mobility efficiently.",
+        treatment: "During the procedure, your surgeon can remove loose pieces of bone or cartilage, smooth out damaged cartilage, treat bone spurs that cause impingement, and even repair ligaments. Because it's minimally invasive, there is less scarring and post-operative pain, and a carefully guided outside rehabilitation program can restore your strength and mobility efficiently.",
         pain_info: "The goal of ankle arthroscopy is to relieve the chronic pain caused by an internal joint problem. By fixing the underlying mechanical issue, the procedure can provide lasting relief from the aching, grinding, or sharp pains that were limiting your activity.",
         prevent: "Preventing the need for arthroscopy involves protecting your ankles from injury. This includes wearing supportive footwear, strengthening the muscles around the ankle, and properly rehabilitating any ankle sprains to avoid long-term instability.",
         why_choose_us: "The foot and ankle surgeons at Mountain Spine & Orthopedics are highly skilled in advanced, minimally invasive ankle arthroscopy. We offer patients in Florida a complimentary MRI review to determine if this procedure is right for you. Our goal is to fix your ankle problem with less pain and a faster recovery.",
@@ -4481,7 +4481,7 @@ export const conditions: ConditionInfoProp[] = [
                             className="text-[#424959] text-md sm:text-xl"
                         >
                             Not every ankle problem requires surgery, so we exhaust
-                            nonsurgical measures first, including targeted physical therapy (if recommended),
+                            nonsurgical measures first, including targeted outside rehabilitation,
                             ultrasound guided corticosteroid or platelet rich plasma
                             injections, custom bracing, and gait retraining. When imaging
                             shows mechanical impingement, unstable cartilage, or loose
@@ -4696,7 +4696,7 @@ export const conditions: ConditionInfoProp[] = [
                             while custom orthotic inserts offload the ball of the foot. Toe
                             spacers and prefabricated hammer toe pads cushion prominent joints
                             and night splints gently stretch the flexor tendons during sleep.
-                            A referred physical therapy program focuses on towel scrunches marble pickups and
+                            A outside rehabilitation program focuses on towel scrunches marble pickups and
                             resistance band exercises to strengthen the small muscles that
                             stabilize the toes. When discomfort persists or the toe becomes
                             rigid surgical correction offers a reliable solution. <br />
@@ -5125,7 +5125,7 @@ export const conditions: ConditionInfoProp[] = [
                             incision heals. Most patients begin gentle non weight bearing
                             range of motion exercises within days followed by progressive
                             partial weight bearing in a removable boot. By the sixth week
-                            supervised physical therapy (if recommended) focuses on rebuilding strength balance
+                            guided outside rehabilitation focuses on rebuilding strength balance
                             and gait mechanics.
                             <br />
                             <br />

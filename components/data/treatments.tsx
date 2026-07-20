@@ -202,9 +202,9 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "inTxt_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--ankle-ligament-reconstruction-surgery--thumbnail.png',
   "body": "Ankle ligament reconstruction surgery restores stability and function in patients with chronic ankle instability caused by torn ligaments. Relieve symptoms today.",
   "detail": "<p><strong>Ankle ligament reconstruction surgery</strong> repairs or reconstructs damaged lateral ankle ligaments in patients with <a href=\"/conditions/ankle-instability\" class=\"text-blue-600 hover:underline\">chronic ankle instability</a>. Repeated ankle sprains stretch or tear the ligaments (primarily the ATFL and CFL), leading to a loose, unstable ankle prone to giving way.</p><p>According to the <a href=\"https://orthoinfo.aaos.org/en/diseases--conditions/chronic-lateral-ankle-pain/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">American Academy of Orthopaedic Surgeons</a>, up to 20% of ankle sprains can lead to chronic instability. The <strong>Broström-Gould procedure</strong> is the gold standard for anatomic repair, while severe cases may require tendon graft reconstruction.</p>",
-  "conditions_treated": "<ul><li><a href=\"/conditions/ankle-instability\" class=\"text-blue-600 hover:underline\">Chronic lateral ankle instability</a></li><li>Torn ankle ligaments unresponsive to bracing and physical therapy</li><li>Recurrent ankle sprains (ankle giving way)</li><li>Significant ligament laxity after ankle fractures</li><li>Failed previous ankle stabilization procedures</li><li>Ankle instability affecting sports participation</li></ul>",
+  "conditions_treated": "<ul><li><a href=\"/conditions/ankle-instability\" class=\"text-blue-600 hover:underline\">Chronic lateral ankle instability</a></li><li>Torn ankle ligaments unresponsive to bracing and rehabilitation</li><li>Recurrent ankle sprains (ankle giving way)</li><li>Significant ligament laxity after ankle fractures</li><li>Failed previous ankle stabilization procedures</li><li>Ankle instability affecting sports participation</li></ul>",
   "procedure_info": "<ol><li>Pre-operative MRI and stress X-rays confirm ligament damage and rule out other pathology</li><li>Surgery is performed as an outpatient procedure under regional or general anesthesia</li><li>A small incision is made on the outside of the ankle</li><li><strong>Broström repair:</strong> Damaged ligaments are tightened and reattached to bone with suture anchors</li><li><strong>Gould modification:</strong> The extensor retinaculum is reinforced for additional strength</li><li>For severe cases, tendon graft reconstruction using peroneus brevis or allograft</li><li><a href=\"/treatments/ankle-arthroscopy-minimally-invasive-surgery\" class=\"text-blue-600 hover:underline\">Ankle arthroscopy</a> may be performed simultaneously to address cartilage damage</li></ol>",
-  "recovery_info": "<p>Recovery involves immobilization in a cast or boot for 4-6 weeks. Weight-bearing progresses gradually. Physical therapy begins around 6 weeks, focusing on range of motion, strength, balance, and proprioception training. Return to sports typically takes 4-6 months. Success rates exceed 85-95% for restoring stability.</p>",
+  "recovery_info": "<p>Recovery involves immobilization in a cast or boot for 4-6 weeks. Weight-bearing progresses gradually. Rehabilitation begins around 6 weeks, focusing on range of motion, strength, balance, and proprioception training. Return to sports typically takes 4-6 months. Success rates exceed 85-95% for restoring stability.</p>",
   "benefits": (
     <ul>
       <li>Eliminates chronic ankle instability and the sensation of the ankle 'giving way'</li>
@@ -221,24 +221,6 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "keywords": ["Ankle ligament reconstruction", "chronic ankle instability surgery", "FL, NJ, NY, & PA orthopedic foot ankle", "torn ankle ligament operation", "foot and ankle care", "Brostrom procedure for ankle", "ankle stabilization techniques", "recurrent ankle sprain treatment", "lateral ankle repair", "ankle ligament repair FL, NJ, NY, & PA"]
 },
 {
-  "title": "Axial Fusion Surgery",
-  "tag": "Lower Spine",
-  "card_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--axial-fusion-surgery--thumbnail.png',
-  "inTxt_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--axial-fusion-surgery--thumbnail.png',
-  "body": "Axial fusion is a minimally invasive surgery to stabilize the L5-S1 vertebrae via a small presacral incision, offering relief for specific lower back pain. Explore options.",
-  "detail": "Axial Lumbar Interbody Fusion (AxiaLIF) is a minimally invasive technique for <a href=\"/conditions/degenerative-disc-disease\" class=\"text-blue-600 hover:underline\">painful degenerative disc disease</a> or instability at L5-S1. Accessed via a small incision near the tailbone, it avoids major back muscle disruption. A specialized instrument removes the damaged disc and inserts a fusion device (threaded rod with bone graft), restoring disc height and promoting L5-S1 vertebral fusion for lasting spinal stability. This is a targeted lumbosacral spine surgery.",
-  "conditions_treated": "Indicated for symptomatic conditions at L5-S1: Degenerative disc disease causing chronic low back pain/instability, Isthmic or degenerative spondylolisthesis (L5 on S1, Grade I/II), Collapsed L5-S1 disc, or Failed previous L5-S1 surgery requiring revision and <a href=\"/treatments/lumbar-fusion-surgery\" class=\"text-blue-600 hover:underline\">lumbar spine fusion</a>. It addresses specific L5-S1 pathology and provides lumbosacral stabilization.",
-  "procedure_info": "After consultation and imaging (MRI, CT), AxiaLIF is performed under general anesthesia. A small incision near the buttocks allows percutaneous access to the L5-S1 disc space. The damaged disc is removed, and a specialized FDA-approved fusion device (threaded rod with bone graft) is inserted to restore disc height and facilitate L5-S1 interbody fusion. This is a targeted approach for lumbosacral fusion, a less invasive fusion technique.",
-  "recovery_info": "Recovery is generally faster than traditional open lumbar fusion. Hospital stay 1-2 nights. A lumbar brace is often worn. Physical therapy focuses on core strengthening. Solid bone fusion takes several months. This minimally invasive spine surgery allows quicker back muscle function recovery and improved spinal support, promoting faster return to daily activities.",
-  "benefits": (
-  <ul><li>Provides effective relief of chronic low back pain originating from L5-S1 disc pathology and instability.</li><li>Is a minimally invasive approach with less muscle damage and potentially faster initial recovery.</li><li>Restores disc height and proper spinal alignment at the lumbosacral junction.</li><li>Achieves long-term stabilization of the L5-S1 spinal segment through fusion.</li><li>Preserves function in the large back muscles due to the presacral surgical approach.</li><li>Offers a durable solution for specific L5-S1 conditions.</li></ul>
-),
-  "why_choose_us": "Our spine specialists are experienced in cutting-edge minimally invasive fusion techniques like AxiaLIF. Our practice uses comprehensive diagnostics and advanced imaging techniques to ensure axial fusion is the most appropriate treatment for your specific L5-S1 condition, optimizing outcomes in FL, NJ, NY, & PA.",
-  "schedule": "Chronic low back pain or L5-S1 disc instability? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
-  "slug": "axial-fusion-surgery",
-  "keywords": ["Axial fusion surgery", "AxiaLIF", "FL, NJ, NY, & PA orthopedic spine", "L5-S1 interbody fusion", "minimally invasive spine procedure", "spine health care FL, NJ, NY, & PA", "presacral approach fusion", "low back pain L5-S1 treatment"]
-},
-{
   "title": "Hybrid Cervical Spine Surgery",
   "tag": "Neck",
   "card_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--hybrid-cervical-spine-surgery--thumbnail.png',
@@ -247,7 +229,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "Hybrid cervical spine surgery treats multilevel degenerative disc disease by combining <a href=\"/treatments/acdf-surgery\" class=\"text-blue-600 hover:underline\">Anterior Cervical Discectomy and Fusion (ACDF)</a> at one or more levels with motion-preserving artificial disc replacement (<a href=\"/treatments/cervical-disc-arthroplasty\" class=\"text-blue-600 hover:underline\">Cervical Disc Arthroplasty</a>) at adjacent levels. This approach addresses varied pathology, fusing unstable segments while preserving neck motion elsewhere, potentially reducing adjacent segment stress compared to multilevel cervical fusion and improving overall neck biomechanics. This is an advanced cervical spine solution.",
   "conditions_treated": "Utilized for multilevel cervical DDD causing chronic neck pain, radiculopathy, or myelopathy, where some levels require fusion due to instability or severe facet arthritis, while others are suitable for artificial disc replacement. It provides a tailored solution for complex cervical pathology and restoring cervical spine function, addressing issues of combined cervical instability and disc degeneration.",
   "procedure_info": "Following a comprehensive evaluation with advanced imaging, the surgery is performed via an anterior neck incision. At fusion levels, the disc is removed, a graft/cage inserted, and a plate applied for cervical spine stabilization. At disc replacement levels, a mobile FDA-approved artificial disc implant is inserted after discectomy. This combined approach, a sophisticated form of neck surgery, optimizes neck biomechanics and provides targeted segmental treatment.",
-  "recovery_info": "Recovery combines elements of fusion and disc replacement. Hospital stay is a few days. A soft collar may be used. Physical therapy focuses on restoring motion at mobile segments and strengthening neck muscles. Full recovery can take 3-9 months, allowing for bone healing at fused levels and improved neck mobility, promoting a return to normal neck function.",
+  "recovery_info": "Recovery combines elements of fusion and disc replacement. Hospital stay is a few days. A soft collar may be used. Rehabilitation focuses on restoring motion at mobile segments and strengthening neck muscles. Full recovery can take 3-9 months, allowing for bone healing at fused levels and improved neck mobility, promoting a return to normal neck function.",
   "benefits": (
   <ul><li>Offers effective relief of nerve compression and neck pain from multilevel disease.</li><li>Provides stability where fusion is needed, while preserving motion with disc replacement at other levels.</li><li>May reduce the risk of adjacent segment degeneration compared to fusing multiple levels alone.</li><li>Improves overall neck function, flexibility, and quality of life.</li><li>Balances the benefits of both fusion and motion-preserving techniques.</li><li>Customizes treatment for complex cervical spine conditions.</li></ul>
 ),
@@ -283,7 +265,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "<p><strong>Bunion correction surgery</strong> (bunionectomy) realigns the big toe and corrects the bony prominence that forms at the base of the toe. A <a href=\"/conditions/bunions-hallux-valgus\" class=\"text-blue-600 hover:underline\">bunion (hallux valgus)</a> develops when the big toe drifts inward and the metatarsal head protrudes outward, causing pain and difficulty with footwear.</p><p>Multiple surgical techniques exist, from traditional osteotomies to <strong>minimally invasive procedures</strong>. Our surgeons select the approach based on your bunion severity, bone quality, and activity goals. According to the <a href=\"https://orthoinfo.aaos.org/en/treatment/bunion-surgery/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">American Academy of Orthopaedic Surgeons</a>, over 100 different surgical procedures have been described for bunion correction.</p>",
   "conditions_treated": "<ul><li><a href=\"/conditions/bunions-hallux-valgus\" class=\"text-blue-600 hover:underline\">Symptomatic bunions (hallux valgus)</a> unresponsive to conservative treatments</li><li>Bunion pain limiting daily activities and footwear choices</li><li>Secondary <a href=\"/conditions/hammer-toes\" class=\"text-blue-600 hover:underline\">hammertoe</a> deformities from crowding</li><li>Bunionettes (tailor's bunion) at the fifth toe</li><li>Arthritis in the first MTP joint</li><li>Metatarsalgia from abnormal weight distribution</li><li>Painful calluses from deformity-related pressure</li></ul>",
   "procedure_info": "<ol><li>Weight-bearing X-rays assess deformity severity and guide surgical planning</li><li>Surgery is performed as an outpatient procedure under regional or general anesthesia</li><li><strong>Osteotomy:</strong> Bone cuts (chevron, scarf, or Lapidus) realign the metatarsal</li><li>Bone is stabilized with screws or plates</li><li>Soft tissue balancing releases tight structures and tightens loose ones</li><li><strong>Minimally invasive options:</strong> Small incisions with specialized instruments for faster recovery</li><li>For severe arthritis, joint fusion (arthrodesis) may be recommended</li></ol>",
-  "recovery_info": "<p>Recovery varies by procedure type. Minimally invasive bunion surgery allows earlier weight-bearing. Traditional osteotomies require 4-6 weeks in a surgical shoe or boot. Swelling can persist for several months. Physical therapy restores range of motion. Full recovery and return to regular shoes takes 2-4 months; strenuous activities 4-6 months.</p>",
+  "recovery_info": "<p>Recovery varies by procedure type. Minimally invasive bunion surgery allows earlier weight-bearing. Traditional osteotomies require 4-6 weeks in a surgical shoe or boot. Swelling can persist for several months. Rehabilitation restores range of motion. Full recovery and return to regular shoes takes 2-4 months; strenuous activities 4-6 months.</p>",
   "benefits": (
   <ul><li>Significant reduction or elimination of bunion pain</li><li>Corrects the foot deformity and improves foot appearance</li><li>Restores ability to wear normal shoes comfortably</li><li>Resolves associated issues like calluses and <a href="/conditions/hammer-toes" className="text-blue-600 hover:underline">hammertoes</a></li><li>Restores normal weight distribution across the foot</li><li>Minimally invasive options available for faster recovery</li><li>Prevents further joint deterioration and arthritis</li></ul>
 ),
@@ -319,7 +301,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "<a href=\"/treatments/cervical-disc-arthroplasty\" class=\"text-blue-600 hover:underline\">Cervical disc replacement (arthroplasty)</a> treats chronic neck/arm pain from damaged cervical discs by replacing the disc with a mobile implant, preserving segmental motion, unlike fusion. This procedure is for suitable candidates with symptomatic cervical disc herniation or DDD unresponsive to non-surgical care. This advanced neck surgery aims to maintain flexibility and reduce adjacent level stress, offering a modern solution for cervical spine conditions and improving overall neck function.",
   "conditions_treated": "For symptomatic cervical disc herniation or DDD causing radiculopathy/myelopathy, unresponsive to non-surgical neck pain treatment. Candidates need good bone/facet health. It addresses conditions requiring cervical disc removal and motion preservation, improving overall neck health and relieving symptoms of cervical disc disease.",
   "procedure_info": "After consultation and diagnostic imaging (MRI, CT), the procedure is performed via an anterior neck incision. The damaged disc and any compressing bone spurs are removed. An FDA-approved artificial disc, designed to mimic natural neck movement, is inserted. This procedure focuses on restoring cervical spine kinematics and decompressing neural structures, representing a state-of-the-art neck disc surgery and an <a href=\"/treatments/acdf-surgery\" class=\"text-blue-600 hover:underline\">alternative to cervical fusion</a>.",
-  "recovery_info": "Often faster recovery than fusion. Hospital stay 1-2 days. A soft collar may be used for comfort. Physical therapy restores motion and strength. Full recovery usually takes 3-6 months. This <a href=\"/treatments/motion-preservation-spine-surgery\" class=\"text-blue-600 hover:underline\">motion-sparing neck surgery</a> facilitates quicker rehabilitation and return to daily neck function, promoting improved range of motion.",
+  "recovery_info": "Often faster recovery than fusion. Hospital stay 1-2 days. A soft collar may be used for comfort. Rehabilitation restores motion and strength. Full recovery usually takes 3-6 months. This <a href=\"/treatments/motion-preservation-spine-surgery\" class=\"text-blue-600 hover:underline\">motion-sparing neck surgery</a> facilitates quicker rehabilitation and return to daily neck function, promoting improved range of motion.",
   "benefits": (
   <ul><li>Preserves motion at the treated cervical level, maintaining natural neck flexibility.</li><li>Effectively relieves nerve compression, reducing neck and arm pain (radiculopathy).</li><li>Restores disc height and can improve spinal alignment.</li><li>Often leads to a faster recovery and less post-operative stiffness compared to fusion.</li><li>May reduce the risk of problems at adjacent spinal levels.</li><li>Improves overall quality of life by restoring neck function.</li></ul>
 ),
@@ -334,10 +316,10 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "card_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--coccygectomy-tailbone-removal-surgery--thumbnail.png',
   "inTxt_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--coccygectomy-tailbone-removal-surgery--thumbnail.png',
   "body": "Coccygectomy, or tailbone removal surgery, is performed for chronic coccydynia (tailbone pain) that does not improve with conservative treatments. Explore options.",
-  "detail": "Coccygectomy is the surgical removal of the coccyx (tailbone) for <a href=\"/conditions/coccydynia\" class=\"text-blue-600 hover:underline\">chronic, debilitating coccydynia</a> unresponsive to extended non-surgical management (physical therapy, injections). This procedure is for carefully selected patients where pain is localized to a pathological coccyx. The goal is to eliminate the source of chronic tailbone pain and improve sitting tolerance, offering a definitive solution for intractable coccyx pain and restoring quality of life.",
+  "detail": "Coccygectomy is the surgical removal of the coccyx (tailbone) for <a href=\"/conditions/coccydynia\" class=\"text-blue-600 hover:underline\">chronic, debilitating coccydynia</a> unresponsive to extended non-surgical management (rehabilitation, injections). This procedure is for carefully selected patients where pain is localized to a pathological coccyx. The goal is to eliminate the source of chronic tailbone pain and improve sitting tolerance, offering a definitive solution for intractable coccyx pain and restoring quality of life.",
   "conditions_treated": "Indicated for severe, chronic coccydynia from trauma (fracture, dislocation), coccygeal hypermobility or instability, or prominent bony abnormalities causing impingement, confirmed as coccyx-originating pain by <a href=\"/treatments/impar-block-treatment\" class=\"text-blue-600 hover:underline\">diagnostic blocks</a>. It addresses intractable tailbone pain and improves quality of life for sufferers of persistent coccyx discomfort and related pelvic floor dysfunction.",
   "procedure_info": "Following thorough consultation and diagnostic workup including imaging and potentially diagnostic injections, coccygectomy is performed under general anesthesia. A small incision is made over the tailbone. All or part of the coccyx is carefully removed from the sacrum and surrounding ligaments. Meticulous closure of soft tissues is performed. This is a specialized procedure for coccyx pain relief, aiming for complete removal of the painful segment and addressing issues of coccygeal instability.",
-  "recovery_info": "Recovery requires careful management. Hospital stay 1-2 days. Avoid direct pressure on the surgical site (no prolonged sitting, use donut cushion). Physical therapy once healed. Full recovery and unrestricted sitting can take 3-12 months. Wound care is critical for this type of lower back surgery to prevent complications and ensure proper healing of the sacrococcygeal area.",
+  "recovery_info": "Recovery requires careful management. Hospital stay 1-2 days. Avoid direct pressure on the surgical site (no prolonged sitting, use donut cushion). Rehabilitation once healed. Full recovery and unrestricted sitting can take 3-12 months. Wound care is critical for this type of lower back surgery to prevent complications and ensure proper healing of the sacrococcygeal area.",
   "benefits": (
   <ul><li>Provides significant reduction or elimination of severe, chronic tailbone pain.</li><li>Restores the ability to sit comfortably for extended periods.</li><li>Improves overall quality of life by relieving debilitating coccyx-specific pain.</li><li>Can alleviate pain experienced during bowel movements or intercourse if related to coccyx pathology.</li><li>Offers a permanent solution when other coccydynia treatments fail.</li><li>Addresses intractable pain at the base of the spine.</li></ul>
 ),
@@ -355,9 +337,9 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "Anti-inflammatory injections deliver potent medication (commonly corticosteroids) directly to the source of pain and inflammation in joints, around tendons, into bursae, or near compressed spinal nerves. Often including a local anesthetic for immediate relief, these image-guided injections are used for conditions like arthritis or sciatica when conservative measures fail, offering targeted pain reduction and improved mobility. This is a common non-surgical joint pain solution for acute or chronic inflammation.",
   "conditions_treated": "Used for pain and inflammation from Osteoarthritis (knees, hips, shoulders), Rheumatoid arthritis, Bursitis, Tendonitis (rotator cuff, Achilles), Herniated discs, Spinal stenosis, Facet joint arthritis, and Sacroiliac (SI) joint dysfunction. It's a versatile non-surgical pain management technique for various musculoskeletal inflammations and treating localized joint swelling.",
   "procedure_info": "After a consultation and review of any imaging (MRI, X-ray), this quick outpatient procedure is performed. The site is cleaned and numbed. Using ultrasound or fluoroscopy guidance, a fine needle delivers anti-inflammatory medication (corticosteroid) and often a local anesthetic to the target. This ensures precise medication delivery for optimal therapeutic effect in treating localized pain and swelling, a key interventional pain therapy.",
-  "recovery_info": "Patients can typically resume light activities shortly. Temporary soreness is common. The local anesthetic provides immediate, temporary relief. Corticosteroid effects usually begin in 24-72 hours, lasting weeks to months. These injections can facilitate more effective physical therapy and functional improvement, aiding in overall pain condition management.",
+  "recovery_info": "Patients can typically resume light activities shortly. Temporary soreness is common. The local anesthetic provides immediate, temporary relief. Corticosteroid effects usually begin in 24-72 hours, lasting weeks to months. These injections can facilitate more effective rehabilitation and functional improvement, aiding in overall pain condition management.",
   "benefits": (
-  <ul><li>Provide rapid and targeted relief from pain and inflammation at the source.</li><li>Significantly reduce joint or spine inflammation, improving comfort.</li><li>Enhance mobility and function in the affected area.</li><li>Can delay or avoid the need for more invasive surgical intervention.</li><li>Facilitate participation in physical therapy by reducing acute pain.</li><li>Offer minimal downtime with a quick return to daily activities.</li></ul>
+  <ul><li>Provide rapid and targeted relief from pain and inflammation at the source.</li><li>Significantly reduce joint or spine inflammation, improving comfort.</li><li>Enhance mobility and function in the affected area.</li><li>Can delay or avoid the need for more invasive surgical intervention.</li><li>Facilitate participation in rehabilitation by reducing acute pain.</li><li>Offer minimal downtime with a quick return to daily activities.</li></ul>
 ),
   "why_choose_us": "We specialize in precise, image-guided injection therapies. Our center's diagnostic evaluation includes advanced imaging techniques to accurately visualize the pain source. Our physicians in FL, NJ, NY, & PA use advanced image guidance for accurate injections, maximizing effectiveness as part of a comprehensive, evidence-based care strategy.",
   "schedule": "Struggling with joint or spine pain due to inflammation? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
@@ -372,7 +354,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "body": "Aging management focuses on proactive measures to preserve bone density, joint integrity, and muscle strength, reducing fracture and chronic pain risks. Relieve symptoms.",
   "detail": "Bone mass declines and cartilage degenerates with age, increasing risks of osteopenia, <a href=\"/conditions/osteoarthritis\" class=\"text-blue-600 hover:underline\">arthritis</a>, and falls. Aging management shifts orthopedic care to preventive maintenance, identifying vulnerabilities early. Our comprehensive evaluation (health profile, physical exam, DEXA, MRI/ultrasound) informs a customized plan integrating medical, nutritional, and lifestyle strategies for lifelong musculoskeletal wellness and improved mobility for seniors, focusing on proactive joint care.",
   "conditions_treated": "This program addresses risks and conditions accelerated by: Genetic predisposition to osteoporosis, Sedentary lifestyle, Smoking, Excessive alcohol use, Chronic inflammatory diseases, Prolonged corticosteroid therapy, Inadequate protein or calcium intake, and Hormonal changes like menopause, all of which can speed tissue degeneration and contribute to age-related joint deterioration and loss of bone strength.",
-  "procedure_info": "This is not a single procedure but a comprehensive program. It begins with a consultation, thorough health assessment, and advanced diagnostics like DEXA scans for bone density and potentially MRI for joint health. Based on findings, an individualized plan is created, which may include supervised physical therapy for balance and strength, nutritional counseling, lifestyle modification guidance, and, if necessary, medical treatments for osteoporosis or early joint preservation techniques.",
+  "procedure_info": "This is not a single procedure but a comprehensive program. It begins with a consultation, thorough health assessment, and advanced diagnostics like DEXA scans for bone density and potentially MRI for joint health. Based on findings, an individualized plan is created, which may include supervised rehabilitation for balance and strength, nutritional counseling, lifestyle modification guidance, and, if necessary, medical treatments for osteoporosis or early joint preservation techniques.",
   "recovery_info": "An ongoing process of maintaining and improving musculoskeletal health. Involves active engagement in personalized exercise, nutrition, and lifestyle modifications. Regular follow-up reassessments track bone density, muscle mass, and balance, adjusting the plan for long-term mobility and effective age-related orthopedic care, promoting an active aging lifestyle.",
   "benefits": (
   <ul><li>Preserves or improves bone density, significantly reducing osteoporosis and fracture risk.</li><li>Maintains or increases muscle mass and strength, enhancing physical function.</li><li>Improves balance and coordination, lowering the risk of falls.</li><li>Reduces age-related joint pain through targeted interventions.</li><li>Can delay the onset or progression of osteoarthritis.</li><li>Enhances overall mobility, independence, and quality of life.</li></ul>
@@ -409,9 +391,9 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "Cortisone (corticosteroid) injections are an effective <a href=\"/treatments/non-surgical-treatments-for-pain-management\" class=\"text-blue-600 hover:underline\">non-surgical treatment</a> for reducing inflammation and alleviating spinal pain. Delivered directly into inflamed areas like the epidural space or facet joints under image guidance, they decrease swelling and nerve irritation from conditions like herniated discs or spinal stenosis. This targeted anti-inflammatory treatment provides significant <a href=\"/treatments/back-pain-treatment\" class=\"text-blue-600 hover:underline\">back pain relief</a> and can improve spinal mobility, often used as part of a comprehensive back care plan.",
   "conditions_treated": "Commonly used for inflammatory back and neck pain from Herniated discs (radiculopathy/sciatica), Spinal stenosis, Degenerative disc disease, <a href=\"/treatments/facet-ablation-rhizotomy-treatment\" class=\"text-blue-600 hover:underline\">Facet joint arthritis (spondylosis)</a>, or Sacroiliitis. It addresses nerve compression pain and joint inflammation, offering relief for acute or chronic spinal conditions and improving symptoms of lumbar or cervical spine disorders.",
   "procedure_info": "After consultation and review of imaging (MRI, X-rays), this is an outpatient procedure. The skin is numbed. Using fluoroscopy, a thin needle delivers corticosteroid and local anesthetic to the target (e.g., an <a href=\"/treatments/epidural-steroid-injection\" class=\"text-blue-600 hover:underline\">epidural space</a>, facet joint, SI joint). This precise spinal injection technique maximizes therapeutic benefit for pain conditions and minimizes discomfort during the interventional pain procedure, a common non-surgical back pain solution.",
-  "recovery_info": "Patients typically resume normal activities the next day. Temporary soreness is possible. Local anesthetic provides immediate, temporary relief. Corticosteroid effects begin in 24-72 hours, lasting weeks to months. This injection can aid participation in physical therapy for back pain and improve functional outcomes, allowing for better pain-free movement.",
+  "recovery_info": "Patients typically resume normal activities the next day. Temporary soreness is possible. Local anesthetic provides immediate, temporary relief. Corticosteroid effects begin in 24-72 hours, lasting weeks to months. This injection can aid participation in rehabilitation for back pain and improve functional outcomes, allowing for better pain-free movement.",
   "benefits": (
-  <ul><li>Provide effective and targeted reduction of spinal inflammation.</li><li>Offer significant relief from localized back pain and radiating pain like sciatica.</li><li>Can help break the cycle of pain and inflammation, facilitating physical therapy.</li><li>Is a minimally invasive outpatient procedure with relatively low risk.</li><li>May reduce reliance on oral pain medications and potentially avoid surgery.</li><li>Improves spinal comfort and overall function.</li></ul>
+  <ul><li>Provide effective and targeted reduction of spinal inflammation.</li><li>Offer significant relief from localized back pain and radiating pain like sciatica.</li><li>Can help break the cycle of pain and inflammation, facilitating rehabilitation.</li><li>Is a minimally invasive outpatient procedure with relatively low risk.</li><li>May reduce reliance on oral pain medications and potentially avoid surgery.</li><li>Improves spinal comfort and overall function.</li></ul>
 ),
   "why_choose_us": "Our pain management specialists are highly skilled in precise, image-guided spinal injections. Our practice uses advanced imaging techniques to identify the pain source and fluoroscopy for accurate medication delivery, ensuring effective and safe back pain treatment in FL, NJ, NY, & PA.",
   "schedule": "Back pain limiting your activity? Schedule your complimentary consultation today at Mountain Spine & Orthopedics to discuss cortisone injections.",
@@ -427,7 +409,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "For severe Degenerative Disc Disease (DDD) unresponsive to non-surgical care, surgery may be an option. Spinal fusion provides stability by joining vertebrae, while artificial disc replacement aims to preserve motion. Evaluation includes MRI and dynamic X-rays to plan the most effective surgical treatment for discogenic pain and nerve compression, potentially using minimally invasive spine surgery in FL, NJ, NY, & PA for improved spinal health and addressing issues of chronic discogenic back pain.",
   "conditions_treated": "Considered for persistent axial or radicular pain, neurological deficits from DDD, severe disc collapse, or spinal instability confirmed by imaging. Surgery aims to address the symptomatic disc level and improve overall spinal health when conservative treatments for disc degeneration and associated spinal pain fail, including cases of advanced intervertebral disc wear.",
   "procedure_info": "Spinal Fusion involves removing the damaged disc, inserting a graft/cage, and using hardware for vertebral stabilization. Artificial Disc Replacement replaces the disc with a mobile prosthesis. Minimally invasive approaches are often used for these advanced spine surgery techniques to reduce recovery time and enhance spinal segment restoration, offering solutions for severe disc pathology.",
-  "recovery_info": "Fusion recovery is longer (6-12 months for solid bone healing) with activity restrictions. Disc replacement often allows faster recovery and earlier motion. Physical therapy is often recommended for both to optimize functional outcome and restore spinal strength after surgery for advanced disc disease, focusing on long-term spinal function.",
+  "recovery_info": "Fusion recovery is longer (6-12 months for solid bone healing) with activity restrictions. Disc replacement often allows faster recovery and earlier motion. Rehabilitation is often recommended for both to optimize functional outcome and restore spinal strength after surgery for advanced disc disease, focusing on long-term spinal function.",
   "benefits": (
   <ul><li>Provides durable pain relief from discogenic sources and nerve compression.</li><li>Restores spinal stability through fusion or preserves natural spinal motion with disc replacement.</li><li>Leads to improved quality of life and functional capacity.</li><li>Addresses the underlying disc pathology and can improve overall spinal alignment.</li><li>Reduces reliance on chronic pain medication for symptomatic DDD.</li><li>Offers definitive treatment for advanced symptomatic degenerative disc disease.</li></ul>
 ),
@@ -445,7 +427,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "Endoscopic discectomy is a cutting-edge, minimally invasive surgery for symptomatic <a href=\"/conditions/herniated-disc\" class=\"text-blue-600 hover:underline\">herniated discs</a> compressing spinal nerves. Through a sub-centimeter incision, an endoscope (tiny camera) provides magnified visualization, allowing specialized micro-instruments to remove only the herniated disc portion. This technique for treating disc herniation minimizes muscle disruption, offering less pain and faster recovery than a traditional <a href=\"/treatments/lumbar-microdiscectomy-surgery\" class=\"text-blue-600 hover:underline\">minimally invasive</a> approach, representing a significant advancement in spinal care and a precise nerve root surgery.",
   "conditions_treated": "Effective for symptomatic cervical, thoracic, or lumbar disc herniations causing radiculopathy (radiating arm/leg pain like sciatica), numbness, or weakness, unresponsive to conservative treatments. It targets specific disc fragments causing nerve root compression and aims for rapid symptom resolution from discogenic nerve pain, including foraminal disc herniations.",
   "procedure_info": "After consultation and MRI review, this is an outpatient procedure, often under local anesthesia with sedation. Using fluoroscopic guidance, a tubular retractor creates a channel for the endoscope. Micro-instruments remove the herniated disc material, achieving precise spinal nerve decompression with minimal tissue trauma. This is a key ultra-minimally invasive disc procedure, offering an endoscopic approach to discectomy.",
-  "recovery_info": "Recovery is typically rapid. Patients often go home the same day. Radiating nerve pain relief is often quick. Physical therapy may be recommended. Full activities usually resume within 4-6 weeks. This ultra-minimally invasive spine surgery promotes swift healing and restoration of spinal comfort with less scarring.",
+  "recovery_info": "Recovery is typically rapid. Patients often go home the same day. Radiating nerve pain relief is often quick. Rehabilitation may be recommended. Full activities usually resume within 4-6 weeks. This ultra-minimally invasive spine surgery promotes swift healing and restoration of spinal comfort with less scarring.",
   "benefits": (
     <ul>
       <li>Provides effective and often rapid relief from radiating nerve pain (sciatica or arm pain).</li>
@@ -470,7 +452,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "Endoscopic foraminotomy is a state-of-the-art, minimally invasive spine surgery for <a href=\"/conditions/foraminal-stenosis\" class=\"text-blue-600 hover:underline\">foraminal stenosis</a> (narrowed nerve exit canal). An endoscope provides magnified visualization, allowing removal of bone spurs or disc material compressing the nerve root. This technique for <a href=\"/conditions/pinched-nerve\" class=\"text-blue-600 hover:underline\">treating pinched nerves</a> avoids significant muscle dissection, resulting in less pain and potentially faster recovery. It is an effective spinal decompression method for restoring nerve pathway integrity and relieving radicular pain.",
   "conditions_treated": "Primarily for symptomatic nerve root compression from foraminal stenosis (cervical, thoracic, or lumbar) due to degenerative disc disease, bone spurs, or disc herniation, causing radiculopathy unresponsive to conservative treatments. It addresses specific nerve pathway narrowing and relieves symptoms of nerve impingement, including foraminal nerve entrapment.",
   "procedure_info": "Following consultation and diagnostic imaging (MRI/CT), this is typically an outpatient procedure. A small incision allows insertion of an endoscope to the targeted foramen. Micro-instruments remove obstructing elements (bone spurs, ligament, disc fragments), enlarging the foramen and achieving direct nerve root decompression while preserving spinal stability. This is a precise endoscopic nerve release surgery, a key minimally invasive spine intervention.",
-  "recovery_info": "Recovery is generally rapid. Patients often go home the same day. Radiating pain relief is often quick. Physical therapy may be recommended. Full activities usually resume within 3-6 weeks. This minimally invasive spine surgery offers minimal disruption and promotes quick functional improvement with less post-operative discomfort.",
+  "recovery_info": "Recovery is generally rapid. Patients often go home the same day. Radiating pain relief is often quick. Rehabilitation may be recommended. Full activities usually resume within 3-6 weeks. This minimally invasive spine surgery offers minimal disruption and promotes quick functional improvement with less post-operative discomfort.",
   "benefits": (
     <ul>
       <li>Provides effective and often immediate relief from nerve root compression and associated radiating pain.</li>
@@ -495,7 +477,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "The anterior cruciate ligament (ACL) is crucial for knee stability. Tears, often from sports injuries, cause instability and functional limits. ACL reconstruction replaces the damaged ligament with a graft (patient's own or donor), anchored in the femur and tibia. This knee ligament surgery is vital for active individuals aiming to return to sports and prevent further joint damage, ensuring long-term knee health and addressing knee joint instability.",
   "conditions_treated": "Addresses Complete ACL rupture, Partial ACL tears causing significant instability, Complex multi-ligament knee injuries, Recurrent knee instability following a prior ACL tear, or when conservative treatments fail to restore adequate knee joint stability for desired activity levels. It focuses on restoring normal knee kinematics and preventing secondary knee injuries.",
   "procedure_info": "After consultation and MRI confirmation, ACL reconstruction is typically performed arthroscopically. Torn ligament remnants are removed, and tunnels drilled in femur and tibia. The graft is passed through and securely fixed. This arthroscopic knee surgery technique ensures precise graft placement for optimal ligament function restoration and a stable knee joint, a common sports medicine knee procedure.",
-  "recovery_info": "Recovery involves pain/swelling management and physical therapy. Gentle motion exercises start early, progressing to strength, balance, and sport-specific agility over 9-12 months. Diligent knee rehabilitation is essential for successful return to high-impact activities and preventing re-injury, focusing on restoring full knee function.",
+  "recovery_info": "Recovery involves pain/swelling management and rehabilitation. Gentle motion exercises start early, progressing to strength, balance, and sport-specific agility over 9-12 months. Diligent knee rehabilitation is essential for successful return to high-impact activities and preventing re-injury, focusing on restoring full knee function.",
   "benefits": (
   <ul><li>Restores knee stability, greatly reducing episodes of the knee 'giving way'.</li><li>Enables a safe return to pivoting sports and high-impact activities.</li><li>Helps prevent long-term joint damage, such as secondary meniscus tears or early osteoarthritis.</li><li>Improves overall knee function and confidence after an ACL injury.</li><li>Promotes an active lifestyle and protects knee joint health.</li><li>Reduces pain associated with knee instability.</li></ul>
 ),
@@ -513,9 +495,9 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "An Epidural Steroid Injection (ESI) treats back, leg, neck, or arm pain from inflamed spinal nerves. Conditions like <a href=\"/conditions/herniated-disc\" class=\"text-blue-600 hover:underline\">herniated discs</a> or spinal stenosis can compress nerves, causing radiating pain. ESIs deliver corticosteroid and local anesthetic into the epidural space under image guidance, targeting inflammation for pain relief. This is a common <a href=\"/treatments/non-surgical-treatments-for-pain-management\" class=\"text-blue-600 hover:underline\">non-surgical spine intervention</a> for managing acute or chronic nerve pain and improving spinal comfort.",
   "conditions_treated": "Manages inflammatory pain from Lumbar, thoracic, or cervical radiculopathy (disc herniation), Spinal stenosis, Degenerative disc disease with nerve irritation, Facet joint arthritis affecting nerves, or <a href=\"/conditions/sciatica\" class=\"text-blue-600 hover:underline\">Sciatica</a>. It addresses specific nerve root inflammation and provides relief from debilitating spinal nerve pain, a key treatment for radicular pain syndromes.",
   "procedure_info": "Following consultation and review of imaging (MRI), an ESI is an outpatient procedure. The skin is numbed. Using fluoroscopy, a thin needle is guided into the epidural space. Contrast dye confirms placement before corticosteroid/anesthetic is injected. This targeted spinal injection technique ensures medication reaches the inflamed nerves, offering effective pain modulation and reducing nerve swelling.",
-  "recovery_info": "Patients usually resume normal activities the next day. Temporary soreness is possible. Local anesthetic provides immediate, temporary relief. Corticosteroid effects begin in 24-72 hours, lasting weeks to months. This injection can facilitate effective physical therapy for spinal conditions and improve functional mobility, aiding in a quicker return to daily life.",
+  "recovery_info": "Patients usually resume normal activities the next day. Temporary soreness is possible. Local anesthetic provides immediate, temporary relief. Corticosteroid effects begin in 24-72 hours, lasting weeks to months. This injection can facilitate effective rehabilitation for spinal conditions and improve functional mobility, aiding in a quicker return to daily life.",
   "benefits": (
-  <ul><li>Provides effective and targeted reduction of inflammation in the epidural space.</li><li>Offers significant relief from radiating pain such as sciatica or radiculopathy.</li><li>Can help break the cycle of pain and inflammation, facilitating physical therapy.</li><li>Is a minimally invasive outpatient procedure with relatively low risk.</li><li>May reduce reliance on oral pain medications and potentially avoid surgery.</li><li>Improves functional mobility and overall comfort.</li></ul>
+  <ul><li>Provides effective and targeted reduction of inflammation in the epidural space.</li><li>Offers significant relief from radiating pain such as sciatica or radiculopathy.</li><li>Can help break the cycle of pain and inflammation, facilitating rehabilitation.</li><li>Is a minimally invasive outpatient procedure with relatively low risk.</li><li>May reduce reliance on oral pain medications and potentially avoid surgery.</li><li>Improves functional mobility and overall comfort.</li></ul>
 ),
   "why_choose_us": "Our pain management specialists are highly skilled in precise, image-guided ESIs. Our center uses advanced imaging techniques for diagnosis and fluoroscopy for accurate needle placement, maximizing effective pain relief and safety for your spinal condition in FL, NJ, NY, & PA.",
   "schedule": "Back or neck pain radiating into your limbs? Schedule your complimentary consultation today at Mountain Spine & Orthopedics.",
@@ -531,7 +513,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "Extreme Lateral Interbody Fusion (XLIF/DLIF) is a minimally invasive technique for <a href=\"/treatments/lumbar-fusion-surgery\" class=\"text-blue-600 hover:underline\">lumbar spinal fusion</a>. Accessed from the patient's side, it avoids major back muscle disruption. The damaged disc is removed, and a large interbody cage with bone graft inserted, restoring disc height and correcting alignment for conditions like <a href=\"/conditions/adult-degenerative-scoliosis\" class=\"text-blue-600 hover:underline\">degenerative scoliosis</a>. This lateral spine surgery approach can mean faster recovery and improved spinal stability, offering a solution for complex lumbar spine disorders.",
   "conditions_treated": "Effective for Lumbar degenerative disc disease (L1-L5), Spondylolisthesis, Adult degenerative scoliosis requiring spinal curvature correction, Recurrent disc herniations with instability, or Foraminal stenosis from disc collapse. It addresses chronic back pain and nerve compression, improving overall spinal biomechanics and providing significant spinal support.",
   "procedure_info": "After consultation and diagnostic imaging (MRI, CT, X-rays), XLIF is performed under general anesthesia, with the patient on their side. A flank incision allows access. Using nerve monitoring and fluoroscopy, dilators create a channel to the disc. The disc is removed, and a large FDA-approved cage with bone graft inserted. Supplemental posterior fixation is usually added for robust lumbar spine stabilization and successful vertebral fusion. This is an advanced technique for lateral lumbar interbody fusion.",
-  "recovery_info": "Recovery is generally faster than traditional open fusion. Hospital stay 1-3 days. A lumbar brace may be used. Physical therapy begins early. Full bone fusion takes 6-12+ months. Temporary thigh numbness can occur but usually resolves. This minimally invasive spine surgery aids quicker functional return and pain reduction, improving quality of life.",
+  "recovery_info": "Recovery is generally faster than traditional open fusion. Hospital stay 1-3 days. A lumbar brace may be used. Rehabilitation begins early. Full bone fusion takes 6-12+ months. Temporary thigh numbness can occur but usually resolves. This minimally invasive spine surgery aids quicker functional return and pain reduction, improving quality of life.",
   "benefits": (
     <ul>
       <li>Provides effective relief from chronic back and leg pain by decompressing nerves and stabilizing segments.</li>
@@ -556,7 +538,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "Facet joints can develop <a href=\"/conditions/facet-joint-disease\" class=\"text-blue-600 hover:underline\">facet joint osteoarthritis</a>, leading to chronic neck or back pain. Facet ablation (radiofrequency ablation/RFA or medial branch rhizotomy) treats this pain. After a <a href=\"/treatments/facet-block-ablation-rhizotomy-and-facet-fusion\" class=\"text-blue-600 hover:underline\">diagnostic medial branch block</a> confirms the facet joints as the source, RFA uses heat to lesion small nerves (medial branches) carrying pain signals from these joints. This targeted nerve treatment provides extended pain relief and improves spinal comfort, a key <a href=\"/treatments/non-surgical-treatments-for-pain-management\" class=\"text-blue-600 hover:underline\">non-surgical back pain solution</a>.",
   "conditions_treated": "For chronic facet joint osteoarthritis (spondylosis) in cervical, thoracic, or lumbar spine, Chronic mechanical back or neck pain confirmed by diagnostic blocks, or Pain from degenerative facet joints without significant instability. It addresses localized spinal joint pain and facet joint syndrome, offering relief from persistent facet mediated pain.",
   "procedure_info": "Following consultation and successful diagnostic blocks, this is an outpatient procedure under fluoroscopic guidance. RFA cannulas are placed near medial branch nerves. After nerve testing, radiofrequency energy creates a heat lesion, deactivating pain-transmitting nerves. This precise nerve ablation technique targets facet joint pain, offering a non-surgical solution for facet mediated pain and improving spinal joint function.",
-  "recovery_info": "Resume light activities in 24-48 hours. Temporary soreness is common. Pain relief can take days to weeks, lasting 6-12+ months. The procedure can be repeated. Physical therapy is often recommended after this minimally invasive pain procedure to improve function and maintain spinal mobility, aiding in long-term pain control.",
+  "recovery_info": "Resume light activities in 24-48 hours. Temporary soreness is common. Pain relief can take days to weeks, lasting 6-12+ months. The procedure can be repeated. Rehabilitation is often recommended after this minimally invasive pain procedure to improve function and maintain spinal mobility, aiding in long-term pain control.",
   "benefits": (
   <ul><li>Offers significant and often long-lasting relief from chronic facet joint pain.</li><li>Is a minimally invasive outpatient procedure with low risk and minimal downtime.</li><li>Provides targeted pain relief by deactivating specific pain-transmitting nerves.</li><li>Can lead to a substantial reduction in the need for oral pain medications.</li><li>Improves spinal mobility and function by alleviating restrictive pain.</li><li>Can be safely repeated if facet joint pain recurs.</li></ul>
 ),
@@ -574,7 +556,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "Facet joints can cause chronic neck/back pain due to osteoarthritis. We offer a stepped approach: 1. Facet Blocks: Image-guided injections (anesthetic/corticosteroid) for diagnosis and temporary relief. 2. Facet Ablation (Rhizotomy): If blocks help, radiofrequency ablation deactivates nerves for longer pain relief. 3. Facet Fusion: Surgical stabilization for severe degeneration or instability unresponsive to less invasive facet joint syndrome treatments, providing definitive spinal segment support. This addresses the full spectrum of facet joint pathology.",
   "conditions_treated": "For chronic neck/back pain from Facet joint osteoarthritis (spondylosis), Mechanical pain confirmed by diagnostic injections, or Instability from significant degenerative facet changes. It addresses localized spinal pain and stiffness, sometimes requiring surgical facet stabilization to improve spinal alignment and reduce pain from arthritic facet joints.",
   "procedure_info": "Consultation and imaging (X-ray, MRI) guide treatment. Facet Block: Outpatient, fluoroscopy-guided injection. Ablation: Outpatient, fluoroscopy-guided nerve deactivation with RF. Fusion: Surgical procedure (minimally invasive or open) involving bone graft and possibly FDA-approved instrumentation to fuse affected facet joints, eliminating painful motion and providing spinal support. This addresses advanced facet joint disease and provides long-term facet joint stabilization.",
-  "recovery_info": "Blocks/Ablation: Minimal downtime, relief in days/weeks. Fusion: More involved recovery (months), physical therapy. The goal is pain reduction and improved spinal function. This spectrum of care addresses varying severities of facet-mediated pain and enhances overall spinal health, promoting return to pain-free spinal movement.",
+  "recovery_info": "Blocks/Ablation: Minimal downtime, relief in days/weeks. Fusion: More involved recovery (months), rehabilitation. The goal is pain reduction and improved spinal function. This spectrum of care addresses varying severities of facet-mediated pain and enhances overall spinal health, promoting return to pain-free spinal movement.",
   "benefits": (
   <ul><li>Facet Blocks provide diagnostic clarity and temporary pain relief from inflammation.</li><li>Facet Ablation (Rhizotomy) offers potentially long-lasting pain relief by deactivating specific nerves.</li><li>Facet Fusion provides lasting pain elimination and spinal stabilization for advanced degeneration.</li><li>Improves spinal mobility and function by addressing the source of facet pain.</li><li>Reduces reliance on chronic pain medication.</li><li>Offers a tailored approach from non-surgical to surgical facet joint care.</li></ul>
 ),
@@ -592,9 +574,9 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "Fracture fixation is orthopedic surgery for broken bones needing internal/external stabilization for correct healing, typically for displaced, unstable, or joint-involved fractures. It surgically realigns fragments (reduction) and holds them with implants (plates, screws, rods). This surgical fracture management promotes optimal bone healing and early movement, restoring bone strength and mobility, crucial for complex bone injuries and achieving anatomical bone reconstruction.",
   "conditions_treated": "For Displaced or unstable fractures, Fractures involving major joints (ankle, wrist, hip, knee), Open (compound) fractures, Comminuted fractures (multiple fragments), Long bone fractures (femur, tibia), Non-unions (failed healing) or malunions (incorrect healing). It addresses complex bone injuries and facilitates proper bone union, a key aspect of orthopedic trauma surgery.",
   "procedure_info": "After consultation and diagnostic imaging (X-rays, CT scans), the surgery is performed under anesthesia. Bone fragments are realigned. Internal fixation devices (plates, screws, intramedullary nails) are implanted. External fixation uses an outside frame. This orthopedic trauma surgery ensures stable bone alignment during the healing process, often involving advanced fracture care techniques and surgical hardware for bone stabilization.",
-  "recovery_info": "Involves pain management and immobilization (cast/splint). Weight-bearing restrictions vary. Physical therapy is critical for restoring motion and strength as bone healing progresses (monitored by X-rays). Full recovery from this type of bone surgery and restoration of limb function takes several months, focusing on regaining pre-injury activity levels.",
+  "recovery_info": "Involves pain management and immobilization (cast/splint). Weight-bearing restrictions vary. Rehabilitation is critical for restoring motion and strength as bone healing progresses (monitored by X-rays). Full recovery from this type of bone surgery and restoration of limb function takes several months, focusing on regaining pre-injury activity levels.",
   "benefits": (
-  <ul><li>Restores proper bone alignment, length, and rotation, essential for normal function.</li><li>Provides immediate stability to the fracture site, significantly reducing pain.</li><li>Promotes more predictable and often faster bone healing.</li><li>Facilitates earlier initiation of physical therapy and mobility of surrounding joints.</li><li>Reduces the risk of delayed or improper bone healing (non-union or malunion).</li><li>Enables earlier return to weight-bearing and functional activities.</li></ul>
+  <ul><li>Restores proper bone alignment, length, and rotation, essential for normal function.</li><li>Provides immediate stability to the fracture site, significantly reducing pain.</li><li>Promotes more predictable and often faster bone healing.</li><li>Facilitates earlier initiation of rehabilitation and mobility of surrounding joints.</li><li>Reduces the risk of delayed or improper bone healing (non-union or malunion).</li><li>Enables earlier return to weight-bearing and functional activities.</li></ul>
 ),
   "why_choose_us": "Our orthopedic trauma surgeons are highly specialized in managing a wide range of fractures with advanced fixation techniques. Our center uses advanced imaging techniques for precise evaluation, tailoring surgical approaches for optimal bone healing and functional restoration in FL, NJ, NY, & PA.",
   "schedule": "Sustained a fracture needing surgical stabilization or experiencing complications? Schedule your complimentary consultation today at Mountain Spine & Orthopedics.",
@@ -627,8 +609,8 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "body": "Neck and shoulder pain can impact mobility and quality of life. We offer comprehensive, minimally invasive treatments for lasting relief. Explore treatment options.",
   "detail": "Neck and shoulder pain often co-exist due to anatomical links. Causes include muscle strains, cervical spine issues (disc herniation, radiculopathy), or shoulder pathologies (rotator cuff tears, impingement). Accurate diagnosis via exams and imaging (MRI, X-rays) is key. Our multidisciplinary care plan addresses the specific source of cervicobrachial pain for effective relief and improved musculoskeletal function, often involving non-surgical shoulder pain solutions or advanced neck care.",
   "conditions_treated": "We treat Cervical disc herniation/DDD causing neck/arm pain (radiculopathy), Cervical spinal stenosis, Arthritis (cervical spine/shoulder), Shoulder impingement, Rotator cuff tears/tendonitis, Bursitis, Labral tears, and Frozen shoulder. We address interconnected neck and shoulder conditions, providing comprehensive upper body pain solutions and treating conditions like cervicalgia and shoulder joint dysfunction.",
-  "procedure_info": "Consultation includes physical exam and review of imaging. Non-surgical options: Physical therapy (posture, strengthening), anti-inflammatories, image-guided injections (cervical epidural/facet, shoulder joint/bursa). Surgical options: Minimally invasive cervical spine surgery (discectomy, foraminotomy), or arthroscopic shoulder surgery (rotator cuff repair, labral repair) for structural neck or shoulder problems, aiming for optimal pain reduction and mobility restoration. This includes options for cervical nerve decompression and shoulder joint repair.",
-  "recovery_info": "Varies by condition and treatment. Non-surgical options offer gradual improvement. Minimally invasive spine or shoulder surgery generally allows faster recovery than open procedures. Physical therapy is often recommended for restoring motion, strength, and achieving optimal functional recovery from neck and shoulder disorders and improving overall upper extremity health. The goal is a return to pain-free daily activities.",
+  "procedure_info": "Consultation includes physical exam and review of imaging. Non-surgical options: Rehabilitation (posture, strengthening), anti-inflammatories, image-guided injections (cervical epidural/facet, shoulder joint/bursa). Surgical options: Minimally invasive cervical spine surgery (discectomy, foraminotomy), or arthroscopic shoulder surgery (rotator cuff repair, labral repair) for structural neck or shoulder problems, aiming for optimal pain reduction and mobility restoration. This includes options for cervical nerve decompression and shoulder joint repair.",
+  "recovery_info": "Varies by condition and treatment. Non-surgical options offer gradual improvement. Minimally invasive spine or shoulder surgery generally allows faster recovery than open procedures. Rehabilitation is often recommended for restoring motion, strength, and achieving optimal functional recovery from neck and shoulder disorders and improving overall upper extremity health. The goal is a return to pain-free daily activities.",
   "benefits": (
   <ul><li>Provides significant reduction of chronic neck and shoulder pain.</li><li>Relieves radiating arm pain and neurological symptoms caused by nerve compression.</li><li>Improves range of motion, flexibility, and strength in the neck and shoulder.</li><li>Corrects underlying structural issues such as disc herniations or rotator cuff tears.</li><li>Enhances posture and overall musculoskeletal function.</li><li>Allows for a return to daily activities with greater comfort.</li></ul>
 ),
@@ -643,17 +625,17 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "card_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--non-surgical-treatments-for-pain-management--thumbnail.png',
   "inTxt_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--non-surgical-treatments-for-pain-management--thumbnail.png',
   "body": "Non-surgical pain management offers effective relief for joint, spine, and nerve discomfort without invasive procedures, focusing on quality of life. Relieve symptoms.",
-  "detail": "Chronic or acute musculoskeletal and nerve pain can impair daily life. Non-surgical pain management uses treatments like physical therapy referrals, medications, image-guided injections (corticosteroid, PRP), bracing, and lifestyle changes to reduce pain, decrease inflammation, and improve function. Our approach is rooted in accurate diagnosis and personalized care for conditions like arthritis or disc pathology, aiming for long-term wellness and providing alternatives to surgery. This includes comprehensive conservative pain therapy.",
+  "detail": "Chronic or acute musculoskeletal and nerve pain can impair daily life. Non-surgical pain management uses treatments like outside rehabilitation guidance, medications, image-guided injections (corticosteroid, PRP), bracing, and lifestyle changes to reduce pain, decrease inflammation, and improve function. Our approach is rooted in accurate diagnosis and personalized care for conditions like arthritis or disc pathology, aiming for long-term wellness and providing alternatives to surgery. This includes comprehensive conservative pain therapy.",
   "conditions_treated": "Suitable for Osteoarthritis, Rheumatoid arthritis, Degenerative disc disease, Herniated discs (mild-moderate), Spinal stenosis, Tendinopathies, Bursitis, Pinched nerves (carpal tunnel), Sciatica, <a href=\"/treatments/facet-ablation-rhizotomy-treatment\" class=\"text-blue-600 hover:underline\">Facet joint pain</a>, and Sacroiliac joint dysfunction. It's a first-line approach for many musculoskeletal pain conditions, offering conservative pain solutions and management of chronic joint inflammation.",
-  "procedure_info": "After a thorough consultation and diagnostic assessment (which may include imaging like X-ray or MRI), treatment involves Physical therapy referrals (exercises, manual therapy), Anti-inflammatory medications, <a href=\"/treatments/cortisone-injections-for-back-pain\" class=\"text-blue-600 hover:underline\">Corticosteroid injections</a> (image-guided to joints, epidural space), <a href=\"/treatments/stem-cell-treatment\" class=\"text-blue-600 hover:underline\">Regenerative medicine (PRP injections)</a>, Bracing/orthotics, and Lifestyle modifications. These non-operative pain solutions are tailored to individual needs, focusing on interventional pain relief and rehabilitation, including options like therapeutic nerve blocks.",
-  "recovery_info": "A progressive journey to reduced pain and improved function. Injections can offer rapid relief, facilitating physical therapy. Consistent adherence to the plan is key for lasting results. The goal is regaining comfort and mobility for chronic pain sufferers without surgery, enhancing overall physical well-being and promoting functional restoration.",
+  "procedure_info": "After a thorough consultation and diagnostic assessment (which may include imaging like X-ray or MRI), treatment involves Outside rehabilitation guidance (exercises, manual therapy), Anti-inflammatory medications, <a href=\"/treatments/cortisone-injections-for-back-pain\" class=\"text-blue-600 hover:underline\">Corticosteroid injections</a> (image-guided to joints, epidural space), <a href=\"/treatments/stem-cell-treatment\" class=\"text-blue-600 hover:underline\">Regenerative medicine (PRP injections)</a>, Bracing/orthotics, and Lifestyle modifications. These non-operative pain solutions are tailored to individual needs, focusing on interventional pain relief and rehabilitation, including options like therapeutic nerve blocks.",
+  "recovery_info": "A progressive journey to reduced pain and improved function. Injections can offer rapid relief, facilitating rehabilitation. Consistent adherence to the plan is key for lasting results. The goal is regaining comfort and mobility for chronic pain sufferers without surgery, enhancing overall physical well-being and promoting functional restoration.",
   "benefits": (
   <ul><li>Offers effective pain and inflammation reduction without the risks of surgery.</li><li>Improves mobility, flexibility, and overall physical function.</li><li>Reduces reliance on oral pain medications, including opioids.</li><li>Provides targeted relief for specific pain generators through procedures like image-guided injections.</li><li>Can delay or potentially prevent the need for more invasive surgical interventions.</li><li>Empowers patients with strategies for self-management and long-term wellness.</li></ul>
 ),
   "why_choose_us": "We are dedicated to comprehensive, effective non-surgical pain management. Our practice uses detailed assessments and advanced imaging techniques to identify pain contributors, offering precise image-guided injections and personalized, evidence-based care plans for lasting relief in FL, NJ, NY, & PA.",
   "schedule": "Looking for effective, non-surgical pain relief? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   "slug": "non-surgical-treatments-for-pain-management",
-  "keywords": ["Non-surgical pain management", "FL, NJ, NY, & PA pain relief clinic", "orthopedic non-operative care", "joint pain injections", "spine physical therapy", "PRP for pain", "arthritis conservative treatment", "interventional pain medicine"]
+  "keywords": ["Non-surgical pain management", "FL, NJ, NY, & PA pain relief clinic", "orthopedic non-operative care", "joint pain injections", "spine rehabilitation", "PRP for pain", "arthritis conservative treatment", "interventional pain medicine"]
 },
 {
   "title": "Oblique Lumbar Interbody Fusion",
@@ -664,7 +646,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "Oblique Lumbar Interbody Fusion (OLIF) is a minimally invasive technique for <a href=\"/treatments/lumbar-fusion-surgery\" class=\"text-blue-600 hover:underline\">lumbar spinal fusion</a> (L2-L5). Accessed from the side via an oblique corridor (between major vessels and psoas muscle), it allows direct disc space access with potentially less psoas muscle disruption than direct lateral approaches. The damaged disc is removed, and a large interbody cage with bone graft inserted for disc height restoration and achieving vertebral fusion for spinal stability. This is an advanced approach to lumbar interbody arthrodesis.",
   "conditions_treated": "Effective for <a href=\"/conditions/degenerative-disc-disease\" class=\"text-blue-600 hover:underline\">Lumbar degenerative disc disease</a> (L2-L5), Spondylolisthesis, Spinal stenosis from disc collapse, or Adult degenerative scoliosis requiring spinal curvature correction and stabilization. It addresses chronic low back pain and radiculopathy unresponsive to conservative care, improving lumbar spine alignment and reducing symptoms of lumbar spine instability.",
   "procedure_info": "Following consultation and diagnostic imaging (MRI, CT, X-rays), OLIF is performed under general anesthesia, with the patient on their side. A small oblique flank incision allows access to the disc. The disc is removed, endplates prepared, and a large FDA-approved interbody cage with bone graft inserted to restore alignment and facilitate lumbar spine fusion. Supplemental posterior fixation is usually added for stability, completing this advanced interbody fusion technique, a key procedure for lumbar spine reconstruction.",
-  "recovery_info": "Generally faster recovery than open fusion. Hospital stay 2-4 days. A lumbar brace may be used. Physical therapy begins early. Full bone fusion takes 6-12+ months. This minimally invasive spine surgery aims for quicker leg strength recovery and restoration of spinal function, promoting better spinal biomechanics.",
+  "recovery_info": "Generally faster recovery than open fusion. Hospital stay 2-4 days. A lumbar brace may be used. Rehabilitation begins early. Full bone fusion takes 6-12+ months. This minimally invasive spine surgery aims for quicker leg strength recovery and restoration of spinal function, promoting better spinal biomechanics.",
   "benefits": (
   <ul><li>Provides effective relief from chronic low back and leg pain by decompressing nerves and stabilizing the spine.</li><li>Is a minimally invasive approach, potentially leading to less post-operative pain and faster initial recovery.</li><li>Allows insertion of a large interbody cage for excellent disc height restoration and spinal alignment correction.</li><li>May offer reduced risk of injury to lumbar plexus nerves compared to direct lateral approaches at certain levels.</li><li>Achieves high success rates for solid spinal fusion when combined with posterior fixation.</li><li>Supports improved functional mobility and reduces disability.</li></ul>
 ),
@@ -700,7 +682,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "Shoulder arthroscopy uses an arthroscope (small camera) and specialized instruments through tiny incisions to treat problems inside and around the shoulder joint, such as torn rotator cuffs or labral tears. This <a href=\"/treatments/surgical-treatments\" class=\"text-blue-600 hover:underline\">minimally invasive shoulder surgery</a> technique reduces tissue trauma, leading to less pain and faster recovery than open surgery. It addresses chronic shoulder pain, stiffness, or instability, improving overall shoulder joint health and function.",
   "conditions_treated": "Used for Rotator cuff tears (repair or debridement), Labral injuries (SLAP tears, Bankart lesions), Shoulder instability, Frozen shoulder (adhesive capsulitis release), Biceps tendon injuries, Removal of loose bodies, or Synovitis. It's a versatile procedure for various shoulder joint disorders and improving shoulder mechanics, including treatment for <a href=\"/treatments/neck-pain-treatment-and-shoulder-pain-relief\" class=\"text-blue-600 hover:underline\">shoulder impingement syndrome</a>.",
   "procedure_info": "Following consultation and diagnostic imaging (MRI), this is typically an outpatient procedure. Small portals are made, sterile fluid expands the joint. The arthroscope visualizes, and instruments perform repairs (such as <a href=\"/treatments/rotator-cuff-repair-surgery\" class=\"text-blue-600 hover:underline\">rotator cuff repair</a> or labrum repair with anchors) or debridement. This is a precise method for treating shoulder joint pathology, including shoulder impingement syndrome solutions and arthroscopic subacromial decompression.",
-  "recovery_info": "Recovery varies by procedure. A sling is used for protection. Physical therapy is often recommended, progressing from passive motion to strengthening. Full recovery can take 3-6+ months for complex repairs. This shoulder surgery aims for functional restoration and return to overhead activities, focusing on shoulder joint rehabilitation.",
+  "recovery_info": "Recovery varies by procedure. A sling is used for protection. Rehabilitation is often recommended, progressing from passive motion to strengthening. Full recovery can take 3-6+ months for complex repairs. This shoulder surgery aims for functional restoration and return to overhead activities, focusing on shoulder joint rehabilitation.",
   "benefits": (
     <ul>
       <li>Provides effective diagnosis and treatment for a wide range of shoulder joint issues.</li>
@@ -728,7 +710,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "Stem cells, often harvested from the patient's bone marrow or adipose tissue, are concentrated and injected into damaged areas like arthritic joints or torn tendons. They release growth factors, reduce inflammation, and stimulate the body's regenerative capacity. This regenerative orthopedics approach aims to repair damaged tissues, reduce chronic pain, and improve function without surgery, promoting natural tissue healing and offering a biological joint repair solution for musculoskeletal conditions.",
   "conditions_treated": "Utilized for Osteoarthritis (knees, hips, shoulders, spine), Chronic tendon injuries (tendinopathies like Achilles or rotator cuff tendonitis), Ligamentous injuries or sprains, Degenerative disc disease (without major instability), or Soft tissue tears. It's a non-surgical option for joint tissue regeneration and treating chronic musculoskeletal pain, including early joint degeneration.",
   "procedure_info": "After consultation and diagnostic evaluation (possibly MRI or ultrasound), this is an outpatient procedure. Stem cells are harvested (bone marrow or fat), processed to concentrate mesenchymal stem cells, then injected under image guidance (ultrasound/fluoroscopy) into the site of injury. This precise delivery of regenerative cells maximizes therapeutic potential for conditions like chronic tendinopathy or early arthritis, a key aspect of orthobiologic treatment.",
-  "recovery_info": "Limit activity initially. Mild discomfort is managed with OTC pain relievers. Gradual pain reduction and functional improvement occur over weeks/months as tissues regenerate. Physical therapy is often recommended to optimize outcomes from this biological joint repair therapy and enhance tissue remodeling, supporting long-term joint health.",
+  "recovery_info": "Limit activity initially. Mild discomfort is managed with OTC pain relievers. Gradual pain reduction and functional improvement occur over weeks/months as tissues regenerate. Rehabilitation is often recommended to optimize outcomes from this biological joint repair therapy and enhance tissue remodeling, supporting long-term joint health.",
   "benefits": (
   <ul><li>Stimulates the body's natural healing and regenerative processes in damaged tissues.</li><li>Reduces pain and inflammation associated with arthritis, tendon injuries, and degeneration.</li><li>Improves joint function, mobility, and stability.</li><li>May help repair damaged cartilage, tendons, or ligaments.</li><li>Offers a non-surgical or minimally invasive alternative for certain orthopedic conditions.</li><li>Can potentially delay or avoid the need for more invasive surgical interventions.</li></ul>
 ),
@@ -746,7 +728,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "When non-surgical treatments fail to relieve chronic pain or restore function for spine or joint conditions, surgical intervention may be necessary. We perform a wide range of advanced procedures, from complex reconstructive surgeries for severe joint damage or spinal deformities to minimally invasive surgical (MIS) techniques. MIS can lead to less pain, shorter hospital stays, and faster recovery, addressing issues like herniated discs or joint deterioration effectively and improving overall musculoskeletal health. This includes specialized orthopedic interventions.",
   "conditions_treated": "Indicated for Herniated discs causing severe nerve compression, Spinal stenosis, Spondylolisthesis, Scoliosis, Severe degenerative disc disease, Advanced joint arthritis (knee, hip, shoulder), Labral tears, Rotator cuff tears, or Complex fractures requiring surgical stabilization and joint function restoration. We offer solutions for a wide array of orthopedic problems, including those requiring joint reconstruction surgery.",
   "procedure_info": "The journey begins with a thorough consultation, including review of medical history and advanced imaging (MRI, CT scans). Spinal Surgery options include Fusion (ALIF, PLIF, TLIF, XLIF), Artificial Disc Replacement, Laminectomy, Microdiscectomy, and Endoscopic Spine Surgery. Joint Surgery options include Total/Partial Replacement (hip, knee, shoulder), Arthroscopy (knee, hip, shoulder), and Fracture Fixation. Many are performed with minimally invasive surgery techniques for enhanced precision and improved patient recovery times, representing advanced orthopedic surgical care.",
-  "recovery_info": "Recovery varies by procedure. Minimally invasive options often mean shorter hospital stays and faster initial recovery. Pain management and physical therapy are crucial. Full recovery can take weeks to months, aiming for restoration of mobility and strength after orthopedic intervention and a return to an active lifestyle, guided by expert orthopedic rehabilitation.",
+  "recovery_info": "Recovery varies by procedure. Minimally invasive options often mean shorter hospital stays and faster initial recovery. Pain management and rehabilitation are crucial. Full recovery can take weeks to months, aiming for restoration of mobility and strength after orthopedic intervention and a return to an active lifestyle, guided by expert orthopedic rehabilitation.",
   "benefits": (
   <ul><li>Provide significant and often long-lasting relief from debilitating pain.</li><li>Correct structural issues such as spinal instability or severe joint damage.</li><li>Offer effective nerve decompression for radiating pain and neurological deficits.</li><li>Restore function, mobility, and stability to affected joints or spinal segments.</li><li>Improve overall quality of life by addressing the root cause of musculoskeletal conditions.</li><li>Utilize advanced surgical solutions for complex orthopedic problems.</li></ul>
 ),
@@ -789,7 +771,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
 "detail": "<p>The ankle joint endures forces up to five times your body weight during walking. Over time, previous injuries (fractures, sprains), inflammatory diseases like rheumatoid arthritis, or degenerative osteoarthritis can erode the protective cartilage, leading to painful <a href=\"/conditions/ankle-arthritis\" class=\"text-blue-600 hover:underline\">ankle arthritis</a> with bone-on-bone grinding, swelling, and debilitating stiffness.</p><p>According to the <a href=\"https://orthoinfo.aaos.org/en/treatment/ankle-replacement-total-ankle-arthroplasty/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">American Academy of Orthopaedic Surgeons</a>, total ankle replacement is an effective alternative to ankle fusion for end-stage arthritis, preserving motion while relieving pain. At Mountain Spine & Orthopedics, our fellowship-trained specialists use weight-bearing CT scans for precise 3D surgical planning, ensuring optimal implant positioning and longevity.</p>",
 "conditions_treated": "<ul><li><strong>End-stage <a href=\"/conditions/ankle-arthritis\" class=\"text-blue-600 hover:underline\">ankle arthritis</a></strong> unresponsive to conservative treatment</li><li><strong>Osteoarthritis</strong> (degenerative joint disease) of the ankle</li><li><strong>Post-traumatic arthritis</strong> from previous ankle fractures or ligament injuries</li><li><strong>Rheumatoid arthritis</strong> or other inflammatory conditions</li><li><strong>Avascular necrosis</strong> of the talus</li><li>Failed previous ankle surgeries with arthritis</li><li>Severe <a href=\"/conditions/ankle-pain\" class=\"text-blue-600 hover:underline\">ankle pain</a> with standing, walking, or climbing stairs</li><li>Significant stiffness with reduced range of motion</li></ul>",
 "procedure_info": "Total ankle arthroplasty (ankle replacement) is a sophisticated surgical procedure performed by a specialized orthopedic foot and ankle surgeon. The primary goal is to remove the damaged cartilage and bone surfaces of the ankle joint and replace them with artificial components. The procedure is typically performed under general anesthesia or a regional nerve block. An incision is made at the front or side of theankle to access the joint. The surgeon then carefully removes the damaged ends of the tibia and talus. Using precise instruments and often computer-assisted navigation or patient-specific instrumentation (based on pre-operative CT scans), the bone surfaces are prepared to accept the prosthetic components. The artificial joint typically consists of two metal components that resurface the ends of the tibia and talus, and a medical-grade plastic (polyethylene) spacer that fits between them, allowing for smooth movement. These components are designed to mimic the natural motion of the ankle. The components may be press-fit into the bone for biological ingrowth or secured using bone cement. After ensuring proper alignment and stability of the implant, the incision is closed with sutures or staples, and a sterile dressing and a splint or cast are applied to protect the ankle during initial healing. The surgery generally takes a few hours, and patients may require a short hospital stay.",
-"recovery_info": "Recovery after ankle replacement surgery is a gradual process that requires patience and adherence to the surgeon's rehabilitation protocol. Immediately after surgery, the ankle will be immobilized in a splint or cast to protect the new joint and allow for initial healing. Pain management will be a priority, often involving a combination of medications. Weight-bearing restrictions will be in place for several weeks (typically 6 weeks or more), meaning you will likely use crutches or a walker. Physical therapy is a crucial component of recovery, usually starting a few weeks after surgery once initial healing has occurred. Therapy will focus on gradually restoring range of motion, strength, balance, and normal gait mechanics. Swelling is common and can persist for several months; elevation and ice will be recommended. Full recovery, including a return to most daily activities and low-impact recreational pursuits, can take anywhere from 6 months to a year. High-impact activities like running or jumping are generally discouraged to preserve the longevity of the implant. Regular follow-up appointments with your surgeon will be necessary to monitor progress and the condition of the implant.",
+"recovery_info": "Recovery after ankle replacement surgery is a gradual process that requires patience and adherence to the surgeon's rehabilitation protocol. Immediately after surgery, the ankle will be immobilized in a splint or cast to protect the new joint and allow for initial healing. Pain management will be a priority, often involving a combination of medications. Weight-bearing restrictions will be in place for several weeks (typically 6 weeks or more), meaning you will likely use crutches or a walker. Rehabilitation is a crucial component of recovery, usually starting a few weeks after surgery once initial healing has occurred. Therapy will focus on gradually restoring range of motion, strength, balance, and normal gait mechanics. Swelling is common and can persist for several months; elevation and ice will be recommended. Full recovery, including a return to most daily activities and low-impact recreational pursuits, can take anywhere from 6 months to a year. High-impact activities like running or jumping are generally discouraged to preserve the longevity of the implant. Regular follow-up appointments with your surgeon will be necessary to monitor progress and the condition of the implant.",
 "benefits": "The primary benefits of successful ankle replacement surgery include: Significant reduction or elimination of chronic ankle pain caused by arthritis. Improved range of motion in the ankle compared to pre-surgery or ankle fusion. Restoration of a more natural walking pattern (gait). Increased ability to perform daily activities and participate in low-impact recreational activities with greater comfort. Improved overall quality of life due to reduced pain and increased mobility. Preservation of motion, which is a key advantage over ankle fusion (arthrodesis) for many patients. Long-term solution for end-stage ankle arthritis, with modern implants showing good durability.",
 "why_choose_us": "Choosing Mountain Spine & Orthopedics for your ankle replacement means entrusting your care to fellowship-trained foot and ankle specialists with extensive experience in total ankle arthroplasty. We are committed to a patient-centered approach, utilizing the most advanced diagnostic tools, including high-resolution weight-bearing CT scans for meticulous pre-operative planning. Our surgeons employ cutting-edge, computer-guided alignment technology and precision-engineered prostheses to personalize each surgery, aiming for optimal implant positioning, lasting comfort, and restored mobility. We offer a comprehensive diagnostic process, which includes a thorough medical history review, detailed physical examination to assess your ankle's condition, stability, and range of motion, and advanced imaging to understand the precise nature of your joint damage. If non-surgical treatments have failed to provide relief from debilitating ankle arthritis, we will discuss whether ankle replacement is the most suitable option to help you regain an active, pain-free lifestyle. Our commitment extends to providing comprehensive post-operative care and rehabilitation guidance.",
 "schedule": "If chronic ankle pain and stiffness are severely impacting your daily activities and quality of life, and conservative treatments have not provided adequate relief, it may be time to consider ankle replacement. Schedule a consultation with the foot and ankle specialists at Mountain Spine & Orthopedics today. We offer services such as complimentary MRI reviews if indicated, free second opinions to ensure you are confident in your treatment path, telehealth consultations for convenience, and door-to-door transportation services to facilitate your access to our expert care. Let us help you explore your options for lasting pain relief and improved mobility.",
@@ -820,7 +802,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "<p><strong>Achilles tendon repair</strong> is a surgical procedure to reconnect the ends of a ruptured Achilles tendon, the largest and strongest tendon in the body connecting the calf muscles to the heel. A complete rupture often occurs during sudden, forceful pushing off movements in sports like basketball, tennis, or soccer.</p><p>Surgery may be performed using <strong>open</strong> or <strong>minimally invasive (percutaneous)</strong> techniques, depending on the injury severity and patient factors. At Mountain Spine & Orthopedics, our <strong>foot and ankle specialists</strong> evaluate each rupture individually to recommend the optimal approach for restoring your mobility.</p>",
   "conditions_treated": "Achilles tendon repair is indicated for complete Achilles tendon ruptures, partial ruptures that fail conservative treatment, chronic Achilles tendon tears, re-ruptures of previously repaired tendons, and athletes or active individuals seeking faster return to sports.",
   "procedure_info": "<ol><li>Surgery is typically performed under regional or general anesthesia as an outpatient procedure</li><li>For open repair, an incision is made along the back of the lower leg to expose the ruptured tendon</li><li>The torn ends are sutured together using strong, specialized stitching techniques</li><li>For minimally invasive repair, several small incisions allow passage of sutures without a large incision</li><li>If the tendon is severely damaged or chronically torn, a tendon transfer may augment the repair</li><li>The leg is placed in a splint or cast with the foot pointed down to protect the repair</li></ol>",
-  "recovery_info": "Recovery involves several phases: initial immobilization in a cast or boot for 2-4 weeks, then gradual transition to weight-bearing in a boot with heel lifts. Physical therapy begins around 4-6 weeks to restore range of motion and strength. Return to light activities takes 3-4 months; return to sports typically 6-12 months. Full tendon healing takes approximately 6 months.",
+  "recovery_info": "Recovery involves several phases: initial immobilization in a cast or boot for 2-4 weeks, then gradual transition to weight-bearing in a boot with heel lifts. Rehabilitation begins around 4-6 weeks to restore range of motion and strength. Return to light activities takes 3-4 months; return to sports typically 6-12 months. Full tendon healing takes approximately 6 months.",
   "benefits": "<ul><li>Restores tendon continuity and calf muscle function</li><li>Lower re-rupture rate compared to non-surgical treatment</li><li>Faster return to sports for active individuals</li><li>Minimally invasive options reduce wound complications</li><li>Allows for return to high-demand activities</li></ul>",
   "why_choose_us": "Our foot and ankle specialists at Mountain Spine & Orthopedics have extensive experience in both open and minimally invasive Achilles tendon repair. We use advanced surgical techniques to optimize healing and reduce complications while creating personalized rehabilitation protocols for your goals.",
   "schedule": "<p>If you've experienced a sudden pop or snap in your Achilles tendon, <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">schedule an urgent evaluation</a> with our specialists. Early treatment within 2-3 weeks of injury typically produces the best outcomes.</p>",
@@ -832,14 +814,14 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "tag": "Foot",
   "card_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--plantar-fasciitis-treatment--thumbnail.png',
   "inTxt_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--plantar-fasciitis-treatment--thumbnail.png',
-  "body": "Comprehensive plantar fasciitis treatment relieves chronic heel pain through targeted therapies including stretching, orthotics, injections, and advanced regenerative options.",
-  "detail": "<p><strong>Plantar fasciitis treatment</strong> addresses the most common cause of heel pain—inflammation of the plantar fascia, the thick band of tissue running across the bottom of your foot. Most cases respond to conservative treatment within 6-12 months.</p><p>At Mountain Spine & Orthopedics, our <strong>foot and ankle specialists</strong> create personalized treatment plans that progress from simple stretching to advanced interventional options based on your response to each therapy level. Our goal is to eliminate your <a href=\"/conditions/heel-pain\" class=\"text-blue-600 hover:underline\">heel pain</a> using the most conservative effective approach.</p>",
-  "conditions_treated": "This treatment addresses plantar fasciitis with morning heel pain, chronic heel pain lasting more than 6 weeks, plantar fascia inflammation confirmed on ultrasound or MRI, heel pain that limits walking or standing, and cases unresponsive to basic stretching and rest.",
-  "procedure_info": "<h3>Conservative Treatment Options</h3><ul><li><strong>Stretching exercises:</strong> Targeted plantar fascia and calf stretches performed multiple times daily</li><li><strong>Night splints:</strong> Hold the foot in dorsiflexion overnight to prevent morning pain</li><li><strong>Orthotics:</strong> Custom or over-the-counter arch supports and heel cushions</li><li><strong>Physical therapy:</strong> Comprehensive stretching, strengthening, and manual therapy</li><li><strong>NSAIDs:</strong> Anti-inflammatory medications for pain and swelling</li></ul><h3>Interventional Options</h3><ul><li><strong>Corticosteroid injections:</strong> Ultrasound-guided <a href=\"/treatments/anti-inflammatory-injections-for-joint-and-spine-pain\" class=\"text-blue-600 hover:underline\">injections</a> for targeted relief</li><li><strong>PRP injections:</strong> Platelet-rich plasma to promote tissue healing</li><li><strong>ESWT:</strong> Extracorporeal shockwave therapy to stimulate healing</li></ul>",
-  "recovery_info": "Most patients experience significant improvement within 6-12 months of consistent conservative treatment. Stretching and orthotic use should be continued long-term to prevent recurrence. Injection benefits typically last several months. Overall, 90% of patients improve without surgery.",
-  "benefits": "<ul><li>Non-surgical approach effective in 90% of cases</li><li>Multiple treatment options tailored to severity</li><li>Targeted injections provide rapid relief for stubborn cases</li><li>Addresses both symptoms and underlying causes</li><li>Prevents progression to chronic condition</li></ul>",
-  "why_choose_us": "Mountain Spine & Orthopedics provides comprehensive <a href=\"/conditions/plantar-fasciitis\" class=\"text-blue-600 hover:underline\">plantar fasciitis</a> evaluation and treatment. We use ultrasound to confirm diagnosis and guide injections for maximum effectiveness. Our stepped approach ensures you receive the appropriate level of treatment for your condition.",
-  "schedule": "<p>Don't let heel pain limit your daily activities. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule an appointment</a> with our plantar fasciitis specialists for comprehensive evaluation and personalized treatment.</p>",
+  "body": "Plantar fasciitis treatment targets the plantar fascia, calf tightness, footwear mechanics, and inflammation that cause first-step heel pain.",
+  "detail": "<p><strong>Plantar fasciitis treatment</strong> is focused on the plantar fascia itself: the thick band of tissue that supports the arch and attaches to the bottom of the heel. The classic pattern is sharp heel pain with the first steps in the morning or after sitting, then partial improvement as the tissue warms up.</p><p>This page is intentionally more specific than general <a href=\"/treatments/heel-pain-treatment\" class=\"text-blue-600 hover:underline\">heel pain treatment</a>. Plantar fasciitis care looks at calf tightness, arch mechanics, footwear, body-weight load, training changes, and fascia thickening on ultrasound or MRI when imaging is needed. Mountain Spine & Orthopedics uses a stepped approach, beginning with the least invasive options and escalating only when pain remains limiting.</p>",
+  "conditions_treated": "<ul><li><a href=\"/conditions/plantar-fasciitis\" class=\"text-blue-600 hover:underline\">Plantar fasciitis</a> with first-step morning heel pain</li><li>Medial heel pain that worsens after standing, walking, or running</li><li>Plantar fascia thickening or partial tearing seen on ultrasound or MRI</li><li>Heel pain that persists despite shoe changes, stretching, or rest</li><li>Recurrent plantar fascia symptoms related to tight calves, high arches, flat feet, or training load changes</li></ul>",
+  "procedure_info": "<h3>Diagnosis and Treatment Sequence</h3><ul><li><strong>Exam:</strong> The clinician checks tenderness at the plantar fascia origin, ankle flexibility, arch position, gait mechanics, and whether symptoms suggest another heel-pain source.</li><li><strong>Imaging when needed:</strong> X-rays may assess heel spurs or other bone problems; ultrasound or MRI can show fascia thickening, tearing, or stress injury when the diagnosis is unclear.</li><li><strong>Load reduction:</strong> Shoe changes, heel cups, arch supports, night splints, and training modification reduce repeated strain at the fascia insertion.</li><li><strong>Stretching and strengthening:</strong> Calf flexibility, plantar fascia-specific stretching, and foot intrinsic strengthening address the mechanical drivers of recurrence.</li><li><strong>Injections:</strong> Ultrasound-guided corticosteroid injections may reduce severe inflammation; PRP or shockwave therapy may be considered for chronic cases depending on candidacy.</li><li><strong>Surgery:</strong> Plantar fascia release is reserved for carefully selected patients with persistent disabling symptoms after a complete non-surgical course.</li></ul>",
+  "recovery_info": "Improvement is usually gradual rather than immediate. Many patients notice less first-step pain after consistent stretching, footwear changes, and activity modification, but chronic plantar fascia irritation can take months to settle. Injection relief may create a window to progress walking and strengthening, but recurrence prevention depends on continuing calf mobility, arch support, and load management.",
+  "benefits": "<ul><li>Targets the specific tissue responsible for first-step plantar heel pain</li><li>Separates plantar fasciitis from stress fracture, nerve entrapment, Achilles disease, or fat-pad pain</li><li>Uses imaging selectively when symptoms do not fit a straightforward plantar fasciitis pattern</li><li>Escalates from footwear and stretching to injections or surgery only when clinically appropriate</li><li>Supports long-term recurrence prevention through mechanics and load management</li></ul>",
+  "why_choose_us": "Mountain Spine & Orthopedics provides focused <a href=\"/conditions/plantar-fasciitis\" class=\"text-blue-600 hover:underline\">plantar fasciitis</a> evaluation rather than treating every heel complaint the same way. Our foot specialists can review imaging, confirm whether the plantar fascia is the true pain generator, and discuss conservative care, image-guided injections, or surgical options when needed. PPO Insurance is Accepted.",
+  "schedule": "<p>If first-step heel pain is limiting walking, standing, work, or exercise, <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">schedule an appointment</a> for plantar fasciitis evaluation and a treatment plan matched to the cause of your symptoms.</p>",
   "slug": "plantar-fasciitis-treatment",
   "keywords": ["plantar fasciitis treatment", "heel pain treatment", "plantar fascia therapy", "orthotics for heel pain", "corticosteroid injection heel", "ESWT plantar fasciitis", "foot specialist FL, NJ, NY, & PA", "morning heel pain treatment"]
 },
@@ -850,9 +832,9 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "inTxt_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--plantar-fasciitis-surgery--thumbnail.png',
   "body": "Plantar fascia release surgery provides lasting relief for chronic plantar fasciitis that hasn't responded to conservative treatment after 6-12 months.",
   "detail": "<p><strong>Plantar fascia release surgery</strong> is reserved for patients with chronic <a href=\"/conditions/plantar-fasciitis\" class=\"text-blue-600 hover:underline\">plantar fasciitis</a> that fails to improve after 6-12 months of comprehensive conservative treatment. The procedure involves partially releasing the tight plantar fascia to reduce tension and relieve pain.</p><p>Surgery can be performed through a <strong>traditional open incision</strong> or using <strong>endoscopic (minimally invasive)</strong> techniques. At Mountain Spine & Orthopedics, our surgeons typically prefer minimally invasive approaches when appropriate, as they allow for faster recovery and less post-operative pain.</p>",
-  "conditions_treated": "Surgery is indicated for chronic plantar fasciitis unresponsive to 6-12 months of conservative care, severe heel pain limiting daily activities despite treatment, confirmed plantar fascia thickening on MRI or ultrasound, and patients who have failed injections, physical therapy, orthotics, and shockwave therapy.",
+  "conditions_treated": "Surgery is indicated for chronic plantar fasciitis unresponsive to 6-12 months of conservative care, severe heel pain limiting daily activities despite treatment, confirmed plantar fascia thickening on MRI or ultrasound, and patients who have failed injections, rehabilitation, orthotics, and shockwave therapy.",
   "procedure_info": "<ol><li>Surgery is performed as an outpatient procedure under regional or local anesthesia</li><li>For endoscopic release, two small incisions allow insertion of a camera and cutting instrument</li><li>For open release, a small incision is made on the side or bottom of the heel</li><li>The medial portion of the plantar fascia is partially released (typically 30-50%)</li><li>Any heel spurs may be removed if contributing to symptoms</li><li>Careful partial release preserves foot arch stability while relieving tension</li></ol>",
-  "recovery_info": "Recovery from plantar fascia release typically involves weight-bearing in a protective boot for 2-4 weeks, with return to regular shoes in 3-6 weeks. Full recovery takes 2-3 months. Physical therapy helps restore flexibility and strength. Success rates are approximately 70-90% for pain relief.",
+  "recovery_info": "Recovery from plantar fascia release typically involves weight-bearing in a protective boot for 2-4 weeks, with return to regular shoes in 3-6 weeks. Full recovery takes 2-3 months. Rehabilitation helps restore flexibility and strength. Success rates are approximately 70-90% for pain relief.",
   "benefits": "<ul><li>Definitive treatment for refractory plantar fasciitis</li><li>Minimally invasive options for faster recovery</li><li>Can address heel spurs simultaneously</li><li>70-90% success rate for pain relief</li><li>Outpatient procedure with same-day discharge</li></ul>",
   "why_choose_us": "Our foot and ankle surgeons at Mountain Spine & Orthopedics are experts in both endoscopic and open plantar fascia release. We carefully evaluate each patient to confirm that surgery is appropriate and use the technique best suited to your anatomy and condition.",
   "schedule": "<p>If conservative treatments have failed to relieve your plantar fasciitis after 6-12 months, <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">schedule a surgical consultation</a> to discuss whether plantar fascia release is right for you.</p>",
@@ -864,14 +846,14 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "tag": "Foot",
   "card_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--hammertoe-surgery--thumbnail.png',
   "inTxt_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--hammertoe-surgery--thumbnail.png',
-  "body": "Hammertoe surgery corrects the abnormal bend in the toe joint, relieving pain, eliminating corns, and allowing comfortable shoe wear.",
-  "detail": "<p><strong>Hammertoe surgery</strong> corrects the abnormal flexion deformity of the toe that causes pain, corns, and difficulty wearing shoes. When <a href=\"/conditions/hammer-toes\" class=\"text-blue-600 hover:underline\">hammertoes</a> become rigid or fail to respond to conservative treatment, surgery provides lasting correction.</p><p>Multiple surgical techniques exist, and our <strong>foot and ankle specialists</strong> select the approach based on whether your hammertoe is flexible or rigid, the presence of associated deformities like <a href=\"/conditions/bunions-hallux-valgus\" class=\"text-blue-600 hover:underline\">bunions</a>, and your functional goals.</p>",
-  "conditions_treated": "Hammertoe surgery is indicated for painful rigid hammertoes not responding to padding and shoe modifications, corns and calluses causing persistent pain, flexible hammertoes that have progressed despite conservative care, hammertoes occurring with bunions requiring combined correction, and difficulty finding comfortable footwear.",
-  "procedure_info": "<ol><li>Surgery is typically performed as an outpatient procedure under local anesthesia with sedation</li><li>For flexible hammertoes, tendon release or transfer restores balance</li><li>For rigid hammertoes, an arthroplasty (removing part of the bone) or arthrodesis (fusion) straightens the toe</li><li>Temporary pins or internal implants may hold the toe in position during healing</li><li>Associated corns are removed during the same procedure</li><li>For multiple hammertoes, correction can be performed on several toes at once</li></ol>",
-  "recovery_info": "Recovery involves wearing a post-operative shoe or boot for 4-6 weeks. Pins, if used, are typically removed at 3-4 weeks. Swelling may persist for several months but gradually decreases. Most patients return to regular shoes in 6-8 weeks and full activities in 2-3 months.",
-  "benefits": "<ul><li>Permanently corrects the toe deformity</li><li>Eliminates painful corns and calluses</li><li>Allows comfortable shoe wear</li><li>Can correct multiple toes simultaneously</li><li>Can be combined with bunion surgery if needed</li></ul>",
-  "why_choose_us": "Mountain Spine & Orthopedics offers comprehensive hammertoe evaluation and surgery. Our foot specialists use the most appropriate technique for your specific deformity, whether tendon balancing for flexible deformities or bone procedures for rigid hammertoes.",
-  "schedule": "<p>If hammertoes are causing pain or limiting your footwear choices, <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">schedule a consultation</a> to discuss surgical options for permanent correction.</p>",
+  "body": "Hammertoe surgery straightens a painful bent toe when shoe changes, padding, splints, or orthotics no longer control rubbing, corns, or joint stiffness.",
+  "detail": "<p><strong>Hammertoe surgery</strong> is not one single operation. It is a group of toe-straightening procedures selected according to whether the deformity is flexible, semi-rigid, or fixed. A flexible <a href=\"/conditions/hammer-toes\" class=\"text-blue-600 hover:underline\">hammertoe</a> may still be corrected by balancing tendons and releasing tight soft tissue. A rigid toe usually needs a bone procedure, such as joint resection or fusion, because the joint no longer straightens by hand.</p><p>The goal is practical: reduce painful pressure over the knuckle, improve toe alignment, make shoe wear easier, and address the mechanics that created the deformity. Some patients also have a bunion, long second toe, metatarsalgia, diabetes-related skin risk, or multiple bent toes, so Mountain Spine & Orthopedics evaluates the whole forefoot before recommending surgery.</p>",
+  "conditions_treated": "Hammertoe surgery may be considered for painful rigid hammertoes, recurrent corns or calluses over the toe joint, toe-tip ulcers or skin breakdown risk, deformities that rub in normal shoes, flexible hammertoes that continue to progress, and hammertoes associated with bunions or forefoot imbalance. Surgery is generally considered after appropriate non-surgical measures have failed or when skin compromise makes the deformity higher risk.",
+  "procedure_info": "<ol><li>The foot and ankle specialist confirms which joint is contracted, whether the toe is flexible, and whether nearby deformities also need correction</li><li>Flexible deformities may be treated with tendon release, tendon transfer, capsule release, or soft-tissue balancing</li><li>Rigid deformities may require arthroplasty, which removes part of the joint, or arthrodesis, which fuses the joint straight</li><li>Temporary pins, buried implants, or screws may hold alignment while bone and soft tissue heal</li><li>Corns and painful pressure points are addressed by correcting the underlying toe position rather than simply shaving skin</li><li>If a bunion or metatarsal overload is driving the hammertoe, the surgical plan may include additional forefoot correction</li></ol>",
+  "recovery_info": "Recovery depends on the number of toes corrected and whether bone fusion is performed. Most patients use a post-operative shoe or boot for several weeks while swelling and soft tissue healing improve. Pins, when used, are usually temporary and removed after early healing. Transition to roomy shoes often occurs around 6-8 weeks, while swelling can take several months to fully settle. Outside rehabilitation or home mobility guidance may be recommended for gait, balance, and safe return to activity.",
+  "benefits": "<ul><li>Corrects the structural source of shoe pressure and painful corns</li><li>Matches the procedure to flexible versus rigid deformity</li><li>Can address several toes or related forefoot problems in one plan</li><li>Improves footwear tolerance and walking comfort when conservative care has failed</li><li><strong>PPO Insurance Accepted</strong> for medically necessary hammertoe evaluation and treatment</li></ul>",
+  "why_choose_us": "Mountain Spine & Orthopedics evaluates hammertoes as part of the whole forefoot, not as an isolated bent toe. Our specialists consider toe flexibility, skin condition, nerve and circulation status, shoe limitations, activity demands, and related bunion or metatarsal problems before recommending tendon balancing, joint resection, fusion, or continued non-surgical care.",
+  "schedule": "<p>If a bent toe is causing pain, skin irritation, or persistent shoe problems, <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">schedule a consultation</a> to review whether hammertoe surgery or continued conservative care is the better next step. <strong>PPO Insurance Accepted.</strong></p>",
   "slug": "hammertoe-surgery",
   "keywords": ["hammertoe surgery", "hammertoe correction", "toe straightening surgery", "arthroplasty toe", "rigid hammertoe treatment", "corn removal surgery", "foot deformity correction", "foot specialist FL, NJ, NY, & PA"]
 },
@@ -884,7 +866,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "<p><strong>Foot fracture surgery</strong> is required when bones in the foot break in a way that cannot heal properly with casting alone. The foot contains 26 bones, and fractures may involve the metatarsals, midfoot bones, calcaneus (heel), or toes.</p><p>Surgical fixation restores bone alignment to preserve foot function and prevent long-term complications like arthritis and chronic pain. At Mountain Spine & Orthopedics, our <strong>foot and ankle specialists</strong> use advanced fixation techniques and imaging to optimize healing.</p>",
   "conditions_treated": "Foot fracture surgery is indicated for displaced metatarsal fractures, Lisfranc (midfoot) injuries with instability, calcaneal (heel) fractures, navicular or cuboid fractures, Jones fractures (fifth metatarsal), and fractures that fail to heal (nonunions) or heal incorrectly (malunions).",
   "procedure_info": "<ol><li>Surgery is performed under regional or general anesthesia</li><li>Incisions are made to access the fractured bone while protecting nerves and blood vessels</li><li>Fracture fragments are realigned under direct visualization or X-ray guidance</li><li>Plates, screws, or pins are used to hold the bones in proper position</li><li>For certain fractures, external fixation may be used</li><li>A splint, cast, or boot is applied for post-operative protection</li></ol>",
-  "recovery_info": "Recovery varies by fracture type. Most foot fractures require 6-12 weeks of restricted weight-bearing, followed by gradual return to weight-bearing in a boot or supportive shoe. Physical therapy helps restore range of motion and strength. Full recovery typically takes 3-6 months depending on fracture severity.",
+  "recovery_info": "Recovery varies by fracture type. Most foot fractures require 6-12 weeks of restricted weight-bearing, followed by gradual return to weight-bearing in a boot or supportive shoe. Rehabilitation helps restore range of motion and strength. Full recovery typically takes 3-6 months depending on fracture severity.",
   "benefits": "<ul><li>Restores proper bone alignment for optimal healing</li><li>Prevents long-term complications like arthritis</li><li>Allows earlier mobilization compared to prolonged casting</li><li>Multiple fixation options tailored to fracture pattern</li><li>Expert care for complex foot injuries</li></ul>",
   "why_choose_us": "Our orthopedic surgeons at Mountain Spine & Orthopedics have extensive experience treating all types of foot fractures. We use advanced imaging and surgical techniques to restore your foot's anatomy and function, with comprehensive rehabilitation support for optimal recovery.",
   "schedule": "<p>If you've suffered a foot fracture, <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">schedule an urgent evaluation</a> with our specialists to determine if surgery is needed and begin appropriate treatment.</p>",
@@ -900,7 +882,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "<p><strong>Ankle fracture surgery</strong> (open reduction internal fixation or ORIF) realigns and stabilizes broken bones around the ankle joint. The ankle is formed by three bones: the tibia (shinbone), fibula (outer leg bone), and talus. Fractures may involve one, two, or all three bones.</p><p>Surgery is essential when fractures are displaced, unstable, or involve the joint surface. Proper alignment is critical because even small amounts of displacement can lead to early <a href=\"/conditions/ankle-arthritis\" class=\"text-blue-600 hover:underline\">ankle arthritis</a>. At Mountain Spine & Orthopedics, our <strong>foot and ankle specialists</strong> use precise surgical techniques to restore your ankle anatomy.</p>",
   "conditions_treated": "Ankle fracture surgery is indicated for <strong>displaced ankle fractures</strong> (bimalleolar, trimalleolar), <strong>unstable fractures</strong> that shift in a cast, fractures involving the <a href=\"/conditions/ankle-arthritis\" class=\"text-blue-600 hover:underline\">ankle joint</a> surface, <strong>open (compound) fractures</strong>, fractures with <strong>syndesmosis injury</strong>, and fractures associated with <a href=\"/conditions/ankle-dislocation\" class=\"text-blue-600 hover:underline\">ankle dislocation</a>. At Mountain Spine & Orthopedics, our foot and ankle specialists determine candidacy using imaging and exam.",
   "procedure_info": "<ol><li><strong>Surgery</strong> is performed under regional or general <strong>anesthesia</strong>, usually as an outpatient procedure</li><li>Incisions are made over the fractured bones (inner and/or outer ankle)</li><li>Fracture fragments are <strong>reduced (realigned)</strong> under direct visualization</li><li><strong>Metal plates and screws</strong> secure the bones in proper position</li><li>The <strong>syndesmosis</strong> (joint between tibia and fibula) is evaluated and repaired if injured</li><li>X-rays confirm proper alignment before closing</li><li>A splint is applied initially, transitioning to a cast or <strong>boot</strong></li></ol>",
-  "recovery_info": "Recovery typically involves <strong>6 weeks of non-weight-bearing</strong> followed by gradual weight-bearing in a boot. <a href=\"/treatments/physical-therapy\" class=\"text-blue-600 hover:underline\">Physical therapy</a> begins once the bone is healing. Most patients return to regular shoes in <strong>10-12 weeks</strong>. Full recovery and return to sports takes <strong>3-6 months</strong>. Hardware may remain permanently or be removed later if symptomatic. Our team provides structured rehab guidance for optimal outcomes.",
+  "recovery_info": "Recovery typically involves <strong>6 weeks of non-weight-bearing</strong> followed by gradual weight-bearing in a boot. <a href=\"/conditions\" class=\"text-blue-600 hover:underline\">Rehabilitation</a> begins once the bone is healing. Most patients return to regular shoes in <strong>10-12 weeks</strong>. Full recovery and return to sports takes <strong>3-6 months</strong>. Hardware may remain permanently or be removed later if symptomatic. Our team provides structured rehab guidance for optimal outcomes.",
   "benefits": "<ul><li><strong>Restores proper ankle alignment</strong> critical for long-term function</li><li>Prevents <strong>post-traumatic arthritis</strong> from malunion</li><li>Allows <strong>earlier mobilization</strong> than casting alone</li><li>Addresses associated <strong>syndesmosis</strong> injuries</li><li>High success rates with modern <strong>fixation techniques</strong></li></ul>",
   "why_choose_us": "Our foot and ankle specialists at Mountain Spine & Orthopedics are experts in ankle fracture surgery. We use advanced imaging and anatomic plating systems to achieve precise reduction and stable fixation, optimizing your chances for complete recovery.",
   "schedule": "<p>Ankle fractures require prompt evaluation. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule an urgent appointment</a> if you've suffered an ankle injury with significant pain, swelling, or inability to bear weight.</p>",
@@ -932,7 +914,7 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "detail": "<p><strong>Flat foot surgery</strong> reconstructs the collapsed arch to restore proper foot alignment and relieve pain from <a href=\"/conditions/flat-feet\" class=\"text-blue-600 hover:underline\">adult-acquired flatfoot deformity (AAFD)</a>. This progressive condition most commonly results from posterior tibial tendon dysfunction (PTTD).</p><p>Surgery is typically reserved for patients who fail conservative treatment with orthotics and bracing. Multiple procedures may be combined to address bone, tendon, and ligament components of the deformity. At Mountain Spine & Orthopedics, our <strong>foot and ankle specialists</strong> create individualized surgical plans based on deformity severity and patient goals.</p>",
   "conditions_treated": "Flat foot surgery is indicated for adult-acquired flatfoot deformity (stages II-IV), posterior tibial tendon dysfunction failing conservative care, painful flexible flatfoot not controlled with orthotics, progressive deformity despite bracing, and flatfoot with secondary ankle arthritis.",
   "procedure_info": "<ol><li>Surgery is performed under general or regional anesthesia</li><li>The specific procedure depends on deformity stage and flexibility</li><li><strong>Tendon procedures:</strong> Flexor digitorum longus tendon transfer to replace the failed posterior tibial tendon</li><li><strong>Bone procedures:</strong> Calcaneal osteotomy shifts the heel back under the leg; medial column procedures restore arch height</li><li><strong>Joint fusions:</strong> Subtalar, talonavicular, or triple arthrodesis for rigid deformities or arthritis</li><li>Spring ligament repair may be added for additional support</li><li>Multiple incisions may be required for comprehensive correction</li></ol>",
-  "recovery_info": "Recovery from flatfoot reconstruction is lengthy. Non-weight-bearing for 6-8 weeks is typical, followed by gradual weight-bearing in a boot. Full recovery takes 6-12 months. Physical therapy is essential for strengthening and gait training. Custom orthotics are often recommended long-term for support.",
+  "recovery_info": "Recovery from flatfoot reconstruction is lengthy. Non-weight-bearing for 6-8 weeks is typical, followed by gradual weight-bearing in a boot. Full recovery takes 6-12 months. Rehabilitation is essential for strengthening and gait training. Custom orthotics are often recommended long-term for support.",
   "benefits": "<ul><li>Restores foot alignment and arch structure</li><li>Relieves pain from collapsed arch</li><li>Prevents progression to ankle arthritis</li><li>Multiple techniques tailored to deformity severity</li><li>Improves walking function and shoe wear</li></ul>",
   "why_choose_us": "Our fellowship-trained foot and ankle surgeons at Mountain Spine & Orthopedics specialize in complex flatfoot reconstruction. We carefully stage each deformity and select the procedures that will best correct your specific condition while preserving as much motion as possible.",
   "schedule": "<p>If orthotics and bracing haven't controlled your flatfoot symptoms, <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">schedule a consultation</a> with our flatfoot specialists to discuss surgical options.</p>",
@@ -944,14 +926,14 @@ export const AllTreatments : TreatmentsCardProp[] = [
   "tag": "Foot",
   "card_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--heel-pain-treatment--thumbnail.png',
   "inTxt_img": 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--heel-pain-treatment--thumbnail.png',
-  "body": "Comprehensive heel pain treatment identifies the specific cause of your heel pain and provides targeted therapies for effective, lasting relief.",
-  "detail": "<p><strong>Heel pain treatment</strong> encompasses the evaluation and management of various conditions causing pain in the heel. While <a href=\"/conditions/plantar-fasciitis\" class=\"text-blue-600 hover:underline\">plantar fasciitis</a> is the most common cause, <a href=\"/conditions/heel-pain\" class=\"text-blue-600 hover:underline\">heel pain</a> can also result from <a href=\"/conditions/achilles-tendonitis\" class=\"text-blue-600 hover:underline\">Achilles tendonitis</a>, stress fractures, nerve entrapment, and other conditions.</p><p>At Mountain Spine & Orthopedics, our <strong>foot specialists</strong> conduct thorough evaluations to identify the precise cause of your heel pain, ensuring you receive targeted treatment that addresses your specific condition.</p>",
-  "conditions_treated": "Heel pain treatment addresses plantar fasciitis, heel spurs, Achilles tendonitis, calcaneal stress fractures, Haglund's deformity, retrocalcaneal bursitis, tarsal tunnel syndrome, Baxter's nerve entrapment, and fat pad atrophy.",
-  "procedure_info": "<h3>Diagnostic Evaluation</h3><ul><li>Detailed history and physical examination</li><li>X-rays to evaluate bone structure and heel spurs</li><li>Ultrasound for plantar fascia and Achilles evaluation</li><li>MRI for soft tissue detail (complimentary <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">MRI review</a> available)</li></ul><h3>Treatment Options</h3><ul><li><strong>Stretching and exercises:</strong> Targeted programs for plantar fascia and calf</li><li><strong>Orthotics:</strong> Custom or prefabricated arch supports and heel cushions</li><li><strong>Physical therapy:</strong> Comprehensive rehabilitation programs</li><li><strong>Injections:</strong> Corticosteroid or PRP injections for inflammation</li><li><strong>Shockwave therapy:</strong> ESWT for chronic conditions</li><li><strong>Surgery:</strong> When conservative measures fail (plantar fascia release, heel spur removal)</li></ul>",
-  "recovery_info": "Recovery depends on the underlying condition and treatment approach. Most heel pain responds to conservative treatment within 6-12 months. Injection relief typically lasts several months. Surgical recovery takes 6-12 weeks. Consistent use of orthotics and stretching helps prevent recurrence.",
-  "benefits": "<ul><li>Accurate diagnosis identifies the specific cause of pain</li><li>Multiple treatment options from conservative to surgical</li><li>Targeted injections for rapid relief</li><li>Addresses underlying biomechanical factors</li><li>Comprehensive approach prevents recurrence</li></ul>",
-  "why_choose_us": "Mountain Spine & Orthopedics provides comprehensive heel pain evaluation and treatment. Our foot specialists use advanced diagnostic techniques to identify the exact cause of your pain, then create personalized treatment plans that target your specific condition.",
-  "schedule": "<p>Don't let heel pain limit your mobility. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule an appointment</a> with our heel pain specialists for thorough evaluation and effective treatment.</p>",
+  "body": "Heel pain treatment begins by identifying whether pain comes from the plantar fascia, Achilles tendon, heel bone, bursa, fat pad, or a compressed nerve.",
+  "detail": "<p><strong>Heel pain treatment</strong> is broader than plantar fasciitis care. Heel pain can come from the bottom of the heel, the back of the heel, the heel bone itself, the surrounding bursa, or nerves that travel into the foot. Treating all heel pain as plantar fasciitis can miss Achilles tendon disease, calcaneal stress fracture, Baxter's nerve entrapment, tarsal tunnel syndrome, fat-pad atrophy, or inflammatory arthritis.</p><p>Mountain Spine & Orthopedics evaluates the location, timing, footwear triggers, activity history, and exam findings before recommending treatment. A runner with bone tenderness after a mileage increase needs a different plan than a patient with first-step plantar fascia pain or swelling behind the Achilles tendon.</p>",
+  "conditions_treated": "<ul><li>Plantar heel pain from <a href=\"/conditions/plantar-fasciitis\" class=\"text-blue-600 hover:underline\">plantar fasciitis</a> or heel spur irritation</li><li>Posterior heel pain from Achilles tendonitis, insertional tendinopathy, Haglund's deformity, or retrocalcaneal bursitis</li><li>Calcaneal stress fractures or bone bruising after training changes or trauma</li><li>Nerve-related heel pain, including Baxter's nerve entrapment or tarsal tunnel symptoms</li><li>Fat-pad atrophy, inflammatory arthritis, or mixed causes of chronic heel pain</li></ul>",
+  "procedure_info": "<h3>Diagnostic Evaluation</h3><ul><li><strong>Pain mapping:</strong> Bottom-of-heel, back-of-heel, side-of-heel, and nerve-like pain patterns are evaluated separately.</li><li><strong>Exam:</strong> The clinician checks plantar fascia tenderness, Achilles insertion pain, ankle flexibility, foot alignment, nerve sensitivity, swelling, and ability to bear weight.</li><li><strong>Imaging:</strong> X-rays may show heel spurs, fracture, or Haglund's deformity. Ultrasound can evaluate the plantar fascia and Achilles tendon. MRI may be used when stress fracture, tendon tear, or complex soft-tissue pathology is suspected.</li></ul><h3>Treatment Options</h3><ul><li><strong>Mechanical support:</strong> Shoe changes, heel lifts, cushioning, arch support, or immobilization depending on the diagnosis.</li><li><strong>Medication and activity changes:</strong> Anti-inflammatory medication and load reduction may be used when appropriate.</li><li><strong>Injections:</strong> Corticosteroid, PRP, or other image-guided options may be considered for select soft-tissue conditions.</li><li><strong>Procedures:</strong> Surgery may be considered for refractory plantar fascia disease, Achilles insertional disease, nerve entrapment, fracture, or deformity after diagnosis-specific conservative care.</li></ul>",
+  "recovery_info": "Recovery varies by diagnosis. Plantar fasciitis often improves gradually with load management and stretching. Achilles insertional problems usually require a slower progression because tendon loading must be controlled. Stress fractures require protection until bone healing is adequate. Nerve-related heel pain may improve only after the compression source is identified and treated.",
+  "benefits": "<ul><li>Prevents mislabeling every heel complaint as plantar fasciitis</li><li>Matches treatment to the exact pain location and tissue involved</li><li>Uses imaging when exam findings suggest fracture, tendon tear, nerve entrapment, or atypical pain</li><li>Provides non-surgical and surgical pathways when appropriate</li><li>Helps reduce recurrence by addressing footwear, mechanics, and training load</li></ul>",
+  "why_choose_us": "Mountain Spine & Orthopedics provides diagnosis-specific heel pain care from foot specialists who evaluate plantar fascia, Achilles, bone, bursa, and nerve sources separately. Patients can bring existing imaging for review, and treatment may include conservative care, image-guided injections, or surgical consultation when indicated. PPO Insurance is Accepted.",
+  "schedule": "<p>If heel pain is limiting walking, work, exercise, or sleep, <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">schedule an appointment</a> for a focused heel pain evaluation.</p>",
   "slug": "heel-pain-treatment",
   "keywords": ["heel pain treatment", "plantar fasciitis treatment", "heel spur treatment", "Achilles pain treatment", "foot specialist FL, NJ, NY, & PA", "heel injection", "shockwave therapy heel", "chronic heel pain"]
 },
@@ -999,15 +981,15 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     card_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--revision-spinal-surgery--thumbnail.png',
     inTxt_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--revision-spinal-surgery--thumbnail.png',
     heroImageAlt: "Spine surgeon at Mountain Spine & Orthopedics reviewing CT and MRI imaging to plan complex revision spine surgery for failed back surgery patient",
-    heroDescription: "If your first spine surgery didn't provide lasting relief, you're not alone — and you're not out of options. Mountain Spine & Orthopedics' complex spine specialists perform revision surgery to identify exactly what went wrong, correct it, and finally give you the pain relief you were promised the first time.",
+    heroDescription: "Revision spine surgery evaluates persistent or recurrent symptoms after prior spine surgery and corrects confirmed structural problems such as nonunion, instability, recurrent stenosis, or hardware failure.",
     overview: {
-      heading: "My First Spine Surgery Didn't Work — Now What?",
-      body: "It's one of the most frustrating situations in medicine: you underwent <a href=\"/treatments/spinal-fusion\" class=\"text-blue-600 hover:underline\">**spinal fusion**</a> or decompression, endured the recovery — and the pain came back, or never went away. This is known as **Failed Back Surgery Syndrome (FBSS)**, and it affects a meaningful percentage of spine surgery patients. The causes vary: **pseudarthrosis** (the bone never fully fused), loosened or misplaced hardware, scar tissue compressing a nerve root, <a href=\"/conditions/adult-degenerative-scoliosis\" class=\"text-blue-600 hover:underline\">**adult degenerative scoliosis**</a> that wasn't adequately corrected, or **adjacent segment disease** developing at levels above or below the original fusion. At Mountain Spine & Orthopedics, our revision spine specialists begin with a meticulous diagnostic workup — advanced CT, MRI, and sometimes dynamic X-rays — to build a precise picture of what went wrong. Only then do we develop a surgical plan tailored to your specific failure mode. Our goal is not just to redo your surgery, but to finally correct the underlying problem.",
+      heading: "When Prior Spine Surgery Needs a Second Look",
+      body: "<p><strong>Revision spinal surgery</strong> is considered when pain, weakness, numbness, deformity, or instability persists or returns after a prior decompression, disc surgery, or <a href=\"/treatments/spinal-fusion\" class=\"text-blue-600 hover:underline\">spinal fusion</a>. The goal is not simply to repeat surgery. The goal is to identify a correctable structural reason for the ongoing symptoms.</p><p>Possible causes include <strong>pseudarthrosis</strong> (failed fusion or nonunion), recurrent stenosis, recurrent disc herniation, adjacent segment disease, flatback or sagittal imbalance, progressive <a href=\"/conditions/adult-degenerative-scoliosis\" class=\"text-blue-600 hover:underline\">adult degenerative scoliosis</a>, misplaced or loosened hardware, fractured instrumentation, infection, or nerve compression from bone, disc, or scar. Pseudarthrosis creates persistent micromotion at a level that was supposed to heal into solid bone, which can produce deep pain, grinding or clicking, continued nerve symptoms, and hardware loosening.</p><p>Mountain Spine & Orthopedics begins with prior operative reports, CT, MRI, standing X-rays, flexion-extension imaging when needed, and a neurologic exam before recommending any revision plan. When failed fusion is suspected, thin-slice CT helps assess bone bridging and implant integrity, while risk factors such as nicotine use, diabetes, poor nutrition, steroid exposure, vitamin D deficiency, and multilevel fusion history are reviewed before planning another operation. PPO Insurance Accepted.</p>",
     },
     candidates: {
       heading: "Who Is a Candidate for Revision Spinal Surgery?",
       list: [
-        "Patients whose prior fusion resulted in **pseudarthrosis** — the bone never solidly fused together",
+        "Patients whose prior fusion resulted in **pseudarthrosis** or nonunion — the bone never solidly fused together",
         "Individuals with loose, fractured, or malpositioned **spinal instrumentation** (screws, rods, or cages)",
         "Patients who had <a href=\"/treatments/lumbar-fusion-surgery\" class=\"text-blue-600 hover:underline\">**lumbar fusion surgery**</a> and now have pain at adjacent levels (**adjacent segment disease**)",
         "Those with recurrent **herniated disc** or **spinal stenosis** at the same level after prior decompression",
@@ -1023,28 +1005,28 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "**Surgical planning**: Determining whether the revision requires hardware removal only, extension of the fusion construct, deformity correction, or all three",
         "**Hardware management**: Careful extraction of loose, broken, or malpositioned screws, rods, and interbody cages without further injury to surrounding structures",
         "**Nerve decompression**: Meticulous removal of scar tissue (epidural fibrosis), bone spurs, or recurrent disc material compressing nerve roots",
-        "**Fusion correction**: Placement of new interbody cages — using <a href=\"/treatments/oblique-lumbar-interbody-fusion\" class=\"text-blue-600 hover:underline\">**OLIF**</a> or <a href=\"/treatments/extreme-lateral-interbody-fusion-surgery\" class=\"text-blue-600 hover:underline\">**XLIF**</a> lateral approaches when appropriate to avoid prior scar — packed with bone graft or biologics to achieve solid fusion",
+        "**Fusion correction**: Removal of failed or loose hardware when needed, debridement of fibrous nonunion tissue, and placement of new interbody cages — using <a href=\"/treatments/oblique-lumbar-interbody-fusion\" class=\"text-blue-600 hover:underline\">**OLIF**</a> or <a href=\"/treatments/extreme-lateral-interbody-fusion-surgery\" class=\"text-blue-600 hover:underline\">**XLIF**</a> lateral approaches when appropriate to avoid prior scar — packed with bone graft or biologics to achieve solid fusion",
         "**Alignment restoration**: Correction of **sagittal imbalance** or coronal deformity using osteotomies and new pedicle screw constructs to restore proper spinal alignment",
       ],
     },
     recovery: {
       heading: "Recovery from Revision Spinal Surgery",
       timeline: "6–12 Months for Full Fusion",
-      details: "Recovery from **revision spinal surgery** is typically longer than an index procedure — the anatomy is altered, scar tissue is present, and the fusion construct is often larger. Most patients spend 3–5 days in the hospital. A rigid **spinal brace** may be required for up to 3 months to protect the new hardware while bone healing begins. Structured **physical therapy** starts gradually — protecting the construct while rebuilding core strength and mobility. Many patients notice meaningful improvement in **nerve pain and leg symptoms** within the first few weeks after nerve decompression, even before the fusion is complete. Full solid fusion — confirmed by CT scan — typically occurs at 6–12 months. Our team monitors your recovery closely at every milestone.",
+      details: "Recovery from **revision spinal surgery** is usually more complex than a first operation because scar tissue, altered anatomy, prior hardware, bone quality, and the size of the new construct all affect healing. Hospital stay, bracing, and activity restrictions vary by procedure. Outside-guided rehabilitation and walking progression begin only as the surgeon clears each phase. Nerve symptoms may improve gradually after decompression, while fusion healing is monitored over months with follow-up imaging.",
     },
     benefits: [
       "**Directly corrects the root cause** of your continued pain — not just masking symptoms",
       "Achieves the **solid spinal fusion** your first surgery failed to deliver",
       "**Relieves nerve compression** from scar tissue, recurrent disc, or malpositioned hardware",
       "Restores **proper spinal alignment** and balance, reducing mechanical pain",
-      "PPO insurance accepted — our team navigates the complex pre-authorization process for revision cases",
-      "Gives you a genuine second chance at returning to an **active, pain-free life**",
+      "PPO Insurance Accepted — our team navigates the complex pre-authorization process for revision cases",
+      "Provides a structured second opinion when the cause of persistent symptoms is unclear",
     ],
     insurance: {
       heading: "Cost & Insurance for Revision Surgery",
       body: "Revision spine surgery is recognized as a significant medical necessity. **We accept most major PPO insurance plans**, and our team handles the complex pre-authorization process required for revision procedures so you can focus on your recovery.",
     },
-    schedule: "Your first surgery didn't give you the relief you deserved — that doesn't mean the story ends there. Mountain Spine & Orthopedics specializes in complex revision spine surgery for exactly your situation. Schedule a consultation today and let us review your imaging and history to determine what can be done.",
+    schedule: "Persistent pain, weakness, numbness, deformity, or hardware concerns after prior spine surgery? Schedule a revision spine consultation with Mountain Spine & Orthopedics for imaging review, operative-history review, and a clear discussion of whether a correctable structural problem is present.",
   },
   {
     id: "multilevel-degenerative-disc-disease-surgery",
@@ -1080,7 +1062,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "Individuals whose multilevel disc collapse has caused or is accelerating <a href=\"/conditions/adult-degenerative-scoliosis\" class=\"text-blue-600 hover:underline\">**adult degenerative scoliosis**</a>",
         "Patients with multilevel **spinal stenosis** causing bilateral leg pain, weakness, or neurogenic claudication",
         "Those with significant **sagittal imbalance** (forward lean) driven by multilevel disc height loss",
-        "Patients who have failed 6+ months of conservative care including injections and physical therapy",
+        "Patients who have failed 6+ months of conservative care including injections and rehabilitation",
         "Individuals with progressive deformity or neurological decline requiring surgical stabilization",
       ],
     },
@@ -1098,7 +1080,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from Multilevel Degenerative Disc Disease Surgery",
       timeline: "4–6 Months",
-      details: "Recovery from **multilevel degenerative disc disease surgery** is longer than single-level procedures — the spine is healing across multiple segments simultaneously. Hospital stay is typically 3–5 days. A **lumbar brace** is worn for 6–12 weeks to protect the early fusion. Structured **physical therapy** begins 4–6 weeks post-op, focusing on core activation and gait retraining. Most patients notice meaningful improvement in leg symptoms within the first month as nerve decompression takes effect. Return to light work typically occurs at 6–8 weeks; full activities at 4–6 months. Fusion completeness is confirmed by CT scan at 6 and 12 months.",
+      details: "Recovery from **multilevel degenerative disc disease surgery** is longer than single-level procedures — the spine is healing across multiple segments simultaneously. Hospital stay is typically 3–5 days. A **lumbar brace** is worn for 6–12 weeks to protect the early fusion. Structured **rehabilitation** begins 4–6 weeks post-op, focusing on core activation and gait retraining. Most patients notice meaningful improvement in leg symptoms within the first month as nerve decompression takes effect. Return to light work typically occurs at 6–8 weeks; full activities at 4–6 months. Fusion completeness is confirmed by CT scan at 6 and 12 months.",
     },
     benefits: [
       "Addresses **all pain generators** — disc collapse, nerve compression, and deformity — in a coordinated surgical plan",
@@ -1164,7 +1146,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from Anterior Lumbar Corpectomy and Fusion",
       timeline: "6-12 Months",
-      details: "Due to the extensive nature of **Anterior Lumbar Corpectomy and Fusion**, recovery is a gradual process. Hospital stay is typically 4-7 days. Patients will wear a **custom back brace** for several months to ensure the graft fuses with the bone. Walking is encouraged immediately, but bending and twisting are restricted. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> begins gradually to restore strength and mobility. Full bony fusion is typically achieved by 9-12 months, providing a permanent structural solution.",
+      details: "Due to the extensive nature of **Anterior Lumbar Corpectomy and Fusion**, recovery is a gradual process. Hospital stay is typically 4-7 days. Patients will wear a **custom back brace** for several months to ensure the graft fuses with the bone. Walking is encouraged immediately, but bending and twisting are restricted. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> begins gradually to restore strength and mobility. Full bony fusion is typically achieved by 9-12 months, providing a permanent structural solution.",
     },
     benefits: [
       "Directly removes the source of compression (tumor/bone fragments) from the spinal cord",
@@ -1295,7 +1277,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Hybrid Surgery Recovery Benefits",
       timeline: "3-4 Months",
-      details: "**Hybrid Lumbar Spine Surgery** recovery is typically faster than multilevel fusion because there is less rigid hardware. Patients mobilize quickly, often walking within hours of surgery. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">Physical therapy</a> focuses on mobilizing the replaced disc while protecting the fused level. Most patients return to non-impact sports (swimming, cycling) within 3 months and feel a significant improvement in range of motion compared to traditional surgery.",
+      details: "**Hybrid Lumbar Spine Surgery** recovery is typically faster than multilevel fusion because there is less rigid hardware. Patients mobilize quickly, often walking within hours of surgery. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">Rehabilitation</a> focuses on mobilizing the replaced disc while protecting the fused level. Most patients return to non-impact sports (swimming, cycling) within 3 months and feel a significant improvement in range of motion compared to traditional surgery.",
     },
     benefits: [
       "Preserves range of motion in the lower back",
@@ -1401,7 +1383,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     heroDescription: "Spinal fusion surgery stabilizes the spine, corrects scoliosis and spinal deformity, and relieves nerve compression when conservative care is no longer sufficient. PPO Insurance Accepted.",
     overview: {
       heading: "Spinal Fusion for Scoliosis, Instability & Chronic Back Pain",
-      body: "**Spinal Fusion Surgery** is one of the most commonly performed spine surgeries — and one of the most misunderstood. At its core, fusion permanently stabilizes two or more vertebrae, eliminating painful motion at a damaged or unstable segment while creating the conditions for the spine to heal in correct alignment. For patients with <a href=\"/conditions/adult-degenerative-scoliosis\" class=\"underline text-[#252932] hover:text-[#2358AC]\">**adult scoliosis**</a>, degenerative spinal instability, severe disc disease, or progressive deformity, spinal fusion — performed with modern minimally invasive techniques where appropriate — can provide lasting relief when conservative care has reached its limits. We perform fusion on all levels of the spine, including <a href=\"/treatments/lumbar-fusion-surgery\" class=\"underline text-[#252932] hover:text-[#2358AC]\">**Lumbar Fusion Surgery**</a> for the lower back, tailored to your specific anatomy and diagnosis.",
+      body: "<p><strong>Spinal fusion surgery</strong> stabilizes two or more vertebrae so they heal into one solid segment. It may be considered when pain or nerve symptoms are driven by confirmed instability, deformity, spondylolisthesis, recurrent stenosis with instability risk, pseudarthrosis, traumatic instability, or selected cases of severe degenerative disc disease.</p><p>Fusion is not the right answer for every back or neck pain complaint. The decision depends on whether imaging, standing alignment, neurologic findings, and symptoms all point to a structural problem that fusion can reasonably address. Mountain Spine & Orthopedics performs fusion across cervical, thoracic, and lumbar levels, including <a href=\"/treatments/lumbar-fusion-surgery\" class=\"underline text-[#252932] hover:text-[#2358AC]\">lumbar fusion surgery</a>, with minimally invasive approaches considered when anatomy and goals support them.</p><p>For selected L5-S1 pathology, the fusion discussion may include specialized access options such as Axial Lumbar Interbody Fusion (AxiaLIF), a presacral approach that reaches the L5-S1 disc space through a small incision near the tailbone. This technique is not a general substitute for lumbar fusion; it is considered only when the anatomy, diagnosis, and surgical goals fit a targeted lumbosacral fusion. PPO Insurance Accepted.</p>",
     },
     candidates: {
       heading: "When is Spinal Fusion Recommended?",
@@ -1410,6 +1392,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "Degenerative disc disease or <a href=\"/conditions/spondylolisthesis\" class=\"underline text-[#252932] hover:text-[#2358AC]\">spondylolisthesis</a> causing spinal instability and chronic back or leg pain",
         "Spinal stenosis producing severe neurogenic claudication unresponsive to injections and conservative care",
         "Prior spine surgery with adjacent segment disease or pseudarthrosis (failed fusion requiring revision)",
+        "Selected L5-S1 degenerative disc disease, collapsed disc space, or low-grade spondylolisthesis where a targeted lumbosacral fusion approach is anatomically appropriate",
         "<a href=\"/conditions/spine-deformities\" class=\"underline text-[#252932] hover:text-[#2358AC]\">Spinal deformity</a> including kyphosis or sagittal imbalance requiring surgical correction",
         "Severe spinal fractures, trauma, or spinal instability from infection or tumor",
       ],
@@ -1421,6 +1404,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "<a href=\"/treatments/understanding-tlif-surgery\" class=\"underline text-[#252932] hover:text-[#2358AC]\">TLIF (Transforaminal Lumbar Interbody Fusion)</a>: Posterior approach with excellent access for decompression and single or multilevel fusion — the workhorse of scoliosis and degenerative disc surgery",
         "<a href=\"/treatments/anterior-lumbar-interbody-fusion\" class=\"underline text-[#252932] hover:text-[#2358AC]\">ALIF (Anterior Lumbar Interbody Fusion)</a>: Anterior approach allowing large cage placement to restore lordosis — particularly valuable in scoliosis correction and sagittal balance restoration",
         "<a href=\"/treatments/oblique-lumbar-interbody-fusion\" class=\"underline text-[#252932] hover:text-[#2358AC]\">OLIF</a> or <a href=\"/treatments/extreme-lateral-interbody-fusion-surgery\" class=\"underline text-[#252932] hover:text-[#2358AC]\">XLIF</a>: Lateral approaches used in minimally invasive multilevel scoliosis correction, avoiding posterior muscle disruption",
+        "AxiaLIF / axial lumbar interbody fusion: A specialized presacral L5-S1 approach that may restore disc height and place graft or instrumentation while avoiding posterior muscle disruption in carefully selected patients",
         "Posterior instrumentation: Pedicle screw and rod fixation, often combined with interbody fusion in multilevel scoliosis surgery for maximum correction and stability",
         "Bone grafting: Autograft, allograft, or synthetic graft is placed to stimulate solid bone fusion over 6–12 months",
       ],
@@ -1428,21 +1412,21 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Recovery After Spinal Fusion",
       timeline: "6-12 Months for Full Fusion Maturation",
-      details: "Most patients walk within 24 hours of surgery. Return to light activities typically occurs at 4–6 weeks; more physical work at 3–6 months. Full fusion solidification takes 6–12 months, confirmed by X-ray. **Minimally invasive techniques significantly shorten early recovery** compared to traditional open surgery — many patients report immediate nerve pain relief from decompression even before the fusion fully matures. Smoking cessation is mandatory: nicotine impairs bone healing and dramatically increases pseudarthrosis risk.",
+      details: "Recovery after spinal fusion depends on the level treated, number of levels, whether decompression or deformity correction was performed, bone quality, smoking status, and overall health. Walking usually begins early under clinical guidance, while bending, lifting, twisting, work demands, and driving are restricted according to the surgeon's protocol. Fusion maturation is monitored over months with follow-up imaging. Nicotine avoidance is important because nicotine impairs bone healing and increases pseudarthrosis risk.",
     },
     benefits: [
       "Corrects and stabilizes <a href=\"/conditions/adult-degenerative-scoliosis\" class=\"underline text-[#252932] hover:text-[#2358AC]\">adult scoliosis</a> and spinal deformity",
       "Permanently eliminates painful motion at unstable or severely degenerated segments",
       "Relieves nerve compression causing leg pain, numbness, and weakness",
       "Restores disc height and sagittal balance for improved posture and function",
-      "Can be performed minimally invasively at most levels — less muscle damage, faster recovery",
+      "May be performed with minimally invasive approaches when anatomy and goals are appropriate",
       "PPO Insurance Accepted — our team handles pre-authorization and coverage verification",
     ],
     insurance: {
       heading: "Insurance Coverage for Spinal Fusion",
       body: "Spinal fusion is a covered procedure for many diagnoses including scoliosis, trauma, deformity, and instability. **We accept most major insurance plans. PPO preferred.** We verify all benefits prior to surgery and handle the pre-authorization process for complex procedures including deformity correction.",
     },
-    schedule: "If you have been told spinal fusion may be appropriate for your condition — or want a second opinion on a fusion recommendation — contact Mountain Spine & Orthopedics. Our specialists will review your imaging honestly and help you make an informed decision. **Same-week appointments available. PPO Insurance Accepted.**",
+    schedule: "If you have been told spinal fusion may be appropriate, or want a second opinion before deciding, contact Mountain Spine & Orthopedics. Our specialists can review MRI, CT, and standing X-rays to explain whether fusion, decompression, injections, or continued non-surgical care best matches your diagnosis. PPO Insurance Accepted.",
   },
   {
     id: "transforaminal-lumbar-interbody-fusion",
@@ -1560,7 +1544,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Recovery and Rehabilitation",
       timeline: "3-6 Months for Bone Healing",
-      details: "Recovery involves wearing a cervical collar for 6-12 weeks to ensure the hardware holds the spine in perfect alignment while the bone fuses. Hospital stay is typically 2-4 days. Patients can often walk the day after surgery. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> begins once X-rays show bone healing, focusing on strengthening the upper back and shoulder muscles to support the neck. Full return to activities occurs once the fusion is solid.",
+      details: "Recovery involves wearing a cervical collar for 6-12 weeks to ensure the hardware holds the spine in perfect alignment while the bone fuses. Hospital stay is typically 2-4 days. Patients can often walk the day after surgery. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> begins once X-rays show bone healing, focusing on strengthening the upper back and shoulder muscles to support the neck. Full return to activities occurs once the fusion is solid.",
     },
     benefits: [
       "Provides the most rigid stabilization possible for unstable necks",
@@ -1625,7 +1609,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Recovery Timeline",
       timeline: "3-6 Months",
-      details: "Patients typically spend 2-3 days in the hospital. Discomfort in the back of the neck is common initially but improves rapidly. You will likely wear a neck brace for support. Walking is encouraged immediately. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> starts gradually to prevent stiffness in the shoulders and upper back. Most patients report relief from their pre-op arm pain and **numbness** almost immediately after the decompression.",
+      details: "Patients typically spend 2-3 days in the hospital. Discomfort in the back of the neck is common initially but improves rapidly. You will likely wear a neck brace for support. Walking is encouraged immediately. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> starts gradually to prevent stiffness in the shoulders and upper back. Most patients report relief from their pre-op arm pain and **numbness** almost immediately after the decompression.",
     },
     benefits: [
       "Stops painful motion at arthritic spinal segments",
@@ -1740,7 +1724,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "Individuals with **Degenerative Disc Disease** in the neck",
         "Patients with central disc herniations compressing the spinal cord",
         "Those with **Cervical Spinal Stenosis** caused by bone spurs",
-        "Patients who have failed physical therapy and injections",
+        "Patients who have failed rehabilitation and injections",
       ],
     },
     procedure: {
@@ -1757,7 +1741,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Rapid Recovery with ACDF",
       timeline: "3-6 Months",
-      details: "Most **ACDF Surgery** patients go home the same day or the next morning. Soreness in the throat is common for a few days. Arm pain relief is often immediate. Patients typically return to light daily activities within a week and driving in 2-4 weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> helps restore neck range of motion once fusion begins, typically at the 6-week mark.",
+      details: "Most **ACDF Surgery** patients go home the same day or the next morning. Soreness in the throat is common for a few days. Arm pain relief is often immediate. Patients typically return to light daily activities within a week and driving in 2-4 weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> helps restore neck range of motion once fusion begins, typically at the 6-week mark.",
     },
     benefits: [
       "High success rate (90%+) for relief of arm pain and weakness",
@@ -1823,7 +1807,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Faster Recovery than Fusion",
       timeline: "6-12 Weeks",
-      details: "Recovery from **Lumbar Disc Replacement Surgery** is often faster than fusion because there is no need to wait for bone to knit together. Patients walk the day of surgery. Hospital stay is 1-3 days. Since the device is stable immediately, patients can return to light activities in 2-4 weeks and sports in 3 months. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> focuses on core stability and using the new range of motion.",
+      details: "Recovery from **Lumbar Disc Replacement Surgery** is often faster than fusion because there is no need to wait for bone to knit together. Patients walk the day of surgery. Hospital stay is 1-3 days. Since the device is stable immediately, patients can return to light activities in 2-4 weeks and sports in 3 months. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> focuses on core stability and using the new range of motion.",
     },
     benefits: [
       "Preserves natural motion in the lower back",
@@ -1888,7 +1872,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Recovery and Life After ADR",
       timeline: "4-12 Weeks",
-      details: "Patients typically experience less post-operative stiffness than fusion patients. Cervical ADR patients often go home same-day; lumbar ADR requires a short hospital stay. Because there is no bone fusion to wait for, return to activity is often quicker. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> is started early to encourage mobility. Most patients return to full unrestricted activity within 3 months.",
+      details: "Patients typically experience less post-operative stiffness than fusion patients. Cervical ADR patients often go home same-day; lumbar ADR requires a short hospital stay. Because there is no bone fusion to wait for, return to activity is often quicker. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> is started early to encourage mobility. Most patients return to full unrestricted activity within 3 months.",
     },
     benefits: [
       "Maintains spinal flexibility and range of motion",
@@ -1907,7 +1891,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     id: "cervical-disc-arthroplasty",
     slug: "cervical-disc-arthroplasty",
     metaTitle: "Cervical Disc Arthroplasty | Neck Disc Replacement FL, NJ, NY, & PA",
-    metaDescription: "Treat cervical radiculopathy with Cervical Disc Arthroplasty. Our FL, NJ, NY, & PA experts replace damaged neck discs to preserve motion and relieve arm pain.",
+    metaDescription: "Cervical disc arthroplasty replaces a damaged neck disc to relieve arm pain while preserving motion. Learn candidacy, recovery, and PPO coverage options.",
     keywords: [
       "Cervical disc arthroplasty",
       "CDA surgery",
@@ -1925,48 +1909,49 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     card_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--cervical-disc-arthroplasty--thumbnail.png',
     inTxt_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--cervical-disc-arthroplasty--thumbnail.png',
     heroImageAlt: "Surgeon holding a cervical artificial disc model",
-    heroDescription: "Cervical disc arthroplasty replaces damaged cervical discs with mobile prosthetic implants to preserve neck motion and treat radiculopathy.",
+    heroDescription: "Cervical disc arthroplasty is a motion-preserving option for selected patients with cervical nerve compression from a damaged disc.",
     overview: {
-      heading: "Preserving Neck Motion",
-      body: "**Cervical Disc Arthroplasty** is a motion-sparing surgery used to treat a <a href=\"https://mountainspineorthopedics.com/conditions/cervical-herniated-disc\" class=\"text-blue-600 hover:underline\">**Cervical Herniated Disc**</a> or <a href=\"https://mountainspineorthopedics.com/conditions/degenerative-disc-disease\" class=\"text-blue-600 hover:underline\">**Degenerative Disc Disease**</a> in the neck. Unlike traditional <a href=\"https://mountainspineorthopedics.com/treatments/acdf-surgery\" class=\"text-blue-600 hover:underline\">**ACDF Surgery**</a> which fuses the bones, arthroplasty implants a prosthetic disc that mimics the natural gliding motion of the neck. This procedure is excellent for patients with arm pain (**Radiculopathy**) caused by a pinched nerve who wish to avoid the stiffness associated with fusion.",
+      heading: "Motion-Preserving Neck Disc Replacement",
+      body: "**Cervical Disc Arthroplasty** replaces a damaged cervical disc with an artificial disc after the nerve root or spinal cord has been decompressed. It is most often considered for a single-level or selected two-level <a href=\"https://mountainspineorthopedics.com/conditions/cervical-herniated-disc\" class=\"text-blue-600 hover:underline\">**cervical herniated disc**</a>, bone spur, or disc collapse causing arm pain, numbness, tingling, or weakness. Unlike <a href=\"https://mountainspineorthopedics.com/treatments/acdf-surgery\" class=\"text-blue-600 hover:underline\">**ACDF surgery**</a>, which locks the treated segment, disc arthroplasty is designed to maintain motion at the operated level when the joints, alignment, and bone quality make motion preservation appropriate.<br/><br/>The decision is not simply \"replacement instead of fusion.\" Patients with severe facet arthritis, marked instability, osteoporosis, deformity, infection, or advanced multilevel degeneration may be better served by fusion or another cervical procedure. At Mountain Spine & Orthopedics, the surgical recommendation is based on symptoms, neurological findings, MRI or CT results, X-rays that show motion and alignment, and the patient's functional goals.",
     },
     candidates: {
-      heading: "Candidates for Cervical Arthroplasty",
+      heading: "Who May Be a Candidate?",
       list: [
-        "Patients with arm pain, numbness, or weakness from a pinched neck nerve",
-        "Individuals with single or two-level disc disease",
-        "Patients with good bone quality and no severe arthritis in the neck joints",
-        "Those without significant neck instability or kyphosis",
-        "Active patients prioritizing range of motion",
+        "Patients with arm pain, numbness, tingling, or weakness from cervical radiculopathy",
+        "Single-level or selected two-level disc disease confirmed by imaging and exam",
+        "Cervical disc herniation or bone spur compression that has not improved with appropriate non-surgical care",
+        "Good bone quality, preserved facet joints, and no major cervical instability",
+        "Patients who need nerve decompression and may benefit from preserving motion at the treated level",
       ],
     },
     procedure: {
-      heading: "How It Works",
+      heading: "How Cervical Disc Replacement Is Performed",
       steps: [
-        "Anterior incision is made in a neck crease (minimally invasive)",
-        "The damaged disc is removed to decompress the spinal cord and nerve roots",
-        "Bone spurs are smoothed away",
-        "The artificial disc (typically metal/plastic or metal/metal) is inserted",
-        "The implant anchors to the bone, allowing flexion, extension, and rotation",
+        "The surgeon reaches the cervical spine through a small anterior neck incision",
+        "The damaged disc is removed while protecting the surrounding soft tissues",
+        "Disc fragments and bone spurs are cleared from the nerve root or spinal cord",
+        "The disc space is prepared so the artificial disc sits at the correct height and angle",
+        "The implant is placed under X-ray guidance and checked for alignment and motion",
+        "The incision is closed, and post-operative instructions are tailored to the procedure and exam findings",
       ],
     },
     recovery: {
-      heading: "Quick Recovery",
-      timeline: "4-6 Weeks",
-      details: "Recovery from **Cervical Disc Arthroplasty** is typically rapid. Most surgeries are outpatient. Dysphagia (trouble swallowing) is rare and usually mild. Patients can move their neck immediately after surgery—no rigid brace is required. Return to desk work is often possible in 1-2 weeks, with full sports clearance around 6-12 weeks depending on bone healing.",
+      heading: "Recovery After Cervical Disc Arthroplasty",
+      timeline: "Several Weeks to 3 Months",
+      details: "Recovery varies by the level treated, nerve symptoms, work demands, and whether any additional procedure was performed. Many patients begin walking soon after surgery and are given specific restrictions on lifting, driving, and neck positioning. Swallowing soreness or voice irritation can occur after anterior neck surgery and is usually monitored closely. Outside rehabilitation or guided home exercises may be recommended after the early healing phase to restore comfortable motion and shoulder-neck mechanics. Return to desk work may occur earlier than heavy labor, while contact sports or high-load activity require surgeon clearance.",
     },
     benefits: [
-      "Preserves natural neck rotation and flexion",
-      "Significantly reduces the risk of 'wear and tear' on adjacent discs",
-      "No need for bone grafting or plating",
-      "Faster return to normal neck function than fusion",
-      "Effective relief of radiating arm pain and weakness"
+      "Decompresses irritated cervical nerves while preserving motion at the treated segment",
+      "Avoids the bone-graft healing requirement of a fusion in properly selected patients",
+      "May reduce mechanical stress on adjacent levels compared with fusing the segment",
+      "Addresses arm pain, numbness, or weakness caused by disc or bone-spur compression",
+      "Offers a motion-sparing alternative when anatomy and alignment support that choice"
     ],
     insurance: {
       heading: "Insurance for Cervical Disc Replacement",
-      body: "**We accept most major insurance plans. PPO preferred.** Cervical disc replacement is FDA-approved and widely covered for indicated patients suffering from radiculopathy.",
+      body: "**We accept most major insurance plans. PPO preferred.** Cervical disc replacement coverage depends on the diagnosis, number of levels, imaging findings, and plan requirements. Our team helps PPO patients understand authorization requirements before surgery.",
     },
-    schedule: "Neck pain, arm pain, or numbness affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
+    schedule: "Neck pain with arm numbness, tingling, or weakness may require a surgical opinion. Schedule a consultation with Mountain Spine & Orthopedics to review whether cervical disc arthroplasty, ACDF, or another option fits your anatomy and goals.",
   },
   {
     id: "motion-preservation-spine-surgery",
@@ -2017,7 +2002,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Benefits for Recovery",
       timeline: "Varies by Procedure",
-      details: "Because these procedures do not rely on bone fusion (which takes months to heal), recovery is often faster. Patients avoid the stiffness associated with fusion and often require less time in a brace. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> is crucial to retrain the muscles to control the preserved range of motion. Return to activity is often determined by wound healing rather than bone healing.",
+      details: "Because these procedures do not rely on bone fusion (which takes months to heal), recovery is often faster. Patients avoid the stiffness associated with fusion and often require less time in a brace. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> is crucial to retrain the muscles to control the preserved range of motion. Return to activity is often determined by wound healing rather than bone healing.",
     },
     benefits: [
       "Maintains natural spinal mechanics and flexibility",
@@ -2064,7 +2049,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "Patients with severe hip pain that limits everyday activities like walking or bending",
         "Individuals with hip stiffness that prevents lifting the leg",
         "Those suffering from **Osteoarthritis** or **Avascular Necrosis** of the hip",
-        "Patients with inadequate relief from anti-inflammatory drugs or physical therapy",
+        "Patients with inadequate relief from anti-inflammatory drugs or rehabilitation",
         "Individuals with hip fractures or dysplasia requiring reconstruction",
       ],
     },
@@ -2082,7 +2067,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Recovery and Life After THA",
       timeline: "3-6 Months for Full Activity",
-      details: "<p>Most patients walk with assistance on the day of surgery or the next day. Hospital stays are short (1-2 days) with our <strong>minimally invasive</strong> approach. <strong>Physical therapy</strong> is vital for strengthening the muscles around the new hip and begins immediately after surgery.</p><p><strong>Phase 1 (Weeks 1-2):</strong> Hospital discharge, walking with assistive device, basic range of motion exercises, and wound care.</p><p><strong>Phase 2 (Weeks 2-6):</strong> Progressive weight-bearing, strengthening exercises, and gradual return to daily activities. Most patients return to driving in 3-6 weeks when cleared by their surgeon.</p><p><strong>Phase 3 (Months 2-3):</strong> Advanced strengthening, return to most daily activities, and initiation of low-impact exercise.</p><p><strong>Phase 4 (Months 3-6):</strong> Full recovery with return to low-impact activities like swimming, biking, and golf pain-free. Long-term, patients can enjoy an active lifestyle with their new hip.</p>",
+      details: "<p>Most patients walk with assistance on the day of surgery or the next day. Hospital stays are short (1-2 days) with our <strong>minimally invasive</strong> approach. <strong>Rehabilitation</strong> is vital for strengthening the muscles around the new hip and begins immediately after surgery.</p><p><strong>Phase 1 (Weeks 1-2):</strong> Hospital discharge, walking with assistive device, basic range of motion exercises, and wound care.</p><p><strong>Phase 2 (Weeks 2-6):</strong> Progressive weight-bearing, strengthening exercises, and gradual return to daily activities. Most patients return to driving in 3-6 weeks when cleared by their surgeon.</p><p><strong>Phase 3 (Months 2-3):</strong> Advanced strengthening, return to most daily activities, and initiation of low-impact exercise.</p><p><strong>Phase 4 (Months 3-6):</strong> Full recovery with return to low-impact activities like swimming, biking, and golf pain-free. Long-term, patients can enjoy an active lifestyle with their new hip.</p>",
     },
     benefits: [
       "Significant reduction or total elimination of hip pain",
@@ -2118,49 +2103,52 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     card_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--total-knee-replacement--thumbnail.png',
     inTxt_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--total-knee-replacement--thumbnail.png',
     heroImageAlt: "Detailed view of total knee replacement implant components",
-    heroDescription: "Total knee replacement resurfaces damaged knee joint surfaces with metal and plastic components to treat severe arthritis and restore function.",
+    heroDescription: "Total knee replacement resurfaces the femur, tibia, and sometimes the kneecap to treat severe knee arthritis, deformity, and bone-on-bone pain.",
     overview: {
       heading: "A Long-Term Solution for Knee Arthritis",
-      body: "<p><strong>Total Knee Replacement</strong> (TKA) is a resurfacing procedure for knees severely damaged by <a href=\"/conditions/knee-arthritis\" class=\"text-blue-600 hover:underline\">knee arthritis</a>, including <a href=\"/conditions/osteoarthritis\" class=\"text-blue-600 hover:underline\">osteoarthritis</a> or trauma. It involves removing the damaged cartilage and bone from the surface of the knee joint and replacing them with metal and high-grade plastic components.</p><p>This creates a smooth new hinge for the knee, eliminating the painful friction of bone rubbing against bone. Our <strong>knee specialists</strong> often utilize <strong>minimally invasive</strong> techniques or robotic assistance to ensure precise alignment and longevity of the implant, optimizing outcomes and minimizing recovery time.</p>",
+      body: "<p><strong>Total Knee Replacement</strong> (TKA), also called total knee arthroplasty, is used when <a href=\"/conditions/knee-arthritis\" class=\"text-blue-600 hover:underline\">knee arthritis</a> has damaged more than one compartment of the joint and daily function is limited by pain, stiffness, swelling, or deformity. The operation does not replace the entire knee with a hinge; it resurfaces the worn ends of the femur and tibia with metal components and places a medical-grade plastic spacer between them. The undersurface of the kneecap may also be resurfaced when indicated.</p><p>The central goal is alignment and balance. A knee replacement that is well aligned, stable in flexion and extension, and matched to the patient's anatomy can reduce bone-on-bone pain and improve walking, stairs, and standing tolerance. Mountain Spine & Orthopedics evaluates X-rays, deformity, range of motion, ligament stability, medical risk, and prior treatments before recommending surgery.</p>",
     },
     candidates: {
       heading: "Is Knee Replacement Right for You?",
       list: [
-        "Patients with severe knee pain that interferes with sleeping or walking",
-        "Individuals with chronic knee inflammation and swelling",
-        "Those with knee deformities like bowing in or out of the leg",
-        "Patients with **Rheumatoid Arthritis** or post-traumatic arthritis",
-        "Individuals who have not found relief from cortisone injections or **Physical Therapy**",
+        "Patients with bone-on-bone osteoarthritis involving multiple knee compartments",
+        "Individuals with knee pain that limits walking distance, stairs, sleep, work, or daily errands",
+        "Patients with progressive bow-leg or knock-knee deformity from arthritis",
+        "People with post-traumatic arthritis after fracture, ligament injury, or prior knee surgery",
+        "Patients with rheumatoid or inflammatory arthritis after appropriate medical management",
+        "Individuals who have not found durable relief from medication, bracing, injections, weight-loss efforts, activity changes, or outside rehabilitation guidance",
       ],
     },
     procedure: {
       heading: "How TKA is Performed",
       steps: [
-        "An incision is made on the front of the knee to access the joint",
-        "The damaged cartilage surfaces at the ends of the femur and tibia are removed",
-        "Metal components are cemented or press-fit to recreate the joint surface",
-        "A medical-grade plastic spacer is inserted between the metal parts to create a smooth gliding surface",
-        "The undersurface of the kneecap (patella) may also be resurfaced",
-        "The surgeon tests the knee's motion to ensure perfect balance before closing",
+        "Pre-operative X-rays and exam guide implant sizing, alignment goals, and deformity correction",
+        "An incision is made over the front of the knee and the arthritic joint surfaces are exposed",
+        "Damaged cartilage and a precise amount of bone are removed from the femur and tibia",
+        "Trial components are used to check extension, flexion, ligament balance, and kneecap tracking",
+        "Final metal components are cemented or press-fit depending on the implant plan",
+        "A polyethylene spacer is placed between the metal surfaces to allow smooth motion",
+        "The patella is resurfaced or preserved based on cartilage wear and tracking",
+        "The surgeon confirms stability, range of motion, and alignment before closure",
       ],
     },
     recovery: {
-      heading: "Rehabilitation and Outcomes",
+      heading: "Recovery After Knee Replacement",
       timeline: "3-6 Months",
-      details: "Movement begins immediately. You will likely walk with a walker the day of surgery. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">Physical therapy</a> is crucial and begins right away to restore range of motion. Most patients resume normal daily activities within 6 weeks. While complete healing takes time, the relief from the deep, aching pain of arthritis is often felt very quickly.",
+      details: "<p>Walking usually begins the day of surgery or the next day with a walker or other assistive device. Early recovery focuses on controlling swelling, safely bearing weight, restoring knee extension, and gradually improving flexion. Outside rehabilitation guidance and a home exercise plan help protect motion while the incision and deeper tissues heal.</p><p>Many patients resume basic daily activities within several weeks, but swelling, warmth, and stiffness can fluctuate for months. Full recovery depends on pre-operative motion, strength, medical health, pain control, and adherence to the post-operative plan. The surgeon will advise when driving, work, travel, and low-impact activities are appropriate.</p>",
     },
     benefits: [
-      "Dramatic relief from chronic knee pain",
-      "Correction of leg deformities (bow-legs or knock-knees)",
-      "Restoration of function for walking, climbing stairs, and standing",
-      "High durability with modern implants lasting decades",
-      "Ability to return to active hobbies like hiking and cycling"
+      "Reduces bone-on-bone knee arthritis pain when non-surgical care is no longer enough",
+      "Corrects arthritis-related bowing or knock-knee alignment when appropriate",
+      "Improves tolerance for walking, stairs, standing, and daily activities",
+      "Addresses multi-compartment disease that is not suitable for partial knee replacement",
+      "Uses modern implant planning focused on alignment, stability, and kneecap tracking"
     ],
     insurance: {
       heading: "Cost & Insurance for Knee Replacement",
       body: "Knee replacement is widely covered by insurance for arthritis. **We accept most major insurance plans. PPO preferred.** We help navigate the approval process to ensure your surgery is covered.",
     },
-    schedule: "Knee pain, stiffness, or limited mobility affecting daily life? Our <strong>knee specialists</strong> provide comprehensive evaluation and advanced <strong>minimally invasive</strong> knee replacement. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
+    schedule: "Knee pain, stiffness, swelling, or deformity affecting daily life? Our <strong>knee specialists</strong> can review your X-rays, prior treatments, and surgical candidacy. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. PPO Insurance is Accepted.",
   },
   {
     id: "posterior-cervical-laminoplasty",
@@ -2213,7 +2201,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Recovery Advantages",
       timeline: "6-12 Weeks",
-      details: "Because there is no bone fusion, recovery is often faster than fusion surgery. Patients usually stay in the hospital for 1-2 days. A soft collar may be worn for comfort for a few weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> focuses on neck strengthening and range of motion. Since the spine is not fused, patients typically retain much of their pre-op neck flexibility.",
+      details: "Because there is no bone fusion, recovery is often faster than fusion surgery. Patients usually stay in the hospital for 1-2 days. A soft collar may be worn for comfort for a few weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> focuses on neck strengthening and range of motion. Since the spine is not fused, patients typically retain much of their pre-op neck flexibility.",
     },
     benefits: [
       "Preserves neck motion (rotation and extension)",
@@ -2279,7 +2267,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Quick Recovery",
       timeline: "2-4 Weeks",
-      details: "This is often an outpatient procedure, meaning you go home the same day. Because the spine is not fused, recovery is rapid. Most patients experience immediate relief from arm pain. Soreness at the incision site resolves quickly. Return to desk work is often possible within 1-2 weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> may be prescribed to strengthen the neck muscles.",
+      details: "This is often an outpatient procedure, meaning you go home the same day. Because the spine is not fused, recovery is rapid. Most patients experience immediate relief from arm pain. Soreness at the incision site resolves quickly. Return to desk work is often possible within 1-2 weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> may be prescribed to strengthen the neck muscles.",
     },
     benefits: [
       "Preserves full neck range of motion",
@@ -2345,7 +2333,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Recovery and Results",
       timeline: "4-12 Weeks",
-      details: "Patients often feel immediate relief from leg pain upon waking. Hospital stay is usually 1-2 days. Walking is encouraged immediately. You will be advised to avoid heavy lifting and bending for several weeks to allow the muscles to heal. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> helps rebuild core strength. Most patients regain the ability to walk for exercise and daily tasks without the pre-op limitations.",
+      details: "Patients often feel immediate relief from leg pain upon waking. Hospital stay is usually 1-2 days. Walking is encouraged immediately. You will be advised to avoid heavy lifting and bending for several weeks to allow the muscles to heal. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> helps rebuild core strength. Most patients regain the ability to walk for exercise and daily tasks without the pre-op limitations.",
     },
     benefits: [
       "Significant improvement in walking distance and standing tolerance",
@@ -2410,7 +2398,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Recovery Expectations",
       timeline: "3-6 Weeks",
-      details: "Recovery depends on the extent of the decompression. Simple discectomies often allow return to work in 1-2 weeks. More extensive laminectomies may require 4-6 weeks. Patients typically experience significant leg pain relief immediately. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> is prescribed to strengthen the back and prevent future issues. Walking is the best initial exercise during recovery.",
+      details: "Recovery depends on the extent of the decompression. Simple discectomies often allow return to work in 1-2 weeks. More extensive laminectomies may require 4-6 weeks. Patients typically experience significant leg pain relief immediately. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> is prescribed to strengthen the back and prevent future issues. Walking is the best initial exercise during recovery.",
     },
     benefits: [
       "Directly addresses the mechanical cause of nerve pain",
@@ -2458,7 +2446,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "Patients with a focal **Herniated Disc** causing leg pain",
         "Individuals with **Sciatica** who want the least invasive surgical option",
         "Patients looking for a rapid return to work or sports",
-        "Those who have not improved with physical therapy or epidural injections",
+        "Those who have not improved with rehabilitation or epidural injections",
         "Patients with disc fragments in the spinal canal",
       ],
     },
@@ -2476,7 +2464,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Fast Track Recovery",
       timeline: "1-3 Weeks",
-      details: "MED is almost always an outpatient procedure. Patients walk out the same day. Because muscles are dilated rather than cut, back pain is minimal. Many patients return to sedentary work within a week. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> may be shorter or less intensive than with open surgery. Relief from leg pain is typically immediate.",
+      details: "MED is almost always an outpatient procedure. Patients walk out the same day. Because muscles are dilated rather than cut, back pain is minimal. Many patients return to sedentary work within a week. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> may be shorter or less intensive than with open surgery. Relief from leg pain is typically immediate.",
     },
     benefits: [
       "Minimal muscle damage and scarring",
@@ -2542,7 +2530,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Recovery Timeline",
       timeline: "2-6 Weeks",
-      details: "This is typically an outpatient surgery. Patients are encouraged to walk immediately to prevent scar tissue. Avoid bending, lifting, or twisting (BLT) for about 4-6 weeks to prevent re-herniation. Most patients experience dramatic pain relief immediately. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> usually starts at week 4-6 to strengthen the core and stabilize the back.",
+      details: "This is typically an outpatient surgery. Patients are encouraged to walk immediately to prevent scar tissue. Avoid bending, lifting, or twisting (BLT) for about 4-6 weeks to prevent re-herniation. Most patients experience dramatic pain relief immediately. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> usually starts at week 4-6 to strengthen the core and stabilize the back.",
     },
     benefits: [
       "Immediate relief of leg pain in over 90% of patients",
@@ -2561,7 +2549,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     id: "degenerative-disc-disease-surgery",
     slug: "degenerative-disc-disease-surgery",
     metaTitle: "Degenerative Disc Disease Surgery | Fusion & Replacement FL",
-    metaDescription: "Treat chronic back pain from DDD with expert surgery. We offer spinal fusion and artificial disc replacement in FL, NJ, NY, & PA to restore stability and comfort.",
+    metaDescription: "Degenerative disc disease surgery may involve decompression, fusion, or disc replacement when imaging, symptoms, and failed conservative care support surgery.",
     keywords: [
       "Degenerative disc disease surgery",
       "DDD surgery",
@@ -2579,47 +2567,48 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     card_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--degenerative-disc-disease-surgery--thumbnail.png',
     inTxt_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--degenerative-disc-disease-surgery--thumbnail.png',
     heroImageAlt: "Medical illustration of a degenerated spinal disc versus a healthy disc",
-    heroDescription: "Degenerative disc disease surgery addresses chronic discogenic pain through spinal fusion or artificial disc replacement.",
+    heroDescription: "Degenerative disc disease surgery is considered when worn spinal discs cause confirmed nerve compression, instability, deformity, or persistent disc-related pain.",
     overview: {
-      heading: "Surgical Solutions for Worn Spinal Discs",
-      body: "**Degenerative Disc Disease Surgery** is recommended when chronic back or neck pain from worn-out discs persists despite conservative care. As discs lose hydration and height, they can cause **Spinal Instability** and nerve compression. Our surgeons perform advanced procedures to address this, ranging from <a href=\"https://mountainspineorthopedics.com/treatments/spinal-fusion\" class=\"text-blue-600 hover:underline\">**Spinal Fusion Surgery**</a> (to lock the painful segment) to <a href=\"https://mountainspineorthopedics.com/treatments/artificial-disc-replacement-surgery\" class=\"text-blue-600 hover:underline\">**Artificial Disc Replacement**</a> (to preserve motion). The goal is to eliminate the deep, aching pain of disc degeneration and restore spinal alignment.",
+      heading: "When Disc Degeneration Becomes a Surgical Problem",
+      body: "**Degenerative Disc Disease Surgery** is not based on an MRI label alone. Many adults have worn discs without needing an operation. Surgery becomes a serious discussion when disc collapse, herniation, bone spurs, or segment instability match the patient's symptoms and have not improved with appropriate non-surgical care.<br/><br/>The surgical target can differ from patient to patient. A collapsed lumbar disc may cause mechanical back pain, foraminal narrowing, or <a href=\"https://mountainspineorthopedics.com/conditions/sciatica\" class=\"text-blue-600 hover:underline\">**sciatica**</a>. A cervical disc may compress a nerve root and cause arm pain or weakness. Some patients need decompression for nerve pressure; others need <a href=\"https://mountainspineorthopedics.com/treatments/spinal-fusion\" class=\"text-blue-600 hover:underline\">**spinal fusion**</a> for instability, or <a href=\"https://mountainspineorthopedics.com/treatments/artificial-disc-replacement-surgery\" class=\"text-blue-600 hover:underline\">**artificial disc replacement**</a> when motion preservation is appropriate. Mountain Spine & Orthopedics reviews imaging, exam findings, prior treatments, and functional limits before recommending a procedure.",
     },
     candidates: {
-      heading: "Who Needs Surgery for DDD?",
+      heading: "Who May Need Surgery for DDD?",
       list: [
-        "Patients with severe, chronic back or neck pain unresponsive to physical therapy or injections",
-        "Individuals with **Degenerative Disc Disease** confirmed by MRI (dark discs, loss of height)",
-        "Those suffering from radiating nerve pain (**Sciatica** or Radiculopathy) due to disc collapse",
-        "Patients with spinal instability or **Spondylolisthesis** caused by disc wear",
-        "Individuals whose pain significantly limits daily activities and quality of life",
+        "Patients with nerve compression from disc collapse, herniation, or bone spurs causing leg or arm symptoms",
+        "Spinal instability, spondylolisthesis, or deformity linked to disc degeneration",
+        "Disc-related pain that is severe, persistent, and consistent with imaging and diagnostic findings",
+        "Symptoms that continue despite appropriate medication, injections, activity modification, and outside rehabilitation or home exercise care",
+        "Patients healthy enough for surgery and clear on the difference between decompression, fusion, and disc replacement",
       ],
     },
     procedure: {
-      heading: "Surgical Options",
+      heading: "Surgical Options Are Matched to the Pain Source",
       steps: [
-        "**Spinal Fusion**: The damaged disc is removed and replaced with a bone graft and cage. Screws and rods stabilize the spine while bones fuse together.",
-        "**Artificial Disc Replacement**: The worn disc is removed and replaced with a mobile prosthetic implant that mimics natural movement.",
-        "**Minimally Invasive Approaches**: We use techniques like **ALIF** or **XLIF** to access the spine with less muscle disruption.",
-        "**Decompression**: Any bone spurs or disc material pressing on nerves are removed during the procedure.",
+        "**Decompression** removes disc material, bone spurs, or ligament pressure when nerve compression is the dominant problem.",
+        "**Spinal fusion** removes the painful or collapsed disc, restores height with a cage or graft, and stabilizes the segment with instrumentation when instability is present.",
+        "**Artificial disc replacement** may be considered when one or selected levels are diseased, the facet joints are healthy, and preserving motion is realistic.",
+        "**Approach selection** may include anterior, posterior, lateral, or minimally invasive access depending on the level, anatomy, prior surgery, and goals.",
+        "**Revision planning** is considered when prior surgery, adjacent segment disease, or hardware changes complicate the diagnosis.",
       ],
     },
     recovery: {
       heading: "Recovery Expectations",
-      timeline: "3-6 Months",
-      details: "Recovery depends on the specific procedure. Disc replacement patients often recover motion faster (6-12 weeks). Fusion patients require time for bone healing (3-6 months) before returning to heavy activities. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> is essential for both, focusing on core strengthening and posture to protect the spine. Most patients report a significant reduction in their pre-operative pain.",
+      timeline: "Weeks to Several Months",
+      details: "Recovery depends on the procedure and the reason surgery was performed. Decompression alone may have a shorter restriction period than fusion. Fusion requires time for bone healing and usually has stricter lifting and bending limits. Disc replacement recovery focuses on protecting the implant while restoring controlled motion. Outside rehabilitation or surgeon-directed home exercises may be introduced after the early healing phase to rebuild walking tolerance, core control, posture, and safe movement habits. Nerve symptoms can improve at different speeds depending on how long the nerve was compressed before surgery.",
     },
     benefits: [
-      "Eliminates the source of discogenic pain",
-      "Relieves pressure on pinched nerves",
-      "Restores proper disc height and spinal alignment",
-      "Stabilizes the spine to prevent further degeneration",
-      "Improves overall function and ability to sit/stand comfortably"
+      "Separates disc-related pain, nerve compression, and instability instead of treating DDD as one diagnosis",
+      "Allows decompression, fusion, or disc replacement to be chosen for the specific structural problem",
+      "Can restore disc height and foraminal space when collapse is pinching a nerve",
+      "Can stabilize a painful unstable segment when non-surgical care has failed",
+      "Creates a surgical plan based on imaging correlation, symptoms, and functional goals"
     ],
     insurance: {
       heading: "Insurance for DDD Surgery",
-      body: "**We accept most major insurance plans. PPO preferred.** Surgical treatment for proven <a href=\"https://mountainspineorthopedics.com/conditions/degenerative-disc-disease\" class=\"text-blue-600 hover:underline\">degenerative disc disease</a> is a standard covered benefit. We handle all pre-authorization requirements.",
+      body: "**We accept most major insurance plans. PPO preferred.** Authorization for degenerative disc disease surgery typically requires imaging, exam findings, documented symptoms, and prior conservative treatment unless urgent neurological issues are present.",
     },
-    schedule: "Back pain, neck pain, or disc-related symptoms affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
+    schedule: "If a degenerative disc diagnosis has not explained why you hurt or which procedure fits, schedule a consultation with Mountain Spine & Orthopedics for a focused surgical review.",
   },
   {
     id: "percutaneous-discectomy",
@@ -2671,7 +2660,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Fast Recovery",
       timeline: "1-2 Weeks",
-      details: "Because there is no incision or muscle cutting, recovery is very fast. Patients walk out the same day. Most can return to sedentary work within a few days. Soreness at the needle site is minimal. Relief from nerve pain is often felt immediately or within a few days as the nerve inflammation subsides. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> is usually not required but may be suggested for core strengthening.",
+      details: "Because there is no incision or muscle cutting, recovery is very fast. Patients walk out the same day. Most can return to sedentary work within a few days. Soreness at the needle site is minimal. Relief from nerve pain is often felt immediately or within a few days as the nerve inflammation subsides. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> is usually not required but may be suggested for core strengthening.",
     },
     benefits: [
       "No large incision, no stitches, and minimal scarring",
@@ -2736,7 +2725,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Recovery and Rehab",
       timeline: "3-6 Months",
-      details: "A sling is worn for 2-4 weeks to protect the soft tissues. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> begins gently to prevent stiffness and progressively increases to strengthening exercises. Because the natural anatomy is preserved, patients often report a very natural feeling shoulder after recovery. Return to sports like golf or swimming is typically possible after 4-6 months.",
+      details: "A sling is worn for 2-4 weeks to protect the soft tissues. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> begins gently to prevent stiffness and progressively increases to strengthening exercises. Because the natural anatomy is preserved, patients often report a very natural feeling shoulder after recovery. Return to sports like golf or swimming is typically possible after 4-6 months.",
     },
     benefits: [
       "Preserves natural bone stock (easier revision in the future if needed)",
@@ -2776,7 +2765,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     heroDescription: "Hip arthroscopy uses small incisions and an arthroscope to diagnose and treat hip pathology, including labral tears and impingement.",
     overview: {
       heading: "Minimally Invasive Hip Preservation",
-      body: "**Hip Arthroscopy Treatment** is a specialized, <strong>minimally invasive procedure</strong> used to diagnose and treat problems inside the hip joint. Unlike traditional open surgery, it uses small incisions and a camera (arthroscope) to access the joint with minimal tissue disruption. This approach is highly effective for treating <strong>Femoroacetabular Impingement (FAI)</strong> and <strong>labral tears</strong>—conditions that cause deep groin pain, mechanical catching, and restricted hip motion in active individuals.<br/><br/>Athletes and active patients often present with <strong>hip pain during pivoting, cutting, or deep squatting</strong>—movements that stress the labrum and impinging bone. Hip arthroscopy allows surgeons to reshape abnormal bone (CAM or Pincer lesions), repair or reconstruct the labrum, and remove inflamed tissue or loose bodies. The goal is to preserve the natural hip joint, relieve pain, and delay or prevent the onset of hip osteoarthritis. For those experiencing persistent <a href=\"/conditions/hip\" class=\"text-blue-600 hover:underline\">hip conditions</a>, early evaluation can determine if arthroscopy is appropriate.<br/><br/>According to <a href=\"https://orthoinfo.aaos.org/en/diseases--conditions/overuse-injuries-in-children/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">AAOS guidance on overuse injuries</a>, repetitive hip stress in athletes can lead to labral damage that may benefit from surgical intervention when conservative measures fail. Hip arthroscopy has become a valuable tool in sports medicine for returning athletes to their activities with restored hip function and pain relief.",
+      body: "**Hip Arthroscopy Treatment** is a specialized, <strong>minimally invasive procedure</strong> used to diagnose and treat problems inside the hip joint. Unlike traditional open surgery, it uses small incisions and a camera (arthroscope) to access the joint with minimal tissue disruption. This approach is highly effective for treating <strong>Femoroacetabular Impingement (FAI)</strong> and <strong>labral tears</strong>—conditions that cause deep groin pain, mechanical catching, and restricted hip motion in active individuals.<br/><br/>Athletes and active patients often present with <strong>hip pain during pivoting, cutting, or deep squatting</strong>—movements that stress the labrum and impinging bone. Hip arthroscopy allows surgeons to reshape abnormal bone (CAM or Pincer lesions), repair or reconstruct the labrum, and remove inflamed tissue or loose bodies. Loose bodies are small cartilage or bone fragments that float within the joint after trauma, arthritis, avascular necrosis, osteochondritis dissecans, synovial chondromatosis, or prior injury. They can wedge between joint surfaces and cause sudden sharp pain, popping, catching, locking, swelling, and episodic loss of motion. The goal is to preserve the natural hip joint, relieve pain, and delay or prevent the onset of hip osteoarthritis. For those experiencing persistent <a href=\"/conditions/hip\" class=\"text-blue-600 hover:underline\">hip conditions</a>, early evaluation can determine if arthroscopy is appropriate.<br/><br/>According to <a href=\"https://orthoinfo.aaos.org/en/diseases--conditions/overuse-injuries-in-children/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">AAOS guidance on overuse injuries</a>, repetitive hip stress in athletes can lead to labral damage that may benefit from surgical intervention when conservative measures fail. Hip arthroscopy has become a valuable tool in sports medicine for returning athletes to their activities with restored hip function and pain relief.",
     },
     candidates: {
       heading: "Who Hip Arthroscopy Helps Most",
@@ -2788,7 +2777,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "Young, active patients <strong>without significant arthritis</strong> who want to preserve their natural hip",
         "Athletes who have <strong>failed conservative treatment</strong> including rest, therapy, and injections",
         "Patients with <a href=\"/conditions/hip-dysplasia\" class=\"text-blue-600 hover:underline\">hip dysplasia</a> or borderline dysplasia who may benefit from labral repair",
-        "Individuals with <a href=\"/conditions/loose-bodies-hip\" class=\"text-blue-600 hover:underline\">loose bodies</a> in the hip causing mechanical symptoms",
+        "Individuals with loose bodies in the hip causing locking, catching, or intermittent sharp mechanical pain",
       ],
     },
     procedure: {
@@ -2798,7 +2787,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "Small incisions (portals) are made for the camera and instruments",
         "The surgeon trims or re-attaches the torn labrum using anchors",
         "Bone spurs causing impingement (CAM or Pincer lesions) are shaved down",
-        "Inflamed tissue or loose bodies are removed",
+        "Inflamed tissue, synovial irritation, or loose cartilage and bone fragments are removed when they are causing mechanical symptoms",
         "The hip is moved dynamically to ensure impingement is resolved",
       ],
     },
@@ -2809,7 +2798,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     },
     benefits: [
       "Preserves the natural hip joint",
-      "Relieves deep groin pain and mechanical symptoms",
+      "Relieves deep groin pain, catching, locking, and other mechanical symptoms",
       "Corrects the structural cause of hip damage (FAI)",
       "Minimally invasive with small scars and less pain than open surgery",
       "Can prevent premature arthritis in young, active patients"
@@ -2857,7 +2846,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "Athletes with groin pain during pivoting or cutting activities",
         "Patients with <a href=\"/conditions/hip-impingement\" class=\"text-blue-600 hover:underline\">hip impingement</a> (FAI) that has caused labral damage",
         "Young, active patients without significant arthritis who want to preserve their natural hip",
-        "Those who have failed conservative treatment including physical therapy and injections",
+        "Those who have failed conservative treatment including rehabilitation and injections",
         "Patients with <a href=\"/conditions/hip-dysplasia\" class=\"text-blue-600 hover:underline\">hip dysplasia</a> who may benefit from labral repair to improve stability",
       ],
     },
@@ -2914,19 +2903,19 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     card_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--hip-resurfacing--thumbnail.png',
     inTxt_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--hip-resurfacing--thumbnail.png',
     heroImageAlt: "Hip resurfacing procedure preserving femoral head",
-    heroDescription: "Hip resurfacing preserves the femoral head while replacing only the joint surfaces, ideal for young, active patients with hip arthritis.",
+    heroDescription: "Hip resurfacing is a bone-preserving hip arthritis procedure for carefully selected active patients with strong bone quality and appropriate anatomy.",
     overview: {
-      heading: "Bone-Preserving Alternative to Total Hip Replacement",
-      body: "<p><strong>Hip Resurfacing</strong> is a bone-preserving alternative to <a href=\"/treatments/total-hip-replacement\" class=\"text-blue-600 hover:underline\">total hip replacement</a> that involves reshaping and capping the femoral head rather than removing it. This procedure is particularly well-suited for young, active patients with <a href=\"/conditions/hip-arthritis\" class=\"text-blue-600 hover:underline\">hip arthritis</a> who want to maintain an active lifestyle.</p><p>During hip resurfacing, the damaged surface of the femoral head is reshaped and covered with a metal cap, while the hip socket is replaced with a metal component. This approach preserves more natural bone, potentially making future revision surgery easier if needed. The metal-on-metal bearing surface is designed to withstand high activity levels.</p><p>At Mountain Spine & Orthopedics, our <strong>hip specialists</strong> carefully evaluate each patient to determine if hip resurfacing is appropriate, considering factors like age, activity level, bone quality, and anatomy. This <strong>minimally invasive</strong> procedure can provide excellent outcomes for the right candidates.</p>",
+      heading: "Bone-Preserving Hip Arthritis Surgery",
+      body: "<p><strong>Hip resurfacing</strong> treats selected cases of hip arthritis by reshaping the femoral head and placing a cap over it rather than removing the full femoral head and neck as in <a href=\"/treatments/total-hip-replacement\" class=\"text-blue-600 hover:underline\">total hip replacement</a>. The socket is also resurfaced with an implant component.</p><p>The procedure is not a generic replacement for every arthritic hip. Candidacy depends on bone quality, femoral head shape, implant sizing, arthritis pattern, activity goals, kidney function, metal sensitivity considerations, and whether there is deformity or bone loss. The main surgical-intent question is whether preserving femoral bone provides a meaningful advantage for the individual patient compared with modern total hip replacement.</p><p>Mountain Spine & Orthopedics evaluates hip resurfacing candidates with X-rays, MRI or CT when needed, medical history, and a candid discussion of benefits, risks, and alternatives. PPO Insurance Accepted.</p>",
     },
     candidates: {
       heading: "Ideal Candidates for Hip Resurfacing",
       list: [
-        "Young, active patients (typically under 60) with <a href=\"/conditions/hip-arthritis\" class=\"text-blue-600 hover:underline\">hip arthritis</a>",
-        "Athletes or individuals with high activity demands who want to maintain an active lifestyle",
+        "Carefully selected active patients with <a href=\"/conditions/hip-arthritis\" class=\"text-blue-600 hover:underline\">hip arthritis</a>",
+        "Patients whose bone quality and anatomy make resurfacing technically appropriate",
         "Patients with good bone quality and appropriate anatomy",
         "Those who want to preserve bone for potential future procedures",
-        "Patients with <a href=\"/conditions/avascular-necrosis\" class=\"text-blue-600 hover:underline\">avascular necrosis</a> in early stages before collapse",
+        "Selected patients with <a href=\"/conditions/avascular-necrosis\" class=\"text-blue-600 hover:underline\">avascular necrosis</a> before advanced collapse, when imaging supports candidacy",
         "Individuals without significant bone loss or deformity",
         "Those who understand the risks and benefits compared to total hip replacement",
       ],
@@ -2944,22 +2933,22 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     },
     recovery: {
       heading: "Recovery and Return to Activity",
-      timeline: "3-6 Months for Full Activity Return",
-      details: "<p><strong>Recovery from hip resurfacing</strong> is similar to total hip replacement but may allow for earlier return to high-impact activities in appropriate patients.</p><p><strong>Phase 1 (Weeks 1-2):</strong> Hospital discharge, walking with assistive device, basic range of motion exercises, and wound care. Most patients go home within 1-2 days.</p><p><strong>Phase 2 (Weeks 2-6):</strong> Progressive weight-bearing, strengthening exercises, and gradual return to daily activities. Most patients return to driving in 3-6 weeks.</p><p><strong>Phase 3 (Months 2-3):</strong> Advanced strengthening, return to most daily activities, and initiation of low-impact exercise.</p><p><strong>Phase 4 (Months 3-6):</strong> Full recovery with return to high-impact activities for appropriate patients. The metal-on-metal bearing is designed to withstand running and jumping activities.</p>",
+      timeline: "Recovery Varies by Implant, Bone Quality, and Activity Goals",
+      details: "<p><strong>Recovery from hip resurfacing</strong> is planned around bone healing, implant stability, gait, strength, and surgeon-specific precautions. Many early milestones overlap with total hip replacement, but activity progression is individualized.</p><p><strong>Early recovery:</strong> Walking assistance, incision care, swelling control, and hip precautions as directed.</p><p><strong>Progressive phase:</strong> Gradual weight-bearing and outside-guided strengthening as the surgeon clears activity.</p><p><strong>Return-to-activity phase:</strong> Low-impact activity typically precedes higher-demand activity. Running, jumping, or heavy lifting should only resume when the treating surgeon confirms that implant position, bone response, strength, and symptoms support it.</p>",
     },
     benefits: [
       "Preserves more natural bone than total hip replacement",
-      "Allows return to high-impact activities for appropriate patients",
+      "May support higher activity goals in carefully selected patients",
       "Potentially easier revision surgery if needed in the future",
       "Maintains more natural hip biomechanics",
-      "Durable metal-on-metal bearing surface",
-      "Excellent outcomes for young, active patients",
+      "Can be considered when anatomy and bone quality are favorable",
+      "Provides an alternative to total hip replacement for select surgical candidates",
     ],
     insurance: {
       heading: "Insurance for Hip Resurfacing",
       body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Hip resurfacing is a covered procedure for indicated patients. We verify coverage and handle authorization paperwork.",
     },
-    schedule: "Young and active with <a href=\"/conditions/hip-arthritis\" class=\"text-blue-600 hover:underline\">hip arthritis</a>? Our <strong>hip specialists</strong> offer <strong>hip resurfacing</strong> as a bone-preserving alternative. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
+    schedule: "Considering hip resurfacing for <a href=\"/conditions/hip-arthritis\" class=\"text-blue-600 hover:underline\">hip arthritis</a>? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics to compare resurfacing, total hip replacement, and non-surgical options based on your imaging, bone quality, and activity goals.",
   },
   {
     id: "hip-fracture-surgery",
@@ -3015,7 +3004,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Recovery After Hip Fracture Surgery",
       timeline: "3-6 Months for Full Recovery",
-      details: "<p><strong>Recovery from hip fracture surgery</strong> focuses on early mobilization to prevent complications and restore function. The specific recovery timeline depends on the procedure performed.</p><p><strong>Phase 1 (Days 1-7):</strong> Hospital stay with immediate mobilization, pain management, and prevention of complications like blood clots. Most patients begin walking with assistance within 1-2 days.</p><p><strong>Phase 2 (Weeks 1-6):</strong> Progressive weight-bearing as tolerated, <strong>physical therapy</strong> to restore strength and mobility, and gradual return to daily activities. Most patients return home within a few days to a week.</p><p><strong>Phase 3 (Months 2-3):</strong> Continued strengthening, improved mobility, and return to most daily activities. Driving may resume when cleared by the surgeon.</p><p><strong>Phase 4 (Months 3-6):</strong> Full recovery with return to normal activities. Long-term, patients can enjoy an active lifestyle with their repaired or replaced hip.</p>",
+      details: "<p><strong>Recovery from hip fracture surgery</strong> focuses on early mobilization to prevent complications and restore function. The specific recovery timeline depends on the procedure performed.</p><p><strong>Phase 1 (Days 1-7):</strong> Hospital stay with immediate mobilization, pain management, and prevention of complications like blood clots. Most patients begin walking with assistance within 1-2 days.</p><p><strong>Phase 2 (Weeks 1-6):</strong> Progressive weight-bearing as tolerated, <strong>rehabilitation</strong> to restore strength and mobility, and gradual return to daily activities. Most patients return home within a few days to a week.</p><p><strong>Phase 3 (Months 2-3):</strong> Continued strengthening, improved mobility, and return to most daily activities. Driving may resume when cleared by the surgeon.</p><p><strong>Phase 4 (Months 3-6):</strong> Full recovery with return to normal activities. Long-term, patients can enjoy an active lifestyle with their repaired or replaced hip.</p>",
     },
     benefits: [
       "Urgent treatment to restore function and prevent complications",
@@ -3086,7 +3075,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Recovery After Revision Surgery",
       timeline: "3-6 Months for Full Recovery",
-      details: "<p><strong>Recovery from revision hip replacement</strong> may be longer than the initial replacement due to the complexity of the procedure and potential bone loss.</p><p><strong>Phase 1 (Weeks 1-2):</strong> Hospital stay (typically 2-4 days), protected weight-bearing, pain management, and prevention of complications. Early mobilization is important.</p><p><strong>Phase 2 (Weeks 2-6):</strong> Progressive weight-bearing as tolerated, <strong>physical therapy</strong> to restore strength and mobility, and gradual return to daily activities. Some patients may require extended protected weight-bearing.</p><p><strong>Phase 3 (Months 2-3):</strong> Continued strengthening, improved mobility, and return to most daily activities. Driving may resume when cleared by the surgeon.</p><p><strong>Phase 4 (Months 3-6):</strong> Full recovery with return to normal activities. Long-term outcomes are excellent with proper rehabilitation and implant selection.</p>",
+      details: "<p><strong>Recovery from revision hip replacement</strong> may be longer than the initial replacement due to the complexity of the procedure and potential bone loss.</p><p><strong>Phase 1 (Weeks 1-2):</strong> Hospital stay (typically 2-4 days), protected weight-bearing, pain management, and prevention of complications. Early mobilization is important.</p><p><strong>Phase 2 (Weeks 2-6):</strong> Progressive weight-bearing as tolerated, <strong>rehabilitation</strong> to restore strength and mobility, and gradual return to daily activities. Some patients may require extended protected weight-bearing.</p><p><strong>Phase 3 (Months 2-3):</strong> Continued strengthening, improved mobility, and return to most daily activities. Driving may resume when cleared by the surgeon.</p><p><strong>Phase 4 (Months 3-6):</strong> Full recovery with return to normal activities. Long-term outcomes are excellent with proper rehabilitation and implant selection.</p>",
     },
     benefits: [
       "Addresses failed or worn hip implants",
@@ -3139,7 +3128,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "Athletes with pain during pivoting, cutting, or deep squatting",
         "Those with associated <a href=\"/conditions/hip-labral-tear\" class=\"text-blue-600 hover:underline\">labral tears</a> requiring repair",
         "Young, active patients without significant arthritis",
-        "Individuals who have failed physical therapy and injections",
+        "Individuals who have failed rehabilitation and injections",
         "Patients whose impingement is causing progressive joint damage",
       ],
     },
@@ -3270,7 +3259,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     heroDescription: "Hip bursectomy removes the inflamed bursa to treat chronic hip bursitis when conservative treatments have failed.",
     overview: {
       heading: "Surgical Removal of Inflamed Bursa",
-      body: "<p><strong>Hip Bursectomy</strong> is a <strong>minimally invasive</strong> procedure performed to remove an inflamed bursa when <a href=\"/conditions/hip-bursitis\" class=\"text-blue-600 hover:underline\">hip bursitis</a> fails to respond to conservative treatment. The bursa is a small fluid-filled sac that cushions the hip joint, and when it becomes chronically inflamed, removal may be necessary.</p><p>This procedure is typically reserved for severe, chronic cases of bursitis that have not responded to rest, physical therapy, medications, or injections. The most common type is <strong>trochanteric bursectomy</strong>, which removes the bursa over the greater trochanter (the bony prominence on the outer hip).</p><p>At Mountain Spine & Orthopedics, our specialists use <strong>minimally invasive</strong> techniques to remove the inflamed bursa while preserving surrounding tissues. This approach minimizes recovery time and allows for a rapid return to activities once healing is complete.</p>",
+      body: "<p><strong>Hip Bursectomy</strong> is a <strong>minimally invasive</strong> procedure performed to remove an inflamed bursa when <a href=\"/conditions/hip-bursitis\" class=\"text-blue-600 hover:underline\">hip bursitis</a> fails to respond to conservative treatment. The bursa is a small fluid-filled sac that cushions the hip joint, and when it becomes chronically inflamed, removal may be necessary.</p><p>This procedure is typically reserved for severe, chronic cases of bursitis that have not responded to rest, rehabilitation, medications, or injections. The most common type is <strong>trochanteric bursectomy</strong>, which removes the bursa over the greater trochanter (the bony prominence on the outer hip).</p><p>At Mountain Spine & Orthopedics, our specialists use <strong>minimally invasive</strong> techniques to remove the inflamed bursa while preserving surrounding tissues. This approach minimizes recovery time and allows for a rapid return to activities once healing is complete.</p>",
     },
     candidates: {
       heading: "Who Needs Hip Bursectomy?",
@@ -3279,7 +3268,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "Those with persistent pain despite multiple corticosteroid injections",
         "Individuals whose symptoms significantly impact daily activities or sleep",
         "Patients with recurrent bursitis that keeps coming back",
-        "Those who have tried physical therapy, medications, and activity modification without success",
+        "Those who have tried rehabilitation, medications, and activity modification without success",
         "Individuals with severe inflammation that doesn't respond to other treatments",
         "Patients who understand that surgery is a last resort after exhausting other options",
       ],
@@ -3367,7 +3356,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Return-to-Activity Progression",
       timeline: "4-8 Weeks (procedure dependent)",
-      details: "<p><strong>Recovery varies significantly</strong> based on what is performed during arthroscopy. The key is following function-based milestones rather than arbitrary timelines.</p><p><strong>For meniscectomy (tissue removal):</strong> Recovery is rapid. Most patients walk comfortably within days and return to sports in 4-6 weeks. Key milestones include full range of motion, minimal swelling, and quadriceps strength restoration.</p><p><strong>For <a href=\"/treatments/meniscus-repair-surgery\" class=\"text-blue-600 hover:underline\">meniscus repair</a>:</strong> Recovery is slower because the tissue must heal. Weight-bearing and bending are often restricted for 4-6 weeks. Return to sports typically occurs at 4-6 months once healing and strength criteria are met.</p><p><strong>For cartilage procedures:</strong> <a href=\"/treatments/knee-cartilage-restoration\" class=\"text-blue-600 hover:underline\">Microfracture</a> and other cartilage treatments may require 6-8 weeks of protected weight-bearing and 4-6 months before return to impact activities.</p><p><strong>Physical therapy</strong> is essential regardless of procedure, focusing on restoring quadriceps strength, range of motion, and proprioception before return to sports.</p>",
+      details: "<p><strong>Recovery varies significantly</strong> based on what is performed during arthroscopy. The key is following function-based milestones rather than arbitrary timelines.</p><p><strong>For meniscectomy (tissue removal):</strong> Recovery is rapid. Most patients walk comfortably within days and return to sports in 4-6 weeks. Key milestones include full range of motion, minimal swelling, and quadriceps strength restoration.</p><p><strong>For <a href=\"/treatments/meniscus-repair-surgery\" class=\"text-blue-600 hover:underline\">meniscus repair</a>:</strong> Recovery is slower because the tissue must heal. Weight-bearing and bending are often restricted for 4-6 weeks. Return to sports typically occurs at 4-6 months once healing and strength criteria are met.</p><p><strong>For cartilage procedures:</strong> <a href=\"/treatments/knee-cartilage-restoration\" class=\"text-blue-600 hover:underline\">Microfracture</a> and other cartilage treatments may require 6-8 weeks of protected weight-bearing and 4-6 months before return to impact activities.</p><p><strong>Rehabilitation</strong> is essential regardless of procedure, focusing on restoring quadriceps strength, range of motion, and proprioception before return to sports.</p>",
     },
     benefits: [
       "Diagnostic accuracy combined with immediate treatment",
@@ -3416,7 +3405,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "Active individuals with acute traumatic tears",
         "Patients with weakness and inability to raise the arm",
         "Those with persistent night pain affecting sleep",
-        "Patients who have failed physical therapy and injections",
+        "Patients who have failed rehabilitation and injections",
       ],
     },
     procedure: {
@@ -3432,7 +3421,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     recovery: {
       heading: "Rehabilitation Protocol",
       timeline: "4-6 Months",
-      details: "Repairing a tendon to bone requires biological healing time. A sling is worn for 4-6 weeks to protect the repair. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> starts with passive motion (therapist moves the arm) to prevent stiffness. Active motion starts around 6 weeks. Strengthening begins at 3 months. Full return to overhead sports or heavy lifting typically takes 6 months.",
+      details: "Repairing a tendon to bone requires biological healing time. A sling is worn for 4-6 weeks to protect the repair. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> starts with passive motion (therapist moves the arm) to prevent stiffness. Active motion starts around 6 weeks. Strengthening begins at 3 months. Full return to overhead sports or heavy lifting typically takes 6 months.",
     },
     benefits: [
       "Restores shoulder strength and function",
@@ -3609,7 +3598,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
       heading: "Who Needs Ankle Ligament Reconstruction?",
       list: [
         "Patients with **chronic lateral ankle instability** causing frequent sprains and giving-way episodes",
-        "Individuals with torn ankle ligaments unresponsive to non-surgical treatments like bracing and **Physical Therapy**",
+        "Individuals with torn ankle ligaments unresponsive to non-surgical treatments like bracing and **Rehabilitation**",
         "Those with significant ligament laxity following ankle fractures or trauma",
         "Patients who have failed previous ankle stabilization procedures",
         "Athletes and active individuals requiring stable ankles for sports participation",
@@ -3629,7 +3618,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from Ankle Ligament Reconstruction",
       timeline: "6-12 Months for Full Return to Sports",
-      details: "Recovery from **Ankle Ligament Reconstruction Surgery** involves immobilization in a cast or boot for several weeks to protect the healing ligaments. Weight-bearing is gradually progressed based on healing. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> is essential for restoring range of motion, strength, balance, and proprioception. Return to sports typically takes 6-12 months to ensure full ligament healing and restoration of ankle strength. This **ankle repair surgery** requires patience and dedication to rehabilitation for optimal outcomes.",
+      details: "Recovery from **Ankle Ligament Reconstruction Surgery** involves immobilization in a cast or boot for several weeks to protect the healing ligaments. Weight-bearing is gradually progressed based on healing. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> is essential for restoring range of motion, strength, balance, and proprioception. Return to sports typically takes 6-12 months to ensure full ligament healing and restoration of ankle strength. This **ankle repair surgery** requires patience and dedication to rehabilitation for optimal outcomes.",
     },
     benefits: [
       "Provides substantial reduction of chronic ankle instability and the sensation of the ankle 'giving way'",
@@ -3643,72 +3632,6 @@ export const treatmentContentBatch1: TreatmentContent[] = [
       body: "**We accept most major insurance plans. PPO preferred.** Ankle ligament reconstruction is a medically necessary procedure for chronic instability and is widely covered by insurance carriers.",
     },
     schedule: "Ankle pain, instability, or difficulty walking affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
-  },
-  {
-    id: "axial-fusion-surgery",
-    slug: "axial-fusion-surgery",
-    metaTitle: "Axial Fusion Surgery (AxiaLIF) | L5-S1 Minimally Invasive Fusion",
-    metaDescription: "AxiaLIF is a minimally invasive presacral approach for L5-S1 fusion. Treat degenerative disc disease and instability with less muscle disruption and faster recovery.",
-    keywords: [
-      "Axial fusion surgery",
-      "AxiaLIF procedure",
-      "L5-S1 interbody fusion",
-      "minimally invasive spine surgery",
-      "presacral approach fusion",
-      "lumbosacral stabilization",
-      "degenerative disc disease L5-S1",
-      "minimally invasive lumbar fusion"
-    ],
-    title: "Axial Fusion Surgery",
-    tag: "Lower Spine",
-    additionalTags: ["Spine"],
-    heroImage: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--axial-fusion-surgery--thumbnail.png',
-    card_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--axial-fusion-surgery--thumbnail.png',
-    inTxt_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--axial-fusion-surgery--thumbnail.png',
-    heroImageAlt: "Medical illustration showing AxiaLIF presacral approach to L5-S1 fusion",
-    heroDescription: "Stabilize your L5-S1 segment with Axial Fusion Surgery, a minimally invasive technique that accesses the spine through a small presacral incision.",
-    overview: {
-      heading: "Minimally Invasive L5-S1 Stabilization",
-      body: "**Axial Fusion Surgery** (AxiaLIF - Axial Lumbar Interbody Fusion) is a specialized minimally invasive technique for treating <a href=\"https://mountainspineorthopedics.com/conditions/degenerative-disc-disease\" class=\"text-blue-600 hover:underline\">**painful degenerative disc disease**</a> or instability at the L5-S1 level. Unlike traditional approaches that cut through back muscles, this procedure accesses the spine through a small incision near the tailbone (presacral approach). A specialized instrument removes the damaged disc and inserts a fusion device—a threaded rod with **bone graft**—restoring disc height and promoting L5-S1 vertebral fusion for lasting spinal stability. This targeted **lumbosacral spine surgery** preserves back muscle function while achieving solid fusion.",
-    },
-    candidates: {
-      heading: "Ideal Candidates for Axial Fusion",
-      list: [
-        "Patients with symptomatic **Degenerative Disc Disease** at L5-S1 causing chronic low back pain or instability",
-        "Individuals with isthmic or degenerative **Spondylolisthesis** (L5 on S1, Grade I/II)",
-        "Those with collapsed L5-S1 disc space requiring restoration",
-        "Patients needing revision surgery after failed previous L5-S1 procedures",
-        "Individuals seeking a less invasive alternative to traditional **Lumbar Fusion Surgery**",
-      ],
-    },
-    procedure: {
-      heading: "The AxiaLIF Procedure",
-      steps: [
-        "After consultation and imaging (MRI, CT), the procedure is performed under general anesthesia",
-        "A small incision near the buttocks allows percutaneous access to the L5-S1 disc space",
-        "The damaged disc is completely removed to decompress nerve roots",
-        "A specialized FDA-approved fusion device (threaded rod with **bone graft**) is inserted",
-        "This restores disc height and facilitates L5-S1 interbody fusion",
-        "The incision is closed, and a lumbar brace may be applied for support",
-      ],
-    },
-    recovery: {
-      heading: "Recovery Timeline",
-      timeline: "3-6 Months for Solid Fusion",
-      details: "Recovery from **Axial Fusion Surgery** is generally faster than traditional open lumbar fusion due to minimal muscle disruption. Hospital stay is typically 1-2 nights. A lumbar brace is often worn for support. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> focuses on core strengthening to support the healing fusion. Solid bone fusion takes several months, monitored with X-rays. This **minimally invasive spine surgery** allows quicker back muscle function recovery and improved spinal support, promoting faster return to daily activities.",
-    },
-    benefits: [
-      "Provides effective relief of chronic low back pain originating from L5-S1 disc pathology and instability",
-      "Minimally invasive approach with less muscle damage and potentially faster initial recovery",
-      "Restores disc height and proper spinal alignment at the lumbosacral junction",
-      "Achieves long-term stabilization of the L5-S1 spinal segment through fusion",
-      "Preserves function in the large back muscles due to the presacral surgical approach"
-    ],
-    insurance: {
-      heading: "Insurance Coverage for Axial Fusion",
-      body: "**We accept most major insurance plans. PPO preferred.** AxiaLIF is a medically necessary procedure for L5-S1 instability and is covered by most insurance carriers.",
-    },
-    schedule: "Back pain, leg pain, or spinal instability at L5-S1 affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
   {
     id: "hybrid-cervical-spine-surgery",
@@ -3761,7 +3684,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from Hybrid Surgery",
       timeline: "3-9 Months for Full Recovery",
-      details: "Recovery from **Hybrid Cervical Spine Surgery** combines elements of fusion and disc replacement. Hospital stay is typically a few days. A soft collar may be used for comfort. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> focuses on restoring motion at mobile segments and strengthening neck muscles. Full recovery can take 3-9 months, allowing for bone healing at fused levels and improved neck mobility. This approach promotes a return to normal neck function while maintaining flexibility where preserved.",
+      details: "Recovery from **Hybrid Cervical Spine Surgery** combines elements of fusion and disc replacement. Hospital stay is typically a few days. A soft collar may be used for comfort. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> focuses on restoring motion at mobile segments and strengthening neck muscles. Full recovery can take 3-9 months, allowing for bone healing at fused levels and improved neck mobility. This approach promotes a return to normal neck function while maintaining flexibility where preserved.",
     },
     benefits: [
       "Offers effective relief of nerve compression and neck pain from multilevel disease",
@@ -3780,7 +3703,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     id: "back-pain-treatment",
     slug: "back-pain-treatment",
     metaTitle: "Back Pain Treatment | Comprehensive Spine Care Solutions",
-    metaDescription: "Comprehensive back pain treatment addresses muscle strains, disc issues, stenosis, and arthritis with personalized plans ranging from physical therapy to advanced interventions.",
+    metaDescription: "Comprehensive back pain treatment addresses muscle strains, disc issues, stenosis, and arthritis with personalized plans ranging from rehabilitation to advanced interventions.",
     keywords: [
       "Back pain treatment",
       "back pain specialist",
@@ -3801,7 +3724,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     heroDescription: "Comprehensive back pain treatment addresses various causes with personalized plans, from conservative care to advanced interventions.",
     overview: {
       heading: "Comprehensive Approach to Back Pain",
-      body: "**Back Pain Treatment** encompasses a wide range of strategies to address various spinal conditions. Back pain can stem from muscle strains, <a href=\"https://mountainspineorthopedics.com/conditions/degenerative-disc-disease\" class=\"text-blue-600 hover:underline\">**Degenerative Disc Disease**</a>, <a href=\"https://mountainspineorthopedics.com/conditions/herniated-disc\" class=\"text-blue-600 hover:underline\">**Herniated Discs**</a>, <a href=\"https://mountainspineorthopedics.com/conditions/spinal-stenosis\" class=\"text-blue-600 hover:underline\">**Spinal Stenosis**</a>, or <a href=\"https://mountainspineorthopedics.com/conditions/facet-joint-disease\" class=\"text-blue-600 hover:underline\">**Facet Joint Disease**</a>. Effective management requires accurate diagnosis of the underlying spinal condition. Our approach starts with a clinical evaluation and advanced imaging (MRI, X-rays) to visualize spinal structures. Treatment plans are individualized, ranging from conservative care including referrals to <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> specialists to advanced interventions for lasting back pain relief and improved spinal function.",
+      body: "**Back Pain Treatment** encompasses a wide range of strategies to address various spinal conditions. Back pain can stem from muscle strains, <a href=\"https://mountainspineorthopedics.com/conditions/degenerative-disc-disease\" class=\"text-blue-600 hover:underline\">**Degenerative Disc Disease**</a>, <a href=\"https://mountainspineorthopedics.com/conditions/herniated-disc\" class=\"text-blue-600 hover:underline\">**Herniated Discs**</a>, <a href=\"https://mountainspineorthopedics.com/conditions/spinal-stenosis\" class=\"text-blue-600 hover:underline\">**Spinal Stenosis**</a>, or <a href=\"https://mountainspineorthopedics.com/conditions/facet-joint-disease\" class=\"text-blue-600 hover:underline\">**Facet Joint Disease**</a>. Effective management requires accurate diagnosis of the underlying spinal condition. Our approach starts with a clinical evaluation and advanced imaging (MRI, X-rays) to visualize spinal structures. Treatment plans are individualized, ranging from conservative care including referrals to <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> specialists to advanced interventions for lasting back pain relief and improved spinal function.",
     },
     candidates: {
       heading: "Who Needs Back Pain Treatment?",
@@ -3816,7 +3739,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     procedure: {
       heading: "Treatment Options for Back Pain",
       steps: [
-        "Non-surgical options include referrals to **Physical Therapy** specialists for stretching and core strengthening",
+        "Non-surgical options include referrals to **Rehabilitation** specialists for stretching and core strengthening",
         "Medications and image-guided injections (epidural steroid injections, facet blocks) provide targeted relief",
         "For severe cases unresponsive to conservative care, surgical options like **Lumbar Microdiscectomy Surgery** may be considered",
         "**Lumbar Laminectomy Surgery** addresses spinal stenosis and nerve compression",
@@ -3827,7 +3750,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     recovery: {
       heading: "Recovery Expectations",
       timeline: "Varies by Treatment Approach",
-      details: "Recovery from **Back Pain Treatment** is variable depending on the approach. Non-surgical treatments involve consistent adherence for gradual pain reduction. Surgical recovery includes post-operative protocols, pain management, and referral to structured <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> programs. The goal is to alleviate pain and restore optimal spinal function and mobility, preventing future episodes of acute or chronic back issues and promoting long-term spinal wellness.",
+      details: "Recovery from **Back Pain Treatment** is variable depending on the approach. Non-surgical treatments involve consistent adherence for gradual pain reduction. Surgical recovery includes post-operative protocols, pain management, and referral to structured <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> programs. The goal is to alleviate pain and restore optimal spinal function and mobility, preventing future episodes of acute or chronic back issues and promoting long-term spinal wellness.",
     },
     benefits: [
       "Provides substantial reduction of chronic or acute back pain",
@@ -3838,7 +3761,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance Coverage for Back Pain Treatment",
-      body: "**We accept most major insurance plans. PPO preferred.** Back pain treatment options, from physical therapy to surgical interventions, are typically covered by insurance when medically necessary.",
+      body: "**We accept most major insurance plans. PPO preferred.** Back pain treatment options, from rehabilitation to surgical interventions, are typically covered by insurance when medically necessary.",
     },
     schedule: "Back pain, leg pain, or nerve symptoms affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -3892,7 +3815,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from Bunion Surgery",
       timeline: "4-6 Months for Full Recovery",
-      details: "Recovery from **Bunion Correction Surgery** involves pain management, ice, and elevation. Weight-bearing restrictions vary based on the technique used. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> helps restore range of motion and strength. Full recovery and return to strenuous activities can take 4-6 months. Proper foot care is essential for optimal healing after this type of foot deformity surgery and achieving comfortable ambulation.",
+      details: "Recovery from **Bunion Correction Surgery** involves pain management, ice, and elevation. Weight-bearing restrictions vary based on the technique used. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> helps restore range of motion and strength. Full recovery and return to strenuous activities can take 4-6 months. Proper foot care is essential for optimal healing after this type of foot deformity surgery and achieving comfortable ambulation.",
     },
     benefits: [
       "Provides significant reduction or elimination of pain associated with the bunion",
@@ -4021,7 +3944,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from Cervical Disc Replacement",
       timeline: "3-6 Months for Full Recovery",
-      details: "Recovery from **Cervical Disc Replacement** is often faster than fusion because there is no bone fusion to wait for. Hospital stay is typically 1-2 days. A soft collar may be used for comfort. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> restores motion and strength. Full recovery usually takes 3-6 months. This **motion-sparing neck surgery** facilitates quicker rehabilitation and return to daily neck function, promoting improved range of motion compared to fusion.",
+      details: "Recovery from **Cervical Disc Replacement** is often faster than fusion because there is no bone fusion to wait for. Hospital stay is typically 1-2 days. A soft collar may be used for comfort. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> restores motion and strength. Full recovery usually takes 3-6 months. This **motion-sparing neck surgery** facilitates quicker rehabilitation and return to daily neck function, promoting improved range of motion compared to fusion.",
     },
     benefits: [
       "Preserves motion at the treated cervical level, maintaining natural neck flexibility",
@@ -4061,7 +3984,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     heroDescription: "Eliminate chronic tailbone pain with Coccygectomy, the surgical removal of the coccyx. This definitive procedure treats severe coccydynia unresponsive to conservative treatments, restoring sitting comfort and quality of life.",
     overview: {
       heading: "Definitive Treatment for Chronic Coccydynia",
-      body: "**Coccygectomy** is the surgical removal of the coccyx (tailbone) for **chronic, debilitating coccydynia** unresponsive to extended non-surgical management including **Physical Therapy** and injections. This procedure is for carefully selected patients where pain is localized to a pathological coccyx. The goal is to eliminate the source of chronic tailbone pain and improve sitting tolerance, offering a definitive solution for intractable coccyx pain and restoring quality of life. This specialized procedure addresses persistent sacrococcygeal pain.",
+      body: "**Coccygectomy** is the surgical removal of the coccyx (tailbone) for **chronic, debilitating coccydynia** unresponsive to extended non-surgical management including **Rehabilitation** and injections. This procedure is for carefully selected patients where pain is localized to a pathological coccyx. The goal is to eliminate the source of chronic tailbone pain and improve sitting tolerance, offering a definitive solution for intractable coccyx pain and restoring quality of life. This specialized procedure addresses persistent sacrococcygeal pain.",
     },
     candidates: {
       heading: "Who Needs Coccygectomy?",
@@ -4087,7 +4010,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from Coccygectomy",
       timeline: "3-12 Months for Full Recovery",
-      details: "Recovery from **Coccygectomy** requires careful management. Hospital stay is typically 1-2 days. Avoid direct pressure on the surgical site (no prolonged sitting, use donut cushion). <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> begins once healed. Full recovery and unrestricted sitting can take 3-12 months. Wound care is critical for this type of lower back surgery to prevent complications and ensure proper healing of the sacrococcygeal area.",
+      details: "Recovery from **Coccygectomy** requires careful management. Hospital stay is typically 1-2 days. Avoid direct pressure on the surgical site (no prolonged sitting, use donut cushion). <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> begins once healed. Full recovery and unrestricted sitting can take 3-12 months. Wound care is critical for this type of lower back surgery to prevent complications and ensure proper healing of the sacrococcygeal area.",
     },
     benefits: [
       "Provides significant reduction or elimination of severe, chronic tailbone pain",
@@ -4145,7 +4068,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
         "Patients with <a href=\"/conditions/herniated-disc\" class=\"text-blue-600 hover:underline\">**Herniated Discs**</a> or <a href=\"/conditions/spinal-stenosis\" class=\"text-blue-600 hover:underline\">**Spinal Stenosis**</a> causing nerve compression and radiating pain",
         "Individuals with <a href=\"/conditions/facet-joint-disease\" class=\"text-blue-600 hover:underline\">**Facet Joint Disease**</a> or <a href=\"/conditions/sacroiliac-joint-dysfunction\" class=\"text-blue-600 hover:underline\">**Sacroiliac (SI) joint dysfunction**</a> causing mechanical back pain",
         "Those with <a href=\"/conditions/carpal-tunnel-syndrome\" class=\"text-blue-600 hover:underline\">**Carpal Tunnel Syndrome**</a>, trigger finger, or other compressive neuropathies",
-        "Patients seeking to optimize function before physical therapy or delay surgical intervention",
+        "Patients seeking to optimize function before rehabilitation or delay surgical intervention",
       ],
     },
     procedure: {
@@ -4161,14 +4084,14 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     recovery: {
       heading: "Recovery and Results",
       timeline: "24-72 Hours for Initial Relief",
-      details: "<p><strong>Same-Day Recovery:</strong> Patients can typically resume light activities shortly after **Anti-Inflammatory Injections**. You may experience temporary soreness, warmth, or slight swelling at the injection site (post-injection flare), which is common but resolves within 24-48 hours. Ice application and rest help minimize this temporary reaction.</p><p><strong>Immediate Phase (Hours 0-6):</strong> The local anesthetic provides immediate, temporary relief. This diagnostic response helps confirm the injection target as the pain source. Many patients experience significant pain reduction during this window, allowing increased activity.</p><p><strong>Days 1-3:</strong> As the anesthetic wears off, you may experience temporary return of symptoms before the **corticosteroid** begins working. Some patients experience a mild post-injection flare (increased pain for 1-2 days) as the steroid crystallizes. This is normal and does not indicate treatment failure.</p><p><strong>Days 3-7:</strong> Corticosteroid anti-inflammatory effects usually begin during this window, with progressive reduction in pain, swelling, and stiffness. Joint or spine mobility typically improves as inflammation decreases.</p><p><strong>Weeks 2-12+:</strong> Maximum pain relief is typically reached by 2-4 weeks, lasting weeks to months depending on the condition severity and underlying pathology. Relief duration varies: <ul><li>**Acute inflammation** (bursitis, acute flare): 3-6+ months relief</li><li>**Moderate arthritis**: 2-4 months relief</li><li>**Severe arthritis or degeneration**: 4-8 weeks relief</li><li>**Spinal injections**: weeks to months, varies by condition</li></ul></p><p><strong>Optimizing Results with Physical Therapy:</strong> These injections can facilitate more effective **Physical Therapy** and functional improvement by reducing pain enough to allow therapeutic exercise. Starting PT 1-2 weeks after injection, when inflammation is controlled but pain relief is present, optimizes long-term outcomes and may extend injection benefits.</p><p><strong>Repeat Injections:</strong> If symptoms return, injections can typically be repeated. Most specialists recommend spacing injections at least 6-12 weeks apart, with a maximum of 3-4 injections per year per joint or spine region to minimize corticosteroid side effects. If injections provide only short-term relief, other treatments should be considered.</p>",
+      details: "<p><strong>Same-Day Recovery:</strong> Patients can typically resume light activities shortly after **Anti-Inflammatory Injections**. You may experience temporary soreness, warmth, or slight swelling at the injection site (post-injection flare), which is common but resolves within 24-48 hours. Ice application and rest help minimize this temporary reaction.</p><p><strong>Immediate Phase (Hours 0-6):</strong> The local anesthetic provides immediate, temporary relief. This diagnostic response helps confirm the injection target as the pain source. Many patients experience significant pain reduction during this window, allowing increased activity.</p><p><strong>Days 1-3:</strong> As the anesthetic wears off, you may experience temporary return of symptoms before the **corticosteroid** begins working. Some patients experience a mild post-injection flare (increased pain for 1-2 days) as the steroid crystallizes. This is normal and does not indicate treatment failure.</p><p><strong>Days 3-7:</strong> Corticosteroid anti-inflammatory effects usually begin during this window, with progressive reduction in pain, swelling, and stiffness. Joint or spine mobility typically improves as inflammation decreases.</p><p><strong>Weeks 2-12+:</strong> Maximum pain relief is typically reached by 2-4 weeks, lasting weeks to months depending on the condition severity and underlying pathology. Relief duration varies: <ul><li>**Acute inflammation** (bursitis, acute flare): 3-6+ months relief</li><li>**Moderate arthritis**: 2-4 months relief</li><li>**Severe arthritis or degeneration**: 4-8 weeks relief</li><li>**Spinal injections**: weeks to months, varies by condition</li></ul></p><p><strong>Optimizing Results with Rehabilitation:</strong> These injections can facilitate more effective **Rehabilitation** and functional improvement by reducing pain enough to allow therapeutic exercise. Starting PT 1-2 weeks after injection, when inflammation is controlled but pain relief is present, optimizes long-term outcomes and may extend injection benefits.</p><p><strong>Repeat Injections:</strong> If symptoms return, injections can typically be repeated. Most specialists recommend spacing injections at least 6-12 weeks apart, with a maximum of 3-4 injections per year per joint or spine region to minimize corticosteroid side effects. If injections provide only short-term relief, other treatments should be considered.</p>",
     },
     benefits: [
       "Provide rapid and targeted relief from pain and inflammation at the source",
       "Significantly reduce joint or spine inflammation, improving comfort and mobility",
       "Enhance mobility and function in the affected area, facilitating daily activities",
       "Can delay or avoid the need for more invasive surgical intervention",
-      "Facilitate participation in physical therapy by reducing acute pain barriers",
+      "Facilitate participation in rehabilitation by reducing acute pain barriers",
       "Offer diagnostic value by confirming pain source through immediate anesthetic response",
       "Minimize systemic side effects compared to oral corticosteroids by delivering medication directly to the target"
     ],
@@ -4188,7 +4111,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Anti-Inflammatory Injections",
-      body: "**We accept most major insurance plans. PPO preferred.** Anti-inflammatory corticosteroid injections are standard, medically necessary procedures for joint and spine pain and are typically covered by insurance when conservative treatments (medications, physical therapy) have been attempted.",
+      body: "**We accept most major insurance plans. PPO preferred.** Anti-inflammatory corticosteroid injections are standard, medically necessary procedures for joint and spine pain and are typically covered by insurance when conservative treatments (medications, rehabilitation) have been attempted.",
     },
     schedule: "Joint pain, spine pain, or inflammation affecting daily life? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule your consultation</a> today at Mountain Spine & Orthopedics for **image-guided anti-inflammatory injection** evaluation. <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">Complimentary MRI review</a> and <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">second opinion</a> available. <a href=\"/injuries/car-accident\" class=\"text-blue-600 hover:underline\">Car accident</a> or <a href=\"/injuries/slip-and-fall\" class=\"text-blue-600 hover:underline\">slip-and-fall</a> injury? We treat accident-related joint and spine injuries.",
   },
@@ -4234,7 +4157,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
         "Thorough health assessment and advanced diagnostics like DEXA scans for bone density",
         "Potentially MRI for joint health evaluation and assessment of muscle mass",
         "Based on findings, an individualized plan is created",
-        "May include supervised **Physical Therapy** for balance and strength",
+        "May include supervised **Rehabilitation** for balance and strength",
         "Nutritional counseling, lifestyle modification guidance, and medical treatments for osteoporosis if needed",
       ],
     },
@@ -4284,12 +4207,12 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     heroDescription: "Relieve chronic tailbone pain with Impar Ganglion Ablation (Coccyx Nerve RFA), a minimally invasive procedure that uses radiofrequency energy to deactivate pain-transmitting nerves. This outpatient treatment offers 6-12+ months of relief from coccydynia without surgery.",
     overview: {
       heading: "Targeted Nerve Ablation for Coccyx Pain",
-      body: "**Coccyx Nerve Ablation** (Impar Ganglion Ablation) treats **chronic tailbone pain (<a href=\"/conditions/coccydynia\" class=\"text-blue-600 hover:underline\">coccydynia</a>)** and related pelvic/perineal pain mediated by the Impar ganglion. When conservative treatments (cushions, medications, physical therapy) fail and a diagnostic <a href=\"/treatments/impar-block-treatment\" class=\"text-blue-600 hover:underline\">**Impar Ganglion Block**</a> confirms the pain source (50%+ relief for 4-6 hours), **radiofrequency ablation (RFA)** uses controlled heat to lesion nerve fibers in the ganglion, interrupting pain signals from the coccyx. This outpatient procedure offers a less invasive alternative to <a href=\"/treatments/coccygectomy-tailbone-removal-surgery\" class=\"text-blue-600 hover:underline\">**Coccygectomy**</a> (surgical tailbone removal) for chronic pain and improving sitting comfort, a key interventional pain management technique for refractory tailbone conditions. Learn more about <a href=\"https://www.aaos.org/coccyx-tailbone-pain\" class=\"text-blue-600 hover:underline\" target=\"_blank\" rel=\"noopener noreferrer\">tailbone pain from the American Academy of Orthopaedic Surgeons</a>.",
+      body: "**Coccyx Nerve Ablation** (Impar Ganglion Ablation) treats **chronic tailbone pain (<a href=\"/conditions/coccydynia\" class=\"text-blue-600 hover:underline\">coccydynia</a>)** and related pelvic/perineal pain mediated by the Impar ganglion. When conservative treatments (cushions, medications, rehabilitation) fail and a diagnostic <a href=\"/treatments/impar-block-treatment\" class=\"text-blue-600 hover:underline\">**Impar Ganglion Block**</a> confirms the pain source (50%+ relief for 4-6 hours), **radiofrequency ablation (RFA)** uses controlled heat to lesion nerve fibers in the ganglion, interrupting pain signals from the coccyx. This outpatient procedure offers a less invasive alternative to <a href=\"/treatments/coccygectomy-tailbone-removal-surgery\" class=\"text-blue-600 hover:underline\">**Coccygectomy**</a> (surgical tailbone removal) for chronic pain and improving sitting comfort, a key interventional pain management technique for refractory tailbone conditions. Learn more about <a href=\"https://www.aaos.org/coccyx-tailbone-pain\" class=\"text-blue-600 hover:underline\" target=\"_blank\" rel=\"noopener noreferrer\">tailbone pain from the American Academy of Orthopaedic Surgeons</a>.",
     },
     candidates: {
       heading: "When is Radiofrequency Ablation Recommended?",
       list: [
-        "Patients with chronic <a href=\"/conditions/coccydynia\" class=\"text-blue-600 hover:underline\">coccydynia</a> lasting 3+ months unresponsive to conservative treatments (cushions, NSAIDs, physical therapy)",
+        "Patients with chronic <a href=\"/conditions/coccydynia\" class=\"text-blue-600 hover:underline\">coccydynia</a> lasting 3+ months unresponsive to conservative treatments (cushions, NSAIDs, rehabilitation)",
         "Individuals with a positive diagnostic <a href=\"/treatments/impar-block-treatment\" class=\"text-blue-600 hover:underline\">**Impar ganglion block**</a> (50%+ pain relief for 4-6 hours) confirming the ganglion as the pain source",
         "Those with pain from coccyx trauma (falls, cycling injuries, childbirth trauma) or repetitive microtrauma causing persistent sitting pain",
         "Patients with persistent pain after <a href=\"/treatments/coccygectomy-tailbone-removal-surgery\" class=\"text-blue-600 hover:underline\">**Coccygectomy**</a> (surgical tailbone removal) where the Impar ganglion continues transmitting pain",
@@ -4312,7 +4235,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from Coccyx Nerve Ablation",
       timeline: "6-12+ Months of Pain Relief",
-      details: "<p><strong>Same-Day and Days 1-3:</strong> Recovery from **Coccyx Nerve Ablation** is generally quick. Resume most light activities within 24-48 hours. Temporary soreness, bruising, or slight increase in tailbone pain at the treatment site is common but typically resolves within 3-7 days. Ice application and over-the-counter pain relievers (acetaminophen, ibuprofen) help manage post-procedure discomfort. Avoid prolonged sitting for 2-3 days.</p><p><strong>Days 3-14:</strong> As the ablated nerve fibers degenerate, pain relief gradually develops. Some patients experience relatively quick improvement, while others take 2-4 weeks to notice maximum benefit. This variability is normal and depends on individual healing and the extent of nerve involvement.</p><p><strong>Weeks 2-8:</strong> Most patients reach maximum pain relief during this window, with significant reduction in tailbone pain when sitting, transitioning from sitting to standing, and during bowel movements. Improved sitting tolerance becomes apparent, allowing return to work, driving, and normal daily activities without cushion dependency.</p><p><strong>Months 2-12+:</strong> Pain relief typically lasts 6-12+ months, with many patients experiencing relief for 12-18 months or longer. The duration depends on how quickly nerve fibers regenerate. This treatment facilitates functional improvement and reduces reliance on medication for tailbone discomfort, allowing improved sitting tolerance and daily activities without pain.</p><p><strong>Long-Term Management:</strong> Physical therapy focusing on pelvic floor relaxation and core strengthening may be recommended to optimize outcomes and prevent pain recurrence. Ergonomic modifications (standing desks, proper chair support) can extend relief duration.</p><p><strong>If Ablation Doesn't Provide Relief:</strong> If pain relief is minimal after 6-8 weeks, the Impar ganglion may not be the primary pain source despite a positive diagnostic block. Alternative causes should be explored, including coccyx fracture, hypermobility, or referred pain from lumbar or pelvic sources. <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">Complimentary MRI reviews</a> and <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">second opinions</a> are available.</p><p><strong>When Pain Returns:</strong> If tailbone pain recurs after successful ablation (typically 12-18 months later as nerves regenerate), the procedure can be safely repeated with similarly high success rates. Some patients undergo ablation every 12-18 months as needed to maintain pain-free sitting.</p>",
+      details: "<p><strong>Same-Day and Days 1-3:</strong> Recovery from **Coccyx Nerve Ablation** is generally quick. Resume most light activities within 24-48 hours. Temporary soreness, bruising, or slight increase in tailbone pain at the treatment site is common but typically resolves within 3-7 days. Ice application and over-the-counter pain relievers (acetaminophen, ibuprofen) help manage post-procedure discomfort. Avoid prolonged sitting for 2-3 days.</p><p><strong>Days 3-14:</strong> As the ablated nerve fibers degenerate, pain relief gradually develops. Some patients experience relatively quick improvement, while others take 2-4 weeks to notice maximum benefit. This variability is normal and depends on individual healing and the extent of nerve involvement.</p><p><strong>Weeks 2-8:</strong> Most patients reach maximum pain relief during this window, with significant reduction in tailbone pain when sitting, transitioning from sitting to standing, and during bowel movements. Improved sitting tolerance becomes apparent, allowing return to work, driving, and normal daily activities without cushion dependency.</p><p><strong>Months 2-12+:</strong> Pain relief typically lasts 6-12+ months, with many patients experiencing relief for 12-18 months or longer. The duration depends on how quickly nerve fibers regenerate. This treatment facilitates functional improvement and reduces reliance on medication for tailbone discomfort, allowing improved sitting tolerance and daily activities without pain.</p><p><strong>Long-Term Management:</strong> Rehabilitation focusing on pelvic floor relaxation and core strengthening may be recommended to optimize outcomes and prevent pain recurrence. Ergonomic modifications (standing desks, proper chair support) can extend relief duration.</p><p><strong>If Ablation Doesn't Provide Relief:</strong> If pain relief is minimal after 6-8 weeks, the Impar ganglion may not be the primary pain source despite a positive diagnostic block. Alternative causes should be explored, including coccyx fracture, hypermobility, or referred pain from lumbar or pelvic sources. <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">Complimentary MRI reviews</a> and <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">second opinions</a> are available.</p><p><strong>When Pain Returns:</strong> If tailbone pain recurs after successful ablation (typically 12-18 months later as nerves regenerate), the procedure can be safely repeated with similarly high success rates. Some patients undergo ablation every 12-18 months as needed to maintain pain-free sitting.</p>",
     },
     benefits: [
       "Provides significant and often long-lasting relief (6-12+ months) from chronic tailbone and related pelvic/perineal pain",
@@ -4370,7 +4293,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     heroDescription: "Target inflammation and relieve back pain with Cortisone Injections. These image-guided spinal steroid injections deliver potent anti-inflammatory medication directly to inflamed areas, providing significant relief from herniated discs, spinal stenosis, and sciatica.",
     overview: {
       heading: "Targeted Anti-Inflammatory Spinal Treatment",
-      body: "**Cortisone Injections for Back Pain** (corticosteroid injections) are an effective **non-surgical treatment** for reducing inflammation and alleviating spinal pain. Delivered directly into inflamed areas like the epidural space or facet joints under image guidance, they decrease swelling and nerve irritation from conditions like **Herniated Discs** or **Spinal Stenosis**. This targeted anti-inflammatory treatment provides significant **back pain relief** and can improve spinal mobility, often used as part of a comprehensive back care plan including **Physical Therapy** and activity modification.",
+      body: "**Cortisone Injections for Back Pain** (corticosteroid injections) are an effective **non-surgical treatment** for reducing inflammation and alleviating spinal pain. Delivered directly into inflamed areas like the epidural space or facet joints under image guidance, they decrease swelling and nerve irritation from conditions like **Herniated Discs** or **Spinal Stenosis**. This targeted anti-inflammatory treatment provides significant **back pain relief** and can improve spinal mobility, often used as part of a comprehensive back care plan including **Rehabilitation** and activity modification.",
     },
     candidates: {
       heading: "Who Benefits from Cortisone Injections?",
@@ -4396,12 +4319,12 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     recovery: {
       heading: "Recovery and Results",
       timeline: "Weeks to Months of Relief",
-      details: "Patients typically resume normal activities the next day after **Cortisone Injections for Back Pain**. Temporary soreness is possible but resolves quickly. Local anesthetic provides immediate, temporary relief. Corticosteroid effects begin in 24-72 hours, lasting weeks to months depending on the condition. This injection can aid participation in **Physical Therapy** for back pain and improve functional outcomes, allowing for better pain-free movement and reduced reliance on oral medications.",
+      details: "Patients typically resume normal activities the next day after **Cortisone Injections for Back Pain**. Temporary soreness is possible but resolves quickly. Local anesthetic provides immediate, temporary relief. Corticosteroid effects begin in 24-72 hours, lasting weeks to months depending on the condition. This injection can aid participation in **Rehabilitation** for back pain and improve functional outcomes, allowing for better pain-free movement and reduced reliance on oral medications.",
     },
     benefits: [
       "Provide effective and targeted reduction of spinal inflammation",
       "Offer significant relief from localized back pain and radiating pain like sciatica",
-      "Can help break the cycle of pain and inflammation, facilitating physical therapy",
+      "Can help break the cycle of pain and inflammation, facilitating rehabilitation",
       "Is a minimally invasive outpatient procedure with relatively low risk",
       "May reduce reliance on oral pain medications and potentially avoid surgery"
     ],
@@ -4444,7 +4367,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
         "Patients with persistent axial or radicular pain from advanced DDD",
         "Individuals with neurological deficits from disc degeneration",
         "Those with severe disc collapse or spinal instability confirmed by imaging",
-        "Patients unresponsive to conservative treatments including **Physical Therapy** and injections",
+        "Patients unresponsive to conservative treatments including **Rehabilitation** and injections",
         "Individuals with discogenic pain significantly affecting quality of life",
       ],
     },
@@ -4462,7 +4385,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from DDD Surgery",
       timeline: "3-12 Months Depending on Procedure",
-      details: "Recovery from **Degenerative Disc Disease Surgery** varies by procedure type. Fusion recovery is longer (6-12 months for solid bone healing) with activity restrictions. Disc replacement often allows faster recovery and earlier motion. **Physical Therapy** is often recommended for both to optimize functional outcome and restore spinal strength after surgery for advanced disc disease, focusing on long-term spinal function and return to daily activities.",
+      details: "Recovery from **Degenerative Disc Disease Surgery** varies by procedure type. Fusion recovery is longer (6-12 months for solid bone healing) with activity restrictions. Disc replacement often allows faster recovery and earlier motion. **Rehabilitation** is often recommended for both to optimize functional outcome and restore spinal strength after surgery for advanced disc disease, focusing on long-term spinal function and return to daily activities.",
     },
     benefits: [
       "Provides durable pain relief from discogenic sources and nerve compression",
@@ -4509,7 +4432,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
       list: [
         "Patients with symptomatic cervical, thoracic, or lumbar disc herniations causing **Radiculopathy**",
         "Individuals with radiating arm/leg pain like **Sciatica**, numbness, or weakness",
-        "Those unresponsive to conservative treatments including **Physical Therapy** and injections",
+        "Those unresponsive to conservative treatments including **Rehabilitation** and injections",
         "Patients with specific disc fragments causing nerve root compression",
         "Individuals seeking the least invasive surgical option for disc removal",
       ],
@@ -4528,7 +4451,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from Endoscopic Discectomy",
       timeline: "4-6 Weeks for Full Activities",
-      details: "Recovery from **Endoscopic Discectomy Surgery** is typically rapid. Patients often go home the same day. Radiating nerve pain relief is often quick, sometimes immediate. **Physical Therapy** may be recommended to restore strength and flexibility. Full activities usually resume within 4-6 weeks. This ultra-minimally invasive spine surgery promotes swift healing and restoration of spinal comfort with less scarring and minimal muscle disruption compared to traditional approaches.",
+      details: "Recovery from **Endoscopic Discectomy Surgery** is typically rapid. Patients often go home the same day. Radiating nerve pain relief is often quick, sometimes immediate. **Rehabilitation** may be recommended to restore strength and flexibility. Full activities usually resume within 4-6 weeks. This ultra-minimally invasive spine surgery promotes swift healing and restoration of spinal comfort with less scarring and minimal muscle disruption compared to traditional approaches.",
     },
     benefits: [
       "Provides effective and often rapid relief from radiating nerve pain (sciatica or arm pain)",
@@ -4594,7 +4517,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from Endoscopic Foraminotomy",
       timeline: "3-6 Weeks for Full Activities",
-      details: "Recovery from **Endoscopic Foraminotomy Surgery** is generally rapid. Patients often go home the same day. Radiating pain relief is often quick, sometimes immediate. **Physical Therapy** may be recommended to restore strength and flexibility. Full activities usually resume within 3-6 weeks. This minimally invasive spine surgery offers minimal disruption and promotes quick functional improvement with less post-operative discomfort compared to traditional open procedures.",
+      details: "Recovery from **Endoscopic Foraminotomy Surgery** is generally rapid. Patients often go home the same day. Radiating pain relief is often quick, sometimes immediate. **Rehabilitation** may be recommended to restore strength and flexibility. Full activities usually resume within 3-6 weeks. This minimally invasive spine surgery offers minimal disruption and promotes quick functional improvement with less post-operative discomfort compared to traditional open procedures.",
     },
     benefits: [
       "Provides effective and often immediate relief from nerve root compression and associated radiating pain",
@@ -4843,44 +4766,43 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     card_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--knee-ligament-repair--thumbnail.png',
     inTxt_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--knee-ligament-repair--thumbnail.png',
     heroImageAlt: "Knee ligament repair restoring knee stability",
-    heroDescription: "Knee ligament repair restores stability after injuries to the MCL, LCL, or other knee ligaments using advanced reconstruction techniques.",
+    heroDescription: "Knee ligament repair or reconstruction restores stability after MCL, LCL, posterolateral corner, or combined ligament injuries.",
     overview: {
-      heading: "Restoring Knee Stability Through Ligament Repair",
-      body: "<p><strong>Knee Ligament Repair</strong> is performed to restore stability after injuries to the collateral ligaments (MCL or LCL) or other knee ligaments. While <a href=\"/conditions/acl-injury\" class=\"text-blue-600 hover:underline\">ACL</a> and <a href=\"/conditions/pcl-tear\" class=\"text-blue-600 hover:underline\">PCL</a> injuries typically require reconstruction, collateral ligament injuries may be repairable or may require reconstruction depending on the severity and location of the tear.</p><p>The medial collateral ligament (MCL) and lateral collateral ligament (LCL) provide stability to the sides of the knee. Injuries to these ligaments can cause <a href=\"/conditions/knee-instability\" class=\"text-blue-600 hover:underline\">knee instability</a> and pain, particularly with side-to-side movements or when the knee is stressed from the side.</p><p>At Mountain Spine & Orthopedics, our <strong>knee specialists</strong> use comprehensive evaluation including physical examination and <strong>MRI</strong> to assess ligament injuries and determine whether repair or reconstruction is most appropriate, using <strong>minimally invasive</strong> techniques whenever possible.</p>",
+      heading: "Repair vs. Reconstruction for Knee Instability",
+      body: "<p><strong>Knee ligament repair</strong> is not one procedure. The right operation depends on which ligament is injured, where it tore, whether the tissue can hold sutures, and whether other structures were damaged. MCL, LCL, posterolateral corner, PCL, and combined ligament injuries each create different instability patterns.</p><p>Some collateral ligament tears can heal with bracing and time. Others require repair to the attachment site or reconstruction with graft tissue, especially when the knee opens abnormally with stress, instability persists, or the injury is part of a multi-ligament knee trauma. Mountain Spine & Orthopedics uses exam findings, stress testing, X-rays, and MRI to determine whether non-surgical care, repair, reconstruction, or staged treatment is appropriate. PPO Insurance Accepted.</p>",
     },
     candidates: {
       heading: "Who Needs Knee Ligament Repair?",
       list: [
-        "Patients with MCL or LCL tears causing significant instability",
-        "Those with combined ligament injuries requiring comprehensive knee stabilization",
-        "Individuals with persistent knee instability despite conservative treatment",
-        "Athletes who need to return to activities requiring knee stability",
-        "Patients with complete ligament tears that cannot heal on their own",
-        "Those with ligament injuries associated with other knee damage",
-        "Individuals whose instability significantly impacts daily activities",
+        "Patients with MCL, LCL, posterolateral corner, or combined ligament tears causing objective instability",
+        "Individuals with persistent giving-way episodes despite bracing and appropriate non-surgical care",
+        "Athletes or active patients whose sport or work requires reliable cutting, pivoting, or side-to-side stability",
+        "Patients with complete tears, avulsion injuries, or poor tissue healing potential",
+        "Those with ligament injuries associated with meniscus, cartilage, fracture, ACL, or PCL damage",
+        "Patients needing a second opinion on whether repair, reconstruction, or staged surgery is most appropriate",
       ],
     },
     procedure: {
       heading: "The Ligament Repair Process",
       steps: [
-        "The procedure may be performed arthroscopically or through a small open incision",
-        "The torn ligament is identified and assessed",
-        "For repairable tears, the ligament is sutured back to its attachment point",
-        "For severe tears, reconstruction using a graft may be performed",
-        "The repair or reconstruction is tested for stability",
-        "Associated injuries (meniscal tears, cartilage damage) are addressed if present",
-        "The knee is closed and rehabilitation begins",
+        "Exam under anesthesia and imaging findings are used to confirm the instability pattern",
+        "Arthroscopy may be used to evaluate meniscus, cartilage, ACL, or PCL injuries",
+        "Repairable avulsion-type tears may be reattached to bone with sutures or anchors",
+        "Mid-substance or chronic tears may require reconstruction with graft tissue",
+        "Multi-ligament injuries are addressed in a planned sequence to restore alignment and stability",
+        "The repair or reconstruction is tested through range of motion and stress testing before closure",
+        "Postoperative bracing and outside-guided rehabilitation protect healing tissue while motion returns",
       ],
     },
     recovery: {
       heading: "Recovery After Ligament Repair",
-      timeline: "3-6 Months for Full Return to Sports",
-      details: "<p><strong>Recovery from knee ligament repair</strong> depends on whether repair or reconstruction was performed, with repair typically allowing faster recovery.</p><p><strong>Phase 1 (Weeks 1-4):</strong> Protected weight-bearing with brace, range of motion exercises, and control of swelling. The brace may be locked initially to protect the repair.</p><p><strong>Phase 2 (Weeks 4-8):</strong> Progressive weight-bearing, gradual restoration of range of motion, and initiation of strengthening exercises.</p><p><strong>Phase 3 (Weeks 8-12):</strong> Advanced strengthening, full range of motion, and return to most daily activities.</p><p><strong>Phase 4 (Months 3-6):</strong> Sport-specific training, return to activities requiring knee stability, with full return to sports typically at 4-6 months based on strength and functional testing.</p>",
+      timeline: "Recovery Depends on Ligament, Repair Type, and Combined Injuries",
+      details: "<p><strong>Recovery from knee ligament repair or reconstruction</strong> depends on the injured ligament, tissue quality, whether graft reconstruction was needed, and whether meniscus, cartilage, ACL, PCL, or fracture treatment was performed at the same time.</p><p><strong>Protection phase:</strong> Bracing, swelling control, protected weight-bearing, and controlled motion protect the repair or graft.</p><p><strong>Strength phase:</strong> Weight-bearing and strengthening progress as stability and healing allow.</p><p><strong>Return-to-activity phase:</strong> Sport and work clearance is based on stability, strength, motion, pain, swelling response, and surgeon guidance rather than a fixed date.</p>",
     },
     benefits: [
       "Restores knee stability and eliminates giving-way episodes",
       "Prevents further joint damage from instability",
-      "Allows return to activities requiring knee stability",
+      "Supports return planning for activities requiring knee stability",
       "Minimally invasive approach when possible",
       "Addresses both the ligament injury and associated damage",
       "Improves confidence in the knee's ability to support weight",
@@ -4889,7 +4811,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
       heading: "Insurance for Ligament Repair",
       body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Knee ligament repair is a covered procedure for symptomatic ligament injuries causing instability. We verify coverage and handle authorization paperwork.",
     },
-    schedule: "Knee ligament injury causing instability? Our <strong>knee specialists</strong> offer advanced <strong>ligament repair</strong> to restore stability. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
+    schedule: "Knee instability after a ligament injury? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics for MRI review, stability testing, and a repair-versus-reconstruction recommendation.",
   },
   {
     id: "pcl-reconstruction",
@@ -5109,7 +5031,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     id: "revision-knee-replacement",
     slug: "revision-knee-replacement",
     metaTitle: "Revision Knee Replacement | Failed Knee Replacement Surgery FL",
-    metaDescription: "Revision knee replacement addresses failed or worn knee implants. Our FL, NJ, NY, & PA specialists offer advanced revision techniques to restore function.",
+    metaDescription: "Revision knee replacement treats loose, infected, unstable, fractured, or worn knee implants. Learn workup, surgery planning, recovery, and PPO coverage.",
     keywords: [
       "revision knee replacement",
       "failed knee replacement",
@@ -5128,53 +5050,53 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     card_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--revision-knee-replacement--thumbnail.png',
     inTxt_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--revision-knee-replacement--thumbnail.png',
     heroImageAlt: "Revision knee replacement addressing failed implant",
-    heroDescription: "Revision knee replacement addresses failed, worn, or loose knee implants, using advanced techniques to restore function and relieve pain.",
+    heroDescription: "Revision knee replacement is a complex second surgery for painful, loose, infected, unstable, or worn knee implants.",
     overview: {
-      heading: "Addressing Failed or Worn Knee Implants",
-      body: "<p><strong>Revision Knee Replacement</strong> is a complex procedure performed to address problems with a previous <a href=\"/treatments/total-knee-replacement\" class=\"text-blue-600 hover:underline\">knee replacement</a>, such as implant wear, loosening, infection, or failure. This procedure is more complex than the initial replacement and requires specialized expertise.</p><br/><br/><p>Common reasons for revision include implant wear over time (typically 15-25 years), aseptic loosening (implant coming loose without infection), infection, instability or dislocation, periprosthetic fractures (fractures around the implant), and implant failure. Revision surgery involves removing the old components and replacing them with new, often more durable implants.</p><br/><br/><p>At Mountain Spine & Orthopedics, our <strong>knee specialists</strong> have extensive experience with complex revision procedures, using advanced techniques and specialized implants to address bone loss, restore stability, and provide lasting pain relief. We work closely with each patient to understand their specific situation and develop a personalized revision plan.</p>",
+      heading: "Finding Why a Knee Replacement Failed",
+      body: "<p><strong>Revision Knee Replacement</strong> is performed when a previous <a href=\"/treatments/total-knee-replacement\" class=\"text-blue-600 hover:underline\">knee replacement</a> is no longer functioning safely or comfortably. The cause must be identified before surgery. A painful implant can come from aseptic loosening, polyethylene wear, instability, stiffness, malalignment, periprosthetic fracture, extensor mechanism problems, metal or cement issues, or infection.</p><br/><br/><p>Revision surgery is more complex than a first-time knee replacement because the surgeon may need to remove well-fixed components, manage bone loss, rebuild ligament stability, and choose stems, augments, cones, sleeves, or more constrained implants. If infection is suspected, bloodwork, aspiration, cultures, and sometimes a staged revision plan may be required before a final implant is placed.</p><br/><br/><p>Mountain Spine & Orthopedics evaluates prior operative records when available, implant type, X-rays, advanced imaging, lab results, and the patient's instability, pain, swelling, and function pattern to build a revision plan rather than simply exchanging parts.</p>",
     },
     candidates: {
-      heading: "Who Needs Revision Knee Replacement?",
+      heading: "Who May Need Revision Knee Replacement?",
       list: [
-        "Patients with knee implant loosening causing pain or instability",
-        "Those with significant implant wear after 15-25 years",
-        "Individuals with knee replacement infection requiring implant removal and replacement",
-        "Patients experiencing recurrent instability or dislocation",
-        "Those with periprosthetic fractures around the implant",
-        "Patients with implant failure or breakage",
-        "Individuals whose knee replacement is no longer providing adequate pain relief",
+        "Painful implant loosening shown on X-rays, CT, bone scan, or clinical workup",
+        "Recurrent instability, giving way, dislocation, or ligament imbalance after knee replacement",
+        "Suspected or confirmed knee replacement infection requiring staged or single-stage management",
+        "Polyethylene wear, osteolysis, implant breakage, or progressive bone loss",
+        "Periprosthetic fracture around the femoral, tibial, or patellar component",
+        "Persistent stiffness, malalignment, or mechanical symptoms after other causes have been evaluated",
+        "Patients whose symptoms match a correctable implant, bone, infection, or alignment problem",
       ],
     },
     procedure: {
-      heading: "The Revision Procedure",
+      heading: "How Revision Surgery Is Planned",
       steps: [
-        "The previous incision is used or extended to access the knee joint",
-        "The old implant components are carefully removed, preserving as much bone as possible",
-        "Any bone loss is addressed with bone grafts or specialized revision implants",
-        "New implant components are selected and positioned to restore stability and function",
-        "Specialized revision implants may be used to address bone loss or instability",
-        "The knee is tested to ensure proper stability and range of motion",
-        "The patient begins rehabilitation to restore function",
+        "The surgeon determines whether infection, loosening, instability, fracture, wear, or stiffness is driving symptoms",
+        "The previous incision is used or extended when appropriate to safely expose the joint",
+        "Loose or failed components are removed while preserving as much bone and soft tissue as possible",
+        "Bone loss may be managed with augments, cones, sleeves, stems, cement, or graft depending on the defect",
+        "Implant constraint is selected based on ligament quality and the stability needed",
+        "In infection cases, treatment may involve component removal, spacer placement, antibiotics, and later reimplantation",
+        "The knee is tested for alignment, tracking, motion, and stability before closure",
       ],
     },
     recovery: {
       heading: "Recovery After Revision Surgery",
-      timeline: "3-6 Months for Full Recovery",
-      details: "<p><strong>Recovery from revision knee replacement</strong> may be longer than the initial replacement due to the complexity of the procedure and potential bone loss.</p><p><strong>Phase 1 (Weeks 1-2):</strong> Hospital stay (typically 2-4 days), protected weight-bearing, pain management, and prevention of complications. Early mobilization is important.</p><p><strong>Phase 2 (Weeks 2-6):</strong> Progressive weight-bearing as tolerated, <strong>physical therapy</strong> to restore strength and mobility, and gradual return to daily activities. Some patients may require extended protected weight-bearing.</p><p><strong>Phase 3 (Months 2-3):</strong> Continued strengthening, improved mobility, and return to most daily activities. Driving may resume when cleared by the surgeon.</p><p><strong>Phase 4 (Months 3-6):</strong> Full recovery with return to normal activities. Long-term outcomes are excellent with proper rehabilitation and implant selection.</p>",
+      timeline: "Several Months, Sometimes Longer",
+      details: "<p><strong>Recovery from revision knee replacement</strong> depends on why the first implant failed and how much reconstruction was required. Some patients can bear weight early; others need protected weight-bearing because of fracture repair, bone loss, stems, or soft-tissue reconstruction.</p><p>The early phase focuses on wound healing, swelling control, safe walking, and preventing complications. Outside rehabilitation or surgeon-directed exercises may progress range of motion, quadriceps strength, gait mechanics, and balance. Infection-related revisions can require a longer timeline because antibiotics, spacer management, and staged reimplantation may be involved. Return to driving, work, and heavier activity is individualized by implant stability, wound healing, strength, and surgeon clearance.</p>",
     },
     benefits: [
-      "Addresses failed or worn knee implants",
-      "Restores stability and function",
-      "Provides lasting pain relief",
-      "Uses advanced revision techniques and implants",
-      "Addresses bone loss with specialized components",
-      "Improves quality of life and mobility",
+      "Identifies the reason a knee replacement is painful before choosing the revision plan",
+      "Addresses loosening, wear, infection, fracture, instability, stiffness, or malalignment",
+      "Uses revision implants and reconstruction tools when bone loss or ligament compromise is present",
+      "Can restore mechanical stability when a failed implant is correctable",
+      "Provides a structured pathway for complex staged infection revisions when needed",
+      "Clarifies realistic recovery expectations after a second or complex knee operation",
     ],
     insurance: {
       heading: "Insurance for Revision Knee Replacement",
-      body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Revision knee replacement is a standard covered procedure for indicated conditions. We verify coverage and handle authorization paperwork.",
+      body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Revision knee replacement authorization usually requires records showing implant failure, infection workup, imaging, symptoms, and medical necessity. We help PPO patients navigate those requirements.",
     },
-    schedule: "Experiencing problems with your knee replacement? Our <strong>knee specialists</strong> offer expert <strong>revision surgery</strong> to address failed or worn implants. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
+    schedule: "A painful knee replacement deserves a cause-specific workup before another operation. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics to review loosening, infection, instability, wear, fracture, or stiffness concerns.",
   },
 ];
 
@@ -5237,12 +5159,12 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     recovery: {
       heading: "Recovery and Results",
       timeline: "Weeks to Months of Relief",
-      details: "<p><strong>Same-Day Recovery:</strong> Patients usually resume light activities the same day or next day after **Epidural Steroid Injection**. Temporary soreness or slight increase in pain at the injection site is possible but typically resolves within 24-48 hours.</p><p><strong>Immediate Effects (Hours 0-6):</strong> The local anesthetic provides immediate, temporary relief. This diagnostic response helps confirm the nerve as the pain source and allows for increased activity tolerance during early recovery.</p><p><strong>Days 1-3:</strong> As the anesthetic wears off, you may experience a temporary return of symptoms before the **corticosteroid** begins working. This is normal and expected.</p><p><strong>Days 3-7:</strong> Corticosteroid anti-inflammatory effects begin to take hold, with progressive reduction in radiating pain, numbness, and tingling. Many patients notice significant improvement during this window.</p><p><strong>Weeks 2-8:</strong> Maximum pain relief typically occurs during this period, lasting weeks to months depending on the underlying condition severity. This injection can facilitate effective **Physical Therapy** for spinal conditions and improve functional mobility, aiding in a quicker return to daily life with reduced pain. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Same-day and next-day appointments</a> available for consultation.</p><p><strong>When to Escalate Care:</strong> If symptoms don't improve after 2-3 weeks, or if relief is only partial, additional injections, alternative treatments like <a href=\"/treatments/facet-ablation-rhizotomy-treatment\" class=\"text-blue-600 hover:underline\">radiofrequency ablation</a>, or surgical evaluation may be recommended.</p>",
+      details: "<p><strong>Same-Day Recovery:</strong> Patients usually resume light activities the same day or next day after **Epidural Steroid Injection**. Temporary soreness or slight increase in pain at the injection site is possible but typically resolves within 24-48 hours.</p><p><strong>Immediate Effects (Hours 0-6):</strong> The local anesthetic provides immediate, temporary relief. This diagnostic response helps confirm the nerve as the pain source and allows for increased activity tolerance during early recovery.</p><p><strong>Days 1-3:</strong> As the anesthetic wears off, you may experience a temporary return of symptoms before the **corticosteroid** begins working. This is normal and expected.</p><p><strong>Days 3-7:</strong> Corticosteroid anti-inflammatory effects begin to take hold, with progressive reduction in radiating pain, numbness, and tingling. Many patients notice significant improvement during this window.</p><p><strong>Weeks 2-8:</strong> Maximum pain relief typically occurs during this period, lasting weeks to months depending on the underlying condition severity. This injection can facilitate effective **Rehabilitation** for spinal conditions and improve functional mobility, aiding in a quicker return to daily life with reduced pain. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Same-day and next-day appointments</a> available for consultation.</p><p><strong>When to Escalate Care:</strong> If symptoms don't improve after 2-3 weeks, or if relief is only partial, additional injections, alternative treatments like <a href=\"/treatments/facet-ablation-rhizotomy-treatment\" class=\"text-blue-600 hover:underline\">radiofrequency ablation</a>, or surgical evaluation may be recommended.</p>",
     },
     benefits: [
       "Provides effective and targeted reduction of inflammation in the epidural space",
       "Offers significant relief from radiating pain such as sciatica or radiculopathy",
-      "Can help break the cycle of pain and inflammation, facilitating physical therapy",
+      "Can help break the cycle of pain and inflammation, facilitating rehabilitation",
       "Is a minimally invasive outpatient procedure with relatively low risk",
       "May reduce reliance on oral pain medications and potentially avoid surgery",
       "Allows diagnostic confirmation of the pain generator through immediate anesthetic response",
@@ -5318,7 +5240,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from XLIF Surgery",
       timeline: "6–12 Months for Full Fusion",
-      details: "Recovery from **XLIF** is typically faster than open posterior fusion due to minimal muscle disruption. Most patients spend 1–3 days in the hospital and are walking the same day. A **lumbar brace** is worn for 6–8 weeks to protect the early fusion. **Physical therapy** begins at 4–6 weeks, focusing on core activation and gait normalization. Temporary hip flexor weakness or thigh numbness can occur from psoas retraction — this resolves in the majority of patients within 6–12 weeks. Full bony fusion, confirmed by CT scan, typically occurs at 6–12 months.",
+      details: "Recovery from **XLIF** is typically faster than open posterior fusion due to minimal muscle disruption. Most patients spend 1–3 days in the hospital and are walking the same day. A **lumbar brace** is worn for 6–8 weeks to protect the early fusion. **Rehabilitation** begins at 4–6 weeks, focusing on core activation and gait normalization. Temporary hip flexor weakness or thigh numbness can occur from psoas retraction — this resolves in the majority of patients within 6–12 weeks. Full bony fusion, confirmed by CT scan, typically occurs at 6–12 months.",
     },
     benefits: [
       "**Avoids back muscle disruption entirely** — no cutting or detaching of posterior musculature",
@@ -5373,7 +5295,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
         "Those with pain from degenerative facet joints without significant spinal instability or nerve compression",
         "Patients with <a href=\"/conditions/osteoarthritis\" class=\"text-blue-600 hover:underline\">**Osteoarthritis**</a> of the spine causing localized pain that worsens with extension or twisting",
         "Individuals seeking long-lasting relief (6-12+ months) from facet-mediated pain",
-        "Those unresponsive to conservative treatments including **Physical Therapy**, medications, and <a href=\"/treatments/anti-inflammatory-injections-for-joint-and-spine-pain\" class=\"text-blue-600 hover:underline\">corticosteroid injections</a>",
+        "Those unresponsive to conservative treatments including **Rehabilitation**, medications, and <a href=\"/treatments/anti-inflammatory-injections-for-joint-and-spine-pain\" class=\"text-blue-600 hover:underline\">corticosteroid injections</a>",
         "Patients looking to avoid or delay <a href=\"/treatments/spinal-fusion\" class=\"text-blue-600 hover:underline\">spinal fusion surgery</a>",
       ],
     },
@@ -5391,7 +5313,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from Radiofrequency Ablation",
       timeline: "6-12+ Months of Pain Relief",
-      details: "<p><strong>Same-Day and Days 1-3:</strong> Recovery from **Radiofrequency Ablation (Rhizotomy)** is generally quick. Resume light activities within 24-48 hours. Temporary soreness, muscle spasm, or slight increase in pain at the treatment site is common but typically resolves within 3-7 days. Ice and over-the-counter pain relievers help manage post-procedure discomfort.</p><p><strong>Days 3-14:</strong> As the ablated nerves degenerate, pain relief gradually develops. Some patients experience immediate improvement, while others take 2-4 weeks to notice maximum benefit. This variability is normal and depends on individual healing responses.</p><p><strong>Weeks 2-8:</strong> Most patients reach maximum pain relief during this window, with significant reduction in facet-mediated pain. Improved mobility and function become apparent, allowing return to normal daily activities and exercise.</p><p><strong>Months 2-12+:</strong> Pain relief typically lasts 6-12+ months, with many patients experiencing relief for 12-24 months or longer. The duration depends on how quickly the nerves regenerate. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Physical Therapy</a> is often recommended after this minimally invasive pain procedure to improve core strength, posture, and maintain spinal mobility, aiding in long-term pain control and functional restoration.</p><p><strong>If RFA Doesn't Work:</strong> If pain relief is minimal after 6-8 weeks, the facet joints may not be the primary pain source. Alternative diagnoses should be explored, including <a href=\"/conditions/degenerative-disc-disease\" class=\"text-blue-600 hover:underline\">discogenic pain</a>, <a href=\"/conditions/sacroiliac-joint-dysfunction\" class=\"text-blue-600 hover:underline\">SI joint dysfunction</a>, or muscular causes. <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">Second opinions</a> and <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">complimentary MRI reviews</a> are available.</p><p><strong>When Pain Returns:</strong> If facet pain recurs after successful RFA (typically 6-18 months later as nerves regenerate), the procedure can be safely repeated with similarly high success rates. Many patients undergo RFA every 12-18 months as needed.</p>",
+      details: "<p><strong>Same-Day and Days 1-3:</strong> Recovery from **Radiofrequency Ablation (Rhizotomy)** is generally quick. Resume light activities within 24-48 hours. Temporary soreness, muscle spasm, or slight increase in pain at the treatment site is common but typically resolves within 3-7 days. Ice and over-the-counter pain relievers help manage post-procedure discomfort.</p><p><strong>Days 3-14:</strong> As the ablated nerves degenerate, pain relief gradually develops. Some patients experience immediate improvement, while others take 2-4 weeks to notice maximum benefit. This variability is normal and depends on individual healing responses.</p><p><strong>Weeks 2-8:</strong> Most patients reach maximum pain relief during this window, with significant reduction in facet-mediated pain. Improved mobility and function become apparent, allowing return to normal daily activities and exercise.</p><p><strong>Months 2-12+:</strong> Pain relief typically lasts 6-12+ months, with many patients experiencing relief for 12-24 months or longer. The duration depends on how quickly the nerves regenerate. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Rehabilitation</a> is often recommended after this minimally invasive pain procedure to improve core strength, posture, and maintain spinal mobility, aiding in long-term pain control and functional restoration.</p><p><strong>If RFA Doesn't Work:</strong> If pain relief is minimal after 6-8 weeks, the facet joints may not be the primary pain source. Alternative diagnoses should be explored, including <a href=\"/conditions/degenerative-disc-disease\" class=\"text-blue-600 hover:underline\">discogenic pain</a>, <a href=\"/conditions/sacroiliac-joint-dysfunction\" class=\"text-blue-600 hover:underline\">SI joint dysfunction</a>, or muscular causes. <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">Second opinions</a> and <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">complimentary MRI reviews</a> are available.</p><p><strong>When Pain Returns:</strong> If facet pain recurs after successful RFA (typically 6-18 months later as nerves regenerate), the procedure can be safely repeated with similarly high success rates. Many patients undergo RFA every 12-18 months as needed.</p>",
     },
     benefits: [
       "Offers significant and often long-lasting relief (6-12+ months) from chronic facet joint pain",
@@ -5475,7 +5397,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     recovery: {
       heading: "Recovery Expectations",
       timeline: "Varies by Treatment Type",
-      details: "Recovery from **Facet Block, Ablation, Rhizotomy, and Facet Fusion** varies by approach. Blocks/Ablation: Minimal downtime, relief in days/weeks. Fusion: More involved recovery (months), **Physical Therapy** required. The goal is pain reduction and improved spinal function. This spectrum of care addresses varying severities of facet-mediated pain and enhances overall spinal health, promoting return to pain-free spinal movement.",
+      details: "Recovery from **Facet Block, Ablation, Rhizotomy, and Facet Fusion** varies by approach. Blocks/Ablation: Minimal downtime, relief in days/weeks. Fusion: More involved recovery (months), **Rehabilitation** required. The goal is pain reduction and improved spinal function. This spectrum of care addresses varying severities of facet-mediated pain and enhances overall spinal health, promoting return to pain-free spinal movement.",
     },
     benefits: [
       "Facet Blocks provide diagnostic clarity and temporary pain relief from inflammation",
@@ -5541,13 +5463,13 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from Fracture Fixation",
       timeline: "Several Months for Full Recovery",
-      details: "Recovery from **Fracture Fixation** involves pain management and immobilization (cast/splint). Weight-bearing restrictions vary based on fracture type and location. **Physical Therapy** is critical for restoring motion and strength as bone healing progresses (monitored by X-rays). Full recovery from this type of bone surgery and restoration of limb function takes several months, focusing on regaining pre-injury activity levels and ensuring proper bone union.",
+      details: "Recovery from **Fracture Fixation** involves pain management and immobilization (cast/splint). Weight-bearing restrictions vary based on fracture type and location. **Rehabilitation** is critical for restoring motion and strength as bone healing progresses (monitored by X-rays). Full recovery from this type of bone surgery and restoration of limb function takes several months, focusing on regaining pre-injury activity levels and ensuring proper bone union.",
     },
     benefits: [
       "Restores proper bone alignment, length, and rotation, essential for normal function",
       "Provides immediate stability to the fracture site, significantly reducing pain",
       "Promotes more predictable and often faster bone healing",
-      "Facilitates earlier initiation of physical therapy and mobility of surrounding joints",
+      "Facilitates earlier initiation of rehabilitation and mobility of surrounding joints",
       "Reduces the risk of delayed or improper bone healing (non-union or malunion)"
     ],
     insurance: {
@@ -5587,7 +5509,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     candidates: {
       heading: "Who Benefits from Impar Ganglion Block?",
       list: [
-        "Patients with chronic <a href=\"/conditions/coccydynia\" class=\"text-blue-600 hover:underline\">**Coccydynia**</a> (tailbone pain) unresponsive to conservative treatments like cushions, NSAIDs, and physical therapy",
+        "Patients with chronic <a href=\"/conditions/coccydynia\" class=\"text-blue-600 hover:underline\">**Coccydynia**</a> (tailbone pain) unresponsive to conservative treatments like cushions, NSAIDs, and rehabilitation",
         "Individuals with pain following coccyx trauma (falls, repetitive microtrauma from cycling or rowing) causing persistent sitting pain",
         "Those with persistent pain after <a href=\"/treatments/coccygectomy-tailbone-removal-surgery\" class=\"text-blue-600 hover:underline\">**Coccygectomy**</a> (surgical tailbone removal)",
         "Patients with certain chronic pelvic or perineal pain syndromes (proctalgia, vulvodynia, or pudendal neuralgia patterns)",
@@ -5662,7 +5584,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     card_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--neck-pain-treatment-and-shoulder-pain-relief--thumbnail.png',
     inTxt_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--neck-pain-treatment-and-shoulder-pain-relief--thumbnail.png',
     heroImageAlt: "Patient receiving comprehensive neck and shoulder pain treatment consultation",
-    heroDescription: "Comprehensive neck and shoulder pain treatment addresses interconnected conditions affecting the upper body. Our multidisciplinary approach ranges from physical therapy and injections to minimally invasive surgical options for lasting relief.",
+    heroDescription: "Comprehensive neck and shoulder pain treatment addresses interconnected conditions affecting the upper body. Our multidisciplinary approach ranges from rehabilitation and injections to minimally invasive surgical options for lasting relief.",
     overview: {
       heading: "Comprehensive Upper Body Pain Management",
       body: "Neck and shoulder pain often co-exist due to anatomical links. Causes include muscle strains, cervical spine issues (**Cervical Herniated Disc**, **Radiculopathy**), or shoulder pathologies (**Rotator Cuff Tears**, impingement). Accurate diagnosis via exams and imaging (MRI, X-rays) is key. Our multidisciplinary care plan addresses the specific source of cervicobrachial pain for effective relief and improved musculoskeletal function, often involving **non-surgical shoulder pain solutions** or advanced neck care including **ACDF Surgery** or **Shoulder Arthroscopy**.",
@@ -5680,7 +5602,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     procedure: {
       heading: "Treatment Options for Neck and Shoulder Pain",
       steps: [
-        "Non-surgical options: **Physical Therapy** (posture, strengthening), anti-inflammatories, image-guided injections",
+        "Non-surgical options: **Rehabilitation** (posture, strengthening), anti-inflammatories, image-guided injections",
         "Cervical injections: epidural/facet blocks for neck pain and radiculopathy",
         "Shoulder injections: joint/bursa injections for shoulder pain and inflammation",
         "Surgical options: Minimally invasive cervical spine surgery (**Discectomy**, **Foraminotomy**)",
@@ -5691,7 +5613,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     recovery: {
       heading: "Recovery Expectations",
       timeline: "Varies by Treatment Approach",
-      details: "Recovery from **Neck Pain Treatment and Shoulder Pain Relief** varies by condition and treatment. Non-surgical options offer gradual improvement. Minimally invasive spine or shoulder surgery generally allows faster recovery than open procedures. **Physical Therapy** is often recommended for restoring motion, strength, and achieving optimal functional recovery from neck and shoulder disorders, improving overall upper extremity health. The goal is a return to pain-free daily activities.",
+      details: "Recovery from **Neck Pain Treatment and Shoulder Pain Relief** varies by condition and treatment. Non-surgical options offer gradual improvement. Minimally invasive spine or shoulder surgery generally allows faster recovery than open procedures. **Rehabilitation** is often recommended for restoring motion, strength, and achieving optimal functional recovery from neck and shoulder disorders, improving overall upper extremity health. The goal is a return to pain-free daily activities.",
     },
     benefits: [
       "Provides significant reduction of chronic neck and shoulder pain",
@@ -5702,7 +5624,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Neck and Shoulder Pain Treatment",
-      body: "**We accept most major insurance plans. PPO preferred.** Neck and shoulder pain treatments, from physical therapy to surgical interventions, are typically covered by insurance when medically necessary.",
+      body: "**We accept most major insurance plans. PPO preferred.** Neck and shoulder pain treatments, from rehabilitation to surgical interventions, are typically covered by insurance when medically necessary.",
     },
     schedule: "Neck pain, shoulder pain, or arm numbness? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -5710,12 +5632,12 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     id: "non-surgical-treatments-for-pain-management",
     slug: "non-surgical-treatments-for-pain-management",
     metaTitle: "Non-Surgical Pain Management FL, NJ, NY, & PA | Conservative Orthopedic & Spine Treatment",
-    metaDescription: "Comprehensive non-surgical pain management offers effective relief for joint, spine, and nerve pain without surgery. Physical therapy, injections, and regenerative medicine at Mountain Spine & Orthopedics.",
+    metaDescription: "Comprehensive non-surgical pain management offers effective relief for joint, spine, and nerve pain without surgery. Rehabilitation, injections, and regenerative medicine at Mountain Spine & Orthopedics.",
     keywords: [
       "Non-surgical pain management",
       "orthopedic non-operative care",
       "joint pain injections",
-      "spine physical therapy",
+      "spine rehabilitation",
       "PRP for pain",
       "arthritis conservative treatment",
       "interventional pain medicine",
@@ -5730,10 +5652,10 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     card_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--non-surgical-treatments-for-pain-management--thumbnail.png',
     inTxt_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--non-surgical-treatments-for-pain-management--thumbnail.png',
     heroImageAlt: "Patient receiving non-surgical pain management treatment consultation",
-    heroDescription: "Effective pain relief without surgery. Non-Surgical Pain Management encompasses physical therapy, medications, image-guided injections, and regenerative therapies to reduce pain, decrease inflammation, and improve function for various musculoskeletal conditions.",
+    heroDescription: "Effective pain relief without surgery. Non-Surgical Pain Management encompasses rehabilitation, medications, image-guided injections, and regenerative therapies to reduce pain, decrease inflammation, and improve function for various musculoskeletal conditions.",
     overview: {
       heading: "Comprehensive Conservative Care",
-      body: "Chronic or acute musculoskeletal and nerve pain can significantly impair daily life, but surgery isn't always necessary. **Non-Surgical Treatments for Pain Management** encompasses a multimodal approach using **Physical Therapy**, medications, **image-guided injections** (corticosteroid, hyaluronic acid, nerve blocks), regenerative medicine (<a href=\"/treatments/stem-cell-treatment\" class=\"text-blue-600 hover:underline\">stem cell therapy</a>, PRP), bracing, and lifestyle modifications to reduce pain, decrease inflammation, and improve function. Our approach is rooted in accurate diagnosis and personalized care for conditions like <a href=\"/conditions/osteoarthritis\" class=\"text-blue-600 hover:underline\">**Osteoarthritis**</a>, <a href=\"/conditions/degenerative-disc-disease\" class=\"text-blue-600 hover:underline\">disc pathology</a>, <a href=\"/conditions/chronic-pain\" class=\"text-blue-600 hover:underline\">**chronic pain**</a> syndromes, and nerve compression, aiming for long-term wellness and providing effective alternatives to surgery. This includes comprehensive conservative pain therapy and interventional pain management techniques. Learn more about <a href=\"https://www.ninds.nih.gov/health-information/patient-caregiver-education/fact-sheets/chronic-pain-fact-sheet\" class=\"text-blue-600 hover:underline\" target=\"_blank\" rel=\"noopener noreferrer\">chronic pain management from the National Institute of Neurological Disorders and Stroke</a>.",
+      body: "Chronic or acute musculoskeletal and nerve pain can significantly impair daily life, but surgery isn't always necessary. **Non-Surgical Treatments for Pain Management** encompasses a multimodal approach using **Rehabilitation**, medications, **image-guided injections** (corticosteroid, hyaluronic acid, nerve blocks), regenerative medicine (<a href=\"/treatments/stem-cell-treatment\" class=\"text-blue-600 hover:underline\">stem cell therapy</a>, PRP), bracing, and lifestyle modifications to reduce pain, decrease inflammation, and improve function. Our approach is rooted in accurate diagnosis and personalized care for conditions like <a href=\"/conditions/osteoarthritis\" class=\"text-blue-600 hover:underline\">**Osteoarthritis**</a>, <a href=\"/conditions/degenerative-disc-disease\" class=\"text-blue-600 hover:underline\">disc pathology</a>, <a href=\"/conditions/chronic-pain\" class=\"text-blue-600 hover:underline\">**chronic pain**</a> syndromes, and nerve compression, aiming for long-term wellness and providing effective alternatives to surgery. This includes comprehensive conservative pain therapy and interventional pain management techniques. Learn more about <a href=\"https://www.ninds.nih.gov/health-information/patient-caregiver-education/fact-sheets/chronic-pain-fact-sheet\" class=\"text-blue-600 hover:underline\" target=\"_blank\" rel=\"noopener noreferrer\">chronic pain management from the National Institute of Neurological Disorders and Stroke</a>.",
     },
     candidates: {
       heading: "Who Benefits from Non-Surgical Pain Management?",
@@ -5753,7 +5675,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
       heading: "Non-Surgical Treatment Options",
       steps: [
         "<h3>Comprehensive Pain Assessment</h3><p>Your care begins with detailed evaluation including medical history, physical examination, and review of imaging (<a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">complimentary MRI review available</a>) to accurately diagnose the pain source and develop a personalized treatment plan.</p>",
-        "<h3>Physical Therapy and Rehabilitation</h3><p>**Physical Therapy** referrals provide targeted exercises, manual therapy, and modalities to improve strength, flexibility, and mobility. Specialized programs address spine stabilization, joint mechanics, and functional restoration tailored to your condition.</p>",
+        "<h3>Rehabilitation and Rehabilitation</h3><p>**Rehabilitation** referrals provide targeted exercises, manual therapy, and modalities to improve strength, flexibility, and mobility. Specialized programs address spine stabilization, joint mechanics, and functional restoration tailored to your condition.</p>",
         "<h3>Medications and Pain Relief</h3><p>**Anti-inflammatory medications** (NSAIDs), muscle relaxants, neuropathic pain medications (for nerve pain), and appropriate analgesics reduce pain and inflammation. Medication management is tailored to your condition, minimizing side effects and opioid use.</p>",
         "<h3>Image-Guided Injection Therapies</h3><p>Targeted injections deliver medication precisely to pain generators:<ul><li><a href=\"/treatments/anti-inflammatory-injections-for-joint-and-spine-pain\" class=\"text-blue-600 hover:underline\">**Corticosteroid Injections**</a> - joints, bursae, tendons for inflammation</li><li><a href=\"/treatments/epidural-steroid-injection\" class=\"text-blue-600 hover:underline\">**Epidural Steroid Injections**</a> - spine/nerve pain, sciatica, radiculopathy</li><li>**Facet Joint Injections** - <a href=\"/conditions/facet-joint-disease\" class=\"text-blue-600 hover:underline\">facet arthritis</a>, mechanical back/neck pain</li><li>**SI Joint Injections** - <a href=\"/conditions/sacroiliac-joint-dysfunction\" class=\"text-blue-600 hover:underline\">sacroiliac dysfunction</a></li><li>**Nerve Blocks** - targeted nerve pain relief</li><li>**Trigger Point Injections** - myofascial pain, muscle spasms</li></ul></p>",
         "<h3>Advanced Interventional Pain Procedures</h3><p>When injections provide temporary relief, longer-lasting procedures include:<ul><li><a href=\"/treatments/facet-ablation-rhizotomy-treatment\" class=\"text-blue-600 hover:underline\">**Radiofrequency Ablation (RFA)**</a> - 6-12+ months relief for facet pain</li><li><a href=\"/treatments/coccyx-nerve-ablation\" class=\"text-blue-600 hover:underline\">**Impar Ganglion Ablation**</a> - tailbone pain</li><li>**Medial Branch Blocks** - diagnostic facet injections before ablation</li></ul></p>",
@@ -5765,7 +5687,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     recovery: {
       heading: "Recovery and Results",
       timeline: "Progressive Improvement Over Weeks/Months",
-      details: "<p>**Non-Surgical Treatments for Pain Management** is a progressive journey to reduced pain and improved function, not an overnight fix. The timeline varies by condition and treatment modality:</p><p><strong>Immediate Relief (Days-Weeks):</strong> Injections and medications can offer relatively rapid relief (days to weeks), facilitating **Physical Therapy** and daily activities. Many patients notice significant improvement within 1-2 weeks of starting treatment.</p><p><strong>Functional Restoration (Weeks-Months):</strong> Physical therapy and rehabilitation build strength, stability, and movement patterns over 6-12 weeks or longer. Progressive improvement in function, endurance, and pain-free activity is the goal.</p><p><strong>Long-Term Management (Months-Years):</strong> Consistent adherence to the treatment plan, home exercise programs, and lifestyle modifications are key for lasting results. Some conditions require ongoing management (periodic injections, continued PT) rather than a one-time cure.</p><p><strong>When Non-Surgical Treatment Works Best:</strong> Success requires patient engagement, adherence to therapy, and realistic expectations. Not all pain can be eliminated, but significant improvement in function and quality of life is achievable for most patients. The goal is regaining comfort and mobility for chronic pain sufferers without surgery, enhancing overall physical well-being and promoting functional restoration. Regular follow-up with your care team ensures optimal outcomes and allows treatment adjustments as needed.</p><p><strong>When Surgery May Be Needed:</strong> If non-surgical treatments fail after 3-6 months of comprehensive care, or if you have progressive weakness, severe functional limitation, or imaging showing structural instability requiring stabilization, surgical consultation may be appropriate. Non-surgical treatment also serves as important pre-operative conditioning for patients who eventually need surgery, improving surgical outcomes.</p>",
+      details: "<p>**Non-Surgical Treatments for Pain Management** is a progressive journey to reduced pain and improved function, not an overnight fix. The timeline varies by condition and treatment modality:</p><p><strong>Immediate Relief (Days-Weeks):</strong> Injections and medications can offer relatively rapid relief (days to weeks), facilitating **Rehabilitation** and daily activities. Many patients notice significant improvement within 1-2 weeks of starting treatment.</p><p><strong>Functional Restoration (Weeks-Months):</strong> Rehabilitation and rehabilitation build strength, stability, and movement patterns over 6-12 weeks or longer. Progressive improvement in function, endurance, and pain-free activity is the goal.</p><p><strong>Long-Term Management (Months-Years):</strong> Consistent adherence to the treatment plan, home exercise programs, and lifestyle modifications are key for lasting results. Some conditions require ongoing management (periodic injections, continued PT) rather than a one-time cure.</p><p><strong>When Non-Surgical Treatment Works Best:</strong> Success requires patient engagement, adherence to therapy, and realistic expectations. Not all pain can be eliminated, but significant improvement in function and quality of life is achievable for most patients. The goal is regaining comfort and mobility for chronic pain sufferers without surgery, enhancing overall physical well-being and promoting functional restoration. Regular follow-up with your care team ensures optimal outcomes and allows treatment adjustments as needed.</p><p><strong>When Surgery May Be Needed:</strong> If non-surgical treatments fail after 3-6 months of comprehensive care, or if you have progressive weakness, severe functional limitation, or imaging showing structural instability requiring stabilization, surgical consultation may be appropriate. Non-surgical treatment also serves as important pre-operative conditioning for patients who eventually need surgery, improving surgical outcomes.</p>",
     },
     benefits: [
       "Offers effective pain and inflammation reduction without the risks, recovery time, or cost of surgery",
@@ -5789,7 +5711,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Non-Surgical Pain Management",
-      body: "**We accept most major insurance plans. PPO preferred.** Non-surgical pain management treatments, including physical therapy referrals, diagnostic imaging, medications, and image-guided injections, are typically covered by insurance when medically necessary and conservative care is documented.",
+      body: "**We accept most major insurance plans. PPO preferred.** Non-surgical pain management treatments, including outside rehabilitation guidance, diagnostic imaging, medications, and image-guided injections, are typically covered by insurance when medically necessary and conservative care is documented.",
     },
     schedule: "Joint pain, spine pain, or <a href=\"/conditions/chronic-pain\" class=\"text-blue-600 hover:underline\">chronic discomfort</a> limiting your life? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule your consultation</a> today at Mountain Spine & Orthopedics for comprehensive **non-surgical pain management** evaluation. <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">Complimentary MRI review</a> and <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">second opinion</a> available to explore your non-surgical options. <a href=\"/injuries/car-accident\" class=\"text-blue-600 hover:underline\">Car accident</a> or <a href=\"/injuries/slip-and-fall\" class=\"text-blue-600 hover:underline\">slip-and-fall</a> injury? We provide comprehensive conservative care for accident-related injuries.",
   },
@@ -5849,7 +5771,7 @@ export const treatmentContentBatch4: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from OLIF Surgery",
       timeline: "6–12 Months for Full Fusion",
-      details: "Recovery from **OLIF** is generally faster than traditional open posterior fusion. Most patients spend 2–3 days in the hospital and walk the day after surgery. A **lumbar brace** is worn for 6–8 weeks. Because the psoas is not split, thigh weakness and groin pain — common with XLIF — are rare after OLIF. **Physical therapy** begins at 4–6 weeks, focusing on core strength and functional mobility. Full bony fusion is confirmed by CT scan at 6 and 12 months. Many patients report meaningful improvement in leg and back symptoms within the first few weeks as swelling resolves and nerve decompression takes effect.",
+      details: "Recovery from **OLIF** is generally faster than traditional open posterior fusion. Most patients spend 2–3 days in the hospital and walk the day after surgery. A **lumbar brace** is worn for 6–8 weeks. Because the psoas is not split, thigh weakness and groin pain — common with XLIF — are rare after OLIF. **Rehabilitation** begins at 4–6 weeks, focusing on core strength and functional mobility. Full bony fusion is confirmed by CT scan at 6 and 12 months. Many patients report meaningful improvement in leg and back symptoms within the first few weeks as swelling resolves and nerve decompression takes effect.",
     },
     benefits: [
       "**Psoas-sparing approach** reduces risk of thigh pain and lumbar plexus injury versus direct lateral XLIF",
@@ -5981,7 +5903,7 @@ export const treatmentContentBatch4: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from Shoulder Arthroscopy",
       timeline: "3-6+ Months for Complex Repairs",
-      details: "Recovery from **Shoulder Arthroscopy** varies by procedure. A sling is used for protection initially. **Physical Therapy** is often recommended, progressing from passive motion to strengthening. Full recovery can take 3-6+ months for complex repairs like rotator cuff or labral repairs. This shoulder surgery aims for functional restoration and return to overhead activities, focusing on shoulder joint rehabilitation and strength restoration.",
+      details: "Recovery from **Shoulder Arthroscopy** varies by procedure. A sling is used for protection initially. **Rehabilitation** is often recommended, progressing from passive motion to strengthening. Full recovery can take 3-6+ months for complex repairs like rotator cuff or labral repairs. This shoulder surgery aims for functional restoration and return to overhead activities, focusing on shoulder joint rehabilitation and strength restoration.",
     },
     benefits: [
       "Provides effective diagnosis and treatment for a wide range of shoulder joint issues",
@@ -6051,7 +5973,7 @@ export const treatmentContentBatch4: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from Stem Cell Therapy",
       timeline: "Weeks to Months for Tissue Regeneration",
-      details: "<p><strong>Immediate Post-Procedure (Days 1-7):</strong> Recovery from **Stem Cell Therapy** involves limiting activity initially to allow stem cell engraftment. Mild to moderate discomfort at both the harvest site (hip or abdomen) and injection site is common, managed with over-the-counter pain relievers (acetaminophen recommended over NSAIDs, which may interfere with healing). Ice and rest are important during the first week.</p><p><strong>Weeks 2-4:</strong> Gradual return to light activities as tolerated. Some patients notice early improvements in pain and function, while others experience no change or temporary worsening before improvement. The stem cells are beginning the process of releasing growth factors and potentially initiating tissue repair.</p><p><strong>Weeks 4-12:</strong> Gradual pain reduction and functional improvement may occur over this period as tissues potentially regenerate and inflammation decreases. **Physical Therapy** is often recommended during this phase to optimize outcomes from this biological therapy and enhance tissue remodeling, supporting long-term joint health and function restoration. Improvements are typically subtle and progressive, not dramatic or immediate.</p><p><strong>Months 3-6+:</strong> Maximum benefit, if any, is typically seen by 3-6 months post-treatment. Some patients report modest improvement in pain and function, while others experience no significant benefit. Response is highly variable and unpredictable. If improvement occurs, it may be sustained for 12-24 months or longer, but symptom recurrence is possible as underlying degeneration continues.</p><p><strong>Realistic Expectations:</strong> Stem cell therapy should not be expected to regenerate cartilage, \"cure\" arthritis, or eliminate need for future surgery. At best, it may offer modest symptom improvement and delay progression in selected patients. Many patients ultimately require conventional treatments (injections, physical therapy) or surgery regardless of stem cell therapy. Results are not guaranteed, and significant improvement occurs in only a subset of patients.</p>",
+      details: "<p><strong>Immediate Post-Procedure (Days 1-7):</strong> Recovery from **Stem Cell Therapy** involves limiting activity initially to allow stem cell engraftment. Mild to moderate discomfort at both the harvest site (hip or abdomen) and injection site is common, managed with over-the-counter pain relievers (acetaminophen recommended over NSAIDs, which may interfere with healing). Ice and rest are important during the first week.</p><p><strong>Weeks 2-4:</strong> Gradual return to light activities as tolerated. Some patients notice early improvements in pain and function, while others experience no change or temporary worsening before improvement. The stem cells are beginning the process of releasing growth factors and potentially initiating tissue repair.</p><p><strong>Weeks 4-12:</strong> Gradual pain reduction and functional improvement may occur over this period as tissues potentially regenerate and inflammation decreases. **Rehabilitation** is often recommended during this phase to optimize outcomes from this biological therapy and enhance tissue remodeling, supporting long-term joint health and function restoration. Improvements are typically subtle and progressive, not dramatic or immediate.</p><p><strong>Months 3-6+:</strong> Maximum benefit, if any, is typically seen by 3-6 months post-treatment. Some patients report modest improvement in pain and function, while others experience no significant benefit. Response is highly variable and unpredictable. If improvement occurs, it may be sustained for 12-24 months or longer, but symptom recurrence is possible as underlying degeneration continues.</p><p><strong>Realistic Expectations:</strong> Stem cell therapy should not be expected to regenerate cartilage, \"cure\" arthritis, or eliminate need for future surgery. At best, it may offer modest symptom improvement and delay progression in selected patients. Many patients ultimately require conventional treatments (injections, rehabilitation) or surgery regardless of stem cell therapy. Results are not guaranteed, and significant improvement occurs in only a subset of patients.</p>",
     },
     benefits: [
       "May potentially stimulate the body's natural healing and regenerative processes in damaged tissues (results vary)",
@@ -6134,7 +6056,7 @@ export const treatmentContentBatch4: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from Surgical Treatment",
       timeline: "Weeks to Months Depending on Procedure",
-      details: "Recovery from **Surgical Treatments** varies by procedure. Minimally invasive options often mean shorter hospital stays and faster initial recovery. Pain management and **Physical Therapy** are crucial for optimal outcomes. Full recovery can take weeks to months, aiming for restoration of mobility and strength after orthopedic intervention and a return to an active lifestyle, guided by expert orthopedic rehabilitation protocols.",
+      details: "Recovery from **Surgical Treatments** varies by procedure. Minimally invasive options often mean shorter hospital stays and faster initial recovery. Pain management and **Rehabilitation** are crucial for optimal outcomes. Full recovery can take weeks to months, aiming for restoration of mobility and strength after orthopedic intervention and a return to an active lifestyle, guided by expert orthopedic rehabilitation protocols.",
     },
     benefits: [
       "Provide significant and often long-lasting relief from debilitating pain",
@@ -6218,7 +6140,7 @@ export const treatmentContentBatch4: TreatmentContent[] = [
     id: "ankle-replacement-surgery",
     slug: "ankle-replacement-surgery",
     metaTitle: "Ankle Replacement Surgery | Total Ankle Arthroplasty",
-    metaDescription: "Ankle replacement (total ankle arthroplasty) treats end-stage ankle arthritis by replacing damaged bone and cartilage with a prosthesis. Preserves motion compared to fusion.",
+    metaDescription: "Total ankle replacement treats selected end-stage ankle arthritis while preserving motion. Learn candidacy, ankle fusion comparison, recovery, and PPO coverage.",
     keywords: [
       "Ankle replacement surgery",
       "total ankle arthroplasty",
@@ -6235,49 +6157,49 @@ export const treatmentContentBatch4: TreatmentContent[] = [
     card_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--ankle-replacement-surgery--thumbnail.png',
     inTxt_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--ankle-replacement-surgery--thumbnail.png',
     heroImageAlt: "X-ray showing total ankle replacement prosthesis",
-    heroDescription: "Restore ankle function and relieve chronic pain with Ankle Replacement Surgery. This procedure replaces damaged bone and cartilage with a precision-engineered prosthesis, preserving motion and enabling a more natural gait compared to fusion.",
+    heroDescription: "Total ankle replacement resurfaces the arthritic ankle joint with metal and polyethylene components for selected patients who need pain relief while preserving motion.",
     overview: {
-      heading: "Motion-Preserving Ankle Reconstruction",
-      body: "**Ankle Replacement Surgery** (total ankle arthroplasty) is an advanced surgical procedure designed to alleviate chronic ankle pain and restore function by replacing damaged bone and cartilage with a precision-engineered prosthesis. If severe ankle arthritis is limiting your mobility, this surgery offers a path to relief. By resurfacing the joint and implanting a specialized metal and medical-grade plastic device, ankle replacement aims to preserve motion and enable a more natural gait compared to traditional ankle fusion. This is a motion-preserving alternative for end-stage ankle arthritis.",
+      heading: "Replacing the Arthritic Ankle While Preserving Motion",
+      body: "**Ankle Replacement Surgery**, also called total ankle arthroplasty, treats selected cases of end-stage ankle arthritis by resurfacing the bottom of the tibia and top of the talus with implant components. It is different from ankle fusion: fusion can be durable for severe arthritis but eliminates ankle motion, while replacement is designed to reduce pain and preserve a more natural ankle arc for walking.<br/><br/>The choice between replacement and fusion depends on more than pain severity. Mountain Spine & Orthopedics evaluates alignment, bone stock, ligament stability, prior fractures, deformity, activity level, weight-bearing X-rays, CT findings, and the condition of neighboring joints. Patients with severe deformity, poor bone quality, active infection, major nerve or circulation problems, or very high-impact demands may need a different surgical plan.",
     },
     candidates: {
-      heading: "Ideal Candidates for Ankle Replacement",
+      heading: "Who May Be a Candidate?",
       list: [
-        "Patients with end-stage ankle arthritis (osteoarthritis or rheumatoid arthritis) unresponsive to conservative care",
-        "Individuals with severe and persistent ankle pain during weight-bearing activities",
-        "Those with significant ankle stiffness and reduced range of motion",
-        "Patients with post-traumatic arthritis from previous ankle fractures or injuries",
-        "Individuals seeking to preserve ankle motion rather than fusion",
+        "End-stage ankle arthritis from prior fracture, osteoarthritis, inflammatory arthritis, or chronic instability",
+        "Pain with standing or walking that persists despite bracing, medication, injections, and shoe modification",
+        "Reasonable ankle alignment or deformity that can be corrected as part of the surgical plan",
+        "Adequate bone quality and soft-tissue condition to support implant fixation",
+        "Patients who value motion preservation and understand implant longevity and activity restrictions",
       ],
     },
     procedure: {
-      heading: "The Ankle Replacement Procedure",
+      heading: "How Total Ankle Replacement Is Planned and Performed",
       steps: [
-        "Following consultation and advanced imaging (weight-bearing CT scans), the procedure is performed under anesthesia",
-        "An incision is made at the front or side of the ankle to access the joint",
-        "The damaged ends of the tibia and talus are carefully removed",
-        "Using precise instruments and often computer-assisted navigation, bone surfaces are prepared",
-        "The artificial joint components (metal and polyethylene spacer) are implanted",
-        "The components are designed to mimic the natural motion of the ankle",
+        "Standing X-rays and, when needed, CT imaging are used to evaluate arthritis, alignment, bone loss, and deformity",
+        "Through an ankle incision, the surgeon removes the damaged joint surfaces while preserving supporting bone",
+        "Cutting guides or patient-specific planning may be used to position the tibial and talar components accurately",
+        "Metal components and a polyethylene bearing are inserted to recreate the joint surface",
+        "Ligament balance, implant tracking, and ankle alignment are checked before closure",
+        "Associated procedures, such as deformity correction or tendon balancing, may be added when needed for stability",
       ],
     },
     recovery: {
       heading: "Recovery from Ankle Replacement",
-      timeline: "6-12 Months for Full Recovery",
-      details: "Recovery from **Ankle Replacement Surgery** is a gradual process. The ankle is immobilized initially in a splint or cast. Weight-bearing restrictions are in place for several weeks (typically 6 weeks or more). **Physical Therapy** is crucial, usually starting a few weeks after surgery to restore range of motion, strength, balance, and normal gait mechanics. Full recovery, including return to most daily activities, can take 6-12 months. High-impact activities are generally discouraged to preserve implant longevity.",
+      timeline: "Several Months to 1 Year",
+      details: "Recovery from **Ankle Replacement Surgery** is deliberately staged to protect the implant and soft tissues. Patients usually begin in a splint or boot with a period of restricted weight-bearing. Weight-bearing advances only after the surgeon confirms appropriate wound healing, implant position, and early bone response. Outside rehabilitation or guided home exercises may focus on swelling control, motion, balance, calf strength, and gait mechanics. Low-impact activities are usually favored long term, while repetitive running or jumping may shorten implant life and is generally discouraged.",
     },
     benefits: [
-      "Significant reduction or elimination of chronic ankle pain caused by arthritis",
-      "Improved range of motion in the ankle compared to pre-surgery or ankle fusion",
-      "Restoration of a more natural walking pattern (gait)",
-      "Increased ability to perform daily activities and participate in low-impact recreational activities",
-      "Preservation of motion, which is a key advantage over ankle fusion"
+      "Treats end-stage ankle arthritis while preserving motion in properly selected patients",
+      "May protect adjacent foot joints from the extra stress created by ankle fusion",
+      "Can improve walking mechanics when arthritis pain and stiffness dominate symptoms",
+      "Allows a tailored plan for post-traumatic arthritis, inflammatory arthritis, or deformity-related arthritis",
+      "Supports return to daily walking and low-impact activity with appropriate precautions"
     ],
     insurance: {
       heading: "Insurance for Ankle Replacement",
-      body: "**We accept most major insurance plans. PPO preferred.** Ankle replacement is a medically necessary procedure for end-stage ankle arthritis and is typically covered by insurance.",
+      body: "**We accept most major insurance plans. PPO preferred.** Total ankle replacement usually requires documentation of end-stage arthritis, functional limitation, imaging findings, and prior conservative treatment before authorization.",
     },
-    schedule: "Severe ankle arthritis or chronic ankle pain? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
+    schedule: "Severe ankle arthritis does not always mean fusion is the only surgical option. Schedule a consultation with Mountain Spine & Orthopedics to compare ankle replacement, fusion, and non-surgical care based on your imaging and goals.",
   },
   {
     id: "ankle-arthroscopy-minimally-invasive-surgery",
@@ -6462,8 +6384,8 @@ export const treatmentContentBatch5: TreatmentContent[] = [
     heroImageAlt: "Physician performing image-guided nerve block injection for pain management",
     heroDescription: "Targeted pain relief with Nerve Block Injections, which interrupt pain signals from specific nerves using local anesthetic and anti-inflammatory medication for both diagnostic and therapeutic purposes.",
     overview: {
-      heading: "Targeted Nerve Pain Management",
-      body: "**Nerve Block Injections** are diagnostic and therapeutic procedures that deliver local anesthetic (+/- corticosteroid) near specific nerves to interrupt pain signal transmission from peripheral nerves, nerve plexuses, or sympathetic ganglia to the spinal cord and brain. Nerve blocks serve dual purposes: **diagnostic** (confirming a specific nerve as the pain source through immediate anesthetic relief) and **therapeutic** (providing longer-term pain relief through corticosteroid anti-inflammatory effects or prolonged anesthetic action). Common types include <a href=\"/treatments/epidural-steroid-injection\" class=\"text-blue-600 hover:underline\">**epidural nerve blocks**</a>, <a href=\"/treatments/facet-ablation-rhizotomy-treatment\" class=\"text-blue-600 hover:underline\">**medial branch blocks**</a> (facet nerves), <a href=\"/treatments/impar-block-treatment\" class=\"text-blue-600 hover:underline\">**Impar ganglion blocks**</a> (tailbone), **occipital nerve blocks** (headaches), and **peripheral nerve blocks** for limb pain. This is a core component of <a href=\"/treatments/non-surgical-treatments-for-pain-management\" class=\"text-blue-600 hover:underline\">**interventional pain management**</a>. Learn more about <a href=\"https://www.hopkinsmedicine.org/health/treatment-tests-and-therapies/nerve-blocks\" class=\"text-blue-600 hover:underline\" target=\"_blank\" rel=\"noopener noreferrer\">nerve blocks from Johns Hopkins Medicine</a>.",
+      heading: "Diagnostic and Therapeutic Nerve Blocks",
+      body: "<p><strong>Nerve block injections</strong> place local anesthetic, and sometimes corticosteroid, near a specific nerve, nerve root, nerve branch, or ganglion. The immediate numbing phase helps answer a diagnostic question: is this nerve pathway actually carrying the patient's pain?</p><p>When the block significantly reduces the expected pain for the expected duration, it can guide next steps such as repeat injection, radiofrequency ablation, surgical decompression evaluation, or another targeted procedure. Common examples include <a href=\"/treatments/epidural-steroid-injection\" class=\"text-blue-600 hover:underline\">epidural or selective nerve root blocks</a>, medial branch blocks for facet pain, sympathetic blocks, Impar ganglion blocks, occipital blocks, and selected peripheral nerve blocks. This is different from a general pain shot because the target nerve and pain pattern must match. PPO Insurance Accepted.</p>",
     },
     candidates: {
       heading: "Who Benefits from Nerve Block Injections?",
@@ -6498,7 +6420,7 @@ export const treatmentContentBatch5: TreatmentContent[] = [
       "Minimally invasive outpatient procedure with low risk and minimal downtime",
       "Can lead to significant reduction in oral pain medication use",
       "Guides treatment decisions for longer-term interventions (ablation, surgery, neuromodulation)",
-      "May provide immediate relief allowing participation in physical therapy",
+      "May provide immediate relief allowing participation in rehabilitation",
       "Can be repeated if symptoms return and initial block was effective"
     ],
     faqs: [
@@ -6545,8 +6467,8 @@ export const treatmentContentBatch5: TreatmentContent[] = [
     heroImageAlt: "Specialist evaluating chronic pain patient at Mountain Spine & Orthopedics",
     heroDescription: "Chronic pain is pain lasting longer than expected—often beyond 3 months. Effective treatment starts by identifying the primary pain generator(s) and building a plan that improves function, sleep, and mobility.",
     overview: {
-      heading: "Comprehensive Chronic Pain Evaluation & Treatment",
-      body: "**Chronic pain** is pain lasting longer than expected—typically beyond **3 months**—and often persists after normal healing. Effective treatment does not rely on a single procedure; it starts by **identifying the primary pain generator(s)** and building a **personalized, multimodal plan** that improves function, sleep, and mobility—not just short-term relief.\n\n**Why a thorough evaluation matters:** Pain that has lasted months or years is often driven by multiple factors: nerve sensitization, muscle guarding, joint degeneration, scarring from prior surgery, or central pain processing changes. Our specialists take a structured approach:\n\n<ul><li><strong>Detailed history</strong> — Triggers, timeline, prior treatments, and how pain affects daily life</li><li><strong>Comprehensive physical exam</strong> — Joints, nerves, movement patterns, and posture</li><li><strong>Imaging when indicated</strong> — X-ray or MRI to confirm or rule out structural causes</li><li><strong>Ruling out red flags</strong> — Progressive weakness, systemic illness, infection, or malignancy</li></ul>\n\nOnce the main pain drivers are identified, treatment is tailored to address them with **therapy, medications, injections, and—when appropriate—procedure-based options** such as radiofrequency ablation or spinal cord stimulation.",
+      heading: "Structured Chronic Pain Evaluation & Treatment",
+      body: "<p><strong>Chronic pain treatment</strong> begins by identifying the main pain generator or combination of generators. Pain that lasts for months can involve joint degeneration, nerve compression, prior surgery changes, tendon disease, muscle guarding, scar tissue, and sensitized nerve pathways. A useful plan must separate those contributors rather than treating all chronic pain the same way.</p><p>Mountain Spine & Orthopedics uses history, physical exam, imaging review, and diagnostic injections when appropriate to determine whether pain is primarily spine-related, joint-related, nerve-related, post-surgical, inflammatory, or mixed. Treatment may include medication review, activity modification, outside-guided rehabilitation, image-guided injections, nerve blocks, radiofrequency ablation, surgical evaluation when a correctable structural problem exists, or neuromodulation discussion for selected refractory cases. PPO Insurance Accepted.</p>",
     },
     candidates: {
       heading: "Who Benefits from Chronic Pain Treatment?",
@@ -6563,7 +6485,7 @@ export const treatmentContentBatch5: TreatmentContent[] = [
       heading: "How Chronic Pain Treatment Works: Evaluation & Options",
       steps: [
         "<h3>Step 1: Comprehensive Evaluation</h3><p>Your specialist takes a detailed history (triggers, timeline, prior care), performs a physical exam (joints, nerves, movement), and reviews imaging when needed. The goal is to identify the **primary pain generator(s)** and rule out serious underlying conditions.</p>",
-        "<h3>Step 2: Targeted Physical Therapy & Movement</h3><p><strong>Targeted physical therapy</strong> focuses on movement retraining, strengthening, and posture or ergonomic corrections. This is a cornerstone of chronic pain care and helps restore function while reducing reliance on passive treatments alone.</p>",
+        "<h3>Step 2: Movement and Outside Rehabilitation Guidance</h3><p>When appropriate, outside-guided rehabilitation focuses on movement retraining, strengthening, pacing, and posture or ergonomic corrections. This helps restore function while reducing reliance on passive treatments alone.</p>",
         "<h3>Step 3: Medication Management</h3><p><strong>Medication management</strong> aims to minimize opioid use while optimizing **neuropathic medications** (e.g., gabapentin, duloxetine) and **anti-inflammatory options** when appropriate. The goal is better pain control with fewer side effects.</p>",
         "<h3>Step 4: Image-Guided Injections</h3><p>When a specific pain generator is confirmed (e.g., facet joint, SI joint, nerve root), <strong>injections</strong>—such as <a href=\"/treatments/epidural-steroid-injection\" class=\"text-blue-600 hover:underline\">epidural steroid injections</a> or joint blocks—can provide both diagnostic confirmation and therapeutic relief as part of a larger plan.</p>",
         "<h3>Step 5: Advanced Procedures When Indicated</h3><p>If conservative care and injections are insufficient, options may include <strong>radiofrequency ablation</strong> for facet or SI joint pain, or <strong>neuromodulation</strong> (spinal cord stimulation) for certain refractory conditions. These are considered when clearly indicated and after shared decision-making.</p>",
@@ -6572,11 +6494,11 @@ export const treatmentContentBatch5: TreatmentContent[] = [
     recovery: {
       heading: "What to Expect After Starting Chronic Pain Treatment",
       timeline: "Weeks to Months, Depending on Complexity",
-      details: "**Measurable progress** often occurs within **4–8 weeks** of a structured, multimodal plan. However, chronic pain that developed over years may take **months** to significantly improve.\n\n<strong>Goals focus on:</strong>\n<ul><li><strong>Improved function</strong> — Ability to do daily activities, work, and exercise with less limitation</li><li><strong>Better sleep and quality of life</strong> — Rather than complete pain elimination</li><li><strong>Reduced medication dependence</strong> — Especially opioids, when safe to do so</li><li><strong>Long-term self-management skills</strong> — So you can maintain gains over time</li></ul>\n**Realistic expectations** and **active patient participation** (e.g., following therapy, pacing activities) are critical for success. Our team works with you to set achievable milestones and adjust the plan as needed.",
+      details: "Progress depends on the diagnosis, duration of symptoms, prior surgery, nerve involvement, and overall health. Goals focus on improved function, sleep, mobility, and reduced medication reliance when safe rather than promising complete pain elimination. Treatment milestones are adjusted as diagnostic information becomes clearer and as the patient responds to each step.",
     },
     benefits: [
       "**Comprehensive evaluation** identifies the true pain generators instead of relying on imaging alone.",
-      "**Multimodal approach** addresses pain from multiple angles (therapy, medications, injections, procedures when needed).",
+      "**Multimodal approach** addresses pain from multiple angles (outside-guided movement care, medications, injections, procedures when needed).",
       "**Minimizes medication dependence**, especially opioids, while improving pain control and function.",
       "**Improves function and sleep** and helps you return to activities that matter to you.",
       "**Provides tools for long-term pain self-management** so you can maintain progress over time.",
@@ -6584,7 +6506,7 @@ export const treatmentContentBatch5: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Chronic Pain Treatment",
-      body: "**We accept most major insurance plans. PPO preferred.** Chronic pain evaluation, physical therapy, medications, and image-guided injections are typically covered when medically necessary. Advanced procedures (e.g., spinal cord stimulation) require prior authorization; our team will help guide you through the process.",
+      body: "**We accept most major insurance plans. PPO preferred.** Chronic pain evaluation, medically necessary injections, and advanced procedures may require prior authorization; our team will help guide you through the process.",
     },
     schedule: "<a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> for comprehensive chronic pain evaluation and personalized treatment planning. <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">Free MRI review</a> and <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">second opinion</a> available.",
   },
@@ -6897,7 +6819,7 @@ export const allTreatmentContent: TreatmentContent[] = [
       heading: "Who Needs Tennis Elbow Surgery?",
       list: [
         "Patients with **persistent lateral elbow pain** lasting more than 6-12 months despite conservative treatment",
-        "Individuals who have **failed physical therapy**, bracing, and activity modification",
+        "Individuals who have **failed rehabilitation**, bracing, and activity modification",
         "Those who have not responded to **corticosteroid or PRP injections**",
         "Patients with **significant tendon damage** visible on MRI or ultrasound",
         "Individuals whose elbow pain **significantly limits work or daily activities**",
@@ -6963,7 +6885,7 @@ export const allTreatmentContent: TreatmentContent[] = [
       heading: "Who Needs Golfer's Elbow Surgery?",
       list: [
         "Patients with **persistent medial elbow pain** lasting more than 6-12 months despite conservative treatment",
-        "Individuals who have **failed physical therapy**, bracing, and activity modification",
+        "Individuals who have **failed rehabilitation**, bracing, and activity modification",
         "Those who have not responded to **corticosteroid or PRP injections**",
         "Patients with **significant tendon damage** visible on imaging",
         "Individuals whose elbow pain **significantly limits work, sports, or daily activities**",
@@ -7053,7 +6975,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     recovery: {
       heading: "Recovery from Elbow Arthroscopy",
       timeline: "4-12 Weeks for Full Recovery",
-      details: "<p>Recovery varies based on the procedures performed:</p><p><strong>Simple procedures</strong> (loose body removal): Recovery is rapid—return to light activities in 1-2 weeks, sports in 4-6 weeks.</p><p><strong>Arthritis debridement:</strong> Moderate recovery—full activities in 6-8 weeks. Range of motion exercises begin immediately.</p><p><strong>Capsular release for stiffness:</strong> Intensive therapy required—continuous passive motion (CPM) machine and aggressive physical therapy to maintain the gained motion. Full recovery in 3-4 months.</p><p>Early motion is encouraged for all elbow arthroscopy procedures to prevent stiffness.</p>",
+      details: "<p>Recovery varies based on the procedures performed:</p><p><strong>Simple procedures</strong> (loose body removal): Recovery is rapid—return to light activities in 1-2 weeks, sports in 4-6 weeks.</p><p><strong>Arthritis debridement:</strong> Moderate recovery—full activities in 6-8 weeks. Range of motion exercises begin immediately.</p><p><strong>Capsular release for stiffness:</strong> Intensive therapy required—continuous passive motion (CPM) machine and aggressive rehabilitation to maintain the gained motion. Full recovery in 3-4 months.</p><p>Early motion is encouraged for all elbow arthroscopy procedures to prevent stiffness.</p>",
     },
     benefits: [
       "**Minimally invasive** with smaller incisions and less tissue damage than open surgery",
@@ -7506,7 +7428,7 @@ export const allTreatmentContent: TreatmentContent[] = [
         "Individuals with severe shoulder pain that limits daily activities",
         "Those with significant loss of shoulder motion and function",
         "Patients with intact or repairable rotator cuff tendons",
-        "Individuals who have failed conservative treatments including medications, injections, and physical therapy",
+        "Individuals who have failed conservative treatments including medications, injections, and rehabilitation",
         "Those seeking long-term pain relief and improved shoulder function",
       ],
     },
@@ -7524,7 +7446,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     recovery: {
       heading: "Recovery and Rehabilitation",
       timeline: "3-6 Months for Full Recovery",
-      details: "<strong>Recovery from total shoulder replacement</strong> involves a structured rehabilitation program. A sling is worn for 4-6 weeks to protect the repair. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> begins early with passive motion exercises and progresses to active motion and strengthening. Most patients experience significant pain relief within the first few weeks. Full recovery typically takes 3-6 months, with return to most activities including golf, swimming, and light overhead work. Heavy lifting and high-impact activities are generally avoided to protect the implant.",
+      details: "<strong>Recovery from total shoulder replacement</strong> involves a structured rehabilitation program. A sling is worn for 4-6 weeks to protect the repair. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> begins early with passive motion exercises and progresses to active motion and strengthening. Most patients experience significant pain relief within the first few weeks. Full recovery typically takes 3-6 months, with return to most activities including golf, swimming, and light overhead work. Heavy lifting and high-impact activities are generally avoided to protect the implant.",
     },
     benefits: [
       "Provides dramatic pain relief from advanced shoulder arthritis",
@@ -7591,7 +7513,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     recovery: {
       heading: "Recovery Timeline",
       timeline: "3-6 Months for Full Recovery",
-      details: "<strong>Recovery from reverse shoulder replacement</strong> follows a structured rehabilitation program. A sling is worn for 4-6 weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> begins early with passive motion and progresses to active motion and strengthening. Most patients experience significant pain relief and improved function within the first few weeks. Full recovery typically takes 3-6 months. Patients can usually return to most daily activities, though heavy lifting and high-impact activities are generally avoided.",
+      details: "<strong>Recovery from reverse shoulder replacement</strong> follows a structured rehabilitation program. A sling is worn for 4-6 weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> begins early with passive motion and progresses to active motion and strengthening. Most patients experience significant pain relief and improved function within the first few weeks. Full recovery typically takes 3-6 months. Patients can usually return to most daily activities, though heavy lifting and high-impact activities are generally avoided.",
     },
     benefits: [
       "Provides excellent pain relief for complex shoulder problems",
@@ -7610,7 +7532,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     id: "labral-repair-shoulder",
     slug: "labral-repair-shoulder",
     metaTitle: "Shoulder Labral Repair | SLAP & Bankart Lesion Surgery FL",
-    metaDescription: "Expert arthroscopic labral repair for shoulder instability and SLAP tears. Our FL, NJ, NY, & PA specialists restore shoulder stability with minimally invasive techniques.",
+    metaDescription: "Shoulder labral repair treats selected Bankart, SLAP, and posterior labral tears causing instability or mechanical shoulder pain. PPO insurance accepted.",
     keywords: [
       "labral repair shoulder",
       "SLAP tear repair",
@@ -7628,57 +7550,56 @@ export const allTreatmentContent: TreatmentContent[] = [
     card_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--labral-repair-shoulder--thumbnail.png',
     inTxt_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--labral-repair-shoulder--thumbnail.png',
     heroImageAlt: "Arthroscopic view of shoulder labral repair with suture anchors",
-    heroDescription: "Arthroscopic labral repair reattaches torn labral tissue to restore shoulder stability and prevent recurrent dislocations.",
+    heroDescription: "Arthroscopic shoulder labral repair reattaches torn cartilage when a Bankart, SLAP, or posterior labral tear is driving instability or mechanical pain.",
     overview: {
-      heading: "Restoring Shoulder Stability",
-      body: "<strong>Labral Repair (Shoulder)</strong> is an arthroscopic procedure that reattaches torn labral tissue to the glenoid socket using suture anchors. The labrum is a ring of cartilage that deepens the socket and provides stability to the shoulder joint. Labral tears can occur from traumatic dislocations (Bankart lesions), repetitive overhead activities (SLAP tears), or shoulder instability. At Mountain Spine & Orthopedics, our shoulder specialists use advanced arthroscopic techniques to repair the labrum and restore shoulder stability.<br/><br/>This minimally invasive procedure is highly effective for treating <a href=\"/conditions/shoulder-instability\" class=\"text-blue-600 hover:underline\">shoulder instability</a> and preventing recurrent dislocations. The arthroscopic approach allows for precise repair with minimal tissue disruption, leading to faster recovery compared to open surgery. Our surgeons specialize in repairing various types of labral tears including SLAP tears, Bankart lesions, and posterior labral tears.",
+      heading: "Repairing the Shoulder's Stability Ring",
+      body: "<strong>Labral Repair (Shoulder)</strong> is used when the cartilage rim around the shoulder socket is torn and no longer helps center the ball of the joint. The pattern matters. A Bankart tear usually follows a dislocation and can cause recurrent <a href=\"/conditions/shoulder-instability\" class=\"text-blue-600 hover:underline\">shoulder instability</a>. A SLAP tear involves the top of the labrum where the biceps tendon attaches and may cause deep pain, clicking, or loss of throwing strength. Posterior labral tears can create pain or shifting in the back of the shoulder, especially with pressing, blocking, or contact activity.<br/><br/>Mountain Spine & Orthopedics uses exam findings, MRI or MRI arthrogram results, prior dislocation history, bone-loss assessment, and sport or work demands to decide whether arthroscopic repair is appropriate. Not every labral tear needs surgery, and some older or degenerative SLAP patterns are better treated with <a href=\"/treatments/biceps-tenodesis\" class=\"text-blue-600 hover:underline\">biceps tenodesis</a> or non-surgical care rather than labral repair alone.",
     },
     candidates: {
-      heading: "Who Is a Candidate?",
+      heading: "Who May Need Labral Repair?",
       list: [
-        "Patients with <strong>shoulder instability</strong> and labral tears confirmed by MRI",
-        "Individuals with <strong>recurrent shoulder dislocations</strong> or subluxations",
-        "Athletes with <strong>SLAP tears</strong> causing pain and instability",
-        "Those with <strong>Bankart lesions</strong> from previous dislocations",
-        "Patients who have failed conservative treatment including physical therapy",
-        "Active individuals seeking to return to sports or overhead activities",
+        "Patients with recurrent shoulder dislocations or subluxations after a Bankart tear",
+        "Athletes or active adults with symptomatic SLAP tears that match exam and imaging findings",
+        "Posterior labral tears causing painful catching, shifting, or weakness with pushing activity",
+        "Labral tears that continue to limit work, sleep, lifting, or sport after appropriate non-surgical care",
+        "Patients without severe arthritis, major untreated bone loss, or a better alternative procedure",
+        "People who understand that repair protection and outside rehabilitation are central to recovery",
       ],
     },
     procedure: {
       heading: "The Arthroscopic Repair Technique",
       steps: [
-        "Following consultation and diagnostic imaging (MRI arthrogram), the procedure is performed arthroscopically",
-        "Small portals are created for the camera and instruments",
-        "The torn labrum is identified and prepared",
-        "Suture anchors are placed into the glenoid bone",
-        "The sutures are passed through the labral tissue and tied down, reattaching it to the bone",
-        "The repair is tested for stability",
-        "The portals are closed, and the shoulder is placed in a sling",
+        "The surgeon confirms the tear pattern and checks the cartilage, biceps anchor, rotator cuff, and capsule",
+        "Small arthroscopic portals are used to view the socket and work around the labrum",
+        "The torn edge and bone surface are prepared so the labrum can heal back to the glenoid",
+        "Suture anchors are placed at the specific region of the tear, such as anterior Bankart, superior SLAP, or posterior labrum",
+        "Sutures are passed through the labral tissue and tied to restore the bumper effect and tighten the capsule when needed",
+        "The shoulder is tested for stability before the portals are closed and the arm is protected in a sling",
       ],
     },
     recovery: {
       heading: "Recovery and Return to Activity",
       timeline: "4-6 Months for Full Return to Sports",
-      details: "<strong>Recovery from labral repair</strong> requires protection of the repair while it heals. A sling is worn for 4-6 weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> begins with passive motion and progresses to active motion and strengthening. Return to sports typically occurs at 4-6 months once strength and stability milestones are met. The arthroscopic approach allows for faster recovery compared to open surgery, with most patients experiencing significant improvement within the first few months.",
+      details: "<strong>Recovery from labral repair</strong> is slower than many patients expect because the repaired cartilage must heal to bone. A sling is commonly used during the early protection phase. Motion advances gradually, first protecting the repair and then restoring range of motion, strength, shoulder blade control, and sport-specific mechanics. Outside rehabilitation or a surgeon-directed exercise plan is usually part of the recovery. Return to throwing, contact sports, heavy lifting, or overhead work depends on the tear pattern, repair strength, range of motion, and strength testing.",
     },
     benefits: [
-      "Restores shoulder stability and prevents recurrent dislocations",
-      "Minimally invasive arthroscopic technique with faster recovery",
-      "Allows return to sports and overhead activities",
-      "Preserves shoulder anatomy and function",
-      "High success rate for preventing recurrent instability",
+      "Targets the specific labral tear pattern rather than treating all shoulder pain the same way",
+      "Restores the socket rim that helps stabilize the shoulder after dislocation or subluxation",
+      "Can address associated capsule looseness, biceps-anchor involvement, or posterior instability",
+      "Uses small arthroscopic portals while preserving normal shoulder anatomy where possible",
+      "Supports return-to-activity planning based on objective healing and strength milestones",
     ],
     insurance: {
       heading: "Insurance for Labral Repair",
-      body: "**We accept most major insurance plans. PPO preferred.** Arthroscopic labral repair is a medically necessary procedure for shoulder instability and is typically covered by insurance.",
+      body: "**We accept most major insurance plans. PPO preferred.** Authorization for labral repair typically depends on symptoms, imaging, exam findings, failed conservative care when appropriate, and documentation of instability or mechanical shoulder dysfunction.",
     },
-    schedule: "Shoulder instability or recurrent dislocations? Our shoulder specialists provide comprehensive evaluation to determine if labral repair is right for you. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Book an appointment</a> with Mountain Spine & Orthopedics today.",
+    schedule: "Shoulder clicking, deep pain, or recurrent slipping after an injury should be evaluated before it becomes a pattern. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Book an appointment</a> with Mountain Spine & Orthopedics to review whether labral repair, biceps treatment, or non-surgical care is the right next step.",
   },
   {
     id: "biceps-tenodesis",
     slug: "biceps-tenodesis",
     metaTitle: "Biceps Tenodesis | Biceps Tendon Repair Shoulder FL",
-    metaDescription: "Expert biceps tenodesis surgery to reattach the biceps tendon and relieve shoulder pain. Our FL, NJ, NY, & PA specialists use arthroscopic techniques for faster recovery.",
+    metaDescription: "Biceps tenodesis treats painful long-head biceps tendon problems, SLAP-related biceps pain, and combined shoulder injuries. PPO insurance accepted.",
     keywords: [
       "biceps tenodesis",
       "biceps tendon surgery",
@@ -7696,50 +7617,50 @@ export const allTreatmentContent: TreatmentContent[] = [
     card_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--biceps-tenodesis--thumbnail.png',
     inTxt_img: 'https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--biceps-tenodesis--thumbnail.png',
     heroImageAlt: "Arthroscopic view of biceps tenodesis procedure",
-    heroDescription: "Biceps tenodesis reattaches the long head of the biceps tendon lower on the arm to relieve pain and restore function.",
+    heroDescription: "Biceps tenodesis moves the painful long-head biceps tendon out of the shoulder joint and secures it to the upper arm when the tendon is a clear pain source.",
     overview: {
-      heading: "Relieving Biceps Tendon Pain",
-      body: "<strong>Biceps Tenodesis</strong> is a surgical procedure that reattaches the long head of the biceps tendon from its attachment at the top of the glenoid socket to a lower point on the humerus (upper arm bone). This procedure is performed to treat <a href=\"/conditions/biceps-tendonitis-shoulder\" class=\"text-blue-600 hover:underline\">biceps tendonitis</a>, biceps tendon tears, or when the biceps tendon is causing pain and limiting shoulder function. At Mountain Spine & Orthopedics, our shoulder specialists use arthroscopic techniques to perform this procedure, resulting in less pain and faster recovery compared to open surgery.<br/><br/>Biceps tenodesis is often performed in conjunction with other shoulder procedures like <a href=\"/treatments/rotator-cuff-repair-surgery\" class=\"text-blue-600 hover:underline\">rotator cuff repair</a> or <a href=\"/treatments/acromioplasty\" class=\"text-blue-600 hover:underline\">subacromial decompression</a>. The procedure relieves pain by removing the damaged portion of the tendon from the shoulder joint and reattaching it in a location where it's less likely to cause problems.",
+      heading: "Treating the Long-Head Biceps Pain Generator",
+      body: "<strong>Biceps Tenodesis</strong> treats pain from the long head of the biceps tendon, the portion that travels through the front of the shoulder and attaches near the labrum. When this tendon is inflamed, partially torn, unstable in its groove, or involved in a SLAP tear, it can cause deep front-of-shoulder pain, clicking, cramping, pain with lifting, and loss of overhead strength.<br/><br/>Tenodesis is different from tenotomy. In a tenotomy, the tendon is released and not reattached, which may be appropriate for some patients but can lead to cramping or a cosmetic \"Popeye\" muscle change. In tenodesis, the tendon is released from the painful shoulder-joint attachment and fixed to the upper arm bone to preserve contour and reduce traction inside the joint. Mountain Spine & Orthopedics considers age, activity demands, cosmetic concerns, rotator cuff status, labral findings, and work or sport goals when deciding whether tenodesis fits.",
     },
     candidates: {
-      heading: "Who Is a Candidate?",
+      heading: "Who May Be a Candidate?",
       list: [
-        "Patients with <strong>biceps tendonitis</strong> that hasn't responded to conservative treatment",
-        "Individuals with <strong>biceps tendon tears</strong> or instability",
-        "Those with persistent pain in the front of the shoulder from biceps problems",
-        "Patients undergoing rotator cuff repair with biceps involvement",
-        "Athletes with biceps-related shoulder pain affecting performance",
-        "Those seeking to preserve biceps function while relieving pain",
+        "Patients with persistent front-of-shoulder pain from <strong>biceps tendonitis</strong> or partial tearing",
+        "Biceps tendon instability, pulley injury, or painful snapping in the bicipital groove",
+        "SLAP tears where biceps treatment is more appropriate than labral repair alone",
+        "Patients undergoing <a href=\"/treatments/rotator-cuff-repair-surgery\" class=\"text-blue-600 hover:underline\">rotator cuff repair</a> when the biceps tendon is also damaged",
+        "Active adults who want to reduce the risk of cramping or cosmetic deformity compared with simple release",
+        "People whose exam, injections, and imaging point to the biceps as a meaningful pain source",
       ],
     },
     procedure: {
-      heading: "The Tenodesis Procedure",
+      heading: "How Biceps Tenodesis Is Performed",
       steps: [
-        "Following consultation and diagnostic imaging, the procedure is performed arthroscopically",
-        "The long head of the biceps tendon is identified and released from its attachment",
-        "A small incision is made lower on the arm",
-        "The tendon is reattached to the humerus using a suture anchor or interference screw",
-        "The repair is tested for stability",
-        "The incisions are closed, and the arm is placed in a sling",
+        "The surgeon inspects the biceps tendon, labrum, rotator cuff, cartilage, and bicipital groove",
+        "The damaged long-head biceps tendon is released from its superior labral attachment",
+        "The unhealthy tendon segment may be removed from the shoulder joint",
+        "The tendon is secured to the humerus using an anchor, screw, button, or other fixation method",
+        "Associated shoulder problems, such as rotator cuff tear or impingement, are addressed when part of the surgical plan",
+        "The repair is protected in a sling while early healing begins",
       ],
     },
     recovery: {
-      heading: "Recovery Timeline",
+      heading: "Recovery After Biceps Tenodesis",
       timeline: "3-4 Months for Full Recovery",
-      details: "<strong>Recovery from biceps tenodesis</strong> involves protecting the repair while it heals. A sling is worn for 4-6 weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> begins with gentle motion and progresses to strengthening. Most patients experience significant pain relief within the first few weeks. Full recovery typically takes 3-4 months, with return to most activities including sports. The arthroscopic approach allows for faster recovery with minimal scarring.",
+      details: "<strong>Recovery from biceps tenodesis</strong> depends on whether it was performed alone or with rotator cuff, labral, or decompression surgery. Early restrictions usually protect resisted elbow flexion, lifting, and supination while the tendon heals to bone. Shoulder motion may begin before strengthening, depending on the associated procedures. Outside rehabilitation or surgeon-directed exercises typically progress from protected motion to scapular control, rotator cuff strengthening, and gradual return to lifting or sport. Heavy curls, pulling, and overhead loading require clearance.",
     },
     benefits: [
-      "Relieves pain from biceps tendon problems",
-      "Preserves biceps muscle function",
-      "Minimally invasive arthroscopic technique",
-      "Faster recovery compared to open surgery",
-      "Allows return to sports and activities",
+      "Moves the painful biceps tendon out of the shoulder joint while preserving its upper-arm attachment",
+      "Can reduce cramping and cosmetic deformity risk compared with simple tenotomy in selected patients",
+      "Pairs well with rotator cuff repair, SLAP management, or impingement surgery when clinically indicated",
+      "Targets a specific front-of-shoulder pain source confirmed by exam and imaging",
+      "Supports a staged return to lifting, throwing, and overhead work after tendon healing",
     ],
     insurance: {
       heading: "Insurance for Biceps Tenodesis",
-      body: "**We accept most major insurance plans. PPO preferred.** Biceps tenodesis is a medically necessary procedure for biceps tendon problems and is typically covered by insurance.",
+      body: "**We accept most major insurance plans. PPO preferred.** Biceps tenodesis coverage typically depends on documented shoulder symptoms, exam findings, imaging, failed non-surgical care when appropriate, and any associated procedures.",
     },
-    schedule: "Pain in the front of your shoulder from biceps problems? Our shoulder specialists provide comprehensive evaluation to determine if biceps tenodesis is right for you. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Book an appointment</a> with Mountain Spine & Orthopedics today.",
+    schedule: "Front-of-shoulder pain with lifting, clicking, or biceps tenderness should be evaluated before choosing between tenodesis, tenotomy, labral repair, or non-surgical care. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Book an appointment</a> with Mountain Spine & Orthopedics.",
   },
   {
     id: "shoulder-instability-surgery",
@@ -7775,7 +7696,7 @@ export const allTreatmentContent: TreatmentContent[] = [
         "Individuals with <strong>shoulder instability</strong> confirmed by physical examination and imaging",
         "Athletes with instability affecting sports performance",
         "Those with <strong>Bankart lesions</strong> or other labral tears causing instability",
-        "Patients who have failed conservative treatment including physical therapy",
+        "Patients who have failed conservative treatment including rehabilitation",
         "Active individuals seeking to return to sports or overhead activities",
       ],
     },
@@ -7794,7 +7715,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     recovery: {
       heading: "Recovery and Return to Sports",
       timeline: "4-6 Months for Full Return to Sports",
-      details: "<strong>Recovery from shoulder instability surgery</strong> requires protection of the repair while it heals. A sling is worn for 4-6 weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> begins with passive motion and progresses to active motion and strengthening. Return to sports typically occurs at 4-6 months once strength and stability milestones are met. The arthroscopic approach allows for faster recovery compared to open surgery, with most patients experiencing significant improvement and restored confidence in their shoulder stability.",
+      details: "<strong>Recovery from shoulder instability surgery</strong> requires protection of the repair while it heals. A sling is worn for 4-6 weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> begins with passive motion and progresses to active motion and strengthening. Return to sports typically occurs at 4-6 months once strength and stability milestones are met. The arthroscopic approach allows for faster recovery compared to open surgery, with most patients experiencing significant improvement and restored confidence in their shoulder stability.",
     },
     benefits: [
       "Restores shoulder stability and prevents recurrent dislocations",
@@ -7862,7 +7783,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     recovery: {
       heading: "Recovery Timeline",
       timeline: "3-4 Months for Full Recovery",
-      details: "<strong>Recovery from acromioplasty</strong> is generally faster than rotator cuff repair since no tendon healing is required. A sling is worn for 1-2 weeks for comfort. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> begins early with range of motion and progresses to strengthening. Most patients experience significant pain relief within the first few weeks. Full recovery typically takes 3-4 months, with return to most activities including sports. The arthroscopic approach allows for minimal downtime and faster return to activities.",
+      details: "<strong>Recovery from acromioplasty</strong> is generally faster than rotator cuff repair since no tendon healing is required. A sling is worn for 1-2 weeks for comfort. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> begins early with range of motion and progresses to strengthening. Most patients experience significant pain relief within the first few weeks. Full recovery typically takes 3-4 months, with return to most activities including sports. The arthroscopic approach allows for minimal downtime and faster return to activities.",
     },
     benefits: [
       "Relieves shoulder impingement pain",
@@ -7929,7 +7850,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     recovery: {
       heading: "Recovery and Healing",
       timeline: "3-6 Months for Full Recovery",
-      details: "<strong>Recovery from shoulder fracture surgery</strong> involves protecting the repair while the bone heals. A sling is worn for 6-8 weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical Therapy**</a> begins gradually with passive motion and progresses to active motion and strengthening as the bone heals. X-rays are taken regularly to monitor healing. Full recovery typically takes 3-6 months, with return to most activities. The hardware may remain in place permanently or be removed later if it causes problems.",
+      details: "<strong>Recovery from shoulder fracture surgery</strong> involves protecting the repair while the bone heals. A sling is worn for 6-8 weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> begins gradually with passive motion and progresses to active motion and strengthening as the bone heals. X-rays are taken regularly to monitor healing. Full recovery typically takes 3-6 months, with return to most activities. The hardware may remain in place permanently or be removed later if it causes problems.",
     },
     benefits: [
       "Restores bone alignment and promotes proper healing",
@@ -7980,7 +7901,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     recovery: {
       heading: "Recovery Timeline",
       timeline: "Same Day to 1 Week",
-      details: "Many patients go home the same day. Activity is gradually increased based on comfort and physician guidance. Most experience **significant pain relief within 48 hours** as the cement stabilizes the fracture. Walking and light activities can resume quickly. Avoid heavy lifting and high-impact activities for several weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical therapy**</a> may be recommended to improve strength and mobility."
+      details: "Many patients go home the same day. Activity is gradually increased based on comfort and physician guidance. Most experience **significant pain relief within 48 hours** as the cement stabilizes the fracture. Walking and light activities can resume quickly. Avoid heavy lifting and high-impact activities for several weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> may be recommended to improve strength and mobility."
     },
     benefits: [
       "**Rapid pain relief** (often within 24-48 hours)",
@@ -8044,7 +7965,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     recovery: {
       heading: "What to Expect After Vertebroplasty",
       timeline: "Same Day to 1 Week",
-      details: "Most patients go home the same day. Pain often **improves within 48 hours** as cement stabilizes the fracture. Activity guidance focuses on gradual return to function while addressing **bone health** to prevent future fractures. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical therapy**</a> may be recommended to improve strength and prevent falls. Weight-bearing activities can typically resume quickly under medical guidance."
+      details: "Most patients go home the same day. Pain often **improves within 48 hours** as cement stabilizes the fracture. Activity guidance focuses on gradual return to function while addressing **bone health** to prevent future fractures. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> may be recommended to improve strength and prevent falls. Weight-bearing activities can typically resume quickly under medical guidance."
     },
     benefits: [
       "**Quick pain relief** for many patients within days",
@@ -8107,7 +8028,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     recovery: {
       heading: "Recovery Process",
       timeline: "3-6 Months for Full Recovery",
-      details: "Recovery depends on levels fused and overall health. Walking begins **the day after surgery**. Hospital stay typically **1-3 days**. A **brace may be used for 6-12 weeks** for support. Avoid bending, lifting, and twisting for 3 months. Return to light activities at 6-12 weeks; full recovery takes 3-6 months. Fusion solidifies over 3-6 months with continued improvement up to 12 months. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical therapy**</a> is essential for optimal recovery."
+      details: "Recovery depends on levels fused and overall health. Walking begins **the day after surgery**. Hospital stay typically **1-3 days**. A **brace may be used for 6-12 weeks** for support. Avoid bending, lifting, and twisting for 3 months. Return to light activities at 6-12 weeks; full recovery takes 3-6 months. Fusion solidifies over 3-6 months with continued improvement up to 12 months. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> is essential for optimal recovery."
     },
     benefits: [
       "**Stabilizes unstable spine segment** preventing further slippage",
@@ -8171,7 +8092,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     recovery: {
       heading: "Recovery Expectations",
       timeline: "6-12 Months for Complete Recovery",
-      details: "Recovery varies widely depending on **procedure complexity**, approach, and reason for surgery. Hospital stay may be **3-7 days for major procedures**. **Brace use is common** for several months. Return to light activities takes 6-12 weeks; **full recovery can take 6-12 months**. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical therapy**</a> is typically important for regaining strength and mobility. Neurologic recovery depends on severity and duration of cord compression before surgery."
+      details: "Recovery varies widely depending on **procedure complexity**, approach, and reason for surgery. Hospital stay may be **3-7 days for major procedures**. **Brace use is common** for several months. Return to light activities takes 6-12 weeks; **full recovery can take 6-12 months**. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> is typically important for regaining strength and mobility. Neurologic recovery depends on severity and duration of cord compression before surgery."
     },
     benefits: [
       "**Prevents neurologic decline** from spinal cord compression",
@@ -8233,7 +8154,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     recovery: {
       heading: "Recovery and Healing",
       timeline: "3-6 Months for Full Recovery",
-      details: "Gradual return to function over several weeks to months. **Weight-bearing restrictions** (limited weight on surgical side) may apply for first 6 weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical therapy**</a> helps optimize outcomes and prevent compensatory issues. Most patients notice **meaningful improvement by 3 months** with continued gains through 6-12 months as fusion solidifies. Pain relief continues to improve as the joint fuses completely."
+      details: "Gradual return to function over several weeks to months. **Weight-bearing restrictions** (limited weight on surgical side) may apply for first 6 weeks. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> helps optimize outcomes and prevent compensatory issues. Most patients notice **meaningful improvement by 3 months** with continued gains through 6-12 months as fusion solidifies. Pain relief continues to improve as the joint fuses completely."
     },
     benefits: [
       "**Eliminates painful motion** at the SI joint",
@@ -8268,8 +8189,8 @@ export const allTreatmentContent: TreatmentContent[] = [
     additionalTags: ["Spine"],
     categories: [],
     overview: {
-      heading: "Decompression for the Spinal Cord",
-      body: "**Cervical laminectomy** is a decompression surgery that removes part of the bony arch (**lamina**) to relieve pressure on the spinal cord. At Mountain Spine & Orthopedics, it's commonly used for <a href=\"https://mountainspineorthopedics.com/conditions/cervical-spinal-stenosis\" class=\"text-blue-600 hover:underline\">**cervical stenosis**</a> with signs of **myelopathy** (spinal cord dysfunction). Symptoms that may indicate need include hand clumsiness, dropping objects, balance or gait changes, weakness, numbness, or coordination issues."
+      heading: "Posterior Decompression for Cervical Myelopathy",
+      body: "<p><strong>Cervical laminectomy</strong> is a posterior neck surgery that removes the lamina, the back part of the vertebral arch, to create more room for the spinal cord. It is most often discussed when <a href=\"https://mountainspineorthopedics.com/conditions/cervical-spinal-stenosis\" class=\"text-blue-600 hover:underline\">cervical spinal stenosis</a> causes <strong>myelopathy</strong>, meaning the spinal cord is not functioning normally.</p><p>Myelopathy is different from ordinary neck pain. Warning signs can include hand clumsiness, dropping objects, changes in handwriting, balance problems, gait changes, arm or leg weakness, numbness, and coordination issues. Mountain Spine & Orthopedics uses MRI, exam findings, alignment X-rays, and symptom progression to decide whether posterior decompression, laminoplasty, laminectomy with fusion, or another cervical procedure is most appropriate. PPO Insurance Accepted.</p>"
     },
     heroDescription: "Surgical decompression for cervical spinal cord pressure",
     candidates: {
@@ -8296,16 +8217,16 @@ export const allTreatmentContent: TreatmentContent[] = [
     },
     recovery: {
       heading: "Recovery Process",
-      timeline: "6-12 Weeks for Bone Healing",
-      details: "Many patients resume light activity relatively soon with guidance. Hospital stay typically **1-3 days**. **Neck collar may be used temporarily** for comfort. If fusion is added, recovery is longer (6-12 weeks for bone healing). Complete recovery varies based on extent of surgery. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical therapy**</a> helps restore neck strength and range of motion. Neurologic recovery depends on severity and duration of cord compression."
+      timeline: "Recovery Depends on Decompression Levels and Whether Fusion is Added",
+      details: "Hospital stay, collar use, and activity restrictions depend on how many levels are decompressed and whether fusion with instrumentation is performed. If fusion is added, bone healing and return to heavier activity take longer. Outside-guided rehabilitation may be used after the surgeon clears motion and strengthening. Neurologic recovery depends on how severe the cord compression was and how long symptoms were present before surgery; the primary goal is often to prevent further decline while allowing possible improvement."
     },
     benefits: [
       "**Prevents progression of myelopathy**—goal is stabilize or improve symptoms",
       "**Relieves spinal cord pressure** preventing permanent damage",
       "**Preserves motion** if fusion not needed",
       "**Posterior approach** avoids risks of anterior neck surgery in selected cases",
-      "**Improves quality of life** and prevents disability",
-      "**Modern techniques** minimize surgical morbidity"
+      "May improve walking, hand function, and balance when the spinal cord can recover",
+      "Allows the surgical plan to be matched to alignment, number of levels, and stability"
     ],
     heroImage: "https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--cervical-laminectomy--thumbnail.png",
     insurance: {
@@ -8361,7 +8282,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     recovery: {
       heading: "Recovery Timeline",
       timeline: "Varies by Treatment",
-      details: "Recovery depends on specific joint, injury severity, and treatment approach. **Conservative treatments** often show improvement within 4-8 weeks. **Surgical recovery** varies widely: arthroscopy 6-12 weeks, joint replacement 3-6 months. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical therapy**</a> is essential. Guided movement and avoiding painful aggravators are key principles for optimal outcomes."
+      details: "Recovery depends on specific joint, injury severity, and treatment approach. **Conservative treatments** often show improvement within 4-8 weeks. **Surgical recovery** varies widely: arthroscopy 6-12 weeks, joint replacement 3-6 months. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> is essential. Guided movement and avoiding painful aggravators are key principles for optimal outcomes."
     },
     benefits: [
       "**Accurate diagnosis** prevents unnecessary treatments",
@@ -8414,7 +8335,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     procedure: {
       heading: "Treatment Strategies",
       steps: [
-        "**Physical therapy** emphasizing strength and range of motion",
+        "**Rehabilitation** emphasizing strength and range of motion",
         "**Weight management** to reduce joint stress and inflammation",
         "**Anti-inflammatory medications (NSAIDs)** for symptom control",
         "**Activity modification** and assistive devices (braces, canes)",
@@ -8425,7 +8346,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     recovery: {
       heading: "Managing Arthritis Long-Term",
       timeline: "Ongoing Management",
-      details: "Recovery varies by treatment. **Non-surgical approaches** often show improvement within weeks to months. **Surgical recovery** timelines depend on specific procedure: arthroscopy 4-8 weeks, joint replacement 3-6 months for basic function, up to 12 months for complete recovery. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical therapy**</a> and **lifestyle modifications** are essential for long-term success."
+      details: "Recovery varies by treatment. **Non-surgical approaches** often show improvement within weeks to months. **Surgical recovery** timelines depend on specific procedure: arthroscopy 4-8 weeks, joint replacement 3-6 months for basic function, up to 12 months for complete recovery. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> and **lifestyle modifications** are essential for long-term success."
     },
     benefits: [
       "**Early treatment** can slow arthritis progression",
@@ -8481,7 +8402,7 @@ export const allTreatmentContent: TreatmentContent[] = [
         "**Activity modification** avoiding aggravators and repetitive stress",
         "**Ice therapy** for acute inflammation and pain control",
         "**NSAIDs (anti-inflammatories)** to reduce swelling and discomfort",
-        "**Physical therapy** to address biomechanical factors (muscle imbalances, gait issues)",
+        "**Rehabilitation** to address biomechanical factors (muscle imbalances, gait issues)",
         "**Corticosteroid injections** provide significant relief when conservative measures insufficient",
         "**Chronic or septic bursitis** may require aspiration or rarely surgical excision"
       ]
@@ -8489,7 +8410,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     recovery: {
       heading: "Recovery Expectations",
       timeline: "2-4 Weeks",
-      details: "Most cases improve with **conservative care within 2-4 weeks**. **Injection provides relief within days**, but addressing underlying biomechanics (via PT) prevents recurrence. Return to activities guided by pain and function. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical therapy**</a> helps correct movement patterns that contributed to the problem. Chronic cases may take longer to resolve."
+      details: "Most cases improve with **conservative care within 2-4 weeks**. **Injection provides relief within days**, but addressing underlying biomechanics (through guided rehabilitation) prevents recurrence. Return to activities guided by pain and function. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> helps correct movement patterns that contributed to the problem. Chronic cases may take longer to resolve."
     },
     benefits: [
       "**Conservative treatment** is highly effective for most cases",
@@ -8552,7 +8473,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     recovery: {
       heading: "Recovery Timeline",
       timeline: "6 Weeks to 6 Months",
-      details: "**Tendons heal slowly** due to limited blood supply; recovery often takes **6-12 weeks for acute cases**, **3-6 months for chronic tendinopathy**. Progressive loading under guidance is key to successful outcomes. **Patience and consistency with rehab exercises are essential**. Too much rest weakens tendons; too much load aggravates them—finding the **therapeutic window** is critical. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical therapy**</a> guides optimal loading."
+      details: "**Tendons heal slowly** due to limited blood supply; recovery often takes **6-12 weeks for acute cases**, **3-6 months for chronic tendinopathy**. Progressive loading under guidance is key to successful outcomes. **Patience and consistency with rehab exercises are essential**. Too much rest weakens tendons; too much load aggravates them—finding the **therapeutic window** is critical. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> guides optimal loading."
     },
     benefits: [
       "**Conservative treatment** avoids surgery in most cases",
@@ -8616,7 +8537,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     recovery: {
       heading: "Long-Term Management",
       timeline: "Ongoing Monitoring",
-      details: "**Bone density improvements** occur over months to years with appropriate medical management. **DEXA scans repeated every 1-2 years** to monitor response. **Fall prevention strategies** and strength/balance training are ongoing priorities to prevent fractures. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Physical therapy**</a> focuses on safe exercise, posture, and balance. Lifestyle modifications (nutrition, exercise, smoking cessation) are essential."
+      details: "**Bone density improvements** occur over months to years with appropriate medical management. **DEXA scans repeated every 1-2 years** to monitor response. **Fall prevention strategies** and strength/balance training are ongoing priorities to prevent fractures. <a href=\"https://mountainspineorthopedics.com/conditions\" class=\"text-blue-600 hover:underline\">**Rehabilitation**</a> focuses on safe exercise, posture, and balance. Lifestyle modifications (nutrition, exercise, smoking cessation) are essential."
     },
     benefits: [
       "**Prevents potentially life-altering fractures** (hip, spine, wrist)",

@@ -266,7 +266,7 @@ export const PainAreaTreatments: ConditionInfoProp[] = [
                                     fontWeight: 400,
                                 }}
                                 className="text-[#424959] text-xl">
-                                <p className="mb-4">Will I need physical therapy (if recommended) after surgery?</p>
+                                <p className="mb-4">Will I need outside rehabilitation after surgery?</p>
                                 <ul className="list-disc pl-6 space-y-2">
                                     <li>In most cases, yes. Your surgeon will refer you to trusted PT specialists who help strengthen muscles and improve mobility.</li>
                                 </ul>
@@ -459,7 +459,7 @@ At Mountain Spine & Orthopedics, our team specializes in diagnosing and treating
                                 className="text-[#424959] text-xl">
                                 <p className="mb-4">Many patients experience relief from conservative treatments without the need for surgery. Common non-invasive options include:</p>
                                 <ul className="list-disc pl-6 space-y-2">
-                                    <li>A referral for targeted physical therapy to stretch and strengthen key muscles</li>
+                                    <li>Outside rehabilitation guidance to stretch and strengthen key muscles</li>
                                     <li>Ergonomic adjustments for work or sleep posture</li>
                                     <li>Anti-inflammatory and neuropathic medications</li>
                                     <li>Therapeutic massage or acupuncture</li>

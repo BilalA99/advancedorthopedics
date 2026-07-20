@@ -178,7 +178,7 @@ export const clinics: ClinicsProps[] = [
           <li>Same-day appointments available for acute orthopedic problems - no long waits</li>
           <li>Bilingual Spanish-speaking staff for our diverse community</li>
           <li>Free parking and wheelchair-accessible medical facility</li>
-          <li>Most insurance plans accepted, including Workers' Compensation claims</li>
+          <li>PPO insurance accepted, including Workers' Compensation claims</li>
           <li>Sports medicine orthopedic specialists in Hollywood, specializing in <a href='/conditions/sports-injuries' className='underline text-[#0A50EC]'>athletic injuries</a></li>
           <li>Specialized foot and ankle orthopedic services</li>
         </ul>
@@ -378,7 +378,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -622,7 +622,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "Do you accept insurance at your Hollywood, FL office—and what should I bring?",
-        answer: "We accept most PPO and private insurance plans. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Hollywood location?",
@@ -925,7 +925,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -1149,7 +1149,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "Do you accept insurance at your Altamonte Springs - Casselberry, FL office—and what should I bring?",
-        answer: "We accept most PPO and private insurance plans. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Altamonte Springs location?",
@@ -1252,7 +1252,7 @@ export const clinics: ClinicsProps[] = [
           <li>Same-day appointments available for urgent orthopedic problems — no long waits</li>
           <li>Spanish-speaking staff serving Orlando's diverse community</li>
           <li>Free parking and wheelchair-accessible facility at Metrowest Blvd</li>
-          <li>Most insurance plans accepted, including PPO and Workers' Compensation</li>
+          <li>PPO insurance accepted, including Workers' Compensation</li>
           <li>Specialized minimally invasive spine surgery — smaller incisions, faster recovery</li>
           <li>Sports medicine specialists for ACL, rotator cuff, and athletic injuries</li>
         </ul>
@@ -1438,7 +1438,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -1534,7 +1534,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         author: "Karen R.",
-        reviewBody: "Excellent orthopedic care for my rotator cuff injury. The doctors explained my MRI results clearly and gave me options from physical therapy to surgery. I chose the surgical route and the team made sure I was comfortable throughout the entire process.",
+        reviewBody: "Excellent orthopedic care for my rotator cuff injury. The doctors explained my MRI results clearly and gave me options from rehabilitation to surgery. I chose the surgical route and the team made sure I was comfortable throughout the entire process.",
         reviewRating: 5
       },
       {
@@ -1667,7 +1667,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "Do you accept insurance at your Orlando, FL office—and what should I bring?",
-        answer: "We accept most PPO and private insurance plans. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Orlando location?",
@@ -1970,7 +1970,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -2004,7 +2004,7 @@ export const clinics: ClinicsProps[] = [
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
           In Fort Pierce, we frequently pair minimally invasive decompression with image-guided
-          injections and structured physical therapy plans to maximize relief and function.
+          injections and outside rehabilitation planning when appropriate to maximize relief and function.
         </p>
       </div>
     ),
@@ -2187,7 +2187,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "Do you accept insurance at your Fort Pierce, FL office—and what should I bring?",
-        answer: "We accept most PPO and private insurance plans. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Fort Pierce location?",
@@ -2487,7 +2487,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -2710,7 +2710,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "Do you accept insurance at your Palm Beach Gardens, FL office—and what should I bring?",
-        answer: "We accept most PPO and private insurance plans. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Palm Beach Gardens location?",
@@ -3008,7 +3008,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -3231,7 +3231,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "Do you accept insurance at your South Miami, FL office—and what should I bring?",
-        answer: "We accept most PPO and private insurance plans. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your South Miami location?",
@@ -3538,7 +3538,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -3756,7 +3756,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "Do you accept insurance at your Boca Raton, FL office—and what should I bring?",
-        answer: "We accept most PPO and private insurance plans. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Boca Raton location?",
@@ -4051,7 +4051,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -4284,7 +4284,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "Do you accept insurance at your Altamonte Springs, FL office—and what should I bring?",
-        answer: "We accept most PPO and private insurance plans. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Altamonte Springs location?",
@@ -4569,7 +4569,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -4603,7 +4603,7 @@ export const clinics: ClinicsProps[] = [
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
           In Davenport, our orthopedic surgeons frequently use modern implants, strong
-          fixation techniques, and coordinated physical therapy to help patients return
+          fixation techniques, and post-treatment rehabilitation guidance to help patients return
           to work and family responsibilities as safely as possible.
         </p>
       </div>
@@ -4803,7 +4803,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "Do you accept insurance at your Davenport, FL office—and what should I bring?",
-        answer: "We accept most PPO and private insurance plans. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Davenport location?",
@@ -5081,7 +5081,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -5323,7 +5323,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "What insurance does the Jacksonville orthopedic clinic accept?",
-        answer: "We accept most PPO and private insurance plans. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "Do you treat workers' compensation and work-related injuries in Jacksonville?",
@@ -5407,14 +5407,14 @@ export const clinics: ClinicsProps[] = [
     rating: 4.9,
     reviewCount: 19,
     reviews: [
-      { author: 'Michael B.', reviewRating: 5, date: '2024-10-14', reviewBody: 'Came in from Somerville after months of lower back pain. The Bridgewater orthopedic team was excellent — they ordered an MRI the same week, found a herniated disc at L3-L4, and had a treatment plan within ten days. Conservative care with physical therapy and epidural injections cleared up the problem. No surgery needed.' },
+      { author: 'Michael B.', reviewRating: 5, date: '2024-10-14', reviewBody: 'Came in from Somerville after months of lower back pain. The Bridgewater orthopedic team was excellent — they ordered an MRI the same week, found a herniated disc at L3-L4, and had a treatment plan within ten days. Conservative care with rehabilitation and epidural injections cleared up the problem. No surgery needed.' },
       { author: 'Karen S.', reviewRating: 5, date: '2024-10-28', reviewBody: 'The spine surgeon here evaluated me for spinal stenosis that had been causing significant leg pain for over a year. He explained the MRI findings clearly and outlined three options ranging from conservative to surgical. We started with the least invasive and it worked. Really appreciate a doctor who does not rush to the OR.' },
       { author: 'Dennis F.', reviewRating: 5, date: '2024-11-11', reviewBody: 'Excellent experience. The office is easy to find off Route 22 and the staff was friendly. My back pain evaluation was thorough and the clinical quality is outstanding. Insurance was verified before my appointment which saved time. Highly recommend.' },
-      { author: 'Laura H.', reviewRating: 5, date: '2024-11-25', reviewBody: 'I\'ve been dealing with a sports injury from competitive tennis for six months. The orthopedic sports medicine specialist at the Bridgewater office was thorough — he looked at my shoulder imaging and gave me an honest assessment. Physical therapy recommendation was specific and effective. Back on court in eight weeks.' },
+      { author: 'Laura H.', reviewRating: 5, date: '2024-11-25', reviewBody: 'I\'ve been dealing with a sports injury from competitive tennis for six months. The orthopedic sports medicine specialist at the Bridgewater office was thorough — he looked at my shoulder imaging and gave me an honest assessment. Rehabilitation recommendation was specific and effective. Back on court in eight weeks.' },
       { author: 'Richard C.', reviewRating: 5, date: '2024-12-09', reviewBody: 'Took the exit off I-287 to reach this office from Warren — maybe 12 minutes. Got a same-day appointment for severe back pain. The doctor was calm and efficient. Diagnosed a disc herniation on the spot after reviewing my imaging. Cortisone injection provided relief within 36 hours. Very professional operation.' },
       { author: 'Susan M.', reviewRating: 5, date: '2024-12-23', reviewBody: 'My PPO insurance was accepted and the billing team at this Bridgewater orthopedic office handled everything. The spine specialist I saw was the most thorough doctor I\'ve seen for my back problems. He found a foraminal stenosis at C6-C7 that had been missed by two other providers. Treatment resolved it without surgery.' },
       { author: 'Anthony R.', reviewRating: 5, date: '2025-01-14', reviewBody: 'Had a lumbar disc issue that was affecting my ability to sit at a desk for more than an hour. The orthopedic surgeon here reviewed my MRI carefully and recommended a minimally invasive procedure. I was back to a full workday six weeks after the procedure. Office in Bridgewater is convenient from all of Somerset County.' },
-      { author: 'Patricia L.', reviewRating: 5, date: '2025-01-28', reviewBody: 'Thorough evaluation for my knee pain. The orthopedic doctor ordered the right imaging and was honest that my condition didn\'t need surgery yet. Cortisone injection and a structured physical therapy program have helped significantly. Scheduling was easy and the staff was professional.' },
+      { author: 'Patricia L.', reviewRating: 5, date: '2025-01-28', reviewBody: 'Thorough evaluation for my knee pain. The orthopedic doctor ordered the right imaging and was honest that my condition didn\'t need surgery yet. Cortisone injection and a structured outside rehabilitation program have helped significantly. Scheduling was easy and the staff was professional.' },
       { author: 'George T.', reviewRating: 5, date: '2025-02-11', reviewBody: 'The Bridgewater spine team handled my degenerative disc disease case with expertise and patience. I\'d been dealing with pain for three years and was skeptical anything would help. The minimally invasive surgery they performed was outpatient and I recovered faster than I ever expected. Worth every minute of the drive from Raritan.' },
       { author: 'Donna K.', reviewRating: 5, date: '2025-02-25', reviewBody: 'Came here on a referral from my primary care doctor and could not be more satisfied. The spine surgeon diagnosed a herniated nucleus pulposus and explained my options without any pressure. We tried conservative management first and it worked well. Clean office, professional staff, and PPO billing was seamless.' },
       { author: 'Christopher N.', reviewRating: 5, date: '2025-03-11', reviewBody: 'This orthopedic practice in Bridgewater is the real deal. I had radiculopathy from a disc herniation shooting pain into my left arm. The cervical spine specialist here identified the exact level causing the issue and performed a disc replacement. Full recovery in about six weeks. The surgical technique was excellent.' },
@@ -5448,7 +5448,7 @@ export const clinics: ClinicsProps[] = [
           <li>Serving Central New Jersey families with high patient satisfaction rates</li>
           <li>Same-day appointments available for acute orthopedic problems - no long waits</li>
           <li>Free parking and wheelchair-accessible medical facility</li>
-          <li>Most insurance plans accepted, including Workers' Compensation claims</li>
+          <li>PPO insurance accepted, including Workers' Compensation claims</li>
           <li>Sports medicine orthopedic specialists in Bridgewater, specializing in <a href='/conditions/sports-injuries' className='underline text-[#0A50EC]'>athletic injuries</a></li>
           <li>Specialized foot and ankle orthopedic services</li>
           <li>Conveniently located at the intersection of I-287 and US-22</li>
@@ -5649,7 +5649,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -5694,7 +5694,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "What insurance does Mountain Spine & Orthopedics Bridgewater accept?",
-        answer: "We accept most PPO and private insurance plans. Call (973) 259-6756 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (973) 259-6756 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Bridgewater location?",
@@ -5776,7 +5776,7 @@ export const clinics: ClinicsProps[] = [
       { author: 'Thomas W.', reviewRating: 5, date: '2024-11-19', reviewBody: 'I drove over from Haddonfield and was seen the same day I called. They diagnosed my spinal stenosis with imaging ordered locally and the surgeon walked me through every option before we agreed on spinal decompression. Recovery took about six weeks but I\'m now completely pain-free.' },
       { author: 'Angela C.', reviewRating: 5, date: '2024-12-03', reviewBody: 'My degenerative disc disease had been getting worse for two years and two other practices in South Jersey couldn\'t help me beyond pain management. The spine surgeon here actually fixed the problem. Minimally invasive procedure, went home the same day, and insurance was accepted without any pre-auth drama. Coming from Mount Laurel the location off Route 73 is very easy to reach.' },
       { author: 'James P.', reviewRating: 5, date: '2024-12-17', reviewBody: 'Excellent orthopedic care from start to finish. The consultation was detailed, the surgeon listened, and follow-up visits were never rushed. Had a cervical disc issue that two other doctors told me would require major surgery — this team resolved it non-surgically.' },
-      { author: 'Michelle F.', reviewRating: 5, date: '2025-01-08', reviewBody: 'Used them for a shoulder evaluation after a rotator cuff tear. Got a same-day appointment which was a relief because I was in a lot of pain. The orthopedic surgeon was calm and precise. The physical therapy plan worked before we needed to consider surgery.' },
+      { author: 'Michelle F.', reviewRating: 5, date: '2025-01-08', reviewBody: 'Used them for a shoulder evaluation after a rotator cuff tear. Got a same-day appointment which was a relief because I was in a lot of pain. The orthopedic surgeon was calm and precise. The rehabilitation plan worked before we needed to consider surgery.' },
       { author: 'Robert H.', reviewRating: 5, date: '2025-01-21', reviewBody: 'Solid practice. The spine specialist knew his stuff and did not over-order tests. My sciatica from a herniated disc is significantly better after the epidural injection series he recommended. Insurance covered it under my PPO plan. Would recommend to friends in Moorestown or Cherry Hill.' },
       { author: 'Patricia G.', reviewRating: 5, date: '2025-02-04', reviewBody: 'After my car accident on Route 38, I needed an orthopedic evaluation quickly. They got me in the next morning, took X-rays on site, and the doctor was honest about what needed treatment versus what would heal on its own. That kind of transparency is rare.' },
       { author: 'David S.', reviewRating: 5, date: '2025-02-18', reviewBody: 'I had been struggling with lower back pain for months. The Cherry Hill orthopedic team ordered an MRI and had me back within five days with a diagnosis. The lumbar fusion procedure was done outpatient and recovery was much smoother than I expected — four weeks and I was walking normally again.' },
@@ -5785,7 +5785,7 @@ export const clinics: ClinicsProps[] = [
       { author: 'Nancy B.', reviewRating: 5, date: '2025-04-01', reviewBody: 'Outstanding practice with knowledgeable staff. Came in with knee pain that had been limiting my walking for six months. The orthopedic evaluation was thorough and the treatment plan was exactly what I needed. The scheduling team was helpful and the whole process was seamless.' },
       { author: 'Steven K.', reviewRating: 5, date: '2025-04-15', reviewBody: 'Had radiculopathy running from my lower back into my right foot. The spine surgeon ordered the right imaging, confirmed L5-S1 disc herniation, and performed a minimally invasive discectomy. I was driving two weeks after the procedure. The office near I-295 in Cherry Hill is convenient from all of Camden County.' },
       { author: 'Maria T.', reviewRating: 5, date: '2025-05-02', reviewBody: 'Called on a Tuesday morning with severe back spasms and they fit me in that afternoon. The doctor was calm, thorough, and gave me a realistic recovery timeline. Got a cortisone injection that day and was functional again within 48 hours.' },
-      { author: 'William D.', reviewRating: 5, date: '2025-05-20', reviewBody: 'Referred here by my primary care doctor after trying physical therapy for three months with no improvement on my cervical herniated disc. The orthopedic spine specialist reviewed my MRI during the appointment and explained exactly which disc was the problem. ACDF procedure was completed without issue. Back to full range of motion now.' },
+      { author: 'William D.', reviewRating: 5, date: '2025-05-20', reviewBody: 'Referred here by my primary care doctor after trying rehabilitation for three months with no improvement on my cervical herniated disc. The orthopedic spine specialist reviewed my MRI during the appointment and explained exactly which disc was the problem. ACDF procedure was completed without issue. Back to full range of motion now.' },
       { author: 'Jennifer A.', reviewRating: 5, date: '2025-06-07', reviewBody: 'Came from Collingswood for a second opinion on a back surgery recommendation. The spine surgeon here reviewed my imaging and actually recommended a less invasive approach that worked. Saved me from a more complex procedure. This kind of honest second opinion is exactly what patients need.' },
       { author: 'Frank O.', reviewRating: 5, date: '2025-07-01', reviewBody: 'My PPO insurance was accepted here without any issues — billing handled everything. The orthopedic surgeon treated my hip pain conservatively with injections first, and when that wasn\'t enough, scheduled a hip replacement that went smoothly. Staff was professional throughout.' },
       { author: 'Helen C.', reviewRating: 5, date: '2025-08-12', reviewBody: 'Used this Cherry Hill orthopedic office for my spinal stenosis consultation. The doctor spent real time explaining the MRI findings rather than just listing options. Conservative management worked for my case and I haven\'t needed surgery.' },
@@ -5814,7 +5814,7 @@ export const clinics: ClinicsProps[] = [
           <li>Serving South Jersey families with high patient satisfaction rates</li>
           <li>Same-day appointments available for acute orthopedic problems - no long waits</li>
           <li>Free parking and wheelchair-accessible medical facility</li>
-          <li>Most insurance plans accepted, including Workers' Compensation claims</li>
+          <li>PPO insurance accepted, including Workers' Compensation claims</li>
           <li>Sports medicine orthopedic specialists in Cherry Hill, specializing in <a href='/conditions/sports-injuries' className='underline text-[#0A50EC]'>athletic injuries</a></li>
           <li>Specialized foot and ankle orthopedic services</li>
           <li>Conveniently located in Springdale Commons medical complex</li>
@@ -6015,7 +6015,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -6056,7 +6056,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "What insurance does Mountain Spine & Orthopedics Cherry Hill accept?",
-        answer: "We accept most PPO and private insurance plans. Call (973) 259-6756 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (973) 259-6756 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "Where can I park when I visit the Cherry Hill orthopedic office?",
@@ -6141,14 +6141,14 @@ export const clinics: ClinicsProps[] = [
     reviews: [
       { author: 'Debra C.', reviewRating: 5, date: '2024-10-05', reviewBody: 'Had a herniated disc at L5-S1 that was causing constant pain down my right leg. The Edison orthopedic team got me in the same week I called, ordered imaging immediately, and had a surgical plan within two weeks. Minimally invasive discectomy was done outpatient. Back to my nursing job in four weeks. My PPO insurance was accepted and billing was completely transparent.' },
       { author: 'Tony P.', reviewRating: 5, date: '2024-10-19', reviewBody: 'Convenient location right off the Garden State Parkway Exit 131. I came from Woodbridge and it took me under ten minutes. The spine specialist was thorough and did not rush me. Diagnosed my degenerative disc disease accurately and started conservative treatment that has made a real difference.' },
-      { author: 'Gloria W.', reviewRating: 5, date: '2024-11-02', reviewBody: 'Outstanding orthopedic practice. The doctor was knowledgeable and the staff was professional. My sciatica evaluation was thorough and the recommended physical therapy program has made a significant difference. The quality of care here is exceptional and I would not go anywhere else.' },
+      { author: 'Gloria W.', reviewRating: 5, date: '2024-11-02', reviewBody: 'Outstanding orthopedic practice. The doctor was knowledgeable and the staff was professional. My sciatica evaluation was thorough and the recommended rehabilitation program has made a significant difference. The quality of care here is exceptional and I would not go anywhere else.' },
       { author: 'Raymond K.', reviewRating: 5, date: '2024-11-16', reviewBody: 'The Edison orthopedic spine clinic handled my cervical radiculopathy case expertly. Two other doctors had dismissed my symptoms as muscle tension. The spine surgeon here ordered an MRI, found a C5-C6 disc herniation, and we started the right treatment. ACDF procedure was done and I got full range of motion back. Outstanding care.' },
       { author: 'Sandra H.', reviewRating: 5, date: '2024-11-30', reviewBody: 'Same-day appointment when I showed up with severe back spasms. The doctor took his time, did a thorough physical exam, and gave me an injection that provided relief within hours. I was impressed by how seriously they took my pain. Metuchen residents have a real gem here.' },
       { author: 'Frank T.', reviewRating: 5, date: '2024-12-14', reviewBody: 'I\'ve been seeing the spine specialist here for six months for lumbar degenerative disc disease. The treatment has been progressive and thoughtful — tried conservative options first, epidural steroid injections second, and only discussed surgery when necessary. Currently managing well without surgical intervention. Real patient-first approach.' },
       { author: 'Lisa M.', reviewRating: 5, date: '2024-12-28', reviewBody: 'The orthopedic team at the Edison office treated my knee injury from a fall. The evaluation was comprehensive, X-ray was done on site, and the orthopedic surgeon gave me a clear picture of my options. Cortisone injection worked well and I avoided surgery. Insurance handled smoothly — full PPO coverage.' },
-      { author: 'John A.', reviewRating: 5, date: '2025-01-11', reviewBody: 'Good orthopedic practice in Edison. The doctor was straightforward about my back pain and gave me a realistic assessment of what physical therapy could and couldn\'t do. I appreciated the honesty. Referred my coworker from Piscataway and he had the same positive experience.' },
+      { author: 'John A.', reviewRating: 5, date: '2025-01-11', reviewBody: 'Good orthopedic practice in Edison. The doctor was straightforward about my back pain and gave me a realistic assessment of what rehabilitation could and couldn\'t do. I appreciated the honesty. Referred my coworker from Piscataway and he had the same positive experience.' },
       { author: 'Marta G.', reviewRating: 5, date: '2025-01-25', reviewBody: 'Came in from Perth Amboy after hearing about this practice from a neighbor. The spine specialist took over an hour reviewing my case history and explaining the imaging. My herniated disc was causing radiculopathy and after a round of epidural injections the pain has reduced dramatically. Did not need surgery. Very thankful.' },
-      { author: 'Kevin L.', reviewRating: 5, date: '2025-02-08', reviewBody: 'The orthopedic surgeon here repaired my rotator cuff tear with a minimally invasive arthroscopic procedure. The pre-surgical consultation was detailed and he answered every question I had. Recovery took three months of physical therapy but I\'m back to full strength. Off NJ Turnpike Exit 10 the office is very easy to reach from South Amboy.' },
+      { author: 'Kevin L.', reviewRating: 5, date: '2025-02-08', reviewBody: 'The orthopedic surgeon here repaired my rotator cuff tear with a minimally invasive arthroscopic procedure. The pre-surgical consultation was detailed and he answered every question I had. Recovery took three months of rehabilitation but I\'m back to full strength. Off NJ Turnpike Exit 10 the office is very easy to reach from South Amboy.' },
       { author: 'Patricia B.', reviewRating: 5, date: '2025-02-22', reviewBody: 'My PPO covered the entire evaluation and treatment at this Edison orthopedic practice. The spine surgeon diagnosed a lumbar herniated disc that had been causing six months of debilitating sciatica. Minimally invasive surgical decompression was successful. Back to work in five weeks. Professional practice from top to bottom.' },
       { author: 'Donald S.', reviewRating: 5, date: '2025-03-08', reviewBody: 'Outstanding spine care. I had a multi-level lumbar stenosis that was limiting how far I could walk. The surgeon at the Edison office performed a staged decompression procedure and the improvement was remarkable. Went from 50 feet to over a mile without stopping within three months of surgery.' },
       { author: 'Jennifer C.', reviewRating: 5, date: '2025-03-22', reviewBody: 'Solid practice for orthopedic care in Middlesex County. The doctor was attentive and the treatment plan for my back injury was sensible. Follow-up scheduling through the patient portal was straightforward. Would recommend to anyone in the Edison or Highland Park area.' },
@@ -6185,7 +6185,7 @@ export const clinics: ClinicsProps[] = [
           <li>Serving Central New Jersey families with high patient satisfaction rates</li>
           <li>Same-day appointments available for acute orthopedic problems - no long waits</li>
           <li>On-site dedicated surface parking available for patients</li>
-          <li>Most insurance plans accepted, including Workers' Compensation claims</li>
+          <li>PPO insurance accepted, including Workers' Compensation claims</li>
           <li>Sports medicine orthopedic specialists in Edison, specializing in <a href='/conditions/sports-injuries' className='underline text-[#0A50EC]'>athletic injuries</a></li>
           <li>Specialized foot and ankle orthopedic services</li>
           <li>Conveniently located near the Edison Train Station and Route 27</li>
@@ -6384,7 +6384,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -6429,7 +6429,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "What insurance does Mountain Spine & Orthopedics Edison accept?",
-        answer: "We accept most PPO and private insurance plans. Call (973) 259-6756 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (973) 259-6756 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Edison, NJ location?",
@@ -6509,7 +6509,7 @@ export const clinics: ClinicsProps[] = [
       { author: 'Frank L.', reviewRating: 5, date: '2025-08-30', reviewBody: 'I had spinal stenosis that was getting worse. The Freehold Mountain Spine team recommended a minimally invasive procedure and I was back to normal in six weeks. The staff was kind, organized, and professional every step of the way.' },
       { author: 'Patricia S.', reviewRating: 5, date: '2025-12-01', reviewBody: 'As a Howell resident I did not expect to find this caliber of orthopedic care so close to home. From diagnosis to post-op, this office handled everything perfectly. No runaround, no long waits — just excellent medicine. Would not go anywhere else.' },
       { author: 'Brian K.', reviewRating: 5, date: '2025-07-14', reviewBody: 'Freehold location is clean, modern, and well-run. The doctor treated my knee with an arthroscopic procedure and I was back to work within two weeks. Very impressed by the entire team. I also referred my father-in-law who has been equally pleased.' },
-      { author: 'Sandra P.', reviewRating: 5, date: '2025-06-28', reviewBody: 'I have been dealing with degenerative disc disease for years. Mountain Spine in Freehold gave me a new lease on life with their treatment approach. The physical therapy coordination was seamless, and the follow-up care was second to none.' },
+      { author: 'Sandra P.', reviewRating: 5, date: '2025-06-28', reviewBody: 'I have been dealing with degenerative disc disease for years. Mountain Spine in Freehold gave me a new lease on life with their treatment approach. The rehabilitation coordination was seamless, and the follow-up care was second to none.' },
       { author: 'Mike C.', reviewRating: 5, date: '2025-05-19', reviewBody: 'Drove from Colts Neck after a friend recommended this practice. The orthopedic surgeon here diagnosed my rotator cuff tear precisely and walked me through all my options without any pressure. Surgery went perfectly and my shoulder has never felt better.' },
       { author: 'Lisa T.', reviewRating: 5, date: '2025-04-11', reviewBody: 'Amazing staff and unbelievable results. I came in barely able to walk due to a slipped disc. They got me in for imaging the same week, reviewed the results with me at length, and had a treatment plan ready immediately. Six months later I am pain free.' },
       { author: 'James H.', reviewRating: 5, date: '2025-03-26', reviewBody: 'Excellent orthopedic practice in Freehold. Knowledgeable doctors and an efficient front desk team. The quality of care on every visit has been outstanding. I would absolutely recommend them to anyone dealing with back or joint issues in Monmouth County.' },
@@ -6523,7 +6523,7 @@ export const clinics: ClinicsProps[] = [
       { author: 'Eric M.', reviewRating: 5, date: '2024-07-16', reviewBody: 'Top-notch orthopedic care in Central NJ. I had a complex lumbar issue that required surgery and the surgeon here handled it with precision and care. The rehab guidance post-op was detailed and helpful. Already recommended this office to three friends.' },
       { author: 'Joan R.', reviewRating: 5, date: '2024-06-10', reviewBody: 'I live in Howell and had been driving to NYC for my spine care. A neighbor told me about Mountain Spine in Freehold and I am so glad I switched. The quality of care here matches anything I experienced in the city, and the convenience is unbeatable.' },
       { author: 'David C.', reviewRating: 5, date: '2024-05-05', reviewBody: 'From the moment I called Mountain Spine Freehold, the experience was seamless. They scheduled me quickly, the imaging was done on-site, and the doctor had a full picture of my condition before I even sat down. Professional and effective from start to finish.' },
-      { author: 'Melissa A.', reviewRating: 5, date: '2024-04-01', reviewBody: 'I had a bad ankle sprain that was misdiagnosed elsewhere. The orthopedic team here found a ligament issue immediately and created a treatment plan. After physical therapy and a minor procedure, I am walking pain-free. Grateful for their expertise.' },
+      { author: 'Melissa A.', reviewRating: 5, date: '2024-04-01', reviewBody: 'I had a bad ankle sprain that was misdiagnosed elsewhere. The orthopedic team here found a ligament issue immediately and created a treatment plan. After rehabilitation and a minor procedure, I am walking pain-free. Grateful for their expertise.' },
     ],
     neighborhoodsWeServe: ['Freehold Township', 'Howell', 'Marlboro', 'Manalapan', 'Colts Neck'],
     specialists: (
@@ -6546,7 +6546,7 @@ export const clinics: ClinicsProps[] = [
           <li>Serving Central New Jersey families with high patient satisfaction rates</li>
           <li>Same-day appointments available for acute orthopedic problems - no long waits</li>
           <li>Ample free on-site surface parking available for patients</li>
-          <li>Most insurance plans accepted, including Workers' Compensation claims</li>
+          <li>PPO insurance accepted, including Workers' Compensation claims</li>
           <li>Sports medicine orthopedic specialists in Freehold, specializing in <a href='/conditions/sports-injuries' className='underline text-[#0A50EC]'>athletic injuries</a></li>
           <li>Specialized foot and ankle orthopedic services</li>
           <li>Conveniently located near the Route 9 and Route 33 interchange</li>
@@ -6744,7 +6744,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -6793,7 +6793,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "What insurance does Mountain Spine & Orthopedics Freehold accept?",
-        answer: "We accept most PPO and private insurance plans. Call (973) 259-6756 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (973) 259-6756 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Freehold location?",
@@ -6906,7 +6906,7 @@ export const clinics: ClinicsProps[] = [
           <li>Serving Northern New Jersey families with high patient satisfaction rates</li>
           <li>Same-day appointments available for acute orthopedic problems - no long waits</li>
           <li>Large open surface lot parking shared with other medical tenants</li>
-          <li>Most insurance plans accepted, including Workers' Compensation claims</li>
+          <li>PPO insurance accepted, including Workers' Compensation claims</li>
           <li>Sports medicine orthopedic specialists in Paramus, specializing in <a href='/conditions/sports-injuries' className='underline text-[#0A50EC]'>athletic injuries</a></li>
           <li>Specialized foot and ankle orthopedic services</li>
           <li>Conveniently located on Route 17 commercial corridor</li>
@@ -7107,7 +7107,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -7152,7 +7152,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "What insurance does Mountain Spine & Orthopedics Paramus accept?",
-        answer: "We accept most PPO and private insurance plans. Call (973) 259-6756 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (973) 259-6756 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Paramus location?",
@@ -7272,7 +7272,7 @@ export const clinics: ClinicsProps[] = [
           <li>Specialized ambulatory surgery center designed for outpatient procedures</li>
           <li>Shorter wait times and faster discharge compared to hospital settings</li>
           <li>Large onsite surface lot with direct building access for surgical patients</li>
-          <li>Most insurance plans accepted, including Workers' Compensation claims</li>
+          <li>PPO insurance accepted, including Workers' Compensation claims</li>
           <li>Lower infection rates in focused surgical environment</li>
           <li>Same-day discharge for appropriate outpatient procedures</li>
           <li>Conveniently located on Mount Pleasant Avenue near I-280</li>
@@ -7473,7 +7473,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -7514,7 +7514,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "What insurance does the West Orange Surgery Center accept?",
-        answer: "We accept most PPO and private insurance plans. Call (973) 259-6756 before your procedure and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (973) 259-6756 before your procedure and our team will verify your coverage and benefits quickly."
       },
       {
         question: "Where can I park when I visit the West Orange Surgery Center?",
@@ -7649,7 +7649,7 @@ export const clinics: ClinicsProps[] = [
           <li>Serving New York City families with high patient satisfaction rates</li>
           <li>Same-day appointments available for acute orthopedic problems - no long waits</li>
           <li>Conveniently located near Grand Central Terminal and major subway lines</li>
-          <li>Most insurance plans accepted, including Workers' Compensation claims</li>
+          <li>PPO insurance accepted, including Workers' Compensation claims</li>
           <li>Sports medicine orthopedic specialists in NYC, specializing in <a href='/conditions/sports-injuries' className='underline text-[#0A50EC]'>athletic injuries</a></li>
           <li>Specialized foot and ankle orthopedic services</li>
           <li>Paid parking garages available nearby</li>
@@ -7855,7 +7855,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -7900,7 +7900,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "What insurance does Mountain Spine & Orthopedics New York City accept?",
-        answer: "We accept most PPO and private insurance plans. Call (646) 389-5606 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (646) 389-5606 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Midtown Manhattan location?",
@@ -7996,7 +7996,7 @@ export const clinics: ClinicsProps[] = [
       { author: 'Amy V.', reviewRating: 5, date: '2024-11-11', reviewBody: 'Mountain Spine Allentown is the best orthopedic clinic in the Lehigh Valley. The staff is attentive, the facility is modern, and the surgeon is among the most skilled I have encountered. My shoulder repair was handled with expertise and precision. Fully healed and back to tennis.' },
       { author: 'Rick M.', reviewRating: 5, date: '2024-10-07', reviewBody: 'I had a bad fall that caused a lumbar compression injury. Mountain Spine Allentown got me in quickly, assessed the damage thoroughly, and developed a treatment plan that avoided risky surgery. Eight weeks of targeted treatment and I am pain-free. This team is exceptional.' },
       { author: 'Diane W.', reviewRating: 5, date: '2024-09-03', reviewBody: 'I have been a patient at Mountain Spine Allentown for two years and the care has been consistently outstanding. The doctor is thorough, the staff is kind, and the outcomes have been excellent for my complex multi-level cervical condition. I trust this practice completely.' },
-      { author: 'Bruce J.', reviewRating: 5, date: '2024-08-19', reviewBody: 'The Allentown Mountain Spine team is phenomenal. I had a knee injury from cycling and they diagnosed a ligament issue that others had missed. The surgical repair was minimally invasive and the physical therapy coordination was seamless. Back on my bike within eight weeks.' },
+      { author: 'Bruce J.', reviewRating: 5, date: '2024-08-19', reviewBody: 'The Allentown Mountain Spine team is phenomenal. I had a knee injury from cycling and they diagnosed a ligament issue that others had missed. The surgical repair was minimally invasive and the rehabilitation coordination was seamless. Back on my bike within eight weeks.' },
       { author: 'Fran A.', reviewRating: 5, date: '2024-07-15', reviewBody: 'I have referred four people to Mountain Spine Allentown. All have had excellent experiences. The orthopedic surgeons here are brilliant and the support staff matches that quality. It is rare to find a practice where every part of the experience is this good. Highest recommendation.' },
       { author: 'Mark G.', reviewRating: 5, date: '2024-06-09', reviewBody: 'From my first call to my final follow-up appointment, Mountain Spine Allentown was exemplary. The scheduling team was accommodating, the imaging was done efficiently, and the surgeon was exceptional. My spinal fusion results have been wonderful and recovery has been smooth.' },
       { author: 'Helen T.', reviewRating: 5, date: '2024-05-05', reviewBody: 'I was nervous about spine surgery but the team at Mountain Spine Allentown was calming and deeply reassuring. The surgeon walked me through the procedure step by step beforehand, and the results were exactly as he described. I am living without back pain for the first time in a decade.' },
@@ -8023,7 +8023,7 @@ export const clinics: ClinicsProps[] = [
           <li>Serving Lehigh Valley families with high patient satisfaction rates</li>
           <li>Same-day appointments available for acute orthopedic problems - no long waits</li>
           <li>On-site parking and nearby municipal decks like the Spiral Deck are available</li>
-          <li>Most insurance plans accepted, including Workers' Compensation claims</li>
+          <li>PPO insurance accepted, including Workers' Compensation claims</li>
           <li>Sports medicine orthopedic specialists in Allentown, specializing in <a href='/conditions/sports-injuries' className='underline text-[#0A50EC]'>athletic injuries</a></li>
           <li>Specialized foot and ankle orthopedic services</li>
           <li>Conveniently located in Center City Allentown</li>
@@ -8211,7 +8211,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -8256,7 +8256,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "What insurance does Mountain Spine & Orthopedics Allentown accept?",
-        answer: "We accept most PPO and private insurance plans. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Allentown location?",
@@ -8370,7 +8370,7 @@ export const clinics: ClinicsProps[] = [
           <li>Serving Philadelphia families with high patient satisfaction rates</li>
           <li>Same-day appointments available for acute orthopedic problems - no long waits</li>
           <li>Paid parking garages available nearby (e.g., 1625 Locust St garage)</li>
-          <li>Most insurance plans accepted, including Workers' Compensation claims</li>
+          <li>PPO insurance accepted, including Workers' Compensation claims</li>
           <li>Sports medicine orthopedic specialists in Philadelphia, specializing in <a href='/conditions/sports-injuries' className='underline text-[#0A50EC]'>athletic injuries</a></li>
           <li>Specialized foot and ankle orthopedic services</li>
           <li>Conveniently located near SEPTA Suburban Station and Walnut-Locust subway</li>
@@ -8552,7 +8552,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -8597,7 +8597,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "What insurance does Mountain Spine & Orthopedics Philadelphia Walnut accept?",
-        answer: "We accept most PPO and private insurance plans. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Center City Philadelphia location?",
@@ -8680,7 +8680,7 @@ export const clinics: ClinicsProps[] = [
       { author: 'Tom M.', reviewRating: 5, date: '2024-09-24', reviewBody: 'I drove from Frankford to Mountain Spine Tioga based on a recommendation and was very impressed. The physician is thorough and skilled. My spinal stenosis was diagnosed accurately and the conservative treatment was effective enough that I avoided surgery entirely. Excellent care.' },
       { author: 'Donna K.', reviewRating: 5, date: '2024-08-18', reviewBody: 'Mountain Spine North Philadelphia gives this neighborhood a quality orthopedic resource it has long deserved. The surgeon is exceptional and the facility is well-equipped. My lumbar procedure was outpatient and the results were evident within days. I have recommended this office to my entire building.' },
       { author: 'Sam O.', reviewRating: 5, date: '2024-07-13', reviewBody: 'Coming here was one of the best healthcare decisions I have made. Mountain Spine Tioga has expert doctors, a professional team, and a clean modern facility. My back injury from a construction accident was handled with care and skill. I am fully recovered and grateful to this team.' },
-      { author: 'Grace B.', reviewRating: 5, date: '2024-06-07', reviewBody: 'As a Fishtown resident I love having Mountain Spine in the area. The orthopedic physician treated my sciatica comprehensively — starting with injections and physical therapy before recommending a minimally invasive procedure. The approach was patient and the results were excellent.' },
+      { author: 'Grace B.', reviewRating: 5, date: '2024-06-07', reviewBody: 'As a Fishtown resident I love having Mountain Spine in the area. The orthopedic physician treated my sciatica comprehensively — starting with injections and rehabilitation before recommending a minimally invasive procedure. The approach was patient and the results were excellent.' },
     ],
     neighborhoodsWeServe: ['Port Richmond', 'Kensington', 'Fishtown', 'Frankford', 'Juniata Park'],
     specialists: (
@@ -8703,7 +8703,7 @@ export const clinics: ClinicsProps[] = [
           <li>Serving North Philadelphia families with high patient satisfaction rates</li>
           <li>Same-day appointments available for acute orthopedic problems - no long waits</li>
           <li>Street parking available on Tioga St and nearby side streets</li>
-          <li>Most insurance plans accepted, including Workers' Compensation claims</li>
+          <li>PPO insurance accepted, including Workers' Compensation claims</li>
           <li>Sports medicine orthopedic specialists in North Philadelphia, specializing in <a href='/conditions/sports-injuries' className='underline text-[#0A50EC]'>athletic injuries</a></li>
           <li>Specialized foot and ankle orthopedic services</li>
           <li>Conveniently located near SEPTA Market-Frankford Line (Tioga Station)</li>
@@ -8885,7 +8885,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -8926,7 +8926,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "What insurance does Mountain Spine & Orthopedics North Philadelphia accept?",
-        answer: "We accept most PPO and private insurance plans. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your North Philadelphia location?",
@@ -9033,7 +9033,7 @@ export const clinics: ClinicsProps[] = [
           <li>Serving northwest Philadelphia families with high patient satisfaction rates</li>
           <li>Same-day appointments available for acute orthopedic problems - no long waits</li>
           <li>Street parking available on Germantown Ave and nearby side streets</li>
-          <li>Most insurance plans accepted, including Workers' Compensation claims</li>
+          <li>PPO insurance accepted, including Workers' Compensation claims</li>
           <li>Sports medicine orthopedic specialists in Germantown, specializing in <a href='/conditions/sports-injuries' className='underline text-[#0A50EC]'>athletic injuries</a></li>
           <li>Specialized foot and ankle orthopedic services</li>
           <li>Conveniently located on historic Germantown Avenue</li>
@@ -9221,7 +9221,7 @@ export const clinics: ClinicsProps[] = [
             Adjacent Segment Disease
           </Link>
           <Link
-            href="/conditions/cervical-deformities"
+            href="/conditions/spine-deformities"
             className="text-[#0A50EC] underline"
           >
             Cervical Deformities
@@ -9266,7 +9266,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "What insurance does Mountain Spine & Orthopedics Germantown accept?",
-        answer: "We accept most PPO and private insurance plans. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Germantown location?",
@@ -9337,7 +9337,7 @@ export const clinics: ClinicsProps[] = [
       { author: 'Kevin R.', reviewRating: 5, date: '2025-10-20', reviewBody: 'I drove from Marlton to the Voorhees location and was immediately impressed. The office is modern, the staff is professional, and the orthopedic surgeon is outstanding. He identified my lumbar issue in the first consultation and had a clear plan from day one. Excellent results.' },
       { author: 'Susan C.', reviewRating: 5, date: '2025-09-11', reviewBody: 'As a Cherry Hill resident I tried several orthopedic offices before Mountain Spine Voorhees. The difference is remarkable. The doctor listened thoroughly, reviewed all my imaging, and gave me an honest, patient-centered treatment plan. My sciatica is gone. Finally.' },
       { author: 'James L.', reviewRating: 5, date: '2025-08-05', reviewBody: 'The Voorhees Mountain Spine team handled my complex cervical spine case expertly. They had a conservative-first philosophy and tried injections before recommending surgery. When surgery was eventually needed, it was done with minimal invasiveness and excellent outcomes.' },
-      { author: 'Carla T.', reviewRating: 5, date: '2025-07-18', reviewBody: 'I had degenerative disc disease at two levels and was worried surgery was inevitable. The spine specialist at Mountain Spine Voorhees developed a targeted physical therapy and injection plan that has kept me surgery-free. I feel significantly better and am grateful for their approach.' },
+      { author: 'Carla T.', reviewRating: 5, date: '2025-07-18', reviewBody: 'I had degenerative disc disease at two levels and was worried surgery was inevitable. The spine specialist at Mountain Spine Voorhees developed a targeted outside rehabilitation and injection plan that has kept me surgery-free. I feel significantly better and am grateful for their approach.' },
       { author: 'Brian W.', reviewRating: 5, date: '2025-06-12', reviewBody: 'Mountain Spine Voorhees treated my spinal stenosis with a precision endoscopic approach. The procedure took under an hour and I was walking comfortably the same day. The surgeon clearly has done hundreds of these and the outcome was exactly as he described beforehand.' },
       { author: 'Linda A.', reviewRating: 5, date: '2025-05-08', reviewBody: 'I came from Stratford after a neighbor recommended Mountain Spine Voorhees. The orthopedic team here is exceptional in every way. They diagnosed my rotator cuff issue accurately, treated it conservatively first, and when I needed an arthroscopy the surgery was flawless.' },
       { author: 'Patrick S.', reviewRating: 5, date: '2025-04-01', reviewBody: 'Exceptional orthopedic experience at Mountain Spine Voorhees. The physician was thorough and highly experienced. Scheduling was easy, the facility is clean and well-equipped, and every appointment ran professionally. The care quality has been consistently excellent throughout.' },
@@ -9432,7 +9432,7 @@ export const clinics: ClinicsProps[] = [
           <Link href="/conditions/failed-back-surgery-syndrome" className="text-[#0A50EC] underline">Failed Back Surgery Syndrome</Link>
           <Link href="/conditions/adult-degenerative-scoliosis" className="text-[#0A50EC] underline">Adult Degenerative Scoliosis</Link>
           <Link href="/conditions/adjacent-segment-disease" className="text-[#0A50EC] underline">Adjacent Segment Disease</Link>
-          <Link href="/conditions/cervical-deformities" className="text-[#0A50EC] underline">Cervical Deformities</Link>
+          <Link href="/conditions/spine-deformities" className="text-[#0A50EC] underline">Cervical Deformities</Link>
           <Link href="/conditions/spine-deformities" className="text-[#0A50EC] underline">Spine Deformities</Link>
           <Link href="/conditions/spinal-compression-fractures" className="text-[#0A50EC] underline">Spinal Compression Fractures</Link>
           <Link href="/conditions/kyphosis" className="text-[#0A50EC] underline">Kyphosis</Link>
@@ -9456,7 +9456,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "What insurance does Mountain Spine & Orthopedics Voorhees accept?",
-        answer: "We accept most PPO and private insurance plans. Call (973) 259-6756 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (973) 259-6756 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "Which areas do you serve from the Voorhees location?",
@@ -9562,7 +9562,7 @@ export const clinics: ClinicsProps[] = [
           <li><strong>Advanced Spine Care:</strong> Leaders in <Link href="/treatments/artificial-disc-replacement-surgery" className="text-[#0A50EC] font-bold underline">artificial disc replacement</Link> and motion preservation.</li>
           <li><strong>Hyper-Local Access:</strong> Conveniently located near the <strong>Princeton Shopping Center</strong>.</li>
           <li><strong>Comprehensive Diagnostics:</strong> On-site evaluation and rapid <Link href="/find-care/free-mri-review" className="text-[#0A50EC] font-bold underline">MRI reviews</Link>.</li>
-          <li><strong>Insurance Friendly:</strong> We accept most major plans and specialize in <strong>Workers' Compensation</strong>.</li>
+          <li><strong>Insurance Friendly:</strong> PPO insurance accepted; we also handle <strong>Workers' Compensation</strong>.</li>
         </ul>
       </div>
     ),
@@ -9619,7 +9619,7 @@ export const clinics: ClinicsProps[] = [
           <Link href="/conditions/failed-back-surgery-syndrome" className="text-[#0A50EC] underline">Failed Back Surgery Syndrome</Link>
           <Link href="/conditions/adult-degenerative-scoliosis" className="text-[#0A50EC] underline">Adult Degenerative Scoliosis</Link>
           <Link href="/conditions/adjacent-segment-disease" className="text-[#0A50EC] underline">Adjacent Segment Disease</Link>
-          <Link href="/conditions/cervical-deformities" className="text-[#0A50EC] underline">Cervical Deformities</Link>
+          <Link href="/conditions/spine-deformities" className="text-[#0A50EC] underline">Cervical Deformities</Link>
           <Link href="/conditions/spine-deformities" className="text-[#0A50EC] underline">Spine Deformities</Link>
           <Link href="/conditions/spinal-compression-fractures" className="text-[#0A50EC] underline">Spinal Compression Fractures</Link>
           <Link href="/conditions/kyphosis" className="text-[#0A50EC] underline">Kyphosis</Link>
@@ -9647,7 +9647,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "What insurance does Mountain Spine & Orthopedics Princeton accept?",
-        answer: "We accept most PPO and private insurance plans. Call (973) 259-6756 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (973) 259-6756 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "Do you treat workers' compensation and work-related injuries in Princeton, NJ?",
