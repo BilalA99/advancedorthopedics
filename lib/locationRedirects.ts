@@ -9,6 +9,7 @@
  */
 
 import { clinics } from '@/components/data/clinics';
+import { clinicsForMap } from '@/components/data/clinicsForMap.generated';
 
 export interface LocationRedirectMapping {
   state: string;
@@ -89,7 +90,7 @@ export function findClinicByStateAndLocation(stateSlug: string, locationSlug: st
  * @returns Array of clinics in that state
  */
 export function getClinicsByState(stateSlug: string) {
-  return clinics.filter(clinic => clinic.stateSlug === stateSlug);
+  return clinicsForMap.filter(clinic => clinic.stateSlug === stateSlug);
 }
 
 /**

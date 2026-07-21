@@ -13,7 +13,7 @@ function truncateString(str: string, maxLength = 125) {
     return str.slice(0, maxLength) + '...';
 }
 
-export default function TreatmentCard({ ConditionInfo }: { ConditionInfo: TreatmentsCardProp }) {
+export default function TreatmentCard({ ConditionInfo, showFeaturedDoctor }: { ConditionInfo: TreatmentsCardProp; showFeaturedDoctor: boolean }) {
     // Check if ConditionInfo.card_img is a valid image source (string or static import object)
     const imageSource = (ConditionInfo.card_img && typeof ConditionInfo.card_img !== 'string' && ConditionInfo.card_img !== null) || (typeof ConditionInfo.card_img === 'string' && ConditionInfo.card_img.length > 0 && !ConditionInfo.card_img.includes('Placeholder'))
         ? ConditionInfo.card_img // Use the provided image if it seems valid
@@ -66,7 +66,7 @@ export default function TreatmentCard({ ConditionInfo }: { ConditionInfo: Treatm
                 <div className=' bg-[#DCDEE1] h-[1px] w-full' />
 
                 <div className=' flex flex-row w-full space-x-[16px] items-center'>
-                    <DoctorsAvatar tag={ConditionInfo.tag} condition={ConditionInfo.title} />
+                    <DoctorsAvatar tag={ConditionInfo.tag} condition={ConditionInfo.title} showFeaturedDoctor={showFeaturedDoctor} />
                     <span
                         style={{
                             fontFamily: "var(--font-public-sans)",

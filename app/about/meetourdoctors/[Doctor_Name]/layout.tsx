@@ -1,5 +1,5 @@
 import { Metadata, ResolvingMetadata } from "next";
-import { Doctors } from "@/components/data/doctors";
+import { getVisibleProviderBySlug } from "@/lib/providers/providerVisibility";
 import PhysicianSchema from "@/components/PhysicianSchema";
 import { buildCanonical, normalizeUTF8 } from "@/lib/seo";
 import { getOgImageForPath } from "@/lib/og";
@@ -9,7 +9,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { Doctor_Name } = await params;
-  const doctor = Doctors.find((d) => d.slug === Doctor_Name);
+  const doctor = getVisibleProviderBySlug(Doctor_Name);
 
   if (!doctor) {
     return {
@@ -60,7 +60,7 @@ export default async function DoctorLayout({
   params: Promise<{ Doctor_Name: string }>;
 }) {
   const { Doctor_Name } = await params;
-  const doctor = Doctors.find((d) => d.slug === Doctor_Name);
+  const doctor = getVisibleProviderBySlug(Doctor_Name);
 
   return (
     <>

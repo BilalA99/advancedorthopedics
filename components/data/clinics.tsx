@@ -9666,3 +9666,6 @@ export const clinics: ClinicsProps[] = [
 
 ];
 
+// NOTE: a map/nav-safe view of this data lives in ./clinicsForMap.generated
+// (see that file for why it isn't simply `clinics.map(...)` from here).
+

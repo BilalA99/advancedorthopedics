@@ -6,7 +6,7 @@ import Image from 'next/image';
 import ConditionDetialsLanding from '@/public/ConditionDetails.jpeg';
 import { ConsultationForm } from '@/components/ContactForm';
 import BodyPartHeroForm from '@/components/BodyPartHeroForm';
-import { Doctors } from '@/components/data/doctors';
+import { getVisibleProviders } from '@/lib/providers/providerVisibility';
 import DoctorCard from '@/components/DoctorCard';
 import TreatmentsList from '@/components/TreatmentsList';
 import Link from 'next/link';
@@ -250,7 +250,7 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
   }
 
   // Shuffle the Doctors array and then take the first two doctors
-  const randomDoctors = shuffleArray(Doctors).slice(0, 2);
+  const randomDoctors = shuffleArray(getVisibleProviders()).slice(0, 2);
 
   return (
     <main className='w-full flex flex-col items-center justify-center bg-white h-full'>

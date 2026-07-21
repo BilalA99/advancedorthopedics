@@ -28,6 +28,8 @@ import {
 import Link from "next/link"
 import { DoctorContactForm } from "@/components/DoctorContactForm"
 import Testimonials from "./components/Testimonials"
+import { getVisibleReviews } from "@/lib/providers/providerVisibility"
+import { homepageGoogleReviews } from "@/components/data/socialProofReviews"
 import { LOCATION_HOURS_DISPLAY } from "@/lib/locationConstants"
 import { clinics } from "@/components/data/clinics"
 import BookAnAppoitmentButton from "@/components/BookAnAppoitmentButton"
@@ -129,7 +131,7 @@ const HomePage = () => {
 
 
             {/* Testimonials */}
-            <Testimonials />
+            <Testimonials reviews={getVisibleReviews(homepageGoogleReviews)} />
 
             {/* Services Overview */}
             <section className="py-20 bg-pure-white">

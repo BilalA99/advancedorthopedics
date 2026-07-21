@@ -3,7 +3,8 @@ import Image from 'next/image'
 import RatingsAndReviews from '@/components/RatingsAndReviews'
 import ClinicsMap from '@/components/ClinicsMap'
 import ContactUsSection from '@/components/ContactUsSection'
-import { Doctors } from "@/components/data/doctors";
+import { getVisibleProviders, getVisibleReviews } from "@/lib/providers/providerVisibility";
+import { sitewideReviews } from "@/components/data/socialProofReviews";
 import DoctorCard from '@/components/DoctorCard'
 import StarRating from '@/components/StarRating'
 import { TextAnimate } from '@/components/magicui/text-animate'
@@ -165,11 +166,12 @@ const aboutPageSchema = {
 };
 
 export default function AboutUs() {
+  const featuredDoctors = getVisibleProviders().slice(0, 3);
   return (
     <main className='w-full flex flex-col items-center justify-center bg-white h-full'>
       {/* JSON-LD Schema Markup for SEO and Knowledge Graph */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }} />
-      <PhysicianSchema doctors={Doctors.slice(0, 3)} wrapInItemList={true} />
+      <PhysicianSchema doctors={featuredDoctors} wrapInItemList={true} />
       
       {/* Landing */}
       <section className=" w-full h-full flex flex-col relative overflow-hidden [mask-composite:intersect] [mask-image:linear-gradient(to_top,transparent,black_6rem)]" >
@@ -338,7 +340,7 @@ export default function AboutUs() {
         </div>
         <div className=" mt-[60px] grid xl:grid-cols-3  grid-cols-1 md:grid-cols-2 gap-[32px]">
           {
-            Doctors.slice(0, 3).map((item) => (
+            featuredDoctors.map((item) => (
               <DoctorCard key={item.name} doctor={item} />
             ))
           }
@@ -347,7 +349,7 @@ export default function AboutUs() {
 
 
       {/* What our patients say */}
-      <RatingsAndReviews />
+      <RatingsAndReviews reviews={getVisibleReviews(sitewideReviews)} />
 
       {/* Contact Us */}
       <ContactUsSection />

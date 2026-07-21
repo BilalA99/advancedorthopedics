@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
-import { Doctors } from "@/components/data/doctors";
+import { getVisibleProviders, getVisibleReviews } from "@/lib/providers/providerVisibility";
+import { sitewideReviews } from "@/components/data/socialProofReviews";
 import DoctorCard from '@/components/DoctorCard'
 import RatingsAndReviews from '@/components/RatingsAndReviews';
 import { TextAnimate } from '@/components/magicui/text-animate';
@@ -32,10 +33,11 @@ export const metadata: Metadata = {
 };
 
 export default function MeetOurDoctors() {
+  const visibleDoctors = getVisibleProviders();
   return (
     <main className='w-full flex flex-col items-center justify-center bg-white h-full'>
       {/* JSON-LD Schema Markup for SEO - Physician Schema for E-E-A-T */}
-      <PhysicianSchema doctors={Doctors} wrapInItemList={true} />
+      <PhysicianSchema doctors={visibleDoctors} wrapInItemList={true} />
       
       {/* Landing */}
       <section className="w-full h-full flex flex-col relative overflow-hidden [mask-composite:intersect] [mask-image:linear-gradient(to_top,transparent,black_6rem)]" >
@@ -118,14 +120,14 @@ export default function MeetOurDoctors() {
         </div>
         <div className=" mt-[60px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-16 items-stretch">
           {
-            Doctors.map((item) => (
+            visibleDoctors.map((item) => (
               <DoctorCard key={item.name} doctor={item} />
             ))
           }
         </div>
       </section>
 
-      <RatingsAndReviews />
+      <RatingsAndReviews reviews={getVisibleReviews(sitewideReviews)} />
     </main>
   )
 }

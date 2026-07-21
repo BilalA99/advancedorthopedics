@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ConsultationForm } from '@/components/ContactForm';
-import { Doctors } from '@/components/data/doctors';
+import { getVisibleProviders } from '@/lib/providers/providerVisibility';
 import DoctorCard from '@/components/DoctorCard';
 import InternalLinkingSection from '@/components/InternalLinkingSection';
 import InjectionsFAQ, { FAQItem } from './InjectionsFAQ';
@@ -70,7 +70,7 @@ const INJECTION_FAQS: FAQItem[] = [
 ];
 
 // Pain management + spine doctors most relevant for injection therapy
-const injectionDoctors = Doctors.filter(
+const injectionDoctors = getVisibleProviders().filter(
   (d) =>
     d.practice === 'Pain Management' ||
     d.medicalSpecialty.includes('Pain Management') ||

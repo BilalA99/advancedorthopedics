@@ -8,6 +8,7 @@ import ConditionCard from '@/components/ConditionCard';
 import BodyPartTabs from '@/components/BodyPartTabs';
 import ConditionsSearchBar from '@/components/ConditionsSearchBar';
 import RatingsAndReviews from '@/components/RatingsAndReviews';
+import type { SocialProofReview } from '@/components/data/socialProofReviews';
 import { TextAnimate } from '@/components/magicui/text-animate';
 import { MultiSelect } from '@/components/ui/multi-select';
 import { useSearchParams } from 'next/navigation';
@@ -33,7 +34,7 @@ function filterByTag(items: ConditionInfoProp[], tags: string[]) {
   return items.filter((item) => item.tag && tags.includes(item.tag));
 }
 
-export default function ConditionsHubClient() {
+export default function ConditionsHubClient({ reviews, showFeaturedDoctor }: { reviews: SocialProofReview[]; showFeaturedDoctor: boolean }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [allData] = useState<ConditionInfoProp[]>(conditions);
   const [filteredData, setFilteredData] = useState<ConditionInfoProp[]>(conditions);
@@ -228,7 +229,7 @@ export default function ConditionsHubClient() {
         {currentItems.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8 gap-6 xl:gap-8">
             {currentItems.map((item) => (
-              <ConditionCard key={item.slug} ConditionInfo={item} />
+              <ConditionCard key={item.slug} ConditionInfo={item} showFeaturedDoctor={showFeaturedDoctor} />
             ))}
           </div>
         ) : (
@@ -319,7 +320,7 @@ export default function ConditionsHubClient() {
       </section>
 
       {/* Ratings & Reviews Section */}
-      <RatingsAndReviews />
+      <RatingsAndReviews reviews={reviews} />
     </main>
   );
 }

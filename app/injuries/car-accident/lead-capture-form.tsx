@@ -17,7 +17,7 @@ import { sendContactEmail, sendUserEmail } from "@/components/email/sendcontacte
 import { redirect } from "next/navigation"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
-import { clinics } from "@/components/data/clinics"
+import { clinicsForMap as clinics } from "@/components/data/clinicsForMap.generated"
 import { pushFormSubmit } from "@/utils/enhancedConversions"
 import { STATE_OPTIONS } from "@/lib/stateUtils"
 

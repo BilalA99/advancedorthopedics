@@ -1,9 +1,11 @@
 "use client"
 
 import type React from "react"
+import type { DoctorProp } from "@/components/data/doctors"
 
 interface CarAccidentClientProps {
     faqs: Array<{ q: string; a: string }>;
+    doctors: DoctorProp[];
 }
 
 import { useState, useEffect, useRef } from "react"
@@ -59,7 +61,7 @@ import insurance6 from '@/public/insurance(6).png'
 import insurance7 from '@/public/insurance(7).png'
 import insurance8 from '@/public/insurance(8).png'
 import { Marquee } from "@/components/magicui/marquee"
-import { clinics } from "@/components/data/clinics"
+import { clinicsForMap as clinics } from "@/components/data/clinicsForMap.generated"
 import InjuryDoctorsSection from "@/components/InjuryDoctorsSection.client"
 import BookAnAppoitmentButton from "@/components/BookAnAppoitmentButton"
 import CondensedLocations from "@/components/CondensedLocations"
@@ -332,7 +334,7 @@ const insuranceCarriers = [
 ]
 
 
-export default function CarAccidentClient({ faqs }: CarAccidentClientProps) {
+export default function CarAccidentClient({ faqs, doctors }: CarAccidentClientProps) {
     const shouldReduceMotion = useReducedMotion()
     const triage = useTriage()
     const [faqSearch, setFaqSearch] = useState("")
@@ -1199,7 +1201,7 @@ export default function CarAccidentClient({ faqs }: CarAccidentClientProps) {
 
                 <InjuryHotspots injuryType="car-accident" />
 
-                <div className="w-full max-w-[1440px] mx-auto px-4 sm:py-16 py-8"><InjuryDoctorsSection /></div>
+                <div className="w-full max-w-[1440px] mx-auto px-4 sm:py-16 py-8"><InjuryDoctorsSection doctors={doctors} /></div>
 
                 {/* FAQs */}
                 <Reveal width="100%" className="bg-gray-50 sm:py-16 py-8" data-section="faqs">

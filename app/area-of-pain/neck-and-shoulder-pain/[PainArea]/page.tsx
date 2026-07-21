@@ -1,6 +1,6 @@
 import { conditions } from '@/components/data/conditions'
 import { conditions as painconditions } from '@/components/data/painconditions'
-import { Doctors } from '@/components/data/doctors'
+import { getVisibleProviders } from '@/lib/providers/providerVisibility'
 import { PainAreaTreatments } from '@/components/data/painareatreatments'
 import { notFound } from 'next/navigation'
 import { PainAreaClient } from './PainAreaClient'
@@ -45,7 +45,7 @@ export default async function PainArea({ params }: { params: Promise<{ PainArea:
   // Get specialty slugs for cross-linking
   specialtySlugs = conditions.map(x => x.slug);
 
-  const randomDoctors = shuffleArray(Doctors).slice(0, 2);
+  const randomDoctors = shuffleArray(getVisibleProviders()).slice(0, 2);
 
   return <PainAreaClient condition_details={condition_details} randomDoctors={randomDoctors} specialtySlugs={specialtySlugs} />;
 }

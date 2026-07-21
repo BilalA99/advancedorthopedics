@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { injuries } from '@/components/data/injuries';
 import { ConsultationForm } from '@/components/ContactForm';
-import { Doctors } from '@/components/data/doctors';
+import { getVisibleProviders } from '@/lib/providers/providerVisibility';
 import DoctorCard from '@/components/DoctorCard';
 import Link from 'next/link';
 import Logo from '@/public/newlogo4.png';
@@ -25,7 +25,7 @@ export default async function InjuryPage({ params }: { params: Promise<{ slug: s
   }
 
   // Randomly select 2 doctors for display
-  const shuffledDoctors = [...Doctors].sort(() => Math.random() - 0.5);
+  const shuffledDoctors = [...getVisibleProviders()].sort(() => Math.random() - 0.5);
   const selectedDoctors = shuffledDoctors.slice(0, 2);
 
   return (

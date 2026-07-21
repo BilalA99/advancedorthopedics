@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import RatingsAndReviews from '@/components/RatingsAndReviews'
+import type { SocialProofReview } from '@/components/data/socialProofReviews'
 import AAOS from '@/public/AAOS.png';
 import ACP from '@/public/ACP.png';
 import AOA from '@/public/AOA.png';
@@ -29,7 +30,6 @@ const associationLogoAlt: Record<string, string> = {
   'Serpent': 'Medical caduceus symbol representing healthcare excellence',
   'SMIS': 'Society for Minimally Invasive Spine Surgery (SMISS) member'
 };
-import { Doctors } from '@/components/data/doctors';
 import DoctorCard from '@/components/DoctorCard';
 import FAQsSection from '@/components/FaqsSection';
 import DoctorsTestitmonial from '@/components/DoctorsTestitmonial';
@@ -216,7 +216,7 @@ const FreeMriReviewSteps = [
   }
 ]
 
-export default function FreeMRIReviewClient() {
+export default function FreeMRIReviewClient({ reviews }: { reviews: SocialProofReview[] }) {
   const [ConditionStep, setConditionStep] = useState(1)
   const [openAppointmentConfirm, setAppointmentConfirm] = useState(false)
   const [disabled, setDisabled] = useState(false)
@@ -553,7 +553,7 @@ export default function FreeMRIReviewClient() {
             }
           </Marquee>
         </div>
-        <RatingsAndReviews />
+        <RatingsAndReviews reviews={reviews} />
 
         <FAQsSection header={Header} faqItems={faqItems} />
 

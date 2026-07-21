@@ -41,6 +41,7 @@ import TrackedOutboundLink from '@/components/TrackedOutboundLink'
 import { findClinicByStateAndLocation, getAllLocationParams, isValidStateSlug, STATE_METADATA } from '@/lib/locationRedirects'
 import { ReviewLocationCapture } from '@/components/ReviewLocationCapture'
 import { STATE_PHONE_NUMBERS, MAIN_PHONE_DISPLAY } from '@/lib/locationConstants'
+import { getVisibleReviews } from '@/lib/providers/providerVisibility'
 import MobileHeroConversionPanel from '@/components/MobileHeroConversionPanel'
 
 export const dynamicParams = false;
@@ -68,7 +69,17 @@ export default async function LocationDetails(
     if (!locationData) {
         return notFound();
     }
-    
+
+    // whatOurPatientsSay (unused legacy JSX) and reviews (may name a hidden
+    // provider) would otherwise be serialized wholesale into these Client
+    // Component props even though neither ClinicsMap nor LocationGallerySection
+    // renders them; strip both so that content never crosses the server/client
+    // boundary. `reviews` is zeroed out rather than omitted since it's a
+    // required field on ClinicsProps; the filtered list used for actual
+    // display is computed separately as `visibleReviews` below.
+    const { whatOurPatientsSay: _unusedTestimonialJsx, ...clinicForClientProps } = locationData;
+    clinicForClientProps.reviews = [];
+
     const OurSpecialtyItems = [
         {
             icon: () => (
@@ -403,9 +414,9 @@ export default async function LocationDetails(
                 </div>
 
             </section>
-            <ClinicsMap startingClinic={locationData} />
+            <ClinicsMap startingClinic={clinicForClientProps} />
             <LocationGallerySection
-              clinic={locationData}
+              clinic={clinicForClientProps}
               city={locationData.region.split(',')[0].trim()}
               stateAbbr={stateInfo?.abbr || state}
               stateSlug={state}
@@ -558,7 +569,10 @@ export default async function LocationDetails(
             )}
 
             <section className="w-full max-w-[1440px] flex flex-col py-10 space-y-12 h-full px-2 md:px-[40px]">
-                {locationData && locationData.reviews && locationData.reviews.length > 0 && (
+                {locationData && (() => {
+                    const visibleReviews = getVisibleReviews(locationData.reviews || []);
+                    if (visibleReviews.length === 0) return null;
+                    return (
                     <>
                         {/*
                           SSR-only reviews block — always present in HTML source for Googlebot.
@@ -572,7 +586,7 @@ export default async function LocationDetails(
                                 <p>Rated {locationData.rating} out of 5 based on {locationData.reviewCount} patient reviews.</p>
                             )}
                             <ul>
-                                {locationData.reviews.map((review, i) => (
+                                {visibleReviews.map((review, i) => (
                                     <li key={i} itemScope itemType="https://schema.org/Review">
                                         <span itemProp="author" itemScope itemType="https://schema.org/Person">
                                             <span itemProp="name">{review.author}</span>
@@ -589,13 +603,14 @@ export default async function LocationDetails(
                             </ul>
                         </div>
                         <ReviewsCarousel
-                            reviews={locationData.reviews}
+                            reviews={visibleReviews}
                             cityName={locationData.region.split(',')[0]}
                             rating={locationData.rating}
                             reviewCount={locationData.reviewCount}
                         />
                     </>
-                )}
+                    );
+                })()}
             </section>
             {/* <RatingsAndReviews /> */}
         </main>

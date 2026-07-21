@@ -6,7 +6,7 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { GoogleMap, Libraries, MarkerF, useJsApiLoader } from "@react-google-maps/api";
 import { useGeolocation } from '@/providers/geolocationcontext';
 import { Select, SelectContent, SelectItem, SelectTrigger } from './ui/select';
-import { clinics } from './data/clinics';
+import { clinicsForMap as clinics } from './data/clinicsForMap.generated';
 import Link from 'next/link';
 import {
   CONSENT_UPDATED_EVENT,

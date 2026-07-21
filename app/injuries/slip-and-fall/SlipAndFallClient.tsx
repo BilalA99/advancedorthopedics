@@ -1,7 +1,12 @@
 'use client'
 
+import type { DoctorProp } from "@/components/data/doctors"
+import type { SocialProofReview } from "@/components/data/socialProofReviews"
+
 interface SlipAndFallClientProps {
     faqs: Array<{ q: string; a: string }>;
+    doctors: DoctorProp[];
+    reviews: SocialProofReview[];
 }
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -31,7 +36,7 @@ import insurance6 from '@/public/insurance(6).png'
 import insurance7 from '@/public/insurance(7).png'
 import insurance8 from '@/public/insurance(8).png'
 import { Marquee } from "@/components/magicui/marquee"
-import { clinics } from "@/components/data/clinics"
+import { clinicsForMap as clinics } from "@/components/data/clinicsForMap.generated"
 import { motion, AnimatePresence, LazyMotion, domAnimation, useReducedMotion, useInView } from "framer-motion"
 
 // CondensedLocations replaced by InjuryClinicFinder
@@ -277,7 +282,7 @@ const data = {
     reviewCount: 327,
 }
 
-export default function SlipAndFallClient({ faqs }: SlipAndFallClientProps) {
+export default function SlipAndFallClient({ faqs, doctors, reviews }: SlipAndFallClientProps) {
     const insuranceCarriers = [
         {
             image: insurance8,
@@ -654,7 +659,7 @@ export default function SlipAndFallClient({ faqs }: SlipAndFallClientProps) {
             <InjuryHotspots injuryType="slip-and-fall" />
 
             {/* Meet Our Experts */}
-            <div className="w-full max-w-[1440px] mx-auto px-4 sm:py-16 py-8"><InjuryDoctorsSection /></div>
+            <div className="w-full max-w-[1440px] mx-auto px-4 sm:py-16 py-8"><InjuryDoctorsSection doctors={doctors} /></div>
 
             {/* FAQ Section */}
             <section className="w-full max-w-[1440px] flex flex-col sm:py-[50px] py-10 h-full px-2 md:px-[40px]" data-section="faq">
@@ -743,7 +748,7 @@ export default function SlipAndFallClient({ faqs }: SlipAndFallClientProps) {
             </section>
 
             {/* Ratings and Reviews Section */}
-            <RatingsAndReviews />
+            <RatingsAndReviews reviews={reviews} />
         </main >
     );
 }

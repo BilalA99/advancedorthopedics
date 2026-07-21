@@ -1,6 +1,7 @@
 import { buildCanonical } from "@/lib/seo";
 import { getOgImageForPath } from "@/lib/og";
-import { Doctors } from '@/components/data/doctors';
+import { getVisibleProviders, getVisibleReviews } from '@/lib/providers/providerVisibility';
+import { sitewideReviews } from '@/components/data/socialProofReviews';
 import PhysicianSchema from '@/components/PhysicianSchema';
 
 export const metadata = {
@@ -108,10 +109,11 @@ import { TextAnimate } from '@/components/magicui/text-animate';
 import { Marquee } from '@/components/magicui/marquee';
 
 export default function FindADoctor() {
+  const visibleDoctors = getVisibleProviders();
   return (
     <main className='w-full flex flex-col items-center justify-center bg-white h-full'>
       {/* JSON-LD Schema Markup for SEO */}
-      <PhysicianSchema doctors={Doctors} wrapInItemList={true} />
+      <PhysicianSchema doctors={visibleDoctors} wrapInItemList={true} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalOrganizationSchema) }} />
       <section className="w-full h-full flex flex-col relative overflow-hidden [mask-composite:intersect] [mask-image:linear-gradient(to_top,transparent,black_6rem)]">
         <div
@@ -194,7 +196,7 @@ export default function FindADoctor() {
         </div>
         <div className=" mt-[60px] grid-cols-1 md:grid-cols-2 grid lg:grid-cols-3 gap-16">
           {
-            Doctors.map((item) => (
+            visibleDoctors.map((item) => (
               <DoctorCard key={item.name} doctor={item} />
             ))
           }
@@ -202,7 +204,7 @@ export default function FindADoctor() {
       </section>
 
 
-      <RatingsAndReviews />
+      <RatingsAndReviews reviews={getVisibleReviews(sitewideReviews)} />
     </main>
   )
 }
