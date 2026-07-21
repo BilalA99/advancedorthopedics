@@ -17,7 +17,11 @@ import { Testimonial } from '../ui/testimonial-card';
 import { Marquee } from '../magicui/marquee';
 import Link from 'next/link';
 import { MAIN_PHONE_DISPLAY, NJ_PHONE_DISPLAY, NY_PHONE_DISPLAY } from '@/lib/locationConstants';
-import { showScottKatzman } from '@/lib/config/featureFlags';
+
+// clinics.tsx is imported by shared/client modules so server-only featureFlags cannot
+// be used here. Read the env var directly; featureFlags.ts still validates it strictly
+// on all server paths, so typos are caught at startup.
+const showScottKatzman = process.env.SHOW_SCOTT_KATZMAN !== "0";
 
 export interface Review {
   author: string;
