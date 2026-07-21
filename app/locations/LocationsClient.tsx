@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Phone, Clock, Building2 } from 'lucide-react'
-import { clinics } from '@/components/data/clinics'
+import { clinicsForMap as clinics } from '@/components/data/clinicsForMap.generated'
 import ClinicsMap from '@/components/ClinicsMap'
 import { TextAnimate } from '@/components/magicui/text-animate'
 import Image from 'next/image'

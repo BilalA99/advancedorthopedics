@@ -7,74 +7,9 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Google } from "./Google"
 import Link from "next/link"
-const reviews = [
-    {
-        id: 1,
-        name: "edy constancia",
-        timeAgo: "a week ago",
-        rating: 5,
-        text: "I had a great experience at this center. The team is efficient and friendly, and Dr. Katzman made sure I understood my treatment plan. They really go above and beyond for their patients",
-    },
-    {
-        id: 2,
-        name: "Mike Qual",
-        timeAgo: "a week ago",
-        rating: 5,
-        text: "Great experience herein Hollywood. The staff is kind and professional and Dr. Katzman made me feel comfortable. I would definitely recommend this office.",
-    },
-    {
-        id: 3,
-        name: "Chelsea Constancia",
-        timeAgo: "a week ago",
-        rating: 5,
-        text: "My sister and I were both injured in an accident, and we decided to see Dr. Katzman together for treatment. From the very first visit, he listened carefully, answered all of our questions, and treated us with kindness and patience. The staff is also incredibly supportive and always made me feel welcomed.",
-    },
-    {
-        id: 4,
-        name: "melanie redondo",
-        timeAgo: "a week ago",
-        rating: 5,
-        text: "I can’t thank Dr. Katzman enough for the care he provided me and my sister. After our accident, I was scared I wouldn’t recover fully. But Dr. Katzman explained everything clearly and guided me through the entire process step by step. The treatment I received has helped me tremendously, and having a doctor who truly cares about his patients makes all the difference",
-    },
-    {
-        id: 5,
-        name: "Jessica Mestre",
-        timeAgo: "a week ago",
-        rating: 5,
-        text: "I was in a terrible car accident that left me with constant neck and back pain. After trying different treatments, I finally came to see Dr. Katzman. He took the time to explain my options and recommended a minimally invasive procedure. I’m finally getting relief and feel confident in my recovery.",
-    },
-    {
-        id: 6,
-        name: "Matheus abudjr",
-        timeAgo: "2 months ago",
-        rating: 5,
-        text: "Super happy with the care I got here. Dr. Scott and the team were really helpful and made everything easy to understand. Great service and smooth recovery, my mom feels so good now!!",
-    },
-    {
-        id: 7,
-        name: "Vanessa Bandeira",
-        timeAgo: "4 months ago",
-        rating: 5,
-        text: "Very quick service bilingual speaking staff. They got me in immediately I feel so much better",
-    },
-    {
-        id: 8,
-        name: "bilal Ahmad",
-        timeAgo: "3 weeks ago",
-        rating: 5,
-        text: "Fixed my Sciatica with a minimally invasive procedure, thanks guys",
-    },
-    {
-        id: 9,
-        name: "mirtala chavarria",
-        timeAgo: "a week ago",
-        rating: 5,
-        text: "Excellent experience at this clinic. The team is professional and always willing to help. Dr. Katzman demonstrates great dedication and confidence in his work.",
-    },
+import type { HomepageGoogleReview } from "@/components/data/socialProofReviews"
 
-]
-
-export default function Testimonials() {
+export default function Testimonials({ reviews }: { reviews: HomepageGoogleReview[] }) {
     const [currentIndex, setCurrentIndex] = useState(0)
     const reviewsPerPage = 2
 

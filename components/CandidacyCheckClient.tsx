@@ -15,6 +15,7 @@ import { sendCandidacyEmail, sendUserEmail } from '@/components/email/sendcontac
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { Marquee } from '@/components/magicui/marquee'
 import RatingsAndReviews from '@/components/RatingsAndReviews'
+import type { SocialProofReview } from '@/components/data/socialProofReviews'
 import FaqsSection from '@/components/FaqsSection'
 import DoctorsTestitmonial from '@/components/DoctorsTestitmonial'
 import AAOS from '@/public/AAOS.png';
@@ -142,7 +143,7 @@ const Header = (
   </span>
 )
 
-export default function CandidacyCheckClient() {
+export default function CandidacyCheckClient({ reviews }: { reviews: SocialProofReview[] }) {
   const [conditionStep, setConditionStep] = useState(1);
   const [appointmentConfirm, setAppointmentConfirm] = useState(false);
   const [disabled, setDisabled] = useState(false)
@@ -510,7 +511,7 @@ export default function CandidacyCheckClient() {
           }
         </Marquee>
       </div>
-      <RatingsAndReviews />
+      <RatingsAndReviews reviews={reviews} />
 
       <FaqsSection header={Header} faqItems={faqItems} />
 

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { AllTreatmentsCombined } from '@/components/data/treatments';
 import { conditions } from '@/components/data/conditions';
 import { clinics } from '@/components/data/clinics';
-import { Doctors } from '@/components/data/doctors';
+import { getVisibleProviders } from '@/lib/providers/providerVisibility';
 import { buildCanonical } from '@/lib/seo';
 import { GetBlogsPublic } from '@/app/blogs/api/get-blogs';
 
@@ -179,7 +179,7 @@ export default async function SitemapPage() {
   })).sort((a, b) => a.title.localeCompare(b.title));
 
   // Prepare doctor links
-  const doctorLinks = Doctors.map(doctor => ({
+  const doctorLinks = getVisibleProviders().map(doctor => ({
     url: `/about/meetourdoctors/${doctor.slug}`,
     title: doctor.name,
   })).sort((a, b) => a.title.localeCompare(b.title));

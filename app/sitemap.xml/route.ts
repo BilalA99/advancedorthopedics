@@ -1,5 +1,5 @@
 import { clinics } from "@/components/data/clinics";
-import { Doctors } from "@/components/data/doctors";
+import { getVisibleProviders } from "@/lib/providers/providerVisibility";
 import { conditions, conditionContentPlaceholders } from "@/components/data/conditions";
 import { AllTreatmentsCombined } from "@/components/data/treatments";
 import { BODY_PARTS } from "@/components/data/bodyParts";
@@ -68,7 +68,7 @@ export async function GET() {
   );
 
   // 3. Doctor pages
-  Doctors.filter((doctor) => doctor.slug && doctor.slug !== "undefined").forEach(
+  getVisibleProviders().filter((doctor) => doctor.slug && doctor.slug !== "undefined").forEach(
     (doctor) => addEntry(`/about/meetourdoctors/${doctor.slug}`, doctor.updatedAt)
   );
 

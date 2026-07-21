@@ -1,12 +1,25 @@
 import { StaticImageData } from 'next/image';
-import Katzman from '../../public/ScottKatzman.png';
 import Monica from '../../public/Monica.png';
 import David from '../../public/David.png';
 import Douglas from '../../public/DouglasSlaughter.png';
 import Christopher from '../../public/ChristopherMcarthy.png';
 import Shumway from '../../public/clay-shumway.png';
-import toporthokatzman from '../../public/toporthokatzman.webp';
 import toporthoslaughter from '../../public/toporthoslaughter.webp';
+
+// Dr. Scott Katzman's images are intentionally NOT statically imported.
+// A webpack static `import` of an image is processed and bundled
+// unconditionally at build time, regardless of any runtime array filtering
+// applied later (see lib/providers/providerVisibility.ts) — the whole point
+// of the SHOW_SCOTT_KATZMAN flag is to keep his data out of flag-off public
+// output, so his image must not be pulled into every bundle that merely
+// imports this file. These plain object literals satisfy Next/Image's
+// StaticImageData shape (so every existing `<Image src={doctor.img} />`
+// consumer works unchanged) while staying inert data — no webpack image
+// loader ever touches them. The physical files are synced into/out of
+// public/ by scripts/sync-provider-media.mjs based on the same flag, so a
+// direct request for either path 404s when the flag is off.
+const KATZMAN_IMG: StaticImageData = { src: '/ScottKatzman.png', width: 275, height: 286 };
+const KATZMAN_CERT_IMG: StaticImageData = { src: '/toporthokatzman.webp', width: 239, height: 300 };
 
 export interface DoctorProp {
     img: StaticImageData;
@@ -35,13 +48,13 @@ export interface DoctorProp {
 
 export const Doctors: DoctorProp[] = [
     {
-        img: Katzman,
+        img: KATZMAN_IMG,
         slug: 'dr-scott-katzman',
         name: 'Dr. Scott Katzman',
         practice: 'Orthopedic Spine Surgeon',
         socials: '',
         short_bio: 'Dr. Scott Katzman is an internationally recognized, board-certified orthopedic surgeon who specializes in comprehensive spine care with a focus on patient outcomes and recovery. A leader in the field since 1996, he provides expert orthopedic care and actively educates fellow surgeons on advanced techniques worldwide.',
-        cert: toporthokatzman,
+        cert: KATZMAN_CERT_IMG,
         desc: 'Dr. Scott Katzman is a nationally acclaimed orthopedic spine surgeon, recognized for his expertise in comprehensive spine care. With over 25 years of experience, he is one of the most sought-after spinal specialists in the country.',
         aboutme: "Dr. Scott Katzman is an internationally recognized board-certified orthopedic and spine surgeon specializing in comprehensive spine care. Since 1996, he has led the field in advanced spine treatments and outpatient procedures that focus on patient outcomes and recovery. Practicing in both New Jersey, New York, and Florida, Dr. Katzman also educates fellow surgeons worldwide and serves as a trusted clinical instructor for major medical companies.",
         bio: "Dr. Katzman is an internationally recognized orthopedic surgeon specializing in comprehensive spine care, and currently practices in New Jersey and Florida. In October 2015, Dr. Katzman was locally recognized as a top New Jersey doctor by The Star-Ledger's Inside New Jersey. After graduating from the University of California at San Diego in 1985, Dr. Scott Katzman attended medical school at Jefferson Medical College in Philadelphia. Upon graduating in 1989, he completed his residency in Orthopedic Surgery at the University of Arizona and went on to become a Board Certified Orthopedic Surgeon in 1996. Since then Dr. Katzman has focused his career on advanced spinal care and orthopedic procedures.\n\nAs one of the most sought after spinal surgeons in the U.S., Dr. Katzman has spent time throughout his career lecturing and educating other physicians on his highly regarded techniques. He has also been a clinical instructor for companies such as Biomet, Johnson & Johnson, Othrocore, Kyphon and Clarus. His comprehensive approach to spine care focuses on patient comfort and recovery, often allowing patients to receive care in outpatient settings. To his patients this means less down time and a quicker recovery than traditional approaches.",
@@ -58,7 +71,7 @@ export const Doctors: DoctorProp[] = [
         metaTitle: 'Dr. Scott Katzman | Expert Spine Surgery & Minimally Invasive Procedures | Mountain Spine Orthopedics | Florida',
         metaDescription: 'Dr. Scott Katzman at Mountain Spine Orthopedics performs advanced spine surgery including laser spine surgery, artificial disc replacement, and endoscopic procedures. Expert surgical care in Florida.',
         keywords: ["Dr. Scott Katzman", "Mountain Spine Orthopedics", "spine surgery", "laser spine surgery", "artificial disc replacement", "endoscopic spine surgery", "minimally invasive spine surgery", "Florida spine surgeon"],
-        ogImage: "/" + (Katzman?.src || "newlogo4.png"),
+        ogImage: "/" + (KATZMAN_IMG?.src || "newlogo4.png"),
         medicalSpecialty: ["Orthopedic Surgery", "Spine Surgery"],
         specialties: ["Minimally Invasive Spine Surgery", "Laser Spine Surgery", "Artificial Disc Replacement", "Endoscopic Discectomy", "Microdiscectomy", "Endoscopic Foraminotomy", "Laminoforaminotomy"],
         conditionsTreated: ["Herniated Disc", "Spinal Stenosis", "Degenerative Disc Disease", "Sciatica", "Spinal Tumors", "Scoliosis"],

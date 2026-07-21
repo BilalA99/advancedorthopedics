@@ -2,6 +2,8 @@ import { Metadata } from 'next'
 import CandidacyCheckClient from '@/components/CandidacyCheckClient'
 import { buildCanonical } from "@/lib/seo";
 import { getOgImageForPath } from "@/lib/og";
+import { getVisibleReviews } from "@/lib/providers/providerVisibility";
+import { sitewideReviews } from "@/components/data/socialProofReviews";
 
 // HowTo Schema for the candidacy check process
 const howToSchema = {
@@ -144,7 +146,7 @@ export default function CandidacyCheckPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalOrganizationSchema) }} />
       
-      <CandidacyCheckClient />
+      <CandidacyCheckClient reviews={getVisibleReviews(sitewideReviews)} />
     </>
   )
 }

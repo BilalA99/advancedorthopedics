@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { clinics } from '@/components/data/clinics'
+import { clinicsForMap as clinics } from '@/components/data/clinicsForMap.generated'
 import ClinicsMap from '@/components/ClinicsMap'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'

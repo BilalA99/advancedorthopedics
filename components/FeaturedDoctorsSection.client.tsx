@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Doctors } from '@/components/data/doctors'
+import type { DoctorProp } from '@/components/data/doctors'
 import DoctorCard from '@/components/DoctorCard'
 import {
     Carousel,
@@ -13,7 +13,7 @@ import {
     type CarouselApi,
 } from '@/components/ui/carousel'
 
-export default function FeaturedDoctorsSection() {
+export default function FeaturedDoctorsSection({ doctors }: { doctors: DoctorProp[] }) {
     const [hasMounted, setHasMounted] = useState(false)
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
     const [api, setApi] = useState<CarouselApi>()
@@ -32,7 +32,7 @@ export default function FeaturedDoctorsSection() {
         api.on('select', () => setCurrent(api.selectedScrollSnap()))
     }, [api])
 
-    const items = Doctors.slice(0, 3)
+    const items = doctors.slice(0, 3)
 
     return (
         <div className="w-full">

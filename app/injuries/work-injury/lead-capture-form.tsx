@@ -17,7 +17,7 @@ import { sendContactEmail, sendUserEmail } from "@/components/email/sendcontacte
 import { redirect } from "next/navigation"
 import { pushFormSubmit } from "@/utils/enhancedConversions"
 import { STATE_OPTIONS } from "@/lib/stateUtils"
-import { clinics } from "@/components/data/clinics"
+import { clinicsForMap as clinics } from "@/components/data/clinicsForMap.generated"
 
 const leadSchema = z.object({
     firstName: z.string().min(2, "First name is required"),

@@ -3,6 +3,8 @@ import { Metadata } from 'next';
 import { buildCanonical, canonicalForOg } from '@/lib/seo';
 import { getOgImageForPath } from '@/lib/og';
 import ConditionsHubClient from '@/components/ConditionsHubClient';
+import { getVisibleReviews, isProviderVisible, providerIds } from '@/lib/providers/providerVisibility';
+import { sitewideReviews } from '@/components/data/socialProofReviews';
 
 export async function generateMetadata(): Promise<Metadata> {
   const url = buildCanonical('/conditions');
@@ -50,7 +52,7 @@ export default function ConditionsPage() {
         </div>
       </main>
     }>
-      <ConditionsHubClient />
+      <ConditionsHubClient reviews={getVisibleReviews(sitewideReviews)} showFeaturedDoctor={isProviderVisible({ slug: providerIds.scottKatzman })} />
     </Suspense>
   );
 }

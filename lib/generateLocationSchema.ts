@@ -1,5 +1,6 @@
 import { ClinicsProps } from '@/components/data/clinics';
 import { MAIN_PHONE_E164, LOCATION_OPENING_HOURS, STATE_PHONE_NUMBERS } from '@/lib/locationConstants';
+import { getVisibleReviews } from '@/lib/providers/providerVisibility';
 
 // Expected GBP addresses for validation (development mode only)
 const GBP_ADDRESSES: Record<string, string> = {
@@ -389,20 +390,25 @@ export function generateLocationSchema(clinic: ClinicsProps): Record<string, any
       'worstRating': '1',
       'reviewCount': clinic.reviewCount.toString()
     } : undefined,
-    'review': clinic.reviews && clinic.reviews.length > 0 ? clinic.reviews.map((r) => ({
-      '@type': 'Review',
-      'author': {
-        '@type': 'Person',
-        'name': r.author
-      },
-      'reviewBody': r.reviewBody,
-      'reviewRating': {
-        '@type': 'Rating',
-        'ratingValue': r.reviewRating,
-        'bestRating': 5,
-        'worstRating': 1
-      }
-    })) : undefined,
+    'review': (() => {
+      const visibleReviews = clinic.reviews ? getVisibleReviews(clinic.reviews) : [];
+      return visibleReviews.length > 0
+        ? visibleReviews.map((r) => ({
+            '@type': 'Review',
+            'author': {
+              '@type': 'Person',
+              'name': r.author
+            },
+            'reviewBody': r.reviewBody,
+            'reviewRating': {
+              '@type': 'Rating',
+              'ratingValue': r.reviewRating,
+              'bestRating': 5,
+              'worstRating': 1
+            }
+          }))
+        : undefined;
+    })(),
   };
 
   // @id is already set to location URL above

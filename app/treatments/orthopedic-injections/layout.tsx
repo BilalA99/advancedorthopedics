@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import React from 'react';
 import { buildCanonical } from '@/lib/seo';
+import { isProviderVisible, providerIds } from '@/lib/providers/providerVisibility';
 
 const BASE_URL = 'https://mountainspineorthopedics.com';
 const PAGE_PATH = '/treatments/orthopedic-injections';
@@ -647,12 +648,20 @@ const consolidatedSchema = {
   ],
 };
 
+const visibleSchema = {
+  ...consolidatedSchema,
+  '@graph': consolidatedSchema['@graph'].filter(
+    (node: { '@id'?: string }) =>
+      node['@id'] !== `${PAGE_URL}#doctor-katzman` || isProviderVisible({ slug: providerIds.scottKatzman })
+  ),
+};
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(consolidatedSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(visibleSchema) }}
       />
       {children}
     </>

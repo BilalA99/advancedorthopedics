@@ -11,7 +11,7 @@ function truncateString(str: string, maxLength = 125) {
   return str.slice(0, maxLength) + '...';
 }
 
-export default function ConditionCard({ ConditionInfo }: { ConditionInfo: ConditionInfoProp }) {
+export default function ConditionCard({ ConditionInfo, showFeaturedDoctor }: { ConditionInfo: ConditionInfoProp; showFeaturedDoctor: boolean }) {
   // Check if ConditionInfo.card_img is a valid image source (string or static import object)
   const imageSource = ConditionInfo?.card_img ? ConditionInfo?.card_img : Logo;
   
@@ -56,7 +56,7 @@ export default function ConditionCard({ ConditionInfo }: { ConditionInfo: Condit
         </div>
         <div className='bg-[#DCDEE1] h-[1px] w-full' />
         <div className='flex flex-row w-full space-x-[16px] items-center'>
-          <DoctorsAvatar tag={ConditionInfo.tag} condition={ConditionInfo.title} />
+          <DoctorsAvatar tag={ConditionInfo.tag} condition={ConditionInfo.title} showFeaturedDoctor={showFeaturedDoctor} />
           <span
             style={{
               fontFamily: "var(--font-public-sans)",

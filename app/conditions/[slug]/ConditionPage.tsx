@@ -6,7 +6,7 @@ import { conditions, conditionContentPlaceholders, ConditionContent } from '@/co
 import { AllTreatments, allTreatmentContent, AllTreatmentsCombined } from '@/components/data/treatments'
 import { ConsultationForm } from '@/components/ContactForm'
 import { Input } from '@/components/ui/input'
-import { Doctors } from '@/components/data/doctors'
+import { getVisibleProviders } from '@/lib/providers/providerVisibility'
 import DoctorCard from '@/components/DoctorCard'
 import { MiniContactForm } from '@/components/MiniContactForm'
 import { DoctorContactForm } from '@/components/DoctorContactForm'
@@ -238,7 +238,7 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
   }
 
   // Shuffle the Doctors array and then take the first two doctors
-  const randomDoctors = shuffleArray(Doctors).slice(0, 2);
+  const randomDoctors = shuffleArray(getVisibleProviders()).slice(0, 2);
   return (
     <main className='w-full flex flex-col items-center justify-center bg-white h-full'>
       {/* Landing */}

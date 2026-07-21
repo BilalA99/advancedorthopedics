@@ -18,6 +18,11 @@ import { Marquee } from '../magicui/marquee';
 import Link from 'next/link';
 import { MAIN_PHONE_DISPLAY, NJ_PHONE_DISPLAY, NY_PHONE_DISPLAY } from '@/lib/locationConstants';
 
+// clinics.tsx is imported by shared/client modules so server-only featureFlags cannot
+// be used here. Read the env var directly; featureFlags.ts still validates it strictly
+// on all server paths, so typos are caught at startup.
+const showScottKatzman = process.env.SHOW_SCOTT_KATZMAN !== "0";
+
 export interface Review {
   author: string;
   reviewBody: string;
@@ -421,26 +426,32 @@ export const clinics: ClinicsProps[] = [
       <div className='flex flex-col space-y-4'>
         <h2 style={{ fontFamily: "var(--font-public-sans)" }} className='font-bold text-3xl'>What Our Hollywood Patients Say</h2>
         <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 lg:mt-10 mt-4'>
-          <Testimonial
-            name="Jennifer T."
-            role="Teacher, Broward County Schools"
-            testimonial="After years of persistent lumbar pain, Dr. Katzman's minimally invasive surgical approach had me back to teaching in just three weeks. This top-rated orthopedic center in Hollywood truly understands working families."
-          />
-          <Testimonial
-            name="Dr. Robert Chen"
-            role="Emergency Physician, Memorial Regional Hospital Hollywood"
-            testimonial="Dr. Katzman's clinical expertise exceeded my expectations for my herniated nucleus pulposus. I now confidently refer my patients to these experienced orthopedic surgeon specialists in Hollywood, FL because I've experienced their excellent care firsthand."
-          />
+          {showScottKatzman && (
+            <Testimonial
+              name="Jennifer T."
+              role="Teacher, Broward County Schools"
+              testimonial="After years of persistent lumbar pain, Dr. Katzman's minimally invasive surgical approach had me back to teaching in just three weeks. This top-rated orthopedic center in Hollywood truly understands working families."
+            />
+          )}
+          {showScottKatzman && (
+            <Testimonial
+              name="Dr. Robert Chen"
+              role="Emergency Physician, Memorial Regional Hospital Hollywood"
+              testimonial="Dr. Katzman's clinical expertise exceeded my expectations for my herniated nucleus pulposus. I now confidently refer my patients to these experienced orthopedic surgeon specialists in Hollywood, FL because I've experienced their excellent care firsthand."
+            />
+          )}
           <Testimonial
             name="Mark S."
             role="Construction Supervisor, Pembroke Pines"
             testimonial="Three different centers couldn't address my persistent lumbar radiculopathy until I found Mountain Spine & Orthopedics. The skilled sports orthopedic team in Hollywood got me back to work in one month."
           />
-          <Testimonial
-            name="Maria L."
-            role="Nurse, Joe DiMaggio Children's Hospital"
-            testimonial="As a healthcare professional myself, I was impressed by the exceptional orthopedic treatment in Hollywood FL. Dr. Katzman's clinical expertise and the team's dedication made my post-operative recovery seamless."
-          />
+          {showScottKatzman && (
+            <Testimonial
+              name="Maria L."
+              role="Nurse, Joe DiMaggio Children's Hospital"
+              testimonial="As a healthcare professional myself, I was impressed by the exceptional orthopedic treatment in Hollywood FL. Dr. Katzman's clinical expertise and the team's dedication made my post-operative recovery seamless."
+            />
+          )}
           <Testimonial
             name="Carlos R."
             role="Miami-Dade Police Officer"
@@ -1481,16 +1492,20 @@ export const clinics: ClinicsProps[] = [
       <div className='flex flex-col space-y-4'>
         <h2 style={{ fontFamily: "var(--font-public-sans)" }} className='font-bold text-3xl'>What Our Orlando Patients Say</h2>
         <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 lg:mt-10 mt-4'>
-          <Testimonial
-            name="Sarah M."
-            role="Disney Cast Member, Celebration"
-            testimonial="Eight years working at Magic Kingdom left me with severe back pain. I tried three different Orlando doctors before finding Mountain Spine & Orthopedics. Dr. Katzman at this Orlando orthopedic center took time to understand the physical demands of theme park work. His minimally invasive approach had me back to full Disney shifts in just three weeks. Two years later, my condition has greatly improved and I can enjoy the Orlando parks with my own children. This Orlando team truly understands working families."
-          />
-          <Testimonial
-            name="Dr. Michael Rodriguez"
-            role="Emergency Physician, Orlando Health"
-            testimonial="As an Orlando emergency doctor, I see spine injuries every day. When my own herniated disc started affecting my ability to work 12-hour shifts, I researched every spine specialist in Orlando. I chose Mountain Spine & Orthopedics because of their reputation among medical professionals. Dr. Katzman's expertise exceeded my expectations. I now confidently refer my patients and colleagues to these Orlando spine and orthopedic specialists of Central FL because I've experienced their excellent care firsthand."
-          />
+          {showScottKatzman && (
+            <Testimonial
+              name="Sarah M."
+              role="Disney Cast Member, Celebration"
+              testimonial="Eight years working at Magic Kingdom left me with severe back pain. I tried three different Orlando doctors before finding Mountain Spine & Orthopedics. Dr. Katzman at this Orlando orthopedic center took time to understand the physical demands of theme park work. His minimally invasive approach had me back to full Disney shifts in just three weeks. Two years later, my condition has greatly improved and I can enjoy the Orlando parks with my own children. This Orlando team truly understands working families."
+            />
+          )}
+          {showScottKatzman && (
+            <Testimonial
+              name="Dr. Michael Rodriguez"
+              role="Emergency Physician, Orlando Health"
+              testimonial="As an Orlando emergency doctor, I see spine injuries every day. When my own herniated disc started affecting my ability to work 12-hour shifts, I researched every spine specialist in Orlando. I chose Mountain Spine & Orthopedics because of their reputation among medical professionals. Dr. Katzman's expertise exceeded my expectations. I now confidently refer my patients and colleagues to these Orlando spine and orthopedic specialists of Central FL because I've experienced their excellent care firsthand."
+            />
+          )}
           <Testimonial
             name="David L."
             role="Construction Supervisor, Winter Garden"
@@ -2013,8 +2028,8 @@ export const clinics: ClinicsProps[] = [
         <h2 style={{ fontFamily: "var(--font-public-sans)" }} className='font-bold text-3xl'>What Our Patients Say</h2>
         <p style={{ fontFamily: "var(--font-public-sans)" }} className='text-lg'>Real residents share their life-changing experiences with Mountain Spine & Orthopedics. These verified patients with documented outcomes trusted us with their care and want to help other families make informed decisions about their spine health and recovery journey.</p>
         <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 lg:mt-10 mt-4'>
-          <Testimonial name="Jennifer T." role="Teacher, St. Lucie County Schools" testimonial="After years of back pain, Dr. Katzman's minimally invasive approach had me back to teaching in just three weeks. This orthopedic center in Fort Pierce truly understands working families." />
-          <Testimonial name="Dr. Robert Chen" role="Emergency Physician, HCA Florida Lawnwood Hospital" testimonial="Dr. Katzman's expertise exceeded my expectations for my herniated disc. I now confidently refer my patients to these orthopedic surgery specialists in Fort Pierce, FL because I've experienced their excellent care firsthand." />
+          {showScottKatzman && <Testimonial name="Jennifer T." role="Teacher, St. Lucie County Schools" testimonial="After years of back pain, Dr. Katzman's minimally invasive approach had me back to teaching in just three weeks. This orthopedic center in Fort Pierce truly understands working families." />}
+          {showScottKatzman && <Testimonial name="Dr. Robert Chen" role="Emergency Physician, HCA Florida Lawnwood Hospital" testimonial="Dr. Katzman's expertise exceeded my expectations for my herniated disc. I now confidently refer my patients to these orthopedic surgery specialists in Fort Pierce, FL because I've experienced their excellent care firsthand." />}
           <Testimonial name="Mark S." role="Construction Supervisor, Port St. Lucie" testimonial="Three different centers couldn't address my persistent back pain until I found Mountain Spine & Orthopedics. The sports orthopedic team in Fort Pierce got me back to work in one month." />
         </div>
       </div>
@@ -2531,14 +2546,14 @@ export const clinics: ClinicsProps[] = [
         <h2 style={{ fontFamily: "var(--font-public-sans)" }} className='font-bold text-3xl'>What Our Patients Say</h2>
         <p style={{ fontFamily: "var(--font-public-sans)" }} className='text-lg'>Real residents share their life-changing experiences with Mountain Spine & Orthopedics. These verified patients with documented clinical outcomes trusted us with their care and want to help other families make informed decisions about their spine health and recovery journey.</p>
         <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 lg:mt-10 mt-4'>
-          <Testimonial name="Jennifer T." role="Teacher, Palm Beach County Schools" testimonial="After years of persistent lumbar pain, Dr. Katzman's minimally invasive surgery had me back in the classroom in just three weeks. This orthopedic center in Palm Beach Gardens truly understands the needs of working families." />
-          <Testimonial name="Dr. Robert Chen" role="Emergency Physician, Jupiter Medical Center" testimonial="Dr. Katzman's clinical expertise for my herniated nucleus pulposus exceeded all my expectations. I now confidently refer my own patients to these experienced orthopedic specialists in Palm Beach Gardens, FL, because I've experienced their excellent care firsthand." />
+          {showScottKatzman && <Testimonial name="Jennifer T." role="Teacher, Palm Beach County Schools" testimonial="After years of persistent lumbar pain, Dr. Katzman's minimally invasive surgery had me back in the classroom in just three weeks. This orthopedic center in Palm Beach Gardens truly understands the needs of working families." />}
+          {showScottKatzman && <Testimonial name="Dr. Robert Chen" role="Emergency Physician, Jupiter Medical Center" testimonial="Dr. Katzman's clinical expertise for my herniated nucleus pulposus exceeded all my expectations. I now confidently refer my own patients to these experienced orthopedic specialists in Palm Beach Gardens, FL, because I've experienced their excellent care firsthand." />}
           <Testimonial name="Mark S." role="Construction Supervisor, Wellington" testimonial="Three different centers couldn't address my persistent lumbar radiculopathy until I found Mountain Spine & Orthopedics. The skilled sports orthopedic team in Palm Beach Gardens got me back to work in just one month." />
-          <Testimonial name="Maria L." role="Nurse, Palm Beach Gardens Medical Center" testimonial="As a healthcare professional, I was incredibly impressed by the exceptional orthopedic treatment in Palm Beach Gardens. Dr. Katzman's clinical expertise and the team's dedication made my post-operative recovery seamless." />
+          {showScottKatzman && <Testimonial name="Maria L." role="Nurse, Palm Beach Gardens Medical Center" testimonial="As a healthcare professional, I was incredibly impressed by the exceptional orthopedic treatment in Palm Beach Gardens. Dr. Katzman's clinical expertise and the team's dedication made my post-operative recovery seamless." />}
           <Testimonial name="Carlos R." role="Palm Beach County Sheriff's Deputy" testimonial="Being in law enforcement demands peak physical condition. When I injured my lumbar spine, the professional orthopedic team in Palm Beach Gardens got me back to protecting our community in record time." />
           <Testimonial name="Sarah M." role="Runner from Jupiter" testimonial="After developing plantar fasciitis from running, I sought treatment at Mountain Spine & Orthopedics in Palm Beach Gardens. Their foot and ankle specialists provided advanced treatment options that eliminated my pain completely. I'm back running without any issues!" />
           <Testimonial name="Dr. Lisa K." role="Physical Therapist, Palm Beach Gardens" testimonial="When I needed urgent orthopedic care in Palm Beach Gardens for my own rotator cuff pathology, I chose Mountain Spine & Orthopedics. Their same-day availability and expert clinical treatment surpassed my professional expectations." />
-          <Testimonial name="Michael R." role="Golf Pro, PGA National" testimonial="As a golf professional, I needed the best comprehensive orthopedic specialist in Palm Beach Gardens when I developed persistent back pain. Dr. Katzman's expertise had me back on the course within a month." />
+          {showScottKatzman && <Testimonial name="Michael R." role="Golf Pro, PGA National" testimonial="As a golf professional, I needed the best comprehensive orthopedic specialist in Palm Beach Gardens when I developed persistent back pain. Dr. Katzman's expertise had me back on the course within a month." />}
         </div>
       </div>
     ),
@@ -3052,8 +3067,8 @@ export const clinics: ClinicsProps[] = [
         <h2 style={{ fontFamily: "var(--font-public-sans)" }} className='font-bold text-3xl'>What Our Patients Say</h2>
         <p style={{ fontFamily: "var(--font-public-sans)" }} className='text-lg'>Real residents share their life-changing experiences with Mountain Spine & Orthopedics. These verified patients with documented outcomes trusted us with their care and want to help other families make informed decisions about their spine health and recovery journey.</p>
         <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 lg:mt-10 mt-4'>
-          <Testimonial name="Maria R." role="Teacher, Miami-Dade County Schools" testimonial="After years of back pain, Dr. Katzman's minimally invasive approach had me back to teaching in just three weeks. This South Miami clinic truly understands working families." />
-          <Testimonial name="Dr. Carlos Mendez" role="Emergency Physician, Baptist Hospital Miami" testimonial="Dr. Katzman's expertise exceeded my expectations for my herniated disc. I now confidently refer my patients to these South Miami orthopedic specialists because I've experienced their excellent care firsthand." />
+          {showScottKatzman && <Testimonial name="Maria R." role="Teacher, Miami-Dade County Schools" testimonial="After years of back pain, Dr. Katzman's minimally invasive approach had me back to teaching in just three weeks. This South Miami clinic truly understands working families." />}
+          {showScottKatzman && <Testimonial name="Dr. Carlos Mendez" role="Emergency Physician, Baptist Hospital Miami" testimonial="Dr. Katzman's expertise exceeded my expectations for my herniated disc. I now confidently refer my patients to these South Miami orthopedic specialists because I've experienced their excellent care firsthand." />}
           <Testimonial name="James T." role="Construction Supervisor, South Miami" testimonial="Three different centers couldn't address my persistent back pain until I found Mountain Spine & Orthopedics. The north Miami Beach team got me back to work in one month." />
         </div>
       </div>
@@ -3582,8 +3597,8 @@ export const clinics: ClinicsProps[] = [
         <h2 style={{ fontFamily: "var(--font-public-sans)" }} className='font-bold text-3xl'>What Our Patients Say</h2>
         <p style={{ fontFamily: "var(--font-public-sans)" }} className='text-lg'>Real residents share their life-changing experiences with Mountain Spine & Orthopedics. These verified patients with documented outcomes trusted us with their care and want to help other families make informed decisions about their spine health and recovery journey.</p>
         <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 lg:mt-10 mt-4'>
-          <Testimonial name="Jennifer S." role="Teacher, Palm Beach County Schools" testimonial="After years of back pain, Dr. Katzman's minimally invasive approach had me back to teaching in just three weeks. This trusted orthopedic clinic truly understands working families." />
-          <Testimonial name="Dr. Michael Rodriguez" role="Emergency Physician, Boca Raton Regional Hospital" testimonial="Dr. Katzman's expertise exceeded my expectations for my herniated disc. I now confidently refer my patients to these skilled orthopedic surgeons because I've experienced their excellent care firsthand." />
+          {showScottKatzman && <Testimonial name="Jennifer S." role="Teacher, Palm Beach County Schools" testimonial="After years of back pain, Dr. Katzman's minimally invasive approach had me back to teaching in just three weeks. This trusted orthopedic clinic truly understands working families." />}
+          {showScottKatzman && <Testimonial name="Dr. Michael Rodriguez" role="Emergency Physician, Boca Raton Regional Hospital" testimonial="Dr. Katzman's expertise exceeded my expectations for my herniated disc. I now confidently refer my patients to these skilled orthopedic surgeons because I've experienced their excellent care firsthand." />}
           <Testimonial name="Robert T." role="Construction Supervisor, Delray Beach" testimonial="Three different centers couldn't address my persistent back pain until I found Mountain Spine & Orthopedics. The expert orthopedic surgeons' team got me back to work in one month." />
         </div>
       </div>
@@ -4093,16 +4108,20 @@ export const clinics: ClinicsProps[] = [
       <div className='flex flex-col space-y-4'>
         <h2 style={{ fontFamily: "var(--font-public-sans)" }} className='font-bold text-3xl'>What Our Altamonte Springs Patients Say</h2>
         <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 lg:mt-10 mt-4'>
-          <Testimonial
-            name="Jennifer T."
-            role="Teacher, Seminole County Schools"
-            testimonial="After years of back pain, Dr. Katzman's minimally invasive approach had me back to teaching in just three weeks. This orthopedic center in Altamonte Springs truly understands working families."
-          />
-          <Testimonial
-            name="Dr. Robert Chen"
-            role="Emergency Physician, AdventHealth Altamonte Springs"
-            testimonial="Dr. Katzman's expertise exceeded my expectations for my herniated disc. I now confidently refer my patients to these orthopedic surgery specialists in Altamonte Springs, FL because I've experienced their excellent care firsthand."
-          />
+          {showScottKatzman && (
+            <Testimonial
+              name="Jennifer T."
+              role="Teacher, Seminole County Schools"
+              testimonial="After years of back pain, Dr. Katzman's minimally invasive approach had me back to teaching in just three weeks. This orthopedic center in Altamonte Springs truly understands working families."
+            />
+          )}
+          {showScottKatzman && (
+            <Testimonial
+              name="Dr. Robert Chen"
+              role="Emergency Physician, AdventHealth Altamonte Springs"
+              testimonial="Dr. Katzman's expertise exceeded my expectations for my herniated disc. I now confidently refer my patients to these orthopedic surgery specialists in Altamonte Springs, FL because I've experienced their excellent care firsthand."
+            />
+          )}
           <Testimonial
             name="Mark S."
             role="Construction Supervisor, Maitland"
@@ -4612,11 +4631,13 @@ export const clinics: ClinicsProps[] = [
       <div className='flex flex-col space-y-4'>
         <h2 style={{ fontFamily: "var(--font-public-sans)" }} className='font-bold text-3xl'>What Our Davenport Patients Say</h2>
         <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 lg:mt-10 mt-4'>
-          <Testimonial
-            name="Jessica M."
-            role="Physical Therapist at Heart of Florida Regional Medical Center"
-            testimonial="As a healthcare professional, I understand spinal pathologies from treating patients with various musculoskeletal conditions daily. When my own L4-L5 disc herniation became debilitating, I researched every orthopedic center in Davenport, FL. Dr. Katzman's minimally invasive discectomy technique exceeded my professional expectations. I returned to treating patients with significantly improved symptoms within four weeks."
-          />
+          {showScottKatzman && (
+            <Testimonial
+              name="Jessica M."
+              role="Physical Therapist at Heart of Florida Regional Medical Center"
+              testimonial="As a healthcare professional, I understand spinal pathologies from treating patients with various musculoskeletal conditions daily. When my own L4-L5 disc herniation became debilitating, I researched every orthopedic center in Davenport, FL. Dr. Katzman's minimally invasive discectomy technique exceeded my professional expectations. I returned to treating patients with significantly improved symptoms within four weeks."
+            />
+          )}
           <Testimonial
             name="Carlos R."
             role="Fire Captain with Polk County Fire Rescue Department"
@@ -5133,11 +5154,13 @@ export const clinics: ClinicsProps[] = [
             role="Contractor, Arlington"
             testimonial="The orthopedic surgeons at Mountain Spine Jacksonville explained every detail of my lumbar surgery and had me walking comfortably again within weeks. The recovery was faster than I imagined."
           />
-          <Testimonial
-            name="Samantha L."
-            role="Nurse, Regency Area"
-            testimonial="I visited Mountain Spine Jacksonville for a second opinion. Dr. Katzman was thorough and professional. He offered a less invasive alternative to fusion that worked perfectly. Highly recommend!"
-          />
+          {showScottKatzman && (
+            <Testimonial
+              name="Samantha L."
+              role="Nurse, Regency Area"
+              testimonial="I visited Mountain Spine Jacksonville for a second opinion. Dr. Katzman was thorough and professional. He offered a less invasive alternative to fusion that worked perfectly. Highly recommend!"
+            />
+          )}
           <Testimonial
             name="David M."
             role="Veteran, Southside"
@@ -9665,4 +9688,7 @@ export const clinics: ClinicsProps[] = [
   },
 
 ];
+
+// NOTE: a map/nav-safe view of this data lives in ./clinicsForMap.generated
+// (see that file for why it isn't simply `clinics.map(...)` from here).
 

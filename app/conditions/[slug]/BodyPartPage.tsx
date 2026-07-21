@@ -7,6 +7,7 @@ import { conditions } from '@/components/data/conditions';
 import { AllTreatmentsCombined } from '@/components/data/treatments';
 import ConditionCard from '@/components/ConditionCard';
 import TreatmentCard from '@/components/TreatmentCard';
+import { isProviderVisible, providerIds } from '@/lib/providers/providerVisibility';
 import ExpandableCardGrid from '@/components/ExpandableCardGrid';
 import BodyPartHeroForm from '@/components/BodyPartHeroForm';
 import { buildCanonical } from '@/lib/seo';
@@ -40,6 +41,7 @@ const BODY_PART_ANATOMY: Record<string, string> = {
 // This component is used internally by the unified [slug] route
 // It accepts a slug prop instead of params
 export default async function BodyPartPage({ bodyPartSlug }: { bodyPartSlug: string }) {
+  const showFeaturedDoctor = isProviderVisible({ slug: providerIds.scottKatzman });
   const bodyPart = BODY_PARTS.find(bp => bp.slug === bodyPartSlug);
 
   if (!bodyPart) {
@@ -517,7 +519,7 @@ export default async function BodyPartPage({ bodyPartSlug }: { bodyPartSlug: str
               totalCount={filteredConditions.length}
             >
               {filteredConditions.map((condition) => (
-                <ConditionCard key={condition.slug} ConditionInfo={condition} />
+                <ConditionCard key={condition.slug} ConditionInfo={condition} showFeaturedDoctor={showFeaturedDoctor} />
               ))}
             </ExpandableCardGrid>
           </section>
@@ -553,7 +555,7 @@ export default async function BodyPartPage({ bodyPartSlug }: { bodyPartSlug: str
               totalCount={filteredTreatments.length}
             >
               {filteredTreatments.map((treatment) => (
-                <TreatmentCard key={treatment.slug} ConditionInfo={treatment} />
+                <TreatmentCard key={treatment.slug} ConditionInfo={treatment} showFeaturedDoctor={showFeaturedDoctor} />
               ))}
             </ExpandableCardGrid>
           </section>
