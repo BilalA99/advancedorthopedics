@@ -10,11 +10,11 @@ import {
   CarouselNext,
   type CarouselApi,
 } from '@/components/ui/carousel';
-import type { ClinicsProps } from '@/components/data/clinics';
+import type { ClinicsMapSafeProps } from '@/components/data/clinicsForMap.generated';
 import StateLocationCard from '@/components/StateLocationCard';
 
 interface StateLocationsCarouselMobileProps {
-  stateClinics: ClinicsProps[];
+  stateClinics: ClinicsMapSafeProps[];
   stateInfo: { name?: string } | undefined;
   phoneDisplay: string;
   phoneTel: string;

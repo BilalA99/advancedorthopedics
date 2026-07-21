@@ -3,7 +3,8 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, ChevronRight } from 'lucide-react'
-import { clinics, StateSlug } from '@/components/data/clinics'
+import { clinicsForMap as clinics } from '@/components/data/clinicsForMap.generated'
+import type { StateSlug } from '@/components/data/clinics'
 import Link from 'next/link'
 
 export default function CondensedLocations() {

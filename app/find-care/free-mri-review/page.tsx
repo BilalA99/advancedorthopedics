@@ -141,6 +141,8 @@ export const metadata = {
 };
 
 import FreeMRIReviewClient from './FreeMRIReviewClient'
+import { getVisibleReviews } from '@/lib/providers/providerVisibility'
+import { sitewideReviews } from '@/components/data/socialProofReviews'
 
 export default function FreeMRIReview() {
   return (
@@ -149,7 +151,7 @@ export default function FreeMRIReview() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(medicalOrganizationSchema) }} />
       
-      <FreeMRIReviewClient />
+      <FreeMRIReviewClient reviews={getVisibleReviews(sitewideReviews)} />
       <section className="mt-8 mb-8 w-full flex justify-center">
         <p className="text-sm text-gray-600 max-w-2xl text-center">
           Learn more about our{' '}

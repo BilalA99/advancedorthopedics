@@ -6,54 +6,9 @@ import StarRating from './StarRating'
 import { useWindowSize } from "@uidotdev/usehooks";
 import { ReviewCard } from './ReviewCard'
 import { motion } from 'framer-motion'
+import type { SocialProofReview } from './data/socialProofReviews'
 
-const Reviews = [
-  {
-    img: 'https://originui.com/avatar-80-03.jpg',
-    rating: 5,
-    name: 'Robert P.',
-    location: 'Miami Beach',
-    body: 'After years of debilitating back pain, I finally sought help at Mountain Spine Orthopedics. Dr. Katzman took the time to actually listen and explain my options clearly. The minimally invasive procedure he performed gave me my life back. The entire team was professional and supportive throughout.'
-  },
-  {
-    img: 'https://mountainspineortho.b-cdn.net/Mreview.png',
-    rating: 5,
-    name: 'Maria G.',
-    location: 'Hollywood',
-    body: `I was hesitant about surgery for my spinal stenosis, but the staff at Mountain Spine Orthopedics put me at ease. From the front desk to the medical assistants, everyone was incredibly kind and efficient. My recovery was smoother than I ever expected. Highly recommend!`
-  },
-  {
-    img: 'https://mountainspineortho.b-cdn.net/DReview.jpg',
-    rating: 5,
-    name: 'David L.',
-    location: 'Orlando',
-    body: `Getting a second opinion from Dr. Katzman was the best decision I made. He reviewed my MRI, explained things in a way I could understand, and offered a non-surgical approach that actually worked for my herniated disc. Truly grateful for his expertise and honest assessment.`
-  },
-  {
-    img: 'https://mountainspineortho.b-cdn.net/Sreview.png',
-    rating: 5,
-    name: 'Sarah Chen',
-    location: 'Altamonate',
-    body: `The level of care at Mountain Spine Orthopedics is outstanding. Scheduling was easy, the office is modern and clean, and Dr. Katzman's team is top-notch. They genuinely care about their patients' well-being and getting them back to their activities.`
-  },
-  {
-    img: 'https://originui.com/avatar-80-01.jpg',
-    rating: 5,
-    name: 'Michael B.',
-    location: 'Davenport',
-    body: `Dealing with chronic neck pain was exhausting. The team at Mountain Spine Orthopedics provided a comprehensive treatment plan, not just a quick fix. I felt involved in my care every step of the way. Feeling so much better now!`
-  },
-  {
-    img: 'https://originui.com/avatar-80-05.jpg',
-    rating: 5,
-    name: 'Linda S.',
-    location: 'Palm Springs',
-    body: `Dr. Katzman is a fantastic surgeon with a great bedside manner. He addressed all my concerns before my procedure and the results exceeded my expectations. The follow-up care from his team at Mountain Spine Orthopedics has also been excellent. Five stars aren't enough!`
-  }
-]
-
-
-export default function RatingsAndReviews() {
+export default function RatingsAndReviews({ reviews: Reviews }: { reviews: SocialProofReview[] }) {
   const size = useWindowSize();
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)

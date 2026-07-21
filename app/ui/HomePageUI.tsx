@@ -25,6 +25,7 @@ import RatingsAndReviews from "@/components/RatingsAndReviews";
 import { DoctorContactForm } from "@/components/DoctorContactForm";
 import { pushPhoneClickEvent } from "@/utils/enhancedConversions";
 import { Doctors } from "@/components/data/doctors";
+import { sitewideReviews } from "@/components/data/socialProofReviews";
 
 // Animation & UI Imports
 import { motion } from "framer-motion";
@@ -548,7 +549,7 @@ export default function HomePageUI() {
       </section>
 
       {/* What Our Patients Say */}
-      <RatingsAndReviews />
+      <RatingsAndReviews reviews={sitewideReviews} />
 
       {/* Meet Our Experts */}
       <section className="w-full max-w-[1440px] flex flex-col py-[50px] h-full px-[40px]">

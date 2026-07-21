@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import type { ClinicsProps } from '@/components/data/clinics';
+import type { ClinicsMapSafeProps } from '@/components/data/clinicsForMap.generated';
 import StateLocationCard from '@/components/StateLocationCard';
 
 const containerVariants = {
@@ -17,7 +17,7 @@ const containerVariants = {
 };
 
 interface StateLocationsGridDesktopProps {
-  stateClinics: ClinicsProps[];
+  stateClinics: ClinicsMapSafeProps[];
   stateInfo: { name?: string } | undefined;
   phoneDisplay?: string;
   phoneTel?: string;

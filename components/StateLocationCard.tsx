@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Clock, Building2 } from 'lucide-react';
 import Link from 'next/link';
-import type { ClinicsProps } from '@/components/data/clinics';
+import type { ClinicsMapSafeProps } from '@/components/data/clinicsForMap.generated';
 import { MAIN_PHONE_DISPLAY, MAIN_PHONE_TEL, LOCATION_HOURS_DISPLAY } from '@/lib/locationConstants';
 
 const itemVariants = {
@@ -23,7 +23,7 @@ const itemVariants = {
 };
 
 interface StateLocationCardProps {
-  clinic: ClinicsProps;
+  clinic: ClinicsMapSafeProps;
   index: number;
   isMobile?: boolean;
   stateInfo: { name?: string } | undefined;

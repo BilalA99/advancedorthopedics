@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { Doctors } from '@/components/data/doctors'
+import type { DoctorProp } from '@/components/data/doctors'
 import DoctorCard from '@/components/DoctorCard'
 import {
     Carousel,
@@ -14,7 +14,7 @@ import {
     type CarouselApi,
 } from '@/components/ui/carousel'
 
-export default function InjuryDoctorsSection() {
+export default function InjuryDoctorsSection({ doctors }: { doctors: DoctorProp[] }) {
     const [hasMounted, setHasMounted] = useState(false)
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
     const [api, setApi] = useState<CarouselApi>()
@@ -33,7 +33,7 @@ export default function InjuryDoctorsSection() {
         api.on('select', () => setCurrent(api.selectedScrollSnap()))
     }, [api])
 
-    const featuredDoctors = Doctors.slice(0, 3)
+    const featuredDoctors = doctors.slice(0, 3)
 
     return (
         <section className="w-full flex flex-col py-[50px] h-full px-[40px]">

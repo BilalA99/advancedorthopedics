@@ -1,4 +1,4 @@
-import { Doctors } from "@/components/data/doctors";
+import { getVisibleProviderBySlug, getVisibleProviders } from "@/lib/providers/providerVisibility";
 import Image from 'next/image';
 import Landing from '@/public/MeetOurDoctorsLanding.jpeg';
 import { notFound } from 'next/navigation';
@@ -13,14 +13,14 @@ import { findTreatmentLinkForSpecialty, findConditionLinkForCondition } from '@/
 
 export const dynamicParams = false;
 export async function generateStaticParams() {
-  return Doctors.map(d => ({ Doctor_Name: d.slug }));
+  return getVisibleProviders().map(d => ({ Doctor_Name: d.slug }));
 }
 
 
 
 export default async function DoctorDetails({ params }: { params: Promise<{ Doctor_Name: string }> }) {
   const { Doctor_Name } = await params;
-  const doctor_details = Doctors.find(x => x.slug === Doctor_Name);
+  const doctor_details = getVisibleProviderBySlug(Doctor_Name);
   if (!doctor_details) {
     return notFound();
   }

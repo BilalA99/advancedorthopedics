@@ -19,7 +19,7 @@ import { WorkInjuryLeadCaptureForm } from "./lead-capture-form"
 import InjuriesCarousel from "@/components/InjuriesCarousel"
 import RatingsAndReviews from "@/components/RatingsAndReviews"
 // CondensedLocations replaced by InjuryClinicFinder
-import { clinics } from "@/components/data/clinics"
+import { clinicsForMap as clinics } from "@/components/data/clinicsForMap.generated"
 import { motion } from "framer-motion"
 import Image from "next/image"
 
@@ -39,11 +39,16 @@ const siteData = {
   ],
 }
 
+import type { DoctorProp } from "@/components/data/doctors"
+import type { SocialProofReview } from "@/components/data/socialProofReviews"
+
 interface WorkInjuryClientProps {
   faqs: Array<{ q: string; a: string }>
+  doctors: DoctorProp[]
+  reviews: SocialProofReview[]
 }
 
-export default function WorkInjuryClient({ faqs }: WorkInjuryClientProps) {
+export default function WorkInjuryClient({ faqs, doctors, reviews }: WorkInjuryClientProps) {
   return (
     <main className="w-full flex flex-col items-center justify-center bg-white h-full">
       {/* Hero Section */}
@@ -298,7 +303,7 @@ export default function WorkInjuryClient({ faqs }: WorkInjuryClientProps) {
 
       {/* Meet Our Experts */}
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:py-16 py-8">
-        <InjuryDoctorsSection />
+        <InjuryDoctorsSection doctors={doctors} />
       </div>
 
       {/* FAQ Section */}
@@ -347,7 +352,7 @@ export default function WorkInjuryClient({ faqs }: WorkInjuryClientProps) {
         </div>
       </section>
 
-      <RatingsAndReviews />
+      <RatingsAndReviews reviews={reviews} />
     </main>
   )
 }

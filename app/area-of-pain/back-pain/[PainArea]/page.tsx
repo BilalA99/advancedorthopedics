@@ -1,6 +1,6 @@
 import { conditions } from '@/components/data/conditions'
 import { conditions as painconditions } from '@/components/data/painconditions'
-import { Doctors } from '@/components/data/doctors'
+import { getVisibleProviders } from '@/lib/providers/providerVisibility'
 import { PainAreaTreatments } from '@/components/data/painareatreatments'
 import { notFound } from 'next/navigation'
 import { PainAreaClient } from './PainAreaClient'
@@ -49,7 +49,7 @@ export default async function PainArea({ params }: { params: Promise<{ PainArea:
   specialtySlugs = conditions.map(x => x.slug);
 
   // Select two random doctors to display on the page.
-  const randomDoctors = shuffleArray(Doctors).slice(0, 2);
+  const randomDoctors = shuffleArray(getVisibleProviders()).slice(0, 2);
 
   // Render the client component with the fetched data.
   // This server component does not render any JSX itself.

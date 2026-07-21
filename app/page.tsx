@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { buildCanonical } from "@/lib/seo";
 import { getOgImageForPath } from "@/lib/og";
+import { getVisibleProviders, getVisibleReviews } from "@/lib/providers/providerVisibility";
+import { sitewideReviews } from "@/components/data/socialProofReviews";
 
 // Data Imports from the centralized file
 import {
@@ -202,6 +204,7 @@ const HomePageJsonLdSchema = () => {
 };
 
 export default function Home() {
+  const visibleDoctors = getVisibleProviders();
   return (
     <>
       <HomePageJsonLdSchema />
@@ -343,14 +346,14 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <FeaturedDoctorsSection />
+          <FeaturedDoctorsSection doctors={visibleDoctors} />
         </section>
 
         {/* From Pain to Progress - Interactive - MOVED UP BEFORE TESTIMONIALS */}
         <HomePainToProgress />
 
         {/* What Our Patients Say */}
-        <RatingsAndReviews />
+        <RatingsAndReviews reviews={getVisibleReviews(sitewideReviews)} />
 
         {/* Complimentary Perks */}
         <section className="w-full max-w-[1440px] flex xl:flex-row flex-col py-[50px] h-full px-2 md:px-[40px] space-x-[32px]">

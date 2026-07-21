@@ -29,7 +29,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card"
-import { clinics } from './data/clinics';
+import { clinicsForMap as clinics } from './data/clinicsForMap.generated';
 import { GetLatestBlog } from "@/app/blogs/api/get-blogs";
 import { SidebarNavItem } from './SidebarNavItem';
 import { House, Heart, Calendar, User, Eye, Scan, Stethoscope, CheckCircle, Shield, LucideFileText, Target, Activity, Zap, Circle, AlertCircle, Minus, Triangle, Settings, Headphones, Building, Users, HelpCircle, FileText, MapPin, Bone, Footprints, Scissors, Droplet, Syringe, Info, List, ChevronRight, Car, CarFront, Briefcase } from 'lucide-react';

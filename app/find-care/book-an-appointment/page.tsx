@@ -1,5 +1,7 @@
 import ContactUsSection from '@/components/ContactUsSection'
 import RatingsAndReviews from '@/components/RatingsAndReviews'
+import { getVisibleReviews } from '@/lib/providers/providerVisibility'
+import { sitewideReviews } from '@/components/data/socialProofReviews'
 import React from 'react'
 import Image from 'next/image'
 import AAOS from '@/public/AAOS.png';
@@ -495,7 +497,7 @@ export default function BookAnAppointment() {
 
       </div>
       <div className="order-4 w-full">
-        <RatingsAndReviews />
+        <RatingsAndReviews reviews={getVisibleReviews(sitewideReviews)} />
       </div>
     </main>
   )

@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import RatingsAndReviews from '@/components/RatingsAndReviews'
+import type { SocialProofReview } from '@/components/data/socialProofReviews'
 import { AllTreatmentsCombined, TreatmentsCardProp } from '@/components/data/treatments'
 import TreatmentCard from '@/components/TreatmentCard'
 import TreatmentsSearchBar from '@/components/ui/TreatmentsSearchBar'
@@ -25,7 +26,7 @@ const filterCategories = [
   { value: "Pain Management", label: "Pain Management", icon: Droplet },
 ];
 
-export default function TreatmentsHubClient() {
+export default function TreatmentsHubClient({ reviews, showFeaturedDoctor }: { reviews: SocialProofReview[]; showFeaturedDoctor: boolean }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(9);
   const searchParams = useSearchParams();
@@ -234,7 +235,7 @@ export default function TreatmentsHubClient() {
         {currentItems.length > 0 ? (
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-8 gap-6 xl:gap-8'>
             {currentItems.map((item) => (
-              <TreatmentCard ConditionInfo={item} key={item.slug} />
+              <TreatmentCard ConditionInfo={item} key={item.slug} showFeaturedDoctor={showFeaturedDoctor} />
             ))}
           </div>
         ) : (
@@ -329,7 +330,7 @@ export default function TreatmentsHubClient() {
       </section>
 
       {/* Ratings & Reviews Section */}
-      <RatingsAndReviews />
+      <RatingsAndReviews reviews={reviews} />
     </main>
   )
 }

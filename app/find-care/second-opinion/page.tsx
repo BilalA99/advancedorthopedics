@@ -8,6 +8,10 @@ import AOA from '@/public/AOA.png';
 import NASS from '@/public/NASS.png';
 import Serpent from '@/public/Serpent.png';
 import SMIS from '@/public/SMIS.png';
+import { isProviderVisible, providerIds, getVisibleReviews } from '@/lib/providers/providerVisibility';
+import { sitewideReviews } from '@/components/data/socialProofReviews';
+
+const showFeaturedDoctor = isProviderVisible({ slug: providerIds.scottKatzman });
 
 // Professional association logo alt text mapping
 const associationLogoAlt: Record<string, string> = {
@@ -18,7 +22,6 @@ const associationLogoAlt: Record<string, string> = {
   'Serpent': 'Medical caduceus symbol representing healthcare excellence',
   'SMIS': 'Society for Minimally Invasive Spine Surgery (SMISS) member'
 };
-import { Doctors } from '@/components/data/doctors';
 import DoctorCard from '@/components/DoctorCard';
 import FAQsSection from '@/components/FaqsSection';
 import DoctorsTestitmonial from '@/components/DoctorsTestitmonial';
@@ -99,7 +102,9 @@ const faqItems: { question: string, answer: React.ReactElement }[] = [
 
 const Testimonial = (
     <p>
-        A virtual second opinion from Mountain Spine & Orthopedics helps you make an informed decision about your medical treatment from the comfort of your home. For patients who live far away or have difficulty traveling, our service provides direct access to leading spine and orthopedic specialists like <a href="/about/meetourdoctors/dr-scott-katzman" className="text-blue-600 hover:underline">Dr. Katzman</a> and <a href="/about/meetourdoctors/dr-david-cowin" className="text-blue-600 hover:underline">Dr. Cowin</a>. Already have an MRI? Use our <a href="/find-care/free-mri-review" className="text-blue-600 hover:underline">Free MRI Review tool</a> to let our doctors review it free of charge. Ready to talk? <a href="/find-care/book-an-appointment" className="text-blue-600 hover:underline">Book an appointment</a> to discuss your options.
+        A virtual second opinion from Mountain Spine & Orthopedics helps you make an informed decision about your medical treatment from the comfort of your home. For patients who live far away or have difficulty traveling, our service provides direct access to leading spine and orthopedic specialists like {showFeaturedDoctor && (
+            <><a href="/about/meetourdoctors/dr-scott-katzman" className="text-blue-600 hover:underline">Dr. Katzman</a> and </>
+        )}<a href="/about/meetourdoctors/dr-david-cowin" className="text-blue-600 hover:underline">Dr. Cowin</a>. Already have an MRI? Use our <a href="/find-care/free-mri-review" className="text-blue-600 hover:underline">Free MRI Review tool</a> to let our doctors review it free of charge. Ready to talk? <a href="/find-care/book-an-appointment" className="text-blue-600 hover:underline">Book an appointment</a> to discuss your options.
     </p>
 )
 
@@ -242,7 +247,7 @@ export default function SecondOpinion() {
                 </Marquee>
 
             </div>
-            <RatingsAndReviews />
+            <RatingsAndReviews reviews={getVisibleReviews(sitewideReviews)} />
 
             <FAQsSection header={Header} faqItems={faqItems} />
 
