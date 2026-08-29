@@ -145,73 +145,6 @@ const data = {
             a: "With your written consent, we share records and scheduling updates promptly.",
         },
     ],
-    clinicians: [
-        {
-            name: "Dr. Elena Reyes, MD",
-            sub: "Spine & Sports Medicine",
-            bio: "Conservative-first care for post-crash neck and low-back injuries.",
-            headshot: "/providers/reyes.jpg",
-            videoUrl: "https://example.com/reyes.mp4",
-        },
-        {
-            name: "Dr. Marcus Patel, DO",
-            sub: "Shoulder & Knee",
-            bio: "Minimally invasive options when clearly indicated; active rehab plans.",
-            headshot: "/providers/patel.jpg",
-            videoUrl: "https://example.com/patel.mp4",
-        },
-        {
-            name: "PA Jordan Smith, PA-C",
-            sub: "Acute Injury Triage",
-            bio: "Same-week access and clear step-by-step recovery guidance.",
-            headshot: "/providers/smith.jpg",
-            videoUrl: "https://example.com/smith.mp4",
-        },
-    ],
-    locations: [
-        {
-            name: "Altamonte Springs, FL",
-            slug: "altamonte-springs",
-            parking: "Free lot; enter from W Town Pkwy.",
-            nextOpen: "Today 3:40 PM",
-            map: "https://maps.example.com/altamonte",
-        },
-        {
-            name: "Hollywood, FL",
-            slug: "hollywood",
-            parking: "Garage behind clinic; 1 hr validation.",
-            nextOpen: "Tomorrow 10:15 AM",
-            map: "https://maps.example.com/hollywood",
-        },
-        {
-            name: "Davenport, FL",
-            slug: "davenport",
-            parking: "Shared plaza parking.",
-            nextOpen: "Today 9:50 AM",
-            map: "https://maps.example.com/davenport",
-        },
-        {
-            name: "Hackensack, NJ",
-            slug: "hackensack",
-            parking: "Street parking available.",
-            nextOpen: "Today 2:00 PM",
-            map: "https://maps.example.com/hackensack",
-        },
-        {
-            name: "New York City, NY",
-            slug: "new-york-city",
-            parking: "Nearby public parking garages.",
-            nextOpen: "Tomorrow 9:00 AM",
-            map: "https://maps.example.com/nyc",
-        },
-        {
-            name: "Philadelphia, PA",
-            slug: "philadelphia",
-            parking: "Street and garage parking available.",
-            nextOpen: "Today 4:00 PM",
-            map: "https://maps.example.com/philadelphia",
-        },
-    ],
     stories: [
         {
             title: "Rear-end collision → neck pain",
@@ -1460,54 +1393,6 @@ export default function CarAccidentClient({ faqs, doctors }: CarAccidentClientPr
                 {/* Sticky Mobile Footer */}
                 {/* <StickyMobileFooter /> */}
 
-                {/* JSON-LD Schema */}
-                {/* <script
-                            type="application/ld+json"
-                            dangerouslySetInnerHTML={{
-                                __html: JSON.stringify({
-                                    "@context": "https://schema.org",
-                                    "@type": "MedicalClinic",
-                                    name: "Mountain Spine & Orthopedics",
-                                    description: "Car accident orthopedic care with same-week appointments",
-                                    url: "https://example.com/car-accident",
-                                    telephone: "+1234567890",
-                                    address: {
-                                        "@type": "PostalAddress",
-                                        addressRegion: "FL",
-                                        addressCountry: "US",
-                                    },
-                                    medicalSpecialty: "Orthopedics",
-                                    aggregateRating: {
-                                        "@type": "AggregateRating",
-                                        ratingValue: data.starRating,
-                                        reviewCount: data.reviewCount,
-                                    },
-                                    physician: data.clinicians.map((clinician) => ({
-                                        "@type": "Physician",
-                                        name: clinician.name,
-                                        medicalSpecialty: clinician.sub,
-                                    })),
-                                }),
-                            }}
-                        />
-    
-                        <script
-                            type="application/ld+json"
-                            dangerouslySetInnerHTML={{
-                                __html: JSON.stringify({
-                                    "@context": "https://schema.org",
-                                    "@type": "FAQPage",
-                                    mainEntity: data.faqs.map((faq) => ({
-                                        "@type": "Question",
-                                        name: faq.q,
-                                        acceptedAnswer: {
-                                            "@type": "Answer",
-                                            text: faq.a,
-                                        },
-                                    })),
-                                }),
-                            }}
-                        /> */}
             </div>
         </section>
     )

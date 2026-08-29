@@ -1,3 +1,4 @@
+import { selectProvidersForPage } from "@/lib/providers/selectProviders";
 import { conditions } from '@/components/data/conditions'
 import { conditions as painconditions } from '@/components/data/painconditions'
 import { getVisibleProviders } from '@/lib/providers/providerVisibility'
@@ -12,16 +13,6 @@ export async function generateStaticParams() {
   return allSlugs.map((PainArea) => ({ PainArea }))
 }
 
-// This function shuffles an array and is used to display random doctors.
-// It's defined here because it's only used for this server component.
-function shuffleArray(array: any[]) {
-  const newArray = [...array];
-  for (let i = newArray.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-  }
-  return newArray;
-}
 
 export default async function PainArea({ params }: { params: Promise<{ PainArea: string }> }) {
   const { PainArea } = await params;
@@ -49,7 +40,7 @@ export default async function PainArea({ params }: { params: Promise<{ PainArea:
   specialtySlugs = conditions.map(x => x.slug);
 
   // Select two random doctors to display on the page.
-  const randomDoctors = shuffleArray(getVisibleProviders()).slice(0, 2);
+  const randomDoctors = selectProvidersForPage(getVisibleProviders(), PainArea);
 
   // Render the client component with the fetched data.
   // This server component does not render any JSX itself.

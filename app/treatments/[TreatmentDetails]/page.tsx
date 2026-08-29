@@ -1,3 +1,4 @@
+import { selectProvidersForPage } from "@/lib/providers/selectProviders";
 import { notFound } from 'next/navigation';
 import { AllTreatments, treatmentContentPlaceholders, allTreatmentContent, TreatmentContent, AllTreatmentsCombined } from '@/components/data/treatments';
 import { treatmentThumbnailBySlug } from '@/lib/seo/treatment-images';
@@ -239,18 +240,8 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
   const _bodyPartHub = getBodyPartFromTag(_combinedTreatment?.tag);
   const heroFormLabel = _bodyPartHub?.title ?? 'Orthopedic';
 
-  // Function to perform a Fisher-Yates shuffle on the array
-  function shuffleArray<T>(array: T[]): T[] {
-    const newArray = [...array]; // Clone the array
-    for (let i = newArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1)); // Pick a random index from 0 to i
-      [newArray[i], newArray[j]] = [newArray[j], newArray[i]]; // Swap elements at indices i and j
-    }
-    return newArray;
-  }
 
-  // Shuffle the Doctors array and then take the first two doctors
-  const randomDoctors = shuffleArray(getVisibleProviders()).slice(0, 2);
+    const randomDoctors = selectProvidersForPage(getVisibleProviders(), resolvedParams.TreatmentDetails);
 
   return (
     <main className='w-full flex flex-col items-center justify-center bg-white h-full'>

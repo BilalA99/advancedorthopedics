@@ -1,3 +1,4 @@
+import { selectProvidersForPage } from "@/lib/providers/selectProviders";
 import React from 'react';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -24,9 +25,7 @@ export default async function InjuryPage({ params }: { params: Promise<{ slug: s
     notFound();
   }
 
-  // Randomly select 2 doctors for display
-  const shuffledDoctors = [...getVisibleProviders()].sort(() => Math.random() - 0.5);
-  const selectedDoctors = shuffledDoctors.slice(0, 2);
+  const selectedDoctors = selectProvidersForPage(getVisibleProviders(), slug);
 
   return (
     <div className="w-full flex flex-col">

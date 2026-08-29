@@ -3,6 +3,7 @@
     import { GetBlogInfo } from '@/app/blogs/api/get-blog-info';
     import BlogContent from '@/components/BlogContent';
     import BlogSections from '@/components/BlogSections';
+    import BlogConversionModule from '@/components/BlogConversionModule';
     import BlogFAQSection from '@/components/BlogFAQSection';
     import BlogRecentPosts from '@/components/BlogRecentPosts';
     import RelatedPosts from '@/components/RelatedPosts';
@@ -53,6 +54,10 @@
             
             {/* Server-rendered FAQ section */}
             {faqs.length > 0 && <BlogFAQSection faqs={faqs} />}
+
+            {/* Conversion module — after the article body so it reads as the
+                natural next step rather than competing with the content. */}
+            <BlogConversionModule tags={blog.blog_info.tags || []} placement="article-end" />
           </article>
           
           {/* Client-rendered Recent Posts sidebar */}
