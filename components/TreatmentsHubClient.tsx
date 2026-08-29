@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import RatingsAndReviews from '@/components/RatingsAndReviews'
 import type { SocialProofReview } from '@/components/data/socialProofReviews'
-import { AllTreatmentsCombined, TreatmentsCardProp } from '@/components/data/treatments'
+import { treatmentIndex as AllTreatmentsCombined, type TaxonomyEntry } from '@/components/data/taxonomyIndex.generated'
 import TreatmentCard from '@/components/TreatmentCard'
 import TreatmentsSearchBar from '@/components/ui/TreatmentsSearchBar'
 import { TextAnimate } from '@/components/magicui/text-animate'
@@ -30,8 +30,8 @@ export default function TreatmentsHubClient({ reviews, showFeaturedDoctor }: { r
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(9);
   const searchParams = useSearchParams();
-  const [allData] = useState<TreatmentsCardProp[]>(AllTreatmentsCombined);
-  const [filteredData, setFilteredData] = useState<TreatmentsCardProp[]>(AllTreatmentsCombined);
+  const [allData] = useState<TaxonomyEntry[]>(AllTreatmentsCombined);
+  const [filteredData, setFilteredData] = useState<TaxonomyEntry[]>(AllTreatmentsCombined);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const isInitialMount = useRef(true);
   const paginationRef = useRef<HTMLDivElement>(null);
@@ -52,7 +52,7 @@ export default function TreatmentsHubClient({ reviews, showFeaturedDoctor }: { r
     return param ? [param] : [];
   }
 
-  const filterTreatments = (treatments: TreatmentsCardProp[]) => {
+  const filterTreatments = (treatments: TaxonomyEntry[]) => {
     if (selectedFilters.length === 0) return treatments;
     return treatments.filter(treatment =>
       selectedFilters.includes(treatment.tag)
@@ -70,7 +70,7 @@ export default function TreatmentsHubClient({ reviews, showFeaturedDoctor }: { r
   const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
-  const handleSelectTreatment = (selectedTreatment: TreatmentsCardProp) => {
+  const handleSelectTreatment = (selectedTreatment: TaxonomyEntry) => {
     setFilteredData([selectedTreatment]);
     setCurrentPage(1);
   };

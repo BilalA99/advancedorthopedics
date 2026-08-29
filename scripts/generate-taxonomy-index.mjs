@@ -37,10 +37,20 @@ const { AllTreatmentsCombined } = await import('../components/data/treatments.ts
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// The five fields ConditionCard and TreatmentCard actually read, plus what the
+// related-link lists and the search bar need. Everything else in those records
+// is long-form JSX content that no client component touches.
+const str = (v) => (typeof v === 'string' ? v : null);
 const slim = (arr) =>
   arr
     .filter((x) => x && x.slug && x.slug !== 'undefined' && x.title)
-    .map((x) => ({ slug: x.slug, title: x.title, tag: x.tag ?? null }));
+    .map((x) => ({
+      slug: x.slug,
+      title: x.title,
+      tag: x.tag ?? null,
+      body: str(x.body),
+      card_img: str(x.card_img),
+    }));
 
 const conditionIndex = slim(conditions);
 const treatmentIndex = slim(AllTreatmentsCombined);
@@ -60,6 +70,8 @@ export interface TaxonomyEntry {
   slug: string;
   title: string;
   tag: string | null;
+  body: string | null;
+  card_img: string | null;
 }
 
 export const conditionIndex: TaxonomyEntry[] = ${JSON.stringify(conditionIndex, null, 2)};

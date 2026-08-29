@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { conditions } from '@/components/data/conditions';
+import { conditionIndex as conditions, type TaxonomyEntry } from '@/components/data/taxonomyIndex.generated';
 import ConditionCard from '@/components/ConditionCard';
 import BodyPartTabs from '@/components/BodyPartTabs';
 import ConditionsSearchBar from '@/components/ConditionsSearchBar';
@@ -36,8 +36,8 @@ function filterByTag(items: ConditionInfoProp[], tags: string[]) {
 
 export default function ConditionsHubClient({ reviews, showFeaturedDoctor }: { reviews: SocialProofReview[]; showFeaturedDoctor: boolean }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [allData] = useState<ConditionInfoProp[]>(conditions);
-  const [filteredData, setFilteredData] = useState<ConditionInfoProp[]>(conditions);
+  const [allData] = useState<TaxonomyEntry[]>(conditions);
+  const [filteredData, setFilteredData] = useState<TaxonomyEntry[]>(conditions);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const searchParams = useSearchParams();
   const paginationRef = useRef<HTMLDivElement>(null);
