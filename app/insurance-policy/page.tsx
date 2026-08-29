@@ -69,7 +69,7 @@ const medicalOrganizationSchema = {
     "Davenport, FL",
     "Fort Pierce, FL",
     "Palm Beach Gardens, FL",
-    "Miami Beach, FL",
+    "South Miami, FL",
     "Boca Raton, FL"
   ]
 };

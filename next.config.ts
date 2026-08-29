@@ -215,7 +215,9 @@ const nextConfig: NextConfig = {
     {"source":"/locations/orlando-orthopedics","destination":"/locations/florida/orlando-orthopedics","permanent":true},
     {"source":"/locations/fort-pierce-orthopedics","destination":"/locations/florida/fort-pierce-orthopedics","permanent":true},
     {"source":"/locations/palm-beach-gardens-orthopedics","destination":"/locations/florida/palm-beach-gardens-orthopedics","permanent":true},
-    {"source":"/locations/miami-beach-orthopedics","destination":"/locations/florida/miami-beach-orthopedics","permanent":true},
+    {"source":"/locations/miami-beach-orthopedics","destination":"/locations/florida/south-miami-orthopedics","permanent":true},
+    // Entity correction: this clinic is South Miami (7000 SW 62nd Ave), not Miami Beach.
+    {"source":"/locations/florida/miami-beach-orthopedics","destination":"/locations/florida/south-miami-orthopedics","permanent":true},
     {"source":"/locations/boca-raton-orthopedics","destination":"/locations/florida/boca-raton-orthopedics","permanent":true},
     {"source":"/locations/altamonte-springs-orthopedics","destination":"/locations/florida/altamonte-springs-orthopedics","permanent":true},
     {"source":"/locations/davenport-orthopedics","destination":"/locations/florida/davenport-orthopedics","permanent":true},

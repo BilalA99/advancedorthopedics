@@ -2768,8 +2768,9 @@ export const clinics: ClinicsProps[] = [
     slug: 'miami-beach-orthopedics',
     stateAbbr: 'FL',
     stateSlug: 'florida',
-    locationSlug: 'miami-beach-orthopedics',
+    locationSlug: 'south-miami-orthopedics',
     locationType: 'office',
+    oldSlugs: ['miami-beach-orthopedics'],
     paragraph: `
     South Florida's most trusted spine and joint care center.
     [PARAGRAPH BREAK]Trust Mountain Spine & Orthopedics for expert care, compassionate service, and results that make a difference. Your mobility and well-being are our top priorities. Experience the excellence that sets our South Miami orthopedic practice apart.
@@ -2802,8 +2803,8 @@ export const clinics: ClinicsProps[] = [
       'best orthopedic near me south miami'
     ],
     // SEO-FIX: Updated metaTitle (<65 chars) and metaDescription (<158 chars) per keyword optimization — Phase 2
-    metaTitle: 'Miami Beach Orthopedic Surgeon & Spine Specialist | Mountain Spine',
-    metaDescription: 'Top orthopedic surgeons in Miami Beach, FL. Back pain, herniated disc, minimally invasive spine surgery, joint replacement. PPO accepted. Book today.',
+    metaTitle: 'South Miami Orthopedic & Spine Surgeon | Mountain Spine',
+    metaDescription: 'Board-certified orthopedic surgeons in South Miami, FL. Back pain, herniated disc, sciatica, joint replacement. Serving Coral Gables & Pinecrest. PPO accepted.',
     specialists: (
       <div className='flex flex-col space-y-4'>
         <h2 style={{ fontFamily: "var(--font-public-sans)" }} className='font-bold text-3xl'>South Miami Orthopedic & Spine Specialists of Miami-Dade County</h2>
@@ -3069,7 +3070,7 @@ export const clinics: ClinicsProps[] = [
         <div className='grid lg:grid-cols-2 grid-cols-1 gap-4 lg:mt-10 mt-4'>
           {showScottKatzman && <Testimonial name="Maria R." role="Teacher, Miami-Dade County Schools" testimonial="After years of back pain, Dr. Katzman's minimally invasive approach had me back to teaching in just three weeks. This South Miami clinic truly understands working families." />}
           {showScottKatzman && <Testimonial name="Dr. Carlos Mendez" role="Emergency Physician, Baptist Hospital Miami" testimonial="Dr. Katzman's expertise exceeded my expectations for my herniated disc. I now confidently refer my patients to these South Miami orthopedic specialists because I've experienced their excellent care firsthand." />}
-          <Testimonial name="James T." role="Construction Supervisor, South Miami" testimonial="Three different centers couldn't address my persistent back pain until I found Mountain Spine & Orthopedics. The north Miami Beach team got me back to work in one month." />
+          <Testimonial name="James T." role="Construction Supervisor, South Miami" testimonial="Three different centers couldn't address my persistent back pain until I found Mountain Spine & Orthopedics. The South Miami team got me back to work in one month." />
         </div>
       </div>
     ),
@@ -3088,7 +3089,7 @@ export const clinics: ClinicsProps[] = [
       },
       {
         author: "James T.",
-        reviewBody: "Three different centers couldn't address my persistent back pain until I found Mountain Spine & Orthopedics. The north Miami Beach team got me back to work in one month.",
+        reviewBody: "Three different centers couldn't address my persistent back pain until I found Mountain Spine & Orthopedics. The South Miami team got me back to work in one month.",
         reviewRating: 5
       },
       {

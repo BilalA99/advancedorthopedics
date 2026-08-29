@@ -71,7 +71,7 @@ export const injuryLocations: InjuryLocation[] = [
     zip: '33143',
     lat: 25.69602070,
     lng: -80.30127530,
-    slug: 'miami-beach-orthopedics',
+    slug: 'south-miami-orthopedics',
     stateSlug: 'florida',
   },
   {

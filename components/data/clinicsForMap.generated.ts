@@ -392,8 +392,11 @@ export const clinicsForMap: ClinicsMapSafeProps[] = [
     "slug": "miami-beach-orthopedics",
     "stateAbbr": "FL",
     "stateSlug": "florida",
-    "locationSlug": "miami-beach-orthopedics",
+    "locationSlug": "south-miami-orthopedics",
     "locationType": "office",
+    "oldSlugs": [
+      "miami-beach-orthopedics"
+    ],
     "paragraph": "\n    South Florida's most trusted spine and joint care center.\n    [PARAGRAPH BREAK]Trust Mountain Spine & Orthopedics for expert care, compassionate service, and results that make a difference. Your mobility and well-being are our top priorities. Experience the excellence that sets our South Miami orthopedic practice apart.\n    [PARAGRAPH BREAK]At Mountain Spine & Orthopedics, we provide exceptional care using the latest treatments with a patient-first approach. Here's why families throughout South Florida choose us.\n    ",
     "keywords": [
       "south miami orthopedic surgeon",
@@ -421,8 +424,8 @@ export const clinicsForMap: ClinicsMapSafeProps[] = [
       "orthopedic doctor near me south miami",
       "best orthopedic near me south miami"
     ],
-    "metaTitle": "Miami Beach Orthopedic Surgeon & Spine Specialist | Mountain Spine",
-    "metaDescription": "Top orthopedic surgeons in Miami Beach, FL. Back pain, herniated disc, minimally invasive spine surgery, joint replacement. PPO accepted. Book today.",
+    "metaTitle": "South Miami Orthopedic & Spine Surgeon | Mountain Spine",
+    "metaDescription": "Board-certified orthopedic surgeons in South Miami, FL. Back pain, herniated disc, sciatica, joint replacement. Serving Coral Gables & Pinecrest. PPO accepted.",
     "rating": 5,
     "reviewCount": 27,
     "ogImage": "/south-miami-og.png",

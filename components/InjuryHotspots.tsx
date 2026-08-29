@@ -35,7 +35,7 @@ const hotspots: Record<StateCode, HotspotRecord[]> = {
       corridor: 'US-1 Biscayne Blvd — Downtown Miami to Aventura',
       context: 'Heavy urban traffic, frequent pedestrian crossings, and commercial truck deliveries make US-1 in Miami a high-risk corridor for pedestrian injuries, bicycle accidents, and rear-end collisions causing cervical and lumbar spine injuries.',
       nearestClinicLabel: 'South Miami, FL',
-      nearestClinicSlug: 'miami-beach-orthopedics',
+      nearestClinicSlug: 'south-miami-orthopedics',
       nearestClinicState: 'florida',
       tags: ['car-accident', 'personal-injury', 'slip-and-fall'],
     },

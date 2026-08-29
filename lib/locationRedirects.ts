@@ -27,7 +27,7 @@ export const LEGACY_LOCATION_REDIRECTS: Record<string, LocationRedirectMapping> 
   'orlando-orthopedics': { state: 'florida', location: 'orlando-orthopedics' },
   'fort-pierce-orthopedics': { state: 'florida', location: 'fort-pierce-orthopedics' },
   'palm-beach-gardens-orthopedics': { state: 'florida', location: 'palm-beach-gardens-orthopedics' },
-  'miami-beach-orthopedics': { state: 'florida', location: 'miami-beach-orthopedics' },
+  'miami-beach-orthopedics': { state: 'florida', location: 'south-miami-orthopedics' },
   'boca-raton-orthopedics': { state: 'florida', location: 'boca-raton-orthopedics' },
   'altamonte-springs-orthopedics': { state: 'florida', location: 'altamonte-springs-orthopedics' },
   'davenport-orthopedics': { state: 'florida', location: 'davenport-orthopedics' },

@@ -12,7 +12,7 @@ export const sitewideReviews: SocialProofReview[] = [
     img: 'https://originui.com/avatar-80-03.jpg',
     rating: 5,
     name: 'Robert P.',
-    location: 'Miami Beach',
+    location: 'South Miami',
     body: 'After years of debilitating back pain, I finally sought help at Mountain Spine Orthopedics. Dr. Katzman took the time to actually listen and explain my options clearly. The minimally invasive procedure he performed gave me my life back. The entire team was professional and supportive throughout.'
   },
   {

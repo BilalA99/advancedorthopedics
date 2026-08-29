@@ -1256,7 +1256,7 @@ export default function OrthopedicInjectionsPage() {
               {[
                 {
                   state: 'Florida',
-                  cities: ['Boca Raton', 'Hollywood', 'Palm Beach Gardens', 'Palm Springs', 'Miami Beach', 'Orlando', 'Altamonte Springs', 'Davenport', 'Fort Pierce', 'Jacksonville'],
+                  cities: ['Boca Raton', 'Hollywood', 'Palm Beach Gardens', 'Palm Springs', 'South Miami', 'Orlando', 'Altamonte Springs', 'Davenport', 'Fort Pierce', 'Jacksonville'],
                   href: '/locations/florida',
                 },
                 {

@@ -3,7 +3,7 @@
 // Clinics not in this map have no GBP yet — handled gracefully in all UI
 export const REVIEW_LINKS: Record<string, string> = {
   'hollywood-orthopedics': 'https://g.page/r/CYqA11vJ24y9EBM/review',
-  'miami-beach-orthopedics': 'https://g.page/r/CUt57-NcR2RGEBM/review',
+  'south-miami-orthopedics': 'https://g.page/r/CUt57-NcR2RGEBM/review',
   'palm-beach-gardens-orthopedics': 'https://g.page/r/CUMyxOiry4yEEBM/review',
   'boca-raton-orthopedics': 'https://g.page/r/CewP7F8j5W7WEBM/review',
   'orlando-orthopedics': 'https://g.page/r/CWyo3YuSDwCTEBM/review',
@@ -33,7 +33,7 @@ export function getReviewLink(locationSlug: string): string | null {
 export function getReviewLocations(): { locationSlug: string; region: string; address: string; reviewUrl: string }[] {
   return [
     { locationSlug: 'hollywood-orthopedics',          region: 'Hollywood, FL',                          address: '3500 Tyler St, Hollywood, FL 33021',                        reviewUrl: REVIEW_LINKS['hollywood-orthopedics'] },
-    { locationSlug: 'miami-beach-orthopedics',         region: 'South Miami, FL',                        address: '7000 SW 62nd Ave, Suite 330, Miami, FL 33143',              reviewUrl: REVIEW_LINKS['miami-beach-orthopedics'] },
+    { locationSlug: 'south-miami-orthopedics',         region: 'South Miami, FL',                        address: '7000 SW 62nd Ave, Suite 330, Miami, FL 33143',              reviewUrl: REVIEW_LINKS['south-miami-orthopedics'] },
     { locationSlug: 'palm-beach-gardens-orthopedics',  region: 'Palm Beach Gardens, FL',                 address: '3355 Burns Rd, Palm Beach Gardens, FL 33410',               reviewUrl: REVIEW_LINKS['palm-beach-gardens-orthopedics'] },
     { locationSlug: 'boca-raton-orthopedics',          region: 'Boca Raton, FL',                         address: '1905 Clint Moore Rd, Boca Raton, FL 33496',                 reviewUrl: REVIEW_LINKS['boca-raton-orthopedics'] },
     { locationSlug: 'orlando-orthopedics',             region: 'Orlando, FL',                            address: '6150 Metrowest Blvd, Orlando, FL 32835',                    reviewUrl: REVIEW_LINKS['orlando-orthopedics'] },
