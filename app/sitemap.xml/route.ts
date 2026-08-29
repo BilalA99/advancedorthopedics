@@ -6,6 +6,7 @@ import { BODY_PARTS } from "@/components/data/bodyParts";
 import { GetBlogsPublic } from "@/app/blogs/api/get-blogs";
 import { VALID_STATE_SLUGS } from "@/lib/locationRedirects";
 import { generateSitemapEntry, wrapInUrlset } from "@/lib/sitemap-utils";
+import { SITEMAP_EXCLUDED_PATHS } from "@/lib/sitemap-exclusions";
 
 export const revalidate = 3600;
 
@@ -51,6 +52,8 @@ export async function GET() {
     const normalizedPath = path.startsWith("/") ? path : `/${path}`;
     const finalPath =
       normalizedPath === "/" ? "/" : normalizedPath.replace(/\/$/, "");
+    // Never advertise a URL that redirects — see lib/sitemap-exclusions.ts
+    if (SITEMAP_EXCLUDED_PATHS.has(finalPath)) return;
     sitemapEntries.set(finalPath, lastmod);
   };
 

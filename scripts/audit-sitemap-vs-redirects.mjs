@@ -21,7 +21,9 @@ const CANONICAL_HOST = 'mountainspineorthopedics.com';
 // ── redirect sources, read straight out of next.config.ts ──
 const cfg = fs.readFileSync(path.join(__dirname, '../next.config.ts'), 'utf8');
 const sources = new Set();
-for (const m of cfg.matchAll(/source\s*:\s*["']([^"']+)["']/g)) sources.add(m[1]);
+// Redirects in next.config.ts are written both as object literals
+// (source: "/x") and as JSON ("source":"/x"), so allow an optional quoted key.
+for (const m of cfg.matchAll(/["']?source["']?\s*:\s*["']([^"']+)["']/g)) sources.add(m[1]);
 // treat `/x/:slug*` style params as prefix matches
 const prefixSources = [...sources].filter((s) => s.includes(':')).map((s) => s.split(':')[0].replace(/\/$/, ''));
 const exactSources = new Set([...sources].filter((s) => !s.includes(':')));
@@ -50,7 +52,10 @@ for (const u of urls) {
 
   if (exactSources.has(p)) errors.push(`sitemap lists a redirect source: ${p}`);
   else {
-    const hit = prefixSources.find((pre) => pre.length > 1 && p.startsWith(pre));
+    // Segment-aware: "/locations/fl" must not match "/locations/florida".
+    const hit = prefixSources.find(
+      (pre) => pre.length > 1 && (p === pre || p.startsWith(pre + '/'))
+    );
     if (hit) errors.push(`sitemap lists a URL under redirect prefix "${hit}...": ${p}`);
   }
 }
