@@ -1,3 +1,6 @@
+import HubStaticShell, { type HubLink } from "@/components/HubStaticShell";
+import { AllTreatmentsCombined } from "@/components/data/treatments";
+import { SITEMAP_EXCLUDED_PATHS } from "@/lib/sitemap-exclusions";
 import React, { Suspense } from 'react';
 import { Metadata } from 'next';
 import { buildCanonical, canonicalForOg } from '@/lib/seo';
@@ -42,9 +45,21 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+function treatmentHubLinks(): HubLink[] {
+  const seen = new Set<string>();
+  return AllTreatmentsCombined
+    .filter((t) => t.slug && t.slug !== "undefined")
+    .map((t) => ({ href: `/treatments/${t.slug}`, label: t.title, group: t.tag || "Other" }))
+    .filter((l) => !SITEMAP_EXCLUDED_PATHS.has(l.href) && !seen.has(l.href) && seen.add(l.href));
+}
+
 export default function TreatmentsPage() {
   return (
-    <Suspense>
+    <Suspense fallback={<HubStaticShell
+      title="Orthopedic Treatments & Procedures"
+      intro="Explore the minimally invasive procedures, injections, and surgical treatments our board-certified orthopedic and spine surgeons perform across Florida, New Jersey, New York, and Pennsylvania."
+      links={treatmentHubLinks()}
+    />}>
       <TreatmentsHubClient reviews={getVisibleReviews(sitewideReviews)} showFeaturedDoctor={isProviderVisible({ slug: providerIds.scottKatzman })} />
     </Suspense>
   );

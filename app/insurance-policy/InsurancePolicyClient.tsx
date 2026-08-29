@@ -130,7 +130,7 @@ export default function InsurancePolicyClient() {
             </nav>
           </div>
           <div className="px-6 xl:px-[80px] z-[2] flex flex-col space-y-[24px] items-center justify-start mt-[12px] w-[85%] xl:w-[45%] flex-wrap">
-            <TextAnimate animation="blurInUp" by="word" once
+            <TextAnimate as="h1" animation="blurInUp" by="word" once
               style={{ fontFamily: "var(--font-public-sans)", fontWeight: 400 }}
               className="text-[#252932] text-4xl sm:text-6xl xl:text-6xl"
             >

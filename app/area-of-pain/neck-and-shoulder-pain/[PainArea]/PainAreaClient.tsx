@@ -130,7 +130,6 @@ export function PainAreaClient({ condition_details, randomDoctors, specialtySlug
   return (
     <main className='w-full flex flex-col items-center justify-center bg-white h-full'>
       {/* Screen reader only H1 */}
-      <h1 className="sr-only">{condition_details?.title ?? condition_details?.name}</h1>
       
       {/* FAQ JSON-LD Script */}
       {faqs.length > 0 && (
@@ -225,7 +224,7 @@ export function PainAreaClient({ condition_details, randomDoctors, specialtySlug
             </div>
           </div>
           <div className="px-6 xl:px-[80px] z-[2] flex flex-row space-x-[20px] items-center justify-center mt-[12px] w-full">
-            <TextAnimate animation="blurInUp" by="word" once
+            <TextAnimate as="h1" animation="blurInUp" by="word" once
               style={{
                 fontFamily: "var(--font-public-sans)",
                 fontWeight: 400,

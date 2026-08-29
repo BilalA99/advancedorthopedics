@@ -405,12 +405,14 @@ export default function BookAnAppointment() {
             aria-hidden="true"
           />
           <div className="relative z-10">
-            <h1
+            {/* The lg+ hero below carries this page's single <h1>; this
+                mobile-only duplicate is presentational. */}
+            <p
               style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }}
               className="text-[#252932] text-3xl"
             >
               Book an Appointment
-            </h1>
+            </p>
             <p
               style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }}
               className="text-[#252932] text-base mt-1"
@@ -448,7 +450,7 @@ export default function BookAnAppointment() {
         />
         <div className="z-[2] flex flex-col w-full h-full text-left relative pt-32 lg:pt-26 pb-20 px-6 lg:px-[80px]">
           <div className='max-w-[1440px] w-full flex flex-col items-start justify-start'>
-            <TextAnimate animation="blurInUp" by="word" once
+            <TextAnimate as="h1" animation="blurInUp" by="word" once
               style={{
                 fontFamily: 'var(--font-public-sans)',
                 fontWeight: 500,

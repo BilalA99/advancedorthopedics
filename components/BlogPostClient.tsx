@@ -360,7 +360,7 @@ export default function BlogDetails({
                 <li aria-current="page">{blog_details?.blog_info.title}</li>
               </ol>
             </nav>
-            <TextAnimate by='word' style={{ fontFamily: "var(--font-public-sans)", fontWeight: 500 }} className="text-[#1C2340] text-2xl md:text-5xl lg:text-6xl w-full text-center">{blog_details?.blog_info.title}</TextAnimate>
+            <TextAnimate as="h1" by='word' style={{ fontFamily: "var(--font-public-sans)", fontWeight: 500 }} className="text-[#1C2340] text-2xl md:text-5xl lg:text-6xl w-full text-center">{blog_details?.blog_info.title}</TextAnimate>
             <p style={{ fontWeight: 400, lineHeight: "150%" }} className="text-[#394257] md:text-lg text-base w-full text-center">{blog_details?.blog_info.desc}</p>
             <div className="flex flex-wrap gap-2 mt-2 justify-center">
               {blog_details?.blog_info.tags.map((tag: string, index: number) => (

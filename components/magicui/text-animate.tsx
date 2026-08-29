@@ -304,7 +304,7 @@ export function TextAnimate({
   variants,
   className,
   segmentClassName,
-  as: Component = "h1",
+  as: Component = "p",
   startOnView = true,
   once = false,
   by = "word",

@@ -226,7 +226,7 @@ export default function CandidacyCheckClient({ reviews }: { reviews: SocialProof
         />
         <div className="z-[2] flex flex-col w-full h-full text-left relative pt-32 lg:pt-26 pb-20 px-6 lg:px-[80px]">
           <div className='max-w-[1440px] w-full flex flex-col items-start justify-start'>
-            <TextAnimate animation="blurInUp" by="word" once
+            <TextAnimate as="h1" animation="blurInUp" by="word" once
               style={{
                 fontFamily: 'var(--font-public-sans)',
                 fontWeight: 500,

@@ -1,3 +1,6 @@
+import HubStaticShell, { type HubLink } from "@/components/HubStaticShell";
+import { conditions, conditionContentPlaceholders } from "@/components/data/conditions";
+import { SITEMAP_EXCLUDED_PATHS } from "@/lib/sitemap-exclusions";
 import React, { Suspense } from 'react';
 import { Metadata } from 'next';
 import { buildCanonical, canonicalForOg } from '@/lib/seo';
@@ -42,16 +45,21 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+function conditionHubLinks(): HubLink[] {
+  const seen = new Set<string>();
+  return [...conditions, ...conditionContentPlaceholders]
+    .filter((c) => c.slug && c.slug !== "undefined")
+    .map((c) => ({ href: `/conditions/${c.slug}`, label: c.title, group: c.tag || "Other" }))
+    .filter((l) => !SITEMAP_EXCLUDED_PATHS.has(l.href) && !seen.has(l.href) && seen.add(l.href));
+}
+
 export default function ConditionsPage() {
   return (
-    <Suspense fallback={
-      <main className="w-full flex flex-col items-center justify-center bg-white h-screen">
-        <div className="animate-pulse flex flex-col items-center">
-          <div className="h-12 w-64 bg-gray-200 rounded mb-4"></div>
-          <div className="h-4 w-48 bg-gray-200 rounded"></div>
-        </div>
-      </main>
-    }>
+    <Suspense fallback={<HubStaticShell
+      title="Orthopedic Conditions & Treatments"
+      intro="Browse the spine, joint, and musculoskeletal conditions our board-certified orthopedic surgeons diagnose and treat across Florida, New Jersey, New York, and Pennsylvania."
+      links={conditionHubLinks()}
+    />}>
       <ConditionsHubClient reviews={getVisibleReviews(sitewideReviews)} showFeaturedDoctor={isProviderVisible({ slug: providerIds.scottKatzman })} />
     </Suspense>
   );
