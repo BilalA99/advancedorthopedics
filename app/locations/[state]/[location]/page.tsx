@@ -40,7 +40,8 @@ import LocationGallerySection from '@/components/LocationGallerySection'
 import TrackedOutboundLink from '@/components/TrackedOutboundLink'
 import { findClinicByStateAndLocation, getAllLocationParams, isValidStateSlug, STATE_METADATA } from '@/lib/locationRedirects'
 import { ReviewLocationCapture } from '@/components/ReviewLocationCapture'
-import { STATE_PHONE_NUMBERS, MAIN_PHONE_DISPLAY } from '@/lib/locationConstants'
+import { STATE_PHONE_NUMBERS, MAIN_PHONE_DISPLAY, MAIN_PHONE_TEL, MAIN_PHONE_E164, MAIN_PHONE_HREF } from '@/lib/locationConstants'
+import SecondOpinionCallout from '@/components/SecondOpinionCallout'
 import { getVisibleReviews } from '@/lib/providers/providerVisibility'
 import MobileHeroConversionPanel from '@/components/MobileHeroConversionPanel'
 
@@ -122,7 +123,7 @@ export default async function LocationDetails(
     
     // Get state metadata for breadcrumb
     const stateInfo = STATE_METADATA[state];
-    const statePhone = STATE_PHONE_NUMBERS[state as keyof typeof STATE_PHONE_NUMBERS] || { display: MAIN_PHONE_DISPLAY };
+    const statePhone = STATE_PHONE_NUMBERS[state as keyof typeof STATE_PHONE_NUMBERS] || { display: MAIN_PHONE_DISPLAY, tel: MAIN_PHONE_TEL, e164: MAIN_PHONE_E164, href: MAIN_PHONE_HREF };
     
     return (
         <main className='w-full flex-col items-center justify-center h-full'>
@@ -224,7 +225,7 @@ export default async function LocationDetails(
                             <MobileHeroConversionPanel
                                 pageType="location"
                                 phone={statePhone.display}
-                                phoneTel={`tel:${statePhone.tel || `+1${statePhone.display.replace(/\D/g, '')}`}`}
+                                phoneTel={statePhone.href}
                                 cityName={locationData.region.split(',')[0].trim()}
                                 locationName={locationData.name}
                                 locationSlug={locationSlug}
@@ -252,6 +253,10 @@ export default async function LocationDetails(
                             {/* NAP Block - Desktop */}
                             <div className="xl:px-[80px] px-8 mt-1 sm:block hidden">
                                 <LocationNAP slug={locationData.slug} phoneDisplay={statePhone.display} phoneTel={statePhone.tel} />
+                            </div>
+                            {/* Free Second Opinion — paid-search message match */}
+                            <div className="xl:px-[80px] px-4 sm:px-8 mt-4">
+                                <SecondOpinionCallout cityName={locationData.region.split(',')[0].trim()} />
                             </div>
                         </SlidingDiv>
 

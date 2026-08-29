@@ -13,7 +13,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { MAIN_PHONE_DISPLAY, MAIN_PHONE_TEL, MAIN_PHONE_E164, STATE_PHONE_NUMBERS } from '@/lib/locationConstants'
+import { MAIN_PHONE_DISPLAY, MAIN_PHONE_TEL, MAIN_PHONE_E164, MAIN_PHONE_HREF, STATE_PHONE_NUMBERS } from '@/lib/locationConstants'
 import StateSeoSections from '@/components/StateSeoSections'
 import StateLocationsCarouselMobile from '@/components/StateLocationsCarouselMobile.client'
 import StateLocationsGridDesktop from '@/components/StateLocationsGridDesktop.client'
@@ -42,7 +42,7 @@ export default async function StateHubPage({
   }
   
   const stateInfo = STATE_METADATA[state]
-  const statePhone = STATE_PHONE_NUMBERS[state as keyof typeof STATE_PHONE_NUMBERS] || { display: MAIN_PHONE_DISPLAY, tel: MAIN_PHONE_TEL, e164: MAIN_PHONE_E164 };
+  const statePhone = STATE_PHONE_NUMBERS[state as keyof typeof STATE_PHONE_NUMBERS] || { display: MAIN_PHONE_DISPLAY, tel: MAIN_PHONE_TEL, e164: MAIN_PHONE_E164, href: MAIN_PHONE_HREF };
   
   // Filter clinics client-side to avoid server-side require issues
   const stateClinics = clinics.filter(clinic => clinic.stateSlug === state)
@@ -260,7 +260,7 @@ export default async function StateHubPage({
                 <MobileHeroConversionPanel
                   pageType="state"
                   phone={statePhone.display}
-                  phoneTel={`tel:${statePhone.tel}`}
+                  phoneTel={statePhone.href}
                   stateName={stateInfo?.name || ''}
                   defaultState={stateInfo?.abbr || state.toUpperCase()}
                 />
