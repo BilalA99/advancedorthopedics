@@ -121,13 +121,6 @@ const consolidatedSchema = {
         { '@type': 'State', name: 'New York',     sameAs: 'https://en.wikipedia.org/wiki/New_York_(state)' },
         { '@type': 'State', name: 'Pennsylvania', sameAs: 'https://en.wikipedia.org/wiki/Pennsylvania' },
       ],
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '5',
-        reviewCount: '54',
-        bestRating: '5',
-        worstRating: '1',
-      },
       hasCredential: [
         { '@type': 'EducationalOccupationalCredential', credentialCategory: 'Board Certification', recognizedBy: { '@type': 'Organization', name: 'American Board of Orthopaedic Surgery' } },
         { '@type': 'EducationalOccupationalCredential', credentialCategory: 'Board Certification', recognizedBy: { '@type': 'Organization', name: 'American Board of Neurological Surgery' } },
@@ -558,39 +551,6 @@ const consolidatedSchema = {
       url: `${BASE_URL}/about/meetourdoctors/dr-douglas-slaughter`,
       sameAs: ['https://www.healthgrades.com/physician/dr-douglas-slaughter-xc2mw'],
     },
-
-    // ── 10. Review entities — patient testimonials ────────────────────────────
-    {
-      '@type': 'Review',
-      '@id': `${PAGE_URL}#review-david-s`,
-      author: { '@type': 'Person', name: 'David S.' },
-      datePublished: '2024-02-01',
-      description: 'I had been dealing with lower back pain for over a year. After one epidural steroid injection at Mountain Spine, I was back to my normal routine within a week. The whole process took less than 30 minutes.',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-      itemReviewed: { '@id': organizationId },
-      reviewAspect: 'Epidural Steroid Injection — Back Pain',
-    },
-    {
-      '@type': 'Review',
-      '@id': `${PAGE_URL}#review-christina-j`,
-      author: { '@type': 'Person', name: 'Christina J.' },
-      datePublished: '2024-11-01',
-      description: 'My knee was so bad I could barely walk. The cortisone shot they gave me worked better than anything I had tried before. Six months later and I am still doing well.',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-      itemReviewed: { '@id': organizationId },
-      reviewAspect: 'Cortisone Shot — Knee Osteoarthritis',
-    },
-    {
-      '@type': 'Review',
-      '@id': `${PAGE_URL}#review-dean-w`,
-      author: { '@type': 'Person', name: 'Dean W.' },
-      datePublished: '2025-01-01',
-      description: 'I was nervous about needles but the doctor numbed the area first and I barely felt a thing. The facet injection relieved my neck pain faster than I expected. I would recommend this to anyone.',
-      reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
-      itemReviewed: { '@id': organizationId },
-      reviewAspect: 'Facet Joint Injection — Cervical Pain',
-    },
-
     // ── 11. HowTo — What to Expect at Your Injection Appointment ─────────────
     {
       '@type': 'HowTo',

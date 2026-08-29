@@ -1,5 +1,5 @@
 import { ClinicsProps } from '@/components/data/clinics';
-import { MAIN_PHONE_E164, LOCATION_OPENING_HOURS, STATE_PHONE_NUMBERS } from '@/lib/locationConstants';
+import { MAIN_PHONE_E164, STATE_PHONE_NUMBERS } from '@/lib/locationConstants';
 import { getVisibleReviews } from '@/lib/providers/providerVisibility';
 
 // Expected GBP addresses for validation (development mode only)
@@ -282,106 +282,8 @@ export function generateLocationSchema(clinic: ClinicsProps): Record<string, any
             'name': `${addressLocality}, ${addressRegion}`
           }
         ],
-    'openingHours': LOCATION_OPENING_HOURS,
-    'openingHoursSpecification': [{
-      '@type': 'OpeningHoursSpecification',
-      'dayOfWeek': [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday'
-      ],
-      'opens': '08:00',
-      'closes': '20:00'
-    }],
     'priceRange': '$$',
     'parentOrganization': 'Mountain Spine & Orthopedics',
-    'hasOfferCatalog': {
-      '@type': 'OfferCatalog',
-      'name': 'Orthopedic & Spine Surgery Services',
-      'itemListElement': [
-        {
-          '@type': 'Offer',
-          'itemOffered': {
-            '@type': 'MedicalProcedure',
-            'name': 'Minimally Invasive Spine Surgery'
-          }
-        },
-        {
-          '@type': 'Offer',
-          'itemOffered': {
-            '@type': 'MedicalProcedure',
-            'name': 'Band-Aid Back Surgery'
-          }
-        },
-        {
-          '@type': 'Offer',
-          'itemOffered': {
-            '@type': 'MedicalProcedure',
-            'name': 'Microdiscectomy'
-          }
-        },
-        {
-          '@type': 'Offer',
-          'itemOffered': {
-            '@type': 'MedicalProcedure',
-            'name': 'Laminectomy'
-          }
-        },
-        {
-          '@type': 'Offer',
-          'itemOffered': {
-            '@type': 'MedicalProcedure',
-            'name': 'Spinal Fusion'
-          }
-        },
-        {
-          '@type': 'Offer',
-          'itemOffered': {
-            '@type': 'MedicalProcedure',
-            'name': 'Artificial Disc Replacement'
-          }
-        },
-        {
-          '@type': 'Offer',
-          'itemOffered': {
-            '@type': 'MedicalProcedure',
-            'name': 'Kyphoplasty'
-          }
-        },
-        {
-          '@type': 'Offer',
-          'itemOffered': {
-            '@type': 'MedicalProcedure',
-            'name': 'Vertebroplasty'
-          }
-        },
-        {
-          '@type': 'Offer',
-          'itemOffered': {
-            '@type': 'MedicalProcedure',
-            'name': 'Endoscopic Spine Surgery'
-          }
-        },
-        {
-          '@type': 'Offer',
-          'itemOffered': {
-            '@type': 'MedicalProcedure',
-            'name': 'Joint Replacement Surgery'
-          }
-        },
-        {
-          '@type': 'Offer',
-          'itemOffered': {
-            '@type': 'MedicalProcedure',
-            'name': 'Orthopedic Consultation'
-          }
-        }
-      ]
-    },
     'image': clinic.ogImage ? `https://mountainspineorthopedics.com${clinic.ogImage}` : 'https://mountainspineorthopedics.com/locations_og.png',
     'aggregateRating': clinic.rating && clinic.reviewCount ? {
       '@type': 'AggregateRating',

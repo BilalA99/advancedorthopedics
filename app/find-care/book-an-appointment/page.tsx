@@ -66,13 +66,6 @@ const BookAppointmentJsonLdSchema = () => {
     "logo": "https://mountainspineorthopedics.com/newlogo4.png",
     "image": "https://mountainspineorthopedics.com/herosectionimg.jpg",
     "telephone": "(561) 223-9959",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "1247",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
     "medicalSpecialty": [
       "Orthopedic Surgery",
       "Spine Surgery", 

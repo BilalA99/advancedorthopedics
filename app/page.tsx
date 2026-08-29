@@ -146,13 +146,6 @@ const HomePageJsonLdSchema = () => {
       'postalCode': '33021',
       'addressCountry': 'US'
     },
-    'aggregateRating': {
-      '@type': 'AggregateRating',
-      'ratingValue': '5',
-      'reviewCount': '200',
-      'bestRating': '5',
-      'worstRating': '1'
-    },
     'sameAs': [
       'https://www.facebook.com/p/Mountain-Spine-Orthopedics-61576930958681/',
       'https://www.instagram.com/mountainspineortho/'

@@ -85,7 +85,6 @@ export function buildInjuryClinicItemListSchema(opts: {
         name: `Mountain Spine & Orthopedics — ${loc.city}${loc.neighborhood ? ` (${loc.neighborhood})` : ''}`,
         url: `https://mountainspineorthopedics.com/locations/${loc.stateSlug}/${loc.slug}`,
         telephone: '+15612239959',
-        openingHours: 'Mo-Su 08:00-20:00',
         availableService: {
           '@type': 'MedicalTherapy',
           name: opts.availableService,
