@@ -1,6 +1,7 @@
 'use server'
 
 import { Resend } from 'resend';
+import { randomUUID } from 'node:crypto';
 import { EmailTemplate } from './emailtemplate';
 import { MRIEmailTemplate } from './mrireviewtemplate';
 import { TreatmentCandidacyEmailTemplate } from './candidemailtemplate';
@@ -9,11 +10,13 @@ import { UserEmailTemplate } from './useremailtemplate';
 import { LawyerEmailTemplate } from './lawyeremailtemplate';
 import { LawyerConfirmationTemplate } from './lawyerconfirmationtemplate';
 import { createClient } from '@/utils/supabase/server';
+import { normalizeStateCode } from '@/lib/stateUtils';
+import { resolveFormSource } from '@/lib/lead-contract';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // ─────────────────────────────────────────────────────────────────────────────
-// logLeadToSupabase — shared helper, never throws (Supabase failure is silent)
+// logLeadToSupabase — authoritative persistence boundary for accepted leads
 // ─────────────────────────────────────────────────────────────────────────────
 async function logLeadToSupabase(data: {
   patient_name?: string;
@@ -27,6 +30,8 @@ async function logLeadToSupabase(data: {
   attorney_firm?: string;
   attorney_name?: string;
   gclid?: string;
+  gbraid?: string;
+  wbraid?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
@@ -35,27 +40,36 @@ async function logLeadToSupabase(data: {
 }) {
   try {
     const supabase = await createClient();
+    const submissionId = randomUUID();
     const { error } = await supabase.from('forms').insert({
+      submission_id:  submissionId,
       patient_name:   data.patient_name   || null,
       patient_email:  data.patient_email  || null,
       patient_phone:  data.patient_phone  || null,
-      state:          data.state          || null,
+      state:          normalizeStateCode(data.state || '') || null,
       reason:         data.reason         || null,
       best_time:      data.best_time      || null,
       insurance_type: data.insurance_type || null,
-      form_source:    data.form_source    || null,
+      form_source:    resolveFormSource({ explicitSource: data.form_source }) || null,
       attorney_firm:  data.attorney_firm  || null,
       attorney_name:  data.attorney_name  || null,
       gclid:          data.gclid          || null,
+      gbraid:         data.gbraid         || null,
+      wbraid:         data.wbraid         || null,
       utm_source:     data.utm_source     || null,
       utm_medium:     data.utm_medium     || null,
       utm_campaign:   data.utm_campaign   || null,
       utm_term:       data.utm_term       || null,
       utm_content:    data.utm_content    || null,
     });
-    if (error) console.error('[logLeadToSupabase]', error);
+    if (error) {
+      console.error('[logLeadToSupabase]', error);
+      throw new Error('Lead persistence failed');
+    }
+    return { ok: true as const, submissionId };
   } catch (err) {
     console.error('[logLeadToSupabase] unexpected error', err);
+    throw new Error('Lead persistence failed');
   }
 }
 
@@ -71,6 +85,8 @@ export async function sendUserEmail(formData: {
   bestTime?: string;
   form_source?: string;
   gclid?: string;
+  gbraid?: string;
+  wbraid?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
@@ -78,7 +94,7 @@ export async function sendUserEmail(formData: {
   utm_content?: string;
 }) {
   try {
-    const data = await resend.emails.send({
+    await resend.emails.send({
       from: 'Mountain Spine & Orthopedics <info@mountainspineorthopedics.com>',
       to: [formData.email],
       subject: 'Thank you for contacting Mountain Spine & Orthopedics',
@@ -89,7 +105,7 @@ export async function sendUserEmail(formData: {
       }),
     });
 
-    await logLeadToSupabase({
+    const acceptance = await logLeadToSupabase({
       patient_name:  formData.name,
       patient_email: formData.email,
       patient_phone: formData.phone,
@@ -98,6 +114,8 @@ export async function sendUserEmail(formData: {
       best_time:     formData.bestTime,
       form_source:   formData.form_source || 'unknown',
       gclid:         formData.gclid,
+      gbraid:        formData.gbraid,
+      wbraid:        formData.wbraid,
       utm_source:    formData.utm_source,
       utm_medium:    formData.utm_medium,
       utm_campaign:  formData.utm_campaign,
@@ -105,7 +123,7 @@ export async function sendUserEmail(formData: {
       utm_content:   formData.utm_content,
     });
 
-    return data;
+    return acceptance;
   } catch (error) {
     console.error('[sendUserEmail]', error);
     throw new Error('Failed to send email');
@@ -130,6 +148,8 @@ export async function sendContactEmail(formData: {
   insuranceCardFront?: File;
   insuranceCardBack?: File;
   gclid?: string;
+  gbraid?: string;
+  wbraid?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
@@ -199,6 +219,8 @@ export async function sendMRIContactEmail(formData: {
   state: string;
   bestTime: string;
   gclid?: string;
+  gbraid?: string;
+  wbraid?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
@@ -206,7 +228,7 @@ export async function sendMRIContactEmail(formData: {
   utm_content?: string;
 }) {
   try {
-    const data = await resend.emails.send({
+    await resend.emails.send({
       from: 'Mountain Spine & Orthopedics <no-reply@mountainspineorthopedics.com>',
       to: ['info@mountainspineorthopedics.com'],
       subject: 'New MRI Review Form Submission',
@@ -226,7 +248,7 @@ export async function sendMRIContactEmail(formData: {
       }),
     });
 
-    await logLeadToSupabase({
+    const acceptance = await logLeadToSupabase({
       patient_name:   `${formData.first_name} ${formData.last_name}`.trim(),
       patient_email:  formData.email,
       patient_phone:  formData.phone,
@@ -236,6 +258,8 @@ export async function sendMRIContactEmail(formData: {
       insurance_type: formData.insurance_type,
       form_source:    'free-mri-review',
       gclid:          formData.gclid,
+      gbraid:         formData.gbraid,
+      wbraid:         formData.wbraid,
       utm_source:     formData.utm_source,
       utm_medium:     formData.utm_medium,
       utm_campaign:   formData.utm_campaign,
@@ -243,7 +267,7 @@ export async function sendMRIContactEmail(formData: {
       utm_content:    formData.utm_content,
     });
 
-    return data;
+    return acceptance;
   } catch (error) {
     console.error('[sendMRIContactEmail]', error);
     throw new Error('Failed to send email');
@@ -270,6 +294,8 @@ export async function sendCandidacyEmail(formData: {
   comments: string;
   email_optout: string;
   gclid?: string;
+  gbraid?: string;
+  wbraid?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
@@ -277,7 +303,7 @@ export async function sendCandidacyEmail(formData: {
   utm_content?: string;
 }) {
   try {
-    const data = await resend.emails.send({
+    await resend.emails.send({
       from: 'Mountain Spine & Orthopedics <info@mountainspineorthopedics.com>',
       to: ['info@mountainspineorthopedics.com'],
       subject: 'New Candidacy Form Submission',
@@ -300,7 +326,7 @@ export async function sendCandidacyEmail(formData: {
       }),
     });
 
-    await logLeadToSupabase({
+    const acceptance = await logLeadToSupabase({
       patient_name:   `${formData.first_name} ${formData.last_name}`.trim(),
       patient_email:  formData.email,
       patient_phone:  formData.phone,
@@ -309,6 +335,8 @@ export async function sendCandidacyEmail(formData: {
       insurance_type: formData.insurance_type,
       form_source:    'candidacy-check',
       gclid:          formData.gclid,
+      gbraid:         formData.gbraid,
+      wbraid:         formData.wbraid,
       utm_source:     formData.utm_source,
       utm_medium:     formData.utm_medium,
       utm_campaign:   formData.utm_campaign,
@@ -316,7 +344,7 @@ export async function sendCandidacyEmail(formData: {
       utm_content:    formData.utm_content,
     });
 
-    return data;
+    return acceptance;
   } catch (error) {
     console.error('[sendCandidacyEmail]', error);
     throw new Error('Failed to send email');
@@ -346,6 +374,8 @@ export const sendConditionCheckEmail = async (formData: {
   pain_source: string;
   pain_test: string;
   gclid?: string;
+  gbraid?: string;
+  wbraid?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
@@ -353,7 +383,7 @@ export const sendConditionCheckEmail = async (formData: {
   utm_content?: string;
 }) => {
   try {
-    const data = await resend.emails.send({
+    await resend.emails.send({
       from: 'Mountain Spine & Orthopedics <info@mountainspineorthopedics.com>',
       to: ['info@mountainspineorthopedics.com'],
       subject: 'New Condition Check Form Submission',
@@ -379,7 +409,7 @@ export const sendConditionCheckEmail = async (formData: {
       }),
     });
 
-    await logLeadToSupabase({
+    const acceptance = await logLeadToSupabase({
       patient_name:   `${formData.first_name} ${formData.last_name}`.trim(),
       patient_email:  formData.email,
       patient_phone:  formData.phone,
@@ -388,6 +418,8 @@ export const sendConditionCheckEmail = async (formData: {
       insurance_type: formData.insurance_type,
       form_source:    'condition-check',
       gclid:          formData.gclid,
+      gbraid:         formData.gbraid,
+      wbraid:         formData.wbraid,
       utm_source:     formData.utm_source,
       utm_medium:     formData.utm_medium,
       utm_campaign:   formData.utm_campaign,
@@ -395,7 +427,7 @@ export const sendConditionCheckEmail = async (formData: {
       utm_content:    formData.utm_content,
     });
 
-    return data;
+    return acceptance;
   } catch (error) {
     console.error('[sendConditionCheckEmail]', error);
     throw new Error('Failed to send email');
@@ -421,6 +453,8 @@ export async function sendLawyerContactEmail(formData: {
   urgency: string;
   additionalInfo?: string;
   gclid?: string;
+  gbraid?: string;
+  wbraid?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
@@ -428,7 +462,7 @@ export async function sendLawyerContactEmail(formData: {
   utm_content?: string;
 }) {
   try {
-    const data = await resend.emails.send({
+    await resend.emails.send({
       from: 'Mountain Spine & Orthopedics <no-reply@mountainspineorthopedics.com>',
       to: ['info@mountainspineorthopedics.com'],
       subject: `New Attorney Coordination Request - ${formData.clientName}`,
@@ -450,7 +484,7 @@ export async function sendLawyerContactEmail(formData: {
       }),
     });
 
-    await logLeadToSupabase({
+    const acceptance = await logLeadToSupabase({
       patient_name:  formData.clientName,
       patient_email: formData.clientEmail,
       patient_phone: formData.clientPhone,
@@ -459,6 +493,8 @@ export async function sendLawyerContactEmail(formData: {
       attorney_firm: formData.firmName,
       attorney_name: formData.attorneyName,
       gclid:         formData.gclid,
+      gbraid:        formData.gbraid,
+      wbraid:        formData.wbraid,
       utm_source:    formData.utm_source,
       utm_medium:    formData.utm_medium,
       utm_campaign:  formData.utm_campaign,
@@ -466,7 +502,7 @@ export async function sendLawyerContactEmail(formData: {
       utm_content:   formData.utm_content,
     });
 
-    return data;
+    return acceptance;
   } catch (error) {
     console.error('[sendLawyerContactEmail]', error);
     throw new Error('Failed to send attorney coordination email');

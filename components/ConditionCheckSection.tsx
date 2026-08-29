@@ -11,8 +11,8 @@ import { Input } from '@/components/ui/input'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { sendConditionCheckEmail } from '@/components/email/sendcontactemail'
 import { useRouter } from 'next/navigation'
-import { getAttributionData } from '@/lib/gclid'
-import { pushFormSubmit } from '@/utils/enhancedConversions'
+import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid'
+import { pushAcceptedLead } from '@/utils/enhancedConversions'
 
 
 const formSchema = z.object({
@@ -66,7 +66,7 @@ export default function ConditionCheckSection({
   const [ConditionStep, setConditionStep] = useState(1)
   const [openAppointmentConfirm, setAppointmentConfirm] = useState(false)
   const [disabled, setDisabled] = useState(false)
-  const [attribution, setAttribution] = useState({ gclid: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '', utm_content: '' })
+  const [attribution, setAttribution] = useState(EMPTY_ATTRIBUTION)
   const router = useRouter()
 
   useEffect(() => {
@@ -103,6 +103,8 @@ export default function ConditionCheckSection({
     const data = await sendConditionCheckEmail({
       ...values,
       gclid: attribution.gclid,
+      gbraid: attribution.gbraid,
+      wbraid: attribution.wbraid,
       utm_source: attribution.utm_source,
       utm_medium: attribution.utm_medium,
       utm_campaign: attribution.utm_campaign,
@@ -110,8 +112,10 @@ export default function ConditionCheckSection({
       utm_content: attribution.utm_content,
     })
     if (data) {
-      pushFormSubmit({
+      await pushAcceptedLead({
+        acceptance: data,
         form_name: 'ConditionCheckForm',
+        form_source: 'condition-check',
         state: values.state,
         email: values.email,
         phone: values.phone,

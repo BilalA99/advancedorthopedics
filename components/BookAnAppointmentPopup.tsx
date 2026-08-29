@@ -18,10 +18,11 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog"
 import { useState, useEffect } from "react"
 import BookAnAppointmentClient from "./BookAnAppointmentClient"
 import Link from "next/link"
-import { getAttributionData } from "@/lib/gclid"
-import { useRouter } from "next/navigation"
+import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
+import { usePathname, useRouter } from "next/navigation"
 import { appendPreparedUploads } from "@/lib/client-upload"
-import { pushFormSubmit } from "@/utils/enhancedConversions"
+import { pushAcceptedLead } from "@/utils/enhancedConversions"
+import { resolveFormSource } from "@/lib/lead-contract"
 const formSchema = z.object({
     name: z.string().min(2, "name must be at least 2 characters"),
     email: z.string().email("Invalid email address"),
@@ -42,7 +43,8 @@ export default function BookAnAppointmentPopup() {
     const [openContactForm, setOpenContactForm] = useState(false)
     const [openAppointmentConfirm, setAppointmentConfirm] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [attribution, setAttribution] = useState({ gclid: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '', utm_content: '' })
+    const [attribution, setAttribution] = useState(EMPTY_ATTRIBUTION)
+    const pathname = usePathname()
     const router = useRouter()
 
     useEffect(() => {
@@ -65,6 +67,7 @@ export default function BookAnAppointmentPopup() {
             setLoading(true)
             const firstName = values.name.split(' ')[0] || values.name
             const lastName = values.name.split(' ').slice(1).join(' ') || ''
+            const formSource = resolveFormSource({ pathname, formId: 'BookAnAppointmentPopup' })
 
             const payload = new FormData()
             payload.append('firstName', firstName)
@@ -73,8 +76,10 @@ export default function BookAnAppointmentPopup() {
             payload.append('phone', values.phone)
             payload.append('reason', values.reason)
             payload.append('bestTime', values.bestTime)
-            payload.append('form_source', 'book-appointment')
+            payload.append('form_source', formSource)
             payload.append('gclid', attribution.gclid)
+            payload.append('gbraid', attribution.gbraid)
+            payload.append('wbraid', attribution.wbraid)
             payload.append('utm_source', attribution.utm_source)
             payload.append('utm_medium', attribution.utm_medium)
             payload.append('utm_campaign', attribution.utm_campaign)
@@ -107,14 +112,17 @@ export default function BookAnAppointmentPopup() {
                 return
             }
 
-            pushFormSubmit({
+            const accepted = await pushAcceptedLead({
+                acceptance: res,
                 form_name: 'BookAnAppointmentPopup',
+                form_source: formSource,
                 state: '',
                 email: values.email,
                 phone: values.phone,
                 firstName,
                 lastName,
             })
+            if (!accepted) return
 
             router.push('/thank-you')
         } catch (error) {

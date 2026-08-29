@@ -5,8 +5,8 @@ import { Phone, User, ArrowRight, CheckCircle, Loader2, Mail, ChevronDown, Shiel
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { pushEvent, pushFormSubmit } from '@/utils/enhancedConversions';
-import { getAttributionData } from '@/lib/gclid';
+import { pushEvent, pushAcceptedLead } from '@/utils/enhancedConversions';
+import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid';
 import { formatPhoneInput } from '@/lib/phone-formatter';
 import { STATE_OPTIONS } from '@/lib/stateUtils';
 import { appendPreparedUploads } from '@/lib/client-upload';
@@ -37,9 +37,7 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
   const [error, setError] = useState('');
   const [showDialog, setShowDialog] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
-  const [attribution, setAttribution] = useState({
-    gclid: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '', utm_content: '',
-  });
+  const [attribution, setAttribution] = useState(EMPTY_ATTRIBUTION);
   const formRef = useRef<HTMLFormElement>(null);
   const router = useRouter();
 
@@ -121,6 +119,14 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
         'Homepage Hero'
       );
       payload.append('gclid', attribution.gclid);
+      payload.append('gbraid', attribution.gbraid);
+      payload.append('wbraid', attribution.wbraid);
+      const formSource = pageType === 'location'
+        ? 'location-consultation'
+        : pageType === 'state'
+          ? 'state-consultation'
+          : 'homepage-consultation';
+      payload.append('form_source', formSource);
       payload.append('utm_source', attribution.utm_source);
       payload.append('utm_medium', attribution.utm_medium);
       payload.append('utm_campaign', attribution.utm_campaign);
@@ -141,8 +147,10 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
       if (res.redirected) { router.push(res.url); return; }
       if (!res.ok) throw new Error('Submission failed');
 
-      pushFormSubmit({
+      const accepted = await pushAcceptedLead({
+        acceptance: res,
         form_name: 'MobileHeroMiniForm',
+        form_source: formSource,
         state: formData.state,
         email: formData.email,
         phone: formData.phone,
@@ -150,6 +158,7 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
         lastName: formData.lastName,
         postalCode: formData.postalCode,
       });
+      if (!accepted) throw new Error('Submission was not persisted');
 
       setShowDialog(false);
       setIsSubmitted(true);

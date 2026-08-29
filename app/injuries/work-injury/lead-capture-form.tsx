@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getAttributionData } from "@/lib/gclid"
+import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -15,7 +15,7 @@ import { BorderBeam } from "@/components/magicui/border-beam"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { sendContactEmail, sendUserEmail } from "@/components/email/sendcontactemail"
 import { redirect } from "next/navigation"
-import { pushFormSubmit } from "@/utils/enhancedConversions"
+import { pushAcceptedLead } from "@/utils/enhancedConversions"
 import { STATE_OPTIONS } from "@/lib/stateUtils"
 import { clinicsForMap as clinics } from "@/components/data/clinicsForMap.generated"
 
@@ -55,7 +55,7 @@ export function WorkInjuryLeadCaptureForm() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
-    const [attribution, setAttribution] = useState({ gclid: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '', utm_content: '' })
+    const [attribution, setAttribution] = useState(EMPTY_ATTRIBUTION)
 
     useEffect(() => {
         setAttribution(getAttributionData())
@@ -92,7 +92,7 @@ export function WorkInjuryLeadCaptureForm() {
             utm_term: attribution.utm_term,
             utm_content: attribution.utm_content,
         })
-        await sendUserEmail({
+        const acceptance = await sendUserEmail({
             name: values.firstName,
             email: values.email,
             phone: values.phone,
@@ -100,6 +100,8 @@ export function WorkInjuryLeadCaptureForm() {
             reason: values.injury,
             form_source: 'work-injury',
             gclid: attribution.gclid,
+            gbraid: attribution.gbraid,
+            wbraid: attribution.wbraid,
             utm_source: attribution.utm_source,
             utm_medium: attribution.utm_medium,
             utm_campaign: attribution.utm_campaign,
@@ -107,7 +109,7 @@ export function WorkInjuryLeadCaptureForm() {
             utm_content: attribution.utm_content,
         })
 
-        pushFormSubmit({ form_name: 'WorkInjuryLeadForm', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName })
+        await pushAcceptedLead({ acceptance, form_name: 'WorkInjuryLeadForm', form_source: 'work-injury', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName })
 
         setIsSubmitting(false)
         if (data) {

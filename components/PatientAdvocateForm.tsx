@@ -15,10 +15,10 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useState, useEffect } from "react"
 import BookAnAppointmentClient from "./BookAnAppointmentClient"
-import { getAttributionData } from "@/lib/gclid"
+import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
 import { Dialog, DialogContent, DialogTitle } from "./ui/dialog"
 import { motion } from "framer-motion"
-import { pushFormSubmit } from "@/utils/enhancedConversions"
+import { pushAcceptedLead } from "@/utils/enhancedConversions"
 import { STATE_OPTIONS } from "@/lib/stateUtils"
 import { useRouter } from "next/navigation"
 
@@ -47,7 +47,7 @@ const timeSlots = [
 export function PatientAdvocateForm() {
   const [appointmentConfirm, setAppointmentConfirm] = useState(false)
   const [disabled, setDisabled] = useState(false)
-  const [attribution, setAttribution] = useState({ gclid: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '', utm_content: '' })
+  const [attribution, setAttribution] = useState(EMPTY_ATTRIBUTION)
   const router = useRouter()
 
   useEffect(() => {
@@ -85,7 +85,10 @@ export function PatientAdvocateForm() {
           postalCode: values.postalCode,
           country: values.country,
           state: values.state,
+          form_source: 'patient-advocate',
           gclid: attribution.gclid,
+          gbraid: attribution.gbraid,
+          wbraid: attribution.wbraid,
           utm_source: attribution.utm_source,
           utm_medium: attribution.utm_medium,
           utm_campaign: attribution.utm_campaign,
@@ -103,7 +106,8 @@ export function PatientAdvocateForm() {
         return
       }
 
-      pushFormSubmit({ form_name: 'PatientAdvocateForm', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode });
+      const accepted = await pushAcceptedLead({ acceptance: res, form_name: 'PatientAdvocateForm', form_source: 'patient-advocate', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode });
+      if (!accepted) return
 
       setAppointmentConfirm(true)
       form.reset()

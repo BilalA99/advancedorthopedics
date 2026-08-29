@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getAttributionData } from "@/lib/gclid"
+import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -18,7 +18,7 @@ import { redirect } from "next/navigation"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { clinicsForMap as clinics } from "@/components/data/clinicsForMap.generated"
-import { pushFormSubmit } from "@/utils/enhancedConversions"
+import { pushAcceptedLead } from "@/utils/enhancedConversions"
 import { STATE_OPTIONS } from "@/lib/stateUtils"
 
 const leadSchema = z.object({
@@ -69,7 +69,7 @@ export function CarAccidentLeadCaptureForm() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
-    const [attribution, setAttribution] = useState({ gclid: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '', utm_content: '' })
+    const [attribution, setAttribution] = useState(EMPTY_ATTRIBUTION)
 
     useEffect(() => {
         setAttribution(getAttributionData())
@@ -92,7 +92,7 @@ export function CarAccidentLeadCaptureForm() {
     async function onSubmit(values: z.infer<typeof leadSchema>) {
         setIsSubmitting(true)
         const data = await sendContactEmail({ name: values.firstName, email: values.email, phone: values.phone, reason: values.injuryType, bestTime: values.painLevel, has_attorney: values.hasAttorney, injury_type: values.injuryType, pain_level: values.painLevel, location: values.location, state: values.state, gclid: attribution.gclid, utm_source: attribution.utm_source, utm_medium: attribution.utm_medium, utm_campaign: attribution.utm_campaign, utm_term: attribution.utm_term, utm_content: attribution.utm_content })
-        await sendUserEmail({
+        const acceptance = await sendUserEmail({
             name: values.firstName,
             email: values.email,
             phone: values.phone,
@@ -100,6 +100,8 @@ export function CarAccidentLeadCaptureForm() {
             reason: values.injuryType,
             form_source: 'car-accident',
             gclid: attribution.gclid,
+            gbraid: attribution.gbraid,
+            wbraid: attribution.wbraid,
             utm_source: attribution.utm_source,
             utm_medium: attribution.utm_medium,
             utm_campaign: attribution.utm_campaign,
@@ -108,7 +110,7 @@ export function CarAccidentLeadCaptureForm() {
         })
         
         // Enhanced Conversions
-        pushFormSubmit({ form_name: 'CarAccidentLeadForm', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName });
+        await pushAcceptedLead({ acceptance, form_name: 'CarAccidentLeadForm', form_source: 'car-accident', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName });
         
         setIsSubmitting(false)
         if (data) {

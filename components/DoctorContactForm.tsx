@@ -20,13 +20,14 @@ import { motion } from 'framer-motion'
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
 import { BorderBeam } from "@/components/magicui/border-beam";
-import { pushFormSubmit } from "@/utils/enhancedConversions"
-import { getAttributionData } from "@/lib/gclid"
+import { pushAcceptedLead } from "@/utils/enhancedConversions"
+import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
 import { STATE_OPTIONS, slugFromPathname, normalizeState } from "@/lib/stateUtils"
 import { formatPhone, validatePhoneNumber, formatPhoneInput } from "@/lib/phone-formatter"
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3"
 import { verifyCaptcha } from "@/seo/verify-captcha"
 import { appendPreparedUploads } from "@/lib/client-upload"
+import { resolveFormSource } from "@/lib/lead-contract"
 
 const formSchema = z.object({
     firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -90,7 +91,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
     const [openContactForm, setOpenContactForm] = useState(false)
     const [openAppointmentConfirm, setAppointmentConfirm] = useState(false)
     const [disabled, setDisabled] = useState(false)
-    const [attribution, setAttribution] = useState({ gclid: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '', utm_content: '' })
+    const [attribution, setAttribution] = useState(EMPTY_ATTRIBUTION)
     const [showScrollIndicator, setShowScrollIndicator] = useState(true)
     const formRef = useRef<HTMLFormElement>(null)
     const router = useRouter()
@@ -193,6 +194,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
         setDisabled(true)
 
         try {
+            const formSource = resolveFormSource({ pathname, formId: 'DoctorContactForm' })
             const payload = new FormData()
             payload.append("firstName", values.firstName)
             payload.append("lastName", values.lastName)
@@ -204,6 +206,9 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
             payload.append("country", values.country)
             payload.append("state", values.state)
             payload.append("gclid", attribution.gclid)
+            payload.append("gbraid", attribution.gbraid)
+            payload.append("wbraid", attribution.wbraid)
+            payload.append("form_source", formSource)
             payload.append("utm_source", attribution.utm_source)
             payload.append("utm_medium", attribution.utm_medium)
             payload.append("utm_campaign", attribution.utm_campaign)
@@ -236,7 +241,8 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                 return
             }
 
-            pushFormSubmit({ form_name: 'DoctorContactForm', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode });
+            const accepted = await pushAcceptedLead({ acceptance: res, form_name: 'DoctorContactForm', form_source: formSource, state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode });
+            if (!accepted) return
 
             setOpenContactForm(false)
             router.push('/thank-you')

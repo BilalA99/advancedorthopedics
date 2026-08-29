@@ -24,8 +24,8 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { User, Mail, Phone, Lock } from 'lucide-react'
 import { formatPhoneInput } from '@/lib/phone-formatter'
-import { pushFormSubmit } from '@/utils/enhancedConversions'
-import { getAttributionData } from '@/lib/gclid'
+import { pushAcceptedLead } from '@/utils/enhancedConversions'
+import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid'
 import { useRouter } from 'next/navigation'
 import { STATE_OPTIONS, normalizeState } from '@/lib/stateUtils'
 
@@ -51,7 +51,7 @@ interface Props {
 export default function StateHeroForm({ defaultState, stateName }: Props) {
   const [expanded, setExpanded] = useState(false)
   const [disabled, setDisabled] = useState(false)
-  const [attribution, setAttribution] = useState({ gclid: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '', utm_content: '' })
+  const [attribution, setAttribution] = useState(EMPTY_ATTRIBUTION)
   const router = useRouter()
 
   useEffect(() => {
@@ -95,7 +95,10 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
           postalCode: values.postalCode,
           country: values.country,
           state: values.state,
+          form_source: 'state-consultation',
           gclid: attribution.gclid,
+          gbraid: attribution.gbraid,
+          wbraid: attribution.wbraid,
           utm_source: attribution.utm_source,
           utm_medium: attribution.utm_medium,
           utm_campaign: attribution.utm_campaign,
@@ -114,7 +117,8 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
         return
       }
 
-      pushFormSubmit({ form_name: 'StateHeroForm', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode })
+      const accepted = await pushAcceptedLead({ acceptance: res, form_name: 'StateHeroForm', form_source: 'state-consultation', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode })
+      if (!accepted) return
 
       router.push('/thank-you')
     } catch (error) {

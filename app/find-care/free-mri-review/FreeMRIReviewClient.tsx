@@ -38,9 +38,9 @@ import { Marquee } from '@/components/magicui/marquee'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { sendMRIContactEmail } from '@/components/email/sendcontactemail'
 import { redirect } from 'next/navigation'
-import { pushFormSubmit } from '@/utils/enhancedConversions'
+import { pushAcceptedLead } from '@/utils/enhancedConversions'
 import { normalizeState } from '@/lib/stateUtils'
-import { getAttributionData } from '@/lib/gclid'
+import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid'
 
 const formSchema = z.object({
   // Step 1 Questions
@@ -220,7 +220,7 @@ export default function FreeMRIReviewClient({ reviews }: { reviews: SocialProofR
   const [ConditionStep, setConditionStep] = useState(1)
   const [openAppointmentConfirm, setAppointmentConfirm] = useState(false)
   const [disabled, setDisabled] = useState(false)
-  const [attribution, setAttribution] = useState({ gclid: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '', utm_content: '' })
+  const [attribution, setAttribution] = useState(EMPTY_ATTRIBUTION)
 
   React.useEffect(() => {
     setAttribution(getAttributionData())
@@ -248,6 +248,8 @@ export default function FreeMRIReviewClient({ reviews }: { reviews: SocialProofR
     const data = await sendMRIContactEmail({
       ...values,
       gclid: attribution.gclid,
+      gbraid: attribution.gbraid,
+      wbraid: attribution.wbraid,
       utm_source: attribution.utm_source,
       utm_medium: attribution.utm_medium,
       utm_campaign: attribution.utm_campaign,
@@ -255,7 +257,7 @@ export default function FreeMRIReviewClient({ reviews }: { reviews: SocialProofR
       utm_content: attribution.utm_content,
     })
     if (data) {
-      pushFormSubmit({ form_name: 'FreeMRIReviewForm', state: normalizeState(values.state), email: values.email, phone: values.phone, firstName: values.first_name, lastName: values.last_name })
+      await pushAcceptedLead({ acceptance: data, form_name: 'FreeMRIReviewForm', form_source: 'free-mri-review', state: normalizeState(values.state), email: values.email, phone: values.phone, firstName: values.first_name, lastName: values.last_name })
       ConditionForm.reset()
       redirect('/thank-you')
       setDisabled(false)

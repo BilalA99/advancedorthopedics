@@ -21,6 +21,8 @@ type LawyerPayload = {
   urgency: string;
   additionalInfo?: string;
   gclid?: string;
+  gbraid?: string;
+  wbraid?: string;
   utm_source?: string;
   utm_medium?: string;
   utm_campaign?: string;
@@ -41,7 +43,7 @@ export async function POST(request: Request) {
   try {
     const body: LawyerPayload = await request.json();
 
-    await sendLawyerContactEmail(body);
+    const acceptance = await sendLawyerContactEmail(body);
     await sendLawyerConfirmationEmail({
       attorneyName: body.attorneyName,
       email: body.email,
@@ -49,7 +51,7 @@ export async function POST(request: Request) {
       clientName: body.clientName,
     });
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json(acceptance);
   } catch (error) {
     console.error("[LawyerForm] Submission failed", error);
     return NextResponse.json({ ok: false }, { status: 500 });

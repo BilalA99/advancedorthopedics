@@ -13,6 +13,7 @@
     "check:clinics-map": "npx tsx scripts/generate-clinics-for-map.mjs --check",
     "generate:clinics-map": "npx tsx scripts/generate-clinics-for-map.mjs",
     "test:feature-flag": "npx tsx scripts/test-feature-flag-parsing.mjs",
+    "test:measurement": "tsx --test tests/measurement-contract.test.ts",
     "lint": "next lint",
     "fullcrawl": "node scripts/full-site-crawl.mjs",
     "seo:audit": "node scripts/seo-local-sitemap-audit.mjs --concurrency=4 --timeout=25000 --headless",

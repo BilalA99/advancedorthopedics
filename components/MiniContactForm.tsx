@@ -8,9 +8,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import BookAnAppoitmentButton from "./BookAnAppoitmentButton"
-import { getAttributionData } from "@/lib/gclid"
+import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
 import { useRouter } from "next/navigation"
-import { pushFormSubmit } from "@/utils/enhancedConversions"
+import { pushAcceptedLead } from "@/utils/enhancedConversions"
 
 const formSchema = z.object({
   name: z.string().min(2, "name must be at least 2 characters"),
@@ -21,7 +21,7 @@ const formSchema = z.object({
 })
 
 export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor?: string }) {
-  const [attribution, setAttribution] = useState({ gclid: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '', utm_content: '' })
+  const [attribution, setAttribution] = useState(EMPTY_ATTRIBUTION)
   const router = useRouter()
 
   useEffect(() => {
@@ -54,8 +54,10 @@ export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor
           phone: values.phone,
           reason: values.reason,
           bestTime: values.bestTime,
-          form_source: 'state-consultation',
+          form_source: 'general-contact',
           gclid: attribution.gclid,
+          gbraid: attribution.gbraid,
+          wbraid: attribution.wbraid,
           utm_source: attribution.utm_source,
           utm_medium: attribution.utm_medium,
           utm_campaign: attribution.utm_campaign,
@@ -68,14 +70,17 @@ export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor
         return
       }
       if (res.ok) {
-        pushFormSubmit({
+        const accepted = await pushAcceptedLead({
+          acceptance: res,
           form_name: 'MiniContactForm',
+          form_source: 'general-contact',
           state: '',
           email: values.email,
           phone: values.phone,
           firstName,
           lastName,
         })
+        if (!accepted) return
         router.push('/thank-you')
       }
     } catch (error) {

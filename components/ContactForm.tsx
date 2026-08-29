@@ -14,15 +14,16 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import BookAnAppoitmentButton from "./BookAnAppoitmentButton"
 import BookAnAppointmentClient from "./BookAnAppointmentClient"
-import { getAttributionData } from "@/lib/gclid"
+import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
 import { User, Mail, Phone } from "lucide-react"
 import { DialogContent, DialogTitle } from "./ui/dialog"
 import { Dialog } from "./ui/dialog"
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { useRouter, usePathname } from "next/navigation"
-import { pushFormSubmit } from "@/utils/enhancedConversions"
+import { pushAcceptedLead } from "@/utils/enhancedConversions"
 import { STATE_OPTIONS, slugFromPathname, normalizeState } from "@/lib/stateUtils"
+import { resolveFormSource } from "@/lib/lead-contract"
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -40,7 +41,7 @@ const formSchema = z.object({
 export function ConsultationForm({ defaultState = "" }: { defaultState?: string }) {
   const [openAppointmentConfirm, setAppointmentConfirm] = useState(false)
   const [disabled, setDisabled] = useState(false)
-  const [attribution, setAttribution] = useState({ gclid: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '', utm_content: '' })
+  const [attribution, setAttribution] = useState(EMPTY_ATTRIBUTION)
   const router = useRouter()
 
   useEffect(() => {
@@ -67,6 +68,7 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setDisabled(true)
     try {
+      const formSource = resolveFormSource({ pathname, formId: 'ConsultationForm' })
       const res = await fetch("/api/forms/consultation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -80,7 +82,10 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
           postalCode: values.postalCode,
           country: values.country,
           state: values.state,
+          form_source: formSource,
           gclid: attribution.gclid,
+          gbraid: attribution.gbraid,
+          wbraid: attribution.wbraid,
           utm_source: attribution.utm_source,
           utm_medium: attribution.utm_medium,
           utm_campaign: attribution.utm_campaign,
@@ -99,7 +104,8 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
         return
       }
 
-      pushFormSubmit({ form_name: 'ConsultationForm', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode });
+      const accepted = await pushAcceptedLead({ acceptance: res, form_name: 'ConsultationForm', form_source: formSource, state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode });
+      if (!accepted) return
 
       form.reset()
       router.push('/thank-you')

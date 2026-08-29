@@ -7,7 +7,6 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import { restoreECFromSession } from "@/utils/enhancedConversions";
 import { getReviewLink, getReviewLocations } from "@/lib/reviewLinks";
 
 export default function ThankYouPage() {
@@ -18,12 +17,6 @@ export default function ThankYouPage() {
   // The locationSlug values are defined in /components/data/clinics.tsx
   const [resolvedSlug, setResolvedSlug] = useState<string | null>(null);
   const [selectedSlug, setSelectedSlug] = useState<string>('');
-
-  useEffect(() => {
-    // Restore enhanced conversion data from sessionStorage immediately
-    // This ensures the data is available when Google Ads conversion tags fire
-    restoreECFromSession(); // pushes {event:'ec_restore', enhanced_conversion_data:{...}}
-  }, []);
 
   useEffect(() => {
     try {

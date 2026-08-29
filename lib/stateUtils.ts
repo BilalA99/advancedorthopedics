@@ -55,6 +55,21 @@ export function normalizeState(value: string): StateSlug | '' {
   return SLUG_MAP[key] ?? '';
 }
 
+export type StateCode = 'FL' | 'NJ' | 'NY' | 'PA';
+
+const STATE_CODE_BY_SLUG: Record<StateSlug, StateCode> = {
+  florida: 'FL',
+  'new-jersey': 'NJ',
+  'new-york': 'NY',
+  pennsylvania: 'PA',
+};
+
+/** Canonical storage/measurement boundary. UI values remain route-friendly slugs. */
+export function normalizeStateCode(value: string): StateCode | '' {
+  const slug = normalizeState(value);
+  return slug ? STATE_CODE_BY_SLUG[slug] : '';
+}
+
 export function isValidState(value: string): value is StateSlug {
   return (VALID_STATES as readonly string[]).includes(value);
 }

@@ -1,5 +1,11 @@
 // utils/enhancedConversions.ts
 import { hasMarketingConsent, hasMeasurementConsent } from "@/lib/consent";
+import {
+  buildCanonicalLeadEvent,
+  parseLeadAcceptance,
+  readLeadAcceptance,
+  type FormSource,
+} from "@/lib/lead-contract";
 
 /**
  * Enhanced Conversions for Google Ads
@@ -274,17 +280,44 @@ export function pushAppointmentCtaClick(params: Record<string, any> = {}) {
 }
 
 /**
- * Single entry point for all form conversion tracking.
+ * Single entry point for accepted lead tracking.
  *
- * Internally calls persistEC → pushEC → dataLayer form_submit in the correct order.
- * No other code should call persistEC or pushEC directly after form submission.
- *
- * Must be called once, BEFORE navigation to /thank-you.
- * State MUST be one of: "florida" | "new-jersey" | "new-york" | "pennsylvania"
+ * The caller must provide the non-PII ID returned by successful persistence.
+ * Existing Enhanced Conversions data remains isolated in its own dataLayer push;
+ * the canonical lead event contains only non-sensitive measurement context.
  */
+const emittedSubmissionIds = new Set<string>();
+
+type AcceptedLeadContext = {
+  form_name: string;
+  form_source?: FormSource;
+  state: string;
+  email?: string;
+  phone?: string;
+  firstName?: string;
+  lastName?: string;
+  postalCode?: string;
+  country?: string;
+};
+
+export async function pushAcceptedLead({
+  acceptance,
+  ...context
+}: AcceptedLeadContext & { acceptance: unknown }): Promise<boolean> {
+  const accepted = acceptance instanceof Response
+    ? await readLeadAcceptance(acceptance)
+    : parseLeadAcceptance(acceptance);
+
+  if (!accepted) return false;
+  pushFormSubmit({ ...context, submission_id: accepted.submissionId });
+  return true;
+}
+
 export function pushFormSubmit({
   form_name,
+  form_source,
   state,
+  submission_id,
   email,
   phone,
   firstName,
@@ -293,7 +326,9 @@ export function pushFormSubmit({
   country = 'US',
 }: {
   form_name: string;
+  form_source?: FormSource;
   state: string;
+  submission_id: string | number;
   email?: string;
   phone?: string;
   firstName?: string;
@@ -302,6 +337,11 @@ export function pushFormSubmit({
   country?: string;
 }) {
   if (typeof window === 'undefined') return;
+
+  const acceptance = parseLeadAcceptance({ ok: true, submissionId: submission_id });
+  if (!acceptance || emittedSubmissionIds.has(acceptance.submissionId)) return;
+
+  emittedSubmissionIds.add(acceptance.submissionId);
 
   // Normalize phone to E.164 once here so every downstream consumer gets the correct format.
   // formatPhoneToE164 returns '' for invalid/short numbers; treat those as absent.
@@ -322,26 +362,17 @@ export function pushFormSubmit({
   }
 
   if (hasMeasurementConsent()) {
-    (window as any).dataLayer = (window as any).dataLayer || [];
-    (window as any).dataLayer.push({
-      event: 'lead_form_submit_success',
-      form_name,
-      state: state || '',
-      page_path: window.location.pathname,
-    });
-    (window as any).dataLayer.push({
-      event: 'form_submit',
-      form_name,
-      state: state || '',
-      page_path: window.location.pathname,
-    });
-    // Legacy alias — some GTM triggers/Ads conversions may still be bound to the
-    // old 'form_submission' event name with its original camelCase field names.
-    (window as any).dataLayer.push({
-      event: 'form_submission',
-      formName: form_name,
+    const measurementWindow = window as typeof window & {
+      dataLayer?: Array<Record<string, unknown>>;
+    };
+    measurementWindow.dataLayer = measurementWindow.dataLayer || [];
+    measurementWindow.dataLayer.push(buildCanonicalLeadEvent({
+      formId: form_name,
+      formSource: form_source,
       pagePath: window.location.pathname,
-    });
+      state,
+      submissionId: acceptance.submissionId,
+    }));
   }
 }
 

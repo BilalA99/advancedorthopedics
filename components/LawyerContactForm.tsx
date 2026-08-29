@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { getAttributionData } from "@/lib/gclid"
+import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -17,7 +17,7 @@ import { BorderBeam } from "@/components/magicui/border-beam"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { useRouter, usePathname } from "next/navigation"
-import { pushFormSubmit, persistEC, pushEC } from "@/utils/enhancedConversions"
+import { pushAcceptedLead } from "@/utils/enhancedConversions"
 import { STATE_OPTIONS, slugFromPathname } from "@/lib/stateUtils"
 
 const lawyerSchema = z.object({
@@ -75,7 +75,7 @@ export function LawyerContactForm() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [openDialog, setOpenDialog] = useState(false)
-    const [attribution, setAttribution] = useState({ gclid: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '', utm_content: '' })
+    const [attribution, setAttribution] = useState(EMPTY_ATTRIBUTION)
     const router = useRouter()
     const pathname = usePathname()
 
@@ -122,7 +122,8 @@ export function LawyerContactForm() {
                 return
             }
 
-            pushFormSubmit({ form_name: 'LawyerContactForm', state: values.clientState, email: values.email, phone: values.phone })
+            const accepted = await pushAcceptedLead({ acceptance: res, form_name: 'LawyerContactForm', form_source: 'attorney-coordination', state: values.clientState, email: values.email, phone: values.phone })
+            if (!accepted) return
             setOpenDialog(false)
             setIsSubmitted(true)
             router.push('/thank-you')

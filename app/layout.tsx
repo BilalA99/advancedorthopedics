@@ -239,19 +239,6 @@ export default function RootLayout({
             });
           `}
         </Script>
-        {/* Google tag (gtag.js) */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-XXHSYV3NMD"
-          strategy="afterInteractive"
-        />
-        <Script id="gtag-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            window.gtag = window.gtag || function gtag(){dataLayer.push(arguments);}
-            window.gtag('js', new Date());
-            window.gtag('config', 'G-XXHSYV3NMD');
-          `}
-        </Script>
         {/* Google Tag Manager */}
         <Script id="gtm-head" strategy="afterInteractive">
           {`

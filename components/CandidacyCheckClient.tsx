@@ -35,8 +35,8 @@ const associationLogoAlt: Record<string, string> = {
   'SMIS': 'Society for Minimally Invasive Spine Surgery (SMISS) member'
 };
 import { useRouter } from 'next/navigation'
-import { getAttributionData } from '@/lib/gclid'
-import { pushFormSubmit } from '@/utils/enhancedConversions'
+import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid'
+import { pushAcceptedLead } from '@/utils/enhancedConversions'
 // Reverted form schema to match the "Candidacy Check" steps from the image
 const formSchema = z.object({
   // Step 1 Questions
@@ -147,7 +147,7 @@ export default function CandidacyCheckClient({ reviews }: { reviews: SocialProof
   const [conditionStep, setConditionStep] = useState(1);
   const [appointmentConfirm, setAppointmentConfirm] = useState(false);
   const [disabled, setDisabled] = useState(false)
-  const [attribution, setAttribution] = useState({ gclid: '', utm_source: '', utm_medium: '', utm_campaign: '', utm_term: '', utm_content: '' })
+  const [attribution, setAttribution] = useState(EMPTY_ATTRIBUTION)
   const router = useRouter()
 
   React.useEffect(() => {
@@ -178,8 +178,10 @@ export default function CandidacyCheckClient({ reviews }: { reviews: SocialProof
     setDisabled(true)
     const data = await sendCandidacyEmail({ ...values, email_optout: "false", ...attribution });
     if (data) {
-      pushFormSubmit({
+      await pushAcceptedLead({
+        acceptance: data,
         form_name: 'CandidacyCheckForm',
+        form_source: 'candidacy-check',
         state: values.state,
         email: values.email,
         phone: values.phone,
