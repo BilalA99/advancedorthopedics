@@ -73,6 +73,9 @@ enforces that the sitemap never lists a redirect source.
 | Invented patient reviews in schema | 3 | **0** |
 | Clinics with global fake hours in JSON-LD | 23 | **0** |
 | `forms` rows lacking a submission ID | 1,142 | **0** |
+| Live pages picking doctors at random | 6 | **0** (deterministic, proven over 2 builds) |
+| Blog posts with an in-content conversion module | 0 | **all** (5 context variants) |
+| Invented clinician records in source | 3 | **0** |
 | Measurement contract tests | none | **8/8** |
 | Typecheck errors | 43 | 43 (no regressions) |
 
@@ -103,11 +106,21 @@ per-location review bodies. Logged with status in
 copy is deliberately left in place across 17 FAQ answers and 6 components rather
 than blanking hours sitewide on my own judgement.
 
-**Not started:** Waves 3–5 are largely untouched. `/conditions/spine` does not
-exist and still needs building. The orphan-page and links-to-redirects queues
-need a real crawl. The insurance page rebuild, blog conversion module,
-treatment/condition template consolidation, design-token layer, motion system,
-and the 42 legacy `layout="fill"` image props are all outstanding.
+**Corrected:** `/conditions/spine` **does** exist and is in good shape (1 H1,
+self-canonical, in the sitemap, 29 condition + 52 treatment links). Both the
+brief and my own first pass had this wrong — SHARED-15 is a review, not a build.
+
+**Partly done (Wave 3):** deterministic provider selection, the blog conversion
+module, and dead-code removal are complete. Still outstanding: the insurance page
+rebuild, treatment/condition template consolidation, and the RichTextContent
+linkification review.
+
+**Not started (Waves 4–5):** design-token layer, motion system, accessibility
+matrix, and performance budgets. The 41 legacy `layout="fill"` image props were
+investigated and deliberately left alone — Next 15 renders them correctly
+(`data-nimg="fill"`, full `srcSet`), so they are deprecation debt rather than a
+defect, and converting them blind would be unverifiable churn. The orphan-page
+and links-to-redirects queues still need a real crawl.
 
 **Environment limit worth knowing:** this machine has 7.3 GB RAM and repeatedly
 dropped below 1 GB free. Three production builds were killed mid-run by the OS
