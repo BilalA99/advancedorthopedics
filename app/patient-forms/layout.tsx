@@ -28,8 +28,6 @@ export default function PatientFormsLayout({
 }) {
   return (
     <>
-      <h1 className="sr-only">Patient Forms</h1>
-      <h2 className="sr-only">Download and Complete Forms Online</h2>
       {children}
     </>
   );

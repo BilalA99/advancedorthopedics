@@ -31,8 +31,6 @@ export default function ThankYouLayout({
 }) {
   return (
     <>
-      <h1 className="sr-only">Thank You</h1>
-      <h2 className="sr-only">We'll Contact You Soon</h2>
       {children}
     </>
   );

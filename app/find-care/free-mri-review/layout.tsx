@@ -28,8 +28,6 @@ export default function FreeMRIReviewLayout({
 }) {
   return (
     <>
-      <h1 className="sr-only">Free MRI Review</h1>
-      <h2 className="sr-only">Expert Imaging Analysis</h2>
       {children}
     </>
   );

@@ -28,8 +28,6 @@ export default function BookAppointmentLayout({
 }) {
   return (
     <>
-      <h1 className="sr-only">Book an Appointment</h1>
-      <h2 className="sr-only">Schedule Your Consultation</h2>
       {children}
     </>
   );

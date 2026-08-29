@@ -28,8 +28,6 @@ export default function InsurancePolicyLayout({
 }) {
   return (
     <>
-      <h1 className="sr-only">Insurance Policy</h1>
-      <h2 className="sr-only">Coverage and Payment Options</h2>
       {children}
     </>
   );

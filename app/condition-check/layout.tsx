@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { buildCanonical, canonicalForOg, srOnly } from "@/lib/seo";
+import { buildCanonical, canonicalForOg } from "@/lib/seo";
 import { getOgImageForPath } from "@/lib/og";
 
 export const metadata: Metadata = {
@@ -39,8 +39,6 @@ export default function ConditionCheckLayout({
 }) {
   return (
     <div>
-      <h1 className={srOnly}>Orthopedic Condition Checker</h1>
-      <h2 className={srOnly}>Quick Assessment Tool</h2>
       {children}
     </div>
   );

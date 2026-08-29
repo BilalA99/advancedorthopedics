@@ -28,8 +28,6 @@ export default function CandidacyCheckLayout({
 }) {
   return (
     <>
-      <h1 className="sr-only">Candidacy Check</h1>
-      <h2 className="sr-only">Surgery Candidacy Assessment</h2>
       {children}
     </>
   );

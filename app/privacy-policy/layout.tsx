@@ -28,8 +28,6 @@ export default function PrivacyPolicyLayout({
 }) {
   return (
     <>
-      <h1 className="sr-only">Privacy Policy</h1>
-      <h2 className="sr-only">Data Protection and HIPAA Compliance</h2>
       {children}
     </>
   );

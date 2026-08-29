@@ -28,8 +28,6 @@ export default function FindADoctorLayout({
 }) {
   return (
     <>
-      <h1 className="sr-only">Find a Doctor</h1>
-      <h2 className="sr-only">Orthopedic Specialists Near You</h2>
       {children}
     </>
   );

@@ -28,8 +28,6 @@ export default function FindCareLayout({
 }) {
   return (
     <>
-      <h1 className="sr-only">Find Care</h1>
-      <h2 className="sr-only">Orthopedic Services and Resources</h2>
       {children}
     </>
   );
