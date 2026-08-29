@@ -22,8 +22,8 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 
 const siteData = {
-  starRating: 5,
-  reviewCount: 327,
+  starRating: AVERAGE_RATING,
+  reviewCount: TOTAL_REVIEW_COUNT,
   citiesPill: "FL • NJ • NY • PA",
   injuries: [
     {
@@ -78,6 +78,7 @@ const siteData = {
 }
 
 import type { DoctorProp } from "@/components/data/doctors"
+import { AVERAGE_RATING, TOTAL_REVIEW_COUNT } from "@/components/data/reviewAggregate.generated"
 import type { SocialProofReview } from "@/components/data/socialProofReviews"
 
 interface PersonalInjuryClientProps {

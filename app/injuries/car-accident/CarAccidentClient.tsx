@@ -2,6 +2,7 @@
 
 import type React from "react"
 import type { DoctorProp } from "@/components/data/doctors"
+import { AVERAGE_RATING, TOTAL_REVIEW_COUNT } from "@/components/data/reviewAggregate.generated"
 
 interface CarAccidentClientProps {
     faqs: Array<{ q: string; a: string }>;
@@ -219,8 +220,8 @@ const data = {
             result: "Back to full desk days by week 2; driving okay.",
         },
     ],
-    starRating: 5,
-    reviewCount: 327,
+    starRating: AVERAGE_RATING,
+    reviewCount: TOTAL_REVIEW_COUNT,
 }
 
 // Custom hook for triage logic

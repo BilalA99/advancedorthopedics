@@ -2,6 +2,7 @@
 
 import type { DoctorProp } from "@/components/data/doctors"
 import type { SocialProofReview } from "@/components/data/socialProofReviews"
+import { AVERAGE_RATING, TOTAL_REVIEW_COUNT } from "@/components/data/reviewAggregate.generated"
 
 interface SlipAndFallClientProps {
     faqs: Array<{ q: string; a: string }>;
@@ -49,8 +50,8 @@ import { motion, AnimatePresence, LazyMotion, domAnimation, useReducedMotion, us
 
 // Data constants
 const siteData = {
-    starRating: 5,
-    reviewCount: 327,
+    starRating: AVERAGE_RATING,
+    reviewCount: TOTAL_REVIEW_COUNT,
     insurers: [
         { name: "Aetna", logo: "/logos/aetna.svg" },
         { name: "Cigna", logo: "/logos/cigna.svg" },
@@ -278,8 +279,8 @@ const data = {
             result: "Back to full desk days by week 2; driving okay.",
         },
     ],
-    starRating: 5,
-    reviewCount: 327,
+    starRating: AVERAGE_RATING,
+    reviewCount: TOTAL_REVIEW_COUNT,
 }
 
 export default function SlipAndFallClient({ faqs, doctors, reviews }: SlipAndFallClientProps) {

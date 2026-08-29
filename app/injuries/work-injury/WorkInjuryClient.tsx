@@ -24,8 +24,8 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 
 const siteData = {
-  starRating: 5,
-  reviewCount: 327,
+  starRating: AVERAGE_RATING,
+  reviewCount: TOTAL_REVIEW_COUNT,
   citiesPill: "FL • NJ • NY • PA",
   injuries: [
     { title: "Back strain", slug: "back-strain", blurb: "Lower or upper back pain from lifting or repetitive work.", link: "/conditions/lumbar-strain" },
@@ -41,6 +41,7 @@ const siteData = {
 
 import type { DoctorProp } from "@/components/data/doctors"
 import type { SocialProofReview } from "@/components/data/socialProofReviews"
+import { AVERAGE_RATING, TOTAL_REVIEW_COUNT } from "@/components/data/reviewAggregate.generated"
 
 interface WorkInjuryClientProps {
   faqs: Array<{ q: string; a: string }>

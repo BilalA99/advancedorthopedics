@@ -99,6 +99,48 @@ const body = JSON.stringify(safe, null, 2) + ';\n';
 const outPath = path.join(__dirname, '../components/data/clinicsForMap.generated.ts');
 const generatedContent = header + body;
 
+// ── Practice-wide review aggregate ──────────────────────────────────────────
+// Derived from the same GBP-sourced per-location rating/reviewCount fields, so
+// any review figure shown to a patient is traceable to real listing data rather
+// than a hand-typed marketing number. Emitted as its own tiny module because the
+// client components that display it (injury landing pages) must not pull the
+// full clinicsForMap payload into their bundles just to read two numbers.
+const rated = safe.filter(
+  (c) => typeof c.rating === 'number' && typeof c.reviewCount === 'number' && c.reviewCount > 0
+);
+const totalReviews = rated.reduce((sum, c) => sum + c.reviewCount, 0);
+const averageRating =
+  Math.round((rated.reduce((sum, c) => sum + c.rating * c.reviewCount, 0) / totalReviews) * 10) / 10;
+
+const aggregatePath = path.join(__dirname, '../components/data/reviewAggregate.generated.ts');
+const aggregateContent = `/**
+ * Auto-generated practice-wide review aggregate.
+ * DO NOT hand-edit — regenerate with: node scripts/generate-clinics-for-map.mjs
+ *
+ * Derived from the per-location Google Business Profile rating/reviewCount
+ * fields in components/data/clinics.tsx. Any review figure displayed to a
+ * patient must be sourced from here so it stays traceable to real listing data.
+ */
+
+/** Locations contributing a Google rating. */
+export const RATED_LOCATION_COUNT = ${rated.length};
+
+/** Total Google reviews summed across all rated locations. */
+export const TOTAL_REVIEW_COUNT = ${totalReviews};
+
+/** Review-count-weighted average rating across all rated locations. */
+export const AVERAGE_RATING = ${averageRating};
+`;
+
+const outputs = [
+  { path: outPath, content: generatedContent, label: `clinicsForMap.generated.ts (${safe.length} entries)` },
+  {
+    path: aggregatePath,
+    content: aggregateContent,
+    label: `reviewAggregate.generated.ts (${totalReviews} reviews / ${rated.length} locations)`,
+  },
+];
+
 const checkOnly = process.argv.includes('--check');
 
 // Line-ending-agnostic comparison: this repo's .gitattributes (`* text=auto`)
@@ -108,19 +150,28 @@ const checkOnly = process.argv.includes('--check');
 const normalizeNewlines = (s) => s.replace(/\r\n/g, '\n');
 
 if (checkOnly) {
-  const existing = fs.existsSync(outPath) ? fs.readFileSync(outPath, 'utf8') : null;
-  if (existing !== null && normalizeNewlines(existing) === normalizeNewlines(generatedContent)) {
-    console.log(`clinicsForMap.generated.ts is up to date (${safe.length} entries).`);
-    process.exit(0);
+  let stale = false;
+  for (const out of outputs) {
+    const existing = fs.existsSync(out.path) ? fs.readFileSync(out.path, 'utf8') : null;
+    if (existing !== null && normalizeNewlines(existing) === normalizeNewlines(out.content)) {
+      console.log(`${out.label} is up to date.`);
+      continue;
+    }
+    console.error(
+      existing === null
+        ? `${path.basename(out.path)} is missing.`
+        : `${path.basename(out.path)} is STALE — it no longer matches components/data/clinics.tsx.`
+    );
+    stale = true;
   }
-  console.error(
-    existing === null
-      ? 'clinicsForMap.generated.ts is missing.'
-      : 'clinicsForMap.generated.ts is STALE — it no longer matches components/data/clinics.tsx.'
-  );
-  console.error('Run: npx tsx scripts/generate-clinics-for-map.mjs');
-  process.exit(1);
+  if (stale) {
+    console.error('Run: npx tsx scripts/generate-clinics-for-map.mjs');
+    process.exit(1);
+  }
+  process.exit(0);
 }
 
-fs.writeFileSync(outPath, generatedContent);
-console.log(`Wrote ${safe.length} entries to ${outPath}`);
+for (const out of outputs) {
+  fs.writeFileSync(out.path, out.content);
+  console.log(`Wrote ${out.label}`);
+}
