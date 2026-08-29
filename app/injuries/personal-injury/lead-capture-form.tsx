@@ -218,7 +218,7 @@ export function PersonalInjuryLeadCaptureForm() {
                     </FormLabel>
                     <FormControl>
                       <div className="flex">
-                        <Input placeholder="Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1]" {...field} />
+                        <Input aria-label="Name" placeholder="Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1]" {...field} />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -240,7 +240,7 @@ export function PersonalInjuryLeadCaptureForm() {
                     </FormLabel>
                     <FormControl>
                       <div className="flex">
-                        <Input placeholder="Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1]" {...field} />
+                        <Input aria-label="Name" placeholder="Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1]" {...field} />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -292,7 +292,7 @@ export function PersonalInjuryLeadCaptureForm() {
                   </FormLabel>
                   <FormControl>
                     <div className="flex">
-                      <Input placeholder="Email" startIcon={Mail} className="h-12 text-lg border-[#DCDEE1]" {...field} />
+                      <Input aria-label="Email" placeholder="Email" startIcon={Mail} className="h-12 text-lg border-[#DCDEE1]" {...field} />
                     </div>
                   </FormControl>
                   <FormMessage />

@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Reem_Kufi, Inter, Public_Sans } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/NavBar";
+import SkipLinks from "@/components/SkipLinks";
+import MotionPreferences from "@/components/MotionPreferences";
 import Footer from "@/components/Footer";
 import { MapProvider } from "@/providers/map-provider";
 import { GeolocationProvider } from "@/providers/geolocationcontext";
@@ -254,6 +256,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${ReemKufi.variable} ${inter.variable} ${publicSans.variable} antialiased  overscroll-none `}
         suppressHydrationWarning
       >
+        <SkipLinks />
         {/* WebSite Schema for Search Functionality */}
         <script
           type="application/ld+json"
@@ -266,16 +269,20 @@ export default function RootLayout({
         />
         <GclidCapture />
         <CookieConsentManager />
-        <TanstackProvider>
-          <NavBar />
-          <MapProvider>
-            <GeolocationProvider>
-              {children}
-              <Footer />
-              <DelayedLocationPopup delayInSeconds={8} />
-            </GeolocationProvider>
-          </MapProvider>
-        </TanstackProvider>
+        <MotionPreferences>
+          <TanstackProvider>
+            <NavBar />
+            <MapProvider>
+              <GeolocationProvider>
+                <div id="main-content" tabIndex={-1}>
+                  {children}
+                </div>
+                <Footer />
+                <DelayedLocationPopup delayInSeconds={8} />
+              </GeolocationProvider>
+            </MapProvider>
+          </TanstackProvider>
+        </MotionPreferences>
       </body>
     </html>
   );

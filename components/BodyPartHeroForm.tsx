@@ -234,6 +234,9 @@ export default function BodyPartHeroForm({ bodyPartTitle }: BodyPartHeroFormProp
             </div>
             <input
               type="text"
+              name="firstName"
+              autoComplete="given-name"
+              aria-label="Your name"
               placeholder="Your Name"
               value={formData.firstName}
               onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
@@ -249,6 +252,10 @@ export default function BodyPartHeroForm({ bodyPartTitle }: BodyPartHeroFormProp
             </div>
             <input
               type="tel"
+              name="phone"
+              autoComplete="tel"
+              inputMode="tel"
+              aria-label="Phone number"
               placeholder="Phone Number"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: formatPhoneInput(e.target.value) })}

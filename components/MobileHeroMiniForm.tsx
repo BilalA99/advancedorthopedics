@@ -222,6 +222,9 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
             </div>
             <input
               type="text"
+              name="firstName"
+              autoComplete="given-name"
+              aria-label="Your name"
               placeholder="Your Name"
               value={formData.firstName}
               autoComplete="given-name"
@@ -238,6 +241,10 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
             </div>
             <input
               type="tel"
+              name="phone"
+              autoComplete="tel"
+              inputMode="tel"
+              aria-label="Phone number"
               placeholder="Phone Number"
               value={formData.phone}
               autoComplete="tel"

@@ -253,7 +253,7 @@ export function LeadCaptureForm() {
                                         </FormLabel>
                                         <FormControl>
                                             <div className=" flex  ">
-                                                <Input placeholder="Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1] " {...field} />
+                                                <Input aria-label="Name" placeholder="Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1] " {...field} />
                                             </div>
                                         </FormControl>
                                         <FormMessage />
@@ -279,7 +279,7 @@ export function LeadCaptureForm() {
                                         </FormLabel>
                                         <FormControl>
                                             <div className=" flex  ">
-                                                <Input placeholder="Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1] " {...field} />
+                                                <Input aria-label="Name" placeholder="Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1] " {...field} />
                                             </div>
                                         </FormControl>
                                         <FormMessage />
@@ -306,7 +306,7 @@ export function LeadCaptureForm() {
                                     </FormLabel>
                                     <FormControl>
                                         <div className=" flex  ">
-                                            <Input placeholder="Phone Number" startIcon={Phone} className="h-12 text-lg border-[#DCDEE1] " {...field} />
+                                            <Input aria-label="Phone Number" placeholder="Phone Number" startIcon={Phone} className="h-12 text-lg border-[#DCDEE1] " {...field} />
                                         </div>
                                     </FormControl>
                                     <FormMessage />
@@ -332,7 +332,7 @@ export function LeadCaptureForm() {
                                     </FormLabel>
                                     <FormControl>
                                         <div className=" flex  ">
-                                            <Input placeholder="Email" startIcon={Mail} className="h-12 text-lg border-[#DCDEE1] " {...field} />
+                                            <Input aria-label="Email" placeholder="Email" startIcon={Mail} className="h-12 text-lg border-[#DCDEE1] " {...field} />
                                         </div>
                                     </FormControl>
                                     <FormMessage />
@@ -408,7 +408,7 @@ export function LeadCaptureForm() {
                                                     </FormLabel>
                                                     <FormControl>
                                                         <div className=" flex  ">
-                                                            <Input placeholder="Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1] " {...field} />
+                                                            <Input aria-label="Name" placeholder="Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1] " {...field} />
                                                         </div>
                                                     </FormControl>
                                                     <FormMessage />
@@ -434,7 +434,7 @@ export function LeadCaptureForm() {
                                                     </FormLabel>
                                                     <FormControl>
                                                         <div className=" flex  ">
-                                                            <Input placeholder="Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1] " {...field} />
+                                                            <Input aria-label="Name" placeholder="Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1] " {...field} />
                                                         </div>
                                                     </FormControl>
                                                     <FormMessage />
@@ -461,7 +461,7 @@ export function LeadCaptureForm() {
                                                 </FormLabel>
                                                 <FormControl>
                                                     <div className=" flex  ">
-                                                        <Input placeholder="Phone Number" startIcon={Phone} className="h-12 text-lg border-[#DCDEE1] " {...field} />
+                                                        <Input aria-label="Phone Number" placeholder="Phone Number" startIcon={Phone} className="h-12 text-lg border-[#DCDEE1] " {...field} />
                                                     </div>
                                                 </FormControl>
                                                 <FormMessage />
@@ -487,7 +487,7 @@ export function LeadCaptureForm() {
                                                 </FormLabel>
                                                 <FormControl>
                                                     <div className=" flex  ">
-                                                        <Input placeholder="Email" startIcon={Mail} className="h-12 text-lg border-[#DCDEE1] " {...field} />
+                                                        <Input aria-label="Email" placeholder="Email" startIcon={Mail} className="h-12 text-lg border-[#DCDEE1] " {...field} />
                                                     </div>
                                                 </FormControl>
                                                 <FormMessage />

@@ -332,6 +332,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                         <div className=" flex  ">
                                                             <Input
                                                                 id="first_name"
+                                                                aria-label="First name"
                                                                 name="firstName"
                                                                 placeholder="First Name"
                                                                 autoComplete="given-name"
@@ -368,6 +369,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                         <div className=" flex  ">
                                                             <Input
                                                                 id="last_name"
+                                                                aria-label="Last name"
                                                                 name="lastName"
                                                                 placeholder="Last Name"
                                                                 autoComplete="family-name"
@@ -424,6 +426,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                 <div className=" flex  ">
                                                     <Input
                                                         id="email"
+                                                        aria-label="Email address"
                                                         name="email"
                                                         type="email"
                                                         placeholder="Example@gmail.com"
@@ -461,6 +464,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                 <div className=" flex  ">
                                                     <Input
                                                         id="phone"
+                                                        aria-label="Phone number"
                                                         name="phone"
                                                         type="tel"
                                                         placeholder="(123) 456-7890"
@@ -500,6 +504,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                     <div className="flex">
                                                         <Input
                                                             id="postal_code"
+                                                            aria-label="ZIP or postal code"
                                                             name="postalCode"
                                                             inputMode="numeric"
                                                             autoComplete="postal-code"
@@ -629,6 +634,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                                 <FormControl>
                                                                     <Input
                                                                         id="first_name"
+                                                                        aria-label="First name"
                                                                         name="firstName"
                                                                         placeholder="First Name"
                                                                         autoComplete="given-name"
@@ -653,6 +659,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                                 <FormControl>
                                                                     <Input
                                                                         id="last_name"
+                                                                        aria-label="Last name"
                                                                         name="lastName"
                                                                         placeholder="Last Name"
                                                                         autoComplete="family-name"
@@ -691,6 +698,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                                 <FormControl>
                                                                     <Input
                                                                         id="email"
+                                                                        aria-label="Email address"
                                                                         name="email"
                                                                         type="email"
                                                                         placeholder="Enter your email"
@@ -727,6 +735,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                                 <FormControl>
                                                                     <Input
                                                                         id="phone"
+                                                                        aria-label="Phone number"
                                                                         name="phone"
                                                                         type="tel"
                                                                         placeholder="(123) 456-7890"
@@ -765,6 +774,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                                 <FormControl>
                                                                     <Input
                                                                         id="postal_code"
+                                                                        aria-label="ZIP or postal code"
                                                                         name="postalCode"
                                                                         inputMode="numeric"
                                                                         autoComplete="postal-code"

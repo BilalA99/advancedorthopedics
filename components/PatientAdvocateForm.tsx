@@ -162,6 +162,7 @@ export function PatientAdvocateForm() {
                     <FormControl>
                       <Input 
                         id="first_name"
+                        aria-label="First name"
                         name="firstName"
                         placeholder="First Name" 
                         autoComplete="given-name"
@@ -186,6 +187,7 @@ export function PatientAdvocateForm() {
                     <FormControl>
                       <Input 
                         id="last_name"
+                        aria-label="Last name"
                         name="lastName"
                         placeholder="Last Name" 
                         autoComplete="family-name"
@@ -240,6 +242,7 @@ export function PatientAdvocateForm() {
                     <FormControl>
                       <Input 
                         id="postal_code"
+                        aria-label="ZIP or postal code"
                         name="postalCode"
                         inputMode="numeric"
                         autoComplete="postal-code"

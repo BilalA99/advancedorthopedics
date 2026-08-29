@@ -271,7 +271,7 @@ export function CarAccidentLeadCaptureForm() {
                                         </FormLabel>
                                         <FormControl>
                                             <div className=" flex  ">
-                                                <Input placeholder="First Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1] " {...field} />
+                                                <Input aria-label="First Name" placeholder="First Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1] " {...field} />
                                             </div>
                                         </FormControl>
                                         <FormMessage />
@@ -295,7 +295,7 @@ export function CarAccidentLeadCaptureForm() {
                                         </FormLabel>
                                         <FormControl>
                                             <div className=" flex  ">
-                                                <Input placeholder="Last Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1] " {...field} />
+                                                <Input aria-label="Last Name" placeholder="Last Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1] " {...field} />
                                             </div>
                                         </FormControl>
                                         <FormMessage />
@@ -320,7 +320,7 @@ export function CarAccidentLeadCaptureForm() {
                                     </FormLabel>
                                     <FormControl>
                                         <div className=" flex  ">
-                                            <Input placeholder="Phone Number" startIcon={Phone} className="h-12 text-lg border-[#DCDEE1] " {...field} />
+                                            <Input aria-label="Phone Number" placeholder="Phone Number" startIcon={Phone} className="h-12 text-lg border-[#DCDEE1] " {...field} />
                                         </div>
                                     </FormControl>
                                     <FormMessage />
@@ -344,7 +344,7 @@ export function CarAccidentLeadCaptureForm() {
                                     </FormLabel>
                                     <FormControl>
                                         <div className=" flex  ">
-                                            <Input placeholder="Email" startIcon={Mail} className="h-12 text-lg border-[#DCDEE1] " {...field} />
+                                            <Input aria-label="Email" placeholder="Email" startIcon={Mail} className="h-12 text-lg border-[#DCDEE1] " {...field} />
                                         </div>
                                     </FormControl>
                                     <FormMessage />
@@ -406,7 +406,7 @@ export function CarAccidentLeadCaptureForm() {
                                                 </FormLabel>
                                                 <FormControl>
                                                     <div className=" flex  ">
-                                                        <Input placeholder="First Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1] " {...field} />
+                                                        <Input aria-label="First Name" placeholder="First Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1] " {...field} />
                                                     </div>
                                                 </FormControl>
                                                 <FormMessage />
@@ -430,7 +430,7 @@ export function CarAccidentLeadCaptureForm() {
                                                 </FormLabel>
                                                 <FormControl>
                                                     <div className=" flex  ">
-                                                        <Input placeholder="Last Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1] " {...field} />
+                                                        <Input aria-label="Last Name" placeholder="Last Name" startIcon={User} className="h-12 text-lg border-[#DCDEE1] " {...field} />
                                                     </div>
                                                 </FormControl>
                                                 <FormMessage />
@@ -455,7 +455,7 @@ export function CarAccidentLeadCaptureForm() {
                                             </FormLabel>
                                             <FormControl>
                                                 <div className=" flex  ">
-                                                    <Input placeholder="Phone Number" startIcon={Phone} className="h-12 text-lg border-[#DCDEE1] " {...field} />
+                                                    <Input aria-label="Phone Number" placeholder="Phone Number" startIcon={Phone} className="h-12 text-lg border-[#DCDEE1] " {...field} />
                                                 </div>
                                             </FormControl>
                                             <FormMessage />
@@ -479,7 +479,7 @@ export function CarAccidentLeadCaptureForm() {
                                             </FormLabel>
                                             <FormControl>
                                                 <div className=" flex  ">
-                                                    <Input placeholder="Email" startIcon={Mail} className="h-12 text-lg border-[#DCDEE1] " {...field} />
+                                                    <Input aria-label="Email" placeholder="Email" startIcon={Mail} className="h-12 text-lg border-[#DCDEE1] " {...field} />
                                                 </div>
                                             </FormControl>
                                             <FormMessage />
