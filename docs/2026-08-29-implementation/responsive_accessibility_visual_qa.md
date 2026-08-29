@@ -64,3 +64,53 @@ captured: the machine could not hold a browser and a build concurrently.
 
 Every claim above is from static markup analysis of the production build. None
 of it has been verified on a deployed site.
+
+---
+
+# Browser QA — desktop, 2026-08-29
+
+Driven against `npm start` on localhost with Chrome automation at a 1536px
+viewport. **Mobile was not tested** — see blockers.
+
+## Verified working
+
+| Check | Result |
+|---|---|
+| `/locations/florida/miami-beach-orthopedics` | 301s to `/south-miami-orthopedics` |
+| South Miami page | 1 H1, self-canonical, 0 occurrences of "Miami Beach", 105 of "South Miami" |
+| Second Opinion callout | Renders in the decision path with the verified 24-hour scope and both links |
+| PBG page | 1 H1; every `tel:` link E.164 (`+15612239959`, `+19732596756`, `+16463895606`); offer present; no placeholder phone |
+| `/conditions`, `/treatments` | 1 H1 each; skip link and `#main-content` landmark present |
+| Blog conversion module | Resolves to `second-opinion` on the surgery-recovery post; 3 CTAs with `data-cta-action` |
+| dataLayer on page load | `gtm.js`, `gtm.dom`, `gtm.load` only — **0 lead events** |
+| Empty form submit | **0 `lead_form_submit_success`**, no navigation to `/thank-you` |
+
+The `TextAnimate` H1 appears faint in a screenshot taken mid-animation but
+settles to `opacity: 1`, `transform: none`. Not a defect.
+
+## Found during testing
+
+**Silent validation failure (pre-existing).** Submitting the hero mini form
+empty produces no error message, no `aria-invalid`, and the inputs carry no
+`required` attribute — the form simply does nothing. The conversion invariant
+holds, but the user gets no feedback. WCAG 3.3.1 (Error Identification).
+
+**NAP inconsistency on the renamed page.** The South Miami page displays
+`7000 SW 62nd Ave, Suite 330, Miami, FL 33143` while its title, H1, breadcrumb
+and schema all say South Miami. **Deliberately not changed**: the address must
+match the Google Business Profile exactly, and the repo disagrees with itself —
+`GBP_ADDRESSES` says "Miami, FL 33143" while the clinic's own Google Maps
+`link` says "South Miami, FL 33143-4716". Guessing here would risk a real NAP
+mismatch, which is worse than the cosmetic inconsistency. Needs the GBP listing
+checked.
+
+## Blocked
+
+- **Mobile viewport.** `resize_window` reports success but `innerWidth` stays
+  at 1536 — the Chrome window is maximized, which prevents programmatic
+  resizing. Stopped after three attempts. Needs the window restored down.
+- **Screenshot capture** timed out twice on tall pages with ~400–700MB free RAM
+  (Chrome alone was using 2.2GB across 38 processes).
+- **End-to-end lead submission** not attempted: it writes to the production
+  `forms` table and sends a patient email via Resend. Requires explicit
+  approval and an identifiable test record.
