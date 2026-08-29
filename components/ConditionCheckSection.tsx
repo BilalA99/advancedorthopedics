@@ -252,7 +252,7 @@ export default function ConditionCheckSection({
                             value={field.value || ""}
                             onValueChange={field.onChange}
                           >
-                            <SelectTrigger className="w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm">
+                            <SelectTrigger aria-label="Choose" className="w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm">
                               <SelectValue placeholder="Choose" className="font-[var(--font-inter)] text-lg" />
                             </SelectTrigger>
                             <SelectContent>

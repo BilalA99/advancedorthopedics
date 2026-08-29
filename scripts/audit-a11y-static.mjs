@@ -96,6 +96,8 @@ for (const f of files) {
     // Radix renders a visually hidden native control purely so the value posts
     // with the form; it is aria-hidden and out of the tab order, so needs no label.
     if (attr(t, 'aria-hidden') === 'true' || attr(t, 'tabindex') === '-1') continue;
+    // display:none removes an element from the accessibility tree entirely.
+    if ((attr(t, 'style') || '').replace(/\s/g, '').includes('display:none')) continue;
     const id = attr(t, 'id');
     if (attr(t, 'aria-label') || attr(t, 'aria-labelledby') || (id && labelFor.has(id))) continue;
     totals.inputNoLabel++;

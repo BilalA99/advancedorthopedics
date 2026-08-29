@@ -264,7 +264,7 @@ export function PatientAdvocateForm() {
                   <FormLabel className="text-sm text-[#838890] font-semibold">State<span className="text-red-500">*</span></FormLabel>
                   <FormControl>
                     <Select onValueChange={field.onChange} value={field.value}>
-                      <SelectTrigger className="w-full h-12 px-6 bg-[#f0f5ff] border border-[#DCDEE1] rounded-sm">
+                      <SelectTrigger aria-label="Select your state" className="w-full h-12 px-6 bg-[#f0f5ff] border border-[#DCDEE1] rounded-sm">
                         <SelectValue placeholder="Select your state" />
                       </SelectTrigger>
                       <SelectContent>
@@ -291,7 +291,7 @@ export function PatientAdvocateForm() {
                 </FormLabel>
                 <FormControl>
                   <Select onValueChange={field.onChange} value={field.value} >
-                    <SelectTrigger
+                    <SelectTrigger aria-label="Best Contact Time"
                       className="w-full h-12 px-6 bg-[#f0f5ff]  border rounded-sm"
                     >
                       <SelectValue placeholder="Best Contact Time" className=" font-[var(--font-inter)] h-12 text-lg data-[placeholder]:text-red-500" />

@@ -435,7 +435,7 @@ export default function BookAnAppoitmentButton({
                                                 <FormLabel className="text-sm text-[#111315] font-semibold">State<span className="text-red-500">*</span></FormLabel>
                                                 <FormControl>
                                                     <Select onValueChange={field.onChange} value={field.value}>
-                                                        <SelectTrigger className="w-full h-10 px-4 bg-[#f0f5ff] border rounded-sm">
+                                                        <SelectTrigger aria-label="Select your state" className="w-full h-10 px-4 bg-[#f0f5ff] border rounded-sm">
                                                             <SelectValue placeholder="Select your state" />
                                                         </SelectTrigger>
                                                         <SelectContent>
@@ -471,7 +471,7 @@ export default function BookAnAppoitmentButton({
                                             </FormLabel>
                                             <FormControl>
                                                 <Select onValueChange={field.onChange} value={field.value} >
-                                                    <SelectTrigger
+                                                    <SelectTrigger aria-label="Select Best Time To Contact"
                                                         className="w-full h-10 px-6 bg-[#f0f5ff]  border rounded-sm"
                                                     >
                                                         <SelectValue placeholder="Select Best Time To Contact" className=" font-[var(--font-inter)] h-10 text-lg data-[placeholder]:text-red-500" />

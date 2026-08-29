@@ -237,7 +237,7 @@ export default function BookAnAppointmentPopup() {
                                     </FormLabel>
                                     <FormControl>
                                         <Select onValueChange={field.onChange} value={field.value} >
-                                            <SelectTrigger
+                                            <SelectTrigger aria-label="Select Best Time To Contact"
                                                 className="w-full h-12 px-6 bg-[#f0f5ff]  border rounded-sm"
                                             >
                                                 <SelectValue placeholder="Select Best Time To Contact" className=" font-[var(--font-inter)] h-12 text-lg data-[placeholder]:text-red-500" />

@@ -247,7 +247,7 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
                   <FormLabel className="text-sm text-[#838890] font-semibold">State<span className="text-red-500">*</span></FormLabel>
                   <FormControl>
                     <Select onValueChange={field.onChange} value={field.value}>
-                      <SelectTrigger className="w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm">
+                      <SelectTrigger aria-label="Select your state" className="w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm">
                         <SelectValue placeholder="Select your state" className="font-[var(--font-inter)] h-12 text-lg" />
                       </SelectTrigger>
                       <SelectContent>
@@ -277,7 +277,7 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
                 </FormLabel>
                 <FormControl>
                   <Select onValueChange={field.onChange} value={field.value} >
-                    <SelectTrigger
+                    <SelectTrigger aria-label="Select Best Time To Contact"
                       className="w-full h-12 px-6 bg-[#f0f5ff]  border rounded-sm"
                     >
                       <SelectValue placeholder="Select Best Time To Contact" className=" font-[var(--font-inter)] h-12 text-lg data-[placeholder]:text-red-500" />

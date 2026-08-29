@@ -404,7 +404,7 @@ export default function CandidacyCheckClient({ reviews }: { reviews: SocialProof
                         <FormControl>
                           {question.options.length > 0 ? (
                             <Select onValueChange={field.onChange} value={field.value || ""}>
-                              <SelectTrigger className="w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm">
+                              <SelectTrigger aria-label="Choose" className="w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm">
                                 <SelectValue placeholder="Choose" className="font-[var(--font-inter)] text-lg" />
                               </SelectTrigger>
                               <SelectContent>

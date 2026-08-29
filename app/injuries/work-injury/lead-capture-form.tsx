@@ -412,7 +412,7 @@ export function WorkInjuryLeadCaptureForm() {
                                         </span>
                                     </Label>
                                     <Select onValueChange={(value) => form.setValue("injury", value)}>
-                                        <SelectTrigger className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm ${form.formState.errors.injury ? "border-red-500" : ""}`}>
+                                        <SelectTrigger aria-label="Select your injury" className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm ${form.formState.errors.injury ? "border-red-500" : ""}`}>
                                             <SelectValue placeholder="Select your injury" className="font-[var(--font-inter)] h-12 text-lg" />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -433,7 +433,7 @@ export function WorkInjuryLeadCaptureForm() {
                                         </span>
                                     </Label>
                                     <Select onValueChange={(value) => form.setValue("urgency", value)}>
-                                        <SelectTrigger className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm ${form.formState.errors.urgency ? "border-red-500" : ""}`}>
+                                        <SelectTrigger aria-label="Select urgency" className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm ${form.formState.errors.urgency ? "border-red-500" : ""}`}>
                                             <SelectValue placeholder="Select urgency" className="font-[var(--font-inter)] h-12 text-lg" />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -454,7 +454,7 @@ export function WorkInjuryLeadCaptureForm() {
                                         </span>
                                     </Label>
                                     <Select onValueChange={(value) => form.setValue("location", value)}>
-                                        <SelectTrigger className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm ${form.formState.errors.location ? "border-red-500" : ""}`}>
+                                        <SelectTrigger aria-label="Select location" className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm ${form.formState.errors.location ? "border-red-500" : ""}`}>
                                             <SelectValue placeholder="Select location" className="font-[var(--font-inter)] h-12 text-lg" />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -475,7 +475,7 @@ export function WorkInjuryLeadCaptureForm() {
                                         </span>
                                     </Label>
                                     <Select onValueChange={(value) => form.setValue("state", value)}>
-                                        <SelectTrigger className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm ${form.formState.errors.state ? "border-red-500" : ""}`}>
+                                        <SelectTrigger aria-label="Select your state" className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm ${form.formState.errors.state ? "border-red-500" : ""}`}>
                                             <SelectValue placeholder="Select your state" />
                                         </SelectTrigger>
                                         <SelectContent>

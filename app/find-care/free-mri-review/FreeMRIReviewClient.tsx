@@ -424,7 +424,7 @@ export default function FreeMRIReviewClient({ reviews }: { reviews: SocialProofR
                                       value={field.value || ""}
                                     // defaultValue={field.value} // Can also use defaultValue, but `value` is standard for controlled
                                     >
-                                      <SelectTrigger
+                                      <SelectTrigger aria-label="Choose"
                                         className="w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm"
                                       >
                                         {/* Note: className on SelectValue might have limited effect; style Trigger/Item */}

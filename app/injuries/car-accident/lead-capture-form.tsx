@@ -503,7 +503,7 @@ export function CarAccidentLeadCaptureForm() {
                                             </FormLabel>
                                             <FormControl>
                                                 <Select onValueChange={(value) => field.onChange(value)}>
-                                                    <SelectTrigger className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm`}>
+                                                    <SelectTrigger aria-label="Select your injury type" className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm`}>
                                                         <SelectValue placeholder="Select your injury type" className="font-[var(--font-inter)] h-12 text-lg" />
                                                     </SelectTrigger>
                                                     <SelectContent>
@@ -536,7 +536,7 @@ export function CarAccidentLeadCaptureForm() {
                                             </FormLabel>
                                             <FormControl>
                                                 <Select onValueChange={(value) => field.onChange(value)}>
-                                                    <SelectTrigger className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm`}>
+                                                    <SelectTrigger aria-label="Select pain level" className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm`}>
                                                         <SelectValue placeholder="Select pain level" className="font-[var(--font-inter)] h-12 text-lg" />
                                                     </SelectTrigger>
                                                     <SelectContent>
@@ -573,7 +573,7 @@ export function CarAccidentLeadCaptureForm() {
                                             </FormLabel>
                                             <FormControl>
                                                 <Select onValueChange={(value) => field.onChange(value)}>
-                                                    <SelectTrigger className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm`}>
+                                                    <SelectTrigger aria-label="Select pain level" className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm`}>
                                                         <SelectValue placeholder="Select pain level" className="font-[var(--font-inter)] h-12 text-lg" />
                                                     </SelectTrigger>
                                                     <SelectContent>
@@ -610,7 +610,7 @@ export function CarAccidentLeadCaptureForm() {
                                             </FormLabel>
                                             <FormControl>
                                                 <Select onValueChange={(value) => field.onChange(value)}>
-                                                    <SelectTrigger className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm`}>
+                                                    <SelectTrigger aria-label="Select option" className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm`}>
                                                         <SelectValue placeholder="Select option" className="font-[var(--font-inter)] h-12 text-lg" />
                                                     </SelectTrigger>
                                                     <SelectContent>
@@ -638,7 +638,7 @@ export function CarAccidentLeadCaptureForm() {
                                             </FormLabel>
                                             <FormControl>
                                                 <Select onValueChange={field.onChange} value={field.value}>
-                                                    <SelectTrigger className="w-full h-12 px-6 bg-[#f0f5ff] border border-[#DCDEE1] rounded-sm">
+                                                    <SelectTrigger aria-label="Select your state" className="w-full h-12 px-6 bg-[#f0f5ff] border border-[#DCDEE1] rounded-sm">
                                                         <SelectValue placeholder="Select your state" />
                                                     </SelectTrigger>
                                                     <SelectContent>

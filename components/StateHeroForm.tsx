@@ -178,6 +178,7 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
                       <FormControl>
                         <Input
                           id="hero_first_name"
+                          aria-label="First name"
                           name="firstName"
                           placeholder="First Name"
                           autoComplete="given-name"
@@ -201,6 +202,7 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
                       <FormControl>
                         <Input
                           id="hero_last_name"
+                          aria-label="Last name"
                           name="lastName"
                           placeholder="Last Name"
                           autoComplete="family-name"
@@ -225,6 +227,7 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
                     <FormControl>
                       <Input
                         id="hero_phone"
+                        aria-label="Phone number"
                         name="phone"
                         type="tel"
                         placeholder="(123) 456-7890"
@@ -253,6 +256,7 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
                     <FormControl>
                       <Input
                         id="hero_email"
+                        aria-label="Email address"
                         name="email"
                         type="email"
                         placeholder="Email Address"
@@ -291,6 +295,7 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
                               <FormControl>
                                 <Input
                                   id="hero_postal"
+                                  aria-label="ZIP or postal code"
                                   name="postalCode"
                                   inputMode="numeric"
                                   autoComplete="postal-code"
@@ -311,7 +316,7 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
                           <FormItem className="w-full">
                             <FormControl>
                               <Select onValueChange={field.onChange} value={field.value}>
-                                <SelectTrigger className="w-full h-11 text-sm bg-white/70 border border-[#DCDEE1] rounded-md px-3 focus:bg-white transition-colors">
+                                <SelectTrigger aria-label="State" className="w-full h-11 text-sm bg-white/70 border border-[#DCDEE1] rounded-md px-3 focus:bg-white transition-colors">
                                   <SelectValue placeholder="State" />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -337,7 +342,7 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
                               onValueChange={field.onChange}
                               value={field.value}
                             >
-                              <SelectTrigger className="h-11 text-sm bg-white/70 border-[#DCDEE1] rounded-sm">
+                              <SelectTrigger aria-label="Best time to contact" className="h-11 text-sm bg-white/70 border-[#DCDEE1] rounded-sm">
                                 <SelectValue placeholder="Best time to contact" />
                               </SelectTrigger>
                               <SelectContent>

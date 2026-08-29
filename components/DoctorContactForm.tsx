@@ -534,7 +534,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                             </FormLabel>
                                             <FormControl>
                                                 <Select onValueChange={field.onChange} value={field.value}>
-                                                    <SelectTrigger className="w-full sm:h-12 h-10 px-4 bg-[#f0f5ff] border rounded-sm">
+                                                    <SelectTrigger aria-label="Select state" className="w-full sm:h-12 h-10 px-4 bg-[#f0f5ff] border rounded-sm">
                                                         <SelectValue placeholder="Select state" />
                                                     </SelectTrigger>
                                                     <SelectContent>
@@ -570,7 +570,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                         </FormLabel>
                                         <FormControl>
                                             <Select onValueChange={field.onChange} value={field.value} >
-                                                <SelectTrigger
+                                                <SelectTrigger aria-label="Select Best Time To Contact"
                                                     className="w-full !sm:h-12 h-10 px-6 bg-[#f0f5ff]  border rounded-sm"
                                                 >
                                                     <SelectValue placeholder="Select Best Time To Contact" className=" font-[var(--font-inter)] sm:h-12 h-10 text-lg data-[placeholder]:text-red-500" />
@@ -803,7 +803,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                             </FormLabel>
                                                             <FormControl>
                                                                 <Select onValueChange={field.onChange} value={field.value}>
-                                                                    <SelectTrigger className="w-full h-10 px-4 bg-[#f0f5ff] border rounded-sm">
+                                                                    <SelectTrigger aria-label="Select state" className="w-full h-10 px-4 bg-[#f0f5ff] border rounded-sm">
                                                                         <SelectValue placeholder="Select state" />
                                                                     </SelectTrigger>
                                                                     <SelectContent>
@@ -839,7 +839,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                         </FormLabel>
                                                         <FormControl>
                                                             <Select onValueChange={field.onChange} value={field.value} >
-                                                                <SelectTrigger
+                                                                <SelectTrigger aria-label="Select Best Time To Contact"
                                                                     className="w-full h-10 px-6 bg-[#f0f5ff]  border rounded-sm"
                                                                 >
                                                                     <SelectValue placeholder="Select Best Time To Contact" className=" font-[var(--font-inter)] h-10 text-lg data-[placeholder]:text-red-500" />

@@ -173,6 +173,10 @@ export default function InjuryClinicFinder() {
                 value={zipInput}
                 onChange={(e) => setZipInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleZipSearch()}
+                aria-label="ZIP code"
+                name="zip"
+                autoComplete="postal-code"
+                inputMode="numeric"
                 placeholder="Enter ZIP code (e.g. 33021)"
                 maxLength={5}
                 className="flex-1 border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0A50EC]"
