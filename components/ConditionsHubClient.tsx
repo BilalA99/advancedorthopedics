@@ -254,7 +254,7 @@ export default function ConditionsHubClient({ reviews, showFeaturedDoctor }: { r
                   Previous
                 </span>
               </button>
-              <div className="flex flex-row items-center space-x-1">{renderPageNumbers()}</div>
+              <div className="flex flex-row flex-wrap justify-center items-center gap-1">{renderPageNumbers()}</div>
               <button
                 className="flex flex-row items-center space-x-2 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}

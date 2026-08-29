@@ -261,7 +261,7 @@ export default function TreatmentsHubClient({ reviews, showFeaturedDoctor }: { r
                 </span>
               </button>
 
-              <div className='flex flex-row items-center space-x-1'>
+              <div className='flex flex-row flex-wrap justify-center items-center gap-1'>
                 {renderPageNumbers()}
               </div>
 
