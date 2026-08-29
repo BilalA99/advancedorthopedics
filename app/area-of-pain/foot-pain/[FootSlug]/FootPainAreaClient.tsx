@@ -10,8 +10,8 @@ import { TextAnimate } from '@/components/magicui/text-animate';
 import { PhoneText } from '@/components/PhoneText';
 import { PhoneCTA } from '@/components/PhoneCTA';
 import Link from 'next/link';
-import { conditions } from '@/components/data/conditions';
-import { AllTreatmentsCombined } from '@/components/data/treatments';
+import { conditionIndex as conditions } from '@/components/data/taxonomyIndex.generated';
+import { treatmentIndex as AllTreatmentsCombined } from '@/components/data/taxonomyIndex.generated';
 
 // Helper to resolve specialty slug for cross-linking
 const SPECIALTY_MAP: Record<string, string> = {
