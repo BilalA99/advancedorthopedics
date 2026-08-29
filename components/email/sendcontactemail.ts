@@ -94,17 +94,6 @@ export async function sendUserEmail(formData: {
   utm_content?: string;
 }) {
   try {
-    await resend.emails.send({
-      from: 'Mountain Spine & Orthopedics <info@mountainspineorthopedics.com>',
-      to: [formData.email],
-      subject: 'Thank you for contacting Mountain Spine & Orthopedics',
-      react: await UserEmailTemplate({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-      }),
-    });
-
     const acceptance = await logLeadToSupabase({
       patient_name:  formData.name,
       patient_email: formData.email,
@@ -121,6 +110,17 @@ export async function sendUserEmail(formData: {
       utm_campaign:  formData.utm_campaign,
       utm_term:      formData.utm_term,
       utm_content:   formData.utm_content,
+    });
+
+    await resend.emails.send({
+      from: 'Mountain Spine & Orthopedics <info@mountainspineorthopedics.com>',
+      to: [formData.email],
+      subject: 'Thank you for contacting Mountain Spine & Orthopedics',
+      react: await UserEmailTemplate({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+      }),
     });
 
     return acceptance;
@@ -228,6 +228,25 @@ export async function sendMRIContactEmail(formData: {
   utm_content?: string;
 }) {
   try {
+    const acceptance = await logLeadToSupabase({
+      patient_name:   `${formData.first_name} ${formData.last_name}`.trim(),
+      patient_email:  formData.email,
+      patient_phone:  formData.phone,
+      state:          formData.state,
+      reason:         formData.recent_diagnosis || formData.comments || undefined,
+      best_time:      formData.bestTime,
+      insurance_type: formData.insurance_type,
+      form_source:    'free-mri-review',
+      gclid:          formData.gclid,
+      gbraid:         formData.gbraid,
+      wbraid:         formData.wbraid,
+      utm_source:     formData.utm_source,
+      utm_medium:     formData.utm_medium,
+      utm_campaign:   formData.utm_campaign,
+      utm_term:       formData.utm_term,
+      utm_content:    formData.utm_content,
+    });
+
     await resend.emails.send({
       from: 'Mountain Spine & Orthopedics <no-reply@mountainspineorthopedics.com>',
       to: ['info@mountainspineorthopedics.com'],
@@ -246,25 +265,6 @@ export async function sendMRIContactEmail(formData: {
         state: formData.state,
         bestTime: formData.bestTime,
       }),
-    });
-
-    const acceptance = await logLeadToSupabase({
-      patient_name:   `${formData.first_name} ${formData.last_name}`.trim(),
-      patient_email:  formData.email,
-      patient_phone:  formData.phone,
-      state:          formData.state,
-      reason:         formData.recent_diagnosis || formData.comments || undefined,
-      best_time:      formData.bestTime,
-      insurance_type: formData.insurance_type,
-      form_source:    'free-mri-review',
-      gclid:          formData.gclid,
-      gbraid:         formData.gbraid,
-      wbraid:         formData.wbraid,
-      utm_source:     formData.utm_source,
-      utm_medium:     formData.utm_medium,
-      utm_campaign:   formData.utm_campaign,
-      utm_term:       formData.utm_term,
-      utm_content:    formData.utm_content,
     });
 
     return acceptance;
@@ -303,6 +303,24 @@ export async function sendCandidacyEmail(formData: {
   utm_content?: string;
 }) {
   try {
+    const acceptance = await logLeadToSupabase({
+      patient_name:   `${formData.first_name} ${formData.last_name}`.trim(),
+      patient_email:  formData.email,
+      patient_phone:  formData.phone,
+      state:          formData.state,
+      reason:         formData.condition || undefined,
+      insurance_type: formData.insurance_type,
+      form_source:    'candidacy-check',
+      gclid:          formData.gclid,
+      gbraid:         formData.gbraid,
+      wbraid:         formData.wbraid,
+      utm_source:     formData.utm_source,
+      utm_medium:     formData.utm_medium,
+      utm_campaign:   formData.utm_campaign,
+      utm_term:       formData.utm_term,
+      utm_content:    formData.utm_content,
+    });
+
     await resend.emails.send({
       from: 'Mountain Spine & Orthopedics <info@mountainspineorthopedics.com>',
       to: ['info@mountainspineorthopedics.com'],
@@ -324,24 +342,6 @@ export async function sendCandidacyEmail(formData: {
         comments:         formData.comments,
         email_optout:     formData.email_optout,
       }),
-    });
-
-    const acceptance = await logLeadToSupabase({
-      patient_name:   `${formData.first_name} ${formData.last_name}`.trim(),
-      patient_email:  formData.email,
-      patient_phone:  formData.phone,
-      state:          formData.state,
-      reason:         formData.condition || undefined,
-      insurance_type: formData.insurance_type,
-      form_source:    'candidacy-check',
-      gclid:          formData.gclid,
-      gbraid:         formData.gbraid,
-      wbraid:         formData.wbraid,
-      utm_source:     formData.utm_source,
-      utm_medium:     formData.utm_medium,
-      utm_campaign:   formData.utm_campaign,
-      utm_term:       formData.utm_term,
-      utm_content:    formData.utm_content,
     });
 
     return acceptance;
@@ -383,6 +383,24 @@ export const sendConditionCheckEmail = async (formData: {
   utm_content?: string;
 }) => {
   try {
+    const acceptance = await logLeadToSupabase({
+      patient_name:   `${formData.first_name} ${formData.last_name}`.trim(),
+      patient_email:  formData.email,
+      patient_phone:  formData.phone,
+      state:          formData.state,
+      reason:         formData.pain_area?.join(', ') || undefined,
+      insurance_type: formData.insurance_type,
+      form_source:    'condition-check',
+      gclid:          formData.gclid,
+      gbraid:         formData.gbraid,
+      wbraid:         formData.wbraid,
+      utm_source:     formData.utm_source,
+      utm_medium:     formData.utm_medium,
+      utm_campaign:   formData.utm_campaign,
+      utm_term:       formData.utm_term,
+      utm_content:    formData.utm_content,
+    });
+
     await resend.emails.send({
       from: 'Mountain Spine & Orthopedics <info@mountainspineorthopedics.com>',
       to: ['info@mountainspineorthopedics.com'],
@@ -407,24 +425,6 @@ export const sendConditionCheckEmail = async (formData: {
         pain_source:      formData.pain_source,
         pain_test:        formData.pain_test,
       }),
-    });
-
-    const acceptance = await logLeadToSupabase({
-      patient_name:   `${formData.first_name} ${formData.last_name}`.trim(),
-      patient_email:  formData.email,
-      patient_phone:  formData.phone,
-      state:          formData.state,
-      reason:         formData.pain_area?.join(', ') || undefined,
-      insurance_type: formData.insurance_type,
-      form_source:    'condition-check',
-      gclid:          formData.gclid,
-      gbraid:         formData.gbraid,
-      wbraid:         formData.wbraid,
-      utm_source:     formData.utm_source,
-      utm_medium:     formData.utm_medium,
-      utm_campaign:   formData.utm_campaign,
-      utm_term:       formData.utm_term,
-      utm_content:    formData.utm_content,
     });
 
     return acceptance;
@@ -462,6 +462,24 @@ export async function sendLawyerContactEmail(formData: {
   utm_content?: string;
 }) {
   try {
+    const acceptance = await logLeadToSupabase({
+      patient_name:  formData.clientName,
+      patient_email: formData.clientEmail,
+      patient_phone: formData.clientPhone,
+      reason:        `${formData.caseType}: ${formData.injuryDescription}`,
+      form_source:   'attorney-coordination',
+      attorney_firm: formData.firmName,
+      attorney_name: formData.attorneyName,
+      gclid:         formData.gclid,
+      gbraid:        formData.gbraid,
+      wbraid:        formData.wbraid,
+      utm_source:    formData.utm_source,
+      utm_medium:    formData.utm_medium,
+      utm_campaign:  formData.utm_campaign,
+      utm_term:      formData.utm_term,
+      utm_content:   formData.utm_content,
+    });
+
     await resend.emails.send({
       from: 'Mountain Spine & Orthopedics <no-reply@mountainspineorthopedics.com>',
       to: ['info@mountainspineorthopedics.com'],
@@ -482,24 +500,6 @@ export async function sendLawyerContactEmail(formData: {
         urgency:           formData.urgency,
         additionalInfo:    formData.additionalInfo,
       }),
-    });
-
-    const acceptance = await logLeadToSupabase({
-      patient_name:  formData.clientName,
-      patient_email: formData.clientEmail,
-      patient_phone: formData.clientPhone,
-      reason:        `${formData.caseType}: ${formData.injuryDescription}`,
-      form_source:   'attorney-coordination',
-      attorney_firm: formData.firmName,
-      attorney_name: formData.attorneyName,
-      gclid:         formData.gclid,
-      gbraid:        formData.gbraid,
-      wbraid:        formData.wbraid,
-      utm_source:    formData.utm_source,
-      utm_medium:    formData.utm_medium,
-      utm_campaign:  formData.utm_campaign,
-      utm_term:      formData.utm_term,
-      utm_content:   formData.utm_content,
     });
 
     return acceptance;
