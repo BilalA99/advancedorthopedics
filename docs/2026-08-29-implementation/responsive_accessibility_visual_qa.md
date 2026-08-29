@@ -114,3 +114,57 @@ checked.
 - **End-to-end lead submission** not attempted: it writes to the production
   `forms` table and sends a patient email via Resend. Requires explicit
   approval and an identifiable test record.
+
+---
+
+# Browser QA — mobile, 2026-08-29
+
+Chrome was restarted un-maximized to make the viewport resizable. **Viewport
+floor is 486–502px CSS**, not 390px: Chrome enforces a minimum window width on
+Windows and device emulation is not available through these tools. The mobile
+breakpoint is genuinely active (`max-width: 640px` matches, `min-width: 1024px`
+does not), so mobile layout is exercised — but this is a large-phone width, not
+an iPhone-sized one. A true 390px pass still needs a real device or DevTools
+device mode.
+
+## Bug found and fixed
+
+`/conditions` and `/treatments` **scrolled horizontally** on mobile —
+scrollWidth 527 and 550 against a 486px viewport. The brief's rule is that the
+body must never scroll sideways.
+
+The obvious suspect was wrong. The body-part chip row uses `flex-nowrap` on
+mobile, which looks like the cause, but it sits inside a container that already
+has `overflow-x-auto` and scrolls correctly within its own box. Walking the DOM
+for elements that overflow the viewport *and* are not clipped by a scroll
+ancestor found the real culprit: the pagination control — 612px of page numbers
+in a `flex flex-row` with no wrap and no scroll container.
+
+Fixed with `flex-wrap justify-center gap-1` (gap rather than `space-x`, which
+leaves wrapped rows touching). Verified: mobile wraps to 2 centred rows with no
+overflow; desktop stays on a single 568px row, unchanged.
+
+## Verified on mobile
+
+| Check | Result |
+|---|---|
+| Horizontal overflow — home, south-miami, PBG, book-an-appointment, conditions/sciatica, insurance-policy, blog | none |
+| Horizontal overflow — /conditions, /treatments | fixed (was 527 / 550) |
+| `/find-care/book-an-appointment` | 1 H1 — confirms the mobile duplicate-H1 fix |
+| Hero mini form | `aria-label`, `autocomplete=given-name/tel`, `inputmode=tel`, 46px tap height |
+| Unlabelled inputs on the homepage | 0 (checked `aria-label`, `aria-labelledby`, `label[for]` and wrapping `<label>`) |
+| Second Opinion callout | 454px in a 486px viewport, CTAs stack, both exactly 44px tall (WCAG 2.5.8) |
+| Blog conversion module | 438px wide, correct `second-opinion` variant, all 3 CTAs 44px |
+| Mobile navigation | Hamburger exposes "Toggle menu"; 8 links, none under 24px; no overflow |
+| Pagination interaction | Clicking page 2 changes the card list and the active state |
+
+## Still not verified
+
+- True 390px and smaller viewports; landscape; tablet breakpoints.
+- `prefers-reduced-motion` behaviour. The `MotionConfig reducedMotion="user"`
+  change is correct by Framer Motion's documented contract and content settles
+  visible in normal mode, but emulating the media query needs CDP
+  `Emulation.setEmulatedMedia`, which is not exposed here. **Not tested.**
+- Colour contrast, keyboard focus order, screen reader output, 200% zoom.
+- iOS Safari and Android Chrome.
+- End-to-end lead submission (writes to production and emails a patient).
