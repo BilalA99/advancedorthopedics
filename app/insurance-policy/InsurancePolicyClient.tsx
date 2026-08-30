@@ -130,21 +130,72 @@ export default function InsurancePolicyClient() {
               </ol>
             </nav>
           </div>
-          <div className="px-6 xl:px-[80px] z-[2] flex flex-col space-y-[24px] items-center justify-start mt-[12px] w-[85%] xl:w-[45%] flex-wrap">
-            <TextAnimate as="h1" animation="blurInUp" by="word" once
-              style={{ fontFamily: "var(--font-public-sans)", fontWeight: 400 }}
-              className="text-[#252932] text-4xl sm:text-6xl xl:text-6xl"
+          {/* Two columns from xl up. The hero previously capped the H1 at 45% and
+              left the right half as empty sky; this fills it with the answers a
+              patient is actually scanning for, and routes them into the checker.
+              A form was considered and rejected: "Talk to a Patient Advocate"
+              already sits immediately below the fold, and a second instance
+              would compete with it and add to this page's duplicate input ids. */}
+          <div className="px-6 xl:px-[80px] z-[2] mt-[12px] grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_380px] xl:items-start gap-y-8 gap-x-12 pb-8">
+            <div className="flex flex-col">
+              <TextAnimate as="h1" animation="blurInUp" by="word" once
+                style={{ fontFamily: "var(--font-public-sans)", fontWeight: 400 }}
+                className="text-[#252932] text-4xl sm:text-6xl xl:text-6xl"
+              >
+                PPO Insurance Accepted at Mountain Spine & Orthopedics
+              </TextAnimate>
+              <p
+                style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }}
+                className="text-[#252932] text-xl lg:text-2xl text-shadow-sm mt-6 max-w-[60ch]"
+              >
+                We are a PPO practice. If you carry a PPO plan you can see one of our specialists without a referral — check your carrier below before you book.
+              </p>
+            </div>
+
+            <aside
+              aria-label="PPO insurance at a glance"
+              className="rounded-[24px] border border-white/70 bg-white/80 p-6 shadow-sm backdrop-blur-sm sm:p-7 xl:mt-2"
             >
-              PPO Insurance Accepted at Mountain Spine & Orthopedics
-            </TextAnimate>
-          </div>
-          <div className='px-6 xl:px-[80px] z-[2] flex flex-col items-start justify-start mt-[24px] w-full pb-8'>
-            <p
-              style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }}
-              className="text-[#252932] text-xl lg:text-2xl text-shadow-sm w-full"
-            >
-              We are a PPO practice. If you carry a PPO plan you can see one of our specialists without a referral — check your carrier below before you book.
-            </p>
+              <p
+                style={{ fontFamily: "var(--font-public-sans)", fontWeight: 600 }}
+                className="text-[#111315] text-lg"
+              >
+                At a glance
+              </p>
+              <ul className="mt-4 space-y-3">
+                {[
+                  { ok: true, text: 'PPO plans accepted — Aetna, BCBS, Cigna, UnitedHealthcare and more' },
+                  { ok: true, text: 'No referral needed to see a specialist' },
+                  { ok: true, text: 'We verify your benefits before your visit' },
+                  { ok: false, text: 'HMO plans are not accepted' },
+                ].map((row) => (
+                  <li key={row.text} className="flex items-start gap-3">
+                    <span
+                      aria-hidden="true"
+                      className={`mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[11px] font-bold ${row.ok ? 'bg-[#0A50EC]/10 text-[#0A50EC]' : 'bg-[#9F1239]/10 text-[#9F1239]'}`}
+                    >
+                      {row.ok ? '✓' : '✕'}
+                    </span>
+                    <span className="text-sm leading-relaxed text-[#424959]">
+                      <span className="sr-only">{row.ok ? 'Yes: ' : 'No: '}</span>
+                      {row.text}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="#insurance-checker"
+                className="mt-6 inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-[62px] bg-[#0A50EC] px-5 text-sm font-medium text-white transition-all duration-200 hover:bg-[#1B2A4A] hover:shadow-md active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A50EC] sm:text-base"
+              >
+                Check your plan
+              </a>
+              <a
+                href="tel:+15612239959"
+                className="mt-3 inline-flex min-h-[44px] w-full items-center justify-center text-sm font-medium text-[#2358AC] underline underline-offset-4 transition-colors hover:text-[#0942c4] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A50EC]"
+              >
+                or call (561) 223-9959
+              </a>
+            </aside>
           </div>
         </div>
       </section>
