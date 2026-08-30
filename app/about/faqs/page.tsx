@@ -238,7 +238,7 @@ const faqSections = [
         question: 'What insurance plans do you accept?',
         answer: (
           <p>
-            We accept most major insurance providers across our locations in FL, NJ, NY, and PA, including many PPO plans. Please <Link href="/insurance-policy" className="text-blue-600 hover:underline">review our insurance policy</Link> or call ahead to confirm coverage for your specific plan.
+            We are a PPO practice and accept PPO plans across our locations in FL, NJ, NY, and PA — no referral needed to see a specialist. HMO plans are not accepted. Please <Link href="/insurance-policy" className="text-blue-600 hover:underline">review our insurance policy</Link> or call ahead to confirm coverage for your specific plan.
           </p>
         ),
       },

@@ -1157,7 +1157,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Corpectomy",
-      body: "ALCF is a major reconstructive procedure often required for trauma or oncology. **We accept most major insurance plans. PPO preferred.** Our staff is experienced in processing claims for complex spinal reconstruction.",
+      body: "ALCF is a major reconstructive procedure often required for trauma or oncology. **We accept PPO plans.** Our staff is experienced in processing claims for complex spinal reconstruction.",
     },
     schedule: "Back pain, spinal instability, or neurological symptoms from trauma or tumors affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -1224,7 +1224,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance Coverage for ALIF",
-      body: "ALIF is a standard, FDA-approved procedure covered by most carriers for indicated conditions including degenerative disc disease, spondylolisthesis, and adult spinal deformity. **We accept most major insurance plans. PPO preferred.** Our team handles pre-authorization and benefits verification prior to scheduling.",
+      body: "ALIF is a standard, FDA-approved procedure covered by most carriers for indicated conditions including degenerative disc disease, spondylolisthesis, and adult spinal deformity. **We accept PPO plans.** Our team handles pre-authorization and benefits verification prior to scheduling.",
     },
     schedule: "Chronic back pain, disc collapse at L4-L5 or L5-S1, or scoliosis requiring sagittal correction? Schedule a consultation with Mountain Spine & Orthopedics to see if ALIF is right for you. Our specialists will review your imaging and provide an honest assessment. **Same-week appointments available. PPO Insurance Accepted.**",
   },
@@ -1288,7 +1288,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Hybrid Procedures",
-      body: "Hybrid surgery involves two distinct codes (fusion and arthroplasty). **We accept most major insurance plans. PPO preferred.** We have expertise in justifying the medical necessity of this advanced combined approach to insurance carriers.",
+      body: "Hybrid surgery involves two distinct codes (fusion and arthroplasty). **We accept PPO plans.** We have expertise in justifying the medical necessity of this advanced combined approach to insurance carriers.",
     },
     schedule: "Back pain or multilevel spinal degeneration affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -1355,7 +1355,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance Coverage for Lumbar Fusion",
-      body: "Lumbar fusion is a covered, evidence-based treatment for instability, degenerative disc disease, spondylolisthesis, and adult scoliosis. **We accept most major insurance plans. PPO preferred.** Our financial coordinators handle benefits verification and pre-authorization before scheduling.",
+      body: "Lumbar fusion is a covered, evidence-based treatment for instability, degenerative disc disease, spondylolisthesis, and adult scoliosis. **We accept PPO plans.** Our financial coordinators handle benefits verification and pre-authorization before scheduling.",
     },
     schedule: "Chronic lower back pain, leg pain, or spinal instability unresponsive to injections and conservative care? Schedule a consultation at Mountain Spine & Orthopedics. Our specialists will review your MRI and standing X-rays and give you an honest recommendation. **Same-week appointments available. PPO Insurance Accepted.**",
   },
@@ -1424,7 +1424,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance Coverage for Spinal Fusion",
-      body: "Spinal fusion is a covered procedure for many diagnoses including scoliosis, trauma, deformity, and instability. **We accept most major insurance plans. PPO preferred.** We verify all benefits prior to surgery and handle the pre-authorization process for complex procedures including deformity correction.",
+      body: "Spinal fusion is a covered procedure for many diagnoses including scoliosis, trauma, deformity, and instability. **We accept PPO plans.** We verify all benefits prior to surgery and handle the pre-authorization process for complex procedures including deformity correction.",
     },
     schedule: "If you have been told spinal fusion may be appropriate, or want a second opinion before deciding, contact Mountain Spine & Orthopedics. Our specialists can review MRI, CT, and standing X-rays to explain whether fusion, decompression, injections, or continued non-surgical care best matches your diagnosis. PPO Insurance Accepted.",
   },
@@ -1491,7 +1491,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance Coverage for TLIF Surgery",
-      body: "TLIF is widely recognized by insurance carriers as an effective, evidence-based treatment for lumbar spinal instability and nerve compression. **We accept most major insurance plans. PPO preferred.** Our team handles all pre-authorization requirements and benefits verification prior to scheduling.",
+      body: "TLIF is widely recognized by insurance carriers as an effective, evidence-based treatment for lumbar spinal instability and nerve compression. **We accept PPO plans.** Our team handles all pre-authorization requirements and benefits verification prior to scheduling.",
     },
     schedule: "Chronic back pain, leg pain, or sciatica that has not responded to injections or conservative care? Schedule a consultation with Mountain Spine & Orthopedics. Our spine specialists will review your imaging and tell you honestly whether TLIF is appropriate for your case. **Same-week appointments available. PPO Insurance Accepted.**",
   },
@@ -1555,7 +1555,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Posterior Fusion",
-      body: "This is a medically necessary procedure for stability and trauma. **We accept most major insurance plans. PPO preferred.** Our surgical coordinators will handle all pre-authorization requirements for the surgery and instrumentation.",
+      body: "This is a medically necessary procedure for stability and trauma. **We accept PPO plans.** Our surgical coordinators will handle all pre-authorization requirements for the surgery and instrumentation.",
     },
     schedule: "Neck pain, instability, or neurological symptoms from fractures or deformities affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -1620,7 +1620,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance Coverage",
-      body: "**We accept most major insurance plans. PPO preferred.** Posterior cervical fusion is a standard, covered procedure for diagnoses like stenosis, myelopathy, and instability.",
+      body: "**We accept PPO plans.** Posterior cervical fusion is a standard, covered procedure for diagnoses like stenosis, myelopathy, and instability.",
     },
     schedule: "Neck pain, instability, or neurological symptoms affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -1687,7 +1687,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Cost & Insurance for ACCF",
-      body: "ACCF is a major reconstructive surgery. **We accept most major insurance plans. PPO preferred.** We work closely with your insurance to document the medical necessity of this advanced decompression procedure.",
+      body: "ACCF is a major reconstructive surgery. **We accept PPO plans.** We work closely with your insurance to document the medical necessity of this advanced decompression procedure.",
     },
     schedule: "Neck pain, arm pain, or neurological symptoms from spinal cord compression affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -1752,7 +1752,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance Coverage for ACDF",
-      body: "**We accept most major insurance plans. PPO preferred.** ACDF is the standard of care for cervical herniations and is widely covered by insurance carriers.",
+      body: "**We accept PPO plans.** ACDF is the standard of care for cervical herniations and is widely covered by insurance carriers.",
     },
     schedule: "Neck pain, arm pain, or numbness affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -1818,7 +1818,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Disc Replacement",
-      body: "Coverage for lumbar disc replacement varies by carrier but is increasingly accepted. **We accept most major insurance plans. PPO preferred.** Our team will verify your specific policy coverage for arthroplasty codes.",
+      body: "Coverage for lumbar disc replacement varies by carrier but is increasingly accepted. **We accept PPO plans.** Our team will verify your specific policy coverage for arthroplasty codes.",
     },
     schedule: "Back pain or disc-related symptoms affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -1883,7 +1883,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance and Cost",
-      body: "**We accept most major insurance plans. PPO preferred.** We are experts in navigating insurance policies for motion preservation devices to help you access this advanced technology.",
+      body: "**We accept PPO plans.** We are experts in navigating insurance policies for motion preservation devices to help you access this advanced technology.",
     },
     schedule: "Back pain, neck pain, or disc-related symptoms affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -1949,7 +1949,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Cervical Disc Replacement",
-      body: "**We accept most major insurance plans. PPO preferred.** Cervical disc replacement coverage depends on the diagnosis, number of levels, imaging findings, and plan requirements. Our team helps PPO patients understand authorization requirements before surgery.",
+      body: "**We accept PPO plans.** Cervical disc replacement coverage depends on the diagnosis, number of levels, imaging findings, and plan requirements. Our team helps PPO patients understand authorization requirements before surgery.",
     },
     schedule: "Neck pain with arm numbness, tingling, or weakness may require a surgical opinion. Schedule a consultation with Mountain Spine & Orthopedics to review whether cervical disc arthroplasty, ACDF, or another option fits your anatomy and goals.",
   },
@@ -2013,7 +2013,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Motion Preservation",
-      body: "**We accept most major insurance plans. PPO preferred.** We specialize in these advanced techniques and are experienced in securing approval for FDA-approved motion-sparing procedures.",
+      body: "**We accept PPO plans.** We specialize in these advanced techniques and are experienced in securing approval for FDA-approved motion-sparing procedures.",
     },
     schedule: "Back pain, neck pain, or spinal conditions affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -2078,7 +2078,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Hip Replacement",
-      body: "**We accept most major insurance plans. PPO preferred.** Total hip replacement is a standard covered procedure for severe arthritis. Our team will verify your benefits and handle all authorization paperwork.",
+      body: "**We accept PPO plans.** Total hip replacement is a standard covered procedure for severe arthritis. Our team will verify your benefits and handle all authorization paperwork.",
     },
     schedule: "Hip pain, stiffness, or limited range of motion affecting daily life? Our <strong>hip specialists</strong> provide comprehensive evaluation and advanced <strong>minimally invasive</strong> hip replacement. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
   },
@@ -2146,7 +2146,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Cost & Insurance for Knee Replacement",
-      body: "Knee replacement is widely covered by insurance for arthritis. **We accept most major insurance plans. PPO preferred.** We help navigate the approval process to ensure your surgery is covered.",
+      body: "Knee replacement is widely covered by insurance for arthritis. **We accept PPO plans.** We help navigate the approval process to ensure your surgery is covered.",
     },
     schedule: "Knee pain, stiffness, swelling, or deformity affecting daily life? Our <strong>knee specialists</strong> can review your X-rays, prior treatments, and surgical candidacy. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. PPO Insurance is Accepted.",
   },
@@ -2212,7 +2212,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Laminoplasty",
-      body: "**We accept most major insurance plans. PPO preferred.** Laminoplasty is an FDA-approved, standard procedure for treating cervical myelopathy and is typically covered by insurance.",
+      body: "**We accept PPO plans.** Laminoplasty is an FDA-approved, standard procedure for treating cervical myelopathy and is typically covered by insurance.",
     },
     schedule: "Neck pain, arm pain, or neurological symptoms from spinal cord compression affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -2278,7 +2278,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance Coverage",
-      body: "**We accept most major insurance plans. PPO preferred.** This is a standard decompression procedure covered by most carriers for radiculopathy symptoms.",
+      body: "**We accept PPO plans.** This is a standard decompression procedure covered by most carriers for radiculopathy symptoms.",
     },
     schedule: "Neck pain, arm pain, or numbness affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -2344,7 +2344,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Laminectomy",
-      body: "**We accept most major insurance plans. PPO preferred.** Laminectomy is a standard, widely accepted procedure for treating symptomatic spinal stenosis.",
+      body: "**We accept PPO plans.** Laminectomy is a standard, widely accepted procedure for treating symptomatic spinal stenosis.",
     },
     schedule: "Back pain, leg pain, or difficulty walking affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -2409,7 +2409,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance Coverage",
-      body: "**We accept most major insurance plans. PPO preferred.** Decompression surgeries are standard medical procedures for treating nerve compression and are routinely covered.",
+      body: "**We accept PPO plans.** Decompression surgeries are standard medical procedures for treating nerve compression and are routinely covered.",
     },
     schedule: "Back pain, leg pain, or nerve symptoms affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -2475,7 +2475,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for MED",
-      body: "**We accept most major insurance plans. PPO preferred.** While advanced, MED is a recognized form of discectomy and is covered by most insurance carriers.",
+      body: "**We accept PPO plans.** While advanced, MED is a recognized form of discectomy and is covered by most insurance carriers.",
     },
     schedule: "Back pain, leg pain, or sciatica affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -2541,7 +2541,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance Coverage",
-      body: "**We accept most major insurance plans. PPO preferred.** Microdiscectomy is the standard surgical treatment for herniated discs and is widely covered.",
+      body: "**We accept PPO plans.** Microdiscectomy is the standard surgical treatment for herniated discs and is widely covered.",
     },
     schedule: "Back pain, leg pain, or sciatica affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -2606,7 +2606,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for DDD Surgery",
-      body: "**We accept most major insurance plans. PPO preferred.** Authorization for degenerative disc disease surgery typically requires imaging, exam findings, documented symptoms, and prior conservative treatment unless urgent neurological issues are present.",
+      body: "**We accept PPO plans.** Authorization for degenerative disc disease surgery typically requires imaging, exam findings, documented symptoms, and prior conservative treatment unless urgent neurological issues are present.",
     },
     schedule: "If a degenerative disc diagnosis has not explained why you hurt or which procedure fits, schedule a consultation with Mountain Spine & Orthopedics for a focused surgical review.",
   },
@@ -2671,7 +2671,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance Coverage",
-      body: "**We accept most major insurance plans. PPO preferred.** Percutaneous discectomy is a recognized procedure for specific types of disc herniations and is covered by many carriers.",
+      body: "**We accept PPO plans.** Percutaneous discectomy is a recognized procedure for specific types of disc herniations and is covered by many carriers.",
     },
     schedule: "Back pain, leg pain, or sciatica affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -2736,7 +2736,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Shoulder Resurfacing",
-      body: "**We accept most major insurance plans. PPO preferred.** This is an FDA-approved arthroplasty procedure widely covered for indicated arthritis diagnoses.",
+      body: "**We accept PPO plans.** This is an FDA-approved arthroplasty procedure widely covered for indicated arthritis diagnoses.",
     },
     schedule: "Shoulder pain, stiffness, or limited range of motion affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -2805,7 +2805,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Hip Scope",
-      body: "**We accept most major insurance plans. PPO preferred.** Hip arthroscopy for FAI and labral tears is a standard covered procedure. We verify coverage for specific repair codes.",
+      body: "**We accept PPO plans.** Hip arthroscopy for FAI and labral tears is a standard covered procedure. We verify coverage for specific repair codes.",
     },
     schedule: "Hip pain, groin pain, or limited range of motion affecting your activities? Our <strong>sports medicine specialists</strong> provide comprehensive evaluation to determine if <strong>minimally invasive</strong> hip arthroscopy is right for you. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Book an appointment</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
   },
@@ -2876,7 +2876,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Labral Repair",
-      body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Hip labral repair is a standard covered procedure for symptomatic labral tears. We verify coverage for specific repair codes.",
+      body: "<strong>We accept PPO plans.</strong> Hip labral repair is a standard covered procedure for symptomatic labral tears. We verify coverage for specific repair codes.",
     },
     schedule: "Hip clicking, catching, or deep groin pain from a labral tear? Our <strong>hip preservation specialists</strong> offer advanced <strong>minimally invasive</strong> labral repair. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
   },
@@ -2946,7 +2946,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Hip Resurfacing",
-      body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Hip resurfacing is a covered procedure for indicated patients. We verify coverage and handle authorization paperwork.",
+      body: "<strong>We accept PPO plans.</strong> Hip resurfacing is a covered procedure for indicated patients. We verify coverage and handle authorization paperwork.",
     },
     schedule: "Considering hip resurfacing for <a href=\"/conditions/hip-arthritis\" class=\"text-blue-600 hover:underline\">hip arthritis</a>? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics to compare resurfacing, total hip replacement, and non-surgical options based on your imaging, bone quality, and activity goals.",
   },
@@ -3016,7 +3016,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Hip Fracture Surgery",
-      body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Hip fracture surgery is a standard covered procedure. We handle urgent authorization and coordinate care efficiently.",
+      body: "<strong>We accept PPO plans.</strong> Hip fracture surgery is a standard covered procedure. We handle urgent authorization and coordinate care efficiently.",
     },
     schedule: "Suspected <a href=\"/conditions/hip-fracture\" class=\"text-blue-600 hover:underline\">hip fracture</a>? Our <strong>hip specialists</strong> provide urgent evaluation and surgical treatment. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Contact us immediately</a> for prompt care. Emergency and same-day appointments are available.",
   },
@@ -3087,7 +3087,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Revision Hip Replacement",
-      body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Revision hip replacement is a standard covered procedure for indicated conditions. We verify coverage and handle authorization paperwork.",
+      body: "<strong>We accept PPO plans.</strong> Revision hip replacement is a standard covered procedure for indicated conditions. We verify coverage and handle authorization paperwork.",
     },
     schedule: "Experiencing problems with your hip replacement? Our <strong>hip specialists</strong> offer expert <strong>revision surgery</strong> to address failed or worn implants. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
   },
@@ -3159,7 +3159,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Impingement Surgery",
-      body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Hip impingement surgery is a standard covered procedure for symptomatic FAI. We verify coverage for specific procedure codes.",
+      body: "<strong>We accept PPO plans.</strong> Hip impingement surgery is a standard covered procedure for symptomatic FAI. We verify coverage for specific procedure codes.",
     },
     schedule: "Persistent <a href=\"/conditions/hip-impingement\" class=\"text-blue-600 hover:underline\">hip impingement</a> pain? Our <strong>hip preservation specialists</strong> offer advanced surgical correction. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
   },
@@ -3229,7 +3229,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Core Decompression",
-      body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Core decompression is a covered procedure for early-stage avascular necrosis. We verify coverage and handle authorization paperwork.",
+      body: "<strong>We accept PPO plans.</strong> Core decompression is a covered procedure for early-stage avascular necrosis. We verify coverage and handle authorization paperwork.",
     },
     schedule: "Early-stage <a href=\"/conditions/avascular-necrosis\" class=\"text-blue-600 hover:underline\">avascular necrosis</a>? Our <strong>hip specialists</strong> offer <strong>core decompression</strong> to preserve your joint. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. Early treatment is crucial. Same-day and next-day appointments are often available.",
   },
@@ -3299,7 +3299,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Bursectomy",
-      body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Hip bursectomy is a covered procedure for chronic bursitis that has failed conservative treatment. We verify coverage and handle authorization paperwork.",
+      body: "<strong>We accept PPO plans.</strong> Hip bursectomy is a covered procedure for chronic bursitis that has failed conservative treatment. We verify coverage and handle authorization paperwork.",
     },
     schedule: "Chronic <a href=\"/conditions/hip-bursitis\" class=\"text-blue-600 hover:underline\">hip bursitis</a> not responding to treatment? Our specialists offer <strong>minimally invasive</strong> bursectomy. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
   },
@@ -3367,7 +3367,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance Coverage",
-      body: "**We accept most major insurance plans. PPO preferred.** Knee arthroscopy is a standard of care for mechanical knee symptoms and injuries.",
+      body: "**We accept PPO plans.** Knee arthroscopy is a standard of care for mechanical knee symptoms and injuries.",
     },
     schedule: "Knee pain, instability, or mechanical symptoms affecting your activities? Our <strong>sports medicine specialists</strong> provide comprehensive evaluation to determine if <strong>minimally invasive</strong> arthroscopic knee surgery is right for you. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Book an appointment</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
   },
@@ -3432,7 +3432,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Cuff Repair",
-      body: "**We accept most major insurance plans. PPO preferred.** Arthroscopic rotator cuff repair is a standard, covered procedure for symptomatic tears.",
+      body: "**We accept PPO plans.** Arthroscopic rotator cuff repair is a standard, covered procedure for symptomatic tears.",
     },
     schedule: "Shoulder pain, weakness, or limited range of motion affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -3499,7 +3499,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Meniscus Repair",
-      body: "**We accept most major insurance plans. PPO preferred.** Meniscus repair is highly encouraged by insurance carriers over removal for eligible tears due to long-term health benefits.",
+      body: "**We accept PPO plans.** Meniscus repair is highly encouraged by insurance carriers over removal for eligible tears due to long-term health benefits.",
     },
     schedule: "Meniscus injury affecting your activities? Our <strong>sports medicine specialists</strong> can evaluate whether your tear is repairable and help you understand your options. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Book an appointment</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
   },
@@ -3559,7 +3559,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance Coverage",
-      body: "**We accept most major insurance plans. PPO preferred.** Most carriers cover fusion. Coverage for disc replacement (especially lumbar) varies but is improving. We help verify your specific benefits.",
+      body: "**We accept PPO plans.** Most carriers cover fusion. Coverage for disc replacement (especially lumbar) varies but is improving. We help verify your specific benefits.",
     },
     schedule: "Back pain, neck pain, or disc-related symptoms affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -3629,7 +3629,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Ankle Ligament Reconstruction",
-      body: "**We accept most major insurance plans. PPO preferred.** Ankle ligament reconstruction is a medically necessary procedure for chronic instability and is widely covered by insurance carriers.",
+      body: "**We accept PPO plans.** Ankle ligament reconstruction is a medically necessary procedure for chronic instability and is widely covered by insurance carriers.",
     },
     schedule: "Ankle pain, instability, or difficulty walking affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -3695,7 +3695,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Hybrid Cervical Surgery",
-      body: "**We accept most major insurance plans. PPO preferred.** Hybrid procedures are medically necessary for complex multilevel cervical conditions and are covered by most insurance carriers.",
+      body: "**We accept PPO plans.** Hybrid procedures are medically necessary for complex multilevel cervical conditions and are covered by most insurance carriers.",
     },
     schedule: "Neck pain, arm pain, or multilevel cervical disc disease affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -3761,7 +3761,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance Coverage for Back Pain Treatment",
-      body: "**We accept most major insurance plans. PPO preferred.** Back pain treatment options, from rehabilitation to surgical interventions, are typically covered by insurance when medically necessary.",
+      body: "**We accept PPO plans.** Back pain treatment options, from rehabilitation to surgical interventions, are typically covered by insurance when medically necessary.",
     },
     schedule: "Back pain, leg pain, or nerve symptoms affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -3826,7 +3826,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Bunion Correction",
-      body: "**We accept most major insurance plans. PPO preferred.** Bunion correction surgery is a medically necessary procedure for symptomatic hallux valgus and is typically covered by insurance.",
+      body: "**We accept PPO plans.** Bunion correction surgery is a medically necessary procedure for symptomatic hallux valgus and is typically covered by insurance.",
     },
     schedule: "Foot pain, bunion deformity, or difficulty walking affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -3891,7 +3891,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Carpal Tunnel Release",
-      body: "**We accept most major insurance plans. PPO preferred.** Carpal tunnel release is a standard, covered procedure for confirmed carpal tunnel syndrome.",
+      body: "**We accept PPO plans.** Carpal tunnel release is a standard, covered procedure for confirmed carpal tunnel syndrome.",
     },
     schedule: "Hand numbness, tingling, or weakness affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -3955,7 +3955,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Cervical Disc Replacement",
-      body: "**We accept most major insurance plans. PPO preferred.** Cervical disc replacement is FDA-approved and widely covered for indicated patients suffering from radiculopathy.",
+      body: "**We accept PPO plans.** Cervical disc replacement is FDA-approved and widely covered for indicated patients suffering from radiculopathy.",
     },
     schedule: "Neck pain, arm pain, or numbness affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -4021,7 +4021,7 @@ export const treatmentContentBatch1: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Coccygectomy",
-      body: "**We accept most major insurance plans. PPO preferred.** Coccygectomy is a medically necessary procedure for severe, refractory coccydynia and is typically covered by insurance.",
+      body: "**We accept PPO plans.** Coccygectomy is a medically necessary procedure for severe, refractory coccydynia and is typically covered by insurance.",
     },
     schedule: "Tailbone pain or difficulty sitting affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -4111,7 +4111,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Anti-Inflammatory Injections",
-      body: "**We accept most major insurance plans. PPO preferred.** Anti-inflammatory corticosteroid injections are standard, medically necessary procedures for joint and spine pain and are typically covered by insurance when conservative treatments (medications, rehabilitation) have been attempted.",
+      body: "**We accept PPO plans.** Anti-inflammatory corticosteroid injections are standard, medically necessary procedures for joint and spine pain and are typically covered by insurance when conservative treatments (medications, rehabilitation) have been attempted.",
     },
     schedule: "Joint pain, spine pain, or inflammation affecting daily life? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule your consultation</a> today at Mountain Spine & Orthopedics for **image-guided anti-inflammatory injection** evaluation. <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">Complimentary MRI review</a> and <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">second opinion</a> available. <a href=\"/injuries/car-accident\" class=\"text-blue-600 hover:underline\">Car accident</a> or <a href=\"/injuries/slip-and-fall\" class=\"text-blue-600 hover:underline\">slip-and-fall</a> injury? We treat accident-related joint and spine injuries.",
   },
@@ -4175,7 +4175,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Aging Management",
-      body: "**We accept most major insurance plans. PPO preferred.** Aging management programs, including bone density scans and preventive care, are typically covered by insurance.",
+      body: "**We accept PPO plans.** Aging management programs, including bone density scans and preventive care, are typically covered by insurance.",
     },
     schedule: "Bone health concerns or age-related joint pain? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -4266,7 +4266,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Coccyx Nerve Ablation",
-      body: "**We accept most major insurance plans. PPO preferred.** Coccyx nerve ablation (Impar ganglion RFA) is a medically necessary procedure for chronic coccydynia and is typically covered by insurance when conservative treatments have failed and a diagnostic Impar ganglion block has confirmed the pain source.",
+      body: "**We accept PPO plans.** Coccyx nerve ablation (Impar ganglion RFA) is a medically necessary procedure for chronic coccydynia and is typically covered by insurance when conservative treatments have failed and a diagnostic Impar ganglion block has confirmed the pain source.",
     },
     schedule: "Chronic <a href=\"/conditions/coccydynia\" class=\"text-blue-600 hover:underline\">tailbone pain</a> affecting your quality of life and ability to sit? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule your consultation</a> today at Mountain Spine & Orthopedics for **coccyx nerve ablation** evaluation. <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">Second opinion</a> available. <a href=\"/injuries/slip-and-fall\" class=\"text-blue-600 hover:underline\">Slip-and-fall</a> or trauma-related tailbone injury? We treat accident-related coccyx pain.",
   },
@@ -4330,7 +4330,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Cortisone Injections",
-      body: "**We accept most major insurance plans. PPO preferred.** Cortisone injections are standard, covered procedures for spinal pain when medically necessary.",
+      body: "**We accept PPO plans.** Cortisone injections are standard, covered procedures for spinal pain when medically necessary.",
     },
     schedule: "Back pain or sciatica limiting your daily activities? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -4396,7 +4396,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for DDD Surgery",
-      body: "**We accept most major insurance plans. PPO preferred.** Degenerative disc disease surgery is medically necessary for advanced DDD and is typically covered by insurance.",
+      body: "**We accept PPO plans.** Degenerative disc disease surgery is medically necessary for advanced DDD and is typically covered by insurance.",
     },
     schedule: "Chronic disc pain or spinal instability affecting your life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -4462,7 +4462,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Endoscopic Discectomy",
-      body: "**We accept most major insurance plans. PPO preferred.** Endoscopic discectomy is a medically necessary procedure for herniated discs and is typically covered by insurance.",
+      body: "**We accept PPO plans.** Endoscopic discectomy is a medically necessary procedure for herniated discs and is typically covered by insurance.",
     },
     schedule: "Herniated disc or sciatica causing radiating pain? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -4528,7 +4528,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Endoscopic Foraminotomy",
-      body: "**We accept most major insurance plans. PPO preferred.** Endoscopic foraminotomy is a medically necessary procedure for foraminal stenosis and is typically covered by insurance.",
+      body: "**We accept PPO plans.** Endoscopic foraminotomy is a medically necessary procedure for foraminal stenosis and is typically covered by insurance.",
     },
     schedule: "Pinched nerve or radiating arm/leg pain? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -4596,7 +4596,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for ACL Reconstruction",
-      body: "**We accept most major insurance plans. PPO preferred.** ACL reconstruction is a medically necessary procedure for knee instability and is typically covered by insurance.",
+      body: "**We accept PPO plans.** ACL reconstruction is a medically necessary procedure for knee instability and is typically covered by insurance.",
     },
     schedule: "ACL injury or knee instability affecting your activities? Our <strong>sports medicine specialists</strong> provide comprehensive evaluation to determine the best treatment approach for your situation. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Book an appointment</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
   },
@@ -4667,7 +4667,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Partial Knee Replacement",
-      body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Partial knee replacement is a covered procedure for indicated patients with localized arthritis. We verify coverage and handle authorization paperwork.",
+      body: "<strong>We accept PPO plans.</strong> Partial knee replacement is a covered procedure for indicated patients with localized arthritis. We verify coverage and handle authorization paperwork.",
     },
     schedule: "Localized <a href=\"/conditions/knee-arthritis\" class=\"text-blue-600 hover:underline\">knee arthritis</a>? Our <strong>knee specialists</strong> offer <strong>partial knee replacement</strong> as a bone-preserving alternative. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
   },
@@ -4738,7 +4738,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Meniscus Surgery",
-      body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Meniscectomy is a standard covered procedure for symptomatic meniscal tears. We verify coverage for specific procedure codes.",
+      body: "<strong>We accept PPO plans.</strong> Meniscectomy is a standard covered procedure for symptomatic meniscal tears. We verify coverage for specific procedure codes.",
     },
     schedule: "Meniscus tear causing pain or mechanical symptoms? Our <strong>knee specialists</strong> can evaluate whether repair or removal is best for your situation. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
   },
@@ -4809,7 +4809,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Ligament Repair",
-      body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Knee ligament repair is a covered procedure for symptomatic ligament injuries causing instability. We verify coverage and handle authorization paperwork.",
+      body: "<strong>We accept PPO plans.</strong> Knee ligament repair is a covered procedure for symptomatic ligament injuries causing instability. We verify coverage and handle authorization paperwork.",
     },
     schedule: "Knee instability after a ligament injury? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics for MRI review, stability testing, and a repair-versus-reconstruction recommendation.",
   },
@@ -4881,7 +4881,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for PCL Reconstruction",
-      body: "<strong>We accept most major insurance plans. PPO preferred.</strong> PCL reconstruction is a covered procedure for symptomatic PCL tears causing instability. We verify coverage and handle authorization paperwork.",
+      body: "<strong>We accept PPO plans.</strong> PCL reconstruction is a covered procedure for symptomatic PCL tears causing instability. We verify coverage and handle authorization paperwork.",
     },
     schedule: "PCL injury causing knee instability? Our <strong>sports medicine specialists</strong> offer advanced <strong>PCL reconstruction</strong> to restore stability. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
   },
@@ -4953,7 +4953,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Cartilage Restoration",
-      body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Cartilage restoration procedures are covered for indicated patients with focal cartilage defects. We verify coverage and handle authorization paperwork.",
+      body: "<strong>We accept PPO plans.</strong> Cartilage restoration procedures are covered for indicated patients with focal cartilage defects. We verify coverage and handle authorization paperwork.",
     },
     schedule: "Knee <a href=\"/conditions/knee-cartilage-damage\" class=\"text-blue-600 hover:underline\">cartilage damage</a>? Our <strong>knee specialists</strong> offer advanced <strong>cartilage restoration</strong> to preserve your joint. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
   },
@@ -5023,7 +5023,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Osteotomy",
-      body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Knee osteotomy is a covered procedure for indicated patients with malalignment and localized arthritis. We verify coverage and handle authorization paperwork.",
+      body: "<strong>We accept PPO plans.</strong> Knee osteotomy is a covered procedure for indicated patients with malalignment and localized arthritis. We verify coverage and handle authorization paperwork.",
     },
     schedule: "Young and active with <a href=\"/conditions/knee-arthritis\" class=\"text-blue-600 hover:underline\">knee arthritis</a>? Our <strong>knee specialists</strong> offer <strong>knee osteotomy</strong> as a joint-preserving option. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics today. Same-day and next-day appointments are often available.",
   },
@@ -5094,7 +5094,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Revision Knee Replacement",
-      body: "<strong>We accept most major insurance plans. PPO preferred.</strong> Revision knee replacement authorization usually requires records showing implant failure, infection workup, imaging, symptoms, and medical necessity. We help PPO patients navigate those requirements.",
+      body: "<strong>We accept PPO plans.</strong> Revision knee replacement authorization usually requires records showing implant failure, infection workup, imaging, symptoms, and medical necessity. We help PPO patients navigate those requirements.",
     },
     schedule: "A painful knee replacement deserves a cause-specific workup before another operation. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with Mountain Spine & Orthopedics to review loosening, infection, instability, wear, fracture, or stiffness concerns.",
   },
@@ -5186,7 +5186,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Epidural Steroid Injections",
-      body: "**We accept most major insurance plans. PPO preferred.** Epidural steroid injections are standard, medically necessary procedures for spinal pain and are typically covered by insurance when conservative treatments have been attempted.",
+      body: "**We accept PPO plans.** Epidural steroid injections are standard, medically necessary procedures for spinal pain and are typically covered by insurance when conservative treatments have been attempted.",
     },
     schedule: "Back pain, <a href=\"/conditions/sciatica\" class=\"text-blue-600 hover:underline\">sciatica</a>, or radiating leg pain limiting your life? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule your consultation</a> today at Mountain Spine & Orthopedics. <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">Complimentary MRI review</a> and <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">second opinion</a> available. Car accident or slip-and-fall injury? We treat <a href=\"/injuries/car-accident\" class=\"text-blue-600 hover:underline\">accident-related</a> spine injuries.",
   },
@@ -5344,7 +5344,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Radiofrequency Ablation",
-      body: "**We accept most major insurance plans. PPO preferred.** Radiofrequency ablation is a medically necessary procedure for chronic facet joint pain and is typically covered by insurance when diagnostic medial branch blocks have confirmed the pain source.",
+      body: "**We accept PPO plans.** Radiofrequency ablation is a medically necessary procedure for chronic facet joint pain and is typically covered by insurance when diagnostic medial branch blocks have confirmed the pain source.",
     },
     schedule: "Chronic <a href=\"/conditions/facet-joint-disease\" class=\"text-blue-600 hover:underline\">facet joint pain</a> or spinal arthritis limiting your life? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule your consultation</a> today at Mountain Spine & Orthopedics for **radiofrequency ablation** evaluation. <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">Complimentary MRI review</a> and <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">second opinion</a> available.",
   },
@@ -5408,7 +5408,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Facet Joint Treatment",
-      body: "**We accept most major insurance plans. PPO preferred.** Facet joint treatments, from blocks to fusion, are medically necessary procedures and are typically covered by insurance.",
+      body: "**We accept PPO plans.** Facet joint treatments, from blocks to fusion, are medically necessary procedures and are typically covered by insurance.",
     },
     schedule: "Chronic back or neck pain from facet joint disease? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -5474,7 +5474,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Fracture Fixation",
-      body: "**We accept most major insurance plans. PPO preferred.** Fracture fixation is a medically necessary procedure for complex fractures and is typically covered by insurance.",
+      body: "**We accept PPO plans.** Fracture fixation is a medically necessary procedure for complex fractures and is typically covered by insurance.",
     },
     schedule: "Broken bone or fracture requiring surgical stabilization? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -5558,7 +5558,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Impar Ganglion Block",
-      body: "**We accept most major insurance plans. PPO preferred.** Impar ganglion block is a medically necessary procedure for chronic coccydynia and pelvic pain syndromes, and is typically covered by insurance when conservative treatments have failed.",
+      body: "**We accept PPO plans.** Impar ganglion block is a medically necessary procedure for chronic coccydynia and pelvic pain syndromes, and is typically covered by insurance when conservative treatments have failed.",
     },
     schedule: "Chronic <a href=\"/conditions/coccydynia\" class=\"text-blue-600 hover:underline\">tailbone pain</a> or difficulty sitting limiting your life? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule your consultation</a> today at Mountain Spine & Orthopedics for Impar ganglion block evaluation. <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">Second opinion</a> available. <a href=\"/injuries/slip-and-fall\" class=\"text-blue-600 hover:underline\">Slip-and-fall</a> or trauma-related tailbone injury? We treat accident-related coccyx pain.",
   },
@@ -5624,7 +5624,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Neck and Shoulder Pain Treatment",
-      body: "**We accept most major insurance plans. PPO preferred.** Neck and shoulder pain treatments, from rehabilitation to surgical interventions, are typically covered by insurance when medically necessary.",
+      body: "**We accept PPO plans.** Neck and shoulder pain treatments, from rehabilitation to surgical interventions, are typically covered by insurance when medically necessary.",
     },
     schedule: "Neck pain, shoulder pain, or arm numbness? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -5711,7 +5711,7 @@ export const treatmentContentBatch3: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Non-Surgical Pain Management",
-      body: "**We accept most major insurance plans. PPO preferred.** Non-surgical pain management treatments, including outside rehabilitation guidance, diagnostic imaging, medications, and image-guided injections, are typically covered by insurance when medically necessary and conservative care is documented.",
+      body: "**We accept PPO plans.** Non-surgical pain management treatments, including outside rehabilitation guidance, diagnostic imaging, medications, and image-guided injections, are typically covered by insurance when medically necessary and conservative care is documented.",
     },
     schedule: "Joint pain, spine pain, or <a href=\"/conditions/chronic-pain\" class=\"text-blue-600 hover:underline\">chronic discomfort</a> limiting your life? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule your consultation</a> today at Mountain Spine & Orthopedics for comprehensive **non-surgical pain management** evaluation. <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">Complimentary MRI review</a> and <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">second opinion</a> available to explore your non-surgical options. <a href=\"/injuries/car-accident\" class=\"text-blue-600 hover:underline\">Car accident</a> or <a href=\"/injuries/slip-and-fall\" class=\"text-blue-600 hover:underline\">slip-and-fall</a> injury? We provide comprehensive conservative care for accident-related injuries.",
   },
@@ -5848,7 +5848,7 @@ export const treatmentContentBatch4: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for PCTR",
-      body: "**We accept most major insurance plans. PPO preferred.** Percutaneous carpal tunnel release is a medically necessary procedure for carpal tunnel syndrome and is typically covered by insurance.",
+      body: "**We accept PPO plans.** Percutaneous carpal tunnel release is a medically necessary procedure for carpal tunnel syndrome and is typically covered by insurance.",
     },
     schedule: "Hand numbness, tingling, or carpal tunnel symptoms? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -5914,7 +5914,7 @@ export const treatmentContentBatch4: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Shoulder Arthroscopy",
-      body: "**We accept most major insurance plans. PPO preferred.** Shoulder arthroscopy is a medically necessary procedure for shoulder conditions and is typically covered by insurance.",
+      body: "**We accept PPO plans.** Shoulder arthroscopy is a medically necessary procedure for shoulder conditions and is typically covered by insurance.",
     },
     schedule: "Shoulder pain, rotator cuff injury, or limited mobility? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -6067,7 +6067,7 @@ export const treatmentContentBatch4: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Surgical Treatments",
-      body: "**We accept most major insurance plans. PPO preferred.** Surgical treatments are medically necessary procedures and are typically covered by insurance when conservative care has failed.",
+      body: "**We accept PPO plans.** Surgical treatments are medically necessary procedures and are typically covered by insurance when conservative care has failed.",
     },
     schedule: "Chronic pain or functional limitations requiring surgery? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -6132,7 +6132,7 @@ export const treatmentContentBatch4: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Trigger Finger Release",
-      body: "**We accept most major insurance plans. PPO preferred.** Trigger finger release is a medically necessary procedure for symptomatic stenosing tenosynovitis and is typically covered by insurance.",
+      body: "**We accept PPO plans.** Trigger finger release is a medically necessary procedure for symptomatic stenosing tenosynovitis and is typically covered by insurance.",
     },
     schedule: "Finger locking, clicking, or trigger finger symptoms? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -6197,7 +6197,7 @@ export const treatmentContentBatch4: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Ankle Replacement",
-      body: "**We accept most major insurance plans. PPO preferred.** Total ankle replacement usually requires documentation of end-stage arthritis, functional limitation, imaging findings, and prior conservative treatment before authorization.",
+      body: "**We accept PPO plans.** Total ankle replacement usually requires documentation of end-stage arthritis, functional limitation, imaging findings, and prior conservative treatment before authorization.",
     },
     schedule: "Severe ankle arthritis does not always mean fusion is the only surgical option. Schedule a consultation with Mountain Spine & Orthopedics to compare ankle replacement, fusion, and non-surgical care based on your imaging and goals.",
   },
@@ -6263,7 +6263,7 @@ export const treatmentContentBatch4: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Ankle Arthroscopy",
-      body: "**We accept most major insurance plans. PPO preferred.** Ankle arthroscopy is a medically necessary procedure for various ankle conditions and is typically covered by insurance.",
+      body: "**We accept PPO plans.** Ankle arthroscopy is a medically necessary procedure for various ankle conditions and is typically covered by insurance.",
     },
     schedule: "Ankle pain, instability, or limited mobility affecting daily life? Start your recovery with expert orthopedic care. Schedule a consultation with Mountain Spine & Orthopedics.",
   },
@@ -6354,7 +6354,7 @@ export const treatmentContentBatch5: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for SI Joint Injection",
-      body: "**We accept most major insurance plans. PPO preferred.** SI joint injections are medically necessary procedures for diagnosing and treating sacroiliac joint dysfunction and are typically covered by insurance when clinical examination suggests SI joint involvement and conservative treatments have been attempted.",
+      body: "**We accept PPO plans.** SI joint injections are medically necessary procedures for diagnosing and treating sacroiliac joint dysfunction and are typically covered by insurance when clinical examination suggests SI joint involvement and conservative treatments have been attempted.",
     },
     schedule: "Lower back or buttock pain that worsens with sitting, stairs, or rolling in bed? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule your consultation</a> today at Mountain Spine & Orthopedics for **SI joint injection** evaluation. <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">Complimentary MRI review</a> and <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">second opinion</a> available. <a href=\"/injuries/car-accident\" class=\"text-blue-600 hover:underline\">Car accident</a> or <a href=\"/injuries/slip-and-fall\" class=\"text-blue-600 hover:underline\">slip-and-fall</a> injury affecting your pelvis? We treat accident-related SI joint injuries.",
   },
@@ -6439,7 +6439,7 @@ export const treatmentContentBatch5: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Nerve Block Injections",
-      body: "**We accept most major insurance plans. PPO preferred.** Nerve block injections are medically necessary procedures for diagnosing and treating various pain conditions and are typically covered by insurance when clinical evaluation suggests a specific nerve as the pain generator and conservative treatments have been attempted.",
+      body: "**We accept PPO plans.** Nerve block injections are medically necessary procedures for diagnosing and treating various pain conditions and are typically covered by insurance when clinical evaluation suggests a specific nerve as the pain generator and conservative treatments have been attempted.",
     },
     schedule: "Chronic pain you suspect is nerve-related? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule your consultation</a> today at Mountain Spine & Orthopedics for **nerve block** evaluation. <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">Complimentary MRI review</a> and <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">second opinion</a> available to identify your pain source and optimal treatment approach.",
   },
@@ -6506,7 +6506,7 @@ export const treatmentContentBatch5: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Chronic Pain Treatment",
-      body: "**We accept most major insurance plans. PPO preferred.** Chronic pain evaluation, medically necessary injections, and advanced procedures may require prior authorization; our team will help guide you through the process.",
+      body: "**We accept PPO plans.** Chronic pain evaluation, medically necessary injections, and advanced procedures may require prior authorization; our team will help guide you through the process.",
     },
     schedule: "<a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> for comprehensive chronic pain evaluation and personalized treatment planning. <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">Free MRI review</a> and <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">second opinion</a> available.",
   },
@@ -6586,7 +6586,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance & Payment Options",
-      body: "**We accept most major insurance plans. PPO preferred.** Sports injury treatment is typically covered by insurance when medically necessary. Our team works with you to ensure your coverage is maximized and provides transparent information about any out-of-pocket costs.",
+      body: "**We accept PPO plans.** Sports injury treatment is typically covered by insurance when medically necessary. Our team works with you to ensure your coverage is maximized and provides transparent information about any out-of-pocket costs.",
     },
     faqs: [
       {
@@ -6688,7 +6688,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Cost & Insurance for Athletic Evaluation",
-      body: "**We accept most major insurance plans. PPO preferred.** Athletic injury evaluation is typically covered by insurance when medically necessary. Our team works with you to ensure your coverage is maximized and provides transparent information about any out-of-pocket costs.",
+      body: "**We accept PPO plans.** Athletic injury evaluation is typically covered by insurance when medically necessary. Our team works with you to ensure your coverage is maximized and provides transparent information about any out-of-pocket costs.",
     },
     faqs: [
       {
@@ -6784,7 +6784,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Cubital Tunnel Surgery",
-      body: "**We accept most major insurance plans. PPO preferred.** Cubital tunnel surgery is typically covered when conservative treatment has failed and nerve compression is documented by examination and nerve conduction studies.",
+      body: "**We accept PPO plans.** Cubital tunnel surgery is typically covered when conservative treatment has failed and nerve compression is documented by examination and nerve conduction studies.",
     },
     schedule: "Numbness in your ring and small fingers affecting your daily life? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with our nerve specialists at Mountain Spine & Orthopedics. We offer <strong>same-day and next-day appointments</strong> to evaluate your condition and discuss surgical options.",
   },
@@ -6851,7 +6851,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Tennis Elbow Surgery",
-      body: "**We accept most major insurance plans. PPO preferred.** Tennis elbow surgery is typically covered when conservative treatment has failed after 6-12 months and the condition significantly affects function.",
+      body: "**We accept PPO plans.** Tennis elbow surgery is typically covered when conservative treatment has failed after 6-12 months and the condition significantly affects function.",
     },
     schedule: "Chronic outer elbow pain limiting your activities? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with our elbow specialists at Mountain Spine & Orthopedics. We offer <strong>same-day and next-day appointments</strong> to evaluate your tennis elbow and discuss treatment options.",
   },
@@ -6918,7 +6918,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Golfer's Elbow Surgery",
-      body: "**We accept most major insurance plans. PPO preferred.** Golfer's elbow surgery is typically covered when conservative treatment has failed after 6-12 months and the condition significantly affects function.",
+      body: "**We accept PPO plans.** Golfer's elbow surgery is typically covered when conservative treatment has failed after 6-12 months and the condition significantly affects function.",
     },
     schedule: "Chronic inner elbow pain limiting your golf game or daily activities? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with our elbow specialists at Mountain Spine & Orthopedics. We offer <strong>same-day and next-day appointments</strong> to discuss your treatment options.",
   },
@@ -6986,7 +6986,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Elbow Arthroscopy",
-      body: "**We accept most major insurance plans. PPO preferred.** Elbow arthroscopy is typically covered when medically necessary to treat documented elbow pathology unresponsive to conservative treatment.",
+      body: "**We accept PPO plans.** Elbow arthroscopy is typically covered when medically necessary to treat documented elbow pathology unresponsive to conservative treatment.",
     },
     schedule: "Elbow catching, locking, or limited motion affecting your activities? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with our orthopedic specialists at Mountain Spine & Orthopedics. We offer <strong>same-day and next-day appointments</strong> to evaluate your elbow and discuss arthroscopic treatment options.",
   },
@@ -7054,7 +7054,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Wrist Arthroscopy",
-      body: "**We accept most major insurance plans. PPO preferred.** Wrist arthroscopy is typically covered when medically necessary to diagnose or treat documented wrist pathology unresponsive to conservative treatment.",
+      body: "**We accept PPO plans.** Wrist arthroscopy is typically covered when medically necessary to diagnose or treat documented wrist pathology unresponsive to conservative treatment.",
     },
     schedule: "Persistent wrist pain or instability affecting your activities? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with our wrist specialists at Mountain Spine & Orthopedics. We offer <strong>same-day and next-day appointments</strong> and complimentary <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">MRI reviews</a> to evaluate your condition.",
   },
@@ -7121,7 +7121,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Wrist Fracture Surgery",
-      body: "**We accept most major insurance plans. PPO preferred.** Wrist fracture surgery is a medically necessary procedure and is typically covered by insurance when surgical indications are met.",
+      body: "**We accept PPO plans.** Wrist fracture surgery is a medically necessary procedure and is typically covered by insurance when surgical indications are met.",
     },
     schedule: "Suffered a wrist fracture? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule an urgent consultation</a> with our wrist specialists at Mountain Spine & Orthopedics. We offer <strong>same-day and next-day appointments</strong> for fracture evaluation and treatment planning.",
   },
@@ -7188,7 +7188,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for De Quervain's Release",
-      body: "**We accept most major insurance plans. PPO preferred.** De Quervain's release is typically covered when conservative treatment has failed and the condition significantly affects hand function.",
+      body: "**We accept PPO plans.** De Quervain's release is typically covered when conservative treatment has failed and the condition significantly affects hand function.",
     },
     schedule: "Persistent thumb-side wrist pain despite injections? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with our hand specialists at Mountain Spine & Orthopedics. We offer <strong>same-day and next-day appointments</strong> to discuss surgical options for your De Quervain's tenosynovitis.",
   },
@@ -7255,7 +7255,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Dupuytren's Surgery",
-      body: "**We accept most major insurance plans. PPO preferred.** Dupuytren's surgery is typically covered when contracture significantly affects hand function, usually when the contracture reaches 30 degrees or more.",
+      body: "**We accept PPO plans.** Dupuytren's surgery is typically covered when contracture significantly affects hand function, usually when the contracture reaches 30 degrees or more.",
     },
     schedule: "Fingers bent and can't straighten? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> with our hand specialists at Mountain Spine & Orthopedics. We offer <strong>same-day and next-day appointments</strong> to evaluate your Dupuytren's contracture and discuss treatment options.",
   },
@@ -7322,7 +7322,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Hand Fracture Surgery",
-      body: "**We accept most major insurance plans. PPO preferred.** Hand fracture surgery is a medically necessary procedure and is typically covered by insurance when surgical indications are met.",
+      body: "**We accept PPO plans.** Hand fracture surgery is a medically necessary procedure and is typically covered by insurance when surgical indications are met.",
     },
     schedule: "Suffered a hand or finger fracture? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule an urgent consultation</a> with our hand specialists at Mountain Spine & Orthopedics. We offer <strong>same-day and next-day appointments</strong> for fracture evaluation and treatment planning.",
   },
@@ -7391,7 +7391,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Elbow Fracture Surgery",
-      body: "**We accept most major insurance plans. PPO preferred.** Elbow fracture surgery is a medically necessary procedure and is typically covered by insurance when surgical indications are met.",
+      body: "**We accept PPO plans.** Elbow fracture surgery is a medically necessary procedure and is typically covered by insurance when surgical indications are met.",
     },
     schedule: "Suffered an elbow fracture? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule an urgent consultation</a> with our orthopedic specialists at Mountain Spine & Orthopedics. We offer <strong>same-day and next-day appointments</strong> for fracture evaluation and treatment planning.",
   },
@@ -7457,7 +7457,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Shoulder Replacement",
-      body: "**We accept most major insurance plans. PPO preferred.** Total shoulder replacement is a medically necessary procedure for advanced arthritis and is typically covered by insurance.",
+      body: "**We accept PPO plans.** Total shoulder replacement is a medically necessary procedure for advanced arthritis and is typically covered by insurance.",
     },
     schedule: "Severe shoulder pain or stiffness affecting daily life? Our shoulder specialists provide comprehensive evaluation to determine if total shoulder replacement is right for you. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Book an appointment</a> with Mountain Spine & Orthopedics today.",
   },
@@ -7524,7 +7524,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Reverse Shoulder Replacement",
-      body: "**We accept most major insurance plans. PPO preferred.** Reverse shoulder replacement is a medically necessary procedure for complex shoulder conditions and is typically covered by insurance.",
+      body: "**We accept PPO plans.** Reverse shoulder replacement is a medically necessary procedure for complex shoulder conditions and is typically covered by insurance.",
     },
     schedule: "Severe shoulder pain with rotator cuff problems? Our shoulder specialists provide comprehensive evaluation to determine if reverse shoulder replacement is right for you. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Book an appointment</a> with Mountain Spine & Orthopedics today.",
   },
@@ -7591,7 +7591,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Labral Repair",
-      body: "**We accept most major insurance plans. PPO preferred.** Authorization for labral repair typically depends on symptoms, imaging, exam findings, failed conservative care when appropriate, and documentation of instability or mechanical shoulder dysfunction.",
+      body: "**We accept PPO plans.** Authorization for labral repair typically depends on symptoms, imaging, exam findings, failed conservative care when appropriate, and documentation of instability or mechanical shoulder dysfunction.",
     },
     schedule: "Shoulder clicking, deep pain, or recurrent slipping after an injury should be evaluated before it becomes a pattern. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Book an appointment</a> with Mountain Spine & Orthopedics to review whether labral repair, biceps treatment, or non-surgical care is the right next step.",
   },
@@ -7658,7 +7658,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Biceps Tenodesis",
-      body: "**We accept most major insurance plans. PPO preferred.** Biceps tenodesis coverage typically depends on documented shoulder symptoms, exam findings, imaging, failed non-surgical care when appropriate, and any associated procedures.",
+      body: "**We accept PPO plans.** Biceps tenodesis coverage typically depends on documented shoulder symptoms, exam findings, imaging, failed non-surgical care when appropriate, and any associated procedures.",
     },
     schedule: "Front-of-shoulder pain with lifting, clicking, or biceps tenderness should be evaluated before choosing between tenodesis, tenotomy, labral repair, or non-surgical care. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Book an appointment</a> with Mountain Spine & Orthopedics.",
   },
@@ -7726,7 +7726,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Shoulder Stabilization",
-      body: "**We accept most major insurance plans. PPO preferred.** Arthroscopic shoulder stabilization is a medically necessary procedure for recurrent instability and is typically covered by insurance.",
+      body: "**We accept PPO plans.** Arthroscopic shoulder stabilization is a medically necessary procedure for recurrent instability and is typically covered by insurance.",
     },
     schedule: "Recurrent shoulder dislocations or instability? Our shoulder specialists provide comprehensive evaluation to determine if shoulder stabilization surgery is right for you. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Book an appointment</a> with Mountain Spine & Orthopedics today.",
   },
@@ -7795,7 +7795,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Acromioplasty",
-      body: "**We accept most major insurance plans. PPO preferred.** Arthroscopic acromioplasty is a medically necessary procedure for shoulder impingement and is typically covered by insurance.",
+      body: "**We accept PPO plans.** Arthroscopic acromioplasty is a medically necessary procedure for shoulder impingement and is typically covered by insurance.",
     },
     schedule: "Shoulder pain with overhead activities from impingement? Our shoulder specialists provide comprehensive evaluation to determine if acromioplasty is right for you. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Book an appointment</a> with Mountain Spine & Orthopedics today.",
   },
@@ -7861,7 +7861,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     ],
     insurance: {
       heading: "Insurance for Shoulder Fracture Surgery",
-      body: "**We accept most major insurance plans. PPO preferred.** Shoulder fracture surgery is a medically necessary procedure and is typically covered by insurance.",
+      body: "**We accept PPO plans.** Shoulder fracture surgery is a medically necessary procedure and is typically covered by insurance.",
     },
     schedule: "Suffered a shoulder fracture? <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule an urgent consultation</a> with our orthopedic specialists at Mountain Spine & Orthopedics. We offer <strong>same-day and next-day appointments</strong> for fracture evaluation and treatment planning.",
   },
@@ -7914,7 +7914,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     heroImage: "https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--kyphoplasty--thumbnail.png",
     insurance: {
       heading: "Insurance Coverage",
-      body: "**Kyphoplasty is typically covered by Medicare and most insurance plans** when medically necessary for painful compression fractures. We accept most major insurance plans (PPO preferred) and work with your provider to verify coverage and benefits."
+      body: "**Kyphoplasty is typically covered by Medicare and most insurance plans** when medically necessary for painful compression fractures. We accept PPO plans and work with your provider to verify coverage and benefits."
     },
     schedule: "Consider kyphoplasty if pain remains severe and limiting after conservative management, especially when imaging confirms an acute or subacute fracture. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> today. <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">Free MRI review</a> available.",
     keywords: [
@@ -7978,7 +7978,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     heroImage: "https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--vertebroplasty--thumbnail.png",
     insurance: {
       heading: "Insurance and Coverage",
-      body: "**Vertebroplasty is typically covered by Medicare and most insurance plans** for painful compression fractures that haven't responded to conservative care. We accept most major insurance (PPO preferred) and help verify benefits."
+      body: "**Vertebroplasty is typically covered by Medicare and most insurance plans** for painful compression fractures that haven't responded to conservative care. We accept PPO plans and help verify benefits."
     },
     schedule: "If vertebral compression fracture is causing severe persistent pain despite conservative care, <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">schedule a consultation</a> to discuss candidacy. <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">Free imaging review</a> available.",
     keywords: [
@@ -8041,7 +8041,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     heroImage: "https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--plif--thumbnail.png",
     insurance: {
       heading: "Insurance Coverage",
-      body: "**PLIF is typically covered by insurance** when medically necessary for documented instability or nerve compression. We accept most major insurance plans (PPO preferred) and work with you to verify coverage and benefits."
+      body: "**PLIF is typically covered by insurance** when medically necessary for documented instability or nerve compression. We accept PPO plans and work with you to verify coverage and benefits."
     },
     schedule: "<a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> or <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">get a second opinion</a> to discuss if PLIF is right for your lumbar spine condition.",
     keywords: [
@@ -8104,7 +8104,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     heroImage: "https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--thoracic-spine-surgery--thumbnail.png",
     insurance: {
       heading: "Insurance and Coverage",
-      body: "**Thoracic spine surgery is typically covered by insurance** when medically necessary for cord compression, fractures, tumors, or infection. We accept most major insurance (PPO preferred) and assist with authorization."
+      body: "**Thoracic spine surgery is typically covered by insurance** when medically necessary for cord compression, fractures, tumors, or infection. We accept PPO plans and assist with authorization."
     },
     schedule: "<a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> or request a <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">second opinion</a> for complex thoracic spine conditions requiring evaluation for surgery.",
     keywords: [
@@ -8167,7 +8167,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     heroImage: "https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--si-joint-fusion--thumbnail.png",
     insurance: {
       heading: "Insurance Coverage",
-      body: "**SI joint fusion is increasingly covered by insurance** when conservative care has failed and diagnosis is confirmed with diagnostic injections. We accept most major insurance (PPO preferred) and help navigate authorization."
+      body: "**SI joint fusion is increasingly covered by insurance** when conservative care has failed and diagnosis is confirmed with diagnostic injections. We accept PPO plans and help navigate authorization."
     },
     schedule: "Most patients start with therapy, activity modification, and injections. Fusion is considered when pain remains function-limiting and SI joint is clearly confirmed as the primary pain generator. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a>.",
     keywords: [
@@ -8231,7 +8231,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     heroImage: "https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--cervical-laminectomy--thumbnail.png",
     insurance: {
       heading: "Insurance Coverage",
-      body: "**Cervical laminectomy is typically covered by insurance** when performed for myelopathy or progressive neurologic symptoms. We accept most major insurance (PPO preferred) and assist with authorization."
+      body: "**Cervical laminectomy is typically covered by insurance** when performed for myelopathy or progressive neurologic symptoms. We accept PPO plans and assist with authorization."
     },
     schedule: "MRI evaluates cord compression; exam determines severity and urgency. Surgery aims to prevent progression and relieve cord pressure. <a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> or <a href=\"/find-care/second-opinion\" class=\"text-blue-600 hover:underline\">get a second opinion</a> for cervical myelopathy evaluation.",
     keywords: [
@@ -8294,7 +8294,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     heroImage: "https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--joint-pain-treatment--thumbnail.png",
     insurance: {
       heading: "Insurance Coverage",
-      body: "**Joint pain treatment is typically covered by insurance** depending on the specific diagnosis and treatment plan. We accept most major insurance (PPO preferred) and verify benefits."
+      body: "**Joint pain treatment is typically covered by insurance** depending on the specific diagnosis and treatment plan. We accept PPO plans and verify benefits."
     },
     schedule: "<a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> for joint pain evaluation and treatment planning tailored to your specific joint and lifestyle needs.",
     keywords: [
@@ -8358,7 +8358,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     heroImage: "https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--arthritis-treatment--thumbnail.png",
     insurance: {
       heading: "Insurance Coverage",
-      body: "**Arthritis treatment is typically covered by insurance** including therapy, injections, and surgery when medically necessary. We accept most major insurance (PPO preferred) and verify coverage."
+      body: "**Arthritis treatment is typically covered by insurance** including therapy, injections, and surgery when medically necessary. We accept PPO plans and verify coverage."
     },
     schedule: "<a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> to discuss arthritis treatment options tailored to your joint and severity. <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">Free imaging review</a> available.",
     keywords: [
@@ -8422,7 +8422,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     heroImage: "https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--bursitis-treatment--thumbnail.png",
     insurance: {
       heading: "Insurance Coverage",
-      body: "**Bursitis treatment is typically covered by insurance** including therapy, injections, and imaging when appropriate. We accept most major insurance (PPO preferred)."
+      body: "**Bursitis treatment is typically covered by insurance** including therapy, injections, and imaging when appropriate. We accept PPO plans."
     },
     schedule: "<a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> if bursitis pain persists despite 2-4 weeks of rest and conservative home care, or if you have significant swelling or weakness.",
     keywords: [
@@ -8485,7 +8485,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     heroImage: "https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--tendonitis-treatment--thumbnail.png",
     insurance: {
       heading: "Insurance Coverage",
-      body: "**Tendonitis treatment is typically covered by insurance** including therapy and imaging. PRP injections are often not covered and may be self-pay. We accept most major insurance (PPO preferred)."
+      body: "**Tendonitis treatment is typically covered by insurance** including therapy and imaging. PRP injections are often not covered and may be self-pay. We accept PPO plans."
     },
     schedule: "<a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> for persistent tendon pain not improving with rest and activity modification over 4-6 weeks.",
     keywords: [
@@ -8549,7 +8549,7 @@ export const allTreatmentContent: TreatmentContent[] = [
     heroImage: "https://mountainspineortho.b-cdn.net/treatments-thumbnails/mountain-spine-orthopedics--treatment--osteoporosis-treatment--thumbnail.png",
     insurance: {
       heading: "Insurance Coverage",
-      body: "**Osteoporosis treatment is typically covered by Medicare and most insurance** including DEXA scans, medications, and minimally invasive procedures for fractures. We accept most major insurance (PPO preferred)."
+      body: "**Osteoporosis treatment is typically covered by Medicare and most insurance** including DEXA scans, medications, and minimally invasive procedures for fractures. We accept PPO plans."
     },
     schedule: "<a href=\"/find-care/book-an-appointment\" class=\"text-blue-600 hover:underline\">Schedule a consultation</a> for bone health evaluation, especially if you have risk factors (age, family history, steroid use) or a new compression fracture. <a href=\"/find-care/free-mri-review\" class=\"text-blue-600 hover:underline\">Free imaging review</a> available.",
     keywords: [

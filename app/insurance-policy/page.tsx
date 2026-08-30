@@ -75,14 +75,14 @@ const medicalOrganizationSchema = {
 };
 
 export const generateMetadata = (): Metadata => ({
-  title: 'Insurance Policy | Mountain Spine & Orthopedics',
-  description: 'Learn about insurance coverage options for orthopedic care at Mountain Spine & Orthopedics. We accept a wide range of flexible, comprehensive insurance providers to help patients throughout Florida.',
+  title: 'PPO Insurance Accepted | Mountain Spine & Orthopedics',
+  description: 'Mountain Spine & Orthopedics is a PPO practice. We accept PPO plans from Aetna, Blue Cross Blue Shield, Cigna, UnitedHealthcare and more — no referral needed. HMO plans are not accepted. Check your carrier before you book.',
   alternates: {
     canonical: buildCanonical('/insurance-policy'),
   },
   openGraph: {
-    title: 'Insurance Policy | Mountain Spine & Orthopedics',
-    description: 'Learn about insurance coverage options for orthopedic care at Mountain Spine & Orthopedics. We accept a wide range of flexible, comprehensive insurance providers to help patients throughout Florida.',
+    title: 'PPO Insurance Accepted | Mountain Spine & Orthopedics',
+    description: 'Mountain Spine & Orthopedics is a PPO practice. We accept PPO plans from Aetna, Blue Cross Blue Shield, Cigna, UnitedHealthcare and more — no referral needed. HMO plans are not accepted. Check your carrier before you book.',
     url: buildCanonical('/insurance-policy'),
     siteName: 'Mountain Spine & Orthopedics',
     type: 'website',
@@ -97,8 +97,8 @@ export const generateMetadata = (): Metadata => ({
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Insurance Policy | Mountain Spine & Orthopedics',
-    description: 'Learn about insurance coverage options for orthopedic care at Mountain Spine & Orthopedics. We accept a wide range of flexible, comprehensive insurance providers to help patients throughout Florida.',
+    title: 'PPO Insurance Accepted | Mountain Spine & Orthopedics',
+    description: 'Mountain Spine & Orthopedics is a PPO practice. We accept PPO plans from Aetna, Blue Cross Blue Shield, Cigna, UnitedHealthcare and more — no referral needed. HMO plans are not accepted. Check your carrier before you book.',
     images: ['/InsuranceLanding.png'],
   },
 })

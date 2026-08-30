@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ShieldCheck, ShieldAlert, ShieldX, Phone, ArrowRight } from 'lucide-react';
 import {
   INSURANCE_PLANS,
+  PPO_HEADLINE,
+  PPO_SUBLINE,
   STATUS_COPY,
   findPlans,
   type InsurancePlan,
@@ -95,6 +97,28 @@ export default function InsurancePlanChecker() {
 
   return (
     <div className="w-full">
+      {/* PPO is the rule that decides most answers here, so it leads rather than
+          sitting in a footnote. An Aetna PPO is accepted; an Aetna HMO is not. */}
+      <div className="mb-8 rounded-[24px] border border-[#0A50EC]/20 bg-[#0A50EC]/[0.04] px-5 py-5 sm:px-7 sm:py-6">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
+          <span
+            className="inline-flex w-fit shrink-0 items-center rounded-[62px] bg-[#0A50EC] px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-white"
+            style={{ fontFamily: 'var(--font-public-sans)' }}
+          >
+            PPO practice
+          </span>
+          <p
+            style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 600 }}
+            className="text-xl text-[#111315] sm:text-2xl"
+          >
+            {PPO_HEADLINE}
+          </p>
+        </div>
+        <p className="mt-3 max-w-[70ch] text-sm leading-relaxed text-[#424959] sm:text-base">
+          {PPO_SUBLINE}
+        </p>
+      </div>
+
       {/* Search */}
       <div className="relative max-w-[560px]">
         <Search

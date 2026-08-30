@@ -135,7 +135,7 @@ export default function InsurancePolicyClient() {
               style={{ fontFamily: "var(--font-public-sans)", fontWeight: 400 }}
               className="text-[#252932] text-4xl sm:text-6xl xl:text-6xl"
             >
-              Mountain Spine & Orthopedics Insurance Policy
+              PPO Insurance Accepted at Mountain Spine & Orthopedics
             </TextAnimate>
           </div>
           <div className='px-6 xl:px-[80px] z-[2] flex flex-col items-start justify-start mt-[24px] w-full pb-8'>
@@ -143,7 +143,7 @@ export default function InsurancePolicyClient() {
               style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }}
               className="text-[#252932] text-xl lg:text-2xl text-shadow-sm w-full"
             >
-              We accept a wide variety of orthopedic care insurance coverage to help as many patients as possible throughout Florida.
+              We are a PPO practice. If you carry a PPO plan you can see one of our specialists without a referral — check your carrier below before you book.
             </p>
           </div>
         </div>
@@ -152,10 +152,10 @@ export default function InsurancePolicyClient() {
         <div className="max-w-[1440px] w-full h-full px-6 xl:px-[40px] mx-auto flex flex-col lg:flex-row space-x-[60px] ">
           <div className=" lg:w-[50%] w-full  flex flex-col h-full">
             <h2 style={{ fontFamily: "var(--font-public-sans)", fontWeight: 500, color: '#252932' }} className="text-3xl">
-              We Accept Flexible & Comprehensive Insurance Providers
+              We Are a PPO Practice
             </h2>
             <p style={{ fontFamily: "var(--font-public-sans)", fontWeight: 500, color: '#424959' }} className="text-lg mt-[24px]">
-              Not all insurance providers are equal which is why we only work with carriers that offer flexibility, comprehensive coverage, and cost effective options. Speak with a patient advocate to learn more.
+              We accept PPO plans, which let you see a specialist without a referral and give you the widest choice of surgeon. HMO plans are not accepted. Speak with a patient advocate and we will verify your benefits before your visit.
             </p>
             <Image src={InsurancePolicy2} className="w-full rounded-[24px] mt-[40px] h-full aspect-auto" alt="Mountain Spine & Orthopedics medical staff training session on insurance verification and patient billing procedures" />
           </div>
@@ -169,10 +169,10 @@ export default function InsurancePolicyClient() {
           scrolling past a wall of brand marks. */}
       <section id="insurance-checker" className='w-full max-w-[1440px] mt-14 px-6 xl:px-[80px] flex flex-col scroll-mt-24'>
         <h2 className='text-[#252932] text-3xl sm:text-4xl lg:text-5xl' style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }}>
-          Check your insurance
+          Check your plan
         </h2>
         <p className='mt-3 max-w-[720px] text-[#424959] text-base sm:text-lg' style={{ fontFamily: 'var(--font-inter)', fontWeight: 400 }}>
-          Find your carrier below to see where you stand before you book. We verify every
+          We accept PPO plans. Find your carrier below to see where you stand before you book — we verify every
           patient&rsquo;s benefits ahead of their visit, so you are not guessing at the front desk.
         </p>
         <div className='mt-8'>
@@ -182,7 +182,7 @@ export default function InsurancePolicyClient() {
 
       <section className='w-full h-full  mt-14 max-w-[1440px]  px-6 xl:px-[80px] space-y-2 flex flex-col '>
         <h2 className='text-[#252932] text-4xl md:text-5xl lg:text-7xl font-bold text-start w-full' style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }}>
-          Covered Insurance Carriers
+          PPO Carriers We Accept
         </h2>
         <div className='w-full flex flex-row flex-wrap gap-4 items-center justify-evenly'>
           {insuranceCarriers.map((item, index) => (
