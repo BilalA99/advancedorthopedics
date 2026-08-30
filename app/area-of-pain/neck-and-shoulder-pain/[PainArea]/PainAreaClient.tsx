@@ -8,6 +8,7 @@ import { DoctorContactForm } from '@/components/DoctorContactForm';
 import { NeckAndShoulderDropDown } from '@/components/neck-and-shoulder-dropdown';
 import { TextAnimate } from '@/components/magicui/text-animate';
 import { PhoneText } from '@/components/PhoneText';
+import { processTextWithBoldAndLinks } from '@/lib/richText';
 import { PhoneCTA } from '@/components/PhoneCTA';
 import Link from 'next/link';
 import { conditionIndex as conditions } from '@/components/data/taxonomyIndex.generated';
@@ -297,7 +298,18 @@ export function PainAreaClient({ condition_details, randomDoctors, specialtySlug
                 }}
                 className='text-[#424959] sm:text-xl text-sm'
               >
-                <PhoneText text={condition_details?.detail} trackLocation="Neck & Shoulder Pain Detail Section" />
+                {/* detail carries stored HTML (<strong>, inline links). PhoneText
+                    renders text, so those tags printed literally on every
+                    area-of-pain page. No detail string contains a phone
+                    number, so nothing tracked is lost by rendering it as HTML. */}
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: processTextWithBoldAndLinks(
+                      condition_details?.detail ?? '',
+                      condition_details?.slug ?? ''
+                    ),
+                  }}
+                />
               </div>
             </div>
 
