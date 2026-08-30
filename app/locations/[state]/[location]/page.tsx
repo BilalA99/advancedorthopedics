@@ -231,10 +231,33 @@ export default async function LocationDetails(
                                 locationSlug={locationSlug}
                                 defaultState={stateInfo?.abbr || state.toUpperCase()}
                             />
-                            {/* Secondary offer sits under the form, not above the
-                                primary CTAs — booking stays the first action. */}
+                            {/* Address, hours and directions sit directly under the
+                                form on mobile. These are what a patient checks before
+                                committing to a visit, so they come before the secondary
+                                second-opinion offer further down. */}
                             <div className="mt-4">
-                                <SecondOpinionCallout cityName={locationData.region.split(',')[0].trim()} />
+                                <LocationNAP slug={locationData.slug} phoneDisplay={statePhone.display} phoneTel={statePhone.tel} />
+                            </div>
+                            <div className="mt-3 w-full max-w-[480px] mx-auto">
+                                {/* Get Directions - light grey */}
+                                <TrackedOutboundLink
+                                    href={(locationData.link || (locationData.address ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(locationData.address)}` : `https://www.google.com/maps/dir/?api=1&destination=${locationData.lat},${locationData.lng}`))}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    eventName="directions_click"
+                                    eventParams={{
+                                    location_name: locationData.name,
+                                    location_state: state,
+                                    }}
+                                    className="w-full h-[52px] rounded-[16px] bg-[#E5E7EB] text-[#252932] flex flex-row items-center justify-center gap-2 font-[500] text-[15px] shadow-sm active:scale-[0.98] transition-all duration-200"
+                                    style={{ fontFamily: 'var(--font-public-sans)' }}
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                    </svg>
+                                    <span className="whitespace-nowrap">Get Directions</span>
+                                </TrackedOutboundLink>
                             </div>
                         </SlidingDiv>
 
@@ -251,38 +274,18 @@ export default async function LocationDetails(
                                       : `${locationData.region.split(',')[0].trim()}'s trusted orthopedic and spine center — board-certified surgeons, same-day appointments, and minimally invasive treatments that get you back to your life faster.`}
                                 </p>
                             </div>
-                            {/* NAP Block - Mobile */}
-                            <div className="xl:px-[80px] px-8 mt-1 sm:hidden block">
-                                <LocationNAP slug={locationData.slug} phoneDisplay={statePhone.display} phoneTel={statePhone.tel} />
-                            </div>
                             {/* NAP Block - Desktop */}
                             <div className="xl:px-[80px] px-8 mt-1 sm:block hidden">
                                 <LocationNAP slug={locationData.slug} phoneDisplay={statePhone.display} phoneTel={statePhone.tel} />
                             </div>
                         </SlidingDiv>
 
-                        {/* Mobile CTA row (under paragraph, above certificates) */}
+                        {/* Mobile secondary offer + trust points (under paragraph, above certificates) */}
                         <div className="z-[2] px-4 mt-3 sm:hidden block">
                             <div className="flex flex-col space-y-3 w-full max-w-[480px] mx-auto">
-                                {/* Get Directions - light grey */}
-                                <TrackedOutboundLink
-                                    href={(locationData.link || (locationData.address ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(locationData.address)}` : `https://www.google.com/maps/dir/?api=1&destination=${locationData.lat},${locationData.lng}`))}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    eventName="directions_click"
-                                    eventParams={{
-                                        location_name: locationData.name,
-                                        location_state: state,
-                                    }}
-                                    className="w-full h-[52px] rounded-[16px] bg-[#E5E7EB] text-[#252932] flex flex-row items-center justify-center gap-2 font-[500] text-[15px] shadow-sm active:scale-[0.98] transition-all duration-200"
-                                    style={{ fontFamily: 'var(--font-public-sans)' }}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="flex-shrink-0">
-                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z" />
-                                        <circle cx="12" cy="10" r="3" />
-                                    </svg>
-                                    <span className="whitespace-nowrap">Get Directions</span>
-                                </TrackedOutboundLink>
+                                {/* Secondary offer, below the location details and the
+                                    primary CTAs — booking stays the first action. */}
+                                <SecondOpinionCallout cityName={locationData.region.split(',')[0].trim()} />
 
                                 {/* Checkmark Items - Mobile */}
                                 <div className="flex flex-col space-y-2 mt-4 w-full">
