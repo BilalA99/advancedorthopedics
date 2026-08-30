@@ -402,8 +402,14 @@ export default async function LocationDetails(
                     </div>
                 </div>
 
+                {/* Kept in normal flow. This band used to be xl:absolute xl:bottom-0,
+                    which pulled it out of flow and let the hero columns render
+                    underneath it once the second-opinion card made the right column
+                    taller. The hero is content-height (no min-height), so flowing the
+                    marquee after the columns puts it in the same place while making
+                    the collision structurally impossible at any width. */}
                 <div
-                    className="z-[2] w-full flex flex-row items-center justify-evenly xl:absolute xl:bottom-0 xl:left-0 xl:right-0 py-12 pt-[32px] pb-[50px]"
+                    className="z-[2] w-full flex flex-row items-center justify-evenly py-12 pt-[32px] pb-[50px]"
 
                 >
                     <Marquee pauseOnHover className="w-full" >

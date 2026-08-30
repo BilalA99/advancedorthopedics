@@ -24,7 +24,7 @@ const VARIANTS: Record<Variant, { heading: string; body: string; primary: { href
   },
   "second-opinion": {
     heading: "Been told you need surgery?",
-    body: "Upload your MRI or X-ray and a board-certified orthopedic surgeon will send you a second opinion within 24 hours — 100% free, with no obligation to book treatment.",
+    body: "Carry a PPO plan? Upload your MRI or X-ray and a board-certified orthopedic surgeon will send you a second opinion within 24 hours — 100% free, with no obligation to book treatment.",
     primary: { href: "/find-care/second-opinion", label: "Get a free second opinion" },
     secondary: { href: "/find-care/free-mri-review", label: "Start with a free MRI review" },
   },

@@ -30,12 +30,13 @@ export default function SecondOpinionCallout({
         style={{ fontFamily: "var(--font-public-sans)", fontWeight: 600 }}
         className="text-[#252932] text-base sm:text-lg"
       >
-        Free second opinion{cityName ? ` for ${cityName} patients` : ""}
+        Free second opinion for PPO-insured{cityName ? ` ${cityName}` : ""} patients
       </p>
       <p className="mt-1.5 text-sm sm:text-base leading-relaxed text-[#424959]">
-        Already have an MRI or X-ray? Upload it and a board-certified orthopedic
-        surgeon will review your imaging and send you a second opinion within 24
-        hours — 100% free, with no obligation to book treatment.
+        Carry a PPO plan and already have an MRI or X-ray? Upload it and a
+        board-certified orthopedic surgeon will review your imaging and send you a
+        second opinion within 24 hours — 100% free, with no obligation to book
+        treatment.
       </p>
       <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
         <Link
@@ -51,6 +52,13 @@ export default function SecondOpinionCallout({
           Or start with a free MRI review
         </Link>
       </div>
+      <p className="mt-3 text-xs leading-relaxed text-[#6B7280]">
+        Not sure whether your plan qualifies?{' '}
+        <Link href="/insurance-policy" className="underline underline-offset-2 hover:text-[#0A50EC]">
+          Check your insurance
+        </Link>
+        .
+      </p>
     </aside>
   );
 }
