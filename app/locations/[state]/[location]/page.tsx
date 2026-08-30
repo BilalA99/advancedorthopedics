@@ -231,6 +231,11 @@ export default async function LocationDetails(
                                 locationSlug={locationSlug}
                                 defaultState={stateInfo?.abbr || state.toUpperCase()}
                             />
+                            {/* Secondary offer sits under the form, not above the
+                                primary CTAs — booking stays the first action. */}
+                            <div className="mt-4">
+                                <SecondOpinionCallout cityName={locationData.region.split(',')[0].trim()} />
+                            </div>
                         </SlidingDiv>
 
                         <SlidingDiv position="left" className="z-[2]">
@@ -253,10 +258,6 @@ export default async function LocationDetails(
                             {/* NAP Block - Desktop */}
                             <div className="xl:px-[80px] px-8 mt-1 sm:block hidden">
                                 <LocationNAP slug={locationData.slug} phoneDisplay={statePhone.display} phoneTel={statePhone.tel} />
-                            </div>
-                            {/* Free Second Opinion — paid-search message match */}
-                            <div className="xl:px-[80px] px-4 sm:px-8 mt-4">
-                                <SecondOpinionCallout cityName={locationData.region.split(',')[0].trim()} />
                             </div>
                         </SlidingDiv>
 
@@ -395,6 +396,9 @@ export default async function LocationDetails(
                     {/* Desktop Form - Positioned higher for above the fold */}
                     <div className="w-[50%] sm:flex hidden flex-col z-[2] justify-start items-center xl:pt-8 lg:pt-12 md:pt-16">
                         <div className="xl:w-[65%] w-[95%] rounded-2xl mx-auto"><DoctorContactForm backgroundcolor={'#0xFF'} buttonText="Get Your Free Consultation" header="" defaultState={stateInfo?.abbr || state.toUpperCase()} /></div>
+                        <div className="xl:w-[65%] w-[95%] mx-auto mt-5">
+                            <SecondOpinionCallout cityName={locationData.region.split(',')[0].trim()} />
+                        </div>
                     </div>
                 </div>
 
