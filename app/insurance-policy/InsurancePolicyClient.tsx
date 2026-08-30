@@ -12,6 +12,7 @@ import Policy3 from '@/public/InsurancePolicyCard3.png'
 import { motion } from 'framer-motion'
 import ClinicsMap from '@/components/ClinicsMap'
 import ContactUsSection from '@/components/ContactUsSection'
+import InsurancePlanChecker from '@/components/InsurancePlanChecker'
 import ConciergeServices from '@/public/ConceirgeServices.png'
 import { TextAnimate } from '@/components/magicui/text-animate'
 import insurance1 from '@/public/insurance(1).png'
@@ -163,6 +164,22 @@ export default function InsurancePolicyClient() {
           </div>
         </div>
       </section>
+      {/* Insurance checker — the page's decision element. Placed above the
+          carrier logos so a patient can answer "am I covered?" before
+          scrolling past a wall of brand marks. */}
+      <section id="insurance-checker" className='w-full max-w-[1440px] mt-14 px-6 xl:px-[80px] flex flex-col scroll-mt-24'>
+        <h2 className='text-[#252932] text-3xl sm:text-4xl lg:text-5xl' style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }}>
+          Check your insurance
+        </h2>
+        <p className='mt-3 max-w-[720px] text-[#424959] text-base sm:text-lg' style={{ fontFamily: 'var(--font-inter)', fontWeight: 400 }}>
+          Find your carrier below to see where you stand before you book. We verify every
+          patient&rsquo;s benefits ahead of their visit, so you are not guessing at the front desk.
+        </p>
+        <div className='mt-8'>
+          <InsurancePlanChecker />
+        </div>
+      </section>
+
       <section className='w-full h-full  mt-14 max-w-[1440px]  px-6 xl:px-[80px] space-y-2 flex flex-col '>
         <h2 className='text-[#252932] text-4xl md:text-5xl lg:text-7xl font-bold text-start w-full' style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }}>
           Covered Insurance Carriers
