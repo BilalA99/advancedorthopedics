@@ -2,7 +2,8 @@
  * Centralized state normalization and resolution for multi-state tracking.
  *
  * Valid state values are lowercase, hyphenated slugs matching the routing structure:
- *   /locations/florida, /locations/new-jersey, /locations/new-york, /locations/pennsylvania
+ *   /locations/florida, /locations/new-jersey, /locations/new-york, /locations/pennsylvania,
+ *   /locations/georgia
  *
  * No abbreviations, no uppercase, no spacing variations anywhere in analytics data.
  */
@@ -12,6 +13,7 @@ export const VALID_STATES = [
   'new-jersey',
   'new-york',
   'pennsylvania',
+  'georgia',
 ] as const;
 
 export type StateSlug = (typeof VALID_STATES)[number];
@@ -22,6 +24,7 @@ export const STATE_DISPLAY_NAMES: Record<StateSlug, string> = {
   'new-jersey': 'New Jersey',
   'new-york': 'New York',
   pennsylvania: 'Pennsylvania',
+  georgia: 'Georgia',
 };
 
 /** Ready-to-use options array for Select components */
@@ -39,11 +42,13 @@ const SLUG_MAP: Record<string, StateSlug> = {
   'new-jersey': 'new-jersey',
   'new-york': 'new-york',
   pennsylvania: 'pennsylvania',
+  georgia: 'georgia',
   // Abbreviations (upper and lower)
   fl: 'florida',
   nj: 'new-jersey',
   ny: 'new-york',
   pa: 'pennsylvania',
+  ga: 'georgia',
   // Full name variants
   'new jersey': 'new-jersey',
   'new york': 'new-york',
@@ -55,13 +60,14 @@ export function normalizeState(value: string): StateSlug | '' {
   return SLUG_MAP[key] ?? '';
 }
 
-export type StateCode = 'FL' | 'NJ' | 'NY' | 'PA';
+export type StateCode = 'FL' | 'NJ' | 'NY' | 'PA' | 'GA';
 
 const STATE_CODE_BY_SLUG: Record<StateSlug, StateCode> = {
   florida: 'FL',
   'new-jersey': 'NJ',
   'new-york': 'NY',
   pennsylvania: 'PA',
+  georgia: 'GA',
 };
 
 /** Canonical storage/measurement boundary. UI values remain route-friendly slugs. */
@@ -85,7 +91,7 @@ export function isValidState(value: string): value is StateSlug {
  */
 export function slugFromPathname(pathname: string): StateSlug | '' {
   const match = pathname.match(
-    /\/locations\/(florida|new-jersey|new-york|pennsylvania)/
+    /\/locations\/(florida|new-jersey|new-york|pennsylvania|georgia)/
   );
   return match ? (match[1] as StateSlug) : '';
 }
