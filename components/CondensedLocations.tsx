@@ -22,7 +22,8 @@ export default function CondensedLocations() {
         'florida': 'Florida',
         'new-jersey': 'New Jersey',
         'new-york': 'New York',
-        'pennsylvania': 'Pennsylvania'
+        'pennsylvania': 'Pennsylvania',
+        'georgia': 'Georgia'
     }
 
     const containerVariants = {
@@ -50,7 +51,7 @@ export default function CondensedLocations() {
                 <div className="text-center mb-10">
                     <h2 className="text-3xl font-bold text-[#252932] mb-3">Our Locations</h2>
                     <p className="text-gray-600 max-w-2xl mx-auto text-sm md:text-base">
-                        Visit any of our state-of-the-art facilities across FL, NJ, NY, and PA for expert orthopedic care.
+                        Visit any of our state-of-the-art facilities across FL, NJ, NY, PA, and GA for expert orthopedic care.
                     </p>
                 </div>
 
@@ -97,7 +98,7 @@ export default function CondensedLocations() {
                 
                 <div className="mt-12 pt-8 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4">
                     <p className="text-sm text-gray-500">
-                        By state: FL/PA <a href="tel:+15612239959" className="font-semibold text-gray-700 hover:text-[#0A50EC]">(561) 223-9959</a> · NJ <a href="tel:+19732596756" className="font-semibold text-gray-700 hover:text-[#0A50EC]">(973) 259-6756</a> · NY <a href="tel:+16463895606" className="font-semibold text-gray-700 hover:text-[#0A50EC]">(646) 389-5606</a>
+                        By state: FL <a href="tel:+15612239959" className="font-semibold text-gray-700 hover:text-[#0A50EC]">(561) 223-9959</a> · NJ <a href="tel:+19732596756" className="font-semibold text-gray-700 hover:text-[#0A50EC]">(973) 259-6756</a> · NY <a href="tel:+16463895606" className="font-semibold text-gray-700 hover:text-[#0A50EC]">(646) 389-5606</a> · PA <a href="tel:+12154369496" className="font-semibold text-gray-700 hover:text-[#0A50EC]">(215) 436-9496</a> · GA <a href="tel:+14049136886" className="font-semibold text-gray-700 hover:text-[#0A50EC]">(404) 913-6886</a>
                     </p>
                     <Link 
                         href="/locations"

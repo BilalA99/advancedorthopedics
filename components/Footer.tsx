@@ -54,7 +54,7 @@ export default function Footer() {
                             color: 'white'
                         }}
                         className='text-white mt-[20px] text-sm leading-relaxed'>
-                        Trusted <strong>orthopedic surgeon specialists</strong> serving Florida, New Jersey, New York & Pennsylvania with <strong>minimally invasive spine surgery</strong>, <strong>joint replacement surgery</strong>, and advanced <strong>back pain treatment</strong>. Book your <strong>orthopedic surgery consultation</strong> today.
+                        Trusted <strong>orthopedic surgeon specialists</strong> serving Florida, New Jersey, New York, Pennsylvania & Georgia with <strong>minimally invasive spine surgery</strong>, <strong>joint replacement surgery</strong>, and advanced <strong>back pain treatment</strong>. Book your <strong>orthopedic surgery consultation</strong> today.
                     </p>
 
                     {/* Contact Info — general + all 3 regional buckets */}
@@ -76,7 +76,7 @@ export default function Footer() {
                             </a>
                         </div>
 
-                        {([CONTACT_INFO.fl, CONTACT_INFO.nj, CONTACT_INFO.ny] as const).map((c) => (
+                        {([CONTACT_INFO.fl, CONTACT_INFO.nj, CONTACT_INFO.ny, CONTACT_INFO.pa, CONTACT_INFO.ga] as const).map((c) => (
                             <div key={c.key} className='flex flex-col gap-[2px]'>
                                 <span
                                     style={{ fontFamily: 'var(--font-inter)', fontWeight: 600, color: '#8A8F98' }}

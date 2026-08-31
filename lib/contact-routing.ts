@@ -6,14 +6,16 @@
  * the correct phone or email for the current page context.
  *
  * Route logic:
- *   /locations/new-jersey/**  → NJ contact
- *   /locations/new-york/**    → NY contact
- *   all other paths           → FL / General contact
+ *   /locations/new-jersey/**   → NJ contact
+ *   /locations/new-york/**     → NY contact
+ *   /locations/pennsylvania/** → PA contact
+ *   /locations/georgia/**      → GA contact
+ *   all other paths            → FL / General contact
  */
 
 import { slugFromPathname } from './stateUtils';
 
-export type ContactKey = 'fl' | 'nj' | 'ny';
+export type ContactKey = 'fl' | 'nj' | 'ny' | 'pa' | 'ga';
 
 export interface ContactInfo {
   key: ContactKey;
@@ -49,6 +51,26 @@ export const CONTACT_INFO: Record<ContactKey, ContactInfo> = {
     phoneTel: '6463895606',
     email: 'ny@mountainspineorthopedics.com',
   },
+  pa: {
+    key: 'pa',
+    label: 'PA',
+    phoneDisplay: '(215) 436-9496',
+    phoneHref: 'tel:+12154369496',
+    phoneTel: '2154369496',
+    // Follows the per-state inbox convention above. UNCONFIRMED: verify this
+    // mailbox exists and is monitored before this reaches production.
+    email: 'pa@mountainspineorthopedics.com',
+  },
+  ga: {
+    key: 'ga',
+    label: 'GA',
+    phoneDisplay: '(404) 913-6886',
+    phoneHref: 'tel:+14049136886',
+    phoneTel: '4049136886',
+    // Follows the per-state inbox convention above. UNCONFIRMED: verify this
+    // mailbox exists and is monitored before this reaches production.
+    email: 'ga@mountainspineorthopedics.com',
+  },
 };
 
 /** General inquiries email shown in the footer alongside all state-specific contacts. */
@@ -65,5 +87,7 @@ export function resolveContactByPathname(pathname: string): ContactInfo {
   const stateSlug = slugFromPathname(pathname);
   if (stateSlug === 'new-jersey') return CONTACT_INFO.nj;
   if (stateSlug === 'new-york') return CONTACT_INFO.ny;
+  if (stateSlug === 'pennsylvania') return CONTACT_INFO.pa;
+  if (stateSlug === 'georgia') return CONTACT_INFO.ga;
   return CONTACT_INFO.fl;
 }

@@ -16,7 +16,7 @@ import { StaticImageData } from 'next/image';
 import { Testimonial } from '../ui/testimonial-card';
 import { Marquee } from '../magicui/marquee';
 import Link from 'next/link';
-import { MAIN_PHONE_DISPLAY, NJ_PHONE_DISPLAY, NY_PHONE_DISPLAY } from '@/lib/locationConstants';
+import { MAIN_PHONE_DISPLAY, NJ_PHONE_DISPLAY, NY_PHONE_DISPLAY, PA_PHONE_DISPLAY, GA_PHONE_DISPLAY } from '@/lib/locationConstants';
 
 // clinics.tsx is imported by shared/client modules so server-only featureFlags cannot
 // be used here. Read the env var directly; featureFlags.ts still validates it strictly
@@ -31,8 +31,8 @@ export interface Review {
 }
 
 // State type definitions for multi-state support
-export type StateAbbr = 'FL' | 'NJ' | 'NY' | 'PA';
-export type StateSlug = 'florida' | 'new-jersey' | 'new-york' | 'pennsylvania';
+export type StateAbbr = 'FL' | 'NJ' | 'NY' | 'PA' | 'GA';
+export type StateSlug = 'florida' | 'new-jersey' | 'new-york' | 'pennsylvania' | 'georgia';
 export type LocationType = 'office' | 'surgery-center';
 
 export type LocationGalleryCategory = 'Facility' | 'Parking' | 'Interior' | 'Team' | 'Treatments' | 'Other';
@@ -102,6 +102,13 @@ export interface ClinicsProps {
   // Google Maps URL fields
   googleMapsUrl?: string; // Google Maps search URL (non-GBP)
   hasMap?: string;        // Same as googleMapsUrl (for schema)
+  /**
+   * Per-location hours override for the visible NAP block.
+   * `null` suppresses the hours row entirely - use it for an office whose
+   * hours are not yet confirmed, rather than inheriting the sitewide default
+   * and publishing an operating claim we cannot stand behind.
+   */
+  hoursDisplay?: string | null;
   updatedAt?: string;
   // Location photo gallery (SEO/CRO)
   gallery?: LocationGalleryImage[];
@@ -7965,7 +7972,7 @@ export const clinics: ClinicsProps[] = [
     lat: 40.6033,
     lng: -75.4775,
     address: '451 W. Linden St., Allentown, PA 18102',
-    phone: MAIN_PHONE_DISPLAY,
+    phone: PA_PHONE_DISPLAY,
     link: 'https://maps.app.goo.gl/nX5N9x7P7Z7G9N7P9',
     slug: 'allentown-orthopedics',
     stateAbbr: 'PA',
@@ -8264,35 +8271,35 @@ export const clinics: ClinicsProps[] = [
     faqs: [
       {
         question: "Do you offer same-day orthopedic appointments in Allentown, PA?",
-        answer: "Yes. Our Allentown location is open 8AM–8PM, 7 days a week, and we prioritize same-day and next-day visits when available. Call (561) 223-9959 to book the earliest appointment."
+        answer: "Yes. Our Allentown location is open 8AM–8PM, 7 days a week, and we prioritize same-day and next-day visits when available. Call (215) 436-9496 to book the earliest appointment."
       },
       {
         question: "Where is your Allentown, PA orthopedic office located?",
-        answer: "You can find Mountain Spine & Orthopedics in Allentown at 451 W. Linden St., Allentown, PA 18102. We're located near the PPL Center for convenient access. Call (561) 223-9959 if you'd like help with directions."
+        answer: "You can find Mountain Spine & Orthopedics in Allentown at 451 W. Linden St., Allentown, PA 18102. We're located near the PPL Center for convenient access. Call (215) 436-9496 if you'd like help with directions."
       },
       {
         question: "What areas do you serve from your Allentown location?",
-        answer: "Patients visit our Allentown clinic from surrounding Lehigh Valley communities and nearby areas throughout eastern Pennsylvania. If you're not sure which location is closest, call (561) 223-9959 and we'll guide you."
+        answer: "Patients visit our Allentown clinic from surrounding Lehigh Valley communities and nearby areas throughout eastern Pennsylvania. If you're not sure which location is closest, call (215) 436-9496 and we'll guide you."
       },
       {
         question: "What conditions do you treat at your Allentown, PA location?",
-        answer: "We evaluate and treat common orthopedic and spine conditions including herniated discs, sciatica, spinal stenosis, arthritis-related joint pain, sports injuries, and more. Browse our Conditions section on this page to see options by body area, then call (561) 223-9959 to schedule."
+        answer: "We evaluate and treat common orthopedic and spine conditions including herniated discs, sciatica, spinal stenosis, arthritis-related joint pain, sports injuries, and more. Browse our Conditions section on this page to see options by body area, then call (215) 436-9496 to schedule."
       },
       {
         question: "What insurance does Mountain Spine & Orthopedics Allentown accept?",
-        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (215) 436-9496 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Allentown location?",
-        answer: "Our Allentown orthopedic surgeons perform minimally invasive procedures including microdiscectomy, laminectomy, spinal fusion, ACDF, and artificial disc replacement. Most procedures are outpatient with faster recovery than traditional open surgery. Call (561) 223-9959 or visit our Treatments page for details."
+        answer: "Our Allentown orthopedic surgeons perform minimally invasive procedures including microdiscectomy, laminectomy, spinal fusion, ACDF, and artificial disc replacement. Most procedures are outpatient with faster recovery than traditional open surgery. Call (215) 436-9496 or visit our Treatments page for details."
       },
       {
         question: "Do you treat workers' compensation and work-related injuries in the Lehigh Valley?",
-        answer: "Yes. Our Allentown clinic accepts workers' compensation cases with same-day evaluations for work-related orthopedic injuries. We serve the Lehigh Valley including Bethlehem, Easton, and Whitehall Township. Call (561) 223-9959 to schedule a workers' comp evaluation."
+        answer: "Yes. Our Allentown clinic accepts workers' compensation cases with same-day evaluations for work-related orthopedic injuries. We serve the Lehigh Valley including Bethlehem, Easton, and Whitehall Township. Call (215) 436-9496 to schedule a workers' comp evaluation."
       },
       {
         question: "How do I book my first appointment at your Allentown orthopedic clinic?",
-        answer: "Call (561) 223-9959 or use the Book an Appointment form at the top of this page. Same-day and next-day availability is typically offered for new patients. Our team will handle scheduling and insurance verification before your visit."
+        answer: "Call (215) 436-9496 or use the Book an Appointment form at the top of this page. Same-day and next-day availability is typically offered for new patients. Our team will handle scheduling and insurance verification before your visit."
       }
     ],
     ogImage: '/locations-pennsylvania-og.png',
@@ -8310,7 +8317,7 @@ export const clinics: ClinicsProps[] = [
     lat: 39.9496,
     lng: -75.1685,
     address: '1601 Walnut St. Suite 514, Philadelphia, PA 19102',
-    phone: MAIN_PHONE_DISPLAY,
+    phone: PA_PHONE_DISPLAY,
     link: 'https://maps.app.goo.gl/rX5N9x7P7Z7G9N7P9',
     slug: 'philadelphia-walnut-orthopedics',
     stateAbbr: 'PA',
@@ -8605,35 +8612,35 @@ export const clinics: ClinicsProps[] = [
     faqs: [
       {
         question: "Do you offer same-day orthopedic appointments in Philadelphia, PA?",
-        answer: "Yes. Our Philadelphia location is open 8AM–8PM, 7 days a week, and we prioritize same-day and next-day visits when available. Call (561) 223-9959 to book the earliest appointment."
+        answer: "Yes. Our Philadelphia location is open 8AM–8PM, 7 days a week, and we prioritize same-day and next-day visits when available. Call (215) 436-9496 to book the earliest appointment."
       },
       {
         question: "Where is your Philadelphia, PA orthopedic office located?",
-        answer: "You can find Mountain Spine & Orthopedics in Philadelphia at 1601 Walnut St. Suite 514, Philadelphia, PA 19102. We're located in the historic medical district near Rittenhouse Square. Call (561) 223-9959 if you'd like help with directions."
+        answer: "You can find Mountain Spine & Orthopedics in Philadelphia at 1601 Walnut St. Suite 514, Philadelphia, PA 19102. We're located in the historic medical district near Rittenhouse Square. Call (215) 436-9496 if you'd like help with directions."
       },
       {
         question: "What areas do you serve from your Philadelphia location?",
-        answer: "Patients visit our Philadelphia clinic from throughout Center City, surrounding Philadelphia neighborhoods, and nearby suburban communities. If you're not sure which location is closest, call (561) 223-9959 and we'll guide you."
+        answer: "Patients visit our Philadelphia clinic from throughout Center City, surrounding Philadelphia neighborhoods, and nearby suburban communities. If you're not sure which location is closest, call (215) 436-9496 and we'll guide you."
       },
       {
         question: "What conditions do you treat at your Philadelphia, PA location?",
-        answer: "We evaluate and treat common orthopedic and spine conditions including herniated discs, sciatica, spinal stenosis, arthritis-related joint pain, sports injuries, and more. Browse our Conditions section on this page to see options by body area, then call (561) 223-9959 to schedule."
+        answer: "We evaluate and treat common orthopedic and spine conditions including herniated discs, sciatica, spinal stenosis, arthritis-related joint pain, sports injuries, and more. Browse our Conditions section on this page to see options by body area, then call (215) 436-9496 to schedule."
       },
       {
         question: "What insurance does Mountain Spine & Orthopedics Philadelphia Walnut accept?",
-        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (215) 436-9496 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Center City Philadelphia location?",
-        answer: "Our Philadelphia orthopedic surgeons perform minimally invasive procedures including microdiscectomy, laminectomy, spinal fusion, ACDF, and artificial disc replacement. Most procedures are outpatient with faster recovery than traditional open surgery. Call (561) 223-9959 or visit our Treatments page for details."
+        answer: "Our Philadelphia orthopedic surgeons perform minimally invasive procedures including microdiscectomy, laminectomy, spinal fusion, ACDF, and artificial disc replacement. Most procedures are outpatient with faster recovery than traditional open surgery. Call (215) 436-9496 or visit our Treatments page for details."
       },
       {
         question: "Do you treat workers' compensation and work-related injuries in Center City Philadelphia?",
-        answer: "Yes. Our Walnut Street clinic accepts workers' compensation cases with same-day evaluations for work-related orthopedic injuries. We serve Center City, Rittenhouse Square, University City, and surrounding neighborhoods. Call (561) 223-9959 to schedule a workers' comp evaluation."
+        answer: "Yes. Our Walnut Street clinic accepts workers' compensation cases with same-day evaluations for work-related orthopedic injuries. We serve Center City, Rittenhouse Square, University City, and surrounding neighborhoods. Call (215) 436-9496 to schedule a workers' comp evaluation."
       },
       {
         question: "How do I book my first appointment at your Philadelphia Walnut Street clinic?",
-        answer: "Call (561) 223-9959 or use the Book an Appointment form at the top of this page. Same-day and next-day availability is typically offered for new patients. Our team will handle scheduling and insurance verification before your visit."
+        answer: "Call (215) 436-9496 or use the Book an Appointment form at the top of this page. Same-day and next-day availability is typically offered for new patients. Our team will handle scheduling and insurance verification before your visit."
       }
     ],
     ogImage: '/Philadelphia-og.png',
@@ -8651,7 +8658,7 @@ export const clinics: ClinicsProps[] = [
     lat: 39.9912,
     lng: -75.0934,
     address: '2401 E. Tioga St., Philadelphia, PA 19134',
-    phone: MAIN_PHONE_DISPLAY,
+    phone: PA_PHONE_DISPLAY,
     link: 'https://maps.app.goo.gl/sX5N9x7P7Z7G9N7P9',
     slug: 'philadelphia-tioga-orthopedics',
     stateAbbr: 'PA',
@@ -8950,15 +8957,15 @@ export const clinics: ClinicsProps[] = [
       },
       {
         question: "What insurance does Mountain Spine & Orthopedics North Philadelphia accept?",
-        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (215) 436-9496 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your North Philadelphia location?",
-        answer: "Our North Philadelphia orthopedic surgeons perform minimally invasive procedures including microdiscectomy, laminectomy, spinal fusion, ACDF, and artificial disc replacement. Most procedures are outpatient with faster recovery than traditional open surgery. Call (561) 223-9959 or visit our Treatments page for details."
+        answer: "Our North Philadelphia orthopedic surgeons perform minimally invasive procedures including microdiscectomy, laminectomy, spinal fusion, ACDF, and artificial disc replacement. Most procedures are outpatient with faster recovery than traditional open surgery. Call (215) 436-9496 or visit our Treatments page for details."
       },
       {
         question: "How do I book my first appointment at your North Philadelphia orthopedic clinic?",
-        answer: "Call (561) 223-9959 or use the Book an Appointment form at the top of this page. Same-day and next-day availability is typically offered for new patients. Our team will handle scheduling and insurance verification before your visit."
+        answer: "Call (215) 436-9496 or use the Book an Appointment form at the top of this page. Same-day and next-day availability is typically offered for new patients. Our team will handle scheduling and insurance verification before your visit."
       },
       {
         question: "Where can I park when I visit the Port Richmond / Tioga orthopedic office?",
@@ -8980,7 +8987,7 @@ export const clinics: ClinicsProps[] = [
     lat: 40.0275,
     lng: -75.1668,
     address: '5245 Germantown Ave. Suite A, Philadelphia, PA 19144',
-    phone: MAIN_PHONE_DISPLAY,
+    phone: PA_PHONE_DISPLAY,
     link: 'https://maps.app.goo.gl/tX5N9x7P7Z7G9N7P9',
     slug: 'philadelphia-germantown-orthopedics',
     stateAbbr: 'PA',
@@ -9274,35 +9281,35 @@ export const clinics: ClinicsProps[] = [
     faqs: [
       {
         question: "Do you offer same-day orthopedic appointments in Philadelphia, PA?",
-        answer: "Yes. Our Philadelphia location is open 8AM–8PM, 7 days a week, and we prioritize same-day and next-day visits when available. Call (561) 223-9959 to book the earliest appointment."
+        answer: "Yes. Our Philadelphia location is open 8AM–8PM, 7 days a week, and we prioritize same-day and next-day visits when available. Call (215) 436-9496 to book the earliest appointment."
       },
       {
         question: "Where is your Philadelphia, PA orthopedic office located?",
-        answer: "You can find Mountain Spine & Orthopedics in Philadelphia at 5245 Germantown Ave. Suite A, Philadelphia, PA 19144. We're located near Vernon Park for convenient access. Call (561) 223-9959 if you'd like help with directions."
+        answer: "You can find Mountain Spine & Orthopedics in Philadelphia at 5245 Germantown Ave. Suite A, Philadelphia, PA 19144. We're located near Vernon Park for convenient access. Call (215) 436-9496 if you'd like help with directions."
       },
       {
         question: "What areas do you serve from your Philadelphia location?",
-        answer: "Patients visit our Philadelphia clinic from throughout Germantown and surrounding Philadelphia neighborhoods and communities. If you're not sure which location is closest, call (561) 223-9959 and we'll guide you."
+        answer: "Patients visit our Philadelphia clinic from throughout Germantown and surrounding Philadelphia neighborhoods and communities. If you're not sure which location is closest, call (215) 436-9496 and we'll guide you."
       },
       {
         question: "What conditions do you treat at your Philadelphia, PA location?",
-        answer: "We evaluate and treat common orthopedic and spine conditions including herniated discs, sciatica, spinal stenosis, arthritis-related joint pain, sports injuries, and more. Browse our Conditions section on this page to see options by body area, then call (561) 223-9959 to schedule."
+        answer: "We evaluate and treat common orthopedic and spine conditions including herniated discs, sciatica, spinal stenosis, arthritis-related joint pain, sports injuries, and more. Browse our Conditions section on this page to see options by body area, then call (215) 436-9496 to schedule."
       },
       {
         question: "What insurance does Mountain Spine & Orthopedics Germantown accept?",
-        answer: "PPO insurance accepted. Call (561) 223-9959 before your visit and our team will verify your coverage and benefits quickly."
+        answer: "PPO insurance accepted. Call (215) 436-9496 before your visit and our team will verify your coverage and benefits quickly."
       },
       {
         question: "What spine and back surgery options are available at your Germantown location?",
-        answer: "Our Germantown orthopedic surgeons perform minimally invasive procedures including microdiscectomy, laminectomy, spinal fusion, ACDF, and artificial disc replacement. Most procedures are outpatient with faster recovery than traditional open surgery. Call (561) 223-9959 or visit our Treatments page for details."
+        answer: "Our Germantown orthopedic surgeons perform minimally invasive procedures including microdiscectomy, laminectomy, spinal fusion, ACDF, and artificial disc replacement. Most procedures are outpatient with faster recovery than traditional open surgery. Call (215) 436-9496 or visit our Treatments page for details."
       },
       {
         question: "Do you treat workers' compensation and work-related injuries in Northwest Philadelphia?",
-        answer: "Yes. Our Germantown clinic accepts workers' compensation cases with same-day evaluations for work-related orthopedic injuries. We serve Germantown, Mount Airy, East Falls, Nicetown, and Wissahickon. Call (561) 223-9959 to schedule a workers' comp evaluation."
+        answer: "Yes. Our Germantown clinic accepts workers' compensation cases with same-day evaluations for work-related orthopedic injuries. We serve Germantown, Mount Airy, East Falls, Nicetown, and Wissahickon. Call (215) 436-9496 to schedule a workers' comp evaluation."
       },
       {
         question: "How do I book my first appointment at your Germantown orthopedic clinic?",
-        answer: "Call (561) 223-9959 or use the Book an Appointment form at the top of this page. Same-day and next-day availability is typically offered for new patients. Our team will handle scheduling and insurance verification before your visit."
+        answer: "Call (215) 436-9496 or use the Book an Appointment form at the top of this page. Same-day and next-day availability is typically offered for new patients. Our team will handle scheduling and insurance verification before your visit."
       }
     ],
     ogImage: '/Philadelphia-og.png',
@@ -9686,6 +9693,165 @@ export const clinics: ClinicsProps[] = [
     gallery: [
       { src: 'https://mountainspineortho.b-cdn.net/Location-Gallery/Mountain-Spine-Orthopedics-Princeton-Building-Exterior.jpg', width: 1200, height: 900, alt: 'Building exterior at Mountain Spine & Orthopedics Princeton, NJ', caption: 'Building exterior (Princeton, NJ)', category: 'Facility' },
     ],
+  },
+
+  {
+    id: 24,
+    name: 'Mountain Spine & Orthopedics Atlanta, GA',
+    region: 'Atlanta, GA',
+    // Verified against the US Census Bureau geocoder (Public_AR_Current
+    // benchmark), which matched "2250 DRUID HILLS RD NE, ATLANTA, GA, 30329".
+    // Not an estimate: OpenStreetMap has no house number on this block, so an
+    // interpolated guess was ~220m out before this was corrected.
+    lat: 33.829783,
+    lng: -84.332626,
+    address: '2250 North Druid Hills Rd NE, Suite 124, Atlanta, GA 30329',
+    // Atlanta direct line.
+    phone: GA_PHONE_DISPLAY,
+    // Address search rather than a Place link - this office has no published
+    // Google Business Profile yet, so there is no CID/Place URL to point at.
+    link: 'https://www.google.com/maps/search/?api=1&query=2250%20North%20Druid%20Hills%20Rd%20NE%20Suite%20124%2C%20Atlanta%2C%20GA%2030329',
+    slug: 'atlanta-orthopedics',
+    stateAbbr: 'GA',
+    stateSlug: 'georgia',
+    locationSlug: 'atlanta-orthopedics',
+    locationType: 'office',
+    paragraph: `
+    Mountain Spine & Orthopedics brings its spine and orthopedic care to Atlanta at 2250 North Druid Hills Rd NE, Suite 124, in the North Druid Hills area of DeKalb County.
+    [PARAGRAPH BREAK]Our practice specializes in the evaluation and treatment of spine and musculoskeletal conditions - back and neck pain, herniated and bulging discs, sciatica and nerve compression, spinal stenosis, degenerative disc disease, adult spinal deformity, and joint pain. Our board-certified orthopedic and spine surgeons emphasize accurate diagnosis first: understanding what is actually generating your symptoms before recommending any treatment.
+    [PARAGRAPH BREAK]Where surgery is appropriate, our surgeons favor minimally invasive and motion-preserving techniques, which generally mean smaller incisions and a faster return to activity than traditional open procedures. Where it is not, we treat with targeted, image-guided injections and non-surgical care. Most major PPO plans are accepted, and a complimentary MRI review is available if you already have imaging from another provider.
+    `,
+    keywords: [
+      'orthopedic surgeon atlanta ga',
+      'spine surgeon atlanta',
+      'orthopedic doctor atlanta',
+      'back pain doctor atlanta',
+      'spine specialist atlanta ga',
+      'herniated disc atlanta',
+      'sciatica treatment atlanta',
+      'spinal stenosis atlanta',
+      'minimally invasive spine surgery atlanta',
+      'scoliosis doctor atlanta',
+      'adult scoliosis specialist atlanta',
+      'orthopedic doctor 30329',
+      'north druid hills orthopedic',
+      'second opinion spine surgeon atlanta',
+      'neck pain doctor atlanta ga',
+    ],
+    metaTitle: 'Atlanta GA Spine Surgeon & Orthopedic Doctor | Mountain Spine',
+    metaDescription: 'Orthopedic and spine specialists in Atlanta, GA at 2250 North Druid Hills Rd NE, Suite 124. Back pain, herniated disc, sciatica, adult scoliosis. PPO accepted.',
+    // No published reviews for this office yet. Left at zero deliberately: the
+    // schema builder and the on-page reviews block both skip empty values, so
+    // nothing fabricated is rendered or marked up.
+    rating: 0,
+    reviewCount: 0,
+    reviews: [],
+    specialists: (
+      <div className='flex flex-col space-y-4'>
+        <h2 style={{ fontFamily: "var(--font-public-sans)" }} className='font-bold text-3xl'>Orthopedic &amp; Spine Care in Atlanta, GA</h2>
+        <p style={{ fontFamily: "var(--font-public-sans)" }} className='text-lg'>Mountain Spine &amp; Orthopedics is seeing patients in Atlanta at <strong>2250 North Druid Hills Rd NE, Suite 124</strong>. Our <strong>board-certified orthopedic and spine surgeons</strong> evaluate and treat the full range of spine and musculoskeletal problems, from <Link href="/conditions/lower-back-pain" className="text-[#0A50EC] underline">lower back pain</Link> and <Link href="/conditions/neck-pain" className="text-[#0A50EC] underline">neck pain</Link> to <Link href="/conditions/herniated-disc" className="text-[#0A50EC] underline">herniated discs</Link>, <Link href="/conditions/sciatica" className="text-[#0A50EC] underline">sciatica</Link>, and <Link href="/conditions/spinal-stenosis" className="text-[#0A50EC] underline">spinal stenosis</Link>.</p>
+        <p style={{ fontFamily: "var(--font-public-sans)" }} className='text-lg'>We also evaluate <Link href="/conditions/adult-degenerative-scoliosis" className="text-[#0A50EC] underline">adult degenerative scoliosis</Link> and other forms of <Link href="/conditions/spine-deformities" className="text-[#0A50EC] underline">adult spinal deformity</Link> - conditions that need standing full-length imaging and an alignment-focused assessment, not just a lumbar MRI.</p>
+      </div>
+    ),
+    skilled: (
+      <div className='flex flex-col space-y-4'>
+        <h2 style={{ fontFamily: "var(--font-public-sans)" }} className='font-bold text-3xl'>How We Approach Diagnosis and Treatment</h2>
+        <p style={{ fontFamily: "var(--font-public-sans)" }} className='text-lg'>Our surgeons start by identifying the source of your symptoms rather than treating an image. That means correlating your examination with your imaging, and being explicit about what is and is not likely to be causing your pain. Many patients are managed without surgery, using <Link href="/treatments/epidural-steroid-injection" className="text-[#0A50EC] underline">image-guided injections</Link> and other non-surgical care.</p>
+        <p style={{ fontFamily: "var(--font-public-sans)" }} className='text-lg'>When surgery is the right answer, our team performs minimally invasive spine procedures including microdiscectomy, <Link href="/treatments/lumbar-decompression" className="text-[#0A50EC] underline">decompression</Link>, and fusion techniques such as <Link href="/treatments/understanding-tlif-surgery" className="text-[#0A50EC] underline">TLIF</Link> and <Link href="/treatments/anterior-lumbar-interbody-fusion" className="text-[#0A50EC] underline">ALIF</Link>.</p>
+      </div>
+    ),
+    whyChoose: (
+      <div className='flex flex-col space-y-4'>
+        <h3 style={{ fontFamily: "var(--font-public-sans)" }} className='font-bold text-xl'>Why Patients Choose Mountain Spine &amp; Orthopedics</h3>
+        <ul style={{ fontFamily: "var(--font-public-sans)" }} className='text-lg list-disc pl-5 space-y-2'>
+          <li>Board-certified orthopedic and spine surgeons</li>
+          <li>Minimally invasive and motion-preserving techniques where appropriate</li>
+          <li><Link href="/find-care/free-mri-review" className="text-[#0A50EC] underline">Complimentary MRI review</Link> if you already have imaging</li>
+          <li><Link href="/find-care/second-opinion" className="text-[#0A50EC] underline">Second opinions</Link> on surgery that has already been recommended elsewhere</li>
+          <li>Most major PPO insurance accepted - see our <Link href="/insurance-policy" className="text-[#0A50EC] underline">insurance information</Link></li>
+          <li>Non-surgical pain management, including image-guided injections</li>
+        </ul>
+      </div>
+    ),
+    advancedTreatments: (
+      <div className="flex flex-col space-y-4">
+        <h2 style={{ fontFamily: "var(--font-public-sans)" }} className="text-2xl md:text-3xl font-bold text-[#062044]">
+          Spine &amp; Orthopedic Conditions We Treat
+        </h2>
+        <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
+          Mountain Spine &amp; Orthopedics evaluates and treats the conditions below across our offices. Select a condition to understand its symptoms, how it is diagnosed, and which treatments apply.
+        </p>
+        <div style={{ fontFamily: "var(--font-public-sans)" }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-sm">
+          <Link href="/conditions/herniated-disc" className="text-[#0A50EC] underline">Herniated Disc</Link>
+          <Link href="/conditions/lumbar-herniated-disc" className="text-[#0A50EC] underline">Lumbar Herniated Disc</Link>
+          <Link href="/conditions/cervical-herniated-disc" className="text-[#0A50EC] underline">Cervical Herniated Disc</Link>
+          <Link href="/conditions/sciatica" className="text-[#0A50EC] underline">Sciatica / Nerve Pain</Link>
+          <Link href="/conditions/spinal-stenosis" className="text-[#0A50EC] underline">Spinal Stenosis</Link>
+          <Link href="/conditions/foraminal-stenosis" className="text-[#0A50EC] underline">Foraminal Stenosis</Link>
+          <Link href="/conditions/degenerative-disc-disease" className="text-[#0A50EC] underline">Degenerative Disc Disease</Link>
+          <Link href="/conditions/adult-degenerative-scoliosis" className="text-[#0A50EC] underline">Adult Degenerative Scoliosis</Link>
+          <Link href="/conditions/spine-deformities" className="text-[#0A50EC] underline">Spine Deformities</Link>
+          <Link href="/conditions/spondylolisthesis" className="text-[#0A50EC] underline">Spondylolisthesis</Link>
+          <Link href="/conditions/pinched-nerve" className="text-[#0A50EC] underline">Pinched Nerve</Link>
+          <Link href="/conditions/lower-back-pain" className="text-[#0A50EC] underline">Lower Back Pain</Link>
+          <Link href="/conditions/neck-pain" className="text-[#0A50EC] underline">Neck Pain</Link>
+          <Link href="/conditions/spinal-compression-fractures" className="text-[#0A50EC] underline">Spinal Compression Fractures</Link>
+          <Link href="/conditions/adjacent-segment-disease" className="text-[#0A50EC] underline">Adjacent Segment Disease</Link>
+        </div>
+      </div>
+    ),
+    faqs: [
+      {
+        question: "Where is your Atlanta, GA orthopedic office located?",
+        answer: "Mountain Spine & Orthopedics is located at 2250 North Druid Hills Rd NE, Suite 124, Atlanta, GA 30329, in the North Druid Hills area of DeKalb County. Call (404) 913-6886 if you would like help with directions."
+      },
+      {
+        question: "What conditions do you treat at your Atlanta location?",
+        answer: "We evaluate and treat spine and orthopedic conditions including herniated and bulging discs, sciatica and nerve compression, spinal stenosis, degenerative disc disease, adult degenerative scoliosis and other spinal deformities, and joint pain. Browse the conditions listed on this page, then call (404) 913-6886 to schedule an evaluation."
+      },
+      {
+        question: "Do I need surgery to be seen by a spine surgeon in Atlanta?",
+        answer: "No. Most patients we evaluate are managed without surgery. A spine consultation is a diagnostic visit: the surgeon works out what is generating your symptoms and which treatments apply to your case, including non-surgical options such as image-guided injections."
+      },
+      {
+        question: "Do you see adult scoliosis patients in Atlanta?",
+        answer: "Yes. Adult degenerative scoliosis is evaluated with standing full-length spine X-rays and, when there are leg symptoms, an MRI. Read more on our Adult Degenerative Scoliosis page, or call (404) 913-6886 to arrange an evaluation."
+      },
+      {
+        question: "Can I get a second opinion on spine surgery in Atlanta?",
+        answer: "Yes. If fusion or another spine procedure has been recommended to you elsewhere, you can request a second opinion. If you already have imaging, you can also request a complimentary MRI review before booking a full consultation."
+      },
+      {
+        question: "What insurance do you accept in Atlanta?",
+        answer: "Most major PPO insurance plans are accepted. Call (404) 913-6886 before your visit and our team will verify your coverage and benefits."
+      },
+      {
+        question: "How do I book an appointment at your Atlanta orthopedic clinic?",
+        answer: "Call (404) 913-6886 or use the appointment form on this page. Our team handles scheduling and insurance verification before your visit."
+      }
+    ],
+    ogImage: '/locations-og.png',
+    formattedAddress: '2250 North Druid Hills Rd NE, Suite 124, Atlanta, GA 30329',
+    addressLine1: '2250 North Druid Hills Rd NE',
+    suite: 'Suite 124',
+    city: 'Atlanta',
+    state: 'Georgia',
+    postalCode: '30329',
+    county: 'DeKalb',
+    country: 'United States',
+    countryCode: 'us',
+    stateCode: 'GA',
+    googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=2250%20North%20Druid%20Hills%20Rd%20NE%20Suite%20124%2C%20Atlanta%2C%20GA%2030329',
+    hasMap: 'https://www.google.com/maps/search/?api=1&query=2250%20North%20Druid%20Hills%20Rd%20NE%20Suite%20124%2C%20Atlanta%2C%20GA%2030329',
+    // Google Business Profile fields (placeId, cid, businessProfileId, kgId,
+    // placeUrl, embedSrc) are intentionally absent: the GBP for this office is
+    // still being created. Every consumer of those fields is already guarded on
+    // their presence, so they can be filled in here alone once the profile is
+    // live - no template changes required.
+    // PENDING: real photographs of the Atlanta office have not been shot yet.
+    // Left empty rather than reusing another location's images, which would
+    // misrepresent this office. LocationGallerySection skips an empty gallery.
+    gallery: [],
   },
 
 ];

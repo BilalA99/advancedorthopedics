@@ -232,7 +232,7 @@ export default function LocationsClient({ selectedLocation, setSelectedLocation 
           fetchPriority="high"
           layout='fill'
           className="h-full absolute top-0 object-cover object-center md:object-center w-full"
-          alt="Find Mountain Spine & Orthopedics clinic locations across Florida, New Jersey, New York, and Pennsylvania"
+          alt="Find Mountain Spine & Orthopedics clinic locations across Florida, New Jersey, New York, Pennsylvania, and Georgia"
         />
         <div
           className="lg:w-[100%] z-[1] h-full absolute left-0 top-0 md:w-[100%] w-full"
@@ -255,7 +255,7 @@ export default function LocationsClient({ selectedLocation, setSelectedLocation 
               }}
               className='text-[#252932] sm:text-6xl text-4xl'
             >
-              Orthopedic Clinic Locations in Florida, New Jersey, New York & Pennsylvania
+              Orthopedic Clinic Locations in Florida, New Jersey, New York, Pennsylvania & Georgia
             </TextAnimate>
             <div className="mt-6 space-y-4 max-w-4xl">
               <p
@@ -276,7 +276,7 @@ export default function LocationsClient({ selectedLocation, setSelectedLocation 
                 }}
                 className='text-[#424959] text-lg leading-relaxed'
               >
-                Use the state picker and map to find the most convenient clinic, then select a location to view directions, hours, and local details. If you need help scheduling, call the number for your state—FL/PA <a href="tel:+15612239959" className="text-[#0A50EC] hover:underline font-medium">(561) 223-9959</a>, NJ <a href="tel:+19732596756" className="text-[#0A50EC] hover:underline font-medium">(973) 259-6756</a>, NY <a href="tel:+16463895606" className="text-[#0A50EC] hover:underline font-medium">(646) 389-5606</a>—and our team will match you with the best office for your symptoms and availability.
+                Use the state picker and map to find the most convenient clinic, then select a location to view directions, hours, and local details. If you need help scheduling, call the number for your state—FL <a href="tel:+15612239959" className="text-[#0A50EC] hover:underline font-medium">(561) 223-9959</a>, NJ <a href="tel:+19732596756" className="text-[#0A50EC] hover:underline font-medium">(973) 259-6756</a>, NY <a href="tel:+16463895606" className="text-[#0A50EC] hover:underline font-medium">(646) 389-5606</a>, PA <a href="tel:+12154369496" className="text-[#0A50EC] hover:underline font-medium">(215) 436-9496</a>, GA <a href="tel:+14049136886" className="text-[#0A50EC] hover:underline font-medium">(404) 913-6886</a>—and our team will match you with the best office for your symptoms and availability.
               </p>
             </div>
           </div>
@@ -401,6 +401,7 @@ export default function LocationsClient({ selectedLocation, setSelectedLocation 
               'new-jersey': `Our New Jersey locations help patients across North and Central NJ access orthopedic and spine specialists without long travel times. Whether you're dealing with chronic back pain, pinched nerves, joint injuries, or arthritis-related stiffness, our NJ clinics focus on accurate diagnosis and clear next steps. Browse New Jersey locations to choose the most convenient office.`,
               'new-york': `Our New York location serves patients who need specialized orthopedic and spine evaluations with straightforward scheduling and coordinated follow-up care. If you're experiencing neck pain, radiating arm symptoms, low back pain, or joint pain that limits activity, explore our New York location page for directions and details.`,
               pennsylvania: `Mountain Spine & Orthopedics offers convenient access to orthopedic and spine care for patients in Pennsylvania, including evaluation for back pain, neck pain, sciatica, joint injuries, and degenerative conditions. View our Pennsylvania locations to compare offices and choose the best clinic for your needs.`,
+              georgia: `Mountain Spine & Orthopedics serves patients in Georgia from our Atlanta office in the North Druid Hills area of DeKalb County. Our orthopedic and spine specialists evaluate back and neck pain, herniated discs, sciatica, spinal stenosis, adult scoliosis, and joint pain. View our Georgia location for the address and appointment details.`,
             }
             return intros[slug] || `Our ${stateInfo?.name} locations provide expert orthopedic and spine care with board-certified specialists. Browse locations below to find the most convenient office for your needs.`
           }
@@ -522,7 +523,7 @@ export default function LocationsClient({ selectedLocation, setSelectedLocation 
             <li className="flex items-start">
               <span className="text-[#0A50EC] mr-3">•</span>
               <span>
-                <Link href="/injuries" className="text-[#0A50EC] hover:underline font-medium">Sports injuries and overuse conditions</Link> (return-to-activity planning)
+                <Link href="/conditions/sports-medicine" className="text-[#0A50EC] hover:underline font-medium">Sports injuries and overuse conditions</Link> (return-to-activity planning)
               </span>
             </li>
           </ul>
@@ -593,7 +594,7 @@ export default function LocationsClient({ selectedLocation, setSelectedLocation 
                   className="text-[#424959] leading-relaxed pt-2"
                 >
                   <p>
-                    Choose the closest clinic in your state, then select the office that's most convenient for commuting and scheduling. If you're unsure, call our scheduling team: FL/PA <a href="tel:+15612239959" className="text-[#0A50EC] hover:underline font-medium">(561) 223-9959</a>, NJ <a href="tel:+19732596756" className="text-[#0A50EC] hover:underline font-medium">(973) 259-6756</a>, or NY <a href="tel:+16463895606" className="text-[#0A50EC] hover:underline font-medium">(646) 389-5606</a>, and we'll recommend the best location based on your symptoms and availability.
+                    Choose the closest clinic in your state, then select the office that's most convenient for commuting and scheduling. If you're unsure, call our scheduling team: FL <a href="tel:+15612239959" className="text-[#0A50EC] hover:underline font-medium">(561) 223-9959</a>, NJ <a href="tel:+19732596756" className="text-[#0A50EC] hover:underline font-medium">(973) 259-6756</a>, NY <a href="tel:+16463895606" className="text-[#0A50EC] hover:underline font-medium">(646) 389-5606</a>, PA <a href="tel:+12154369496" className="text-[#0A50EC] hover:underline font-medium">(215) 436-9496</a>, or GA <a href="tel:+14049136886" className="text-[#0A50EC] hover:underline font-medium">(404) 913-6886</a>, and we'll recommend the best location based on your symptoms and availability.
                   </p>
                 </AccordionContent>
               </AccordionItem>
@@ -694,7 +695,7 @@ export default function LocationsClient({ selectedLocation, setSelectedLocation 
                 <Phone className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-[#252932] mb-2">State Phone Numbers</h3>
-              <p className="text-[#424959] text-sm">FL/PA: <a href="tel:+15612239959" className="text-[#0A50EC] hover:underline">(561) 223-9959</a> · NJ: <a href="tel:+19732596756" className="text-[#0A50EC] hover:underline">(973) 259-6756</a> · NY: <a href="tel:+16463895606" className="text-[#0A50EC] hover:underline">(646) 389-5606</a></p>
+              <p className="text-[#424959] text-sm">FL: <a href="tel:+15612239959" className="text-[#0A50EC] hover:underline">(561) 223-9959</a> · NJ: <a href="tel:+19732596756" className="text-[#0A50EC] hover:underline">(973) 259-6756</a> · NY: <a href="tel:+16463895606" className="text-[#0A50EC] hover:underline">(646) 389-5606</a> · PA: <a href="tel:+12154369496" className="text-[#0A50EC] hover:underline">(215) 436-9496</a> · GA: <a href="tel:+14049136886" className="text-[#0A50EC] hover:underline">(404) 913-6886</a></p>
             </div>
 
             <div className="text-center">
@@ -702,7 +703,7 @@ export default function LocationsClient({ selectedLocation, setSelectedLocation 
                 <MapPin className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-bold text-[#252932] mb-2">{clinics.length} Locations</h3>
-              <p className="text-[#424959]">Serving communities across FL, NJ, NY & PA</p>
+              <p className="text-[#424959]">Serving communities across FL, NJ, NY, PA & GA</p>
             </div>
           </div>
         </motion.div>

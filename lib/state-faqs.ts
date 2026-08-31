@@ -78,7 +78,7 @@ export const STATE_FAQS: Record<string, StateFAQ[]> = {
   pennsylvania: [
     {
       question: "Where are your Pennsylvania orthopedic locations?",
-      answer: "We have multiple Pennsylvania locations serving patients across the state, including Allentown and Philadelphia. Each location page lists the address, hours, and nearby communities served. View the Locations section on this page to find the clinic nearest you or call (561) 223-9959 for help selecting the best location for your needs."
+      answer: "We have multiple Pennsylvania locations serving patients across the state, including Allentown and Philadelphia. Each location page lists the address, hours, and nearby communities served. View the Locations section on this page to find the clinic nearest you or call (215) 436-9496 for help selecting the best location for your needs."
     },
     {
       question: "What orthopedic services are offered at your Pennsylvania locations?",
@@ -86,15 +86,37 @@ export const STATE_FAQS: Record<string, StateFAQ[]> = {
     },
     {
       question: "Do you offer same-day appointments in Pennsylvania?",
-      answer: "Yes, same-day and next-day appointments are often available at our Pennsylvania locations, subject to provider schedules. We prioritize urgent orthopedic needs when possible. To request the earliest available appointment, call (561) 223-9959 or use our online booking system. Our clinics are open 8AM–8PM, 7 days a week."
+      answer: "Yes, same-day and next-day appointments are often available at our Pennsylvania locations, subject to provider schedules. We prioritize urgent orthopedic needs when possible. To request the earliest available appointment, call (215) 436-9496 or use our online booking system. Our clinics are open 8AM–8PM, 7 days a week."
     },
     {
       question: "Do you accept insurance at your Pennsylvania locations?",
-      answer: "Yes. We accept most major PPO insurance plans and Personal Injury Protection (PIP) coverage at our Pennsylvania locations. To verify that your specific plan is accepted and understand your coverage details, copay requirements, and any authorization requirements, contact your preferred Pennsylvania office directly or call (561) 223-9959 before your visit."
+      answer: "Yes. We accept most major PPO insurance plans and Personal Injury Protection (PIP) coverage at our Pennsylvania locations. To verify that your specific plan is accepted and understand your coverage details, copay requirements, and any authorization requirements, contact your preferred Pennsylvania office directly or call (215) 436-9496 before your visit."
     },
     {
       question: "Do you treat auto accident and work injuries in Pennsylvania?",
-      answer: "Yes. Our Pennsylvania specialists evaluate and treat injuries from auto accidents, workplace incidents, and slip-and-fall cases. We work with Personal Injury Protection (PIP) insurance and can coordinate with your attorney if needed. Our team develops personalized treatment plans that may include conservative care, injections, or surgery when appropriate. Call (561) 223-9959 or visit your nearest Pennsylvania location to schedule an evaluation."
+      answer: "Yes. Our Pennsylvania specialists evaluate and treat injuries from auto accidents, workplace incidents, and slip-and-fall cases. We work with Personal Injury Protection (PIP) insurance and can coordinate with your attorney if needed. Our team develops personalized treatment plans that may include conservative care, injections, or surgery when appropriate. Call (215) 436-9496 or visit your nearest Pennsylvania location to schedule an evaluation."
+    }
+  ],
+  georgia: [
+    {
+      question: "Where is your Georgia orthopedic and spine office located?",
+      answer: "Mountain Spine & Orthopedics sees patients in Georgia at 2250 North Druid Hills Rd NE, Suite 124, Atlanta, GA 30329, in the North Druid Hills area of DeKalb County. Call (404) 913-6886 for directions or to schedule an appointment."
+    },
+    {
+      question: "What conditions do your Georgia specialists treat?",
+      answer: "Our Georgia office evaluates and treats spine and orthopedic conditions including back and neck pain, herniated and bulging discs, sciatica and nerve compression, spinal stenosis, degenerative disc disease, adult degenerative scoliosis and other spinal deformities, spondylolisthesis, and joint pain. Browse the Conditions section of this site to read about your specific condition, then call (404) 913-6886 to schedule."
+    },
+    {
+      question: "Do I have to be considering surgery to see a spine specialist in Georgia?",
+      answer: "No. A spine consultation is first a diagnostic visit. The surgeon works out what is actually generating your symptoms and which treatments apply, and most patients are managed without surgery using targeted, image-guided injections and other non-surgical care. Surgery is discussed only when the findings support it."
+    },
+    {
+      question: "Can I get a second opinion on spine surgery in Georgia?",
+      answer: "Yes. If a fusion or another spine procedure has already been recommended to you, you can request a second opinion. If you already have an MRI or other imaging from another provider, you can request a complimentary MRI review first, before booking a full consultation."
+    },
+    {
+      question: "What insurance do you accept in Georgia?",
+      answer: "Most major PPO insurance plans are accepted. Coverage, copay, and authorization requirements vary by plan, so call (404) 913-6886 before your visit and our team will verify your specific benefits."
     }
   ]
 };

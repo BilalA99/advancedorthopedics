@@ -205,7 +205,7 @@ export default function LocationsPicker() {
                     Our Locations
                 </h2>
                 <p className="text-lg md:text-xl text-[#424959] max-w-3xl mx-auto">
-                    Visit any of our state-of-the-art facilities across Florida, New Jersey, New York, and Pennsylvania for expert orthopedic care and personalized treatment.
+                    Visit any of our state-of-the-art facilities across Florida, New Jersey, New York, Pennsylvania, and Georgia for expert orthopedic care and personalized treatment.
                 </p>
             </motion.div>
 
@@ -284,7 +284,7 @@ export default function LocationsPicker() {
                             <Phone className="w-8 h-8 text-white" />
                         </div>
                         <h3 className="text-xl font-bold text-[#252932] mb-2">State Phone Numbers</h3>
-                        <p className="text-[#424959] text-sm">FL/PA: <a href="tel:+15612239959" className="text-[#0A50EC] hover:underline">(561) 223-9959</a> · NJ: <a href="tel:+19732596756" className="text-[#0A50EC] hover:underline">(973) 259-6756</a> · NY: <a href="tel:+16463895606" className="text-[#0A50EC] hover:underline">(646) 389-5606</a></p>
+                        <p className="text-[#424959] text-sm">FL: <a href="tel:+15612239959" className="text-[#0A50EC] hover:underline">(561) 223-9959</a> · NJ: <a href="tel:+19732596756" className="text-[#0A50EC] hover:underline">(973) 259-6756</a> · NY: <a href="tel:+16463895606" className="text-[#0A50EC] hover:underline">(646) 389-5606</a> · PA: <a href="tel:+12154369496" className="text-[#0A50EC] hover:underline">(215) 436-9496</a> · GA: <a href="tel:+14049136886" className="text-[#0A50EC] hover:underline">(404) 913-6886</a></p>
                     </div>
 
                     <div className="text-center">

@@ -25,7 +25,8 @@ const STATE_PHONE_MAP: Record<string, { display: string; tel: string }> = {
   FL: { display: '(561) 223-9959', tel: '5612239959' },
   NJ: { display: '(973) 259-6756', tel: '9732596756' },
   NY: { display: '(646) 389-5606', tel: '6463895606' },
-  PA: { display: '(561) 223-9959', tel: '5612239959' },
+  PA: { display: '(215) 436-9496', tel: '2154369496' },
+  GA: { display: '(404) 913-6886', tel: '4049136886' },
 };
 
 export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({

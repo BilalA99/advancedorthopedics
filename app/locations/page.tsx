@@ -2,8 +2,8 @@ import { buildCanonical } from "@/lib/seo";
 import { getOgImageForPath } from "@/lib/og";
 
 export const metadata = {
-  title: 'Orthopedic Clinic Locations in Florida, New Jersey, New York & Pennsylvania | Mountain Spine & Orthopedics',
-  description: 'Find expert orthopedic and spine care near you. Mountain Spine & Orthopedics locations across Florida, New Jersey, New York, and Pennsylvania. Same-day and next-day appointments available. Book your consultation today.',
+  title: 'Orthopedic Clinic Locations in Florida, New Jersey, New York, Pennsylvania & Georgia | Mountain Spine & Orthopedics',
+  description: 'Find expert orthopedic and spine care near you. Mountain Spine & Orthopedics locations across Florida, New Jersey, New York, Pennsylvania, and Georgia. Same-day and next-day appointments available. Book your consultation today.',
   keywords: [
     'orthopedic clinic locations',
     'orthopedic surgeon near me',
@@ -27,8 +27,8 @@ export const metadata = {
     'orthopedic specialist near me'
   ],
   openGraph: {
-    title: 'Orthopedic Clinic Locations in FL, NJ, NY & PA | Mountain Spine & Orthopedics',
-    description: 'Find all Mountain Spine & Orthopedics clinic locations across Florida, New Jersey, New York, and Pennsylvania. Expert spine and joint care near you.',
+    title: 'Orthopedic Clinic Locations in FL, NJ, NY, PA & GA | Mountain Spine & Orthopedics',
+    description: 'Find all Mountain Spine & Orthopedics clinic locations across Florida, New Jersey, New York, Pennsylvania, and Georgia. Expert spine and joint care near you.',
     url: buildCanonical('/locations'),
     siteName: 'Mountain Spine & Orthopedics',
     type: 'website',
@@ -38,14 +38,14 @@ export const metadata = {
         url: getOgImageForPath('/locations'),
         width: 1200,
         height: 630,
-        alt: 'Mountain Spine & Orthopedics clinic locations across FL, NJ, NY and PA',
+        alt: 'Mountain Spine & Orthopedics clinic locations across FL, NJ, NY, PA and GA',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Orthopedic Clinic Locations in FL, NJ, NY & PA | Mountain Spine & Orthopedics',
-    description: 'Find all Mountain Spine & Orthopedics clinic locations across Florida, New Jersey, New York, and Pennsylvania. Expert spine and joint care near you.',
+    title: 'Orthopedic Clinic Locations in FL, NJ, NY, PA & GA | Mountain Spine & Orthopedics',
+    description: 'Find all Mountain Spine & Orthopedics clinic locations across Florida, New Jersey, New York, Pennsylvania, and Georgia. Expert spine and joint care near you.',
     images: [getOgImageForPath('/locations')],
   },
   alternates: {
@@ -98,8 +98,8 @@ const LocationsCollectionPageSchema = () => {
   const pageSchema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    'name': 'Orthopedic Clinic Locations in Florida, New Jersey, New York & Pennsylvania | Mountain Spine & Orthopedics',
-    'description': 'Find expert orthopedic and spine care near you. Mountain Spine & Orthopedics locations across Florida, New Jersey, New York, and Pennsylvania. Same-day and next-day appointments available. Book your consultation today.',
+    'name': 'Orthopedic Clinic Locations in Florida, New Jersey, New York, Pennsylvania & Georgia | Mountain Spine & Orthopedics',
+    'description': 'Find expert orthopedic and spine care near you. Mountain Spine & Orthopedics locations across Florida, New Jersey, New York, Pennsylvania, and Georgia. Same-day and next-day appointments available. Book your consultation today.',
     'url': buildCanonical('/locations'),
     'mainEntity': itemListReference,
     'about': {
@@ -127,7 +127,7 @@ const LocationsFAQSchema = () => {
         'name': 'How do I choose the best location near me?',
         'acceptedAnswer': {
           '@type': 'Answer',
-          'text': 'Choose the closest clinic in your state, then select the office that\'s most convenient for commuting and scheduling. If you\'re unsure, call our scheduling team: FL/PA (561) 223-9959, NJ (973) 259-6756, or NY (646) 389-5606, and we\'ll recommend the best location based on your symptoms and availability.'
+          'text': 'Choose the closest clinic in your state, then select the office that\'s most convenient for commuting and scheduling. If you\'re unsure, call our scheduling team: FL (561) 223-9959, NJ (973) 259-6756, NY (646) 389-5606, PA (215) 436-9496, or GA (404) 913-6886, and we\'ll recommend the best location based on your symptoms and availability.'
         }
       },
       {

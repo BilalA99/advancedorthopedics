@@ -109,6 +109,18 @@ export default async function StateHubPage({
       'Lancaster',
       'Reading',
       'York'
+    ],
+    georgia: [
+      'Atlanta',
+      'North Druid Hills',
+      'Buckhead',
+      'Midtown',
+      'Decatur',
+      'Sandy Springs',
+      'Brookhaven',
+      'DeKalb County',
+      'Fulton County',
+      'Metro Atlanta'
     ]
   }
   
