@@ -57,8 +57,6 @@ export const CONTACT_INFO: Record<ContactKey, ContactInfo> = {
     phoneDisplay: '(215) 436-9496',
     phoneHref: 'tel:+12154369496',
     phoneTel: '2154369496',
-    // Follows the per-state inbox convention above. UNCONFIRMED: verify this
-    // mailbox exists and is monitored before this reaches production.
     email: 'pa@mountainspineorthopedics.com',
   },
   ga: {
@@ -67,8 +65,6 @@ export const CONTACT_INFO: Record<ContactKey, ContactInfo> = {
     phoneDisplay: '(404) 913-6886',
     phoneHref: 'tel:+14049136886',
     phoneTel: '4049136886',
-    // Follows the per-state inbox convention above. UNCONFIRMED: verify this
-    // mailbox exists and is monitored before this reaches production.
     email: 'ga@mountainspineorthopedics.com',
   },
 };

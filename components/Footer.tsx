@@ -57,7 +57,7 @@ export default function Footer() {
                         Trusted <strong>orthopedic surgeon specialists</strong> serving Florida, New Jersey, New York, Pennsylvania & Georgia with <strong>minimally invasive spine surgery</strong>, <strong>joint replacement surgery</strong>, and advanced <strong>back pain treatment</strong>. Book your <strong>orthopedic surgery consultation</strong> today.
                     </p>
 
-                    {/* Contact Info — general + all 3 regional buckets */}
+                    {/* Contact Info — general + one bucket per state, in VALID_STATE_SLUGS order */}
                     <div className='mt-6 flex flex-col gap-[10px]'>
                         {/* General inquiries */}
                         <div className='flex flex-col gap-[2px]'>
@@ -118,8 +118,8 @@ export default function Footer() {
                     </div>
                 </div>
 
-                {/* Right: Links Grid - 5 equal columns */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-8 flex-1">
+                {/* Right: Links Grid - Overview + one column per state (VALID_STATE_SLUGS) */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-8 flex-1">
                     {/* Column 1: Overview */}
                     <div
                         style={{
