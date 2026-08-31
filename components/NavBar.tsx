@@ -474,7 +474,7 @@ function NavLink({ href, title, screen, pathname, sublinks, short_desc, latestBl
                   <PromoOverlayCard
                     className="max-w-70 w-70"
                     imageUrl="/centralflorida.png"
-                    title="Serving 4 States"
+                    title="Serving 5 States"
                     subtitle="23+ Locations Across FL, NJ, NY, PA & GA"
                     link="/locations"
                   />
