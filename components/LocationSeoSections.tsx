@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { conditions } from '@/components/data/conditions';
 import { AllTreatmentsCombined } from '@/components/data/treatments';
+import { resolveConditionSlugHref } from '@/lib/internal-link-redirects';
 
 interface LocationSeoSectionsProps {
   cityName: string;
@@ -196,8 +197,10 @@ export default function LocationSeoSections({ cityName, stateAbbr, nearbyAreas =
               {hub.label}
             </Link>
           ))}
+          {/* There is no /injuries hub route; that href 404s. Point at the same
+              entry point the primary navigation uses for this section. */}
           <Link
-            href="/injuries"
+            href="/injuries/car-accident"
             className="text-[#0A50EC] hover:underline text-lg font-medium"
           >
             Injury Care & Treatment
@@ -256,7 +259,7 @@ export default function LocationSeoSections({ cityName, stateAbbr, nearbyAreas =
                 {displayedConditions.map((condition) => (
                   <Link
                     key={condition.slug}
-                    href={`/conditions/${condition.slug}`}
+                    href={resolveConditionSlugHref(condition.slug)}
                     className="text-[#0A50EC] hover:underline"
                   >
                     {condition.title}

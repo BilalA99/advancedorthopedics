@@ -5,6 +5,7 @@ import Logo from '../public/newlogo4.png'
 import Link from 'next/link'
 import { ConditionInfoProp } from '@/types/content'
 import { conditionThumbnailBySlug } from '@/lib/seo/condition-images';
+import { resolveConditionSlugHref } from '@/lib/internal-link-redirects';
 
 function truncateString(str: string, maxLength = 125) {
   if (str.length <= maxLength) return str;
@@ -21,7 +22,7 @@ export default function ConditionCard({ ConditionInfo, showFeaturedDoctor }: { C
   const imageTitle = seoMetadata?.title || `${ConditionInfo.title} | Mountain Spine & Orthopedics`;
 
   return (
-    <Link className="bg-white flex flex-col p-4 rounded-[24px] space-y-[32px]" href={`/conditions/${ConditionInfo.slug}`}>
+    <Link className="bg-white flex flex-col p-4 rounded-[24px] space-y-[32px]" href={resolveConditionSlugHref(ConditionInfo.slug)}>
       <div>
         <div className="w-full max-h-[240px] h-full object-cover rounded-[24px] lg:h-[240px] bg-[#FAFAFA] items-center justify-center flex overflow-hidden">
           <Image 

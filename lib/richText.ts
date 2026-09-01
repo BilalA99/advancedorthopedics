@@ -1,4 +1,5 @@
 import { conditionIndex, treatmentIndex } from '@/components/data/taxonomyIndex.generated';
+import { resolveConditionSlugHref } from '@/lib/internal-link-redirects';
 
 /**
  * Converts stored article text into render-ready HTML: markdown bold becomes
@@ -85,7 +86,7 @@ export function processTextWithBoldAndLinks(text: string, currentSlug: string): 
         if (done) return match;
         done = true;
         linked.add(entry.slug);
-        const href = entry.type === 'condition' ? `/conditions/${entry.slug}` : `/treatments/${entry.slug}`;
+        const href = entry.type === 'condition' ? resolveConditionSlugHref(entry.slug) : `/treatments/${entry.slug}`;
         return `<a href="${href}" class="underline text-[#252932] hover:text-[#2358AC]">${match}</a>`;
       });
     }

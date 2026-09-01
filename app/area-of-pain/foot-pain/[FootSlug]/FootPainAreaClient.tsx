@@ -13,6 +13,7 @@ import { PhoneCTA } from '@/components/PhoneCTA';
 import Link from 'next/link';
 import { conditionIndex as conditions } from '@/components/data/taxonomyIndex.generated';
 import { treatmentIndex as AllTreatmentsCombined } from '@/components/data/taxonomyIndex.generated';
+import { resolveConditionSlugHref } from '@/lib/internal-link-redirects';
 
 // Helper to resolve specialty slug for cross-linking
 const SPECIALTY_MAP: Record<string, string> = {
@@ -244,7 +245,7 @@ export function FootPainAreaClient({ condition_details, randomDoctors, specialty
           {specialtySlug && (
             <div className="z-[2] px-6 xl:px-[80px] mt-[16px] w-full flex justify-center">
               <a 
-                href={`/conditions/${specialtySlug}`}
+                href={resolveConditionSlugHref(specialtySlug)}
                 className="inline-flex items-center px-4 py-2 rounded-lg border border-[#2358AC] bg-white/80 hover:bg-[#2358AC] hover:text-white text-[#2358AC] transition-all duration-200 text-sm font-medium shadow-sm hover:shadow-md"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
@@ -364,7 +365,7 @@ export function FootPainAreaClient({ condition_details, randomDoctors, specialty
                 .map((condition) => (
                   <Link
                     key={condition.slug}
-                    href={`/conditions/${condition.slug}`}
+                    href={resolveConditionSlugHref(condition.slug)}
                     className="bg-white border hover:cursor-pointer border-[#252932] px-[20px] py-[10px] rounded-[62px] text-sm transition-colors hover:bg-[#FAFAFA]"
                   >
                     <span

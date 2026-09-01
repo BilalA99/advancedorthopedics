@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { conditions, conditionContentPlaceholders } from './data/conditions';
 import { ConditionInfoProp } from './ConditionCard';
 import ConditionsSearchBar from './ConditionsSearchBar';
+import { resolveConditionSlugHref } from '@/lib/internal-link-redirects';
 
 // Unified lookup list: new-format entries (with tag) + old-format entries
 const allConditionsForFilter: { title: string; slug: string; tag?: string }[] = [
@@ -57,7 +58,7 @@ function FilteredConditionList({ currentCondition, tag }: { currentCondition: st
         return (
           <Link
             key={condition.slug}
-            href={`/conditions/${condition.slug}`}
+            href={resolveConditionSlugHref(condition.slug)}
             style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 400 }}
             className={`flex flex-row items-center justify-between px-4 py-3 rounded-[10px] text-sm transition-colors ${
               isCurrent
@@ -117,7 +118,7 @@ function FullConditionList({ currentCondition }: { currentCondition: string }) {
             return (
               <li key={condition.title} className={`${visibilityClasses} lg:flex-shrink-0`}>
                 <Link
-                  href={`/conditions/${condition.slug}`}
+                  href={resolveConditionSlugHref(condition.slug)}
                   className={`${
                     currentCondition === condition.title
                       ? 'bg-[#252932] text-white'

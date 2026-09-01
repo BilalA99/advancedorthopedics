@@ -7,6 +7,7 @@ import Link from "next/link"
 import { ConditionInfoProp } from "./ConditionCard"
 import { conditions as painconditions } from "./data/painconditions"
 import { PainAreaTreatments } from "./data/painareatreatments"
+import { resolveConditionHref } from '@/lib/internal-link-redirects';
 
 const neckAndShoulderConditions: ConditionInfoProp[] = painconditions.filter(x => 
   x.slug == 'neck-spinal-stenosis' || 
@@ -74,7 +75,7 @@ export function NeckAndShoulderDropDown({ CurrentCondition }: { CurrentCondition
             const isActive = CurrentCondition === option.title
             return (
               <Link 
-                href={`/area-of-pain/neck-and-shoulder-pain/${option.slug}`} 
+                href={resolveConditionHref(`/area-of-pain/neck-and-shoulder-pain/${option.slug}`)} 
                 className={`${isActive 
                   ? 'bg-[#2358AC] text-white border-l-4 border-[#5093FF] shadow-md' 
                   : 'bg-[#FAFAFA] text-[#111315] hover:bg-[#F0F4FF] hover:border-l-4 hover:border-[#2358AC]'

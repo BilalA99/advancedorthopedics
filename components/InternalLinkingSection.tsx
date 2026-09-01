@@ -3,6 +3,7 @@ import { conditions } from '@/components/data/conditions';
 import { AllTreatmentsCombined } from '@/components/data/treatments';
 import { ConditionInfoProp, TreatmentsCardProp } from '@/types/content';
 import { normalizeTag } from '@/lib/tag-utils';
+import { resolveConditionSlugHref } from '@/lib/internal-link-redirects';
 
 interface InternalLinkingSectionProps {
   currentSlug: string;
@@ -157,7 +158,7 @@ export default function InternalLinkingSection({ currentSlug, pageType }: Intern
       relatedItems = related.map(condition => ({
         title: condition.title,
         slug: condition.slug,
-        href: `/conditions/${condition.slug}`
+        href: resolveConditionSlugHref(condition.slug)
       }));
     }
   } else if (pageType === 'treatment') {

@@ -26,6 +26,13 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'mountainspineortho.b-cdn.net',
         pathname: '/**',
+      },
+      // TEMPORARY - remove once these 6 doctors' photos are migrated to
+      // BunnyCDN and switched to local img imports.
+      {
+        protocol: 'https',
+        hostname: 'www.orthopedicandlaserspinesurgery.com',
+        pathname: '/wp-content/uploads/**',
       }
     ]
   },
@@ -131,19 +138,27 @@ const nextConfig: NextConfig = {
     {"source":"/treatments/cancer-pain-treatment","destination":"/treatments","permanent":true},
     
     // --- EXISTING AREA-OF-PAIN REDIRECTS ---
-    {"source":"/area-of-pain/neck-and-shoulder-pain/degenerativediscdisease","destination":"/area-of-pain/neck-and-shoulder-pain/degenerative-disc-disease","permanent":true},
+    // Chain collapsed: the hyphenated slug is itself a redirect source below, so
+    // point this legacy alias straight at the final target.
+    {"source":"/area-of-pain/neck-and-shoulder-pain/degenerativediscdisease","destination":"/area-of-pain/neck-and-shoulder-pain/cervical-degenerative-disc-disease","permanent":true},
     {"source":"/area-of-pain/back-pain/lowerbackpain","destination":"/area-of-pain/back-pain/lower-back-pain","permanent":true},
-    {"source":"/area-of-pain/back-pain/degenerativediscdisease","destination":"/area-of-pain/back-pain/degenerative-disc-disease","permanent":true},
+    // Chain collapsed: the hyphenated slug is itself a redirect source below, so
+    // point this legacy alias straight at the final target.
+    {"source":"/area-of-pain/back-pain/degenerativediscdisease","destination":"/conditions/degenerative-disc-disease","permanent":true},
     {"source":"/area-of-pain/back-pain/backpaintreatmentoptions","destination":"/area-of-pain/back-pain/back-pain-treatment-options","permanent":true},
     
     // --- DDD LEGACY REDIRECTS ---
-    {"source":"/area-of-pain/back-pain/degenerative-disc-disease","destination":"/area-of-pain/back-pain/lumbar-degenerative-disc-disease","permanent":true},
+    // Chain collapsed: lumbar-degenerative-disc-disease itself 301s to
+    // /conditions/degenerative-disc-disease, so point straight at the target.
+    {"source":"/area-of-pain/back-pain/degenerative-disc-disease","destination":"/conditions/degenerative-disc-disease","permanent":true},
     {"source":"/area-of-pain/neck-and-shoulder-pain/degenerative-disc-disease","destination":"/area-of-pain/neck-and-shoulder-pain/cervical-degenerative-disc-disease","permanent":true},
     
     // --- NEW PAIN SLUG REDIRECTS ---
     // Back Pain Group
     {"source":"/area-of-pain/back-pain/foraminal-stenosis","destination":"/area-of-pain/back-pain/foraminal-stenosis-back-pain","permanent":true},
-    {"source":"/area-of-pain/back-pain/sciatica","destination":"/area-of-pain/back-pain/sciatica-nerve-pain","permanent":true},
+    // Chain collapsed: sciatica-nerve-pain itself 301s to /conditions/sciatica (see
+    // the CONDITIONS URL MIGRATION block above), so point straight at the target.
+    {"source":"/area-of-pain/back-pain/sciatica","destination":"/conditions/sciatica","permanent":true},
     {"source":"/area-of-pain/back-pain/coccydynia","destination":"/area-of-pain/back-pain/tailbone-pain-coccydynia","permanent":true},
     
     // Neck & Shoulder Pain Group

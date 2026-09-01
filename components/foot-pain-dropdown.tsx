@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { ConditionInfoProp } from "./ConditionCard"
 import { conditions as painconditions } from "./data/painconditions"
+import { resolveConditionHref } from '@/lib/internal-link-redirects';
 
 const footPainOptions: ConditionInfoProp[] = painconditions.filter(x => 
   x.slug === 'bunion-pain-hallux-valgus' ||
@@ -70,7 +71,7 @@ export function FootPainDropdown({ CurrentCondition }: { CurrentCondition: strin
             const isActive = CurrentCondition === option.title
             return (
               <Link 
-                href={`/area-of-pain/foot-pain/${option.slug}`} 
+                href={resolveConditionHref(`/area-of-pain/foot-pain/${option.slug}`)} 
                 className={`${isActive 
                   ? 'bg-[#2358AC] text-white border-l-4 border-[#5093FF] shadow-md' 
                   : 'bg-[#FAFAFA] text-[#111315] hover:bg-[#F0F4FF] hover:border-l-4 hover:border-[#2358AC]'
