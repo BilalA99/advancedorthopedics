@@ -407,3 +407,85 @@ project's baseline was mistaken for 49 when a fresh build reports 50.
 **Use `npx tsx`, not `node`, for the generator scripts.** They import `clinics.tsx`;
 `prebuild` invokes them through tsx. `node scripts/generate-clinics-for-map.mjs --check`
 fails with `ERR_UNKNOWN_FILE_EXTENSION` and is not a repo bug.
+
+---
+
+# 13. Visual audit — 33 pages × 3 viewports (2026-09-02)
+
+Run with `scripts/visual-audit-sprint.mjs` against a production build. Every surface this
+sprint touched, one representative per change class. Screenshots plus structural checks,
+because screenshots alone do not catch what a bulk string sweep can break.
+
+## Result: 99 page/viewport combinations, 0 defects introduced by this sprint
+
+| Check | Result |
+|---|---|
+| HTTP status | **200 on all 33 pages** |
+| Horizontal overflow | **0** at every viewport |
+| `<h1>` count | **exactly 1** on every page |
+| Skipped heading levels | **0** |
+| Images with no `alt` attribute | **0** |
+| Literal markdown links (`](/treatments/…`) | **0** |
+| Literal `<a href=` rendered as text | **0** |
+| Stray `**` from bold-markdown edits | **0** |
+| Empty headings | 5, on one pre-existing page (below) |
+| Outcome claims in rendered text | **0** |
+| Neurosurgery references | **0** |
+| Canonical present | **all 33** |
+
+The bulk-edit failure modes are the ones that mattered here — Commits 11 and 14a rewrote
+~150 strings across five data files, and a single unbalanced tag or unconverted markdown
+link would have shipped as visible garbage. None did.
+
+Forward links verified as real anchors on all four supporting pages. The DDD `-details`
+link carries the auto-linker's class rather than an inline one, confirming the deliberate
+choice to leave that one as plain text (its body had no anchors, and adding one would have
+tripped the "already has links, stop auto-linking" branch).
+
+## Three findings, all pre-existing
+
+**React error #418 (hydration mismatch) on a subset of treatment pages.** Initially looked
+like mine — all three flagged pages were ones I had edited. Probing pages I never touched
+settled it: `/treatments/hip-labral-repair`, `/treatments/total-hip-replacement`,
+`/treatments/knee-osteotomy` and `/treatments/partial-knee-replacement` all error, while
+`/treatments/spinal-fusion` — which this sprint *did* edit — is clean. **Not caused by this
+sprint.** Worth its own investigation; a hydration mismatch means React discards the
+server-rendered subtree and re-renders on the client.
+
+**5 empty `<h3>` elements** on `/area-of-pain/foot-pain/heel-pain-plantar-fasciitis`. The
+canonical `/conditions/plantar-fasciitis` is clean and the back-pain AoP variant is clean,
+so it is isolated to the foot-pain variant. That page is now noindexed, so the SEO impact is
+nil, but it is a rendering defect.
+
+**One 404 resource** on `/locations/pennsylvania/philadelphia-walnut-orthopedics` — did not
+reproduce on retry. Transient.
+
+## 🔴 Correction: Atlanta *does* display and schema-assert opening hours
+
+An earlier entry in this project's notes stated that Atlanta's absent `hoursDisplay` meant
+the page and schema "stay silent rather than inventing them." **That was wrong, and the
+visual audit caught it.**
+
+`components/LocationNAP.tsx:13`:
+
+```ts
+const hours = clinic.hoursDisplay === undefined ? LOCATION_HOURS_DISPLAY : clinic.hoursDisplay;
+```
+
+The fallback is inverted from what was assumed: **`undefined` means show the sitewide
+default**, not hide the field. Only an explicit value overrides it. So Atlanta renders
+"Hours: 8AM–8PM, 7 days/week" and emits a matching `openingHoursSpecification`, identical to
+established clinics.
+
+This is a **sitewide pattern, not an Atlanta bug** — only **1 of 24** clinics sets
+`hoursDisplay` explicitly; the other 23 inherit `LOCATION_HOURS_DISPLAY`.
+
+For established offices that is presumably accurate practice policy. For Atlanta it is an
+operating-hours claim, in structured data, for an office with no GBP, no reviews, and
+deliberately unset GBP fields — i.e. an office nobody has verified the hours of.
+
+**Needs a business answer, not a code change.** If 8AM–8PM 7 days is genuinely practice-wide
+and Atlanta is staffed accordingly, the current output is accurate and nothing needs doing.
+If it is not, this is fabricated hours on a live location page and in schema — the exact
+class of claim the content rules forbid. Suppressing it is a one-line change to
+`LocationNAP.tsx` plus the schema builder; do not make it without confirming the fact.
