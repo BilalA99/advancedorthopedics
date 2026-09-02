@@ -129,6 +129,30 @@ import artreplaceback from '@/public/artreplaceback.png'
 // Interfaces now imported from centralized @/types/content
 
 // New TreatmentContent interface for structured treatment data
+/**
+ * A question-led section slotted into a treatment page's clinical order.
+ *
+ * Deliberately identical in shape and placement vocabulary to `ConditionSection`
+ * in components/data/conditions.tsx — same field names, same placement union — so
+ * the two templates stay one model rather than drifting into two. The placement
+ * names read as condition-oriented because that is where they were defined; on a
+ * treatment page they map onto the equivalent structural points:
+ *
+ *   after-symptoms    -> after the overview block
+ *   after-causes      -> after the candidacy block
+ *   before-treatment  -> immediately before the procedure block
+ *   after-treatment   -> after the recovery block
+ *
+ * Optional and unset on every existing treatment record, so the other 122 pages
+ * render exactly as before.
+ */
+export interface TreatmentSection {
+  heading: string;
+  /** HTML. Rendered server-side through the same bold/auto-link pipeline. */
+  body: string;
+  placement?: 'after-symptoms' | 'after-causes' | 'before-treatment' | 'after-treatment';
+}
+
 export interface TreatmentContent {
   id?: string;
   slug: string;
@@ -200,6 +224,13 @@ export interface TreatmentContent {
    * their heading exactly as it was.
    */
   doctorsHeading?: string;
+
+  /**
+   * Question-led sections rendered server-side in clinical order. See
+   * `TreatmentSection` above for the placement vocabulary. Unset on every
+   * existing record.
+   */
+  additionalSections?: TreatmentSection[];
 
   /**
    * Clinical review provenance, ISO date. Only set this when a real review

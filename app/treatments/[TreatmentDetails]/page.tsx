@@ -1,6 +1,6 @@
 import { selectRelevantProviders } from "@/lib/providers/providerRelevance";
 import { notFound } from 'next/navigation';
-import { AllTreatments, treatmentContentPlaceholders, allTreatmentContent, TreatmentContent, AllTreatmentsCombined } from '@/components/data/treatments';
+import { AllTreatments, treatmentContentPlaceholders, allTreatmentContent, TreatmentContent, TreatmentSection, AllTreatmentsCombined } from '@/components/data/treatments';
 import { treatmentThumbnailBySlug } from '@/lib/seo/treatment-images';
 import React from 'react';
 import Image from 'next/image';
@@ -215,6 +215,54 @@ export async function generateStaticParams() {
     ...AllTreatments.map(t => ({ TreatmentDetails: t.slug }))
   ];
   return allSlugs;
+}
+
+/**
+ * Question-led sections from `additionalSections`, rendered in place.
+ *
+ * Mirrors the identically-named component in app/conditions/[slug]/ConditionPage.tsx —
+ * same markup, same classes, same server-rendered-HTML behaviour — so a section
+ * reads the same whether it sits on a condition or a treatment page. Returns null
+ * when a record has no sections for this placement, which is every existing
+ * treatment.
+ */
+function AdditionalSections({
+  sections,
+  placement,
+  currentSlug,
+}: {
+  sections: TreatmentSection[] | undefined;
+  placement: NonNullable<TreatmentSection['placement']>;
+  currentSlug: string;
+}) {
+  const matching = (sections ?? []).filter((section) => section.placement === placement);
+  if (matching.length === 0) return null;
+
+  return (
+    <>
+      {matching.map((section) => (
+        <div className=' flex flex-col space-y-[16px] ' key={section.heading}>
+          <h2
+            style={{
+              fontFamily: 'var(--font-public-sans)',
+              fontWeight: 500,
+            }}
+            className='text-[#111315] sm:text-4xl text-2xl'
+          >
+            {section.heading}
+          </h2>
+          <div
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontWeight: 400,
+            }}
+            className="text-[#424959] sm:text-xl text-sm space-y-4 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2 [&_strong]:font-semibold [&_strong]:text-[#111315] [&_a]:underline [&_a]:text-[#252932] [&_a:hover]:text-[#2358AC]"
+            dangerouslySetInnerHTML={{ __html: processTextWithBoldAndLinks(section.body, currentSlug) }}
+          />
+        </div>
+      ))}
+    </>
+  );
 }
 
 export default async function Page({ params }: { params: Promise<{ TreatmentDetails: string }> }) {
@@ -434,6 +482,12 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
                   return null;
                 })()}
 
+                <AdditionalSections
+                  sections={isNewFormat ? treatmentContent.additionalSections : undefined}
+                  placement="after-symptoms"
+                  currentSlug={treatmentContent.slug}
+                />
+
                 {/* Candidates Section */}
                 {treatmentContent.candidates && treatmentContent.candidates.list.length > 0 && (
                   <div className=' flex flex-col space-y-[16px] '>
@@ -542,6 +596,18 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
                   />
                 )}
 
+                <AdditionalSections
+                  sections={isNewFormat ? treatmentContent.additionalSections : undefined}
+                  placement="after-causes"
+                  currentSlug={treatmentContent.slug}
+                />
+
+                <AdditionalSections
+                  sections={isNewFormat ? treatmentContent.additionalSections : undefined}
+                  placement="before-treatment"
+                  currentSlug={treatmentContent.slug}
+                />
+
                 {/* Procedure Section */}
                 {treatmentContent.procedure && treatmentContent.procedure.steps.length > 0 && (
                   <div className=' flex flex-col space-y-[16px] '>
@@ -631,6 +697,12 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
                     />
                   </div>
                 )}
+
+                <AdditionalSections
+                  sections={isNewFormat ? treatmentContent.additionalSections : undefined}
+                  placement="after-treatment"
+                  currentSlug={treatmentContent.slug}
+                />
 
                 {/* Related {Body Part} Treatments Section */}
                 {(() => {
