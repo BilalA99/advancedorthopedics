@@ -1,0 +1,56 @@
+name: Typecheck
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  tsc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # next.config.ts sets typescript.ignoreBuildErrors and
+      # eslint.ignoreDuringBuilds, so a green `next build` says nothing about
+      # whether the project typechecks. This job is the only thing that does.
+      #
+      # The build must run first: tsconfig.json includes ".next/types/**/*.ts",
+      # and those route types only exist after a build. Running tsc against a
+      # cold checkout silently under-reports — that is how the baseline was
+      # mistaken for 49 when a fresh build reports 50.
+      - name: Build (generates .next/types that tsc checks)
+        run: npm run build
+
+      # ── RATCHET, NOT A TARGET ────────────────────────────────────────────
+      # 49 is the count of pre-existing errors as of 2026-09-02, all in
+      # scripts/ and temp_conditions_old.tsx. Do not raise this number to make
+      # a build pass. If you fix errors, LOWER it so the gain is locked in.
+      # Anyone adding the 50th error has introduced a regression.
+      - name: Typecheck against the 49-error ceiling
+        run: |
+          set +e
+          npx tsc --noEmit > tsc.log 2>&1
+          set -e
+          COUNT=$(grep -c "error TS" tsc.log || true)
+          echo "tsc errors: $COUNT (ceiling: 49)"
+          echo "--- errors by file ---"
+          grep "error TS" tsc.log | sed 's/(.*//' | sort | uniq -c | sort -rn
+          if [ "$COUNT" -gt 49 ]; then
+            echo ""
+            echo "::error::tsc reported $COUNT errors, ceiling is 49."
+            echo "A new type error was introduced. Fix it rather than raising the ceiling."
+            exit 1
+          fi
+          if [ "$COUNT" -lt 49 ]; then
+            echo ""
+            echo "::notice::tsc reported $COUNT errors, below the 49 ceiling."
+            echo "Lower the ceiling in this workflow to lock the improvement in."
+          fi
