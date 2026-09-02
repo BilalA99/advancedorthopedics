@@ -7,7 +7,7 @@ import { buildCanonical, safeTitle, safeDescription, normalizeUTF8 } from "@/lib
 import { getOgImageForPath } from "@/lib/og";
 
 export async function generateMetadata(
-  { params }: { params: { PainArea: string } },
+  { params }: { params: Promise<{ PainArea: string }> },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const resolvedParams = await params;
