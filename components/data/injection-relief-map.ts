@@ -182,7 +182,7 @@ export const InjectionAreas: InjectionArea[] = [
       'Ankle Joint Injection',
       'Plantar Fascia Injection',
     ],
-    trustLine: 'Same-week appointments · 23 locations across FL, NJ, NY & PA',
+    trustLine: 'Same-week appointments · 23 locations across FL, NJ, NY, PA & GA',
     learnMoreHref: '/find-care/book-an-appointment',
     primaryCtaText: 'Find Foot & Ankle Relief',
     primaryCtaHref: '/find-care/book-an-appointment',

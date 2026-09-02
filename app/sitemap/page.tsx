@@ -6,6 +6,7 @@ import { clinics } from '@/components/data/clinics';
 import { getVisibleProviders } from '@/lib/providers/providerVisibility';
 import { buildCanonical } from '@/lib/seo';
 import { GetBlogsPublic } from '@/app/blogs/api/get-blogs';
+import { SITEMAP_EXCLUDED_PATHS } from '@/lib/sitemap-exclusions';
 
 export const metadata: Metadata = {
   title: 'Complete Website Sitemap | Mountain Spine & Orthopedics',
@@ -56,10 +57,8 @@ const findCarePages = [
 // Area of Pain pages - Back Pain
 const backPainPages = [
   { url: '/area-of-pain/back-pain/lower-back-pain', title: 'Lower Back Pain' },
-  { url: '/area-of-pain/back-pain/lumbar-degenerative-disc-disease', title: 'Lumbar Degenerative Disc Disease' },
   { url: '/area-of-pain/back-pain/lumbar-herniated-disc', title: 'Lumbar Herniated Disc' },
   { url: '/area-of-pain/back-pain/foraminal-stenosis-back-pain', title: 'Foraminal Stenosis (Back Pain)' },
-  { url: '/area-of-pain/back-pain/sciatica-nerve-pain', title: 'Sciatica Nerve Pain' },
   { url: '/area-of-pain/back-pain/tailbone-pain-coccydynia', title: 'Tailbone Pain (Coccydynia)' },
   { url: '/area-of-pain/back-pain/back-pain-treatment-options', title: 'Back Pain Treatment Options' },
 ];
@@ -71,7 +70,6 @@ const neckPainPages = [
   { url: '/area-of-pain/neck-and-shoulder-pain/cervical-degenerative-disc-disease', title: 'Cervical Degenerative Disc Disease' },
   { url: '/area-of-pain/neck-and-shoulder-pain/neck-shoulder-arthritis-pain', title: 'Neck & Shoulder Arthritis Pain' },
   { url: '/area-of-pain/neck-and-shoulder-pain/pinched-nerve-neck-shoulder', title: 'Pinched Nerve in Neck or Shoulder' },
-  { url: '/area-of-pain/neck-and-shoulder-pain/neck-and-shoulder-pain-treatment', title: 'Neck & Shoulder Pain Treatment' },
 ];
 
 // Area of Pain pages - Foot Pain
@@ -97,20 +95,6 @@ const injuryPages = [
 // Blog category pages (for reference)
 const blogCategoryPages = [
   { url: '/blogs', title: 'Health & Wellness Blog' },
-  { url: '/blogs/tag/back-pain', title: 'Blog: Back Pain Articles' },
-  { url: '/blogs/tag/neck-pain', title: 'Blog: Neck Pain Articles' },
-  { url: '/blogs/tag/joint-care', title: 'Blog: Joint Care Articles' },
-  { url: '/blogs/tag/spinal-surgery', title: 'Blog: Spinal Surgery Articles' },
-  { url: '/blogs/tag/sports-injury', title: 'Blog: Sports Injury Articles' },
-  { url: '/blogs/tag/recovery', title: 'Blog: Recovery Tips' },
-  { url: '/blogs/tag/minimally-invasive', title: 'Blog: Minimally Invasive Surgery' },
-  { url: '/blogs/tag/spine', title: 'Blog: Spine Health' },
-  { url: '/blogs/tag/lower-spine', title: 'Blog: Lower Spine' },
-  { url: '/blogs/tag/neck', title: 'Blog: Neck Health' },
-  { url: '/blogs/tag/shoulder', title: 'Blog: Shoulder Health' },
-  { url: '/blogs/tag/knee', title: 'Blog: Knee Health' },
-  { url: '/blogs/tag/hand', title: 'Blog: Hand, Wrist & Elbow' },
-  { url: '/blogs/tag/foot', title: 'Blog: Foot & Ankle' },
 ];
 
 // Section component for better organization
@@ -185,8 +169,13 @@ export default async function SitemapPage() {
   })).sort((a, b) => a.title.localeCompare(b.title));
 
   // Prepare condition links
+  // Same canonical rules as the XML sitemap: never list a URL that redirects.
+  // Four records in the conditions dataset are really treatments and 308 to
+  // /treatments/* (see lib/sitemap-exclusions.ts), and they are already listed
+  // under Treatments below — so they are dropped here rather than duplicated.
   const conditionLinks = conditions
     .filter(c => c.slug && c.slug !== 'undefined')
+    .filter(c => !SITEMAP_EXCLUDED_PATHS.has(`/conditions/${c.slug}`))
     .map(condition => ({
       url: `/conditions/${condition.slug}`,
       title: condition.title || slugToTitle(condition.slug),

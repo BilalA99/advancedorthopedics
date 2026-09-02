@@ -153,6 +153,41 @@ test('form-source classification respects form placement and originating path', 
   assert.equal(resolveFormSource({ pathname: '/locations/florida/orlando', formId: 'DoctorContactForm' }), 'location-contact');
   assert.equal(resolveFormSource({ pathname: '/conditions/sciatica', formId: 'DoctorContactForm' }), 'general-contact');
   assert.equal(resolveFormSource({ pathname: '/conditions/sciatica', formId: 'BookAnAppoitmentButton' }), 'modal-appointment');
+  // Paid landing pages get their own bucket, and it must stay channel-shaped:
+  // the source names the traffic type, never the condition the ad group bought.
+  assert.equal(resolveFormSource({ pathname: '/lp/adult-scoliosis-treatment', formId: 'BodyPartHeroForm' }), 'paid-landing');
+  assert.equal(resolveFormSource({ explicitSource: 'paid-landing' }), 'paid-landing');
+});
+
+test('no form source encodes a condition, symptom, or insurance status', async () => {
+  const { FORM_SOURCES } = await import('../lib/lead-contract');
+  // GA4 and Google Ads receive form_source verbatim. A value naming a medical
+  // condition or a payer would turn an ad-platform parameter into a health
+  // signal about the visitor, which is exactly what must stay first-party.
+  //
+  // Matched per hyphen-delimited token, not as a substring: "book-appointment"
+  // contains "ppo" inside "appointment" and is perfectly fine.
+  //
+  // The existing injury-vertical sources (car-accident, work-injury, ...) are
+  // deliberately not covered here. They describe the legal/referral vertical the
+  // lead came through, which the practice already treats as a business category,
+  // and changing them is a decision for the team rather than something this test
+  // should force. What this guards is diagnosis and payer terms.
+  const forbiddenTokens = new Set([
+    'scoliosis', 'sciatica', 'stenosis', 'herniated', 'hernia', 'disc', 'fracture',
+    'arthritis', 'cancer', 'tumor', 'surgery', 'surgical', 'pain', 'symptom',
+    'symptoms', 'diagnosis', 'ppo', 'hmo', 'medicare', 'medicaid', 'insurance',
+    'insured', 'uninsured', 'payer', 'selfpay',
+  ]);
+  for (const source of FORM_SOURCES) {
+    for (const token of source.split('-')) {
+      assert.equal(
+        forbiddenTokens.has(token),
+        false,
+        `form source "${source}" leaks a health or payer signal ("${token}")`,
+      );
+    }
+  }
 });
 
 test('canonical payload builder contains only approved non-sensitive context', () => {

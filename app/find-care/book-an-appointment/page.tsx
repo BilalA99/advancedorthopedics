@@ -61,7 +61,7 @@ const BookAppointmentJsonLdSchema = () => {
     "@context": "https://schema.org",
     "@type": "MedicalOrganization",
     "name": "Mountain Spine & Orthopedics",
-    "description": "Leading spine and orthopedic specialists serving FL, NJ, NY, and PA providing advanced minimally invasive treatments, including Band-Aid Back Surgery, laser spine procedures, and comprehensive pain management.",
+    "description": "Leading spine and orthopedic specialists serving FL, NJ, NY, PA, and GA providing advanced minimally invasive treatments, including Band-Aid Back Surgery, laser spine procedures, and comprehensive pain management.",
     "url": "https://mountainspineorthopedics.com",
     "logo": "https://mountainspineorthopedics.com/newlogo4.png",
     "image": "https://mountainspineorthopedics.com/herosectionimg.jpg",

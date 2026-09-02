@@ -53,7 +53,7 @@ export function safeDescription(primary?: string, fallback?: string): string {
   const cleaned = removeHTML(text)
     .replace(/\s+/g, " ")
     .trim();
-  return cleaned || "Trusted orthopedic and spine care across Florida, New Jersey, New York, and Pennsylvania.";
+  return cleaned || "Trusted orthopedic and spine care across Florida, New Jersey, New York, Pennsylvania, and Georgia.";
 }
 
 // SR-only utility class (Tailwind assumed)
@@ -61,7 +61,7 @@ export const srOnly = "sr-only";
 
 /** Build consistent OG description for doctor pages */
 export function buildOgDescription(fullName: string): string {
-  return `Meet ${fullName}, a board-certified orthopedic surgeon at Mountain Spine & Orthopedics. Expert in minimally invasive surgery and personalized spine and joint care. Serving patients across FL, NJ, NY & PA.`;
+  return `Meet ${fullName}, a board-certified orthopedic surgeon at Mountain Spine & Orthopedics. Expert in minimally invasive surgery and personalized spine and joint care. Serving patients across FL, NJ, NY, PA & GA.`;
 }
 
 /**

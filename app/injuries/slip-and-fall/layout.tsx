@@ -12,11 +12,11 @@ const PAGE_URL = "https://mountainspineorthopedics.com/injuries/slip-and-fall";
 export const metadata: Metadata = {
   title: safeTitle(
     undefined,
-    "Slip and Fall Orthopedic Doctor Near Me | FL, NJ, NY & PA | Mountain Spine & Orthopedics"
+    "Slip and Fall Orthopedic Doctor Near Me | FL, NJ, NY, PA & GA | Mountain Spine & Orthopedics"
   ),
   description: safeDescription(
     undefined,
-    "Board-certified slip and fall orthopedic doctors in FL, NJ, NY & PA. Fractures, spine & hip injuries treated same-week. Lien & liability insurance accepted. (561) 223-9959."
+    "Board-certified slip and fall orthopedic doctors in FL, NJ, NY, PA & GA. Fractures, spine & hip injuries treated same-week. Lien & liability insurance accepted. (561) 223-9959."
   ),
   keywords: [
     "slip and fall doctor near me",
@@ -58,11 +58,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: safeTitle(
       undefined,
-      "Slip and Fall Orthopedic Doctor Near Me | FL, NJ, NY & PA | Mountain Spine & Orthopedics"
+      "Slip and Fall Orthopedic Doctor Near Me | FL, NJ, NY, PA & GA | Mountain Spine & Orthopedics"
     ),
     description: safeDescription(
       undefined,
-      "Board-certified slip and fall orthopedic doctors in FL, NJ, NY & PA. Fractures, spine & hip injuries treated same-week. Lien accepted. (561) 223-9959."
+      "Board-certified slip and fall orthopedic doctors in FL, NJ, NY, PA & GA. Fractures, spine & hip injuries treated same-week. Lien accepted. (561) 223-9959."
     ),
     url: buildCanonical("/injuries/slip-and-fall"),
     type: "article",
@@ -79,11 +79,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: safeTitle(
       undefined,
-      "Slip and Fall Orthopedic Doctor Near Me | FL, NJ, NY & PA | Mountain Spine & Orthopedics"
+      "Slip and Fall Orthopedic Doctor Near Me | FL, NJ, NY, PA & GA | Mountain Spine & Orthopedics"
     ),
     description: safeDescription(
       undefined,
-      "Board-certified slip and fall orthopedic doctors in FL, NJ, NY & PA. Fractures, spine & hip injuries treated same-week. Lien accepted."
+      "Board-certified slip and fall orthopedic doctors in FL, NJ, NY, PA & GA. Fractures, spine & hip injuries treated same-week. Lien accepted."
     ),
     images: ["/og-slip-fall-treatment.jpg"],
   },
@@ -105,9 +105,9 @@ export default function SlipAndFallLayout({
             buildInjuryMedicalWebPageSchema({
               url: PAGE_URL,
               headline:
-                "Slip and Fall Orthopedic Doctor Near Me — FL, NJ, NY & PA",
+                "Slip and Fall Orthopedic Doctor Near Me — FL, NJ, NY, PA & GA",
               description:
-                "Board-certified orthopedic and spine specialists treating slip and fall injuries in Florida, New Jersey, New York, and Pennsylvania. Fractures, hip injuries, FOOSH, and spinal trauma treated same-week. Premises liability lien billing accepted. 22+ locations open 8 AM–8 PM, 7 days.",
+                "Board-certified orthopedic and spine specialists treating slip and fall injuries in Florida, New Jersey, New York, Pennsylvania, and Georgia. Fractures, hip injuries, FOOSH, and spinal trauma treated same-week. Premises liability lien billing accepted. 22+ locations open 8 AM–8 PM, 7 days.",
               injuryName: "Slip and Fall Orthopedic Injuries",
               alternateNames: [
                 "Fall Accident Injuries",

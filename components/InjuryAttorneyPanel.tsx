@@ -24,7 +24,7 @@ export default function InjuryAttorneyPanel({ showAttorneyPanel = true }: Props)
               {[
                 'No upfront payment required for evaluation',
                 'We coordinate directly with your personal injury attorney',
-                'Available in FL, NJ, NY & PA for qualifying cases',
+                'Available in FL, NJ, NY, PA & GA for qualifying cases',
                 'Board-certified orthopedic surgeons and spine specialists',
                 'Detailed medical records provided for your legal claim',
               ].map((item, i) => (

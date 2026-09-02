@@ -1,5 +1,5 @@
 import { ClinicsProps } from '@/components/data/clinics';
-import { MAIN_PHONE_E164, STATE_PHONE_NUMBERS } from '@/lib/locationConstants';
+import { MAIN_PHONE_E164, STATE_PHONE_NUMBERS, LOCATION_OPENING_HOURS_SPECIFICATION } from '@/lib/locationConstants';
 import { getVisibleReviews } from '@/lib/providers/providerVisibility';
 
 // Expected GBP addresses for validation (development mode only)
@@ -247,6 +247,14 @@ export function generateLocationSchema(clinic: ClinicsProps): Record<string, any
       'latitude': clinic.lat,
       'longitude': clinic.lng
     },
+    // Tied to the same per-clinic field that controls the visible hours row, so
+    // the two can't drift. A location with `hoursDisplay: null` has unconfirmed
+    // hours: it shows none to a patient, and must not assert any to Google
+    // either — an "open now" result for an office whose schedule nobody has
+    // confirmed sends people to a door that may be locked. Setting real hours
+    // (or removing the null) turns both representations on together.
+    'openingHoursSpecification':
+      clinic.hoursDisplay === null ? undefined : LOCATION_OPENING_HOURS_SPECIFICATION,
     'location': {
       '@type': 'Place',
       'geo': {

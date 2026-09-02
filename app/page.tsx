@@ -51,11 +51,11 @@ const MRI3 = 'https://mountainspineortho.b-cdn.net/public/MRI3.png';
 
 // ✅ Server-Rendered Metadata for Homepage SEO - Multi-State Coverage
 export const metadata: Metadata = {
-  title: 'Mountain Spine & Orthopedics | Top Orthopedic & Spine Surgeons in FL, NJ, NY & PA',
-  description: "Leading orthopedic and spine surgeons specializing in minimally invasive back surgery, joint replacement, and advanced neck pain treatment. Serving patients across Florida, New Jersey, New York & Pennsylvania. Book your consultation today.",
+  title: 'Mountain Spine & Orthopedics | Top Orthopedic & Spine Surgeons in FL, NJ, NY, PA & GA',
+  description: "Leading orthopedic and spine surgeons specializing in minimally invasive back surgery, joint replacement, and advanced neck pain treatment. Serving patients across Florida, New Jersey, New York, Pennsylvania & Georgia. Book your consultation today.",
   openGraph: {
-    title: 'Mountain Spine & Orthopedics | Top Orthopedic & Spine Surgeons in FL, NJ, NY & PA',
-    description: "Leading orthopedic and spine surgeons specializing in minimally invasive back surgery, joint replacement, and advanced neck pain treatment. Serving patients across Florida, New Jersey, New York & Pennsylvania. Book your consultation today.",
+    title: 'Mountain Spine & Orthopedics | Top Orthopedic & Spine Surgeons in FL, NJ, NY, PA & GA',
+    description: "Leading orthopedic and spine surgeons specializing in minimally invasive back surgery, joint replacement, and advanced neck pain treatment. Serving patients across Florida, New Jersey, New York, Pennsylvania & Georgia. Book your consultation today.",
     url: buildCanonical('/'),
     siteName: 'Mountain Spine & Orthopedics',
     images: [
@@ -71,8 +71,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mountain Spine & Orthopedics | Top Orthopedic & Spine Surgeons in FL, NJ, NY & PA',
-    description: "Leading orthopedic and spine surgeons specializing in minimally invasive back surgery, joint replacement, and advanced neck pain treatment. Serving patients across Florida, New Jersey, New York & Pennsylvania. Book your consultation today.",
+    title: 'Mountain Spine & Orthopedics | Top Orthopedic & Spine Surgeons in FL, NJ, NY, PA & GA',
+    description: "Leading orthopedic and spine surgeons specializing in minimally invasive back surgery, joint replacement, and advanced neck pain treatment. Serving patients across Florida, New Jersey, New York, Pennsylvania & Georgia. Book your consultation today.",
     images: [getOgImageForPath('/')],
   },
   keywords: [
@@ -127,7 +127,7 @@ const HomePageJsonLdSchema = () => {
     'name': 'Mountain Spine & Orthopedics',
     'url': 'https://mountainspineorthopedics.com/',
     'logo': 'https://mountainspineorthopedics.com/newlogo4.png',
-    'description': 'Board-certified orthopedic surgeon specialists providing minimally invasive spine surgery, joint replacement surgery, and advanced back pain treatment across Florida, New Jersey, New York, and Pennsylvania. Expert orthopedic surgery consultations available.',
+    'description': 'Board-certified orthopedic surgeon specialists providing minimally invasive spine surgery, joint replacement surgery, and advanced back pain treatment across Florida, New Jersey, New York, Pennsylvania, and Georgia. Expert orthopedic surgery consultations available.',
     'image': 'https://mountainspineorthopedics.com/default_og.png',
     'telephone': '+1-561-223-9959',
     'priceRange': '$$',
@@ -135,7 +135,7 @@ const HomePageJsonLdSchema = () => {
       '@type': 'ContactPoint',
       'telephone': '+1-561-223-9959',
       'contactType': 'Customer Service',
-      'areaServed': ['Florida', 'New Jersey', 'New York', 'Pennsylvania'],
+      'areaServed': ['Florida', 'New Jersey', 'New York', 'Pennsylvania', 'Georgia'],
       'availableLanguage': ['en']
     },
     'address': {
@@ -263,7 +263,7 @@ export default function Home() {
                   className="md:px-6 sm:text-2xl text-lg"
                 >
                   Leading orthopedic specialists combining cutting-edge innovations with compassionate care to treat spine disorders, fractures, arthritis,
-                  sports injuries, and joint pain across Florida, New Jersey, New York, and Pennsylvania. Using minimally invasive techniques
+                  sports injuries, and joint pain across Florida, New Jersey, New York, Pennsylvania, and Georgia. Using minimally invasive techniques
                   and evidence-based treatments, our board-certified specialists provide personalized solutions for faster recovery and lasting mobility.
                 </p>
               </div>
@@ -288,7 +288,7 @@ export default function Home() {
               </h2>
               <div>
                 <p style={{ fontFamily: "var(--font-public-sans)", fontWeight: 400, color: '#424959' }} className="text-lg">
-                  Trust Mountain Spine & Orthopedics for expert spine and joint care across Florida, New Jersey, New York, and Pennsylvania. We provide compassionate service with minimally invasive techniques that deliver faster recovery times. Your mobility and well-being are our top priority!
+                  Trust Mountain Spine & Orthopedics for expert spine and joint care across Florida, New Jersey, New York, Pennsylvania, and Georgia. We provide compassionate service with minimally invasive techniques that deliver faster recovery times. Your mobility and well-being are our top priority!
                 </p>
                 <div className="mt-[40px] xl:w-[50%] w-full md:w-fit">
                   <BookAnAppoitmentButton />
@@ -307,7 +307,7 @@ export default function Home() {
                     Our Specialty
                   </h3>
                   <p style={{ fontFamily: "var(--font-public-sans)", fontWeight: 500, color: '#424959' }} className="text-lg">
-                    At Mountain Spine & Orthopedics, we are dedicated to providing exceptional spine and joint care with cutting-edge minimally invasive treatments and a patient-first approach. Serving patients across Florida, New Jersey, New York, and Pennsylvania. Here's why we stand out:
+                    At Mountain Spine & Orthopedics, we are dedicated to providing exceptional spine and joint care with cutting-edge minimally invasive treatments and a patient-first approach. Serving patients across Florida, New Jersey, New York, Pennsylvania, and Georgia. Here's why we stand out:
                   </p>
                 </div>
               </Reveal>
@@ -327,7 +327,7 @@ export default function Home() {
                 Meet Our Expert Orthopedic Specialists
               </h2>
               <p style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }} className="text-[#54535C] md:w-[50%] w-full">
-                Board-certified orthopedic surgeons and spine specialists serving patients across FL, NJ, NY & PA with 20+ years of combined experience
+                Board-certified orthopedic surgeons and spine specialists serving patients across FL, NJ, NY, PA & GA with 20+ years of combined experience
               </p>
             </div>
             <div className="md:w-[50%] flex items-center md:justify-end w-full md:mt-0 mt-4">
@@ -356,7 +356,7 @@ export default function Home() {
                 Free Second Opinion & MRI Reading
               </h2>
               <p style={{ fontFamily: "var(--font-inter)", fontWeight: 500, color: '#424959', lineHeight: 1.5 }} className="">
-                <span className="text-[#0A50EC]">Free Second Opinion.</span> Persistent pain concerns despite multiple treatments? At Mountain Spine & Orthopedics, serving patients across Florida, New Jersey, New York, and Pennsylvania, we <span className="text-[#0A50EC]">offer a free second opinion</span> and cutting-edge minimally invasive procedures for pain management, mobility restoration, and quality of life enhancement. Book your consultation today!
+                <span className="text-[#0A50EC]">Free Second Opinion.</span> Persistent pain concerns despite multiple treatments? At Mountain Spine & Orthopedics, serving patients across Florida, New Jersey, New York, Pennsylvania, and Georgia, we <span className="text-[#0A50EC]">offer a free second opinion</span> and cutting-edge minimally invasive procedures for pain management, mobility restoration, and quality of life enhancement. Book your consultation today!
               </p>
               <div className="flex md:flex-row flex-col w-full gap-3 justify-center items-stretch">
                 <div className="w-full md:flex-1 min-w-0">

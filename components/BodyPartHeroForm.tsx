@@ -10,12 +10,25 @@ import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid';
 import { formatPhoneInput } from '@/lib/phone-formatter';
 import { STATE_OPTIONS } from '@/lib/stateUtils';
 import { appendPreparedUploads } from '@/lib/client-upload';
+import type { FormSource } from '@/lib/lead-contract';
 
 interface BodyPartHeroFormProps {
   bodyPartTitle: string;
+  /**
+   * Attribution bucket for this placement. Defaults to the organic body-part
+   * pages this form was built for; paid landing pages pass "paid-landing" so
+   * their leads are separable without any condition detail leaving first party.
+   */
+  formSource?: FormSource;
+  /** Overrides the default `${bodyPartTitle} Body Part Page` source label. */
+  sourceLabel?: string;
 }
 
-export default function BodyPartHeroForm({ bodyPartTitle }: BodyPartHeroFormProps) {
+export default function BodyPartHeroForm({
+  bodyPartTitle,
+  formSource = 'body-part-consultation',
+  sourceLabel,
+}: BodyPartHeroFormProps) {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -121,11 +134,11 @@ export default function BodyPartHeroForm({ bodyPartTitle }: BodyPartHeroFormProp
       payload.append('state', formData.state);
       payload.append('country', 'US');
       payload.append('painArea', bodyPartTitle);
-      payload.append('source', `${bodyPartTitle} Body Part Page`);
+      payload.append('source', sourceLabel ?? `${bodyPartTitle} Body Part Page`);
       payload.append('gclid', attribution.gclid);
       payload.append('gbraid', attribution.gbraid);
       payload.append('wbraid', attribution.wbraid);
-      payload.append('form_source', 'body-part-consultation');
+      payload.append('form_source', formSource);
       payload.append('utm_source', attribution.utm_source);
       payload.append('utm_medium', attribution.utm_medium);
       payload.append('utm_campaign', attribution.utm_campaign);
@@ -164,7 +177,7 @@ export default function BodyPartHeroForm({ bodyPartTitle }: BodyPartHeroFormProp
         throw new Error('Submission failed');
       }
 
-      const accepted = await pushAcceptedLead({ acceptance: res, form_name: 'BodyPartHeroForm', form_source: 'body-part-consultation', state: formData.state, email: formData.email, phone: formData.phone, firstName: formData.firstName, lastName: formData.lastName, postalCode: formData.postalCode });
+      const accepted = await pushAcceptedLead({ acceptance: res, form_name: 'BodyPartHeroForm', form_source: formSource, state: formData.state, email: formData.email, phone: formData.phone, firstName: formData.firstName, lastName: formData.lastName, postalCode: formData.postalCode });
       if (!accepted) throw new Error('Submission was not persisted');
 
       setShowDialog(false);

@@ -308,7 +308,7 @@ export default function HomeHeroSection() {
                 }}
                 className={`${timePeriod !== 'night' ? 'sm:text-[#424959] text-[#252932]' : 'text-white'} text-xl lg:text-2xl sm:text-left text-center hidden sm:block`}
               >
-                Expert orthopedic and spine surgeons offering minimally invasive spine surgery, joint replacement, and advanced back pain treatment across Florida, New Jersey, New York, and Pennsylvania. Same-day and next-day appointments at convenient locations. Book your orthopedic consultation today.
+                Expert orthopedic and spine surgeons offering minimally invasive spine surgery, joint replacement, and advanced back pain treatment across Florida, New Jersey, New York, Pennsylvania, and Georgia. Same-day and next-day appointments at convenient locations. Book your orthopedic consultation today.
               </p>
             </div>
           </div>

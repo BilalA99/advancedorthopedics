@@ -12,7 +12,7 @@ export const personalInjuryFaqs = [
     a: "Our board-certified orthopedic surgeons and spine specialists treat injuries arising from: motor vehicle accidents (car, truck, motorcycle, rideshare); slip, trip, and fall incidents on private or public property; pedestrian and bicycle knockdown injuries; construction and workplace accidents; dog bite injuries causing orthopedic trauma; and assault-related orthopedic injuries. We focus on injuries to the spine (cervical, thoracic, lumbar), shoulders, hips, knees, ankles, wrists, and hands.",
   },
   {
-    q: "What are the statutes of limitations for personal injury claims in FL, NJ, NY, and PA?",
+    q: "What are the statutes of limitations for personal injury claims in FL, NJ, NY, PA, and GA?",
     a: "Filing deadlines vary significantly by state: Florida — 2 years from the date of injury (reduced from 4 years effective March 2023); New Jersey — 2 years from the date of injury; New York — 3 years for most personal injury claims against private parties, but only 90 days to file a Notice of Claim against a government entity with a 1-year suit deadline; Pennsylvania — 2 years from the date of injury. Missing these deadlines permanently bars your claim, making early medical documentation and attorney consultation critical.",
   },
   {

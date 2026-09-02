@@ -4,7 +4,7 @@ export const slipFallFaqs = [
     a: "Report the incident to the property owner, manager, or employer immediately and request that an incident report be completed in writing. Take photographs of the hazard that caused the fall — wet floor, uneven pavement, missing handrail — before it is corrected. Collect contact information from any witnesses. Seek medical evaluation within 24 to 48 hours even if pain seems minor, as spine, hip, and wrist fractures can be underestimated at the scene. Call Mountain Spine & Orthopedics at (561) 223-9959 for same-week appointment scheduling.",
   },
   {
-    q: "What are the statutes of limitations for slip and fall claims in FL, NJ, NY, and PA?",
+    q: "What are the statutes of limitations for slip and fall claims in FL, NJ, NY, PA, and GA?",
     a: "The filing deadlines differ significantly by state: Florida — 2 years from the date of injury (reduced from 4 years in 2023); New Jersey — 2 years from the date of injury; New York — 3 years for private premises, but only 1 year for accidents on government property, and government property claimants must also file a Notice of Claim within 90 days; Pennsylvania — 2 years from the date of injury. Early orthopedic documentation creates a contemporaneous medical record that establishes the nature, cause, and severity of your injuries.",
   },
   {
@@ -17,10 +17,10 @@ export const slipFallFaqs = [
   },
   {
     q: "Can a workplace slip and fall be covered by workers' compensation?",
-    a: "Yes. If you slip, trip, or fall while performing your job duties — including in parking lots, stairwells, or at client sites — the injury is covered by workers' compensation regardless of fault. Workers' comp pays 100% of authorized medical expenses and a portion of lost wages. In Florida, report the injury within 30 days. In NJ and PA, report it as soon as possible. In New York, your employer's WC insurer must authorize treatment, so call us to confirm authorization. Our FL, NJ, NY, and PA clinics handle workers' comp cases regularly.",
+    a: "Yes. If you slip, trip, or fall while performing your job duties — including in parking lots, stairwells, or at client sites — the injury is covered by workers' compensation regardless of fault. Workers' comp pays 100% of authorized medical expenses and a portion of lost wages. In Florida, report the injury within 30 days. In NJ and PA, report it as soon as possible. In New York, your employer's WC insurer must authorize treatment, so call us to confirm authorization. Our FL, NJ, NY, PA, and GA clinics handle workers' comp cases regularly.",
   },
   {
-    q: "Is slip and fall treatment available on a medical lien in FL, NJ, NY, and PA?",
+    q: "Is slip and fall treatment available on a medical lien in FL, NJ, NY, PA, and GA?",
     a: "Yes. Mountain Spine & Orthopedics offers lien-based orthopedic treatment for slip-and-fall patients pursuing premises liability claims in all four states. Under a medical lien arrangement, you receive full evaluation and care — orthopedic exam, imaging coordination, injection treatment, and surgical consultation if needed — at no upfront cost. Our fee is paid from your premises liability settlement. Call (561) 223-9959 to discuss lien eligibility during your intake call.",
   },
   {
@@ -29,7 +29,7 @@ export const slipFallFaqs = [
   },
   {
     q: "Which orthopedic injuries are most common from slip and fall accidents?",
-    a: "The most frequent orthopedic injuries from falls include: wrist, hand, and forearm fractures (FOOSH mechanism); hip fractures, particularly in older adults; cervical and lumbar disc herniation from axial loading on impact; shoulder labrum and rotator cuff tears from outstretched arm bracing; ankle fractures and ligament tears; and knee meniscus injuries. Spinal compression fractures may occur in patients with osteoporosis even from low-energy falls. Our board-certified specialists diagnose and treat all of these injuries across our FL, NJ, NY, and PA clinics.",
+    a: "The most frequent orthopedic injuries from falls include: wrist, hand, and forearm fractures (FOOSH mechanism); hip fractures, particularly in older adults; cervical and lumbar disc herniation from axial loading on impact; shoulder labrum and rotator cuff tears from outstretched arm bracing; ankle fractures and ligament tears; and knee meniscus injuries. Spinal compression fractures may occur in patients with osteoporosis even from low-energy falls. Our board-certified specialists diagnose and treat all of these injuries across our FL, NJ, NY, PA, and GA clinics.",
   },
   {
     q: "How do I know if my fall on someone's property qualifies as a premises liability case?",

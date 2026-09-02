@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: "Orthopedic & Podiatric Conditions | Mountain Spine & Orthopedics",
-    description: "Comprehensive guide to orthopedic and podiatric conditions. Expert diagnosis for back pain, neck pain, joint conditions, and foot/ankle problems. Board-certified specialists in FL, NJ, NY, and PA. Book a consultation today.",
+    description: "Comprehensive guide to orthopedic and podiatric conditions. Expert diagnosis for back pain, neck pain, joint conditions, and foot/ankle problems. Board-certified specialists in FL, NJ, NY, PA, and GA. Book a consultation today.",
     keywords: ["orthopedic conditions", "podiatric conditions", "spine conditions", "back pain", "neck pain", "joint conditions", "orthopedic specialists FL NJ NY PA"],
     alternates: {
       canonical: url,
@@ -57,7 +57,7 @@ export default function ConditionsPage() {
   return (
     <Suspense fallback={<HubStaticShell
       title="Orthopedic Conditions & Treatments"
-      intro="Browse the spine, joint, and musculoskeletal conditions our board-certified orthopedic surgeons diagnose and treat across Florida, New Jersey, New York, and Pennsylvania."
+      intro="Browse the spine, joint, and musculoskeletal conditions our board-certified orthopedic surgeons diagnose and treat across Florida, New Jersey, New York, Pennsylvania, and Georgia."
       links={conditionHubLinks()}
     />}>
       <ConditionsHubClient reviews={getVisibleReviews(sitewideReviews)} showFeaturedDoctor={isProviderVisible({ slug: providerIds.scottKatzman })} />

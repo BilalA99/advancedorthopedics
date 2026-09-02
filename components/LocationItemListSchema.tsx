@@ -7,7 +7,7 @@ export function LocationItemListSchema({ clinics }: { clinics: ClinicsProps[] })
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "Mountain Spine & Orthopedics Clinic Locations",
-    "description": "Find all official clinic locations for Mountain Spine & Orthopedics throughout Florida, New Jersey, New York, and Pennsylvania for expert spine and joint care.",
+    "description": "Find all official clinic locations for Mountain Spine & Orthopedics throughout Florida, New Jersey, New York, Pennsylvania, and Georgia for expert spine and joint care.",
     "url": buildCanonical('/locations'),
     "itemListElement": clinics.map((clinic, index) => ({
       "@type": "ListItem",

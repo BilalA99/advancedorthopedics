@@ -12,11 +12,11 @@ const PAGE_URL = "https://mountainspineorthopedics.com/injuries/personal-injury"
 export const metadata: Metadata = {
   title: safeTitle(
     undefined,
-    "Personal Injury Orthopedic Doctor Near Me | FL, NJ, NY & PA | Mountain Spine & Orthopedics"
+    "Personal Injury Orthopedic Doctor Near Me | FL, NJ, NY, PA & GA | Mountain Spine & Orthopedics"
   ),
   description: safeDescription(
     undefined,
-    "Board-certified personal injury orthopedic doctors in FL, NJ, NY & PA. Lien accepted, same-week eval, expert witness records. Call (561) 223-9959 — no insurance needed."
+    "Board-certified personal injury orthopedic doctors in FL, NJ, NY, PA & GA. Lien accepted, same-week eval, expert witness records. Call (561) 223-9959 — no insurance needed."
   ),
   keywords: [
     "personal injury orthopedic doctor near me",
@@ -58,11 +58,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: safeTitle(
       undefined,
-      "Personal Injury Orthopedic Doctor Near Me | FL, NJ, NY & PA | Mountain Spine & Orthopedics"
+      "Personal Injury Orthopedic Doctor Near Me | FL, NJ, NY, PA & GA | Mountain Spine & Orthopedics"
     ),
     description: safeDescription(
       undefined,
-      "Board-certified personal injury orthopedic doctors in FL, NJ, NY & PA. Lien accepted, same-week eval, expert records. Call (561) 223-9959."
+      "Board-certified personal injury orthopedic doctors in FL, NJ, NY, PA & GA. Lien accepted, same-week eval, expert records. Call (561) 223-9959."
     ),
     url: buildCanonical("/injuries/personal-injury"),
     type: "article",
@@ -71,11 +71,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: safeTitle(
       undefined,
-      "Personal Injury Orthopedic Doctor Near Me | FL, NJ, NY & PA | Mountain Spine & Orthopedics"
+      "Personal Injury Orthopedic Doctor Near Me | FL, NJ, NY, PA & GA | Mountain Spine & Orthopedics"
     ),
     description: safeDescription(
       undefined,
-      "Board-certified personal injury orthopedic doctors in FL, NJ, NY & PA. Lien accepted, same-week eval, expert records."
+      "Board-certified personal injury orthopedic doctors in FL, NJ, NY, PA & GA. Lien accepted, same-week eval, expert records."
     ),
   },
 };
@@ -96,9 +96,9 @@ export default function PersonalInjuryLayout({
             buildInjuryMedicalWebPageSchema({
               url: PAGE_URL,
               headline:
-                "Personal Injury Orthopedic Doctor Near Me — FL, NJ, NY & PA",
+                "Personal Injury Orthopedic Doctor Near Me — FL, NJ, NY, PA & GA",
               description:
-                "Board-certified orthopedic and spine specialists treating personal injuries from car accidents, slip and falls, pedestrian knockdowns, and other trauma in Florida, New Jersey, New York, and Pennsylvania. Medical lien accepted, same-week evaluation, expert witness reports. 22+ locations open 8 AM–8 PM, 7 days.",
+                "Board-certified orthopedic and spine specialists treating personal injuries from car accidents, slip and falls, pedestrian knockdowns, and other trauma in Florida, New Jersey, New York, Pennsylvania, and Georgia. Medical lien accepted, same-week evaluation, expert witness reports. 22+ locations open 8 AM–8 PM, 7 days.",
               injuryName: "Personal Injury-Related Orthopedic Conditions",
               alternateNames: [
                 "Accident-Related Orthopedic Injuries",

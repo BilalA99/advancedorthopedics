@@ -21,6 +21,10 @@ export const FORM_SOURCES = [
   "personal-injury",
   "slip-and-fall",
   "work-injury",
+  // Paid landing pages. Deliberately neutral: the source names the traffic
+  // channel, never the condition the ad group targeted, so no health signal
+  // reaches GA4/Google Ads. First-party qualification stays in Supabase.
+  "paid-landing",
 ] as const;
 
 export type FormSource = (typeof FORM_SOURCES)[number];
@@ -52,6 +56,7 @@ export function resolveFormSource({
   }
   if (path.includes("/about/meetourdoctors/")) return "doctor-contact";
   if (path.includes("/locations/")) return "location-contact";
+  if (path.startsWith("/lp/")) return "paid-landing";
   if (id.includes("bodyparthero")) return "body-part-consultation";
   if (id.includes("mobilehero")) return "homepage-consultation";
   if (id.includes("patientadvocate")) return "patient-advocate";

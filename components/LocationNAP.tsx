@@ -8,6 +8,9 @@ export function LocationNAP({ slug, phoneDisplay, phoneTel }: { slug: string; ph
   if (!clinic) return null;
 
   const { address, placeUrl } = clinic;
+  // `null` means hours are not confirmed for this office; omit the row rather
+  // than falling back to the sitewide default.
+  const hours = clinic.hoursDisplay === undefined ? LOCATION_HOURS_DISPLAY : clinic.hoursDisplay;
   const displayPhone = phoneDisplay ?? MAIN_PHONE_DISPLAY;
   const telPhone = phoneTel ?? MAIN_PHONE_TEL;
 
@@ -42,12 +45,14 @@ export function LocationNAP({ slug, phoneDisplay, phoneTel }: { slug: string; ph
         </a>
       </div>
 
-      <div className="flex items-center space-x-2">
-        <Clock className="text-[#0A50EC] w-5 h-5 flex-shrink-0" />
-        <span className="text-[#111315] font-semibold text-base leading-tight">
-          Hours: {LOCATION_HOURS_DISPLAY}
-        </span>
-      </div>
+      {hours && (
+        <div className="flex items-center space-x-2">
+          <Clock className="text-[#0A50EC] w-5 h-5 flex-shrink-0" />
+          <span className="text-[#111315] font-semibold text-base leading-tight">
+            Hours: {hours}
+          </span>
+        </div>
+      )}
 
       {placeUrl && (
         <div className="pt-1">

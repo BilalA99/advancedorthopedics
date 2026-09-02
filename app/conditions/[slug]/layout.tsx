@@ -8,6 +8,7 @@ import { generateFAQPageSchema } from "@/lib/faq-utils";
 import { conditionFAQs } from "@/components/data/conditionFAQs";
 import { getConditionMetadata, generateConditionMetadataFallback } from "@/lib/metadata-seo";
 import { conditionThumbnailBySlug, hubThumbnailBySlug } from "@/lib/seo/condition-images";
+import { getVisibleProviderBySlug } from "@/lib/providers/providerVisibility";
 
 // Helper to strip HTML and markdown from text for schema
 function stripHtmlAndMarkdown(text: string): string {
@@ -53,7 +54,7 @@ export async function generateMetadata(
         ];
         
         // Multi-state location keywords
-        const locationKeywords = ['Florida', 'New Jersey', 'New York', 'Pennsylvania'];
+        const locationKeywords = ['Florida', 'New Jersey', 'New York', 'Pennsylvania', 'Georgia'];
         const combinedKeywords = [
             ...bodyPartKeywords,
             ...locationKeywords.map(loc => `${bodyPart.title.toLowerCase()} doctor ${loc}`),
@@ -300,6 +301,11 @@ const ConditionSchemas = async ({ slug }: { slug: string }) => {
                 '@type': 'State',
                 'name': 'Pennsylvania',
                 'sameAs': 'https://en.wikipedia.org/wiki/Pennsylvania'
+            },
+            {
+                '@type': 'State',
+                'name': 'Georgia',
+                'sameAs': 'https://en.wikipedia.org/wiki/Georgia_(U.S._state)'
             }
         ]
     };
@@ -402,6 +408,34 @@ const ConditionSchemas = async ({ slug }: { slug: string }) => {
         webpageSchema.image = imageUrl;
     }
 
+    // Review provenance, structured data only — there is deliberately no visible
+    // byline for this.
+    //
+    // The scoliosis content was reviewed by a physician at the practice, but no
+    // individual was named to attribute it to, so `reviewedBy` resolves to the
+    // MedicalOrganization: a real entity, and an accurate statement that a
+    // medical organisation reviewed the page. Naming a specific doctor requires
+    // setting `reviewedBy` on the condition record to that doctor's slug, at
+    // which point this emits a Physician object pointing at their profile.
+    // It never invents a name.
+    const reviewedAt = isNewFormat ? conditionContent!.reviewedAt : undefined;
+    const reviewer = isNewFormat && conditionContent!.reviewedBy
+        ? getVisibleProviderBySlug(conditionContent!.reviewedBy)
+        : undefined;
+
+    if (reviewedAt) {
+        webpageSchema.lastReviewed = reviewedAt;
+        webpageSchema.dateModified = reviewedAt;
+    }
+    webpageSchema.reviewedBy = reviewer
+        ? {
+            '@type': 'Physician',
+            'name': reviewer.name,
+            'url': `${baseUrl}/about/meetourdoctors/${reviewer.slug}`,
+            'medicalSpecialty': reviewer.medicalSpecialty,
+        }
+        : { '@id': organizationId };
+
     // 4. Service Schema
     const serviceSchema = {
         '@type': 'Service',
@@ -438,6 +472,11 @@ const ConditionSchemas = async ({ slug }: { slug: string }) => {
                 '@type': 'State',
                 'name': 'Pennsylvania',
                 'sameAs': 'https://en.wikipedia.org/wiki/Pennsylvania'
+            },
+            {
+                '@type': 'State',
+                'name': 'Georgia',
+                'sameAs': 'https://en.wikipedia.org/wiki/Georgia_(U.S._state)'
             }
         ],
         'hasOfferCatalog': {

@@ -40,7 +40,17 @@ export default function StateLocationsGridDesktop({
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
+      // A state with a single office (Georgia, New York) rendered one card in the
+      // left third of a 3-column grid with two empty columns beside it, which
+      // reads as a broken layout rather than a deliberate one. Below three
+      // clinics, drop to a centred, width-capped track so the row looks composed.
+      className={`hidden md:grid gap-6 mb-16 ${
+        stateClinics.length === 1
+          ? 'md:grid-cols-1 max-w-[560px] mx-auto'
+          : stateClinics.length === 2
+            ? 'md:grid-cols-2 max-w-[840px] mx-auto'
+            : 'md:grid-cols-2 lg:grid-cols-3'
+      }`}
     >
       {stateClinics.map((clinic, index) => (
         <StateLocationCard

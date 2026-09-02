@@ -231,7 +231,7 @@ export const OrthoConditionsWeTreat: OrthoConditionItem[] = [
       },
       {
         name: 'Cervical Laminectomy',
-        slug: 'posterior-cervical-laminectomy-surgery'
+        slug: 'cervical-laminectomy'
       },
       {
         name: 'Cervical Foraminotomy',

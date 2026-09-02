@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: "Orthopedic Surgeries & Procedures | Mountain Spine & Orthopedics",
-    description: "Advanced orthopedic surgeries, minimally invasive procedures, and comprehensive treatments. Expert care for back pain, joint replacement, sports injuries, and spine conditions. Board-certified surgeons in FL, NJ, NY, and PA.",
+    description: "Advanced orthopedic surgeries, minimally invasive procedures, and comprehensive treatments. Expert care for back pain, joint replacement, sports injuries, and spine conditions. Board-certified surgeons in FL, NJ, NY, PA, and GA.",
     keywords: ["orthopedic surgeries", "minimally invasive procedures", "spine surgery", "joint replacement", "sports medicine treatments", "orthopedic surgeons FL NJ NY PA"],
     alternates: {
       canonical: url,
@@ -57,7 +57,7 @@ export default function TreatmentsPage() {
   return (
     <Suspense fallback={<HubStaticShell
       title="Orthopedic Treatments & Procedures"
-      intro="Explore the minimally invasive procedures, injections, and surgical treatments our board-certified orthopedic and spine surgeons perform across Florida, New Jersey, New York, and Pennsylvania."
+      intro="Explore the minimally invasive procedures, injections, and surgical treatments our board-certified orthopedic and spine surgeons perform across Florida, New Jersey, New York, Pennsylvania, and Georgia."
       links={treatmentHubLinks()}
     />}>
       <TreatmentsHubClient reviews={getVisibleReviews(sitewideReviews)} showFeaturedDoctor={isProviderVisible({ slug: providerIds.scottKatzman })} />

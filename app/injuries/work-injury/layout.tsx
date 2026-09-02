@@ -12,11 +12,11 @@ const PAGE_URL = "https://mountainspineorthopedics.com/injuries/work-injury";
 export const metadata: Metadata = {
   title: safeTitle(
     undefined,
-    "Work Injury Orthopedic Doctor Near Me | FL, NJ, NY & PA | Mountain Spine & Orthopedics"
+    "Work Injury Orthopedic Doctor Near Me | FL, NJ, NY, PA & GA | Mountain Spine & Orthopedics"
   ),
   description: safeDescription(
     undefined,
-    "Board-certified work injury orthopedic doctors in FL, NJ, NY & PA. Workers' comp coordinated, ATP provider, same-week eval. Call (561) 223-9959 — WC accepted."
+    "Board-certified work injury orthopedic doctors in FL, NJ, NY, PA & GA. Workers' comp coordinated, ATP provider, same-week eval. Call (561) 223-9959 — WC accepted."
   ),
   keywords: [
     "work injury doctor near me",
@@ -58,11 +58,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: safeTitle(
       undefined,
-      "Work Injury Orthopedic Doctor Near Me | FL, NJ, NY & PA | Mountain Spine & Orthopedics"
+      "Work Injury Orthopedic Doctor Near Me | FL, NJ, NY, PA & GA | Mountain Spine & Orthopedics"
     ),
     description: safeDescription(
       undefined,
-      "Board-certified work injury orthopedic doctors in FL, NJ, NY & PA. Workers' comp coordinated. Same-week eval. Call (561) 223-9959."
+      "Board-certified work injury orthopedic doctors in FL, NJ, NY, PA & GA. Workers' comp coordinated. Same-week eval. Call (561) 223-9959."
     ),
     url: buildCanonical("/injuries/work-injury"),
     type: "article",
@@ -71,11 +71,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: safeTitle(
       undefined,
-      "Work Injury Orthopedic Doctor Near Me | FL, NJ, NY & PA | Mountain Spine & Orthopedics"
+      "Work Injury Orthopedic Doctor Near Me | FL, NJ, NY, PA & GA | Mountain Spine & Orthopedics"
     ),
     description: safeDescription(
       undefined,
-      "Board-certified work injury orthopedic doctors in FL, NJ, NY & PA. Workers' comp coordinated. Same-week eval."
+      "Board-certified work injury orthopedic doctors in FL, NJ, NY, PA & GA. Workers' comp coordinated. Same-week eval."
     ),
   },
 };
@@ -96,9 +96,9 @@ export default function WorkInjuryLayout({
             buildInjuryMedicalWebPageSchema({
               url: PAGE_URL,
               headline:
-                "Work Injury Orthopedic Doctor Near Me — FL, NJ, NY & PA",
+                "Work Injury Orthopedic Doctor Near Me — FL, NJ, NY, PA & GA",
               description:
-                "Board-certified orthopedic and spine specialists treating work-related injuries in Florida, New Jersey, New York, and Pennsylvania. Workers' compensation coordination, ATP provider, FCE referrals, same-week evaluation. 22+ locations open 8 AM–8 PM, 7 days.",
+                "Board-certified orthopedic and spine specialists treating work-related injuries in Florida, New Jersey, New York, Pennsylvania, and Georgia. Workers' compensation coordination, ATP provider, FCE referrals, same-week evaluation. 22+ locations open 8 AM–8 PM, 7 days.",
               injuryName: "Work-Related Orthopedic Injuries",
               alternateNames: [
                 "Workplace Injury",

@@ -56,7 +56,7 @@ const medicalOrganizationSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalOrganization",
   "name": "Mountain Spine & Orthopedics",
-  "description": "Leading spine and orthopedic specialists providing advanced minimally invasive treatments, including Band-Aid Back Surgery, laser spine procedures, and comprehensive pain management. Serving patients across Florida, New Jersey, New York, and Pennsylvania.",
+  "description": "Leading spine and orthopedic specialists providing advanced minimally invasive treatments, including Band-Aid Back Surgery, laser spine procedures, and comprehensive pain management. Serving patients across Florida, New Jersey, New York, Pennsylvania, and Georgia.",
   "url": "https://mountainspineorthopedics.com",
   "logo": "https://mountainspineorthopedics.com/newlogo4.png",
   "image": "https://mountainspineorthopedics.com/herosectionimg.jpg",

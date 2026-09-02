@@ -78,7 +78,7 @@ export default async function BodyPartPage({ bodyPartSlug }: { bodyPartSlug: str
     '@id': organizationId,
     'name': 'Mountain Spine & Orthopedics',
     'alternateName': 'MSO',
-    'description': 'Leading spine and orthopedic specialists in Florida, New Jersey, New York, and Pennsylvania providing advanced minimally invasive treatments, including Band-Aid Back Surgery, laser spine procedures, and comprehensive pain management.',
+    'description': 'Leading spine and orthopedic specialists in Florida, New Jersey, New York, Pennsylvania, and Georgia providing advanced minimally invasive treatments, including Band-Aid Back Surgery, laser spine procedures, and comprehensive pain management.',
     'url': baseUrl,
     'logo': {
       '@type': 'ImageObject',
@@ -132,6 +132,11 @@ export default async function BodyPartPage({ bodyPartSlug }: { bodyPartSlug: str
         '@type': 'State',
         'name': 'Pennsylvania',
         'sameAs': 'https://en.wikipedia.org/wiki/Pennsylvania'
+      },
+      {
+        '@type': 'State',
+        'name': 'Georgia',
+        'sameAs': 'https://en.wikipedia.org/wiki/Georgia_(U.S._state)'
       }
     ],
     'hasOfferCatalog': {
@@ -280,7 +285,8 @@ export default async function BodyPartPage({ bodyPartSlug }: { bodyPartSlug: str
       { '@type': 'State', 'name': 'Florida' },
       { '@type': 'State', 'name': 'New Jersey' },
       { '@type': 'State', 'name': 'New York' },
-      { '@type': 'State', 'name': 'Pennsylvania' }
+      { '@type': 'State', 'name': 'Pennsylvania' },
+      { '@type': 'State', 'name': 'Georgia' }
     ],
     'availableChannel': {
       '@type': 'ServiceChannel',

@@ -12,11 +12,11 @@ const PAGE_URL = "https://mountainspineorthopedics.com/injuries/car-accident";
 export const metadata: Metadata = {
   title: safeTitle(
     undefined,
-    "Car Accident Orthopedic Doctor Near Me | FL, NJ, NY & PA | Mountain Spine & Orthopedics"
+    "Car Accident Orthopedic Doctor Near Me | FL, NJ, NY, PA & GA | Mountain Spine & Orthopedics"
   ),
   description: safeDescription(
     undefined,
-    "Board-certified car accident orthopedic doctors in FL, NJ, NY & PA. Same-day eval, PIP/no-fault/lien accepted. Call (561) 223-9959 — don't miss FL's 14-day window."
+    "Board-certified car accident orthopedic doctors in FL, NJ, NY, PA & GA. Same-day eval, PIP/no-fault/lien accepted. Call (561) 223-9959 — don't miss FL's 14-day window."
   ),
   keywords: [
     "car accident orthopedic doctor near me",
@@ -61,11 +61,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: safeTitle(
       undefined,
-      "Car Accident Orthopedic Doctor Near Me | FL, NJ, NY & PA | Mountain Spine & Orthopedics"
+      "Car Accident Orthopedic Doctor Near Me | FL, NJ, NY, PA & GA | Mountain Spine & Orthopedics"
     ),
     description: safeDescription(
       undefined,
-      "Board-certified car accident orthopedic doctors in FL, NJ, NY & PA. Same-day eval, PIP/no-fault/lien accepted. Call (561) 223-9959."
+      "Board-certified car accident orthopedic doctors in FL, NJ, NY, PA & GA. Same-day eval, PIP/no-fault/lien accepted. Call (561) 223-9959."
     ),
     url: buildCanonical("/injuries/car-accident"),
     type: "article",
@@ -82,11 +82,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: safeTitle(
       undefined,
-      "Car Accident Orthopedic Doctor Near Me | FL, NJ, NY & PA | Mountain Spine & Orthopedics"
+      "Car Accident Orthopedic Doctor Near Me | FL, NJ, NY, PA & GA | Mountain Spine & Orthopedics"
     ),
     description: safeDescription(
       undefined,
-      "Board-certified car accident orthopedic doctors in FL, NJ, NY & PA. PIP/no-fault/lien accepted. Same-day appointments. Call (561) 223-9959."
+      "Board-certified car accident orthopedic doctors in FL, NJ, NY, PA & GA. PIP/no-fault/lien accepted. Same-day appointments. Call (561) 223-9959."
     ),
     images: ["/og-car-accident-treatment.jpg"],
   },
@@ -108,9 +108,9 @@ export default function CarAccidentLayout({
             buildInjuryMedicalWebPageSchema({
               url: PAGE_URL,
               headline:
-                "Car Accident Orthopedic Doctor Near Me — FL, NJ, NY & PA",
+                "Car Accident Orthopedic Doctor Near Me — FL, NJ, NY, PA & GA",
               description:
-                "Board-certified orthopedic and spine specialists treating car accident injuries in Florida, New Jersey, New York, and Pennsylvania. Same-day evaluation, PIP/no-fault/lien billing accepted, 22+ locations open 8 AM–8 PM, 7 days.",
+                "Board-certified orthopedic and spine specialists treating car accident injuries in Florida, New Jersey, New York, Pennsylvania, and Georgia. Same-day evaluation, PIP/no-fault/lien billing accepted, 22+ locations open 8 AM–8 PM, 7 days.",
               injuryName: "Car Accident Orthopedic Injuries",
               alternateNames: [
                 "Auto Accident Injuries",

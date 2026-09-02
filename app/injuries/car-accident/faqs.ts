@@ -21,11 +21,11 @@ export const carAccidentFaqs = [
   },
   {
     q: "Can I receive treatment on a medical lien if I don't have health insurance after a car accident?",
-    a: "Yes. In Florida, New Jersey, New York, and Pennsylvania, Mountain Spine & Orthopedics offers lien-based treatment for qualified personal injury patients. Under a medical lien, you receive full orthopedic evaluation and care now — no upfront payment — and we are paid from your settlement when your case resolves. Our patient advocates confirm lien eligibility during your intake call. Call (561) 223-9959 for details.",
+    a: "Yes. In Florida, New Jersey, New York, Pennsylvania, and Georgia, Mountain Spine & Orthopedics offers lien-based treatment for qualified personal injury patients. Under a medical lien, you receive full orthopedic evaluation and care now — no upfront payment — and we are paid from your settlement when your case resolves. Our patient advocates confirm lien eligibility during your intake call. Call (561) 223-9959 for details.",
   },
   {
     q: "How soon after a car accident should I get an MRI or imaging?",
-    a: "If you have neck or back pain, numbness, tingling, weakness, or limited range of motion, imaging should be ordered at your first orthopedic visit. Many car accident disc injuries, fractures, and ligament tears are invisible on X-ray and require MRI for accurate diagnosis. Delaying imaging can make it harder to document the causal link between the accident and your injuries. Our FL, NJ, NY, and PA clinics provide on-site and coordinated diagnostic imaging.",
+    a: "If you have neck or back pain, numbness, tingling, weakness, or limited range of motion, imaging should be ordered at your first orthopedic visit. Many car accident disc injuries, fractures, and ligament tears are invisible on X-ray and require MRI for accurate diagnosis. Delaying imaging can make it harder to document the causal link between the accident and your injuries. Our FL, NJ, NY, PA, and GA clinics provide on-site and coordinated diagnostic imaging.",
   },
   {
     q: "What documents should I bring to my first car accident orthopedic appointment?",
@@ -33,7 +33,7 @@ export const carAccidentFaqs = [
   },
   {
     q: "How quickly can I be seen after a car accident at Mountain Spine & Orthopedics?",
-    a: "Most new car accident patients are seen within the same week — often within 2 to 3 business days. If you are in Florida and approaching the 14-day PIP window, call us at (561) 223-9959 the same day for priority scheduling. We have 22+ locations across FL, NJ, NY, and PA, so there is almost always a clinic near you with rapid availability.",
+    a: "Most new car accident patients are seen within the same week — often within 2 to 3 business days. If you are in Florida and approaching the 14-day PIP window, call us at (561) 223-9959 the same day for priority scheduling. We have 22+ locations across FL, NJ, NY, PA, and GA, so there is almost always a clinic near you with rapid availability.",
   },
   {
     q: "Do car accident injury treatments ever require surgery?",

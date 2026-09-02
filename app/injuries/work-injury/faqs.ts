@@ -37,6 +37,6 @@ export const workInjuryFaqs = [
   },
   {
     q: "How fast can I be seen for a work injury at Mountain Spine & Orthopedics in FL, NJ, NY, or PA?",
-    a: "Work injury patients are typically scheduled within the same week at our FL, NJ, NY, and PA locations. If you are in Florida and your employer has designated us as your ATP, we can often see you within 1 to 2 business days. In New York, we confirm WCB authorization before your visit to ensure seamless billing. Call (561) 223-9959 — our intake team is familiar with workers' comp protocols in all four states and will walk you through the scheduling and authorization process.",
+    a: "Work injury patients are typically scheduled within the same week at our FL, NJ, NY, PA, and GA locations. If you are in Florida and your employer has designated us as your ATP, we can often see you within 1 to 2 business days. In New York, we confirm WCB authorization before your visit to ensure seamless billing. Call (561) 223-9959 — our intake team is familiar with workers' comp protocols in all four states and will walk you through the scheduling and authorization process.",
   },
 ];

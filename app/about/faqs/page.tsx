@@ -42,7 +42,7 @@ const faqSections = [
         question: 'What is orthopedic surgery?',
         answer: (
           <p>
-            Orthopedic surgery focuses on diagnosing and treating conditions affecting bones, joints, muscles, ligaments, and tendons. At <Link href="/about" className="text-blue-600 hover:underline">Mountain Spine & Orthopedics</Link>, our specialists across FL, NJ, NY, and PA use both surgical and non-surgical methods to relieve pain and restore movement.
+            Orthopedic surgery focuses on diagnosing and treating conditions affecting bones, joints, muscles, ligaments, and tendons. At <Link href="/about" className="text-blue-600 hover:underline">Mountain Spine & Orthopedics</Link>, our specialists across FL, NJ, NY, PA, and GA use both surgical and non-surgical methods to relieve pain and restore movement.
           </p>
         ),
       },
@@ -177,7 +177,7 @@ const faqSections = [
         question: 'What conditions do orthopedic surgeons treat?',
         answer: (
           <p>
-            We treat back pain, <Link href="/conditions" className="text-blue-600 hover:underline">spine disorders</Link>, arthritis, sports injuries, joint pain, fractures, and more — for both surgical and non-surgical cases across our locations in FL, NJ, NY, and PA.
+            We treat back pain, <Link href="/conditions" className="text-blue-600 hover:underline">spine disorders</Link>, arthritis, sports injuries, joint pain, fractures, and more — for both surgical and non-surgical cases across our locations in FL, NJ, NY, PA, and GA.
           </p>
         ),
       },
@@ -238,7 +238,7 @@ const faqSections = [
         question: 'What insurance plans do you accept?',
         answer: (
           <p>
-            We are a PPO practice and accept PPO plans across our locations in FL, NJ, NY, and PA — no referral needed to see a specialist. HMO plans are not accepted. Please <Link href="/insurance-policy" className="text-blue-600 hover:underline">review our insurance policy</Link> or call ahead to confirm coverage for your specific plan.
+            We are a PPO practice and accept PPO plans across our locations in FL, NJ, NY, PA, and GA — no referral needed to see a specialist. HMO plans are not accepted. Please <Link href="/insurance-policy" className="text-blue-600 hover:underline">review our insurance policy</Link> or call ahead to confirm coverage for your specific plan.
           </p>
         ),
       },
@@ -246,7 +246,7 @@ const faqSections = [
         question: 'Where are Mountain Spine & Orthopedics locations?',
         answer: (
           <p>
-            We proudly serve patients across FL, NJ, NY, and PA. Our offices include locations in <Link href="/locations/florida/boca-raton-orthopedics" className="text-blue-600 hover:underline">Boca Raton</Link>, <Link href="/locations/florida/palm-beach-gardens-orthopedics" className="text-blue-600 hover:underline">Palm Beach Gardens</Link>, <Link href="/locations/florida/fort-pierce-orthopedics" className="text-blue-600 hover:underline">Fort Pierce</Link>, and more. <Link href="/locations" className="text-blue-600 hover:underline">View all locations</Link>.
+            We proudly serve patients across FL, NJ, NY, PA, and GA. Our offices include locations in <Link href="/locations/florida/boca-raton-orthopedics" className="text-blue-600 hover:underline">Boca Raton</Link>, <Link href="/locations/florida/palm-beach-gardens-orthopedics" className="text-blue-600 hover:underline">Palm Beach Gardens</Link>, <Link href="/locations/florida/fort-pierce-orthopedics" className="text-blue-600 hover:underline">Fort Pierce</Link>, and more. <Link href="/locations" className="text-blue-600 hover:underline">View all locations</Link>.
           </p>
         ),
       },
@@ -296,7 +296,7 @@ const allFaqItems = faqSections.flatMap(section => section.items);
 
 export const metadata: Metadata = {
   title: 'Orthopedic Surgery FAQs | Mountain Spine & Orthopedics',
-  description: 'Get answers to frequently asked questions about orthopedic surgery, spine treatments, recovery times, and patient care at Mountain Spine & Orthopedics across FL, NJ, NY, and PA.',
+  description: 'Get answers to frequently asked questions about orthopedic surgery, spine treatments, recovery times, and patient care at Mountain Spine & Orthopedics across FL, NJ, NY, PA, and GA.',
   alternates: {
     canonical: buildCanonical('/about/faqs'),
   },
@@ -394,7 +394,7 @@ export default function FAQs() {
             style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }}
             className=' text-[#424959] md:w-[55%] w-full text-xl md:text-2xl'
           >
-            At Mountain Spine & Orthopedics, we take the time to listen to each patient to provide you with a positive and individualized treatment experience. Our board-certified, fellowship-trained orthopedic surgeons across FL, NJ, NY, and PA are here to answer your questions and guide you toward the best treatment plan for your needs.
+            At Mountain Spine & Orthopedics, we take the time to listen to each patient to provide you with a positive and individualized treatment experience. Our board-certified, fellowship-trained orthopedic surgeons across FL, NJ, NY, PA, and GA are here to answer your questions and guide you toward the best treatment plan for your needs.
           </p>
         </div>
       </section>

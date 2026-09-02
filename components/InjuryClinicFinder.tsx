@@ -153,7 +153,7 @@ export default function InjuryClinicFinder() {
             Find the Nearest Clinic
           </h2>
           <p className="text-gray-600 text-lg">
-            Open 8 AM – 8 PM, 7 Days · 22+ Locations Across FL, NJ, NY & PA
+            Open 8 AM – 8 PM, 7 Days · 22+ Locations Across FL, NJ, NY, PA & GA
           </p>
         </div>
 

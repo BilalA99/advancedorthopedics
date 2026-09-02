@@ -27,7 +27,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const safe = clinics.map(
-  ({ reviews, whatOurPatientsSay, specialists, skilled, whyChoose, easyToReach, nearby, advancedTreatments, faqs, gallery, galleryIntro, ...rest }) =>
+  ({ reviews, whatOurPatientsSay, specialists, skilled, whyChoose, easyToReach, nearby, advancedTreatments, faqs, gallery, galleryIntro, hoursDisplay, ...rest }) =>
     rest
 );
 
