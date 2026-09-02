@@ -350,3 +350,60 @@ These four are among the *best*-linked pages on the site.
 Google **choosing not to fetch**, not failing to find. That is a crawl-budget and quality
 decision, and it is consistent with the tier-level deprioritization. Adding more internal
 links would not change it.
+
+---
+
+# 11. Internal-link distribution — concentration concern refuted
+
+Raised from URL Inspection referring-page data: `/conditions/knee-instability` appeared as a
+referring page for 11 of 32 inspected URLs and `/treatments/revision-spinal-surgery` for 12,
+which looked like two pages carrying an unusual share of the site's internal linking.
+
+Measured against server-rendered HTML across all 703 built pages:
+
+| Page | Outbound internal links |
+|---|---|
+| `/conditions/knee-instability` | **51** |
+| `/treatments/revision-spinal-surgery` | **65** |
+| — site median | **60** |
+| — templated-tier median (246 pages) | **57** |
+| — templated-tier range | 47 – 118 |
+
+**Neither is an outlier.** Both sit inside the normal band. Their frequent appearance as
+referrers is a sampling artifact: every templated page links to roughly 50–65 siblings, so
+in a 32-URL sample drawn from that same tier, any given page will show up as a referrer for
+a third of them. There is no link-concentration problem and no workstream is warranted.
+
+The genuine structural finding is the inverse, and it is already handled: **387 of 703 pages
+have zero inbound internal links**, essentially all of them the `/area-of-pain/*` set, which
+is now either cross-canonicalised to `/conditions` or noindexed. `NavBar.tsx` and all three
+dropdowns are `'use client'`, so their 21 area-of-pain references never reach server HTML —
+which is why those pages were orphaned in the first place.
+
+Out-degree above 100 occurs on 34 pages, all of them hubs by design: `/sitemap` (302), the
+five state pages (186 each), `/treatments` (159), and the location pages (~159 each).
+
+---
+
+# 12. Runbook corrections
+
+**URL Inspection cannot be deep-linked.** The deep-link inspection URL format returns 404 —
+the live route uses an opaque hashed `id`. The Search Console search-bar fallback is the only
+reliable method. Inspection is a UI action requiring Search Console access; it cannot be
+automated from this repo.
+
+**Verify page state by inspection, never by the Pages export.** URL Inspection is more
+current than the Pages report. Two pages in the 2026-09-01 crawled-not-indexed export
+inspect as indexed or never-crawled. The 137 figure is a lagging snapshot.
+
+**`grep -c` returning zero exits 1.** Chaining `grep -c … && npm run build` silently skips
+the build and reports the grep's exit status, which produced a spurious "BUILD EXIT: 1" and
+a stale page count during this sprint. Run builds in isolation and capture `$?` directly.
+
+**Run `tsc` only after a build.** `tsconfig.json` includes `.next/types/**/*.ts`, and those
+route types exist only after a build. A cold-checkout `tsc` under-reports — that is how this
+project's baseline was mistaken for 49 when a fresh build reports 50.
+
+**Use `npx tsx`, not `node`, for the generator scripts.** They import `clinics.tsx`;
+`prebuild` invokes them through tsx. `node scripts/generate-clinics-for-map.mjs --check`
+fails with `ERR_UNKNOWN_FILE_EXTENSION` and is not a repo bug.
