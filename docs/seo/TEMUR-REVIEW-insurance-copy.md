@@ -62,6 +62,20 @@ Verified byte-identical to production across all 290 payer-bearing lines.
 
 **No action needed unless you want different wording.** Flagged so you know it happened.
 
+> ### ⚠️ The revert was partial, by design
+>
+> The treatment records were restored. **The insurance page was not.** The same unapproved
+> string — `We accept PPO plans` — is **still live at headline scale** on
+> `/insurance-policy` as `PPO_HEADLINE` (`components/data/insurancePlans.ts:28`), and the
+> meta description still frames the practice as PPO-only.
+>
+> That was deliberate: reverting 105 data records is a mechanical restore of wording you
+> already approved, whereas the insurance page's framing is a genuine editorial decision
+> that is yours to make. It is held for you rather than reverted.
+>
+> **So do not read the revert as "already handled."** The most prominent instance of the
+> string is the one still waiting on this review.
+
 ---
 
 ## Review by surface
