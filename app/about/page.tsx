@@ -16,13 +16,13 @@ import PhysicianSchema from '@/components/PhysicianSchema'
 
 export const metadata: Metadata = {
   title: 'About Mountain Spine & Orthopedics | Expert Spine & Joint Care',
-  description: 'Learn about our board-certified orthopedic specialists, advanced facilities, and commitment to comprehensive spine and joint care across Florida, New Jersey, New York, and Pennsylvania. Meet our expert team dedicated to your recovery.',
+  description: 'Learn about our board-certified orthopedic specialists, advanced facilities, and commitment to comprehensive spine and joint care across Florida, New Jersey, New York, Pennsylvania, and Georgia. Meet our expert team dedicated to your recovery.',
   alternates: {
     canonical: buildCanonical('/about'),
   },
   openGraph: {
     title: 'About Mountain Spine & Orthopedics | Expert Spine & Joint Care',
-    description: 'Learn about our board-certified orthopedic specialists, advanced facilities, and commitment to comprehensive spine and joint care across Florida, New Jersey, New York, and Pennsylvania. Meet our expert team dedicated to your recovery.',
+    description: 'Learn about our board-certified orthopedic specialists, advanced facilities, and commitment to comprehensive spine and joint care across Florida, New Jersey, New York, Pennsylvania, and Georgia. Meet our expert team dedicated to your recovery.',
     url: buildCanonical('/about'),
     type: 'website',
     images: [
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'About Mountain Spine & Orthopedics | Expert Spine & Joint Care',
-    description: 'Learn about our board-certified orthopedic specialists, advanced facilities, and commitment to comprehensive spine and joint care across Florida, New Jersey, New York, and Pennsylvania. Meet our expert team dedicated to your recovery.',
+    description: 'Learn about our board-certified orthopedic specialists, advanced facilities, and commitment to comprehensive spine and joint care across Florida, New Jersey, New York, Pennsylvania, and Georgia. Meet our expert team dedicated to your recovery.',
     images: [getOgImageForPath('/about')],
   },
 };
@@ -47,7 +47,7 @@ const aboutPageSchema = {
   "@context": "https://schema.org",
   "@type": "AboutPage",
   "name": "About Mountain Spine & Orthopedics | Expert Spine & Joint Care",
-  "description": "Learn about our board-certified orthopedic specialists, advanced facilities, and commitment to comprehensive spine and joint care across Florida, New Jersey, New York, and Pennsylvania.",
+  "description": "Learn about our board-certified orthopedic specialists, advanced facilities, and commitment to comprehensive spine and joint care across Florida, New Jersey, New York, Pennsylvania, and Georgia.",
   "url": "https://mountainspineorthopedics.com/about",
   "mainEntity": {
     "@type": "MedicalOrganization",
@@ -290,7 +290,7 @@ export default function AboutUs() {
             <br /><br />
             Our spine surgeons are dedicated to achieving the best results for every patient with the most appropriate approach possible using state-of-the-art equipment and procedures to promote faster recovery times that allow you to return to normal activities much sooner. We offer expert diagnosis and treatment for pain and dysfunction caused by deformity, degenerative disc disease, trauma, and failed neck or back surgeries.<span className='text-black font-[600]'>Mountain Spine & Orthopedics operate in the most efficient ways to provide a safe environment and deliver the most effective medical services to patients.</span> When it comes to spine-related issues, Mountain Spine & Orthopedics offers the treatment and care you deserve and expect. Regardless of the cause, our experienced team is ready to help.
             <br /><br />
-            Our experienced and board-certified neurologists, neurosurgeons, orthopedic specialists, and physicians work together to treat specific spine and back disorders using comprehensive techniques. We combine advanced technology with a patient-centered approach to ensure our patients get the best possible outcomes.
+            Our experienced and board-certified orthopedic surgeons, spine specialists, and physicians work together to treat specific spine and back disorders using comprehensive techniques. We combine advanced technology with a patient-centered approach to ensure our patients get the best possible outcomes.
           </p>
         </div>
 

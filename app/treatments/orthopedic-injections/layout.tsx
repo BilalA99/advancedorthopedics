@@ -13,7 +13,7 @@ const DATE_MODIFIED  = '2026-04-03';
 const META_TITLE =
   'Orthopedic Injections & Cortisone Shots Near Me | Mountain Spine & Orthopedics';
 const META_DESCRIPTION =
-  'Board-certified orthopedic specialists offering cortisone shots, epidural steroid injections, nerve blocks, facet & SI joint injections for back, neck, knee and shoulder pain. 23 locations across FL, NJ, NY & PA. PPO insurance accepted — same-week appointments, no referral needed.';
+  'Board-certified orthopedic specialists offering cortisone shots, epidural steroid injections, nerve blocks, facet & SI joint injections for back, neck, knee and shoulder pain. 23 locations across FL, NJ, NY, PA & GA. PPO insurance accepted — same-week appointments, no referral needed.';
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -120,10 +120,10 @@ const consolidatedSchema = {
         { '@type': 'State', name: 'New Jersey',   sameAs: 'https://en.wikipedia.org/wiki/New_Jersey' },
         { '@type': 'State', name: 'New York',     sameAs: 'https://en.wikipedia.org/wiki/New_York_(state)' },
         { '@type': 'State', name: 'Pennsylvania', sameAs: 'https://en.wikipedia.org/wiki/Pennsylvania' },
+        { '@type': 'State', name: 'Georgia',      sameAs: 'https://en.wikipedia.org/wiki/Georgia_(U.S._state)' },
       ],
       hasCredential: [
         { '@type': 'EducationalOccupationalCredential', credentialCategory: 'Board Certification', recognizedBy: { '@type': 'Organization', name: 'American Board of Orthopaedic Surgery' } },
-        { '@type': 'EducationalOccupationalCredential', credentialCategory: 'Board Certification', recognizedBy: { '@type': 'Organization', name: 'American Board of Neurological Surgery' } },
       ],
     },
 
@@ -233,6 +233,7 @@ const consolidatedSchema = {
         { '@type': 'State', name: 'New Jersey' },
         { '@type': 'State', name: 'New York' },
         { '@type': 'State', name: 'Pennsylvania' },
+        { '@type': 'State', name: 'Georgia' },
       ],
       availableChannel: {
         '@type': 'ServiceChannel',
@@ -367,7 +368,7 @@ const consolidatedSchema = {
           name: 'How quickly can I get an orthopedic injection appointment?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Mountain Spine & Orthopedics offers same-week appointments at 23 locations across Florida, New Jersey, New York, and Pennsylvania. No referral is required for PPO-insured patients. You can book online 24/7 or call (561) 223-9959 to speak with a patient coordinator. Most new patients are seen within 2–5 business days.',
+            text: 'Mountain Spine & Orthopedics offers same-week appointments at 23 locations across Florida, New Jersey, New York, Pennsylvania, and Georgia. No referral is required for PPO-insured patients. You can book online 24/7 or call (561) 223-9959 to speak with a patient coordinator. Most new patients are seen within 2–5 business days.',
           },
         },
       ],

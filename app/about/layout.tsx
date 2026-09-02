@@ -4,7 +4,7 @@ import { getOgImageForPath } from "@/lib/og";
 
 export const metadata: Metadata = {
   title: safeTitle("About Mountain Spine & Orthopedics | Expert Spine & Joint Care"),
-  description: safeDescription("Learn about our board-certified orthopedic specialists, advanced facilities, and commitment to comprehensive spine and joint care across Florida, New Jersey, New York, and Pennsylvania."),
+  description: safeDescription("Learn about our board-certified orthopedic specialists, advanced facilities, and commitment to comprehensive spine and joint care across Florida, New Jersey, New York, Pennsylvania, and Georgia."),
   keywords: [
     'about Mountain Spine & Orthopedics',
     'spine experts',
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: safeTitle("About Mountain Spine & Orthopedics | Expert Spine & Joint Care"),
-    description: safeDescription("Learn about our board-certified orthopedic specialists, advanced facilities, and commitment to comprehensive spine and joint care across Florida, New Jersey, New York, and Pennsylvania."),
+    description: safeDescription("Learn about our board-certified orthopedic specialists, advanced facilities, and commitment to comprehensive spine and joint care across Florida, New Jersey, New York, Pennsylvania, and Georgia."),
     url: buildCanonical("/about"),
     siteName: "Mountain Spine & Orthopedics",
     type: "website",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: safeTitle("About Mountain Spine & Orthopedics | Expert Spine & Joint Care"),
-    description: safeDescription("Learn about our board-certified orthopedic specialists, advanced facilities, and commitment to comprehensive spine and joint care across Florida, New Jersey, New York, and Pennsylvania."),
+    description: safeDescription("Learn about our board-certified orthopedic specialists, advanced facilities, and commitment to comprehensive spine and joint care across Florida, New Jersey, New York, Pennsylvania, and Georgia."),
     images: [getOgImageForPath("/")],
   },
 };

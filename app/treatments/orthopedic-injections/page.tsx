@@ -65,7 +65,7 @@ const INJECTION_FAQS: FAQItem[] = [
   {
     question: 'How quickly can I get an orthopedic injection appointment?',
     answer:
-      'Mountain Spine & Orthopedics offers **same-week appointments** at 23 locations across Florida, New Jersey, New York, and Pennsylvania. **No referral is required** for PPO-insured patients. You can book online 24/7 or call (561) 223-9959 to speak with a patient coordinator. Most new patients are seen within 2–5 business days. If you have an existing MRI, bring it to your first appointment — in many cases we can proceed with your injection the same day as your consultation.',
+      'Mountain Spine & Orthopedics offers **same-week appointments** at 23 locations across Florida, New Jersey, New York, Pennsylvania, and Georgia. **No referral is required** for PPO-insured patients. You can book online 24/7 or call (561) 223-9959 to speak with a patient coordinator. Most new patients are seen within 2–5 business days. If you have an existing MRI, bring it to your first appointment — in many cases we can proceed with your injection the same day as your consultation.',
   },
 ];
 
@@ -167,7 +167,7 @@ export default function OrthopedicInjectionsPage() {
                 {[
                   'Same-Week Appointments',
                   'Board-Certified Specialists',
-                  '23 Locations — FL, NJ, NY & PA',
+                  '23 Locations — FL, NJ, NY, PA & GA',
                   'PPO Insurance Accepted',
                 ].map((badge) => (
                   <span
@@ -336,8 +336,8 @@ export default function OrthopedicInjectionsPage() {
                   body: 'Fluoroscopy and ultrasound guidance for every injection ensures the needle is precisely placed, improving accuracy and minimizing discomfort.',
                 },
                 {
-                  title: '23 Locations Across FL, NJ, NY & PA',
-                  body: 'Same-week appointments available at 23 locations across Florida, New Jersey, New York, and Pennsylvania. Convenient care close to where you live and work.',
+                  title: '23 Locations Across FL, NJ, NY, PA & GA',
+                  body: 'Same-week appointments available at 23 locations across Florida, New Jersey, New York, Pennsylvania, and Georgia. Convenient care close to where you live and work.',
                 },
                 {
                   title: 'PPO Insurance Accepted',
@@ -1248,7 +1248,7 @@ export default function OrthopedicInjectionsPage() {
               className="text-[#424959] sm:text-lg text-sm"
             >
               Mountain Spine &amp; Orthopedics operates <strong style={{ fontWeight: 600, color: '#111315' }}>23 clinic locations</strong> across
-              Florida, New Jersey, New York, and Pennsylvania — making board-certified injection therapy
+              Florida, New Jersey, New York, Pennsylvania, and Georgia — making board-certified injection therapy
               accessible no matter where you live or work. Same-week appointments are available at all
               locations. No referral required.
             </p>

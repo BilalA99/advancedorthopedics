@@ -34,12 +34,27 @@ export default function DoctorCard({ doctor }: { doctor: DoctorProp }) {
           href={`/about/meetourdoctors/${doctor.slug}`}
           aria-label={`View profile for ${doctor.name}`}
           className='block flex-grow'>
-          <Image 
-            src={doctor.img} 
-            alt={`${doctor.name}, ${doctor.practice}`} 
-            className='w-full object-cover object-top xl:max-h-[400px] aspect-square rounded-[16px] bg-gray-500 xl:h-[400px]' 
-            draggable={false} 
-          />
+          {/* A circular-cut-out source (transparent corners) is scaled so the
+            circle covers the square frame - 1.42x is sqrt(2), the exact factor
+            at which an inscribed circle covers its square, so the crop is fixed
+            and cannot be repositioned. Everyone else renders exactly as before. */}
+          {doctor.imgCircularMask ? (
+            <div className='w-full aspect-square xl:h-[400px] xl:max-h-[400px] rounded-[16px] overflow-hidden'>
+              <Image
+                src={doctor.img}
+                alt={`${doctor.name}, ${doctor.practice}`}
+                className='w-full h-full object-cover scale-[1.42]'
+                draggable={false}
+              />
+            </div>
+          ) : (
+            <Image 
+              src={doctor.img} 
+              alt={`${doctor.name}, ${doctor.practice}`} 
+              className='w-full object-cover object-top xl:max-h-[400px] aspect-square rounded-[16px] bg-gray-500 xl:h-[400px]' 
+              draggable={false} 
+            />
+          )}
           <div className='flex flex-col space-y-[4px] mt-[16px] flex-grow sm:px-4 px-2'>
             <div className='space-y-[10px] flex flex-col'>
               <span

@@ -18,7 +18,17 @@ export default function DoctorProfileClient({ doctor }: { doctor: DoctorProp }) 
       <div className=' w-full lg:w-[35%] flex flex-col md:flex-row lg:space-x-0 space-x-6 lg:flex-col h-full'>
         <div className='lg:w-full sm:w-[50%] w-full h-full lg:max-h-[630px] rounded-[16px] overflow-hidden space-y-[24px] hover:cursor-pointer'>
           <div className='w-full h-full flex flex-col'>
-            <Image src={doctor.img} alt={doctor.name} className='w-full lg:max-h-[400px] rounded-[16px] bg-gray-500 lg:h-[400px] aspect-square object-cover' draggable={false} />
+            {/* A circular-cut-out source (transparent corners) is scaled so the
+            circle covers the square frame - 1.42x is sqrt(2), the exact factor
+            at which an inscribed circle covers its square, so the crop is fixed
+            and cannot be repositioned. Everyone else renders exactly as before. */}
+            {doctor.imgCircularMask ? (
+              <div className='w-full lg:max-h-[400px] lg:h-[400px] aspect-square rounded-[16px] overflow-hidden'>
+                <Image src={doctor.img} alt={doctor.name} className='w-full h-full object-cover scale-[1.42]' draggable={false} />
+              </div>
+            ) : (
+              <Image src={doctor.img} alt={doctor.name} className='w-full lg:max-h-[400px] rounded-[16px] bg-gray-500 lg:h-[400px] aspect-square object-cover' draggable={false} />
+            )}
             {/* Breadcrumbs */}
             <nav aria-label="Breadcrumb" className="mt-6 mb-2">
               <ol className="flex flex-row flex-wrap gap-2 text-sm text-[#2358AC]">
