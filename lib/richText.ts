@@ -87,6 +87,9 @@ export function processTextWithBoldAndLinks(text: string, currentSlug: string): 
         done = true;
         linked.add(entry.slug);
         const href = entry.type === 'condition' ? resolveConditionSlugHref(entry.slug) : `/treatments/${entry.slug}`;
+        // resolveConditionSlugHref can map a condition slug onto this very
+        // page's treatment URL, so compare the resolved href, not the raw slug.
+        if (href === `/conditions/${currentSlug}` || href === `/treatments/${currentSlug}`) return match;
         return `<a href="${href}" class="underline text-[#252932] hover:text-[#2358AC]">${match}</a>`;
       });
     }

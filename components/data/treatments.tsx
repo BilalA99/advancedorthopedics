@@ -1345,11 +1345,11 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
   {
     id: "lumbar-fusion-surgery",
     slug: "lumbar-fusion-surgery",
-    metaTitle: "Lumbar Fusion Surgery in FL, NJ, NY, PA & GA | Minimally Invasive Spine Care",
-    metaDescription: "Relieve chronic back pain with minimally invasive lumbar fusion surgery. Our FL, NJ, NY, PA & GA board-certified surgeons stabilize the spine to treat spondylolisthesis and DDD.",
+    metaTitle: "Lumbar Fusion Recovery & What the Procedure Involves | FL, NJ, NY, PA & GA",
+    metaDescription: "What a lumbar fusion involves step by step, how TLIF and other approaches differ, and what the recovery stages look like. For an overview of fusion across the whole spine, see our spinal fusion surgery page.",
     keywords: [
-      "Lumbar fusion surgery",
-      "Minimally invasive spinal fusion",
+      "Lumbar fusion recovery",
+      "what happens during lumbar fusion",
       "L5-S1 fusion recovery",
       "Spine stabilization FL, NJ, NY, PA & GA",
       "Spondylolisthesis surgery",
@@ -1366,7 +1366,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     heroDescription: "Lumbar fusion surgery permanently joins lumbar vertebrae to eliminate painful instability from degenerative disc disease, spondylolisthesis, and adult scoliosis. PPO Insurance Accepted.",
     overview: {
       heading: "Lumbar Fusion Surgery: Indications, Techniques & Recovery",
-      body: "**Lumbar Fusion Surgery** is a reconstructive procedure that permanently joins two or more vertebrae in the lower back, eliminating painful motion at damaged or unstable spinal segments. By fusing these vertebrae into a single solid unit, we address the mechanical cause of chronic lower back and leg pain from <a href=\"/conditions/degenerative-disc-disease\" class=\"underline text-[#252932] hover:text-[#2358AC]\">**degenerative disc disease**</a>, <a href=\"/conditions/spondylolisthesis\" class=\"underline text-[#252932] hover:text-[#2358AC]\">**spondylolisthesis**</a>, and <a href=\"/conditions/adult-degenerative-scoliosis\" class=\"underline text-[#252932] hover:text-[#2358AC]\">**adult degenerative scoliosis**</a>. At Mountain Spine & Orthopedics, we use minimally invasive techniques whenever appropriate — reducing muscle disruption, blood loss, and recovery time compared to traditional open lumbar fusion.",
+      body: "**Lumbar Fusion Surgery** is a reconstructive procedure that permanently joins two or more vertebrae in the lower back, eliminating painful motion at damaged or unstable spinal segments. By fusing these vertebrae into a single solid unit, we address the mechanical cause of chronic lower back and leg pain from <a href=\"/conditions/degenerative-disc-disease\" class=\"underline text-[#252932] hover:text-[#2358AC]\">**degenerative disc disease**</a>, <a href=\"/conditions/spondylolisthesis\" class=\"underline text-[#252932] hover:text-[#2358AC]\">**spondylolisthesis**</a>, and <a href=\"/conditions/adult-degenerative-scoliosis\" class=\"underline text-[#252932] hover:text-[#2358AC]\">**adult degenerative scoliosis**</a>. At Mountain Spine & Orthopedics, we use minimally invasive techniques whenever appropriate — reducing muscle disruption, blood loss, and recovery time compared to traditional open lumbar fusion. For how fusion is used across the cervical, thoracic and lumbar spine, and how surgeons decide whether fusion is the right operation at all, see <a href=\"/treatments/spinal-fusion\" class=\"text-blue-600 hover:underline\">Spinal Fusion Surgery</a>.",
     },
     candidates: {
       heading: "Who is a Candidate for Lumbar Fusion Surgery?",
@@ -2749,7 +2749,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     heroDescription: "Resurfacing shoulder replacement caps the humeral head with a metal prosthesis, preserving bone stock while treating arthritis.",
     overview: {
       heading: "Bone-Preserving Arthritis Treatment",
-      body: "**Resurfacing Shoulder Replacement** is a conservative surgical alternative to standard total shoulder replacement. Instead of cutting off the entire humeral head (ball of the shoulder), the surgeon simply smoothes the damaged surface and caps it with a metal prosthesis, similar to capping a tooth. This preserves the patient's natural bone stock, making it an excellent option for younger, active patients with <a href=\"https://mountainspineorthopedics.com/conditions/shoulder-arthritis\" class=\"text-blue-600 hover:underline\">**Shoulder Arthritis**</a> or avascular necrosis who wish to maintain high activity levels.",
+      body: "**Resurfacing Shoulder Replacement** is a conservative surgical alternative to standard total shoulder replacement. Instead of cutting off the entire humeral head (ball of the shoulder), the surgeon simply smoothes the damaged surface and caps it with a metal prosthesis, similar to capping a tooth. This preserves the patient's natural bone stock, making it an excellent option for younger, active patients with <a href=\"https://mountainspineorthopedics.com/conditions/shoulder-arthritis\" class=\"text-blue-600 hover:underline\">**Shoulder Arthritis**</a> or avascular necrosis who wish to maintain high activity levels. For how resurfacing compares with the other shoulder replacement options and when each is chosen, see <a href=\"/treatments/shoulder-replacement\" class=\"text-blue-600 hover:underline\">Total Shoulder Replacement</a>.",
     },
     candidates: {
       heading: "Who Is a Candidate?",
@@ -3511,7 +3511,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
     heroDescription: "Meniscus repair surgery sutures torn meniscal cartilage back together to preserve the knee's natural shock absorber.",
     overview: {
       heading: "Preserving the Knee's Shock Absorber",
-      body: "<p><strong>Meniscus Repair Surgery</strong> is an arthroscopic procedure designed to stitch a torn <a href=\"/conditions/torn-meniscus\" class=\"text-blue-600 hover:underline\">meniscus</a> back together rather than removing it. The meniscus serves as the knee's critical <strong>shock absorber and stabilizer</strong>, and preserving this tissue is essential for long-term knee health. Whenever possible, our surgeons opt for repair over removal (meniscectomy) to reduce the significant long-term risk of <a href=\"/conditions/knee-arthritis\" class=\"text-blue-600 hover:underline\">knee arthritis</a>.</p><p>The decision between repair and removal depends on several factors: <strong>tear location</strong> (outer vascular zone tears heal better than inner white zone tears), <strong>tear pattern</strong> (longitudinal and bucket-handle tears are more repairable), and <strong>tissue quality</strong>. For athletes and young, active patients with repairable tears, preservation is especially important. Studies show that patients who undergo meniscus removal develop arthritis at significantly higher rates than those who have successful repairs.</p><p>For those experiencing persistent <a href=\"/conditions/knee-pain\" class=\"text-blue-600 hover:underline\">knee conditions</a> including meniscus tears, early evaluation can determine if repair is possible. According to <a href=\"https://orthoinfo.aaos.org/en/diseases--conditions/overuse-injuries-in-children/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">AAOS guidance on overuse injuries</a>, preserving meniscal tissue is particularly important in younger athletes who need long-term knee function.</p>",
+      body: "<p><strong>Meniscus Repair Surgery</strong> is an arthroscopic procedure designed to stitch a torn <a href=\"/conditions/torn-meniscus\" class=\"text-blue-600 hover:underline\">meniscus</a> back together rather than removing it. The meniscus serves as the knee's critical <strong>shock absorber and stabilizer</strong>, and preserving this tissue is essential for long-term knee health. Whenever possible, our surgeons opt for repair over removal (meniscectomy) to reduce the significant long-term risk of <a href=\"/conditions/knee-arthritis\" class=\"text-blue-600 hover:underline\">knee arthritis</a>.</p><p>The decision between repair and removal depends on several factors: <strong>tear location</strong> (outer vascular zone tears heal better than inner white zone tears), <strong>tear pattern</strong> (longitudinal and bucket-handle tears are more repairable), and <strong>tissue quality</strong>. For athletes and young, active patients with repairable tears, preservation is especially important. Studies show that patients who undergo meniscus removal develop arthritis at significantly higher rates than those who have successful repairs.</p><p>For those experiencing persistent <a href=\"/conditions/knee-pain\" class=\"text-blue-600 hover:underline\">knee conditions</a> including meniscus tears, early evaluation can determine if repair is possible. According to <a href=\"https://orthoinfo.aaos.org/en/diseases--conditions/overuse-injuries-in-children/\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-blue-600 hover:underline\">AAOS guidance on overuse injuries</a>, preserving meniscal tissue is particularly important in younger athletes who need long-term knee function.</p> Repair is one of two operations for a torn meniscus; for how repair compares with meniscectomy and how the choice is made, see <a href=\"/treatments/meniscus-surgery\" class=\"text-blue-600 hover:underline\">Meniscus Surgery</a>.",
     },
     candidates: {
       heading: "Who Meniscus Repair Helps Most",
@@ -4387,11 +4387,11 @@ export const treatmentContentBatch2: TreatmentContent[] = [
   {
     id: "degenerative-disc-disease-surgery-details",
     slug: "degenerative-disc-disease-surgery-details",
-    metaTitle: "Degenerative Disc Disease Surgery | Fusion & Disc Replacement Options",
-    metaDescription: "Detailed surgical options for Degenerative Disc Disease include spinal fusion or artificial disc replacement to relieve chronic pain and restore spinal stability.",
+    metaTitle: "Fusion vs Disc Replacement for DDD | How the Choice Is Made",
+    metaDescription: "How surgeons weigh spinal fusion against artificial disc replacement for degenerative disc disease, and which findings point toward each. For whether DDD surgery is indicated at all, see our degenerative disc disease surgery page.",
     keywords: [
-      "Degenerative disc disease surgery details",
-      "DDD advanced surgical care",
+      "fusion versus disc replacement for DDD",
+      "choosing between fusion and ADR",
       "spinal fusion versus ADR for DDD",
       "minimally invasive disc operations",
       "chronic discogenic pain surgery",
@@ -4409,7 +4409,7 @@ export const treatmentContentBatch2: TreatmentContent[] = [
     heroDescription: "Explore comprehensive surgical solutions for severe Degenerative Disc Disease. When conservative treatments fail, surgical options including spinal fusion or artificial disc replacement can relieve chronic discogenic pain and restore spinal function.",
     overview: {
       heading: "Surgical Solutions for Advanced DDD",
-      body: "For severe **Degenerative Disc Disease (DDD)** unresponsive to non-surgical care, surgery may be an option. **Spinal Fusion Surgery** provides stability by joining vertebrae with **bone graft** and instrumentation, eliminating painful motion. **Artificial Disc Replacement Surgery** aims to preserve motion by replacing the damaged disc with a mobile implant. Evaluation includes MRI and dynamic X-rays to plan the most effective surgical treatment for discogenic pain and nerve compression, potentially using minimally invasive spine surgery for improved spinal health and addressing issues of chronic discogenic back pain.",
+      body: "For severe **Degenerative Disc Disease (DDD)** unresponsive to non-surgical care, surgery may be an option. **Spinal Fusion Surgery** provides stability by joining vertebrae with **bone graft** and instrumentation, eliminating painful motion. **Artificial Disc Replacement Surgery** aims to preserve motion by replacing the damaged disc with a mobile implant. Evaluation includes MRI and dynamic X-rays to plan the most effective surgical treatment for discogenic pain and nerve compression, potentially using minimally invasive spine surgery for improved spinal health and addressing issues of chronic discogenic back pain. For whether surgery is indicated for degenerative disc disease in the first place, and the full range of options, see Degenerative Disc Disease Surgery.",
     },
     candidates: {
       heading: "Who Needs DDD Surgery?",

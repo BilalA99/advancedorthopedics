@@ -122,6 +122,9 @@ function processTextWithBoldAndLinks(text: string, currentSlug: string): string 
         hasMatched = true;
         linkedSlugs.add(slug);
         const href = type === 'condition' ? resolveConditionSlugHref(slug) : `/treatments/${slug}`;
+        // resolveConditionSlugHref can map a condition slug onto this very
+        // page's treatment URL, so compare the resolved href, not the raw slug.
+        if (href === `/conditions/${currentSlug}` || href === `/treatments/${currentSlug}`) return match;
         return `<a href="${href}" class="underline text-[#252932] hover:text-[#2358AC]">${match}</a>`;
       });
     });
@@ -185,6 +188,9 @@ function linkifyText(text: string, currentSlug: string): string {
     const regex = new RegExp(`(?<![\\w-])${title.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}(?![\\w-])`, 'g');
     replaced = replaced.replace(regex, match => {
       const href = type === 'condition' ? resolveConditionSlugHref(slug) : `/treatments/${slug}`;
+        // resolveConditionSlugHref can map a condition slug onto this very
+        // page's treatment URL, so compare the resolved href, not the raw slug.
+        if (href === `/conditions/${currentSlug}` || href === `/treatments/${currentSlug}`) return match;
       return `<a href="${href}" class="underline text-[#252932]">${match}</a>`;
     });
   });
