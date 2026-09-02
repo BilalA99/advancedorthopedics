@@ -260,7 +260,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -813,7 +813,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -1326,7 +1326,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -1862,7 +1862,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -2379,7 +2379,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -2901,7 +2901,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -3431,7 +3431,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -3944,7 +3944,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -4466,7 +4466,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -4924,7 +4924,7 @@ export const clinics: ClinicsProps[] = [
         <ul style={{ fontFamily: "var(--font-public-sans)" }} className='text-lg list-disc pl-5 space-y-2'>
           <li>Board-certified spine and orthopedic surgeons</li>
           <li>Specialized in minimally invasive procedures</li>
-          <li>High success rates and faster recovery times</li>
+          <li>Minimally invasive techniques with smaller incisions</li>
           <li>On-site evaluations and advanced imaging available</li>
           <li>Same-day appointments available for orthopedic consultations</li>
           <li>Comprehensive spine, joint, and pain management solutions</li>
@@ -4980,7 +4980,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -5550,7 +5550,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -5916,7 +5916,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -6285,7 +6285,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -6645,7 +6645,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -7008,7 +7008,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -7374,7 +7374,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained surgeons perform the full spectrum of outpatient minimally invasive and reconstructive procedures, including microdiscectomy, lumbar laminectomy, cervical disc replacement, arthroscopic procedures, carpal tunnel release, and selected joint surgeries appropriate for ambulatory settings. Patients choose the West Orange Surgery Center for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient in a focused outpatient environment.
+          Our fellowship-trained surgeons perform the full spectrum of outpatient minimally invasive and reconstructive procedures, including microdiscectomy, lumbar laminectomy, cervical disc replacement, arthroscopic procedures, carpal tunnel release, and selected joint surgeries appropriate for ambulatory settings. Patients choose the West Orange Surgery Center for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals in a focused outpatient environment.
         </p>
 
         <h3
@@ -7756,7 +7756,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -8112,7 +8112,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -8327,7 +8327,7 @@ export const clinics: ClinicsProps[] = [
     paragraph: `
     Mountain Spine & Orthopedics serves Center City Philadelphia from our premier Walnut Street location in Suite 514, just steps from Rittenhouse Square and the SEPTA Market-Frankford and Broad Street lines. Our fellowship-trained, board-certified orthopedic surgeons deliver expert care for herniated discs, sciatica, spinal stenosis, degenerative disc disease, ACL tears, rotator cuff injuries, and joint replacement — with a conservative-first philosophy that prioritizes your recovery over unnecessary procedures.
     [PARAGRAPH BREAK]Located at 1601 Walnut St. at the intersection of 16th and Walnut, we are perfectly positioned for Center City professionals and residents from Rittenhouse Square, Society Hill, Old City, Washington Square West, and the Philadelphia Medical District. Same-day and next-day appointments are available. We serve patients from throughout greater Philadelphia, the Main Line, and surrounding Pennsylvania communities.
-    [PARAGRAPH BREAK]Using the most advanced minimally invasive surgical techniques and on-site diagnostic imaging, our Philadelphia orthopedic surgeons achieve outstanding outcomes with shorter recovery times. Most major insurance plans and PPO coverage accepted. If you're looking for the best orthopedic surgeon in Philadelphia, call Mountain Spine & Orthopedics Walnut Street today.
+    [PARAGRAPH BREAK]Using the most advanced minimally invasive surgical techniques and on-site diagnostic imaging, our Philadelphia orthopedic surgeons work through smaller incisions than traditional open surgery. Most major insurance plans and PPO coverage accepted. If you're looking for the best orthopedic surgeon in Philadelphia, call Mountain Spine & Orthopedics Walnut Street today.
     `,
     keywords: [
       'philadelphia orthopedic surgeon',
@@ -8453,7 +8453,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -8668,7 +8668,7 @@ export const clinics: ClinicsProps[] = [
     paragraph: `
     Mountain Spine & Orthopedics serves Port Richmond, Kensington, Fishtown, Frankford, and North Philadelphia from our Tioga Street location at 2401 E. Tioga St. Our fellowship-trained, board-certified orthopedic surgeons provide expert spine and joint care focused on getting you back to work and life — with same-day appointments available and a Workers' Compensation team experienced in handling work-related injury cases.
     [PARAGRAPH BREAK]Conveniently located near Aramingo Avenue and the I-95 corridor, our North Philadelphia orthopedic clinic is the closest high-quality spine and orthopedic option for neighborhoods that have historically lacked access to fellowship-level orthopedic care. We treat sciatica, herniated discs, spinal stenosis, degenerative disc disease, ACL tears, rotator cuff injuries, knee pain, hip pain, and occupational injuries — all with personalized care plans and a conservative-first approach.
-    [PARAGRAPH BREAK]Using the most advanced minimally invasive surgical techniques available in the Philadelphia area, our North Philly orthopedic team delivers outstanding outcomes with dramatically faster recovery times. Most major PPO insurance plans and Workers' Compensation are accepted. Call Mountain Spine & Orthopedics Tioga today for an appointment.
+    [PARAGRAPH BREAK]Using the most advanced minimally invasive surgical techniques available in the Philadelphia area, our North Philly orthopedic team uses techniques chosen to limit incision size and post-operative pain. Most major PPO insurance plans and Workers' Compensation are accepted. Call Mountain Spine & Orthopedics Tioga today for an appointment.
     `,
     keywords: [
       'north philadelphia orthopedic surgeon',
@@ -8786,7 +8786,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -8997,7 +8997,7 @@ export const clinics: ClinicsProps[] = [
     paragraph: `
     Mountain Spine & Orthopedics serves Germantown, Mount Airy, East Falls, Chestnut Hill, and Northwest Philadelphia from our Germantown Avenue office at 5245 Germantown Ave. Suite A. Our fellowship-trained, board-certified orthopedic surgeons bring elite spine and joint care to one of Philadelphia's most storied neighborhoods — providing the same level of expertise found in Center City, right in your own community.
     [PARAGRAPH BREAK]Our Germantown orthopedic clinic is conveniently located on Germantown Avenue near Lincoln Drive and accessible from Route 1, I-76 (Schuylkill Expressway), and SEPTA's Chestnut Hill East line. We treat the full spectrum of orthopedic and spine conditions: herniated discs, sciatica, spinal stenosis, degenerative disc disease, ACL tears, rotator cuff injuries, knee and hip pain, and work-related injuries. Same-day appointments are available and Workers' Compensation cases are handled by experienced staff.
-    [PARAGRAPH BREAK]Using the most advanced minimally invasive surgical and diagnostic tools, our Germantown orthopedic team delivers outstanding outcomes with faster recovery times than traditional open surgery. Most major PPO insurance accepted. Call Mountain Spine & Orthopedics Germantown today.
+    [PARAGRAPH BREAK]Using the most advanced minimally invasive surgical and diagnostic tools, our Germantown orthopedic team uses endoscopic and arthroscopic techniques that require smaller incisions than traditional open surgery. Most major PPO insurance accepted. Call Mountain Spine & Orthopedics Germantown today.
     `,
     keywords: [
       'germantown orthopedic surgeon',
@@ -9122,7 +9122,7 @@ export const clinics: ClinicsProps[] = [
         </h3>
 
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">
-          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our high surgical success rates, cutting-edge technology, and fast recovery protocols tailored to each patient.
+          Our fellowship-trained spine surgeons perform the full spectrum of minimally invasive and reconstructive spine surgeries, including microdiscectomy, lumbar laminectomy, cervical disc replacement, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and a treatment plan built around each patient's diagnosis and goals.
         </p>
 
         <h3
@@ -9440,7 +9440,7 @@ export const clinics: ClinicsProps[] = [
         <h3 style={{ fontFamily: "var(--font-public-sans)" }} className="text-xl font-semibold text-[#062044] mt-2">Leading Spine Doctors in Voorhees &amp; South Jersey</h3>
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">Our board-certified spine specialists in <strong>Voorhees, NJ</strong> provide advanced evaluation and treatment for <strong>chronic neck pain</strong>, <strong>lower back pain</strong>, <strong>sciatica</strong>, <strong>spinal stenosis</strong>, <strong>herniated discs</strong>, nerve compression, and trauma-related injuries. Serving <strong>Camden County</strong> and surrounding South Jersey communities, our team uses the latest diagnostic imaging, minimally invasive procedures, and non-surgical solutions to restore mobility and reduce pain.</p>
         <h3 style={{ fontFamily: "var(--font-public-sans)" }} className="text-xl font-semibold text-[#062044] mt-6">Expert Spine Surgeons in Voorhees</h3>
-        <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">Our fellowship-trained spine surgeons perform the full spectrum of <strong>minimally invasive</strong> and reconstructive spine surgeries, including <strong>microdiscectomy</strong>, lumbar laminectomy, <strong>cervical disc replacement</strong>, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients from Cherry Hill, Marlton, and throughout South Jersey choose Mountain Spine & Orthopedics for our high surgical success rates and fast recovery protocols.</p>
+        <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">Our fellowship-trained spine surgeons perform the full spectrum of <strong>minimally invasive</strong> and reconstructive spine surgeries, including <strong>microdiscectomy</strong>, lumbar laminectomy, <strong>cervical disc replacement</strong>, anterior cervical discectomy and fusion (ACDF), lumbar fusion, motion-preserving surgery, and advanced endoscopic techniques. Patients from Cherry Hill, Marlton, and throughout South Jersey choose Mountain Spine & Orthopedics for our fellowship-trained, board-certified surgeons and minimally invasive techniques.</p>
         <h3 style={{ fontFamily: "var(--font-public-sans)" }} className="text-xl font-semibold text-[#062044] mt-6">Spine Conditions We Treat</h3>
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">Below are the most common spine and nerve conditions we treat at our Voorhees orthopedic center.</p>
         <div style={{ fontFamily: "var(--font-public-sans)" }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-sm">
@@ -9627,7 +9627,7 @@ export const clinics: ClinicsProps[] = [
         <h3 style={{ fontFamily: "var(--font-public-sans)" }} className="text-xl font-semibold text-[#062044] mt-2">Leading Spine Doctors in Princeton &amp; Mercer County</h3>
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">Our board-certified spine specialists in <strong>Princeton, NJ</strong> provide advanced evaluation and treatment for <strong>chronic neck pain</strong>, <strong>lower back pain</strong>, <strong>sciatica</strong>, <strong>spinal stenosis</strong>, <strong>herniated discs</strong>, nerve compression, and trauma-related injuries. Serving <strong>Mercer County</strong>, Plainsboro, West Windsor, and Montgomery, our team delivers academic-level orthopedic precision with minimally invasive outcomes.</p>
         <h3 style={{ fontFamily: "var(--font-public-sans)" }} className="text-xl font-semibold text-[#062044] mt-6">Expert Spine Surgeons in Princeton</h3>
-        <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">Our fellowship-trained spine surgeons perform the full spectrum of <strong>minimally invasive</strong> and reconstructive spine surgeries, including <strong>microdiscectomy</strong>, lumbar laminectomy, <strong>cervical disc replacement</strong>, anterior cervical discectomy and fusion (ACDF), <strong>artificial disc replacement</strong>, lumbar fusion, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics Princeton for our high surgical success rates, motion-preserving technology, and fast recovery protocols tailored to each patient.</p>
+        <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">Our fellowship-trained spine surgeons perform the full spectrum of <strong>minimally invasive</strong> and reconstructive spine surgeries, including <strong>microdiscectomy</strong>, lumbar laminectomy, <strong>cervical disc replacement</strong>, anterior cervical discectomy and fusion (ACDF), <strong>artificial disc replacement</strong>, lumbar fusion, and advanced endoscopic techniques. Patients choose Mountain Spine & Orthopedics Princeton for our fellowship-trained, board-certified surgeons, motion-preserving techniques, and a treatment plan built around each patient's diagnosis and goals.</p>
         <h3 style={{ fontFamily: "var(--font-public-sans)" }} className="text-xl font-semibold text-[#062044] mt-6">Spine Conditions We Treat</h3>
         <p style={{ fontFamily: "var(--font-public-sans)" }} className="text-lg">Below are the most common spine and nerve conditions we treat at our Princeton orthopedic center.</p>
         <div style={{ fontFamily: "var(--font-public-sans)" }} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 text-sm">

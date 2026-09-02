@@ -242,8 +242,8 @@ export interface FAQItem {
         answer: "You should avoid <strong>overhead pressing and heavy lifting</strong> until cleared by a doctor. Strengthening the surrounding scapular muscles is beneficial, but heavy loads can widen the tear."
       },
       {
-        question: "What is the success rate of rotator cuff repair?",
-        answer: "Success rates are high, generally <strong>over 90% for pain relief</strong>. Functional strength return depends on the size of the tear and the patient's adherence to rehabilitation. See more about <a href=\"/treatments/rotator-cuff-repair-surgery\">rotator cuff repair surgery</a>."
+        question: "What determines how well a rotator cuff repair heals?",
+        answer: "The strongest predictors are <strong>the size of the tear, the quality of the tendon and muscle at the time of surgery, and whether the muscle has already fattily degenerated</strong>. Age, smoking, and diabetes all affect tendon healing. Functional strength return also depends on adherence to rehabilitation, which is the part the patient controls. See more about <a href=\"/treatments/rotator-cuff-repair-surgery\">rotator cuff repair surgery</a>."
       }
     ],
     "acl-injury": [
@@ -1360,7 +1360,7 @@ export interface FAQItem {
       },
       {
         question: "When is surgery needed for golfer's elbow?",
-        answer: "<a href=\"/treatments/golfers-elbow-surgery\">Surgery for golfer's elbow</a> is rarely needed (less than 10% of cases) and is considered only after <strong>6-12 months of failed conservative treatment</strong>. The procedure removes damaged tendon tissue and has a high success rate."
+        answer: "<a href=\"/treatments/golfers-elbow-surgery\">Surgery for golfer's elbow</a> is rarely needed (less than 10% of cases) and is considered only after <strong>6-12 months of failed conservative treatment</strong>. The procedure removes the damaged tendon tissue so healthier tissue can take the load."
       }
     ],
     "wrist-pain": [
@@ -2438,7 +2438,7 @@ export interface FAQItem {
       },
       {
         question: "What is the surgery for ankle instability?",
-        answer: "<strong><a href=\"/treatments/ankle-ligament-reconstruction-surgery\">Ankle ligament reconstruction</a></strong> (Brostrom procedure) repairs or reconstructs damaged lateral ligaments. Recovery takes 3-4 months for return to sports. Success rates exceed 90% for properly selected patients."
+        answer: "<strong><a href=\"/treatments/ankle-ligament-reconstruction-surgery\">Ankle ligament reconstruction</a></strong> (Brostrom procedure) repairs or reconstructs damaged lateral ligaments. Recovery takes 3-4 months for return to sports. Patient selection is what matters most here — the procedure works best when the imaging findings clearly explain the symptoms."
       }
     ],
     "lumbar-stenosis": [
