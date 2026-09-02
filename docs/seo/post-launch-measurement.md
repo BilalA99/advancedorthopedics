@@ -589,3 +589,75 @@ treatment pages have a **0%** error rate and offer 29 clean candidates:
 `Crawled – currently not indexed`. That cannot be obtained from this repo. The pool above is
 filtered on the two criteria that can be verified here — hydration-clean, and untouched by
 this sprint beyond the compliance edit.
+
+---
+
+# 15. PILOT — FINAL LOCK (2026-09-02). Supersedes §8.
+
+5v5, matched on region and hydration status, zero knee or hip. **§8's 7v7 lock is void.**
+
+## Two proposed slugs failed verification and were replaced
+
+| Proposed | Problem | Replacement |
+|---|---|---|
+| `sacroiliac-joint-injection` | **hydration ERROR** — it is one of the 40. It sits in the "erroring without block tags" subgroup of injection pages, which is why it was not obvious. | `anterior-cervical-corpectomy-and-fusion` (spine, clean, untouched by 14a) |
+| `acromioplasty` | **Received a rich, non-minimal 14a replacement.** At sweep time it was not a pilot page, so it got the full treatment — a long answer on the procedure's contested evidence base. As a control that violates the minimal-edit condition. | `shoulder-fracture-surgery` (shoulder, clean, untouched by 14a) |
+
+## Treatment arm — full differentiation
+
+| Slug | Region | Hydration | Sprint scope |
+|---|---|---|---|
+| `/treatments/spinal-fusion` | spine | clean | Commit 8 |
+| `/treatments/cervical-laminectomy` | spine | clean | Commit 8 |
+| `/treatments/endoscopic-discectomy-surgery` | spine | clean | Commit 8 |
+| `/treatments/motion-preservation-spine-surgery` | spine | clean | **new — one extra page** |
+| `/treatments/shoulder-arthroscopy` | shoulder | clean | Commit 9 |
+
+## Control arm — minimal compliance edit only
+
+| Slug | Region | Hydration | 14a edit |
+|---|---|---|---|
+| `/treatments/hybrid-cervical-spine-surgery` | spine | clean | none |
+| `/treatments/vertebroplasty` | spine | clean | none |
+| `/treatments/lumbar-decompression` | spine | clean | benefits bullet, minimal |
+| `/treatments/anterior-cervical-corpectomy-and-fusion` | spine | clean | none |
+| `/treatments/shoulder-fracture-surgery` | shoulder | clean | none |
+
+**Composition matched: 4 spine + 1 shoulder on both sides. All ten hydration-clean.**
+
+## Matching criteria applied
+
+1. ✅ **Hydration-clean** — verified in `scripts/hydration-scan.mjs`; all ten.
+2. ⚠️ **`Crawled – currently not indexed`** — **NOT VERIFIED.** Requires URL Inspection,
+   which cannot be run from this repo. **Blocking: confirm all ten before deploying.** The
+   Pages export is a lagging snapshot — `reverse-shoulder-replacement` appeared in it and
+   inspects as indexed.
+3. ✅ **No control page touched beyond the compliance edit** — the two failures above were
+   caught by this check.
+4. ⚠️ **Last-crawl date** — record per page at lock time; treat crawl-latency spread as a
+   documented confound. Do not correct for it on n=5.
+5. ✅ **Commit 13 dependency cleared** — `sacroiliac-joint-injection` is out of the arm
+   entirely, so whether the injections LPs use it as a content source no longer matters.
+
+## Excluded from both arms
+
+- **All knee and hip pages** — every one of the 7 knee treatment pages errors, and hip is
+  7 erroring / 2 clean. No clean knee candidate exists.
+- `degenerative-disc-disease-surgery`, `shoulder-replacement`,
+  `resurfacing-shoulder-replacement` — touched by Commit 11.
+- `reverse-shoulder-replacement` — indexed; cannot measure exit from a state it is not in.
+- `/conditions/cervical-herniated-disc` — never crawled; different failure mode.
+- `revision-spinal-surgery` — anomalous internal-link weight (referring page for 12 of 32
+  inspected URLs).
+- `sacroiliac-joint-injection`, `acromioplasty` — see the failure table above.
+
+## Read criteria at 60–90 days
+
+| Outcome | Conclusion |
+|---|---|
+| Treatment exits Crawled-not-indexed, control does not | Remedy works — scale to the tier |
+| Neither moves | Remedy is wrong — ~246 rewrites avoided |
+| Both move | Something else changed — test void, annotate and re-run |
+
+**Success metric is indexation, not ranking position.** n=5 per arm is a directional read,
+not a powered test; a matched five is worth more than an unmatched seven.
