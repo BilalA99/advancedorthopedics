@@ -489,3 +489,103 @@ and Atlanta is staffed accordingly, the current output is accurate and nothing n
 If it is not, this is fabricated hours on a live location page and in schema — the exact
 class of claim the content rules forbid. Suppressing it is a one-line change to
 `LocationNAP.tsx` plus the schema builder; do not make it without confirming the fact.
+
+---
+
+# 14. Hydration errors — measured, cross-referenced, and refuted as an exclusion driver
+
+## The scan
+
+`scripts/hydration-scan.mjs`, all 246 templated pages against a production build.
+
+| Tier | Pages | React #418 | Rate |
+|---|---|---|---|
+| `/conditions/*` | 124 | **0** | **0.0%** |
+| `/treatments/*` | 122 | **40** | **32.8%** |
+| **Total** | **246** | **40** | **16.3%** |
+
+Every error is React **#418** — a hydration mismatch, meaning React discarded the
+server-rendered subtree and re-rendered on the client.
+
+## 🔴 Cross-reference: hydration does NOT drive exclusion
+
+Two independent cuts, and both run *against* the hypothesis.
+
+**By tier** — the tier with **zero** hydration errors is excluded **more**:
+
+| Tier | Hydration error rate | Exclusion rate |
+|---|---|---|
+| `/conditions/*` | **0.0%** | **56%** (70/124) |
+| `/treatments/*` | **32.8%** | **43%** (53/122) |
+
+**By body part** — exclusions were reported clustering 12 shoulder, 10 knee, 10 hip.
+Hydration errors by the same cut:
+
+| Body part | Hydration errors (treatments) | Reported exclusions |
+|---|---|---|
+| **shoulder** | **0** | **12 — the most** |
+| knee | 7 (all 7 knee treatment pages) | 10 |
+| hip | 7 | 10 |
+
+**Shoulder has the highest exclusion count and zero hydration errors.**
+
+The correlation is absent on one cut and inverted on the other. **Hydration failure is not
+what is driving exclusion.** The content-quality hypothesis survives, and Commit 12 remains
+the test worth running.
+
+This is a confound to control for in the pilot, and a real defect worth fixing — but it is
+not a cheaper alternative to the content work.
+
+*Caveat: this is tier- and region-level (ecological) inference. A page-level join needs the
+137-URL excluded export, which is not in this repo. The two cuts agreeing in direction makes
+the conclusion robust, but a page-level check would settle it.*
+
+## Diagnosis (report only — deliberately not fixed this sprint)
+
+- **100% confined to `/treatments/*`.** Zero condition pages error, at any body part.
+- **89% correlate with block-level HTML** (`<p>`, `<ul>`, `<div>`) inside the record's body
+  fields: 32 of the 40 erroring pages have it, against 36 records that do.
+- **The templates differ in exactly one relevant way.** The treatment template renders
+  content into an `<li dangerouslySetInnerHTML>` host; the condition template only ever uses
+  `<div>`. Injecting block-level markup into an `<li>` lets the browser reparent the DOM,
+  which is precisely what produces a hydration mismatch.
+- **Not `RichTextContent`** — that component was the first hypothesis and is refuted: it is
+  used only by the condition template, which has a 0% error rate.
+
+Clustering by region is consistent with this: erroring pages are knee (7/7), hip (7), and
+hand/elbow (8); shoulder, spine and foot/ankle treatment pages are clean.
+
+**Not fixed here because a fix would touch pages in both experimental arms mid-experiment.**
+First item for the next sprint, with the above as the starting point.
+
+## Pilot rebalance — required, and constrained
+
+The arms are imbalanced on hydration status:
+
+| Arm | Erroring | Clean |
+|---|---|---|
+| Treatment | 2 of 7 (`arthroscopic-knee-surgery`, `knee-cartilage-restoration`) | 5 |
+| Control | **4 of 7** (`knee-osteotomy`, `partial-knee-replacement`, `total-knee-replacement`, `knee-ligament-repair`) | 3 |
+
+29% vs 57%. Unbalanced on a variable that is not the treatment.
+
+**Hard constraint: every one of the 7 knee treatment pages errors.** There is no
+hydration-clean knee treatment page to swap in, and the control arm was knee-heavy. Knee
+must therefore be dropped from both arms, or the arms matched on rate instead.
+
+**Recommended: rebuild both arms from the clean regions** — shoulder, spine and foot/ankle
+treatment pages have a **0%** error rate and offer 29 clean candidates:
+
+| Region | Clean & untouched | Erroring |
+|---|---|---|
+| spine | 11 | 0 |
+| foot/ankle | 13 | 0 |
+| shoulder | 5 | 0 |
+| hip | 2 | 7 |
+| hand/elbow | 5 | 8 |
+| knee | 1 (a condition page) | 7 |
+
+**Final selection still requires URL Inspection** to confirm each candidate is
+`Crawled – currently not indexed`. That cannot be obtained from this repo. The pool above is
+filtered on the two criteria that can be verified here — hydration-clean, and untouched by
+this sprint beyond the compliance edit.

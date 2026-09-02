@@ -137,6 +137,22 @@ indexed or discovered-only, swap it rather than edit it.
   `reviewedBy` stay unset sitewide and the schema stays silent. It must never invent a name.
 - **`lumbar scoliosis` (4,800 vol) is on HOLD** pending the SERP-overlap test in
   `docs/seo/scoliosis-query-page-map.md`.
+- 🔴 **Operating hours are published from a default, not a per-location fact.**
+  `components/LocationNAP.tsx:13` reads
+  `clinic.hoursDisplay === undefined ? LOCATION_HOURS_DISPLAY : clinic.hoursDisplay` —
+  so an unset field means **render the sitewide default**, not stay silent. **Only 1 of 24
+  clinics sets it explicitly**; the other 23 inherit "8AM–8PM, 7 days/week" and emit a
+  matching `openingHoursSpecification` in structured data.
+  > **Are 8AM–8PM, 7 days/week the actual operating hours at all 24 locations including
+  > Atlanta? If any location differs, `hoursDisplay` must be set explicitly on that clinic
+  > record, and the website hours must match what that location's Google Business Profile
+  > publishes.**
+
+  Two distinct risks. **Atlanta** is an operating-hours claim in structured data for an
+  office with no GBP, no reviews, and deliberately unset GBP fields — nobody has verified
+  it. **The other 22 inheriting clinics** risk publishing incorrect hours, which also
+  creates a website-to-GBP mismatch; that consistency is a local ranking input, so an
+  inconsistency costs visibility independent of accuracy. No code changed.
 - 🔴 **"Same-day" vs "same-week" contradiction.** Site copy promises same-day appointments
   (`clinics.tsx:138, 175, 182, 190, 626–627, 651, 655`); approved ad copy says same-week.
   Deliberately not edited — this is an operational claim, not a marketing adjective. If the
@@ -164,6 +180,19 @@ indexed or discovered-only, swap it rather than edit it.
   internal-linking problem, not a metadata one. **Do not rewrite the title.**
 - **11 excluded blog URLs** — blog content lives in production Supabase, not this repo.
   `components/data/blogs.ts` is a stale decoy with 6 unrelated entries that nothing renders.
+- 🔴 **React #418 hydration mismatches on 40 of 246 templated pages (16.3%)** — pre-existing,
+  quantified, diagnosed, and deliberately **not fixed in this sprint** because a fix would
+  touch pages in both experimental arms mid-experiment. **First item for the next sprint.**
+  Confined entirely to `/treatments/*` (0 of 124 conditions, 40 of 122 treatments); 89%
+  correlate with block-level HTML in the record body; the treatment template renders into an
+  `<li dangerouslySetInnerHTML>` host where the condition template only uses `<div>`.
+  **Cross-referenced and refuted as an exclusion driver** — the tier with zero hydration
+  errors (`/conditions`, 56%) is excluded *more* than the tier with 32.8% (`/treatments`,
+  43%), and shoulder has the highest exclusion count (12) with zero hydration errors. Full
+  analysis in `docs/seo/post-launch-measurement.md` §14.
+- **5 empty `<h3>` elements** on `/area-of-pain/foot-pain/heel-pain-plantar-fasciitis` —
+  pre-existing, isolated to the foot-pain variant (the canonical `/conditions/plantar-fasciitis`
+  is clean), page is now noindexed so SEO impact is nil. Logged.
 - **387 of 703 pages have zero inbound internal links** — essentially all the area-of-pain
   set, now noindexed or canonicalised away. `NavBar.tsx` and all three dropdowns are
   `'use client'`, so their 21 area-of-pain references never reach server HTML.
