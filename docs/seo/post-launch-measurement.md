@@ -661,3 +661,94 @@ this sprint beyond the compliance edit.
 
 **Success metric is indexation, not ranking position.** n=5 per arm is a directional read,
 not a powered test; a matched five is worth more than an unmatched seven.
+
+---
+
+# 16. PILOT — DEFINITIVE LOCK (2026-09-02). Supersedes §8 and §15.
+
+**§8 (7v7) and §15 (5v5 with two invalid slugs) are both VOID.** This is the lock.
+
+## Rejected candidates and why
+
+| Slug | Rejected because |
+|---|---|
+| `anterior-cervical-corpectomy-and-fusion` | **Not in the crawled-not-indexed export** — some other index state. Same failure that put `reverse-shoulder-replacement` in and took it out. |
+| `shoulder-fracture-surgery` | Same — not in the export. |
+| `sacroiliac-joint-injection` | **Hydration ERROR.** Sits in the "erroring without block tags" injection subgroup. |
+| `acromioplasty` | **Received the rich, non-minimal 14a replacement** (it was not a pilot page at sweep time). Disqualified as a control. |
+
+**Correction carried:** "spine (11), shoulder (5), foot/ankle (13)" was a count of clean
+*candidates*, not region-level cleanliness. `sacroiliac-joint-injection` proves spine is not
+uniformly clean. **Region is a heuristic; every candidate below was verified individually.**
+
+## Treatment arm — full differentiation (Commits 8 and 9)
+
+| Slug | Region | Hydration | Index status | Written in |
+|---|---|---|---|---|
+| `/treatments/spinal-fusion` | spine | clean ✓ | crawled-not-indexed | Commit 8.1 |
+| `/treatments/cervical-laminectomy` | spine | clean ✓ | crawled-not-indexed | Commit 8.2 |
+| `/treatments/endoscopic-discectomy-surgery` | spine | clean ✓ | crawled-not-indexed | Commit 8.3 |
+| `/treatments/motion-preservation-spine-surgery` | spine | clean ✓ | crawled-not-indexed | Commit 8.4 |
+| `/treatments/shoulder-arthroscopy` | shoulder | clean ✓ | crawled-not-indexed | Commit 9.1 |
+
+## Control arm — 14a minimal compliance edit only
+
+| Slug | Region | Hydration | Gate 3: what 14a did |
+|---|---|---|---|
+| `/treatments/hybrid-cervical-spine-surgery` | spine | clean ✓ | no 14a edit |
+| `/treatments/vertebroplasty` | spine | clean ✓ | no 14a edit |
+| `/treatments/lumbar-decompression` | spine | clean ✓ | no 14a edit |
+| `/treatments/kyphoplasty` | spine | clean ✓ | no 14a edit |
+| `/treatments/biceps-tenodesis` | shoulder | clean ✓ | no 14a edit |
+
+**Composition matched: 4 spine + 1 shoulder per arm. All ten individually hydration-verified.**
+
+### Selection reasoning for the two open slots
+
+**Spine slot — `kyphoplasty` chosen over `plif`.** PLIF is a lumbar fusion technique, and
+`spinal-fusion` sits in the treatment arm receiving heavy differentiation. Putting a fusion
+technique page in the control risks a **new** interaction created by this sprint — the
+differentiated parent absorbing the specific technique — which would depress the control for
+a reason unrelated to the treatment. Kyphoplasty and vertebroplasty are near-twins and may
+interact with each other, but that relationship already exists in production and is stable.
+**Prefer a pre-existing stable interaction over one this sprint introduces.**
+
+**Shoulder slot — `biceps-tenodesis` chosen.** `labral-repair-shoulder` and
+`shoulder-instability-surgery` are both labral/instability procedures performed
+arthroscopically, and `shoulder-arthroscopy` is the treatment-arm page. Biceps tenodesis is
+the most functionally distinct of the three, minimising interaction with the page being
+differentiated.
+
+## Gate results — all ten
+
+1. **Hydration-clean** — ✓ all ten, verified individually, not by region.
+2. **Untouched by differentiating commits** — ✓ none is touched by Commits 8, 9 or 11. All
+   were touched by the Georgia meta-title sweep (`a711300`), which hit all 246 templated
+   pages and is therefore **symmetric across arms and not a confound**.
+3. **14a minimal, not rich** — ✓ four control pages received no 14a edit at all; none
+   received a rich replacement. This gate rejected `acromioplasty`.
+
+## Known limitations, recorded
+
+1. **Index status is export-derived, not inspection-verified.** The export is a lagging
+   snapshot — `reverse-shoulder-replacement` appeared in it and inspects as indexed. Not
+   blocking; spot-check later.
+2. **Crawl-latency spread.** Record last-crawl dates at deploy; do not statistically correct
+   on n=5.
+3. **"More differentiated" and "longer" are not fully separable.** Rich replacements add
+   words to treatment pages and roughly none to controls.
+4. **✅ Recrawl confound RESOLVED by the single-PR decision.** Both arms change exactly once,
+   at one deploy timestamp — control a little, treatment a lot, identical recrawl trigger.
+   Under a split PR the treatment arm would have taken two edits and two recrawls against the
+   control's one, reintroducing "was edited at all" as a variable. Shipping together is the
+   better experimental design, not merely the faster path.
+
+## Read criteria — 60–90 days from deploy
+
+| Outcome | Conclusion |
+|---|---|
+| Treatment exits Crawled-not-indexed, control does not | Remedy works — scale to the tier with a proven template |
+| Neither moves | Remedy is wrong — ~246 rewrites avoided |
+| Both move | Something else changed — test void, annotate and re-run |
+
+**Success metric is indexation, not ranking position.** n=5 per arm is a directional read.
