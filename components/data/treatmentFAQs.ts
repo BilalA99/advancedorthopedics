@@ -135,6 +135,18 @@ export const treatmentFAQs: Record<string, FAQItem[]> = {
   // 7. Spinal Fusion
   "spinal-fusion": [
     {
+      question: "How do I know whether I actually need a fusion?",
+      answer: "The question to put to your surgeon is <strong>what specifically is unstable, and what shows it</strong>. A fusion is most defensible when something structural has been demonstrated \u2014 a slip that moves between flexion and extension films, a deformity, a segment that has failed to heal from previous surgery. It is least defensible when the only finding is pain plus degenerative changes on MRI, because those changes are near-universal after middle age and are not by themselves a surgical problem. If the answer is that the imaging looks bad and other things have not worked, that is a reason to keep looking for the pain source, not a reason to fuse. Ask which single level is believed to be responsible and how that was established."
+    },
+    {
+      question: "What happens if I do not have the surgery?",
+      answer: "That depends entirely on what is driving it, and it is worth asking directly rather than assuming. For <strong>pain from a stable degenerative segment</strong>, waiting costs little \u2014 many people manage for years, and the decision can be revisited whenever it stops being tolerable. For a <strong>progressing deformity</strong> or a slip that is measurably moving, the situation tends to change over time, and delaying can mean a larger operation later than the one on offer now. Where there is <strong>nerve compression producing weakness rather than pain</strong>, the calculation is different again, because prolonged compression affects how completely the nerve recovers. \u201cWhat is the cost of waiting six months\u201d is a fair question and a good surgeon will answer it specifically for your situation."
+    },
+    {
+      question: "How will I know whether my fusion has healed?",
+      answer: "By imaging, not by how you feel. The two come apart more often than patients expect \u2014 it is possible to feel well while bone has not bridged, because the screws and rods are holding the segment still, and it is equally possible to feel sore for a while after a fusion that has healed perfectly well. Your surgeon looks for <strong>continuous bone across the segment</strong> on follow-up imaging, and sometimes for absence of movement between flexion and extension views. Until that is established, the construct is being held by metal, which is why activity is progressed on the imaging rather than on symptoms. A fusion that does not take is called a pseudarthrosis, and it is the reason follow-up imaging continues after you feel recovered."
+    },
+    {
       question: "What are the permanent restrictions after spinal fusion?",
       answer: "For a single-level fusion, there are few <strong>permanent restrictions</strong>. For multi-level fusions, doctors typically advise avoiding <strong>heavy deadlifts</strong>, high-impact contact sports, and extreme spinal twisting to prevent adjacent segment disease."
     },

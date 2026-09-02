@@ -223,6 +223,15 @@ export interface TreatmentContent {
    * condition pages' convention. Unset on every existing treatment, which keeps
    * their heading exactly as it was.
    */
+  /**
+   * Optional H1 override. `title` stays the canonical entity name used by schema,
+   * the internal-link map, related-treatment lists and condition lists, so it must
+   * not be repurposed for phrasing. Mirrors `h1` on ConditionContent
+   * (components/data/conditions.tsx). Unset on every existing treatment, which
+   * keeps their H1 exactly as it was.
+   */
+  h1?: string;
+
   doctorsHeading?: string;
 
   /**
@@ -1344,7 +1353,14 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
   },
   {
     id: "lumbar-fusion-surgery",
-    slug: "lumbar-fusion-surgery",
+    slug: "lumbar-fusion-surgery",
+    additionalSections: [
+      {
+        heading: "What a lumbar fusion involves, from the inside",
+        placement: "before-treatment",
+        body: "<p>The word \u201cfusion\u201d describes the goal rather than the operation. What actually happens at the level being treated is a sequence of separate steps, and knowing them makes the recovery instructions make sense.</p><p><strong>The disc is removed.</strong> The degenerated disc between the two vertebrae is cleared out. This alone relieves some compression and creates the space everything else depends on.</p><p><strong>The endplates are prepared.</strong> The bone surfaces above and below are taken back to a bleeding surface. Bone will only bridge onto living bone, so this step largely determines whether the fusion takes.</p><p><strong>A spacer goes in.</strong> An implant is placed in the cleared disc space to restore height and hold the segment at the right angle. Restoring height reopens the channels the nerve roots exit through, which is often where leg symptom relief comes from.</p><p><strong>Graft material is packed around it.</strong> This is what actually becomes the fusion. The implant holds position; the graft becomes bone.</p><p><strong>Screws and rods are added.</strong> These hold everything still while bone grows. They are an internal brace, not the fusion itself \u2014 a distinction that explains why an operation can look perfect on an X-ray the next day and still fail months later if bone never bridges.</p><p>For how fusion is used across the whole spine and how surgeons decide whether it is the right operation at all, see <a href=\"/treatments/spinal-fusion\" class=\"underline text-[#252932] hover:text-[#2358AC]\">spinal fusion surgery</a>.</p>"
+      }
+    ],
     metaTitle: "Lumbar Fusion Recovery & What the Procedure Involves | FL, NJ, NY, PA & GA",
     metaDescription: "What a lumbar fusion involves step by step, how TLIF and other approaches differ, and what the recovery stages look like. For an overview of fusion across the whole spine, see our spinal fusion surgery page.",
     keywords: [
@@ -1412,6 +1428,34 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
   {
     id: "spinal-fusion-surgery",
     slug: "spinal-fusion",
+    h1: "Spinal Fusion Surgery",
+    additionalSections: [
+      {
+        heading: "Fusion or a disc replacement — which one applies to you?",
+        placement: "after-symptoms",
+        body: "<p>Most patients told they need fusion want to know whether a motion-preserving disc replacement would do instead. The honest answer is that the choice is usually made <strong>for</strong> you by findings on your imaging, not chosen from a menu.</p><p>Disc replacement depends on the rest of the spinal segment being healthy enough to keep moving. So the things that rule it out are, broadly, the things that make fusion the right answer: <strong>worn or arthritic facet joints</strong> behind the disc, because a replacement restores motion through joints that are themselves the pain source; <strong>a segment that already moves too much</strong> — spondylolisthesis, or a slip that shifts on flexion-extension films — since the goal there is to stop motion rather than preserve it; <strong>deformity</strong>, where the operation has to change alignment rather than maintain it; and <strong>poor bone quality</strong>, which affects how a device seats and holds.</p><p>Where those findings are absent and the problem is confined to the disc itself, motion preservation becomes a genuine option — see <a href=\"/treatments/motion-preservation-spine-surgery\" class=\"underline text-[#252932] hover:text-[#2358AC]\">motion preservation spine surgery</a> for what that involves and what it asks of the patient. Where they are present, fusion is not the fallback; it is the operation that addresses what is actually wrong.</p>"
+      },
+      {
+        heading: "When fusion is the wrong operation",
+        placement: "after-causes",
+        body: "<p>The indications above are the ones that make fusion reasonable. It is just as important to know what makes it unreasonable, because fusion performed for the wrong reason does not fail quietly — it produces a stiff segment and the original pain.</p><p><strong>Back pain without demonstrable instability.</strong> This is the single most common reason a fusion disappoints. If the only finding is pain, and flexion-extension films show a segment that does not move abnormally, fusion is being asked to fix something it does not address. Degenerative changes on MRI are near-universal after middle age and are not, by themselves, a surgical indication.</p><p><strong>Pain that has not been localised.</strong> Multi-level degeneration where no single level has been confirmed as the pain generator means the operation is targeting an imaging finding rather than a diagnosis.</p><p><strong>Untreated bone loss.</strong> Osteoporosis affects whether screws hold and whether bone bridges at all. It is a reason to treat the bone first, not a reason never to operate.</p><p><strong>Active nicotine use.</strong> Nicotine impairs the bone healing the entire operation depends on. Most surgeons will ask for cessation before an elective fusion rather than accept the added risk of a fusion that does not take.</p><p><strong>Conservative care that was never genuinely tried.</strong> A documented course of appropriate non-operative treatment is not a formality — for a great many patients it is the endpoint.</p>"
+      },
+      {
+        heading: "How lumbar fusion differs from cervical fusion",
+        placement: "before-treatment",
+        body: "<p>They share a name and very little else. The two regions carry different loads, are reached from different directions, and cost the patient different things when a level is fused.</p><p><strong>Load and consequence.</strong> The lumbar spine carries body weight and generates most of the motion involved in bending and lifting, so fusing a lumbar level is felt during ordinary daily movement. The cervical spine carries the head and supplies rotation for looking around; a single fused cervical level is often barely noticed, because the remaining levels absorb the range.</p><p><strong>Approach.</strong> Cervical fusion is most often performed from the front, where the disc can be reached through a natural tissue plane without disturbing the spinal cord. Lumbar fusion is reached from behind, from the front through the abdomen, or from the side, and each route trades access against what it disturbs on the way in.</p><p><strong>What is being corrected.</strong> Cervical work is frequently about relieving pressure on the cord or a nerve root, with fusion following the decompression. Lumbar work more often has to restore alignment as well — the lordosis that keeps the trunk balanced over the pelvis — which is why the choice of implant and approach matters more there.</p><p>See <a href=\"/treatments/lumbar-fusion-surgery\" class=\"underline text-[#252932] hover:text-[#2358AC]\">lumbar fusion surgery</a> for the lumbar procedure in detail, and <a href=\"/treatments/cervical-laminectomy\" class=\"underline text-[#252932] hover:text-[#2358AC]\">cervical laminectomy</a> for posterior cervical decompression.</p>"
+      },
+      {
+        heading: "What the surgeon weighs when choosing an approach",
+        placement: "before-treatment",
+        body: "<p>The approaches described below are not interchangeable. Which one is chosen follows from the anatomy of the problem.</p><p><strong>Where the compression sits.</strong> Nerve compression behind the disc is reached from behind. A collapsed disc space that needs height and lordosis restored is better addressed from the front or the side, where a larger implant can be placed.</p><p><strong>How much alignment has to change.</strong> Holding a segment where it already sits is a different operation from rebuilding standing balance. The more correction required, the more the choice is driven by what each approach can achieve mechanically.</p><p><strong>How many levels.</strong> A single level offers real choice. Multi-level work narrows it, because the approach has to be one that can be extended without unacceptable soft-tissue cost.</p><p><strong>What is already there.</strong> Previous surgery leaves scar tissue and altered anatomy, and approaching through it is harder and riskier than approaching through a plane nobody has been through. This often drives the decision more than any other factor in revision cases.</p><p><strong>Bone quality and body habitus.</strong> These determine how fixation holds and whether a given corridor is realistically accessible.</p>"
+      },
+      {
+        heading: "What actually happens during recovery, stage by stage",
+        placement: "after-treatment",
+        body: "<p>Recovery from a fusion is governed by one thing above all others: <strong>bone has to grow across the segment</strong>. The hardware holds the position while that happens — it is a scaffold, not the fix. Everything in the protocol makes sense once that is clear.</p><p><strong>The hospital stay.</strong> Walking starts early and deliberately. Getting upright is not a milestone for its own sake — it protects the lungs, reduces clot risk, and settles the nervous system after surgery.</p><p><strong>The protective phase.</strong> Bending, lifting and twisting are restricted, and the restriction is not about pain. Those movements load the graft precisely where bone is trying to bridge. Patients often feel well enough to break the restrictions before it is safe to, which is why the protocol is given in terms of movements rather than how you feel.</p><p><strong>The building phase.</strong> As imaging shows bone forming, activity is progressed. Deconditioning from the protective phase is real, and this stage is largely about rebuilding the trunk and hip strength that got you moving normally before.</p><p><strong>Maturation.</strong> A fusion is considered solid when imaging shows continuous bone across the segment. Until then the construct is held by metal, and that distinction is the reason follow-up imaging matters.</p><p><strong>What slows all of this down:</strong> nicotine, uncontrolled diabetes, poor bone quality, and the number of levels fused. Nicotine is the one most within a patient's control and has the most direct effect on whether bone bridges at all.</p>"
+      }
+    ],
     metaTitle: "Spinal Fusion Surgery | Comprehensive Spine Stabilization FL, NJ, NY, PA & GA",
     metaDescription: "Spinal fusion permanently joins vertebrae to relieve pain from instability. Learn about our advanced fusion techniques for cervical, thoracic, and lumbar spine.",
     keywords: [
@@ -2005,7 +2049,29 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
   },
   {
     id: "motion-preservation-spine-surgery",
-    slug: "motion-preservation-spine-surgery",
+    slug: "motion-preservation-spine-surgery",
+    additionalSections: [
+      {
+        heading: "What has to be true of the segment for motion preservation to work",
+        placement: "after-symptoms",
+        body: "<p>Motion preservation only makes sense if the level is worth keeping mobile. That is a statement about the whole segment, not just the disc.</p><p><strong>The joints behind the disc have to be healthy.</strong> Each spinal level moves through the disc at the front and a pair of facet joints at the back. A device restores motion through the disc — if the facets are themselves arthritic and painful, preserving motion preserves the movement that hurts. This is the most common reason a candidate is turned down.</p><p><strong>The segment must not already be moving too much.</strong> Where there is a slip or demonstrable instability, the aim is to stop abnormal motion. A device that maintains motion is working against the goal.</p><p><strong>Alignment has to be near normal.</strong> These operations maintain the shape a spine is already in. They do not correct deformity, and a segment that needs its alignment changed needs a construct that can change it.</p><p><strong>Bone has to hold.</strong> A device seats against the vertebral endplates and relies on that bone for fixation and long-term position.</p><p>Where those conditions hold and the problem is genuinely confined to the disc, this is a real alternative. Where they do not, see <a href=\"/treatments/spinal-fusion\" class=\"underline text-[#252932] hover:text-[#2358AC]\">spinal fusion surgery</a> \u2014 not as a fallback, but as the operation that addresses what is actually wrong.</p>"
+      },
+      {
+        heading: "What you take on by preserving motion",
+        placement: "after-causes",
+        body: "<p>The case for motion preservation is usually made in terms of what it avoids. It is worth being equally clear about what it introduces, because these trade-offs are real and are not always volunteered.</p><p><strong>A moving part stays in the body.</strong> A fusion, once healed, is bone — biologically finished. A motion-preserving device is a bearing surface that continues to articulate for as long as it is in place. Wear over decades is a genuine consideration, and it weighs more heavily the younger the patient is.</p><p><strong>Bone can form where motion was intended.</strong> The body sometimes lays down bone around an implant placed to move, gradually stiffening the segment. Where that happens the patient has taken on the device without keeping the motion it was chosen for.</p><p><strong>Revision is harder, not easier.</strong> If a preserved level later needs converting to a fusion, the second operation has to remove a device seated against the endplates and then achieve fusion on bone that has already been prepared once. This is more demanding than a first-time fusion, and it is the consideration most often left out of the comparison.</p><p><strong>The main argument for it is a probabilistic one.</strong> Preserving motion is expected to reduce load transferred to neighbouring levels, and so reduce the chance of trouble developing next to the operated segment. That is the central rationale and it is biomechanically reasonable \u2014 but it is a claim about likelihood over years, it is better supported in the neck than the low back, and it should be presented as a reason to prefer the approach rather than as a promise about your spine.</p>"
+      },
+      {
+        heading: "When fusion and motion preservation are combined",
+        placement: "before-treatment",
+        body: "<p>The two are not mutually exclusive across a spine. Where several levels need treating and they do not all have the same problem, a hybrid construct treats each level on its own merits.</p><p>A typical pattern: one level has a collapsed disc with worn facets and a slip \u2014 that level is fused. The level next to it has an isolated disc problem with healthy joints behind it \u2014 that level gets a device. The alternative would be fusing both and accepting stiffness at a level that did not need it.</p><p><strong>What makes this harder than either operation alone:</strong> two different constructs have to sit next to each other and share load sensibly, and the junction between a stiff segment and a mobile one is a demanding place mechanically. It also means recovery follows the fused level's timetable, because bone healing is the slower constraint.</p><p>Hybrid constructs are a reason to be assessed level by level rather than offered a single operation for the whole region.</p>"
+      },
+      {
+        heading: "Recovery: here, stiffness is the thing to avoid",
+        placement: "after-treatment",
+        body: "<p>Recovery after motion preservation is close to the <strong>inverse</strong> of recovery after fusion, and patients who have read about fusion recovery are often surprised by it.</p><p><strong>Nothing has to fuse, so nothing is waiting on bone.</strong> There is no months-long period during which the construct is held by metal while bone bridges. That is the single biggest difference, and it is why activity generally progresses sooner.</p><p><strong>Movement is part of the treatment, not a risk to it.</strong> After a fusion, early motion threatens the graft. Here, motion is the point \u2014 the segment is meant to move, and a segment that is protected too carefully can stiffen into exactly the state the operation was chosen to avoid. Restrictions tend to be shorter and looser, and bracing is used less.</p><p><strong>The specific thing being guarded against is unwanted bone formation.</strong> Where bone grows around a device intended to articulate, the level stiffens. This is the reason some surgeons use particular anti-inflammatory protocols in the early weeks, and it is worth asking whether yours does and why.</p><p><strong>Rehabilitation is about control, not protection.</strong> The muscles around a mobile segment have to learn to control a level that now moves in a way it has not for years. That is a retraining task rather than a healing one, and it is the part of recovery that most determines how the segment feels a year later.</p>"
+      }
+    ],
     metaTitle: "Motion Preservation Spine Surgery | FL, NJ, NY, PA & GA Non-Fusion Options",
     metaDescription: "Explore non-fusion spine surgery options in FL, NJ, NY, PA & GA. We offer artificial disc replacement and laminoplasty to treat pain while keeping you moving.",
     keywords: [
@@ -4452,7 +4518,29 @@ export const treatmentContentBatch2: TreatmentContent[] = [
   },
   {
     id: "endoscopic-discectomy-surgery",
-    slug: "endoscopic-discectomy-surgery",
+    slug: "endoscopic-discectomy-surgery",
+    additionalSections: [
+      {
+        heading: "Which disc herniations can be reached endoscopically — and which cannot",
+        placement: "after-symptoms",
+        body: "<p>The endoscope reaches the disc through a working channel roughly the width of a pen. That constraint is what makes the operation gentle on tissue, and it is also what decides whether your particular herniation is a candidate.</p><p><strong>Suited to the approach:</strong> a herniation that is still connected to the disc of origin, sitting where the channel can be aimed — out to the side or in the foramen, which are awkward to reach from a traditional posterior approach and are often where the endoscope has a genuine advantage. Soft disc material rather than bone.</p><p><strong>Not suited, or much harder:</strong> a fragment that has broken free and <strong>migrated well away</strong> from the disc space, sometimes up or down behind the vertebral body, where a narrow fixed channel cannot follow it. Herniations that have <strong>calcified</strong> into something closer to bone. Compression coming from bony overgrowth and thickened ligament rather than disc material — a stenosis problem, not a herniation problem. And segments that are also <strong>unstable</strong>, where removing more disc addresses the wrong thing.</p><p>This is worth asking about directly, because the answer depends on your imaging rather than on preference. Being told an endoscopic approach is not appropriate is a statement about the anatomy, not about how advanced the surgery on offer is.</p>"
+      },
+      {
+        heading: "Endoscopic, microdiscectomy, or open — what each one trades",
+        placement: "after-causes",
+        body: "<p>All three remove the fragment pressing on the nerve. They differ in how much they disturb on the way in, and in how much room the surgeon has once there.</p><p><strong>Endoscopic.</strong> Smallest access, muscle dilated rather than stripped, usually under sedation. The trade is the narrowest field of view and the least room to manoeuvre, so it depends most on the fragment being where it is expected.</p><p><strong>Microdiscectomy.</strong> A small incision with an operating microscope. Slightly more tissue disturbed, considerably more direct access and control — which is why it remains the reference operation for most single-level herniations, and why it handles migrated fragments the endoscope cannot follow.</p><p><strong>Open.</strong> Reserved for situations needing wide exposure — multiple levels, revision through scar tissue, or where decompression has to extend well beyond the disc.</p><p>The general principle: <strong>the least invasive approach that can reliably reach the problem</strong>. Choosing a narrower approach than the anatomy allows risks leaving fragment behind, which is a worse outcome than a slightly larger incision.</p>"
+      },
+      {
+        heading: "What \u201cminimally invasive\u201d changes here \u2014 and what it does not",
+        placement: "before-treatment",
+        body: "<p>The phrase gets used loosely. Here it means something specific and limited.</p><p><strong>What it genuinely changes:</strong> the muscles are dilated apart rather than stripped off the bone, so the posterior muscle that holds the spine is largely left intact. Blood loss is minimal. Most patients go home the same day. Because the access is small, there is less scar tissue for anyone operating in the area later.</p><p><strong>What it does not change:</strong> the operation removes the fragment pressing on the nerve, and that is all it does. <strong>The tear in the outer ring of the disc that let the fragment out is still there afterwards</strong> — it is not repaired, and it does not close on demand. The disc is not restored to health, the height it has lost is not given back, and any arthritis in the joints behind it is untouched.</p><p>That is why this is an operation for <strong>leg pain from nerve compression</strong>, and why it is a poor operation for back pain. Patients whose dominant complaint is back pain rather than leg pain are the ones most often disappointed, and the reason is visible in what the procedure does and does not do.</p>"
+      },
+      {
+        heading: "Recovery, and the one thing that raises the risk of it happening again",
+        placement: "after-treatment",
+        body: "<p>Recovery here is unusual among spine operations: <strong>nothing has to heal for the operation to have worked.</strong> No bone is fused, no implant has to integrate. Relief of leg pain is often quick because the compression is simply gone.</p><p>That makes the restrictions counterintuitive, so it is worth being clear about what they are protecting.</p><p><strong>They are protecting the hole in the disc, not a healing wound.</strong> The annular defect stays open for a period after surgery, and it is the route any remaining disc material would take to press on the nerve again. Bending, lifting and twisting load the disc precisely where that defect is. The restriction exists because the disc is briefly more vulnerable than it was before surgery, not because the patient is fragile.</p><p><strong>What raises recurrence risk:</strong> a large defect in the outer ring, returning to heavy loading early, and smoking, which affects disc nutrition. Recurrence is the main reason a second operation becomes necessary, and the window that matters most is the early one — when patients feel best and are most tempted to test it.</p><p><strong>What recovery looks like:</strong> walking from the first day and increasing steadily; a period of restriction on bending, lifting and twisting; then progressive core and hip strengthening, which is the part that protects the segment long term. Nerve symptoms that had been present a long time settle more gradually than the compression is relieved, and numbness typically lags behind pain.</p>"
+      }
+    ],
     metaTitle: "Endoscopic Discectomy | Minimally Invasive Herniated Disc Surgery",
     metaDescription: "Endoscopic discectomy removes herniated disc material through a tiny incision using a camera. Ultra-minimally invasive spine surgery for rapid sciatica and nerve pain relief.",
     keywords: [
@@ -8302,7 +8390,29 @@ export const allTreatmentContent: TreatmentContent[] = [
   },
   {
     title: "Cervical Laminectomy",
-    slug: "cervical-laminectomy",
+    slug: "cervical-laminectomy",
+    additionalSections: [
+      {
+        heading: "Which cervical stenosis findings actually point to surgery?",
+        placement: "after-symptoms",
+        body: "<p>Narrowing on a cervical MRI is common and is not by itself a reason to operate. What changes the conversation is evidence that the <strong>spinal cord</strong>, rather than just a nerve root, is being affected.</p><p>The findings surgeons look for are functional rather than radiological. <strong>Loss of hand dexterity</strong> — buttons, coins, handwriting deteriorating without weakness that the patient can name. <strong>A change in walking</strong> — a sense of unsteadiness, or needing to watch the ground. <strong>Signs on examination</strong> that indicate the cord is irritated rather than a single root. Sometimes an electric sensation down the spine on bending the neck forward.</p><p>This matters because cervical myelopathy behaves differently from a pinched nerve. Radiculopathy is a pain problem that often settles on its own, and waiting costs little. Myelopathy is a function problem, and the reason for operating is usually <strong>to stop further decline</strong> rather than to reverse what has already happened. That distinction changes the urgency and it changes what a realistic result looks like — which is why it is worth being clear about which one you have.</p>"
+      },
+      {
+        heading: "Laminectomy, laminoplasty, or a front-of-neck approach — how the choice is made",
+        placement: "after-causes",
+        body: "<p>Three operations address cervical cord compression and they are not interchangeable. The decision turns on two things: <strong>where the compression is</strong> and <strong>what shape your neck is in from the side</strong>.</p><p><strong>Where the compression sits.</strong> Pressure coming from the front — bone spurs and disc material — is most directly removed from the front. Pressure from behind, or narrowing spread across several levels, is better addressed posteriorly.</p><p><strong>Cervical alignment is the deciding factor for posterior surgery.</strong> Decompressing from behind relies on the cord drifting backwards into the space created. That only happens if the neck holds a normal forward curve. In a neck that has drifted into a reversed curve, the cord stays draped over the bone at the front and a posterior decompression alone may not relieve it. This single finding rules posterior approaches in or out more often than any other.</p><p><strong>Number of levels.</strong> One or two levels of front-based compression is straightforward from the front. Three or more begins to favour a posterior approach, which addresses several levels through one exposure.</p><p><strong>Laminectomy versus laminoplasty.</strong> Both open the space from behind. Laminectomy removes the lamina; laminoplasty hinges it open and leaves it in place, keeping more of the posterior structures. The trade-off is between how much room is created and how much stability is preserved.</p>"
+      },
+      {
+        heading: "When fusion is added to a laminectomy, and why",
+        placement: "before-treatment",
+        body: "<p>A laminectomy on its own removes part of what holds the neck upright from behind. In most patients that is tolerated. In some it is not, and the fusion is added at the same operation rather than left as a problem for later.</p><p><strong>The concern is gradual forward drift.</strong> Once the posterior elements are removed, the neck can slowly lose its curve. Because the posterior decompression only works while that curve is maintained, a drift into kyphosis can undo the benefit of the operation years afterwards.</p><p>Fusion tends to be added when several levels are decompressed, when alignment is already borderline, when there is existing instability or a slip, and where facet joints have to be taken down far enough to compromise stability.</p><p>The trade-off is honest: fusion removes the drift risk and costs neck motion, and it introduces bone healing as something recovery now depends on. See <a href=\"/treatments/spinal-fusion\" class=\"underline text-[#252932] hover:text-[#2358AC]\">spinal fusion surgery</a> for what that adds.</p>"
+      },
+      {
+        heading: "Recovery: why nerve recovery lags behind the decompression",
+        placement: "after-treatment",
+        body: "<p>The pressure comes off the cord during the operation. <strong>Recovery of what the cord does takes far longer, and is the part patients are least prepared for.</strong></p><p><strong>The decompression is immediate; the neurology is not.</strong> Nerve tissue that has been compressed for a long time recovers slowly, and how completely it recovers depends largely on how long it was compressed and how much damage was already established. Hand function and balance often improve over many months. Some patients regain most of what they lost; others stabilise where they are, which — for a condition whose natural course is decline — is itself the goal.</p><p><strong>Neck pain after posterior surgery is a separate issue from the original problem.</strong> Reaching the spine from behind means working through the muscles that hold the head up. Aching and stiffness across the back of the neck in the months afterwards is common, is mechanical rather than neurological, and responds to progressive strengthening rather than to more rest.</p><p><strong>What the collar is for.</strong> If one is used, it protects alignment while the posterior tissues heal. Longer use is generally about protecting a fusion rather than the decompression itself.</p><p><strong>If fusion was added</strong>, bone healing becomes the limiting factor on top of everything above, and activity progresses on that timetable instead.</p>"
+      }
+    ],
     tag: "Neck",
     additionalTags: ["Spine"],
     categories: [],

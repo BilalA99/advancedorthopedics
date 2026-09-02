@@ -359,7 +359,9 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
                 style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 400 }}
                 className="text-[#252932] flex-wrap text-3xl md:text-6xl lg:text-7xl"
               >
-                {isNewFormat ? treatmentContent!.title : treatment!.title}
+                {isNewFormat
+                  ? (treatmentContent!.h1 || treatmentContent!.title)
+                  : treatment!.title}
               </h1>
               <div className="mt-[24px] lg:max-w-[600px]">
                 {renderField(
