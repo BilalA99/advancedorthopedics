@@ -10,6 +10,7 @@ import { generateFAQPageSchema } from "@/lib/faq-utils";
 import { buildCanonical, safeTitle, safeDescription, normalizeUTF8 } from "@/lib/seo";
 import { getOgImageForPath } from "@/lib/og";
 import { getTreatmentMetadata, generateTreatmentMetadataFallback } from "@/lib/metadata-seo";
+import { getVisibleProviderBySlug } from "@/lib/providers/providerVisibility";
 
 // Helper function to safely get the image source URL as a string
 const getImageSource = (image: string | StaticImageData | undefined): string => {
@@ -197,6 +198,11 @@ const TreatmentSchemas = async ({ params }: { params: Promise<{ TreatmentDetails
                 '@type': 'State',
                 'name': 'Pennsylvania',
                 'sameAs': 'https://en.wikipedia.org/wiki/Pennsylvania'
+            },
+            {
+                '@type': 'State',
+                'name': 'Georgia',
+                'sameAs': 'https://en.wikipedia.org/wiki/Georgia_(U.S._state)'
             }
         ]
     };
@@ -260,6 +266,30 @@ const TreatmentSchemas = async ({ params }: { params: Promise<{ TreatmentDetails
         webpageSchema.image = imageUrl;
     }
 
+    // Clinical review provenance, gated on the record actually carrying a review
+    // date. Treatments without `reviewedAt` emit nothing here, so the schema
+    // never claims a physician reviewed a page that no one reviewed. Mirrors the
+    // condition pages' pattern: `reviewedBy` is a doctor slug when an individual
+    // is credited, otherwise the MedicalOrganization is.
+    const reviewedAt = isNewFormat ? treatmentContent?.reviewedAt : undefined;
+    const reviewer = isNewFormat && treatmentContent?.reviewedBy
+        ? getVisibleProviderBySlug(treatmentContent.reviewedBy)
+        : undefined;
+
+    if (reviewedAt) {
+        webpageSchema.lastReviewed = reviewedAt;
+        webpageSchema.dateModified = reviewedAt;
+        webpageSchema.reviewedBy = reviewer
+            ? {
+                '@type': 'Physician',
+                'name': reviewer.name,
+                'url': `${baseUrl}/about/meetourdoctors/${reviewer.slug}`,
+                'medicalSpecialty': reviewer.medicalSpecialty,
+            }
+            : { '@id': organizationId };
+        medicalProcedureSchema.lastReviewed = reviewedAt;
+    }
+
     // 4. Service Schema
     const serviceSchema = {
         '@type': 'Service',
@@ -296,6 +326,11 @@ const TreatmentSchemas = async ({ params }: { params: Promise<{ TreatmentDetails
                 '@type': 'State',
                 'name': 'Pennsylvania',
                 'sameAs': 'https://en.wikipedia.org/wiki/Pennsylvania'
+            },
+            {
+                '@type': 'State',
+                'name': 'Georgia',
+                'sameAs': 'https://en.wikipedia.org/wiki/Georgia_(U.S._state)'
             }
         ],
         'hasOfferCatalog': {
