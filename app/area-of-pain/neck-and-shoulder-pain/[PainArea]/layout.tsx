@@ -1,4 +1,4 @@
-import { canonicalPathForPainArea } from "@/lib/areaOfPainCanonical";
+import { canonicalPathForPainArea, hasCrossCanonicalTarget } from "@/lib/areaOfPainCanonical";
 import type { Metadata, ResolvingMetadata } from "next";
 import { conditions } from "@/components/data/conditions";
 import { conditions as painconditions } from "@/components/data/painconditions";
@@ -79,6 +79,11 @@ export async function generateMetadata(
     title,
     description,
     keywords: data.keywords || [],
+    // No /conditions equivalent to consolidate onto, so this page would stay a
+    // self-canonical duplicate. Keep it reachable but out of the index.
+    ...(hasCrossCanonicalTarget(conditionSlug)
+      ? {}
+      : { robots: { index: false, follow: true } }),
     alternates: { 
       canonical: buildCanonical(canonicalPath) 
     },

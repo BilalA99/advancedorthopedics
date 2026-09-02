@@ -1,4 +1,4 @@
-import { canonicalPathForPainArea } from "@/lib/areaOfPainCanonical";
+import { canonicalPathForPainArea, hasCrossCanonicalTarget } from "@/lib/areaOfPainCanonical";
 import type { Metadata, ResolvingMetadata } from "next";
 import { conditions } from "@/components/data/conditions";
 import { conditions as painconditions } from "@/components/data/painconditions";
@@ -70,7 +70,7 @@ export async function generateMetadata(
   const normalizedDesc = data.metaDesc ? normalizeUTF8(data.metaDesc) : undefined;
   
   // Title pattern - prefer data.metaTitle if available
-  const title = safeTitle(normalizedTitle, `${painArea} | Orthopedic Pain Treatment in FL, NJ, NY, & PA | Mountain Spine & Orthopedics`);
+  const title = safeTitle(normalizedTitle, `${painArea} | Orthopedic Pain Treatment in FL, NJ, NY, PA & GA | Mountain Spine & Orthopedics`);
   
   // Description - prefer data.metaDesc if available
   const description = safeDescription(normalizedDesc, `Learn causes, symptoms & minimally invasive treatments for ${painArea.toLowerCase()} at Mountain Spine & Orthopedics. Same-day appointments available.`);
@@ -79,6 +79,11 @@ export async function generateMetadata(
     title,
     description,
     keywords: data.keywords || [],
+    // No /conditions equivalent to consolidate onto, so this page would stay a
+    // self-canonical duplicate. Keep it reachable but out of the index.
+    ...(hasCrossCanonicalTarget(conditionSlug)
+      ? {}
+      : { robots: { index: false, follow: true } }),
     alternates: { 
       canonical: buildCanonical(canonicalPath) 
     },

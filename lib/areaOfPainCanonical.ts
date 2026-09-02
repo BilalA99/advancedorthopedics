@@ -26,3 +26,26 @@ export function canonicalPathForPainArea(selfPath: string, slug: string): string
   if (SITEMAP_EXCLUDED_PATHS.has(target)) return selfPath;
   return target;
 }
+
+/**
+ * True when this pain-area slug has a genuine /conditions equivalent to point at.
+ *
+ * 324 of the 390 pain-area pages do. The remaining 65 either have no condition
+ * record under that exact slug (they are pain-area-specific variants such as
+ * `heel-pain-plantar-fasciitis`) or resolve to one of the four condition URLs
+ * that are themselves redirect sources.
+ *
+ * Those 65 have nothing to consolidate onto, so they stay self-canonical — which
+ * leaves them indexable duplicates. Callers use this to noindex them instead.
+ * Verified against Search Console: no /area-of-pain URL reaches the top 100 pages
+ * by clicks over 90 days, and that list's floor is 53 impressions, so nothing
+ * measurable is lost by dropping them from the index.
+ *
+ * Deliberately not solved with a slug alias map: a wrong alias would point a
+ * canonical at a semantically different condition, which is worse than a noindex
+ * on a page nobody reaches.
+ */
+export function hasCrossCanonicalTarget(slug: string): boolean {
+  const target = `/conditions/${slug}`;
+  return CONDITION_SLUGS.has(slug) && !SITEMAP_EXCLUDED_PATHS.has(target);
+}
