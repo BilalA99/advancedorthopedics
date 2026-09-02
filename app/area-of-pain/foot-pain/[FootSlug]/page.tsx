@@ -1,7 +1,6 @@
-import { selectProvidersForPage } from "@/lib/providers/selectProviders";
+import { selectRelevantProviders, AREA_DOMAINS } from "@/lib/providers/providerRelevance";
 import { conditions } from '@/components/data/conditions'
 import { conditions as painconditions } from '@/components/data/painconditions'
-import { getVisibleProviders } from '@/lib/providers/providerVisibility'
 import { PainAreaTreatments } from '@/components/data/painareatreatments'
 import { notFound } from 'next/navigation'
 import { FootPainAreaClient } from './FootPainAreaClient'
@@ -38,7 +37,7 @@ export default async function FootPainArea({ params }: { params: Promise<{ FootS
   // Get specialty slugs for cross-linking
   specialtySlugs = conditions.map(x => x.slug);
 
-  const randomDoctors = selectProvidersForPage(getVisibleProviders(), FootSlug);
+  const randomDoctors = selectRelevantProviders({ slug: FootSlug, domains: AREA_DOMAINS.footPain });
 
   return <FootPainAreaClient condition_details={condition_details} randomDoctors={randomDoctors} specialtySlugs={specialtySlugs} />;
 }

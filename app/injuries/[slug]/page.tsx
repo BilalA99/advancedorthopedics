@@ -1,10 +1,9 @@
-import { selectProvidersForPage } from "@/lib/providers/selectProviders";
+import { selectRelevantProviders, AREA_DOMAINS } from "@/lib/providers/providerRelevance";
 import React from 'react';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { injuries } from '@/components/data/injuries';
 import { ConsultationForm } from '@/components/ContactForm';
-import { getVisibleProviders } from '@/lib/providers/providerVisibility';
 import DoctorCard from '@/components/DoctorCard';
 import Link from 'next/link';
 import Logo from '@/public/newlogo4.png';
@@ -25,7 +24,7 @@ export default async function InjuryPage({ params }: { params: Promise<{ slug: s
     notFound();
   }
 
-  const selectedDoctors = selectProvidersForPage(getVisibleProviders(), slug);
+  const selectedDoctors = selectRelevantProviders({ slug, domains: AREA_DOMAINS.injury });
 
   return (
     <div className="w-full flex flex-col">

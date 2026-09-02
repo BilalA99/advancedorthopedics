@@ -1,4 +1,4 @@
-import { selectProvidersForPage } from "@/lib/providers/selectProviders";
+import { selectRelevantProviders } from "@/lib/providers/providerRelevance";
 import { notFound } from 'next/navigation';
 import { AllTreatments, treatmentContentPlaceholders, allTreatmentContent, TreatmentContent, AllTreatmentsCombined } from '@/components/data/treatments';
 import { treatmentThumbnailBySlug } from '@/lib/seo/treatment-images';
@@ -7,7 +7,6 @@ import Image from 'next/image';
 import ConditionDetialsLanding from '@/public/ConditionDetails.jpeg';
 import { ConsultationForm } from '@/components/ContactForm';
 import BodyPartHeroForm from '@/components/BodyPartHeroForm';
-import { getVisibleProviders } from '@/lib/providers/providerVisibility';
 import DoctorCard from '@/components/DoctorCard';
 import TreatmentsList from '@/components/TreatmentsList';
 import Link from 'next/link';
@@ -19,6 +18,7 @@ import { BODY_PARTS } from '@/components/data/bodyParts';
 import { isNonEmptyString } from '@/lib/content-validation';
 
 import { conditionContentPlaceholders } from '@/components/data/conditions';
+import { resolveConditionSlugHref } from '@/lib/internal-link-redirects';
 
 // Helper: Build a map of all condition/treatment titles to their slugs and type
 // Include both old and new format data
@@ -121,7 +121,7 @@ function processTextWithBoldAndLinks(text: string, currentSlug: string): string 
         if (hasMatched) return match;
         hasMatched = true;
         linkedSlugs.add(slug);
-        const href = type === 'condition' ? `/conditions/${slug}` : `/treatments/${slug}`;
+        const href = type === 'condition' ? resolveConditionSlugHref(slug) : `/treatments/${slug}`;
         return `<a href="${href}" class="underline text-[#252932] hover:text-[#2358AC]">${match}</a>`;
       });
     });
@@ -184,7 +184,7 @@ function linkifyText(text: string, currentSlug: string): string {
     // Only link if the title matches exactly as a whole word/phrase
     const regex = new RegExp(`(?<![\\w-])${title.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}(?![\\w-])`, 'g');
     replaced = replaced.replace(regex, match => {
-      const href = type === 'condition' ? `/conditions/${slug}` : `/treatments/${slug}`;
+      const href = type === 'condition' ? resolveConditionSlugHref(slug) : `/treatments/${slug}`;
       return `<a href="${href}" class="underline text-[#252932]">${match}</a>`;
     });
   });
@@ -241,7 +241,19 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
   const heroFormLabel = _bodyPartHub?.title ?? 'Orthopedic';
 
 
-    const randomDoctors = selectProvidersForPage(getVisibleProviders(), resolvedParams.TreatmentDetails);
+    // Physicians are matched to the treatment's clinical domain rather than picked
+    // from the full roster — see lib/providers/providerRelevance.ts. An empty list
+    // means no verified provider offers this treatment, and the module is hidden.
+    const randomDoctors = selectRelevantProviders({
+      slug: _treatmentSlug,
+      tag: _combinedTreatment?.tag,
+      additionalTags: _combinedTreatment?.additionalTags,
+    });
+
+    // Page-specific physician heading when the record supplies one; every
+    // treatment without it keeps the original wording.
+    const doctorsHeading =
+      (isNewFormat ? treatmentContent!.doctorsHeading : undefined) ?? 'Meet our Doctors';
 
   return (
     <main className='w-full flex flex-col items-center justify-center bg-white h-full'>
@@ -325,6 +337,7 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
             />
           </div>
 
+          {randomDoctors.length > 0 && (
           <section className='bg-white space-y-[40px] lg:hidden flex flex-col mt-6'>
             <h2
               style={{
@@ -333,7 +346,7 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
               }}
               className="text-[#111315] sm:text-5xl text-3xl"
             >
-              Meet our Doctors
+              {doctorsHeading}
             </h2>
             <div className='grid grid-cols-1 xl:grid-cols-2 gap-x-[32px] gap-y-[32px] '>
               {
@@ -343,6 +356,7 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
               }
             </div>
           </section>
+          )}
           <div className='lg:hidden flex flex-col mt-6'>
             <InternalLinkingSection currentSlug={isNewFormat ? treatmentContent!.slug : treatment!.slug} pageType="treatment" />
           </div>
@@ -737,7 +751,7 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
                     }}
                     className="text-[#424959] sm:text-xl text-sm"
                   >
-                    Our board-certified specialists offer {treatmentContent.title.toLowerCase()} evaluation and treatment at locations across Florida, New Jersey, New York, and Pennsylvania. Schedule a consultation at a clinic near you.
+                    Our board-certified specialists offer {treatmentContent.title.toLowerCase()} evaluation and treatment at locations across Florida, New Jersey, New York, Pennsylvania, and Georgia. Schedule a consultation at a clinic near you.
                   </p>
                   <div className="flex flex-wrap gap-3">
                     <Link
@@ -1082,7 +1096,7 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
                     }}
                     className="text-[#424959] sm:text-xl text-sm"
                   >
-                    Our board-certified specialists offer {treatment!.title.toLowerCase()} evaluation and treatment at locations across Florida, New Jersey, New York, and Pennsylvania. Schedule a consultation at a clinic near you.
+                    Our board-certified specialists offer {treatment!.title.toLowerCase()} evaluation and treatment at locations across Florida, New Jersey, New York, Pennsylvania, and Georgia. Schedule a consultation at a clinic near you.
                   </p>
                   <div className="flex flex-wrap gap-3">
                     <Link
@@ -1126,6 +1140,7 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
             )}
           </section>
 
+          {randomDoctors.length > 0 && (
           <section className='bg-white space-y-[40px] lg:flex-col lg:flex hidden' aria-labelledby="doctors-desktop">
             <p
               id="doctors-desktop"
@@ -1137,7 +1152,7 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
               }}
               className="text-[#111315] sm:text-5xl text-3xl"
             >
-              Meet our Doctors
+              {doctorsHeading}
             </p>
             <div className='grid grid-cols-1 xl:grid-cols-2 gap-x-[32px] gap-y-[32px] '>
               {
@@ -1147,6 +1162,7 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
               }
             </div>
           </section>
+          )}
           <div className='lg:flex hidden flex-col'>
             <InternalLinkingSection currentSlug={isNewFormat ? treatmentContent!.slug : treatment!.slug} pageType="treatment" />
           </div>

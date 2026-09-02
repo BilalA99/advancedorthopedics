@@ -1,13 +1,12 @@
-import { selectProvidersForPage } from "@/lib/providers/selectProviders";
+import { selectRelevantProviders } from "@/lib/providers/providerRelevance";
 import React from 'react'
 import Image from 'next/image'
 import ConditionDetialsLanding from '@/public/ConditionDetails.jpeg'
 import { ConditionInfoProp } from '@/types/content'
-import { conditions, conditionContentPlaceholders, ConditionContent } from '@/components/data/conditions'
+import { conditions, conditionContentPlaceholders, ConditionContent, ConditionSection } from '@/components/data/conditions'
 import { AllTreatments, allTreatmentContent, AllTreatmentsCombined } from '@/components/data/treatments'
 import { ConsultationForm } from '@/components/ContactForm'
 import { Input } from '@/components/ui/input'
-import { getVisibleProviders } from '@/lib/providers/providerVisibility'
 import DoctorCard from '@/components/DoctorCard'
 import { MiniContactForm } from '@/components/MiniContactForm'
 import { DoctorContactForm } from '@/components/DoctorContactForm'
@@ -25,6 +24,8 @@ import { BODY_PARTS } from '@/components/data/bodyParts';
 import { RichTextContent } from '@/components/RichTextContent';
 import { tagMatches } from '@/lib/tag-utils';
 import { isNonEmptyString } from '@/lib/content-validation';
+import { STATE_METADATA, VALID_STATE_SLUGS } from '@/lib/locationRedirects';
+import { resolveConditionSlugHref } from '@/lib/internal-link-redirects';
 
 // Helper: Build a map of all condition/treatment titles to their slugs and type
 // Include both old and new format data
@@ -128,7 +129,7 @@ function processTextWithBoldAndLinks(text: string, currentSlug: string): string 
         if (hasMatched) return match;
         hasMatched = true;
         linkedSlugs.add(slug);
-        const href = type === 'condition' ? `/conditions/${slug}` : `/treatments/${slug}`;
+        const href = type === 'condition' ? resolveConditionSlugHref(slug) : `/treatments/${slug}`;
         return `<a href="${href}" class="underline text-[#252932] hover:text-[#2358AC]">${match}</a>`;
       });
     });
@@ -161,11 +162,42 @@ function linkifyText(text: string, currentSlug: string): string {
     // Only link if the title matches exactly as a whole word/phrase
     const regex = new RegExp(`(?<![\\w-])${title.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}(?![\\w-])`, 'g');
     replaced = replaced.replace(regex, match => {
-      const href = type === 'condition' ? `/conditions/${slug}` : `/treatments/${slug}`;
+      const href = type === 'condition' ? resolveConditionSlugHref(slug) : `/treatments/${slug}`;
       return `<a href="${href}" class="underline text-[#252932]">${match}</a>`;
     });
   });
   return replaced;
+}
+
+/**
+ * State location links for the condition page.
+ *
+ * Driven off VALID_STATE_SLUGS rather than a hardcoded list, so opening in a new
+ * state adds the link everywhere automatically. The previous hardcoded set is
+ * how the site could advertise four states after a fifth had already launched.
+ */
+function ConditionStateLinks() {
+  return (
+    <div className="flex flex-wrap gap-3">
+      <Link
+        href="/locations"
+        className="bg-white border border-[#252932] text-[#252932] px-5 py-2.5 rounded-full text-sm hover:bg-[#F0F0F0] transition-colors"
+        style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 400 }}
+      >
+        View All Locations
+      </Link>
+      {VALID_STATE_SLUGS.map((stateSlug) => (
+        <Link
+          key={stateSlug}
+          href={`/locations/${stateSlug}`}
+          className="bg-white border border-[#252932] text-[#252932] px-5 py-2.5 rounded-full text-sm hover:bg-[#F0F0F0] transition-colors"
+          style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 400 }}
+        >
+          {STATE_METADATA[stateSlug]?.name ?? stateSlug} Locations
+        </Link>
+      ))}
+    </div>
+  );
 }
 
 type HeadingSuffix = "for" | "of";
@@ -182,9 +214,65 @@ function ensureConditionHeadingIncludesKeyword(
     return heading;
   }
 
+  // A heading that already names the condition by its head noun must not get
+  // the full title appended on top. Matching the exact title alone produced
+  // "Non-Surgical Treatment Options for Degenerative Scoliosis for Adult
+  // Degenerative Scoliosis", because the authored heading uses the shorter
+  // clinical name while the title carries a leading qualifier ("Adult").
+  const titleWords = normalizedTitle.split(/\s+/).filter(Boolean);
+  if (titleWords.length > 2 && normalizedHeading.includes(titleWords.slice(-2).join(" "))) {
+    return heading;
+  }
+
   const cleanHeading = heading.trim();
   const separator = suffix === "of" ? "of" : "for";
   return `${cleanHeading} ${separator} ${conditionTitle}`;
+}
+
+/**
+ * Question-led sections from `additionalSections`, rendered in place.
+ *
+ * These are server-rendered plain HTML in the same visual language as the
+ * fixed sections, so the answers sit in the initial HTML response as real H2s
+ * rather than behind hydration.
+ */
+function AdditionalSections({
+  sections,
+  placement,
+  currentSlug,
+}: {
+  sections: ConditionSection[] | undefined;
+  placement: NonNullable<ConditionSection['placement']>;
+  currentSlug: string;
+}) {
+  const matching = (sections ?? []).filter((section) => section.placement === placement);
+  if (matching.length === 0) return null;
+
+  return (
+    <>
+      {matching.map((section) => (
+        <div className=' flex flex-col space-y-[16px] ' key={section.heading}>
+          <h2
+            style={{
+              fontFamily: 'var(--font-public-sans)',
+              fontWeight: 500,
+            }}
+            className='text-[#111315] sm:text-4xl text-2xl'
+          >
+            {section.heading}
+          </h2>
+          <div
+            style={{
+              fontFamily: "var(--font-inter)",
+              fontWeight: 400,
+            }}
+            className="text-[#424959] sm:text-xl text-sm space-y-4 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2 [&_strong]:font-semibold [&_strong]:text-[#111315] [&_a]:underline [&_a]:text-[#252932] [&_a:hover]:text-[#2358AC]"
+            dangerouslySetInnerHTML={{ __html: processTextWithBoldAndLinks(section.body, currentSlug) }}
+          />
+        </div>
+      ))}
+    </>
+  );
 }
 
 function renderField(field: any, currentSlug: string) {
@@ -229,7 +317,16 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
   // Use new format if available, otherwise use old format
   const isNewFormat = !!conditionContent;
 
-  const randomDoctors = selectProvidersForPage(getVisibleProviders(), conditionSlug);
+  // Physicians are matched to the condition's clinical domain rather than picked
+  // from the full roster — see lib/providers/providerRelevance.ts. An empty list
+  // means no verified provider covers this condition, and the module is hidden.
+  const featuredDoctors = selectRelevantProviders({
+    slug: conditionSlug,
+    tag: isNewFormat ? conditionContent!.tag : condition_details!.tag,
+    additionalTags: isNewFormat ? conditionContent!.additionalTags : undefined,
+  });
+  const pageTitle = isNewFormat ? conditionContent!.title : condition_details!.title;
+  const doctorsHeading = `Doctors Who Treat ${pageTitle}`;
   return (
     <main className='w-full flex flex-col items-center justify-center bg-white h-full'>
       {/* Landing */}
@@ -270,7 +367,9 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
                 style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 400 }}
                 className="text-[#252932] text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
               >
-                {isNewFormat ? conditionContent!.title : condition_details!.title}
+                {isNewFormat
+                  ? (conditionContent!.h1 || conditionContent!.title)
+                  : condition_details!.title}
               </h1>
               <div className="mt-[24px] lg:max-w-[600px]">
                 {isNewFormat ? (
@@ -317,25 +416,26 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
             />
           </div>
 
-          <section className='bg-white space-y-[40px] lg:hidden flex flex-col mt-6' aria-label="Our Doctors">
-            <p
-              style={{
-                fontFamily: "var(--font-public-sans)",
-                fontWeight: 400,
-              }}
-              className="text-[#111315] text-5xl"
-              aria-hidden="true"
-            >
-              Meet our Doctors
-            </p>
-            <div className='grid grid-cols-1 xl:grid-cols-2 gap-x-[32px] gap-y-[32px] '>
-              {
-                randomDoctors.map((doctor) => (
-                  <DoctorCard doctor={doctor} key={doctor.name} />
-                ))
-              }
-            </div>
-          </section>
+          {featuredDoctors.length > 0 && (
+            <section className='bg-white space-y-[40px] lg:hidden flex flex-col mt-6'>
+              <h2
+                style={{
+                  fontFamily: "var(--font-public-sans)",
+                  fontWeight: 400,
+                }}
+                className="text-[#111315] text-4xl sm:text-5xl"
+              >
+                {doctorsHeading}
+              </h2>
+              <div className='grid grid-cols-1 xl:grid-cols-2 gap-x-[32px] gap-y-[32px] '>
+                {
+                  featuredDoctors.map((doctor) => (
+                    <DoctorCard doctor={doctor} key={doctor.name} />
+                  ))
+                }
+              </div>
+            </section>
+          )}
           <div className='lg:hidden flex flex-col mt-6'>
             <InternalLinkingSection currentSlug={isNewFormat ? conditionContent!.slug : condition_details!.slug} pageType="condition" />
           </div>
@@ -354,7 +454,7 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
                       fontFamily: 'var(--font-public-sans)',
                       fontWeight: 500,
                     }}
-                    className='text-[#111315] sm:text-5xl text-2xl'
+                    className='text-[#111315] sm:text-4xl text-2xl'
                   >
                     {conditionContent!.overview.heading}
                   </h2>
@@ -406,6 +506,12 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
                   </ul>
                 </div>
 
+                <AdditionalSections
+                  sections={conditionContent!.additionalSections}
+                  placement="after-symptoms"
+                  currentSlug={conditionContent!.slug}
+                />
+
                 {/* Hero Image */}
                 <Image 
                   src={conditionContent!.heroImage} 
@@ -440,6 +546,18 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
                     dangerouslySetInnerHTML={{ __html: processTextWithBoldAndLinks(conditionContent!.causes.body, conditionContent!.slug) }}
                   />
                 </div>
+
+                <AdditionalSections
+                  sections={conditionContent!.additionalSections}
+                  placement="after-causes"
+                  currentSlug={conditionContent!.slug}
+                />
+
+                <AdditionalSections
+                  sections={conditionContent!.additionalSections}
+                  placement="before-treatment"
+                  currentSlug={conditionContent!.slug}
+                />
 
                 {/* Conservative Care Section */}
                 <div className=' flex flex-col space-y-[16px] '>
@@ -522,6 +640,12 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
                     </Link>
                   </div>
                 )}
+
+                <AdditionalSections
+                  sections={conditionContent!.additionalSections}
+                  placement="after-treatment"
+                  currentSlug={conditionContent!.slug}
+                />
 
                 {/* Back to Hub Callout */}
                 {(() => {
@@ -621,8 +745,19 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
                     allLinks.push(...relatedTreatments);
                   }
                   
+                  // Deduplicate and never link a page to itself. internalLinks and the
+                  // tag-matched treatments below are built independently, so the same
+                  // treatment could otherwise appear twice, and a condition whose own
+                  // slug is tagged into its body region could link to itself.
+                  const seenSlugs = new Set<string>([conditionSlug]);
+                  const dedupedLinks = allLinks.filter((link) => {
+                    if (!link.slug || seenSlugs.has(link.slug)) return false;
+                    seenSlugs.add(link.slug);
+                    return true;
+                  });
+
                   // If we have any links, render the section
-                  if (allLinks.length > 0) {
+                  if (dedupedLinks.length > 0) {
                     return (
                       <div className=' flex flex-col space-y-[16px] '>
                         <h2
@@ -635,7 +770,7 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
                           Related Treatments & Conditions
                         </h2>
                         <div className="flex flex-wrap gap-3">
-                          {allLinks.map((link, index) => {
+                          {dedupedLinks.map((link, index) => {
                             // Check if slug exists in conditions or treatments arrays
                             const isCondition = conditions.some(c => c.slug === link.slug) || conditionContentPlaceholders.some(c => c.slug === link.slug);
                             const isTreatment = AllTreatments.some(t => t.slug === link.slug) || allTreatmentContent.some(t => t.slug === link.slug);
@@ -645,9 +780,9 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
                             // Determine href
                             let href: string;
                             if (isBodyPart) {
-                              href = `/conditions/${link.slug}`;
+                              href = resolveConditionSlugHref(link.slug);
                             } else if (isCondition) {
-                              href = `/conditions/${link.slug}`;
+                              href = resolveConditionSlugHref(link.slug);
                             } else {
                               href = `/treatments/${link.slug}`;
                             }
@@ -727,45 +862,9 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
                     }}
                     className="text-[#424959] sm:text-xl text-sm"
                   >
-                    Our board-certified specialists offer {conditionContent!.title.toLowerCase()} evaluation and treatment at locations across Florida, New Jersey, New York, and Pennsylvania. Schedule a consultation at a clinic near you.
+                    Our board-certified specialists offer {conditionContent!.title.toLowerCase()} evaluation and treatment at locations across Florida, New Jersey, New York, Pennsylvania, and Georgia. Schedule a consultation at a clinic near you.
                   </p>
-                  <div className="flex flex-wrap gap-3">
-                    <Link
-                      href="/locations"
-                      className="bg-white border border-[#252932] text-[#252932] px-5 py-2.5 rounded-full text-sm hover:bg-[#F0F0F0] transition-colors"
-                      style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 400 }}
-                    >
-                      View All Locations
-                    </Link>
-                    <Link
-                      href="/locations/florida"
-                      className="bg-white border border-[#252932] text-[#252932] px-5 py-2.5 rounded-full text-sm hover:bg-[#F0F0F0] transition-colors"
-                      style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 400 }}
-                    >
-                      Florida Locations
-                    </Link>
-                    <Link
-                      href="/locations/new-jersey"
-                      className="bg-white border border-[#252932] text-[#252932] px-5 py-2.5 rounded-full text-sm hover:bg-[#F0F0F0] transition-colors"
-                      style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 400 }}
-                    >
-                      New Jersey Locations
-                    </Link>
-                    <Link
-                      href="/locations/new-york"
-                      className="bg-white border border-[#252932] text-[#252932] px-5 py-2.5 rounded-full text-sm hover:bg-[#F0F0F0] transition-colors"
-                      style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 400 }}
-                    >
-                      New York Locations
-                    </Link>
-                    <Link
-                      href="/locations/pennsylvania"
-                      className="bg-white border border-[#252932] text-[#252932] px-5 py-2.5 rounded-full text-sm hover:bg-[#F0F0F0] transition-colors"
-                      style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 400 }}
-                    >
-                      Pennsylvania Locations
-                    </Link>
-                  </div>
+                  <ConditionStateLinks />
                 </div>
 
                 {/* FAQ Section from dedicated data file */}
@@ -782,7 +881,7 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
                         fontFamily: 'var(--font-public-sans)',
                         fontWeight: 500,
                       }}
-                      className='text-[#111315] sm:text-5xl text-2xl'
+                      className='text-[#111315] sm:text-4xl text-2xl'
                     >
                       About {condition_details.title}
                     </h2>
@@ -942,45 +1041,9 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
                     }}
                     className="text-[#424959] sm:text-xl text-sm"
                   >
-                    Our board-certified specialists offer {condition_details!.title.toLowerCase()} evaluation and treatment at locations across Florida, New Jersey, New York, and Pennsylvania. Schedule a consultation at a clinic near you.
+                    Our board-certified specialists offer {condition_details!.title.toLowerCase()} evaluation and treatment at locations across Florida, New Jersey, New York, Pennsylvania, and Georgia. Schedule a consultation at a clinic near you.
                   </p>
-                  <div className="flex flex-wrap gap-3">
-                    <Link
-                      href="/locations"
-                      className="bg-white border border-[#252932] text-[#252932] px-5 py-2.5 rounded-full text-sm hover:bg-[#F0F0F0] transition-colors"
-                      style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 400 }}
-                    >
-                      View All Locations
-                    </Link>
-                    <Link
-                      href="/locations/florida"
-                      className="bg-white border border-[#252932] text-[#252932] px-5 py-2.5 rounded-full text-sm hover:bg-[#F0F0F0] transition-colors"
-                      style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 400 }}
-                    >
-                      Florida Locations
-                    </Link>
-                    <Link
-                      href="/locations/new-jersey"
-                      className="bg-white border border-[#252932] text-[#252932] px-5 py-2.5 rounded-full text-sm hover:bg-[#F0F0F0] transition-colors"
-                      style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 400 }}
-                    >
-                      New Jersey Locations
-                    </Link>
-                    <Link
-                      href="/locations/new-york"
-                      className="bg-white border border-[#252932] text-[#252932] px-5 py-2.5 rounded-full text-sm hover:bg-[#F0F0F0] transition-colors"
-                      style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 400 }}
-                    >
-                      New York Locations
-                    </Link>
-                    <Link
-                      href="/locations/pennsylvania"
-                      className="bg-white border border-[#252932] text-[#252932] px-5 py-2.5 rounded-full text-sm hover:bg-[#F0F0F0] transition-colors"
-                      style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 400 }}
-                    >
-                      Pennsylvania Locations
-                    </Link>
-                  </div>
+                  <ConditionStateLinks />
                 </div>
 
                 {/* FAQ Section from dedicated data file */}
@@ -989,25 +1052,26 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
             )}
           </section>
 
-          <section className='bg-white space-y-[40px] lg:flex-col lg:flex hidden ' aria-label="Our Doctors">
-            <p
-              style={{
-                fontFamily: "var(--font-public-sans)",
-                fontWeight: 400,
-              }}
-              className="text-[#111315] text-5xl"
-              aria-hidden="true"
-            >
-              Meet our Doctors
-            </p>
-            <div className='grid grid-cols-1 xl:grid-cols-2 gap-x-[32px] gap-y-[32px]'>
-              {
-                randomDoctors.map((doctor) => (
-                  <DoctorCard doctor={doctor} key={doctor.name} />
-                ))
-              }
-            </div>
-          </section>
+          {featuredDoctors.length > 0 && (
+            <section className='bg-white space-y-[40px] lg:flex-col lg:flex hidden '>
+              <h2
+                style={{
+                  fontFamily: "var(--font-public-sans)",
+                  fontWeight: 400,
+                }}
+                className="text-[#111315] text-5xl"
+              >
+                {doctorsHeading}
+              </h2>
+              <div className='grid grid-cols-1 xl:grid-cols-2 gap-x-[32px] gap-y-[32px]'>
+                {
+                  featuredDoctors.map((doctor) => (
+                    <DoctorCard doctor={doctor} key={doctor.name} />
+                  ))
+                }
+              </div>
+            </section>
+          )}
           <div className='lg:flex hidden flex-col'>
             <InternalLinkingSection currentSlug={isNewFormat ? conditionContent!.slug : condition_details!.slug} pageType="condition" />
           </div>
