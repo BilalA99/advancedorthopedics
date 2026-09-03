@@ -839,11 +839,22 @@ designed to test it before committing to ~246 rewrites.
 
 # Outstanding business inputs
 
-Same-day vs same-week contradiction · Atlanta GBP fields and on-site physicians · a named
-physician reviewer for `reviewedBy` · confirmation that the 19 verified GBP listings publish
-the same 8AM–8PM hours as the site · `lumbar scoliosis` on HOLD pending a SERP-overlap test.
+Atlanta GBP fields and on-site physicians · a named physician reviewer for `reviewedBy` ·
+confirmation that the 19 verified GBP listings publish the same 8AM–8PM hours as the site ·
+`lumbar scoliosis` on HOLD pending a SERP-overlap test.
 
-**Closed:** clinic hours — 8AM–8PM confirmed practice-wide, sitewide default is accurate.
+## Closed — confirmed by the business, no code change
+
+- **Same-day to same-week appointment availability confirmed; site copy and ad copy are both
+  accurate and consistent.** The location-page same-day claims describe the best case and
+  "same-week" in ad copy is the conservative expression of the same availability. No
+  contradiction to resolve. Where those `clinics.tsx` lines also carry superlatives, Commit
+  14 changes only the superlative and leaves the same-day language intact.
+- **"Same-day callbacks"** in the shared hero — an operational commitment the front desk
+  meets, distinct from an appointment promise.
+- **"elite training from Princeton, Harvard, and Brown"** in Dr. McCarthy's bio — verifiable
+  training at named institutions, not a superlative claim about the practice.
+- **Clinic hours** — 8AM–8PM confirmed practice-wide, so the sitewide default is accurate.
 
 # Not in this PR
 

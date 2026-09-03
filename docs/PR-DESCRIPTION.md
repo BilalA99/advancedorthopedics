@@ -153,13 +153,26 @@ indexed or discovered-only, swap it rather than edit it.
   it. **The other 22 inheriting clinics** risk publishing incorrect hours, which also
   creates a website-to-GBP mismatch; that consistency is a local ranking input, so an
   inconsistency costs visibility independent of accuracy. No code changed.
-- 🔴 **"Same-day" vs "same-week" contradiction.** Site copy promises same-day appointments
-  (`clinics.tsx:138, 175, 182, 190, 626–627, 651, 655`); approved ad copy says same-week.
-  Deliberately not edited — this is an operational claim, not a marketing adjective. If the
-  practice genuinely offers same-day, removing it costs conversions; if it does not, it is a
-  promise the front desk breaks on every call. **Needs a business answer, not a code change.**
 - **Sharmez Savory PA-C has no confirmed practice location** — `locations: []`. Joseph
   Cunningham's were narrowed by inference from NY/NJ licensure and a Brooklyn-based career.
+
+### ✅ Closed — confirmed by the business, no code change
+
+- **Same-day to same-week appointment availability confirmed. Site copy and ad copy are
+  both accurate and consistent.** The location-page claims ("same-day orthopedic
+  appointments", "same-day consultation results" on Miami Beach, Casselberry, Altamonte
+  Springs and Princeton) describe the best case; "same-week" in ad copy is the conservative
+  expression of the same availability. Both are defensible, and there is no contradiction to
+  resolve. Some of the same `clinics.tsx` lines also carry superlatives that remain in
+  Commit 14 scope — **when editing those lines, change only the superlative and leave the
+  same-day language intact.**
+- **"Same-day callbacks"** in the shared hero form. A callback is an operational commitment
+  the front desk meets; it does not conflict with same-week appointment language.
+- **"elite training from Princeton, Harvard, and Brown"** in Dr. McCarthy's bio. This
+  describes verifiable training at named institutions rather than a superlative claim about
+  the practice. No change, and no sweep of the other physician bios for the pattern.
+- **Clinic hours** — 8AM–8PM confirmed practice-wide across all 24 locations, so the
+  sitewide default is accurate and Atlanta's structured data is not a fabricated claim.
 
 ---
 
