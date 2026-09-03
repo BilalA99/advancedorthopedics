@@ -4703,7 +4703,19 @@ export const treatmentContentBatch2: TreatmentContent[] = [
   },
   {
     id: "acl-reconstruction-surgery",
-    slug: "acl-reconstruction-surgery",
+    slug: "acl-reconstruction-surgery",
+    additionalSections: [
+      {
+        heading: "Not every ACL tear needs reconstructing",
+        placement: "after-symptoms",
+        body: "<p>A complete tear does not automatically mean surgery. The decision turns on what the knee is being asked to do, not on the scan alone \u2014 and it is worth understanding before assuming an operation is inevitable.</p><p><strong>Some knees cope well without it.</strong> The ACL resists the shin bone sliding forward and the knee pivoting. People whose activities are mostly straight-line \u2014 walking, cycling, running in a line \u2014 often function without a reconstructed ligament, particularly where the surrounding muscles are strong and the knee feels stable in daily use. A genuine trial of strengthening is how that is established rather than assumed.</p><p><strong>Some knees do not.</strong> Sports involving cutting, pivoting and landing load the ACL directly. A knee that gives way during those movements is not merely unstable \u2014 each episode risks further damage to the meniscus and cartilage, and that cumulative damage is the real argument for reconstructing rather than managing.</p><p><strong>What points toward surgery:</strong> episodes of giving way in ordinary daily activity, a meniscal tear that needs repairing at the same time, involvement in pivoting sport, and a knee that stays unstable after a proper period of strengthening.</p><p><strong>What points away from it:</strong> a knee that feels stable in the activities you actually do, and significant established arthritis \u2014 where reconstruction restores stability but does nothing for the joint surface that is generating the pain.</p>"
+      },
+      {
+        heading: "Graft choice, and why surgeons genuinely disagree about it",
+        placement: "before-treatment",
+        body: "<p>A reconstruction replaces the torn ligament with tissue taken from elsewhere. Which tissue is a real decision with trade-offs rather than a settled matter, and it is reasonable to ask why yours was chosen.</p><p><strong>Hamstring tendon.</strong> Taken from the back of the same leg. Leaves the front of the knee undisturbed, so kneeling tends to be more comfortable afterwards. The trade is some hamstring strength, which matters more in some sports than others.</p><p><strong>Patellar tendon, with a block of bone at each end.</strong> Bone healing into bone within the tunnels is its advantage. The cost is pain at the front of the knee and kneeling discomfort that can persist \u2014 a real consideration for anyone whose work involves kneeling.</p><p><strong>Quadriceps tendon.</strong> Increasingly used, giving substantial graft tissue with less front-of-knee morbidity than the patellar option.</p><p><strong>Donor tissue.</strong> Nothing is taken from the patient, so early recovery is easier. It incorporates more slowly, which is why it is generally the least favoured choice in young pivoting athletes and a more reasonable one in lower-demand knees or revision situations.</p><p><strong>Timing is part of the same decision.</strong> Operating on a knee that is still swollen and stiff straight after injury is associated with more stiffness afterwards. Many surgeons deliberately restore motion first and reconstruct after \u2014 so a delay before surgery is often the plan rather than a queue.</p>"
+      }
+    ],
     metaTitle: "ACL Reconstruction Surgery | Knee Ligament Repair & Sports Medicine",
     metaDescription: "ACL reconstruction repairs a torn anterior cruciate ligament, restoring knee stability for return to sports. Arthroscopic reconstruction of the torn ligament.",
     keywords: [

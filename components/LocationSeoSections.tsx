@@ -33,11 +33,12 @@ const BODY_PART_GROUPS = [
       'pinched-nerve',
     ],
     priorityTreatments: [
-      'microdiscectomy',
-      'laminectomy',
+      'lumbar-microdiscectomy-surgery',
+      'lumbar-laminectomy-surgery',
       'spinal-fusion',
-      'acdf',
-      'artificial-disc-replacement',
+      'acdf-surgery',
+      'artificial-disc-replacement-surgery',
+      'adult-scoliosis-surgery',
     ],
   },
   {
@@ -46,17 +47,15 @@ const BODY_PART_GROUPS = [
     conditionSlug: 'knee',
     priorityConditions: [
       'knee-arthritis',
-      'meniscus-tear',
-      'acl-tear',
-      'mcl-injury',
-      'lcl-injury',
-      'patellofemoral-pain',
+      'torn-meniscus',
+      'acl-injury',
+      'patellofemoral-pain-syndrome',
     ],
     priorityTreatments: [
       'total-knee-replacement',
-      'knee-arthroscopy',
-      'meniscus-repair',
-      'acl-reconstruction',
+      'arthroscopic-knee-surgery',
+      'meniscus-repair-surgery',
+      'acl-reconstruction-surgery',
     ],
   },
   {
@@ -65,13 +64,13 @@ const BODY_PART_GROUPS = [
     conditionSlug: 'hip',
     priorityConditions: [
       'hip-arthritis',
-      'labral-tear',
+      'hip-labral-tear',
       'hip-bursitis',
       'hip-impingement',
     ],
     priorityTreatments: [
       'total-hip-replacement',
-      'hip-arthroscopy',
+      'hip-arthroscopy-treatment',
     ],
   },
   {
@@ -82,10 +81,10 @@ const BODY_PART_GROUPS = [
       'rotator-cuff-tear',
       'shoulder-impingement',
       'frozen-shoulder',
-      'labral-tear',
+      'slap-tear',
     ],
     priorityTreatments: [
-      'rotator-cuff-repair',
+      'rotator-cuff-repair-surgery',
       'shoulder-arthroscopy',
     ],
   },
@@ -94,10 +93,10 @@ const BODY_PART_GROUPS = [
     tagMatchers: ['Hand', 'Wrist', 'Carpal Tunnel', 'Hand/Wrist', 'Elbow', 'Tennis Elbow'],
     conditionSlug: 'hand-wrist-elbow',
     priorityConditions: [
-      'carpal-tunnel',
+      'carpal-tunnel-syndrome',
       'trigger-finger',
       'tennis-elbow',
-      'cubital-tunnel',
+      'cubital-tunnel-syndrome',
     ],
     priorityTreatments: [
       'carpal-tunnel-release',
@@ -110,14 +109,13 @@ const BODY_PART_GROUPS = [
     conditionSlug: 'foot-ankle',
     priorityConditions: [
       'plantar-fasciitis',
-      'achilles-tendinitis',
-      'ankle-sprain',
-      'bunions',
+      'achilles-tendonitis',
+      'bunions-hallux-valgus',
     ],
     priorityTreatments: [
-      'achilles-repair',
-      'bunion-surgery',
-      'ankle-arthroscopy',
+      'achilles-tendon-repair',
+      'bunion-correction-surgery',
+      'ankle-arthroscopy-minimally-invasive-surgery',
     ],
   },
 ];

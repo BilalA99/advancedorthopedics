@@ -140,3 +140,44 @@ useful part of it.
 queries by `scoliosis|degenerative scoliosis|adult scoliosis|spinal deformity|lumbar
 scoliosis`, compare query × landing page over time, and look for URL swapping or an
 unstable preferred URL. Two pages both mentioning "scoliosis" is not evidence.
+
+---
+
+## Commit 10 — local query coverage (2026-09-03)
+
+### `scoliosis specialist near me` — KD 0, CPC $1.80, the strongest commercial signal in the cluster
+
+**Owner: the location pages, not a new national page.** This is a local query and was
+deliberately not given its own URL.
+
+Before this commit the treatment page linked to all five state hubs, but the reverse
+direction did not exist: **no location page linked to `/treatments/adult-scoliosis-surgery`
+at all**, and each mentioned scoliosis exactly once.
+
+The cause was not content. `components/LocationSeoSections.tsx` prioritises which eight
+treatments per body-part group get linked, and `adult-scoliosis-surgery` was not in the
+Spine priority list — so it never made the cut on any of the 24 clinic pages.
+
+Fixed by adding it to the Spine `priorityTreatments`. Verified: clinic pages now link the
+scoliosis treatment page. State hubs (`/locations/georgia` etc.) render through
+`StateSeoSections` and still do not — recorded as a remaining gap, not addressed here.
+
+### `adult scoliosis treatment` — TP 4,100
+
+**Already served by the existing pillar; no new section written.** The pillar carries nine
+sections including "Non-Surgical Treatment Options for Degenerative Scoliosis", "When
+Surgery is Needed for Adult Degenerative Scoliosis" and "What Type of Doctor Treats Adult
+Scoliosis?". Adding a tenth treatment-options section would have duplicated content already
+present and failed the noun-swap test against its own page. Scope was deliberately small
+here; this is the "finish and stop" line.
+
+### `lumbar scoliosis` — 4,800 volume — remains on HOLD
+
+Unchanged. The SERP-overlap test against `/conditions/adult-degenerative-scoliosis` runs
+before any decision. Do not build `/conditions/lumbar-scoliosis`.
+
+### Blog articles — not published
+
+Blog content lives in the production Supabase `blogs` table, not this repo.
+`components/data/blogs.ts` is a stale decoy with six unrelated entries that nothing renders.
+Publishing would mean INSERTs against production.
