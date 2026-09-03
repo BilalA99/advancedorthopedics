@@ -752,3 +752,36 @@ differentiated.
 | Both move | Something else changed — test void, annotate and re-run |
 
 **Success metric is indexation, not ranking position.** n=5 per arm is a directional read.
+
+---
+
+# 17. Meniscus: the opportunity is gated on crawl, not on content
+
+**Do not read a null result on these pages as a content failure.**
+
+`meniscus surgery` is the best opportunity in the entire keyword set — **14,000 volume,
+KD 0, traffic potential 12,000**, the best difficulty-to-potential ratio of anything pulled.
+Both pages that target it are **Discovered – currently not indexed**: Google knows they
+exist and has never fetched them.
+
+| Page | GSC state |
+|---|---|
+| `/treatments/meniscus-surgery` | Discovered – never crawled |
+| `/treatments/meniscus-repair-surgery` | Discovered – never crawled |
+
+**Content cannot fix a page Google has not fetched.** Commit 9 wrote the content anyway so
+it is right when the crawl comes, but the gating factor is crawl prioritisation.
+
+Internal linking has been ruled out as the cause: 11c measured **47 and 45 inbound
+server-rendered internal links** respectively, against a templated-tier median of 41 and a
+site-wide median of 0. Both are in the sitemap. These are among the better-linked pages on
+the site.
+
+That leaves crawl prioritisation on a tier Google has deprioritised — the same diagnosis
+that explains the 123 crawled-and-refused pages, expressed one step earlier in the funnel.
+It is consistent with, not separate from, the core-update finding.
+
+**Implication for the pilot:** if the differentiation remedy works and the tier's standing
+recovers, these pages should begin to be crawled. If they are still uncrawled at 90 days
+while treatment-arm pages have moved, that is a distinct signal worth investigating on its
+own — but it is not evidence about the content written here.

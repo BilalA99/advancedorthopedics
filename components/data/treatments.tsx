@@ -2858,7 +2858,19 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
   },
   {
     id: "hip-arthroscopy-treatment",
-    slug: "hip-arthroscopy-treatment",
+    slug: "hip-arthroscopy-treatment",
+    additionalSections: [
+      {
+        heading: "Who hip arthroscopy helps — and who is past the point where it can",
+        placement: "after-symptoms",
+        body: "<p>Hip arthroscopy is a joint-preservation operation. That framing explains both what it is for and where its limit is: <strong>it works on a joint that is still worth preserving.</strong></p><p><strong>The pattern it addresses.</strong> Impingement, where the shapes of the ball and socket do not clear each other properly through range, typically producing groin pain with deep flexion, rotation, or prolonged sitting. Over time that abnormal contact damages the labrum and the cartilage next to it. Arthroscopy reshapes the bone causing the impingement and repairs the labral damage.</p><p><strong>The limit is cartilage.</strong> Once the joint surface has worn substantially, the mechanical problem is no longer the shape of the bone but the loss of the bearing surface. Reshaping bone and repairing a labrum does not restore cartilage, and in a hip with established arthritis the operation addresses a finding rather than the source of pain. This is the single most important thing to establish before proceeding, and it is assessed on imaging rather than symptoms.</p><p><strong>Age is a proxy, not a criterion.</strong> The relevant question is the state of the cartilage, not the year of birth \u2014 which is why two patients of the same age can get different recommendations.</p><p>Where arthritis is established, the conversation is usually about hip replacement instead, and being told arthroscopy is not appropriate is a statement about the joint rather than about how advanced the surgery on offer is.</p>"
+      },
+      {
+        heading: "Why hip arthroscopy is technically demanding",
+        placement: "after-causes",
+        body: "<p>The hip is a deep ball-and-socket joint held together by strong ligaments and covered by thick muscle. Getting instruments into it safely is materially harder than in a knee or a shoulder, and that shapes the operation.</p><p><strong>The joint has to be opened up to get into it.</strong> The hip is a tight fit by design. Traction is applied to create working space, and the duration of that traction is something surgeons actively minimise because the surrounding soft tissues do not tolerate it indefinitely.</p><p><strong>The working angles are constrained.</strong> Instruments reach the joint through thick tissue with limited room to change direction, so much of the technical skill is in placing the access accurately at the start.</p><p><strong>The bone reshaping has to be judged carefully.</strong> Too little leaves the impingement that caused the problem; too much affects the structural integrity of the femoral neck. There is a correct amount and it is judged during the operation.</p><p>These are the reasons hip arthroscopy is concentrated among surgeons who do it regularly, and a reasonable question to ask is how often the procedure is part of your surgeon's practice.</p>"
+      }
+    ],
     metaTitle: "Hip Arthroscopy FL, NJ, NY, PA & GA | Minimally Invasive Labral Repair",
     metaDescription: "Treat hip impingement and labral tears with minimally invasive Hip Arthroscopy. Our FL, NJ, NY, PA & GA surgeons preserve your hip joint and relieve pain.",
     keywords: [
@@ -3421,7 +3433,19 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
   },
   {
     id: "arthroscopic-knee-surgery",
-    slug: "arthroscopic-knee-surgery",
+    slug: "arthroscopic-knee-surgery",
+    additionalSections: [
+      {
+        heading: "What knee arthroscopy fixes well — and where the evidence is weak",
+        placement: "after-symptoms",
+        body: "<p>This is worth being direct about, because knee arthroscopy is one of the more over-offered operations in orthopaedics and the distinction between its good and poor indications is well established.</p><p><strong>Where it clearly helps:</strong> a knee that mechanically locks or catches because a displaced fragment is physically caught in the joint; loose bodies; certain ligament reconstructions performed arthroscopically; and traumatic meniscal tears in an otherwise healthy knee.</p><p><strong>Where the evidence is genuinely mixed:</strong> <strong>degenerative meniscal tears in a knee that already has arthritis.</strong> Multiple trials have compared arthroscopy against structured non-operative care in this specific group and have not shown it to be reliably superior. The reason is mechanical rather than surgical — in an arthritic knee the meniscal tear is often incidental to the arthritis, so removing it treats a finding rather than the source of pain.</p><p>That does not make arthroscopy the wrong operation for everyone with both findings. It means the question to ask is <strong>which of the two is generating your symptoms</strong>. True locking points toward the meniscus. Diffuse ache, stiffness after sitting and pain on stairs point toward the joint surface, and that is not something arthroscopy addresses.</p><p>If arthroscopy is being offered for an arthritic knee without mechanical symptoms, it is reasonable to ask what specifically is expected to improve.</p>"
+      },
+      {
+        heading: "What is actually done inside the knee",
+        placement: "after-causes",
+        body: "<p>\u201cArthroscopy\u201d names the access, not the operation. Several quite different procedures are performed through the same two small portals, and knowing which one you are having matters more than the word itself.</p><p><strong>Meniscal trimming.</strong> The torn portion is removed back to a stable rim, leaving as much meniscus as possible. See <a href=\"/treatments/meniscus-surgery\" class=\"underline text-[#252932] hover:text-[#2358AC]\">meniscus surgery</a> for how this compares with repairing the tear instead.</p><p><strong>Meniscal repair.</strong> The tear is stitched. A different recovery entirely, because tissue now has to heal.</p><p><strong>Removing loose bodies.</strong> Fragments of cartilage or bone floating in the joint, which is among the most clearly beneficial things arthroscopy does.</p><p><strong>Cartilage work.</strong> Ranging from smoothing a frayed surface to procedures intended to restore it. These are not the same operation and the recovery differs substantially.</p><p><strong>Ligament reconstruction.</strong> Performed arthroscopically but a much larger undertaking than any of the above.</p><p>The recovery instructions you are given follow from which of these was done, not from the fact that it was arthroscopic \u2014 which is why two people with the same-sized scars can be given very different restrictions.</p>"
+      }
+    ],
     metaTitle: "Arthroscopic Knee Surgery | Meniscus & Cartilage Repair FL",
     metaDescription: "Diagnose and treat knee pain with Arthroscopic Knee Surgery. Minimally invasive care for meniscus tears, ACL, and cartilage damage in FL, NJ, NY, PA & GA.",
     keywords: [
@@ -3489,7 +3513,14 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
   },
   {
     id: "rotator-cuff-repair-surgery",
-    slug: "rotator-cuff-repair-surgery",
+    slug: "rotator-cuff-repair-surgery",
+    additionalSections: [
+      {
+        heading: "Tear size, retraction, and whether a cuff can be repaired at all",
+        placement: "after-symptoms",
+        body: "<p>Not every rotator cuff tear can be repaired, and the factors that decide it are visible on imaging before surgery is planned.</p><p><strong>How far the tendon has pulled back.</strong> A torn tendon retracts toward the muscle over time. A recently torn tendon usually still sits near its attachment and can be brought back without undue tension. One that has been torn for years may have retracted well away from the bone, and pulling it back under tension produces a repair that is fighting to stay attached.</p><p><strong>What has happened to the muscle.</strong> This is the finding that most often decides the plan. A muscle whose tendon has been detached for a long time gradually changes character, and a muscle in that state does not regain function even when the tendon is reattached. Where imaging shows advanced change, repair may not be the operation that helps.</p><p><strong>How many tendons are involved.</strong> The cuff is four tendons. A single-tendon tear is a different proposition from one involving several.</p><p><strong>Tissue quality.</strong> Independent of size \u2014 tendon can be robust or thin and friable, and that is partly what the surgeon is assessing during the procedure.</p><p>Where a cuff is not repairable, alternatives exist \u2014 debridement to address pain rather than restore function, tendon transfer, or for the right patient a reverse shoulder replacement, which works by changing the mechanics of the joint so the deltoid does the work the cuff no longer can.</p>"
+      }
+    ],
     metaTitle: "Rotator Cuff Repair Surgery | Arthroscopic Shoulder Relief FL",
     metaDescription: "Restore shoulder strength with Rotator Cuff Repair. Our FL, NJ, NY, PA & GA surgeons use arthroscopic techniques to fix torn tendons and relieve shoulder pain.",
     keywords: [
@@ -4811,7 +4842,19 @@ export const treatmentContentBatch2: TreatmentContent[] = [
   },
   {
     id: "meniscus-surgery",
-    slug: "meniscus-surgery",
+    slug: "meniscus-surgery",
+    additionalSections: [
+      {
+        heading: "Repair or remove — what decides it",
+        placement: "after-symptoms",
+        body: "<p>There are two meniscus operations and they are almost opposites. One stitches the tear so the meniscus heals; the other trims away the torn part. The choice is not a preference — it is dictated by whether the tear is in tissue that can heal at all.</p><p><strong>Blood supply decides it.</strong> The meniscus is only vascular at its outer rim. Tears there have a blood supply and can knit. Tears toward the inner edge do not, and stitching tissue that cannot heal simply produces a repair that fails later.</p><p><strong>Tear pattern matters.</strong> Clean vertical tears in the outer zone are the classic repairable pattern. Complex, degenerative or flap tears in older tissue generally are not.</p><p><strong>Age and tissue quality.</strong> Not a rule about the patient's age so much as the tissue's. A traumatic tear in a young athlete's healthy meniscus is a different proposition from a degenerative tear in a meniscus that has been wearing for decades.</p><p><strong>What else is going on in the knee.</strong> A tear alongside an ACL reconstruction has a better healing environment. A tear in a knee with established arthritis is often not the main problem at all.</p><p>Repair asks more of the patient — a longer protected recovery, because tissue has to heal. Removal is faster to recover from but takes away meniscus permanently. See <a href=\"/treatments/meniscus-repair-surgery\" class=\"underline text-[#252932] hover:text-[#2358AC]\">meniscus repair surgery</a> for the repair procedure in detail.</p>"
+      },
+      {
+        heading: "What happens if a meniscus tear is left alone",
+        placement: "after-causes",
+        body: "<p>A fair question, and the honest answer is that it depends entirely on which tear you have.</p><p><strong>Many degenerative tears settle.</strong> Tears that appear gradually without a clear injury are common findings in knees that have no symptoms at all. Where symptoms exist, they often improve with time and activity modification, and a torn meniscus on a scan is not by itself a reason to operate.</p><p><strong>Some tears do not settle, and a few should not be left.</strong> A fragment that displaces into the joint can physically block the knee from straightening. That is a mechanical problem that does not resolve on its own and is one of the clearer indications for surgery.</p><p><strong>The long-term consideration.</strong> The meniscus distributes load across the joint surface. A knee that has lost meniscal tissue — whether to a tear or to surgery removing it — carries load over a smaller area. This is why preserving meniscus is preferred where the tear allows it, and why removal is not treated as a free option.</p><p><strong>What tips the decision toward surgery:</strong> true mechanical symptoms such as locking or catching, a knee that will not fully straighten, and symptoms that have not improved with a genuine period of non-operative management.</p>"
+      }
+    ],
     metaTitle: "Meniscus Surgery | Partial Meniscectomy & Meniscal Treatment FL",
     metaDescription: "Meniscus surgery removes damaged cartilage when repair isn't possible. Our FL, NJ, NY, PA & GA knee specialists offer minimally invasive arthroscopic meniscectomy.",
     keywords: [
@@ -5992,7 +6035,29 @@ export const treatmentContentBatch4: TreatmentContent[] = [
   },
   {
     id: "shoulder-arthroscopy",
-    slug: "shoulder-arthroscopy",
+    slug: "shoulder-arthroscopy",
+    additionalSections: [
+      {
+        heading: "What arthroscopy can reach in a shoulder — and what still needs an open approach",
+        placement: "after-symptoms",
+        body: "<p>The shoulder is well suited to arthroscopy because it is a large joint with room to work in, but the approach has real limits and they are worth knowing before the conversation about options.</p><p><strong>Handled arthroscopically as a matter of routine:</strong> labral tears including instability repairs, most rotator cuff tears, biceps tendon problems, removal of inflamed bursa and impinging bone, loose bodies, and releasing the stiff capsule in a frozen shoulder.</p><p><strong>Still generally open, or open-assisted:</strong> shoulder replacement of any kind, tendon transfers where a cuff tear is too large and retracted to be brought back, fractures that need plating, bone-block procedures for instability with significant bone loss, and tumour work.</p><p>The distinction is mostly about <strong>what has to be moved rather than what has to be seen</strong>. Arthroscopy is excellent at visualising and repairing tissue in place. Where the operation requires repositioning bone, seating an implant, or moving a tendon a significant distance, direct access is needed.</p><p>A cuff tear that has been present for years is the common in-between case: whether it can be repaired arthroscopically depends on how far the tendon has retracted and what condition the muscle is in, which is why the plan is sometimes only finalised once the surgeon is looking at it.</p>"
+      },
+      {
+        heading: "What the surgeon is actually looking for once inside the joint",
+        placement: "after-causes",
+        body: "<p>An MRI shows anatomy. Arthroscopy shows behaviour, and the two do not always agree — which is why part of the operation is diagnostic even when the plan is already made.</p><p><strong>Whether the tissue is repairable.</strong> A tear on a scan is a shape. Under the camera the surgeon can see whether the tendon edge is healthy enough to hold a stitch, how far it has pulled back, and whether it will reach its footprint on the bone without excessive tension. A repair pulled tight against resistance is a repair under strain from day one.</p><p><strong>Whether something else is contributing.</strong> Shoulders frequently have more than one thing wrong. Biceps tendon pathology alongside a cuff tear is common, and if it is left unaddressed it can remain a pain source after an otherwise sound repair.</p><p><strong>Where the joint is being pinched.</strong> Impingement is dynamic — it happens through movement. Taking the arm through range while watching from inside shows what is actually catching, which a static scan cannot.</p><p><strong>The state of the cartilage.</strong> This is often the finding that changes expectations. Established cartilage wear alongside the problem being repaired means the repair addresses one source of symptoms while another remains.</p>"
+      },
+      {
+        heading: "Recovery, stage by stage — and what each stage is protecting",
+        placement: "after-treatment",
+        body: "<p>Shoulder recovery is slower than patients expect and the reason is specific: <strong>a repair holds tissue against bone and biology has to knit them together</strong>. Until that happens the stitches are all that is holding it, and stitches fail under load. Every restriction below follows from that.</p><p><strong>Stage one — protection.</strong> The arm is supported in a sling and the shoulder is moved only by someone else, or by the patient's other arm. The repair is intact but not yet biologically attached, and active use pulls exactly where healing is trying to happen. Most patients feel able to do more than they are allowed to, which is the hardest part of this stage.</p><p><strong>Stage two — regaining motion, passively.</strong> Range is restored before strength, and deliberately so. A shoulder left completely still stiffens, and stiffness is far harder to fix afterwards than weakness. Motion in this stage is guided rather than driven by the shoulder's own muscles.</p><p><strong>Stage three — active motion.</strong> The shoulder starts moving under its own power against gravity. This is usually when patients notice how much strength was lost, which is normal and expected rather than a sign of failure.</p><p><strong>Stage four — strengthening.</strong> Loading begins once the repair is considered biologically secure. This stage rebuilds the rotator cuff and the muscles that control the shoulder blade, which is what determines how the shoulder feels a year later rather than a month later.</p><p><strong>Stage five — return to demand.</strong> Overhead work, lifting and sport are added last, in that order of difficulty.</p><p>Where no repair was performed — a debridement or a decompression alone — the sequence compresses considerably, because nothing has to heal to bone.</p>"
+      },
+      {
+        heading: "What slows a shoulder down, and what speeds it up",
+        placement: "after-treatment",
+        body: "<p>Two shoulders having the same operation can recover very differently, and the reasons are mostly identifiable in advance.</p><p><strong>Tear size and tendon quality.</strong> The single biggest factor. A small tear in healthy tendon behaves differently from a large one in tissue that has been degenerating for years, and where the muscle has already changed character the repair is working against biology rather than with it.</p><p><strong>How long the shoulder was stiff beforehand.</strong> A shoulder that had lost range before surgery is more likely to stiffen after it, which is why some surgeons treat the stiffness first and operate later.</p><p><strong>Smoking and diabetes.</strong> Both measurably affect tendon-to-bone healing. Smoking is the one most within a patient's control.</p><p><strong>Doing too much, too early.</strong> The commonest self-inflicted setback. The shoulder feels usable well before the repair is secure, and quietly resuming normal one-handed tasks loads the repair repeatedly without it ever feeling like an injury.</p><p><strong>Doing too little.</strong> The opposite failure, and less discussed. Protecting a shoulder past the point where motion should be reintroduced produces stiffness that then takes months to unwind.</p><p>The pattern that recovers best is a patient who respects the early restrictions precisely and then engages seriously with the progression once cleared — which is why the rehabilitation plan matters as much as the operation.</p>"
+      }
+    ],
     metaTitle: "Shoulder Arthroscopy | Minimally Invasive Shoulder Surgery",
     metaDescription: "Shoulder arthroscopy diagnoses and treats shoulder conditions like rotator cuff tears, labral tears, and impingement. Minimally invasive procedure with faster recovery than open surgery.",
     keywords: [
