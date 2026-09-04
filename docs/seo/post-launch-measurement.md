@@ -785,3 +785,47 @@ It is consistent with, not separate from, the core-update finding.
 recovers, these pages should begin to be crawled. If they are still uncrawled at 90 days
 while treatment-arm pages have moved, that is a distinct signal worth investigating on its
 own — but it is not evidence about the content written here.
+
+---
+
+# 18. Additional pilot confound — inbound internal link asymmetry
+
+Measured after the location and state priority-slug repairs (2026-09-03):
+
+| Arm | Page | Inbound pages linking it |
+|---|---|---|
+| Treatment | `spinal-fusion` | 97 |
+| Treatment | `shoulder-arthroscopy` | 54 |
+| Treatment | `motion-preservation-spine-surgery` | 40 |
+| Treatment | `endoscopic-discectomy-surgery` | 9 |
+| Treatment | `cervical-laminectomy` | 7 |
+| | **treatment mean** | **41.4** |
+| Control | `biceps-tenodesis` | 44 |
+| Control | `lumbar-decompression` | 31 |
+| Control | `hybrid-cervical-spine-surgery` | 17 |
+| Control | `kyphoplasty` | 9 |
+| Control | `vertebroplasty` | 7 |
+| | **control mean** | **21.6** |
+
+**The treatment arm is roughly twice as well linked internally as the control arm.**
+
+**This is pre-existing structure, not something this sprint created.** Verified: the
+priority-slug repairs in `LocationSeoSections.tsx` and `StateSeoSections.tsx` changed the
+inbound count of **zero** of the ten pilot slugs (delta +0 on every one), because both pilot
+treatment-arm pages that could have been added — `cervical-laminectomy` and
+`shoulder-arthroscopy` — were deliberately kept out of the priority lists for exactly this
+reason.
+
+**Why it matters.** Internal links are one signal Google uses to judge which pages a site
+considers important. If treatment-arm pages exit Crawled-not-indexed and controls do not,
+better internal linking is a competing explanation alongside differentiation.
+
+**Why it is not disqualifying.** The gap is driven by `spinal-fusion` at 97, which is a hub
+page linked from most of the treatment tier. Excluding it, the treatment mean is 27.5 against
+the control's 21.6 — a much smaller difference. And the direction of the confound is known
+and can be stated when the result is read, which is the standard being applied to the other
+three confounds.
+
+**Do not attempt to equalise it.** Adding links to control pages to balance the arms would
+mean editing control pages beyond the compliance edit, which voids the experiment outright.
+An asymmetry that is documented is better than one that is engineered away.
