@@ -125,6 +125,54 @@ export function persistEC(v: ECIn) {
 }
 
 /**
+ * SHA-256, hex-encoded lowercase — the format Google's Enhanced Conversions spec
+ * requires for pre-hashed user data.
+ *
+ * Uses Web Crypto, which is available in any secure context (https, and localhost
+ * for development). Returns undefined for empty input so an absent field stays
+ * absent rather than becoming the hash of an empty string, which would be a real
+ * value that matches nothing and would pollute match rates.
+ */
+async function sha256Hex(value: string | undefined): Promise<string | undefined> {
+  if (!value) return undefined;
+  if (typeof crypto === 'undefined' || !crypto?.subtle) return undefined;
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return Array.from(new Uint8Array(digest))
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+/**
+ * Builds the enhanced_conversion_data payload with PII hashed.
+ *
+ * normalizeEC has already lowercased, trimmed and E.164-formatted the inputs, which
+ * is the normalisation Google requires BEFORE hashing — hashing an unnormalised
+ * value produces a digest that will never match.
+ *
+ * postal_code and country are deliberately NOT hashed: Google's spec treats them as
+ * unhashed fields, and hashing them breaks matching.
+ */
+async function buildHashedEC(n: ECOut) {
+  const [email, phone, first, last] = await Promise.all([
+    sha256Hex(n.email),
+    sha256Hex(n.phone_number),
+    sha256Hex(n.address.first_name),
+    sha256Hex(n.address.last_name),
+  ]);
+  return {
+    sha256_email_address: email,
+    sha256_phone_number: phone,
+    address: {
+      sha256_first_name: first,
+      sha256_last_name: last,
+      country: n.address.country || 'US',
+      postal_code: n.address.postal_code || undefined,
+    },
+  };
+}
+
+/**
  * Pushes enhanced conversion data to dataLayer for Google Tag Manager
  * 
  * This should be called BEFORE navigation to the thank-you page to ensure
@@ -133,7 +181,7 @@ export function persistEC(v: ECIn) {
  * @param v - User input data (email, phone, name, etc.)
  * @param eventName - Optional event name (default: 'ec_capture')
  */
-export function pushEC(v: ECIn, eventName: string = 'ec_capture') {
+export async function pushEC(v: ECIn, eventName: string = 'ec_capture') {
   if (typeof window === 'undefined') return;
   if (!hasMarketingConsent()) return;
   const n = normalizeEC(v);
@@ -141,20 +189,13 @@ export function pushEC(v: ECIn, eventName: string = 'ec_capture') {
   // Initialize dataLayer if it doesn't exist
   (window as any).dataLayer = (window as any).dataLayer || [];
   
-  // Push enhanced conversion data to dataLayer
-  // Google Tag Manager will automatically hash this data before sending to Google Ads
+  // Values are SHA-256 hashed here, before they touch dataLayer, so no plaintext PII
+  // is ever readable by other scripts on the page. The sha256_ field names tell GTM the
+  // data is already hashed — pushing hashed values under the raw field names would
+  // cause a second hash and silently break Enhanced Conversions matching.
   (window as any).dataLayer.push({
     event: eventName,
-    enhanced_conversion_data: {
-      email: n.email || undefined,
-      phone_number: n.phone_number || undefined,
-      address: {
-        first_name: n.address.first_name || undefined,
-        last_name: n.address.last_name || undefined,
-        country: n.address.country || "US",
-        postal_code: n.address.postal_code || undefined,
-      },
-    },
+    enhanced_conversion_data: await buildHashedEC(n),
   });
 }
 
@@ -163,22 +204,13 @@ export function pushEC(v: ECIn, eventName: string = 'ec_capture') {
  * This is useful when you want the data available for the next conversion tag
  * without triggering any additional events
  */
-export function pushECSilent(v: ECIn) {
+export async function pushECSilent(v: ECIn) {
   if (typeof window === 'undefined') return;
   if (!hasMarketingConsent()) return;
   const n = normalizeEC(v);
   (window as any).dataLayer = (window as any).dataLayer || [];
   (window as any).dataLayer.push({
-    enhanced_conversion_data: {
-      email: n.email || undefined,
-      phone_number: n.phone_number || undefined,
-      address: {
-        first_name: n.address.first_name || undefined,
-        last_name: n.address.last_name || undefined,
-        country: n.address.country || "US",
-        postal_code: n.address.postal_code || undefined,
-      },
-    },
+    enhanced_conversion_data: await buildHashedEC(n),
   });
 }
 
@@ -210,19 +242,14 @@ export function restoreECFromSession(eventName: string = 'ec_restore') {
 
     (window as any).dataLayer = (window as any).dataLayer || [];
     
-    // Push the data to dataLayer so conversion tags can access it
-    (window as any).dataLayer.push({
-      event: eventName,
-      enhanced_conversion_data: {
-        email: ec.email || undefined,
-        phone_number: ec.phone_number || undefined,
-        address: {
-          first_name: ec.address.first_name || undefined,
-          last_name: ec.address.last_name || undefined,
-          country: ec.address.country || "US",
-          postal_code: ec.address.postal_code || undefined,
-        },
-      },
+    // Hashed before it reaches dataLayer, exactly as in pushEC. sessionStorage still
+    // holds the plaintext, which is same-origin and not readable by third-party
+    // scripts — dataLayer is the surface that needed closing.
+    void buildHashedEC(ec).then((hashed) => {
+      (window as any).dataLayer.push({
+        event: eventName,
+        enhanced_conversion_data: hashed,
+      });
     });
   } catch {}
 }
@@ -309,11 +336,11 @@ export async function pushAcceptedLead({
     : parseLeadAcceptance(acceptance);
 
   if (!accepted) return false;
-  pushFormSubmit({ ...context, submission_id: accepted.submissionId });
+  await pushFormSubmit({ ...context, submission_id: accepted.submissionId });
   return true;
 }
 
-export function pushFormSubmit({
+export async function pushFormSubmit({
   form_name,
   form_source,
   state,
@@ -358,7 +385,7 @@ export function pushFormSubmit({
 
   if (hasMarketingConsent()) {
     persistEC(ecData);
-    pushEC(ecData);
+    await pushEC(ecData);
   }
 
   if (hasMeasurementConsent()) {

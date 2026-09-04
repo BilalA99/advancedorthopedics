@@ -214,3 +214,70 @@ test('thank-you presentation has no lead or conversion event emitter', async () 
   assert.equal(source.includes('pushAcceptedLead'), false);
   assert.equal(source.includes('restoreECFromSession'), false);
 });
+
+test('landing_path is persisted server-side and never reaches the GA4 or Ads payload', async () => {
+  // It must exist on the Supabase write path — that is the whole point of the field.
+  const persistence = await readFile(
+    new URL('../components/email/sendcontactemail.ts', import.meta.url), 'utf8');
+  assert.ok(
+    /landing_path:\s*data\.landing_path/.test(persistence),
+    'landing_path must be written to the Supabase forms row',
+  );
+
+  // And it must NOT appear in the canonical client event, under any casing.
+  const event = buildCanonicalLeadEvent({
+    formId: 'InjectionsLandingForm',
+    formSource: 'paid-landing',
+    pagePath: '/lp/spine-and-back-injections',
+    state: 'FLORIDA',
+    submissionId: 991,
+  }) as Record<string, unknown>;
+
+  for (const key of Object.keys(event)) {
+    assert.equal(
+      /landing[_-]?path/i.test(key), false,
+      `landing_path must not reach the measurement payload (found key "${key}")`,
+    );
+  }
+  // NOTE: `page_path` legitimately carries the submitting page's pathname and is part
+  // of the existing contract, so the pathname itself is not what this guards. What it
+  // guards is that no SECOND, separately-named landing-page field is introduced —
+  // landing_path exists to enable per-LP analysis server-side, not to add another path
+  // field to the ad platform.
+  assert.equal(
+    Object.prototype.hasOwnProperty.call(event, 'landing_path'), false,
+    'landing_path must not be a key on the measurement payload',
+  );
+
+  // The client-side measurement module must not reference it at all.
+  const client = await readFile(
+    new URL('../utils/enhancedConversions.ts', import.meta.url), 'utf8');
+  assert.equal(
+    client.includes('landing_path'), false,
+    'landing_path must stay server-side; the client measurement module must not touch it',
+  );
+});
+
+test('enhanced conversions PII is hashed before it reaches dataLayer', async () => {
+  const source = await readFile(
+    new URL('../utils/enhancedConversions.ts', import.meta.url), 'utf8');
+
+  // Hashing must happen, and it must be SHA-256.
+  assert.ok(source.includes("crypto.subtle.digest('SHA-256'"), 'must hash with SHA-256');
+
+  // Every enhanced_conversion_data push must go through the hashing builder rather
+  // than assembling a plaintext object literal.
+  const plaintextPush = /enhanced_conversion_data:\s*\{\s*[\r\n]+\s*(email|phone_number):/;
+  assert.equal(
+    plaintextPush.test(source), false,
+    'no enhanced_conversion_data push may contain plaintext email or phone_number',
+  );
+
+  // Pre-hashed values must use the sha256_ field names. Pushing hashed values under
+  // the raw names would make GTM hash a second time and silently break matching.
+  assert.ok(source.includes('sha256_email_address'), 'hashed email must use sha256_email_address');
+  assert.ok(source.includes('sha256_phone_number'), 'hashed phone must use sha256_phone_number');
+
+  // postal_code and country are unhashed per Google's spec.
+  assert.ok(/postal_code: n\.address\.postal_code/.test(source), 'postal_code stays unhashed');
+});

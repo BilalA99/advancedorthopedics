@@ -37,6 +37,16 @@ async function logLeadToSupabase(data: {
   utm_campaign?: string;
   utm_term?: string;
   utm_content?: string;
+  /**
+   * Pathname of the landing page a paid lead arrived on.
+   *
+   * Supabase ONLY - never the GA4 event payload, never a Google Ads conversion
+   * parameter. form_source=paid-landing is one bucket for every current and future
+   * LP, so without this there is no way to compute per-LP conversion rate. Keeping
+   * it server-side means that analysis is possible without putting a page path that
+   * can imply a health condition into an ad platform.
+   */
+  landing_path?: string;
 }) {
   try {
     const supabase = await createClient();
@@ -61,6 +71,7 @@ async function logLeadToSupabase(data: {
       utm_campaign:   data.utm_campaign   || null,
       utm_term:       data.utm_term       || null,
       utm_content:    data.utm_content    || null,
+      landing_path:   data.landing_path   || null,
     });
     if (error) {
       console.error('[logLeadToSupabase]', error);
