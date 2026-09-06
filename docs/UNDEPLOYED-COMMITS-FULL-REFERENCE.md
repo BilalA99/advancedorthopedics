@@ -2,7 +2,7 @@
 
 **Deployed baseline:** `upstream/main` @ `5c99f1b` ("Merge pull request #84 from AppFlow-Studio/TemurDev")
 **Head:** `pa-ga-phone-and-atlanta-wiring`
-**Generated:** 2026-09-02
+**Generated:** 2026-09-02 · **Regenerated:** 2026-09-06 (Wave 13)
 
 `5c99f1b` is the exact merge-base. **Zero commits exist on `upstream/main` that are not on
 this branch**, so everything below is purely additive to what is live. Nothing here has been
@@ -10,10 +10,10 @@ pushed or deployed.
 
 | | |
 |---|---|
-| Commits ahead of production | **57** |
-| Files changed | **200** |
-| Lines | **+12,862 / −2,615** |
-| Static pages built | **751** (production builds 741) |
+| Commits ahead of production | **72** (71 code @ `e90fcb6` + this documentation wave) |
+| Files changed | **209** |
+| Lines | **+24,276 / −11,037** |
+| Static pages built | **754** (production builds 741) |
 | Sitemap URLs | **339** |
 | Working tree | clean |
 
@@ -21,19 +21,26 @@ pushed or deployed.
 
 124 condition pages · 122 treatment pages · 390 area-of-pain pages · 29 location pages
 (24 clinics + 5 state hubs) · 12 provider records (11 rendered; Katzman suppressed by
-`SHOW_SCOTT_KATZMAN=0`) · 1 paid landing page · plus hubs, find-care, injuries and legal pages.
+`SHOW_SCOTT_KATZMAN=0`) · 4 paid landing pages · plus hubs, find-care, injuries and legal pages.
 
 ### Verification state at time of writing
 
 ```
-npm run build                exit 0, 751/751 static pages
+npm run build                exit 0, 754/754 static pages
 npx tsc --noEmit             49 errors (documented ceiling, all pre-existing)
-npm run test:measurement     9/9
-validate-location-data       24 clinics, 0 warnings
-audit-scoliosis-entity-graph 0 notes
-visual-audit-sprint          33 pages x 3 viewports, 0 defects introduced
-canonical audit              703 built pages, 0 missing a canonical
-hydration scan               40/246 templated pages (pre-existing, quantified)
+npm run test:measurement     11/11 (two Commit-7 contract tests added)
+validate-location-data       24 clinics, 0 warnings (prebuild gate)
+audit-scoliosis-entity-graph 0 notes (prebuild gate)
+visual-audit-sprint          33 pages x 3 viewports; 0 defects introduced
+                             (15 flags, all accounted: 3 pages x 3 viewports of
+                             pre-existing #418, the noindexed foot-pain empty
+                             headings x 3, one non-reproducible resource 404)
+canonical audit              703 pages 0 missing (2026-09-02 audit) + 3 new LPs
+                             verified individually: self-canonical, noindex/follow
+hydration scan               40/246 - unchanged population; all ten locked pilot
+                             slugs clean (re-scanned 2026-09-06)
+control diff                 5/5 control records diffed vs upstream/main:
+                             3 byte-identical, 2 carry only permitted deltas
 ```
 
 ---
@@ -796,6 +803,101 @@ exclusion driver** — see below.
 
 ---
 
+# WAVE 13 — Pilot lock, payer integrity, differentiation content, and the last three commits
+
+Everything after the first edition of this document (`cc462bd`). This wave contains the
+pilot's experimental content, so its commits are the ones the 60–90 day read depends on.
+
+| Commit | Contents |
+|---|---|
+| `c15428a` | Definitive 5v5 pilot lock (§16), superseding the void 7v7 and first 5v5 |
+| `7da4db6` | Payer revert: 105 treatment lines restored **byte-identical** to production's four variants |
+| `054eba8` | Temur payer review widened to all three insurance surfaces |
+| `562dcc9` | Flag that the payer revert was partial **by design** — the insurance page headline is held for review, not reverted |
+| `ef13541` | **Spinal fusion cluster** — differentiated `additionalSections` on five spine pages, including the four spine treatment-arm slugs (§16 Commits 8.1–8.4) |
+| `2686fd2` | Three business clearances recorded so they are not re-flagged |
+| `e6af190` | **Arthroscopy cluster** — five records extended, including `shoulder-arthroscopy` (§16 Commit 9.1) |
+| `6aaba2d` | Location priority-slug repair (22 substitutions); ACL sections; scoliosis local coverage |
+| `2cafb7e` | State priority-slug repair (25 substitutions); link-asymmetry confound recorded |
+| `86b5feb` | **Commit 7b/7d** — enhanced-conversion PII hashed client-side (`sha256_` field names); `landing_path` column plumbing |
+| `80467de` | **Commit 14** — superlative sweep: 45 marketing-copy lines; review bodies and keyword arrays excluded by design |
+| `727862a` | Regenerate `clinicsForMap` after the sweep (prebuild staleness gate caught it) |
+| `e90fcb6` | **Commit 13** — three injections paid LPs on one shared template; `landing_path` wired end-to-end |
+
+**`86b5feb` changes the GTM contract twice.** Hashed values ship under `sha256_`-prefixed
+field names because Google's spec distinguishes raw from pre-hashed input **by field name**
+— pushing hashes under the raw names would make GTM hash a second time and silently zero
+the Enhanced Conversions match rate. The GTM user-provided-data variable must be updated in
+the **same GTM publish** as the `lead_form_submit_success` trigger, before this code
+deploys. The PR description carries the full cutover checklist.
+
+**`e90fcb6` closed a gap `86b5feb` left open:** `landing_path` was declared on
+`logLeadToSupabase` but fed by nothing. The form now appends `window.location.pathname`
+**only when `formSource === 'paid-landing'`**, the doctor route reads it, `sendUserEmail`
+forwards it. Supabase only — the measurement contract test enforces that it never enters
+the GA4 payload. And the honest framing, corrected in the code comment: **this is not a
+privacy control.** GA4 already receives the submitting page's pathname on every event as
+`page_path`. `landing_path` exists to join a lead to its landing page in Supabase for
+per-LP conversion rate; the line it honors is per-user vs per-page — nothing about a
+condition is attached to an individual's ad-platform record.
+
+**`80467de`'s deliberate exclusions, so nobody "fixes" them later:** 28 `reviewBody`
+strings and 1 `testimonial` prop keep their superlatives — they are attributed patient
+statements and are never edited. The 34 `keywords`-array entries ("best orthopedic surgeon
+orlando") are search-query targets consumed only by `generateMetadata`, not rendered
+claims. Lines carrying both a cleared same-day claim and a superlative had only the
+superlative changed.
+
+**The three LPs' link-graph guard:** `/lp/*` is noindex,**follow** — links pass. None of
+the three new pages links any of the ten locked pilot slugs; the spine page routes its
+surgical card to `lumbar-microdiscectomy-surgery`/`acdf-surgery` instead of
+`lumbar-decompression` (control) or `spinal-fusion` (treatment), and the joint page routes
+to the arthroscopy-cluster pages, never `shoulder-arthroscopy` or `biceps-tenodesis`.
+(The scoliosis LP, which predates the lock, links `lumbar-decompression` and
+`spinal-fusion` — recorded in `2cafb7e` as a pre-existing confound, left unedited because
+editing it now would itself change the link graph mid-experiment.)
+
+**The control-diff finding this wave surfaced:** byte-level comparison of all five control
+records against `upstream/main` corrected two §16 claims — three controls are
+byte-identical to production (the Georgia sweep never touched them), and
+`lumbar-decompression` carries one minimal outcome-claim replacement where the lock table
+said "no 14a edit." Neither voids the pilot; both are recorded in §16's dated addendum,
+and the recrawl confound is downgraded from "resolved" to "partially resolved — 5/5
+treatment pages edited vs 2/5 controls."
+
+## Format drift — the migration debt, now quantified
+
+Three schema-drift instances surfaced during this sprint: `TreatmentContent` lacked
+`additionalSections`, then `h1` (both since added); `acl-injury` could not receive
+`additionalSections` because it is a legacy `ConditionInfoProp`. The third is not an
+isolated case:
+
+| Condition data format | Records | Supports `additionalSections`/`h1`/`reviewedAt` |
+|---|---|---|
+| `ConditionContent` (new) | 181 | yes |
+| In both arrays | 27 | via their `ConditionContent` twin (the router prefers it) |
+| **`ConditionInfoProp` legacy-ONLY** | **85** | **no — migration required first** |
+
+**85 of 239 unique condition slugs (36%) cannot receive any differentiation machinery**
+until migrated. They are concentrated in exactly the joint and extremity conditions the
+arthroscopy cluster and the injections LPs build toward: `knee-arthritis`,
+`rotator-cuff-tear`, `hip-labral-tear`, `frozen-shoulder`, `carpal-tunnel-syndrome`,
+`tennis-elbow`, `plantar-fasciitis`, and 78 more. **Any next-quarter differentiation scope
+for these pages must budget the format migration as a prerequisite** — it is not a
+per-page content cost.
+
+### `acl-injury` — its own scoped item
+
+`acl-injury` (17,000/mo volume, KD 1) is blocked by schema, not content: the differentiated
+copy already exists and was relocated to `/treatments/acl-reconstruction-surgery` when the
+legacy format rejected it (adding `additionalSections` to a `ConditionInfoProp` raised tsc
+to 50). The migration of this one record — legacy → `ConditionContent`, preserving every
+currently rendered field byte-for-byte, then moving the condition-side content back — is a
+self-contained task with the highest volume-to-effort ratio in the backlog. It must not run
+during the pilot observation window.
+
+---
+
 # What this PR proves, and what it rules out
 
 Four rounds of verification refuted three hypotheses. Each refutation is recorded with its
@@ -858,6 +960,12 @@ confirmation that the 19 verified GBP listings publish the same 8AM–8PM hours 
 
 # Not in this PR
 
-Commit 7 (7b PII hashing, 7d `landing_path`) · Commits 8, 9, 10, 12 (differentiation content
-and pilot) · Commit 13 (three injections LPs) · Commit 14 (PT positioning and superlatives) ·
-Phase E `temur/insurance-copy`, which is gated on approval and must never merge here.
+Phase E `temur/insurance-copy` — gated on Temur's approval and **must never merge here**
+(the branch exists, carrying no copy changes; the review doc travels in this PR) · the GTM
+container changes (trigger rename + `sha256_` user-provided-data variable), which are a
+coordinated pre-deploy step, not code · the GA4/Ads **audience inventory** (whether any
+audience keys on `/lp/` or condition paths), which requires UI access · the outstanding
+business inputs above.
+
+*Stale entries removed 2026-09-06: Commit 7 (7b/7d), the differentiation content, Commit 13
+and Commit 14 previously listed here are all now in the branch — see Wave 13.*

@@ -563,10 +563,10 @@ pages would leave them indistinguishable from their neighbours. Worth a scope de
 |---|---|
 | **7a** collapse 3 events → 1 with server-issued submission ID | ✅ **already done** (`bdcf3bb`) |
 | persist lead before email | ✅ **already done** (`57a2a08`) |
-| **7b** hash PII before dataLayer push | ❌ **not done** — zero `sha256` / `subtle.digest` / `createHash` anywhere |
+| **7b** hash PII before dataLayer push | ✅ **done 2026-09-06** (`86b5feb`) — `sha256_` field names; GTM variable must change in the same publish |
 | **7c** normalise `state` | ✅ **already done** — `normalizeStateCode()` at `sendcontactemail.ts:49` |
 | **7c** fix `form_source` | ✅ **already done** — `resolveFormSource()` in `lib/lead-contract.ts:34` |
-| **7d** `landing_path` | ❌ **not done** — 0 occurrences |
+| **7d** `landing_path` | ✅ **done 2026-09-06** (`86b5feb` column, `e90fcb6` end-to-end wiring; Supabase only) |
 
 > ### 🔴 The brief contradicts shipped code on the event name
 > The brief says: *"Do not remove the `form_submit` event **name** — GTM triggers depend on it."*
@@ -1176,7 +1176,9 @@ groups are locked with their control condition recorded, and the outcome sweep h
 run across both arms so recrawl is common to both.
 
 **Commit 7 (7b hashing, 7d landing_path), 13 (injections LPs), 14 (PT + superlatives).**
-Scoped and specified; not started.
+~~Scoped and specified; not started.~~ **All three shipped 2026-09-06** — `86b5feb`,
+`e90fcb6`, `80467de`. PT positioning was verified already clean repo-wide, so Commit 14
+is superlatives-only. See Wave 13 in `UNDEPLOYED-COMMITS-FULL-REFERENCE.md`.
 
 ---
 

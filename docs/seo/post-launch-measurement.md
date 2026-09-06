@@ -697,7 +697,7 @@ uniformly clean. **Region is a heuristic; every candidate below was verified ind
 |---|---|---|---|
 | `/treatments/hybrid-cervical-spine-surgery` | spine | clean ✓ | no 14a edit |
 | `/treatments/vertebroplasty` | spine | clean ✓ | no 14a edit |
-| `/treatments/lumbar-decompression` | spine | clean ✓ | no 14a edit |
+| `/treatments/lumbar-decompression` | spine | clean ✓ | one `benefits` line: outcome claim → mechanism statement (see addendum) |
 | `/treatments/kyphoplasty` | spine | clean ✓ | no 14a edit |
 | `/treatments/biceps-tenodesis` | shoulder | clean ✓ | no 14a edit |
 
@@ -719,14 +719,42 @@ arthroscopically, and `shoulder-arthroscopy` is the treatment-arm page. Biceps t
 the most functionally distinct of the three, minimising interaction with the page being
 differentiated.
 
+### Addendum — byte-level control diff, 2026-09-06
+
+`control_diff` compared every control record (treatments.tsx + treatmentFAQs.ts) against
+`upstream/main` before push. Findings, correcting the assumptions above where they differ:
+
+| Control | Delta vs production |
+|---|---|
+| `hybrid-cervical-spine-surgery` | **byte-identical** |
+| `vertebroplasty` | **byte-identical** |
+| `kyphoplasty` | **byte-identical** |
+| `lumbar-decompression` | Georgia state-list sweep (3 strings) + one outcome-claim line replaced |
+| `biceps-tenodesis` | Georgia state-list sweep (1 string) only |
+
+Two earlier claims corrected by this diff: the Georgia sweep was **not** symmetric across
+arms (it only touched records carrying the state-list string — three controls carry none),
+and `lumbar-decompression`'s Gate 3 cell previously read "no 14a edit" when it has exactly
+one minimal compliance line. Neither finding voids the pilot: the lumbar-decompression edit
+is the permitted minimal class, and the recrawl consequence is recorded as downgraded
+Limitation 4. The 2026-09-06 hydration re-scan confirms all ten locked slugs remain clean
+(the sitewide population is unchanged at 40/246; the six erroring pages tagged
+TREATMENT/CONTROL in `hydration-scan.json` are stale labels from the retired 7v7 lists,
+none of them a locked slug).
+
 ## Gate results — all ten
 
 1. **Hydration-clean** — ✓ all ten, verified individually, not by region.
-2. **Untouched by differentiating commits** — ✓ none is touched by Commits 8, 9 or 11. All
-   were touched by the Georgia meta-title sweep (`a711300`), which hit all 246 templated
-   pages and is therefore **symmetric across arms and not a confound**.
-3. **14a minimal, not rich** — ✓ four control pages received no 14a edit at all; none
-   received a rich replacement. This gate rejected `acromioplasty`.
+2. **Untouched by differentiating commits** — ✓ none is touched by Commits 8, 9 or 11.
+   ~~All were touched by the Georgia meta-title sweep~~ **Corrected 2026-09-06 by byte-level
+   diff:** the sweep only touched records carrying the state-list string. Three controls
+   (`hybrid-cervical-spine-surgery`, `vertebroplasty`, `kyphoplasty`) carry none and are
+   **byte-identical to production**. See the addendum below.
+3. **14a minimal, not rich** — ✓ four control pages received no 14a edit;
+   `lumbar-decompression` received exactly one line ("High success rate for relieving
+   radiating leg symptoms" → "Targets the compression causing radiating leg symptoms"),
+   which is the permitted minimal class. None received a rich replacement. This gate
+   rejected `acromioplasty`.
 
 ## Known limitations, recorded
 
@@ -737,11 +765,14 @@ differentiated.
    on n=5.
 3. **"More differentiated" and "longer" are not fully separable.** Rich replacements add
    words to treatment pages and roughly none to controls.
-4. **✅ Recrawl confound RESOLVED by the single-PR decision.** Both arms change exactly once,
-   at one deploy timestamp — control a little, treatment a lot, identical recrawl trigger.
-   Under a split PR the treatment arm would have taken two edits and two recrawls against the
-   control's one, reintroducing "was edited at all" as a variable. Shipping together is the
-   better experimental design, not merely the faster path.
+4. **Recrawl confound PARTIALLY resolved — downgraded 2026-09-06.** The single-PR decision
+   still prevents the two-edits-vs-one asymmetry a split PR would have created. But the
+   byte-level control diff shows the "editing both arms makes recrawl common to both"
+   premise does not hold: **5/5 treatment pages are edited, only 2/5 controls are**
+   (`lumbar-decompression`, `biceps-tenodesis`). The three byte-identical controls get no
+   edit-triggered recrawl and will be revisited on Google's own schedule. At read time,
+   compare the treatment arm against the edited and untouched controls **separately** —
+   if those two control groups diverge, "was edited at all" is live as a variable.
 
 ## Read criteria — 60–90 days from deploy
 

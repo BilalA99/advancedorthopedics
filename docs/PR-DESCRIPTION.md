@@ -1,7 +1,7 @@
 # SEO, schema and content-integrity sprint
 
 **Base:** `upstream/main` @ `5c99f1b` · **Head:** `pa-ga-phone-and-atlanta-wiring`
-**55 commits · 214 files · working tree clean**
+**72 commits · 209 files · working tree clean**
 
 ## Summary
 
@@ -11,6 +11,12 @@ removes **111 unsourced medical outcome claims** from the data layer — 41 of w
 being served to Google as `FAQPage` structured data. It also carries the diagnosis of record
 for the December 2025 ranking collapse, arrived at by refuting three competing hypotheses
 (see `docs/seo/post-launch-measurement.md`).
+
+It also now carries the differentiation pilot's experimental content (5v5, locked in
+`docs/seo/post-launch-measurement.md` §16), the enhanced-conversions PII hashing, three
+injections paid landing pages with per-LP lead attribution, and a superlative sweep across
+the location copy (patient review bodies deliberately excluded — attributed statements are
+never edited).
 
 Four planned commits were **retired after measurement refuted their premise**, and that is
 recorded rather than quietly dropped.
@@ -27,24 +33,47 @@ recorded rather than quietly dropped.
 > per conversion action first, then hold a 21-day change freeze and judge performance on the
 > manual PPO tracker, not on platform-reported conversions.
 
-*(Commit 7's remaining scope — 7b PII hashing and 7d `landing_path` — is not in this PR. The
-cutover checklist below applies whenever it ships.)*
+*(Commit 7 is complete in this PR: the event rename, 7b PII hashing (`86b5feb`) and 7d
+`landing_path` (`86b5feb` + `e90fcb6`). The cutover checklist below is therefore a hard
+pre-deploy gate for THIS deploy, and it now has two coordinated items, not one.)*
 
 ### GTM cutover — required pre-deploy, not included in this PR
 
 **Order is non-negotiable: GTM leads, code follows.** Production currently fires
-`form_submit`; the survivor in this branch is `lead_form_submit_success`.
+`form_submit` with plaintext PII in `enhanced_conversion_data`; this branch fires
+`lead_form_submit_success` with **pre-hashed** PII under `sha256_`-prefixed field names.
+Both halves must land in the **same GTM publish** — the second one fails silently: a
+wrong trigger name shows up as conversions dropping to zero within a day, but a
+user-provided-data variable reading field names that no longer exist shows up as the
+Enhanced Conversions match rate quietly degrading, which nobody notices for a month.
 
 1. In GTM, add a trigger on `lead_form_submit_success` **alongside** the existing
-   `form_submit` trigger. Point the same tags at both. Publish. Nothing double-fires because
+   `form_submit` trigger. Point the same tags at both. Nothing double-fires because
    only one event name is ever actually pushed.
 2. Repeat for the state-filtered triggers `form_submit_FL` / `_NJ` / `_NY` (filtered on
    `DLV - state`) and for `Lead Submit Form Enhanced`.
-3. **Then** deploy the code.
-4. Confirm conversions flow on the new event for 48 hours.
-5. **Then** remove the `form_submit` triggers, the `/thank-you` pageview conversion trigger,
+3. **In the same workspace, before publishing:** update the user-provided-data variable to
+   read `sha256_email_address`, `sha256_phone_number`, `address.sha256_first_name`,
+   `address.sha256_last_name` (`postal_code` and `country` stay unhashed — per Google's
+   spec they are unhashed fields). Google distinguishes raw from pre-hashed input **by
+   field name**; leaving the variable on the raw names would hash a second time and zero
+   the match rate.
+4. Publish the GTM container. **Then** deploy the code.
+5. Confirm for 48 hours — both clauses, the second is the one people skip:
+   conversions flowing on the new event, **and** the Enhanced Conversions match rate
+   holding at its pre-deploy level (Google Ads → conversion action → diagnostics).
+6. **Then** remove the `form_submit` triggers, the `/thank-you` pageview conversion trigger,
    and the four orphaned zero-tag triggers (`Form Subm`, `Form Submission`, `History
    Change`, `Thank You Page Trigger`).
+
+**Also before the LP campaigns go live — audience inventory.** The repo defines no
+remarketing tags or audience conditions (one container, `GTM-T57SB8NQ`; no `AW-` IDs in
+code), so this can only be checked in the UIs: in GA4 Admin → Audiences and Google Ads →
+Audience Manager, confirm **no audience keys on `page_path` containing `/lp/` or
+`/conditions/`**. A page view is fine; an audience built from condition-page visitors is
+what health advertisers are restricted from. `page_path` already reaches GA4 on every
+event — `landing_path` stays Supabase-only and is a join key for per-LP conversion rate,
+not a privacy control.
 
 ---
 
@@ -111,16 +140,25 @@ predate it by six months and rankings rose while they existed.
 
 ## Differentiation pilot
 
-Locked by slug in `docs/seo/post-launch-measurement.md` §8. Seven treatment-arm pages get
-full differentiation; seven control-arm pages get the **compliance edit only**.
+Locked by slug in `docs/seo/post-launch-measurement.md` §16 — **5v5, composition-matched
+(4 spine + 1 shoulder per arm), all ten individually verified** as crawled-not-indexed and
+hydration-clean. §8's 7v7 and the first 5v5 are void; §16 is the lock.
 
-Controls are edited rather than left untouched because any edit triggers a recrawl — an
-untouched control would confound "differentiation worked" with "Google came back and
-looked." The 14a sweep ran across both arms for exactly this reason.
+Treatment arm (full differentiation, shipped in the spinal-fusion and arthroscopy
+clusters): `spinal-fusion`, `cervical-laminectomy`, `endoscopic-discectomy-surgery`,
+`motion-preservation-spine-surgery`, `shoulder-arthroscopy`. Control arm:
+`hybrid-cervical-spine-surgery`, `vertebroplasty`, `lumbar-decompression`, `kyphoplasty`,
+`biceps-tenodesis`.
 
-Four pages in the two arms are still marked **UNVERIFIED** and must be confirmed as
-`Crawled – currently not indexed` by URL Inspection before the pilot deploys. If any is
-indexed or discovered-only, swap it rather than edit it.
+The pre-push byte-level control diff (§16 addendum, 2026-09-06) found three controls
+**byte-identical to production** and two carrying only permitted deltas. Consequence,
+recorded honestly: the recrawl trigger is NOT symmetric — 5/5 treatment pages are edited,
+2/5 controls are. At read time compare the treatment arm against edited and untouched
+controls separately.
+
+**Do not request indexing on any of the ten slugs — it voids the experiment.** The
+location-page paragraph rewrite and the `acl-injury` format migration must also hold until
+the observation window closes.
 
 ---
 
@@ -185,7 +223,7 @@ indexed or discovered-only, swap it rather than edit it.
   Commit 12 observation window** or the pilot's control group is contaminated. Sequence
   Philadelphia first — three near-identical pages, one city, 1,490 combined impressions and
   zero clicks.
-- **`/find-care/book-an-appointment`** — 447 impressions, 0 clicks at position 9.7. 63% of
+- **`/find-care/book-an-appointment`** — 730 impressions, 0 clicks at position 9.7. 63% of
   impressions are brand-navigational, where the homepage and GBP already hold positions 1–3
   and this page is a redundant second listing. It ranks **position 1.0** on genuine
   commercial queries (`hand doctor near me`, `spine specialists in my area`) with 1–2
@@ -209,34 +247,54 @@ indexed or discovered-only, swap it rather than edit it.
 - **387 of 703 pages have zero inbound internal links** — essentially all the area-of-pain
   set, now noindexed or canonicalised away. `NavBar.tsx` and all three dropdowns are
   `'use client'`, so their 21 area-of-pain references never reach server HTML.
-- **Superlatives** in `clinics.tsx` (`world-class`, `top-tier`, `renowned`, `top-rated`) —
-  specified for Commit 14, not yet applied.
+- **Superlatives kept on purpose** — 28 `reviewBody` strings and 1 `testimonial` prop
+  retain phrases like "best orthopedic practice": they are attributed patient statements
+  and are never edited, not even for a typo. The 34 `keywords`-array entries ("best
+  orthopedic surgeon orlando") are search-query targets consumed only by
+  `generateMetadata`, not rendered claims. Do not "fix" either group — `80467de`'s
+  commit message records the same exclusions.
 
 ## Not in this PR
 
-- **Commit 7** — 7b PII hashing, 7d `landing_path`
-- **Commits 8, 9, 10, 12** — the differentiation content and pilot
-- **Commit 13** — three injections landing pages
-- **Commit 14** — PT positioning and superlatives
+- **The GTM container changes** — the trigger rename and the `sha256_`
+  user-provided-data variable are a coordinated pre-deploy step in GTM, not code
+- **The GA4/Ads audience inventory** — requires UI access; see the cutover section
 - **Phase E** — `temur/insurance-copy`, gated on approval, must never merge here
+  (the branch exists and carries no copy changes; the review doc travels in this PR)
+
+*Removed 2026-09-06 — previously listed here, now in the branch: Commit 7 (7b/7d),
+the differentiation content (spinal-fusion and arthroscopy clusters), Commit 13
+(`e90fcb6`), Commit 14 (`80467de`; PT positioning verified already clean repo-wide,
+so the commit is superlatives-only).*
 
 ---
 
 ## Verification
 
 ```
-npm run build          exit 0, 751/751 static pages
+npm run build          exit 0, 754/754 static pages
 npx tsc --noEmit       49 errors — unchanged pre-existing baseline, all in
                        scripts/ and temp_conditions_old.tsx
-npm run test:measurement   9/9
-sitemap                339 URLs
-canonical audit        703 pages, 0 missing a canonical
+npm run test:measurement   11/11 (two Commit-7 contract tests added)
+sitemap                339 URLs (0 under /lp/ — the opt-in list excludes them)
+canonical audit        703 pages 0 missing (2026-09-02) + 3 new LPs verified
+                       individually: self-canonical, noindex/follow, in-budget
+hydration scan         40/246 — unchanged population; all ten locked pilot
+                       slugs clean (re-scanned 2026-09-06)
+control diff           5 control records vs upstream/main: 3 byte-identical,
+                       2 permitted-only deltas (§16 addendum)
 FAQPage schema         122 blocks, 539 questions, 0 malformed
 outcome claims         0 remaining in any data file
-neurosurgery refs      0 across all 751 built pages
+neurosurgery refs      0 across all built pages
 redirect chains        0 across all 121 rules
 provider resolution    124/124 conditions, 122/122 treatments
 ```
+
+**Why "754 built" but "703/706 audited":** the build counter counts static-generation
+tasks, which include routes with no auditable HTML document — the API route handlers,
+the `_not-found` boundary, `/blogs` (request-time), and the XML/metadata routes. The
+prerender manifest holds 706 concrete routes; the canonical audit covers the HTML
+documents (703 at audit time, 706 with the three new LPs).
 
 **Two known QA false positives — do not "fix":** the wide `div.flex` is the existing hero
 marquee (`document.scrollWidth` overflow is 0, clipped by design, identical on Florida and

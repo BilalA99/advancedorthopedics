@@ -42,9 +42,14 @@ async function logLeadToSupabase(data: {
    *
    * Supabase ONLY - never the GA4 event payload, never a Google Ads conversion
    * parameter. form_source=paid-landing is one bucket for every current and future
-   * LP, so without this there is no way to compute per-LP conversion rate. Keeping
-   * it server-side means that analysis is possible without putting a page path that
-   * can imply a health condition into an ad platform.
+   * LP, so without this there is no way to compute per-LP conversion rate.
+   *
+   * This is NOT a privacy control, and must not be justified as one: GA4 already
+   * receives the submitting page's pathname on every event as page_path. The line
+   * that matters is per-user vs per-page - page_path records that a page was
+   * viewed; a field on the lead record attaches information to an individual who
+   * converted. Keeping landing_path server-side honors that line; it does not
+   * keep the path out of GA4, because page_path was already there.
    */
   landing_path?: string;
 }) {
