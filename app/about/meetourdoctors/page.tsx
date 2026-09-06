@@ -13,13 +13,13 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Board-Certified Orthopedic Doctors | Mountain Spine & Orthopedics',
-  description: 'Meet the expert team of spine and orthopedic surgeons at Mountain Spine. Our renowned doctors use advanced, compassionate care to help you find relief. Learn more.',
+  description: 'Meet the expert team of spine and orthopedic surgeons at Mountain Spine. Our board-certified doctors use advanced, compassionate care to help you find relief. Learn more.',
   alternates: {
     canonical: buildCanonical('/about/meetourdoctors'),
   },
   openGraph: {
     title: 'Board-Certified Orthopedic Doctors | Mountain Spine & Orthopedics',
-    description: 'Meet the expert team of spine and orthopedic surgeons at Mountain Spine. Our renowned doctors use advanced, compassionate care to help you find relief. Learn more.',
+    description: 'Meet the expert team of spine and orthopedic surgeons at Mountain Spine. Our board-certified doctors use advanced, compassionate care to help you find relief. Learn more.',
     url: buildCanonical('/about/meetourdoctors'),
     images: [getOgImageForPath('/about')],
     type: 'website',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Board-Certified Orthopedic Doctors | Mountain Spine & Orthopedics',
-    description: 'Meet the expert team of spine and orthopedic surgeons at Mountain Spine. Our renowned doctors use advanced, compassionate care to help you find relief. Learn more.',
+    description: 'Meet the expert team of spine and orthopedic surgeons at Mountain Spine. Our board-certified doctors use advanced, compassionate care to help you find relief. Learn more.',
     images: [getOgImageForPath('/about')],
   }
 };

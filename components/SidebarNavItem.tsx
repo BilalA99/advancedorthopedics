@@ -90,7 +90,7 @@ export const SidebarNavItem = ({ item, pathname, closeSidebar, level = 0, latest
                                             className="max-h-40 h-40 w-full sm:max-h-100 sm:h-fit"
                                             imageUrl="https://mountainspineortho.b-cdn.net/public/lowerbackpain.png"
                                             title="Lower Back Pain?"
-                                            subtitle="Meet with our world-class surgeons today"
+                                            subtitle="Meet with our fellowship-trained surgeons today"
                                             link={`/conditions?data=${encodeURIComponent(JSON.stringify({ tags: ['Spine'] }))}`}
 
                                         /></div>

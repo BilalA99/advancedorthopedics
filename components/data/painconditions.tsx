@@ -3558,8 +3558,7 @@ export const conditions: ConditionInfoProp[] = [
                             realign the metatarsal, restore joint congruency, and stabilize
                             the foot with low-profile titanium hardware. Patients often bear
                             weight in a protective postoperative shoe within days and resume
-                            athletic activities within weeks, guided by our in-house physical
-                            therapy team.
+                            athletic activities within weeks.
                         </p>
                     </div>
                 ),

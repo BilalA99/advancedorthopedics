@@ -251,7 +251,7 @@ function NavLink({ href, title, screen, pathname, sublinks, short_desc, latestBl
                     className="max-w-100 w-100"
                     imageUrl="https://mountainspineortho.b-cdn.net/public/lowerbackpain.png"
                     title="Lower Back Pain?"
-                    subtitle="Meet with our world-class surgeons today"
+                    subtitle="Meet with our fellowship-trained surgeons today"
                     link={`/conditions?data=${encodeURIComponent(JSON.stringify({ tags: ['Spine'] }))}`}
                   />
                 </div>
@@ -380,7 +380,7 @@ function NavLink({ href, title, screen, pathname, sublinks, short_desc, latestBl
                     className="max-w-100"
                     imageUrl="https://mountainspineortho.b-cdn.net/public/lowerbackpain.png"
                     title="Lower Back Pain?"
-                    subtitle="Meet with our world-class surgeons today"
+                    subtitle="Meet with our fellowship-trained surgeons today"
                   /> */}
                 </div>
               ) : title == 'LOCATION' ? (
