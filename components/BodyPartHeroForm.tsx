@@ -139,6 +139,12 @@ export default function BodyPartHeroForm({
       payload.append('gbraid', attribution.gbraid);
       payload.append('wbraid', attribution.wbraid);
       payload.append('form_source', formSource);
+      // Paid-LP submissions carry their pathname so per-LP conversion rate can
+      // be computed in Supabase. Deliberately NOT sent for organic form sources,
+      // and never added to the GA4 payload (see tests/measurement-contract.test.ts).
+      if (formSource === 'paid-landing') {
+        payload.append('landing_path', window.location.pathname);
+      }
       payload.append('utm_source', attribution.utm_source);
       payload.append('utm_medium', attribution.utm_medium);
       payload.append('utm_campaign', attribution.utm_campaign);

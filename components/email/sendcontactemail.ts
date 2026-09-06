@@ -91,6 +91,7 @@ export async function sendUserEmail(formData: {
   name: string;
   email: string;
   phone: string;
+  landing_path?: string;
   state?: string;
   reason?: string;
   bestTime?: string;
@@ -113,6 +114,7 @@ export async function sendUserEmail(formData: {
       reason:        formData.reason,
       best_time:     formData.bestTime,
       form_source:   formData.form_source || 'unknown',
+      landing_path:  formData.landing_path,
       gclid:         formData.gclid,
       gbraid:        formData.gbraid,
       wbraid:        formData.wbraid,

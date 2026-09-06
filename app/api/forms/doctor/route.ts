@@ -107,6 +107,7 @@ export async function POST(request: Request) {
       reason,
       bestTime,
       form_source: getString(formData, "form_source") || "general-contact",
+      landing_path: getString(formData, "landing_path"),
       gclid: getString(formData, "gclid"),
       gbraid: getString(formData, "gbraid"),
       wbraid: getString(formData, "wbraid"),
