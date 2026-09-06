@@ -898,6 +898,49 @@ during the pilot observation window.
 
 ---
 
+## Full-page audit of every visually updated route — 2026-09-06
+
+Run before push, in two prongs: a **static content sweep over all 706 built HTML
+documents** (banned-string regexes with scripts/styles stripped) and a **browser audit of
+the 59 layout-changed routes** at three viewports with structural assertions, screenshot
+review, and superlative fragments captured with ancestor chains for human classification
+(`scripts/visual-audit-updated-pages.mjs`).
+
+**Eight violations found and fixed (`1381dff` + follow-up) — every one lived OUTSIDE the
+data files the earlier sweeps covered:**
+
+| Violation | Where it rendered | Why earlier sweeps missed it |
+|---|---|---|
+| "guided by our in-house physical therapy team" — first-person PT, the hard line | 6 area-of-pain bunion variants | `painconditions.tsx` was never in any sweep's file list |
+| "World-Class Expertise" card + "proven track record of successful outcomes" | all 24 clinic pages | string lives in the route file, not clinics.tsx |
+| Same card, written `World - Class Expertise` | homepage | spaced hyphen defeats every `world-class` regex |
+| "world-class … elite surgical skill" blurb | all 5 state hubs | component string (`StateWhyChoose.tsx`) |
+| "the top tier of … surgical expertise" — unhyphenated | all 5 state hubs | `top-tier` regex requires the hyphen |
+| "Meet with our world-class surgeons today" | nav dropdown, sitewide | component string (`NavBar`, `SidebarNavItem`) |
+| "Our renowned doctors" ×3 / "Renowned Spine Surgeons" | doctors-page metadata / insurance trust card | route-file strings; the insurance fix is a superlative, not payer copy — Temur gate untouched |
+| "unmatched precision" ×2, "unmatched expertise" | McCarthy and Slaughter bios | physician-bio file; the cleared "elite training from Princeton, Harvard, and Brown" is untouched — the clearance covered that phrase, not these comparatives. Softened minimally; flagged as reversible if the business clears them |
+
+**Classified pre-existing, deliberately unchanged:** the three #418 hydration errors on
+`meniscus-surgery` / `arthroscopic-knee-surgery` / `acl-reconstruction-surgery` **reproduce
+on production today** (ground-truthed by loading the live pages — not the cluster's doing);
+the 4px `/locations` mobile overflow measures identically on production; the audit's
+"resource 404s" were Google Ads/Analytics beacons failing on localhost; every rendered
+superlative remaining on location pages sits inside a patient review carousel.
+
+**Also verified:** all 80 distinct internal link targets across the four LPs resolve 200;
+all 74 `additionalSections` headings render in built HTML (the 11 "missing insurance
+sections" were each record's dormant, never-rendered `insurance:` field — byte-identical
+to production); zero outcome claims, neurosurgery references, or markdown leaks anywhere
+in the 706 documents.
+
+**The systemic lesson, recorded so the next sweep starts here:** a data-file sweep bounds
+its guarantee to the files it reads. Marketing copy lives in at least five other places —
+route files, shared components, nav data, metadata objects, physician bios — and string
+matching must tolerate hyphen and spacing variants. The rendered-output sweep
+(`static_sweep` over built HTML) is the only check whose coverage equals what users see.
+
+---
+
 # What this PR proves, and what it rules out
 
 Four rounds of verification refuted three hypotheses. Each refutation is recorded with its

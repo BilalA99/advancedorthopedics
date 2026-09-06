@@ -13,7 +13,7 @@ export default function StateWhyChoose({ stateName }: StateWhyChooseProps) {
     {
       icon: Award,
       title: 'Board-Certified Surgeons',
-      desc: 'Our fellowship-trained specialists represent the top tier of orthopedic and spine surgical expertise.',
+      desc: 'Our fellowship-trained, board-certified specialists cover the full range of orthopedic and spine surgical care.',
     },
     {
       icon: Clock,
