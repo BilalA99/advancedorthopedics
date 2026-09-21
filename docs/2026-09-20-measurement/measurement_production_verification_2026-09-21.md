@@ -79,12 +79,28 @@ Both accounts: Customer data terms **Accepted**, **Recording Enhanced Conversion
 
 | Account | Markets | Destination | EC method |
 |---|---|---|---|
-| `721-766-1742` (ocid 7322556646) | FL, GA | AW-17270956371 | Google Tag **Manager** |
-| `147-098-7566` (ocid 8060035325) | NJ, NY, PA | AW-17988324873 | Google **Tag** |
+| `721-766-1742` (ocid 7322556646) | **FL** (live) + GA routed | AW-17270956371 | Google Tag Manager |
+| `147-098-7566` (ocid 8060035325) | **NJ** (live) + NY, PA routed | AW-17988324873 | Google Tag Manager *(was Google Tag)* |
 
-The method discrepancy is unresolved — the detail panel would not expand because the
-browser profile's ad blocker degrades the Ads UI. Worth confirming automatic
-user-provided-data collection is off on `147-098-7566`.
+There is **no separate Ads account for NY, PA or GA** — those markets are routed
+into the two existing accounts by GTM trigger. If any of them later gets its own
+account, the GTM tag/trigger mapping must be updated or their conversions will
+keep landing in the other state's account.
+
+**RESOLVED.** `147-098-7566` was on the Google Tag method with automatic detection
+active — its panel read "Your tag will automatically detect user-provided data from
+your website." Because the Ads conversion tags trigger on `market` rather than
+form source, that automatic path would have attached scraped identity to
+conversions originating from the clinical assessment forms, bypassing the explicit
+consent-gated UPD tag.
+
+Switched to **Google Tag Manager** and saved; verified on a fresh page load that
+both rows now read "Managed through Google Tag Manager". Both accounts are now
+consistent, and identity reaches Ads only through the explicit, consent-gated,
+SHA-256 hashed setup tags. No coverage was lost — `Lead Submit Form Enhanced For
+NJ/NY` already fires as a setup tag on the conversion for this account.
+
+The Ads UI expanders only function with the ad blocker disabled for ads.google.com.
 
 Only FL and NJ are running ads. NY, PA and GA are configured but have no spend, so
 no paid reconciliation is possible for those three yet.
