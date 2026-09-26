@@ -391,8 +391,91 @@ async function checkMetaFormSourceTriage() {
   }
 }
 
+/**
+ * D10 (2026-09-24): a lead whose insurance is not accepted must not fire the
+ * qualified conversion.
+ *
+ * Structural, not behavioural — tests/measurement-insurance-routing.test.ts
+ * proves the runtime behaviour. This proves a refactor cannot quietly remove the
+ * gate or reorder it after the push, which is the failure mode that would send
+ * unqualified leads into Smart Bidding without any test necessarily noticing.
+ */
+const QUALIFICATION_GATE = /lead_qualification\s*===\s*['"]unqualified['"]/;
+
+async function checkUnqualifiedLeadsDoNotConvert() {
+  const source = stripComments(await read(TRACKING_MODULE));
+  const body = extractFunctionBody(source, 'pushFormSubmit');
+
+  if (!body) {
+    fail('unqualified leads cannot fire the qualified conversion',
+      `could not locate pushFormSubmit in ${TRACKING_MODULE}`);
+    return;
+  }
+
+  const gate = QUALIFICATION_GATE.exec(body);
+  if (!gate) {
+    fail('unqualified leads cannot fire the qualified conversion',
+      `pushFormSubmit no longer tests lead_qualification === 'unqualified'. ` +
+      `Without that gate an "Other"-insurance lead fires the qualified conversion ` +
+      `and corrupts Smart Bidding with leads the practice cannot serve (D10).`);
+    return;
+  }
+
+  const pushIndex = body.search(/dataLayer\s*\.\s*push\s*\(\s*buildCanonicalLeadEvent/);
+  if (pushIndex !== -1 && gate.index > pushIndex) {
+    fail('unqualified leads cannot fire the qualified conversion',
+      `the lead_qualification gate is evaluated AFTER the ${CANONICAL_EVENT} push, ` +
+      `so the conversion has already fired by the time qualification is checked.`);
+  }
+
+  // The gate must actually stop execution, not merely branch around one call.
+  const gateTail = body.slice(gate.index, gate.index + 200);
+  if (!/\breturn\b/.test(gateTail)) {
+    fail('unqualified leads cannot fire the qualified conversion',
+      `the lead_qualification check does not return, so an unqualified lead can ` +
+      `still reach the advertising surfaces below it.`);
+  }
+}
+
+/**
+ * The insurance answer must never become an advertising signal.
+ *
+ * Guards both directions: the tracking module must not import the option list or
+ * carrier names, and the canonical payload builder must not learn an insurance
+ * field. Qualification reaches the tracking module as an opaque
+ * qualified/unqualified flag and nothing more.
+ */
+async function checkInsuranceStaysFirstParty() {
+  const tracking = stripComments(await read(TRACKING_MODULE));
+  const contract = stripComments(await read(CONTRACT_MODULE));
+
+  const carriers = /\b(aetna|cigna|unitedhealthcare|blue\s*cross|bcbs|humana|medicaid|medicare)\b/i;
+  for (const [label, source] of [[TRACKING_MODULE, tracking], [CONTRACT_MODULE, contract]]) {
+    const hit = carriers.exec(source);
+    if (hit) {
+      fail('insurance selections stay first-party',
+        `${label} names the carrier "${hit[1]}". Carrier names belong in ` +
+        `lib/insurance-routing.ts and Supabase, never in the measurement path.`);
+    }
+    if (/insurance_type/.test(source)) {
+      fail('insurance selections stay first-party',
+        `${label} references insurance_type. The measurement path may only see ` +
+        `the opaque lead_qualification flag.`);
+    }
+  }
+
+  const builder = extractFunctionBody(contract, 'buildCanonicalLeadEvent');
+  if (builder && /insurance/i.test(builder)) {
+    fail('insurance selections stay first-party',
+      `buildCanonicalLeadEvent mentions insurance; the advertising payload is a ` +
+      `closed set of six operational keys and must not gain an insurance field.`);
+  }
+}
+
 const CHECKS = [
   ['accepted-lead event is consent-independent', checkAcceptedLeadIsConsentIndependent],
+  ['unqualified leads cannot fire the qualified conversion', checkUnqualifiedLeadsDoNotConvert],
+  ['insurance selections stay first-party', checkInsuranceStaysFirstParty],
   ['exactly one canonical push per submission path', checkSingleCanonicalPush],
   ['canonical event shape and market contract', checkEventShape],
   ['obsolete form_submit stays retired', checkLegacyEventNotRestored],

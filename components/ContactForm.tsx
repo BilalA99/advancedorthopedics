@@ -24,6 +24,7 @@ import { useRouter, usePathname } from "next/navigation"
 import { pushAcceptedLead } from "@/utils/enhancedConversions"
 import { STATE_OPTIONS, slugFromPathname, normalizeState } from "@/lib/stateUtils"
 import { resolveFormSource } from "@/lib/lead-contract"
+import { getInsuranceOptions, routeForInsurance } from "@/lib/insurance-routing"
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -31,9 +32,9 @@ const formSchema = z.object({
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   reason: z.string().min(2, "Please provide more detail about your consultation needs"),
-  bestTime: z.string().min(1, "Please provide more detail about your consultation needs"),
-  postalCode: z.string()
-    .regex(/^\d{5}(?:-\d{4})?$/, "Please enter a valid ZIP code"),
+  // D11 (2026-09-24): insurance is required and PPO appears explicitly, so a
+  // patient who knows they hold a PPO is never pushed into "Other".
+  insuranceType: z.string().min(1, "Please select your insurance"),
   country: z.string(),
   state: z.string().min(1, "Please select your state"),
 })
@@ -58,8 +59,7 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
       email: "",
       phone: "",
       reason: "",
-      bestTime: "",
-      postalCode: "",
+      insuranceType: "",
       country: "US",
       state: resolvedState,
     },
@@ -80,8 +80,9 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
           email: values.email,
           phone: values.phone,
           reason: values.reason,
-          bestTime: values.bestTime,
-          postalCode: values.postalCode,
+          // Persisted to Supabase forms.insurance_type only. Never sent to GA4,
+          // Google Ads or Meta — see lib/insurance-routing.ts.
+          insurance_type: values.insuranceType,
           country: values.country,
           state: values.state,
           form_source: formSource,
@@ -107,11 +108,16 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
         return
       }
 
-      const accepted = await pushAcceptedLead({ acceptance: res, form_name: 'ConsultationForm', form_source: formSource, state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode });
+      // D10: qualification decides BOTH whether the qualified conversion fires
+      // and which confirmation page the patient sees. Derived here, once, from
+      // the single source of truth in lib/insurance-routing.ts.
+      const { qualification, thankYouPath } = routeForInsurance(values.insuranceType)
+
+      const accepted = await pushAcceptedLead({ acceptance: res, form_name: 'ConsultationForm', form_source: formSource, state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, lead_qualification: qualification });
       if (!accepted) return
 
       form.reset()
-      router.push('/thank-you')
+      router.push(thankYouPath)
     } catch (error) {
       console.error("[ConsultationForm] Submit failed", error)
       setSubmitError("We couldn't submit your request. Please try again in a moment, or call our office.")
@@ -220,31 +226,6 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
             />
             <FormField
               control={form.control}
-              name="postalCode"
-              render={({ field }) => {
-                const { name: _, ...fieldProps } = field;
-                return (
-                  <FormItem>
-                    <FormLabel className="text-sm text-[#838890] font-semibold">ZIP / Postal Code<span className="text-red-500">*</span></FormLabel>
-                    <FormControl>
-                      <Input 
-                        id="postal_code"
-                        aria-label="ZIP or postal code"
-                        name="postalCode"
-                        inputMode="numeric"
-                        autoComplete="postal-code"
-                        placeholder="e.g., 33463" 
-                        className="h-12 text-lg border-[#DCDEE1] bg-[#FAFAFA]" 
-                        {...fieldProps} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                );
-              }}
-            />
-            <FormField
-              control={form.control}
               name="state"
               render={({ field }) => (
                 <FormItem>
@@ -269,34 +250,57 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
             />
           </div>
 
+          {/*
+            Insurance (D10 + D11, 2026-09-24).
+
+            Replaces "Best Time To Contact", which was removed as a meeting
+            decision. Options and qualification come from
+            lib/insurance-routing.ts — a single source of truth shared with the
+            routing logic in onSubmit, so the dropdown and the conversion
+            decision can never disagree.
+
+            The selected value goes to Supabase only. It is not added to the
+            canonical lead event, not put in a URL, and not sent to any ad
+            platform.
+          */}
           <FormField
             control={form.control}
-            name="bestTime"
+            name="insuranceType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm text-[#838890] font-semibold">
-
-                  Best Time To Contact
+                <FormLabel htmlFor="insurance_type" className="text-sm text-[#838890] font-semibold">
+                  Insurance
                   <span className="text-red-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Select onValueChange={field.onChange} value={field.value} >
-                    <SelectTrigger aria-label="Select Best Time To Contact"
-                      className="w-full h-12 px-6 bg-[#f0f5ff]  border rounded-sm"
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <SelectTrigger
+                      id="insurance_type"
+                      aria-label="Select your insurance"
+                      className="w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm"
                     >
-                      <SelectValue placeholder="Select Best Time To Contact" className=" font-[var(--font-inter)] h-12 text-lg data-[placeholder]:text-red-500" />
+                      <SelectValue
+                        placeholder="Select your insurance"
+                        className="font-[var(--font-inter)] h-12 text-lg"
+                      />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        {["As Soon As Possible", "Morning", "Afternoon", "Evening"].map((service) => (
-                          <SelectItem key={service} value={service}>
-                            {service}
+                        {getInsuranceOptions().map(({ value, label }) => (
+                          <SelectItem key={value} value={value}>
+                            {label}
                           </SelectItem>
                         ))}
                       </SelectGroup>
                     </SelectContent>
                   </Select>
                 </FormControl>
+                <p className="text-xs text-[#838890]">
+                  Mountain Spine &amp; Orthopedics is a PPO practice. Selecting
+                  &quot;Other&quot; still sends us your request — our team will go over
+                  your options with you.
+                </p>
+                <FormMessage />
               </FormItem>
             )}
           />

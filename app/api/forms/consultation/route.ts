@@ -11,8 +11,11 @@ type ConsultationPayload = {
   email: string;
   phone: string;
   reason: string;
-  bestTime: string;
-  postalCode?: string;
+  /**
+   * Insurance selection (D10/D11, 2026-09-24). Persisted to Supabase and shown
+   * in the staff email only — never forwarded to GA4, Google Ads or Meta.
+   */
+  insurance_type?: string;
   country?: string;
   state?: string;
   form_source?: string;
@@ -46,7 +49,7 @@ export async function POST(request: Request) {
       email: body.email,
       phone: body.phone,
       reason: body.reason,
-      bestTime: body.bestTime,
+      insurance_type: body.insurance_type,
       state: body.state,
       form_source: body.form_source || 'general-contact',
       gclid: body.gclid,
@@ -64,7 +67,7 @@ export async function POST(request: Request) {
       phone: body.phone,
       state: body.state,
       reason: body.reason,
-      bestTime: body.bestTime,
+      insurance_type: body.insurance_type,
       form_source: body.form_source || 'general-contact',
       gclid: body.gclid,
       gbraid: body.gbraid,

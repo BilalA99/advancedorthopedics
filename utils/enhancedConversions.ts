@@ -332,6 +332,8 @@ type AcceptedLeadContext = {
   lastName?: string;
   postalCode?: string;
   country?: string;
+  /** See pushFormSubmit — D10 insurance qualification. Defaults to 'qualified'. */
+  lead_qualification?: 'qualified' | 'unqualified';
 };
 
 export async function pushAcceptedLead({
@@ -358,6 +360,7 @@ export async function pushFormSubmit({
   lastName,
   postalCode,
   country = 'US',
+  lead_qualification = 'qualified',
 }: {
   form_name: string;
   form_source?: FormSource;
@@ -369,6 +372,14 @@ export async function pushFormSubmit({
   lastName?: string;
   postalCode?: string;
   country?: string;
+  /**
+   * Whether this lead met the practice's insurance criteria (D10, 2026-09-24).
+   *
+   * Defaults to 'qualified' so every form that does not ask about insurance
+   * behaves exactly as before. Only forms carrying the insurance dropdown pass
+   * 'unqualified', and they derive it from lib/insurance-routing.ts.
+   */
+  lead_qualification?: 'qualified' | 'unqualified';
 }) {
   if (typeof window === 'undefined') return;
 
@@ -376,6 +387,29 @@ export async function pushFormSubmit({
   if (!acceptance || emittedSubmissionIds.has(acceptance.submissionId)) return;
 
   emittedSubmissionIds.add(acceptance.submissionId);
+
+  // ---------------------------------------------------------------------------
+  // STEP 0 — Qualification gate (D10).
+  //
+  // A lead whose insurance is not accepted is a real, server-accepted lead: it
+  // is persisted to Supabase, it emails the clinic, and the patient still gets a
+  // confirmation page. What it is NOT is a qualified conversion, so it must not
+  // reach Google Ads, Meta, or the enhanced-conversion identity path.
+  //
+  // Returning here — rather than adding an "unqualified" event — is deliberate.
+  // The insurance answer must not reach an advertising payload, and a
+  // distinctly-named event would carry that answer in its own name. Unqualified
+  // volume stays measurable from Supabase, which is where this codebase already
+  // keeps first-party qualification (see lib/insurance-routing.ts, and the
+  // deliberately neutral 'paid-landing' form source).
+  //
+  // This gate is NOT consent-shaped: it asks what kind of lead this is, never
+  // what the visitor permitted. The consent-independence contract is unaffected.
+  //
+  // The submission ID is registered above before this return, so a retry cannot
+  // promote the same submission into a conversion later.
+  // ---------------------------------------------------------------------------
+  if (lead_qualification === 'unqualified') return;
 
   // ---------------------------------------------------------------------------
   // STEP 1 — Business event. Consent-INDEPENDENT by design.

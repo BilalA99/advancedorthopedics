@@ -146,6 +146,11 @@ export async function sendUserEmail(formData: {
   state?: string;
   reason?: string;
   bestTime?: string;
+  /**
+   * Insurance selection (D10/D11). First-party only: it lands in Supabase and
+   * the internal staff email, and is never forwarded to an ad platform.
+   */
+  insurance_type?: string;
   form_source?: string;
   gclid?: string;
   gbraid?: string;
@@ -163,6 +168,7 @@ export async function sendUserEmail(formData: {
     state:         formData.state,
     reason:        formData.reason,
     best_time:     formData.bestTime,
+    insurance_type: formData.insurance_type,
     form_source:   formData.form_source || 'unknown',
     landing_path:  formData.landing_path,
     gclid:         formData.gclid,
@@ -211,7 +217,10 @@ export async function sendContactEmail(formData: {
   email: string;
   phone: string;
   reason: string;
-  bestTime: string;
+  /** Optional since D10 removed "Best Time To Contact" from the intake form. */
+  bestTime?: string;
+  /** Insurance selection (D10/D11). Staff-facing only. */
+  insurance_type?: string;
   has_attorney?: string;
   injury_type?: string;
   pain_level?: string;
@@ -254,6 +263,7 @@ export async function sendContactEmail(formData: {
         phone: formData.phone,
         reason: formData.reason,
         bestTime: formData.bestTime,
+        insurance_type: formData.insurance_type,
         has_attorney: formData.has_attorney,
         injury_type: formData.injury_type,
         pain_level: formData.pain_level,
