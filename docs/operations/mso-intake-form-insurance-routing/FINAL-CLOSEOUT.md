@@ -148,6 +148,20 @@ nesting is fixed. Everywhere else the component renders, they work.
 5. Bump `@types/react` so `tsc` works again.
 6. Decide on the Enhanced-Conversions consent question in point 2 above.
 
+## Where this stopped
+
+Production was **not** deployed. At your direction the work stops at
+**PR #4** (https://github.com/BilalA99/advancedorthopedics/pull/4), commit
+`8d5f9c2`, so you can review the Vercel preview and the 15-option dropdown before
+it reaches patients.
+
+The one thing already live in production is the additive `forms.postal_code`
+column, applied deliberately ahead of the code. It is inert until the code that
+writes it ships, and that ordering is what prevents the class of outage that broke
+lead capture for four days when `landing_path` shipped without a migration.
+
+Post-merge verification steps are in `09-production-verification.md`.
+
 ## Evidence
 
 ```
