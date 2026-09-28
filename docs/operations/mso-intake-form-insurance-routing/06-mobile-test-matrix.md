@@ -82,7 +82,7 @@ finger.
 | Surface | PPO | Other |
 | --- | --- | --- |
 | `BodyPartHeroForm` @ `/lp/adult-scoliosis-treatment` (paid) | pass | pass |
-| `DoctorContactForm` @ `/find-care/book-an-appointment` | not exercised — see `05` | not exercised |
+| `DoctorContactForm` @ `/find-care/book-an-appointment` | pass | pass |
 | `StateHeroForm` @ `/locations/florida` | n/a — desktop-only surface | n/a |
 
 `StateHeroForm`'s first-phase fields are not rendered at 390px (`hero_first_name`

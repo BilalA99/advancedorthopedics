@@ -271,7 +271,7 @@ export function PatientAdvocateForm() {
                     <FormLabel className="text-sm text-[#838890] font-semibold">ZIP / Postal Code<span className="text-red-500">*</span></FormLabel>
                     <FormControl>
                       <Input 
-                        id="postal_code"
+                        id="patientadvocate_postal_code"
                         aria-label="ZIP or postal code"
                         name="postalCode"
                         inputMode="numeric"

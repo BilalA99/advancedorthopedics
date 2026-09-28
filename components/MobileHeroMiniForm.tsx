@@ -246,7 +246,6 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
               aria-label="Your name"
               placeholder="Your Name"
               value={formData.firstName}
-              autoComplete="given-name"
               onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
               className="w-full pl-10 pr-4 py-3 text-sm bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2358AC]/20 focus:border-[#2358AC] transition-all placeholder:text-[#9CA3AF]"
               style={{ fontFamily: 'var(--font-inter)' }}
@@ -266,7 +265,6 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
               aria-label="Phone number"
               placeholder="Phone Number"
               value={formData.phone}
-              autoComplete="tel"
               onChange={(e) => setFormData({ ...formData, phone: formatPhoneInput(e.target.value) })}
               className="w-full pl-10 pr-4 py-3 text-sm bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2358AC]/20 focus:border-[#2358AC] transition-all placeholder:text-[#9CA3AF]"
               style={{ fontFamily: 'var(--font-inter)' }}

@@ -187,7 +187,12 @@ var INSURANCE_NOT_QUALIFIED = [
 
 var INSURANCE_QUALIFIED_NAMED = [
   'workers compensation',
-  'auto / personal injury (pip)'
+  'auto / personal injury (pip)',
+  // Accepted payer without being a PPO, so the substring rule below would miss it.
+  // Note the receiver's getLeadPriority will still label these STANDARD rather
+  // than PPO — correct, since it is not a PPO. Priority and qualification are
+  // different questions.
+  'self-pay / no insurance'
 ];
 
 /** Lower-cases, trims and flattens curly apostrophes so comparisons are stable. */

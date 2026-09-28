@@ -190,7 +190,11 @@ test('the pattern is anchored, so no prefix or suffix sneaks through', () => {
 test('ZIP exists: the intake form renders a labelled, required ZIP field', () => {
   assert.match(FORM, /name="postalCode"/, 'form has no postalCode field');
   assert.match(FORM, /ZIP \/ Postal Code/, 'ZIP field has no visible label');
-  assert.match(FORM, /id="postal_code"/, 'ZIP field has no stable id');
+  // Component-scoped, not a bare "postal_code": five components render a ZIP
+  // input, and duplicate ids made label[for] and getElementById resolve to
+  // whichever copy came first — often one in a hidden form.
+  assert.match(FORM, /id="consultation_postal_code"/, 'ZIP field has no stable, scoped id');
+  assert.match(FORM, /htmlFor="consultation_postal_code"/, 'ZIP label is not associated with its input');
   assert.match(FORM, /aria-label="ZIP or postal code"/, 'ZIP field is not labelled for screen readers');
   assert.match(FORM, /autoComplete="postal-code"/, 'ZIP field does not opt into browser autofill');
   assert.match(FORM, /inputMode="numeric"/, 'ZIP field does not request a numeric mobile keyboard');

@@ -31,24 +31,12 @@ const TARGETS = [
     endpoint: '/api/forms/doctor',
     insuranceId: 'doctor_insurance_type',
     kind: 'radix',
-    prepare: null,
-    // PRE-EXISTING, NOT CAUSED BY THIS CHANGE.
-    //
-    // This page's visible form has no reachable submit control. DoctorContactForm
-    // renders an outer <form> with no onSubmit (the fields the page shows), and the
-    // real <form onSubmit={...}> lives inside a <Dialog> NESTED INSIDE that outer
-    // form. Nested <form> elements are invalid HTML, so the parser drops the inner
-    // one. A real mouse click at the centre of the "Book an Appointment" CTA opens
-    // no dialog, issues no request and shows no validation error.
-    //
-    // Verified identical in `git show HEAD:components/DoctorContactForm.tsx`:
-    // outer form at line 301 with no onSubmit, and zero <button> elements between
-    // it and the inner form.
-    //
-    // The insurance dropdown, the server gate and the routing ARE wired into this
-    // component; the flow simply cannot be driven from this page until the form
-    // nesting is fixed. See FINAL-CLOSEOUT.md.
-    blocked: 'pre-existing: no reachable submit control (nested <form> elements)',
+    // The full form lives in a Radix Dialog opened by the page's "Book an
+    // Appointment" CTA. The CTA sits below the fold, and scrollIntoView() from
+    // inside page.evaluate does not reliably bring it into the viewport here, so
+    // a coordinate click lands on nothing. An in-page .click() on the element
+    // carrying the onClick is what actually opens it.
+    prepare: 'open-booking-dialog',
   },
   {
     name: 'BodyPartHeroForm @ /lp/adult-scoliosis-treatment (PAID landing page)',
@@ -144,6 +132,20 @@ async function openPage(target) {
   await page.goto(BASE + target.url, { waitUntil: 'networkidle2', timeout: 60000 });
   await new Promise((r) => setTimeout(r, 1500));
 
+  if (target.prepare === 'open-booking-dialog') {
+    const opened = await page.evaluate(() => {
+      const form = document.getElementById('doctor_insurance_type')?.closest('form');
+      if (!form) return false;
+      const cta = Array.from(form.querySelectorAll('div'))
+        .find((d) => /w-full self-center flex items-center justify-center/.test(d.className || ''));
+      if (!cta) return false;
+      cta.click();
+      return true;
+    });
+    if (!opened) throw new Error('could not find the booking CTA on ' + target.url);
+    await new Promise((r) => setTimeout(r, 1800));
+  }
+
   if (target.prepare === 'open-evaluation-dialog') {
     // Desktop: a [data-open-evaluation] CTA beside the hero opens the dialog directly.
     await page.evaluate(() => {
@@ -204,24 +206,96 @@ async function openPage(target) {
   return { page, posts };
 }
 
+/**
+ * The id of the insurance control the user can actually interact with.
+ *
+ * DoctorContactForm renders the same RHF field twice — once in the visible
+ * preview form and once inside the booking Dialog — so two controls share the
+ * field. Once the Dialog is open, Radix makes everything behind it inert, and
+ * driving the preview copy silently does nothing: the listbox never opens and it
+ * reads as a broken dropdown rather than a harness pointing at the wrong element.
+ */
+async function resolveInsuranceId(page, target) {
+  return page.evaluate((id) => {
+    const prefix = id.split('_')[0];
+    const all = Array.from(document.querySelectorAll(
+      '[id^="' + prefix + '"][id$="_insurance_type"], #' + id,
+    ));
+    // Prefer one inside an open dialog, then any visible one, then the named one.
+    const inDialog = all.find((e) => e.closest('[role="dialog"]') && e.getClientRects().length > 0);
+    const visible = all.find((e) => e.getClientRects().length > 0);
+    return (inDialog || visible || document.getElementById(id) || {}).id || id;
+  }, target.insuranceId);
+}
+
 /** Scopes to the form containing this target's insurance control. */
 async function scope(page, target) {
+  const resolvedId = await resolveInsuranceId(page, target);
   const ok = await page.evaluate((id) => {
-    // Prefer a VISIBLE control. Several components render two layout variants, so
-    // getElementById can hand back the hidden one and scope every later selector
-    // to a form the user cannot see.
-    const all = Array.from(document.querySelectorAll(`[id^="${id.split('_')[0]}"][id$="_insurance_type"], #${id}`));
-    const el = all.find((e) => e.getClientRects().length > 0) || all[0] || document.getElementById(id);
+    const el = document.getElementById(id);
     const form = el?.closest('form');
     if (!form) return false;
+    document.querySelectorAll('[data-qa-target]').forEach((f) => f.removeAttribute('data-qa-target'));
     form.setAttribute('data-qa-target', '1');
     return true;
-  }, target.insuranceId);
-  if (!ok) throw new Error(`insurance control #${target.insuranceId} not found on ${target.url}`);
+  }, resolvedId);
+  if (!ok) throw new Error(`insurance control #${resolvedId} not found on ${target.url}`);
   return '[data-qa-target="1"]';
 }
 
+/**
+ * Picks a value from any Radix Select addressed by CSS selector.
+ *
+ * Keyboard type-ahead first, because it behaves identically with and without
+ * touch emulation; a real pointer sequence as fallback, because Radix items
+ * listen on pointer events and ignore a plain element.click() under touch.
+ */
+async function selectRadixBySelector(page, selector, wanted) {
+  const reads = () => page.evaluate((s) => document.querySelector(s)?.textContent?.trim() || '', selector);
+  const done = async () => { const t = await reads(); return Boolean(t) && !/^select /i.test(t); };
+
+  await page.evaluate((s) => { const e = document.querySelector(s); e.scrollIntoView({ block: 'center' }); e.focus(); }, selector);
+  await page.keyboard.press('Enter');
+  await new Promise((r) => setTimeout(r, 550));
+  await page.keyboard.type(wanted.slice(0, 8), { delay: 60 });
+  await new Promise((r) => setTimeout(r, 250));
+  await page.keyboard.press('Enter');
+  await new Promise((r) => setTimeout(r, 450));
+  if (await done()) return reads();
+
+  const seen = await page.evaluate((s, want) => {
+    const trigger = document.querySelector(s);
+    const controlled = trigger?.getAttribute('aria-controls');
+    const all = Array.from(document.querySelectorAll('[role="listbox"]'));
+    const visible = all.filter((b) => b.getClientRects().length > 0);
+    const box = (controlled && all.find((b) => b.id === controlled)) || visible[visible.length - 1] || all[all.length - 1];
+    if (!box) return [];
+    const options = Array.from(box.querySelectorAll('[role="option"]'));
+    const norm = (o) => (o.textContent || '').trim().toLowerCase();
+    const el = options.find((o) => norm(o) === want.toLowerCase())
+      || options.find((o) => norm(o).indexOf(want.toLowerCase()) === 0)
+      || options.find((o) => norm(o).includes(want.toLowerCase()));
+    if (!el) return options.map((o) => (o.textContent || '').trim());
+    el.scrollIntoView({ block: 'center' });
+    const r = el.getBoundingClientRect();
+    const base = { bubbles: true, cancelable: true, composed: true, clientX: r.x + r.width / 2, clientY: r.y + r.height / 2, pointerId: 1, isPrimary: true, button: 0 };
+    el.dispatchEvent(new PointerEvent('pointerdown', { ...base, pointerType: 'mouse' }));
+    el.dispatchEvent(new MouseEvent('mousedown', base));
+    el.dispatchEvent(new PointerEvent('pointerup', { ...base, pointerType: 'mouse' }));
+    el.dispatchEvent(new MouseEvent('mouseup', base));
+    el.dispatchEvent(new MouseEvent('click', base));
+    return null;
+  }, selector, wanted);
+  await new Promise((r) => setTimeout(r, 450));
+  if (await done()) return reads();
+
+  throw new Error(`"${wanted}" did not register on ${selector} (reads "${await reads()}"; offered ${JSON.stringify(seen || []).slice(0, 220)})`);
+}
+
 async function setInsurance(page, target, sc, wanted) {
+  const insuranceId = await resolveInsuranceId(page, target);
+  target = Object.assign({}, target, { insuranceId: insuranceId });
+
   if (target.kind === 'native') {
     const value = await page.evaluate((id, want) => {
       const sel = document.getElementById(id);
@@ -334,18 +408,19 @@ async function fillCommon(page, sc, insuranceId) {
     }
   }, sc, insuranceId);
 
-  // Radix state select, if this form uses one.
-  const stateSel = `${sc} [aria-label="Select your state"]`;
+  // Radix state select, if this form uses one. The aria-label is not consistent
+  // across components — ConsultationForm says "Select your state",
+  // DoctorContactForm says "Select state" — so accept either.
+  const stateSel = (await page.$(`${sc} [aria-label="Select your state"]`))
+    ? `${sc} [aria-label="Select your state"]`
+    : `${sc} [aria-label="Select state"]`;
   if (await page.$(stateSel)) {
     const cur = await page.evaluate((s) => document.querySelector(s)?.textContent?.trim(), stateSel);
-    if (!cur || /select your state/i.test(cur)) {
-      await page.evaluate((s) => document.querySelector(s).focus(), stateSel);
-      await page.keyboard.press('Enter');
-      await new Promise((r) => setTimeout(r, 500));
-      await page.keyboard.type('Florida', { delay: 60 });
-      await new Promise((r) => setTimeout(r, 200));
-      await page.keyboard.press('Enter');
-      await new Promise((r) => setTimeout(r, 400));
+    // Matches "Select state" AND "Select your state": the placeholder wording is
+    // not consistent across components, and a guard that only knew one of them
+    // skipped setting state entirely on the other.
+    if (!cur || /^select /i.test(cur)) {
+      await selectRadixBySelector(page, stateSel, 'Florida');
     }
   }
   await new Promise((r) => setTimeout(r, 300));
@@ -380,12 +455,6 @@ for (const target of TARGETS) {
 
   if (target.desktopOnly && PROFILE === 'mobile') {
     console.log('  SKIP desktop-only surface (its fields are not rendered at mobile widths)');
-    continue;
-  }
-
-  if (target.blocked) {
-    console.log(`  SKIP ${target.blocked}`);
-    console.log('  (not a failure of this change — see the comment in TARGETS)');
     continue;
   }
 

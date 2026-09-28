@@ -36,7 +36,7 @@ the merge was clean and changed no files.
 | `npm run validate:measurement` | 10/10 checks pass |
 | `npx tsc --noEmit` | **unusable** — see below |
 
-### Typecheck is broken in this environment, pre-existing
+### Typecheck was broken in this environment — since FIXED
 
 `npx tsc --noEmit` reports ~20,664 errors, dominated by
 `Property 'div' does not exist on type 'JSX.IntrinsicElements'` in files nobody
@@ -44,13 +44,16 @@ touched (`components/data/clinics.tsx` alone accounts for 3,918). The cause is a
 dependency mismatch: `@types/react@18.0.38` imports `scheduler/tracing`, which
 `scheduler@0.23.2` no longer ships, which collapses the global JSX namespace.
 
-This is not caused by this change and is not fixed here — `next.config.ts` already
-sets `typescript.ignoreBuildErrors`, so the build never depended on it. Type
-confidence for this work therefore comes from the production build, the 146-test
-measurement suite, and the in-browser end-to-end runs, not from `tsc`.
+**Resolved.** `@types/react` was bumped `18.0.38 → 18.3.31` and `@types/react-dom`
+`18.0.11 → 18.3.7`, matching the installed `react@18.3.1`. Error count went
+**20,664 → 44**, and every remaining error is pre-existing and in a file unrelated
+to this workstream.
 
-Fixing it is a one-line dependency bump (`@types/react` to a version matching
-`scheduler@0.23`) and is recommended as separate work.
+A usable typecheck immediately earned its keep: it surfaced two duplicate
+`autoComplete` attributes on the same JSX elements in `MobileHeroMiniForm`
+(`TS17001`), invisible while the check was drowned out. Both are fixed.
+
+44 is the new baseline. `npx tsc --noEmit` is worth running again.
 
 ## What the previous commit on this branch had done
 

@@ -113,7 +113,11 @@ test('every qualified option still carries a PPO-detectable value or is a named 
   // Workers' Comp and Auto/PIP are qualified without being PPO — they are handled
   // by name downstream, not by the substring check. Everything else that qualifies
   // must remain detectable as PPO.
-  const namedPayers = ['Workers’ Compensation', 'Auto / Personal Injury (PIP)'];
+  const namedPayers = [
+    'Workers’ Compensation',
+    'Auto / Personal Injury (PIP)',
+    'Self-pay / no insurance',
+  ];
   for (const option of getInsuranceOptions()) {
     if (option.qualification !== 'qualified') continue;
     if (namedPayers.indexOf(option.value) !== -1) continue;

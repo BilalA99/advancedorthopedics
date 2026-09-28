@@ -20,7 +20,7 @@ site actually driven in a browser.
 | ZIP in notifications | **done — it never was before** |
 | ZIP in attribution / Enhanced Conversions | restored (the previous commit had dropped it) |
 | "Best time to contact" removed | done, from all 9 intake forms and all 4 endpoints |
-| Required insurance dropdown | done, on all 9 intake forms |
+| Required insurance dropdown | done, on all 9 intake forms **and the 3 clinical questionnaires** |
 | PPO explicit | done — `PPO (any carrier)`, first in the list |
 | Approved plan list | done — derived from the practice's own published list |
 | Accepted / PPO → qualified flow | done, verified in-browser on 4 surfaces |
@@ -32,8 +32,9 @@ site actually driven in a browser.
 | Mobile visual testing | 18/18 viewports |
 | Desktop E2E | 44/44 + all other surfaces |
 | Mobile E2E | 51/51 + all other surfaces |
-| Automated tests | 146/146 |
-| Build gate | 14/14 checks, each verified to fail when broken |
+| Automated tests | 148/148 |
+| Build gate | 15/15 checks, each verified to fail when broken |
+| Typecheck | 20,664 → 44 errors, none in files this work touched |
 | Production build | exit 0, 768/768 pages |
 
 ## The two scope decisions you made, and what they cost
@@ -51,6 +52,26 @@ site actually driven in a browser.
    renders `DoctorContactForm` (`<ConsultationForm />` is commented out there), and
    the `/lp/*` paid landing pages render `BodyPartHeroForm`. Both now gate the
    conversion.
+
+   This was then taken all the way: the three **clinical questionnaires**
+   (candidacy check, condition check, free MRI review) also ask for insurance and
+   also fired the qualified conversion unconditionally. They now decide it
+   server-side in their own server actions and obey the answer, exactly as the four
+   endpoints do. Twelve lead surfaces are gated, not one.
+
+3. **One insurance list, not four.** The questionnaires each carried their own
+   copy — `"Cigna Healthcare"`, `"Meritan Health"` (a typo for Meritain),
+   `"Multiplan"`, `"United Healthcare"` — none of which matched the values the rest
+   of the system stores. Those leads could never be classified, and the lead
+   sheet's PPO detection (a substring test for `"ppo"`) marked every one of them
+   STANDARD. All four lists are now the one canonical list.
+
+4. **`Self-pay / no insurance` was added to the plan list** as an accepted,
+   non-PPO payer, alongside Workers' Compensation and Auto/PIP. It was already a
+   live option on the candidacy form, the practice demonstrably serves those
+   patients, and the `/thank-you/other` page already offers self-pay pricing. It
+   now appears on every intake form and qualifies. Reverse it by deleting one entry
+   from `insurancePlans.ts` if that is not what you want.
 
 ## Bugs found that were not part of the brief
 
@@ -75,34 +96,34 @@ shipped silently:
   the brief forbids. Caught by deliberately breaking the gate and noticing it did
   not fire.
 
-## The most serious thing found — and it is not part of this change
+## A finding I reported and then disproved
 
-**`/find-care/book-an-appointment`, the main booking page, has a form that cannot
-be submitted.** Fill every field, click "Book an Appointment", and nothing happens:
-no dialog opens, no network request is made, no validation error appears, the URL
-does not change.
+An earlier pass of this document claimed `/find-care/book-an-appointment` could
+not be submitted at all. **That was wrong, and it is worth saying plainly rather
+than quietly deleting.**
 
-Cause: `DoctorContactForm` renders an outer `<form>` with **no `onSubmit`** — the
-fields the page displays — and the real `<form onSubmit={…}>` lives inside a
-`<Dialog>` **nested inside that outer form**. Nested `<form>` elements are invalid
-HTML, so the parser discards the inner one, taking its submit handler and its
-submit button with it.
+The page works. Its "Book an Appointment" CTA opens a Radix Dialog containing the
+real form, and the full PPO and Other flows have now been driven through it end to
+end on desktop and mobile: PPO routes to `/thank-you` with exactly one conversion,
+Other routes to `/thank-you/other` with none.
 
-Verified pre-existing, not caused by this work:
-`git show HEAD:components/DoctorContactForm.tsx` has the identical structure —
-outer form at line 301 with no `onSubmit`, and zero `<button>` elements between it
-and the inner form at 621. Verified in a real browser with a real mouse click at
-the CTA's exact centre coordinates, not a synthetic event.
+What produced the false finding: the CTA sits below the fold at y≈1050 in a 900px
+viewport, `scrollIntoView()` called from inside `page.evaluate` did not bring it
+into view, and so every coordinate-based click landed on empty space. No dialog
+opened, no request fired, no validation error appeared — which reads exactly like a
+dead form. An in-page `.click()` on the element carrying the handler opens it
+immediately.
 
-It was **not fixed here**: repairing it means restructuring that component's
-layout, which is outside this brief and needs a decision about whether the intended
-flow is inline submission or the dialog. It is listed first under remaining work
-because, if the booking page has been dead for any length of time, it dominates
-every other number in this document.
+Two real (harness) bugs were fixed off the back of it, and both would have hidden
+genuine regressions later:
 
-The insurance dropdown, the server gate and the routing **are** wired into
-`DoctorContactForm`; they simply cannot be exercised from that page until the
-nesting is fixed. Everywhere else the component renders, they work.
+- `DoctorContactForm` renders the same RHF field twice — once in the visible
+  preview form, once inside the Dialog. Once the Dialog is open Radix makes
+  everything behind it inert, so driving the preview copy silently does nothing.
+  The harness now resolves to whichever control is actually interactive.
+- The state-select guard tested `/select your state/i`, but this component's
+  placeholder reads "Select state", so state was never set and the form failed
+  validation on a field the harness thought it had filled.
 
 ## Things you should know, that I did not change
 
@@ -119,48 +140,57 @@ nesting is fixed. Everywhere else the component renders, they work.
    which is **not what the code does**. Pre-existing; the comment is wrong, not the
    code. Worth a decision rather than a silent fix.
 
-3. **`tsc` is unusable in this repo.** `@types/react@18.0.38` imports
-   `scheduler/tracing`, which `scheduler@0.23.2` no longer ships, collapsing
-   `JSX.IntrinsicElements` and producing ~20,664 errors in files nobody touched.
-   One-line dependency bump. Type confidence here came from the build, the 146 tests
-   and the in-browser runs instead.
+3. **`tsc` is usable again.** `@types/react` was bumped to 18.3.31 (matching
+   `react@18.3.1`), taking the error count from **20,664 to 44**. Every remaining
+   error is pre-existing and unrelated to this work. The restored check immediately
+   found two duplicate JSX attributes in `MobileHeroMiniForm`, now fixed.
 
 4. **iPad focus-zoom.** shadcn's `Input` has `md:text-sm`, so every field on the
    site is 14px at ≥768px. Sitewide and pre-existing.
 
-5. **Duplicate `id="postal_code"`** across five components. Invalid HTML, breaks
-   `label[for]`. Not fixed because renaming ids touches selectors the tests and the
-   gate key on; worth a focused follow-up.
+5. **Duplicate ids are gone.** Every ZIP input is now component-scoped
+   (`consultation_postal_code`, `doctor_postal_code`, …), the intake form's label is
+   properly associated again, and a build-gate check fails if a bare id returns or
+   two components ever claim the same one.
 
-## Remaining work, in priority order
+## Remaining work
 
-1. **Fix `/find-care/book-an-appointment`.** See above — the main booking page's
-   form cannot be submitted. Unnest the `<form>` elements: either give the outer
-   form an `onSubmit` and a real submit button, or move the `<Dialog>` out of it.
-2. **Gate the clinical questionnaires.** `CandidacyCheckClient` and
-   `ConditionCheckSection` already collect an insurance answer and still fire the
-   qualified conversion unconditionally, because `lead_qualification` defaults to
-   `'qualified'`. They post through server actions rather than the four intake
-   endpoints, so they need their own pass. This is the largest remaining hole in
-   the qualified signal.
-3. Run GTM Preview against production — steps in `08-gtm-verification.md`.
-4. De-duplicate `id="postal_code"` across the five components.
-5. Bump `@types/react` so `tsc` works again.
-6. Decide on the Enhanced-Conversions consent question in point 2 above.
+Everything raised in earlier revisions of this document has been closed except one
+item, which needs a human hand on a deploy button.
 
-## Where this stopped
+### 1. ZIP into the leads sheet — patch ready, deploy is yours
 
-Production was **not** deployed. At your direction the work stops at
-**PR #4** (https://github.com/BilalA99/advancedorthopedics/pull/4), commit
-`8d5f9c2`, so you can review the Vercel preview and the 15-option dropdown before
-it reaches patients.
+The website stores ZIP and the Supabase webhook already sends it. The receiver
+("Mountain Spine Lead Sheet Auto Sync") has no column for it. The exact two-line
+patch is in the appendix of `apps-script/Code.gs`.
 
-The one thing already live in production is the additive `forms.postal_code`
-column, applied deliberately ahead of the code. It is inert until the code that
-writes it ships, and that ordering is what prevents the class of outage that broke
-lead capture for four days when `landing_path` shipped without a migration.
+**I did not apply it**, deliberately. That project is a live web app: editing the
+code is not enough, it has to be re-deployed as a new version, and the database
+trigger points at one specific deployment URL. Getting that wrong silently stops
+every lead reaching the sheet AND stops the Google Ads offline-conversion export.
+That is not a change to make blind from a browser session.
 
-Post-merge verification steps are in `09-production-verification.md`.
+The tracker finds the column by header name, so nothing else needs editing
+afterwards — ZIP features are dormant and cannot throw until the column exists.
+
+### 2. Decide: should the offline export be qualification-aware?
+
+The receiver uploads leads to Google Ads as `Offline Form Lead - FL` / `- NJNY`
+valued by traffic source, not by whether the practice can serve the patient. Now
+that insurance is captured, that export could skip unqualified leads or value them
+lower. This is a media-buying decision with budget consequences, not an engineering
+one, so it is yours to make rather than mine to assume.
+
+### 3. Decide: Enhanced Conversions for undecided visitors
+
+Described above. `isAdvertisingAllowed()` returns `true` for a visitor who has not
+answered the banner, and the function's own docstring says otherwise. The comment is
+wrong, not the code — but which one you want to be true is an owner decision.
+
+### 4. Housekeeping
+
+An empty **"Untitled project"** in Apps Script, created accidentally when I opened
+Extensions → Apps Script on the leads sheet. No code, no triggers, no deployment.
 
 ## Evidence
 

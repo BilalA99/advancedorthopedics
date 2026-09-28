@@ -281,22 +281,18 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
                 return (
                   <FormItem>
                     {/*
-                      No htmlFor here, deliberately. `id="postal_code"` is not unique
-                      on every page: DoctorContactForm, BookAnAppoitmentButton and
-                      PatientAdvocateForm use the same id, and the homepage mounts
-                      DoctorContactForm lazily via HeroContactFormIdle, so a
-                      label[for="postal_code"] can resolve to a HIDDEN input in
-                      another form and focus the wrong field on click.
-
-                      The accessible name comes from aria-label on the input below,
-                      which takes precedence over a <label> anyway, so screen-reader
-                      users are unaffected. De-duplicating the id across all five
-                      components is a separate change — see 04-implementation-summary.md.
+                      The id is component-scoped. It used to be a bare "postal_code",
+                      which four other form components also used — so on a page
+                      rendering more than one of them (the homepage mounts
+                      DoctorContactForm lazily alongside this form) the document held
+                      duplicate ids, and both label[for] and getElementById resolved
+                      to whichever copy came first, often a hidden one. Scoping the id
+                      makes the htmlFor association below correct again.
                     */}
-                    <FormLabel className="text-sm text-[#838890] font-semibold">ZIP / Postal Code<span className="text-red-500">*</span></FormLabel>
+                    <FormLabel htmlFor="consultation_postal_code" className="text-sm text-[#838890] font-semibold">ZIP / Postal Code<span className="text-red-500">*</span></FormLabel>
                     <FormControl>
                       <Input
-                        id="postal_code"
+                        id="consultation_postal_code"
                         aria-label="ZIP or postal code"
                         name="postalCode"
                         type="text"

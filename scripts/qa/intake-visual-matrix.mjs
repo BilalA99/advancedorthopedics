@@ -116,20 +116,20 @@ for (const pageDef of PAGES) {
       const found = await page.evaluate(() => {
         // Scoped via #insurance_type: id="postal_code" is duplicated across five
         // form components, and the homepage lazily mounts DoctorContactForm, so
-        // querySelector('#postal_code') can return a hidden input in another form.
+        // querySelector('input[autocomplete="postal-code"]') can return a hidden input in another form.
         const form = document.querySelector('#insurance_type')?.closest('form');
-        const el = form?.querySelector('#postal_code');
+        const el = form?.querySelector('input[autocomplete="postal-code"]');
         if (el) el.scrollIntoView({ block: 'center' });
         return Boolean(el);
       });
-      if (!found) failures.push('#postal_code NOT FOUND — ZIP field missing');
+      if (!found) failures.push('ZIP field NOT FOUND — ZIP field missing');
 
       await new Promise((r) => setTimeout(r, 900)); // let the reveal settle
 
       const probe = await page.evaluate(() => {
         const insurance = document.querySelector('#insurance_type');
         const intakeForm = insurance?.closest('form');
-        const zip = intakeForm?.querySelector('#postal_code');
+        const zip = intakeForm?.querySelector('input[autocomplete="postal-code"]');
         const rect = (el) => {
           if (!el) return null;
           const r = el.getBoundingClientRect();

@@ -527,7 +527,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                 <FormControl>
                                                     <div className="flex">
                                                         <Input
-                                                            id="postal_code"
+                                                            id="doctor_postal_code"
                                                             aria-label="ZIP or postal code"
                                                             name="postalCode"
                                                             inputMode="numeric"
@@ -797,7 +797,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                                 </FormLabel>
                                                                 <FormControl>
                                                                     <Input
-                                                                        id="postal_code"
+                                                                        id="doctor_compact_postal_code"
                                                                         aria-label="ZIP or postal code"
                                                                         name="postalCode"
                                                                         inputMode="numeric"

@@ -101,23 +101,16 @@ Run against the surfaces the advertising spend actually lands on.
 
 | Surface | PPO → `/thank-you`, 1 conversion | Other → `/thank-you/other`, 0 conversions |
 | --- | --- | --- |
+| `DoctorContactForm` @ `/find-care/book-an-appointment` | pass | pass |
 | `BodyPartHeroForm` @ `/lp/adult-scoliosis-treatment` (paid) | pass | pass |
 | `StateHeroForm` @ `/locations/florida` | pass | pass |
-| `DoctorContactForm` @ `/find-care/book-an-appointment` | **not exercised** | **not exercised** |
 
-Each passing row also asserts best-time is absent from the payload, insurance is
-present, and the "Other" lead is still delivered.
+Each also asserts best-time is absent from the payload, insurance is present, and
+the "Other" lead is still delivered.
 
-`DoctorContactForm` could **not** be driven from that page, and the reason is a
-pre-existing defect rather than a gap in this change: the page's visible form has
-no reachable submit control. It renders an outer `<form>` with no `onSubmit`, with
-the real `<form onSubmit={…}>` nested inside a `<Dialog>` **inside that outer
-form** — invalid HTML, so the parser discards the inner one. A real mouse click at
-the CTA's exact centre opens no dialog, issues no request and shows no validation
-error. Identical structure confirmed in `git show HEAD:components/DoctorContactForm.tsx`.
-The component's insurance dropdown, server gate and routing are wired and are
-verified by the unit tests and the site-wide form audit; only the click-through on
-this one page is blocked. See `FINAL-CLOSEOUT.md`.
+The booking page's form opens from a CTA into a Radix Dialog. An earlier revision
+of this document wrongly recorded it as unsubmittable; see the correction in
+`FINAL-CLOSEOUT.md`.
 
 ## Server contract — the live endpoint
 

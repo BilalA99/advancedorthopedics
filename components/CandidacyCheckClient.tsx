@@ -37,6 +37,28 @@ const associationLogoAlt: Record<string, string> = {
 import { useRouter } from 'next/navigation'
 import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid'
 import { pushAcceptedLead } from '@/utils/enhancedConversions'
+import {
+  classifyInsurance,
+  destinationFor,
+  getInsuranceOptions,
+  parseLeadRouting,
+  pathForDestination,
+} from '@/lib/insurance-routing'
+
+/**
+ * Insurance options from the one canonical list.
+ *
+ * This file used to carry its own copy — "Cigna Healthcare", "Meritan Health"
+ * (a typo), "Multiplan" — none of which matched the values the rest of the
+ * system stores, so these leads could not be classified and the lead sheet's
+ * PPO detection marked every one of them STANDARD.
+ *
+ * Values are what gets stored; labels are what the patient reads.
+ */
+const INSURANCE_VALUES = getInsuranceOptions().map((o) => o.value)
+const INSURANCE_LABELS: Record<string, string> = Object.fromEntries(
+  getInsuranceOptions().map((o) => [o.value, o.label]),
+)
 // Reverted form schema to match the "Candidacy Check" steps from the image
 const formSchema = z.object({
   // Step 1 Questions
@@ -88,7 +110,7 @@ const CandidacyCheckSteps = [
       { question: "Email", control: "email", options: [] },
       { question: "Phone", control: "phone", options: [] },
       { question: "State", control: "state", options: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"] },
-      { question: "Insurance Type", control: "insurance_type", options: ["Blue Cross Blue Shield", "Aetna", "Cigna Healthcare", "United Healthcare", "Meritan Health", "Bright Health Group", "Multiplan", "Self-pay"] },
+      { question: "Insurance Type", control: "insurance_type", options: INSURANCE_VALUES },
       { question: "Comments", control: "comments", options: [] },
     ]
   }
@@ -181,6 +203,14 @@ export default function CandidacyCheckClient({ reviews }: { reviews: SocialProof
     try {
       const data = await sendCandidacyEmail({ ...values, email_optout: "false", ...attribution });
       if (data) {
+        // D10: the server decides qualification (sendCandidacyEmail returns it) and
+        // this form obeys. Without this the questionnaire fired the qualified
+        // conversion for every submission, including plans the practice cannot
+        // serve — which is the signal the whole change exists to clean up.
+        const serverRouting = parseLeadRouting(data)
+        const qualification = serverRouting?.qualification ?? classifyInsurance(values.insurance_type)
+        const destination = serverRouting?.destination ?? destinationFor(qualification)
+
         await pushAcceptedLead({
           acceptance: data,
           form_name: 'CandidacyCheckForm',
@@ -190,10 +220,10 @@ export default function CandidacyCheckClient({ reviews }: { reviews: SocialProof
           phone: values.phone,
           firstName: values.first_name,
           lastName: values.last_name,
+          lead_qualification: qualification,
         })
-        //setAppointmentConfirm(true);
         form.reset();
-        router.push('/thank-you')
+        router.push(pathForDestination(destination))
         return
       }
       setSubmitError("We couldn't submit your request. Please try again in a moment, or call our office.")
@@ -420,7 +450,9 @@ export default function CandidacyCheckClient({ reviews }: { reviews: SocialProof
                               <SelectContent>
                                 <SelectGroup>
                                   {question.options.map((option) => (
-                                    <SelectItem key={option} value={option}>{option}</SelectItem>
+                                    <SelectItem key={option} value={option}>
+                                      {INSURANCE_LABELS[option] || option}
+                                    </SelectItem>
                                   ))}
                                 </SelectGroup>
                               </SelectContent>

@@ -516,6 +516,24 @@ const INTAKE_FORMS = [
   'components/PatientAdvocateForm.tsx',
 ];
 
+/**
+ * Every form that must gate the qualified conversion on the server's decision.
+ *
+ * Wider than INTAKE_FORMS: the clinical questionnaires ask for insurance too and
+ * reach pushAcceptedLead, so ungated they fire a qualified conversion for every
+ * submission regardless of the plan selected.
+ *
+ * They are NOT in INTAKE_FORMS because the best-time invariant does not apply to
+ * them — the 2026-09-24 meeting removed that field from the intake form, and a
+ * clinical questionnaire asking when to call is a different question. Keeping the
+ * two lists separate is what lets each rule have its own correct scope.
+ */
+const CONVERSION_GATED_FORMS = INTAKE_FORMS.concat([
+  'components/CandidacyCheckClient.tsx',
+  'components/ConditionCheckSection.tsx',
+  'app/find-care/free-mri-review/FreeMRIReviewClient.tsx',
+]);
+
 /** Every endpoint that accepts patient intake. */
 const INTAKE_ROUTES = [
   'app/api/forms/consultation/route.ts',
@@ -608,7 +626,7 @@ async function checkBestTimeStaysRemovedFromIntake() {
 async function checkEveryIntakeFormGatesTheConversion() {
   const check = 'every intake form gates the qualified conversion';
 
-  for (const label of INTAKE_FORMS) {
+  for (const label of CONVERSION_GATED_FORMS) {
     const source = stripComments(await read(label));
 
     if (!/getInsuranceOptions\(\)/.test(source)) {
@@ -632,6 +650,16 @@ async function checkEveryIntakeFormGatesTheConversion() {
     if (/acceptance:\s*res/.test(source)) {
       fail(check, `${label} passes the Response to pushAcceptedLead after reading its body.`);
     }
+  }
+
+  // The questionnaires post through server actions rather than a route handler,
+  // so their server-side decision lives in the action itself.
+  const ACTIONS_MODULE = 'components/email/sendcontactemail.ts';
+  const actions = stripComments(await read(ACTIONS_MODULE));
+  const gatedActions = (actions.match(/resolveLeadRouting\(/g) || []).length;
+  if (gatedActions < 3) {
+    fail(check, `${ACTIONS_MODULE} resolves qualification for only ${gatedActions} of the ` +
+      `3 questionnaire server actions (candidacy, condition check, MRI review).`);
   }
 
   for (const label of INTAKE_ROUTES) {
@@ -668,6 +696,46 @@ async function checkZipIsNotAnAdvertisingParameter() {
   }
 }
 
+/**
+ * Element ids on the intake forms must be component-scoped.
+ *
+ * Five components render a ZIP input and several render an insurance select. When
+ * they all used the same bare id, any page rendering two of them held duplicate
+ * ids — invalid HTML, and both `label[for]` and `getElementById` then resolve to
+ * whichever copy comes first, which on the homepage is a lazily-mounted hidden
+ * form. That produced a real mis-association and cost real debugging time.
+ */
+async function checkFormElementIdsAreScoped() {
+  const check = 'intake form element ids are component-scoped';
+  const bare = [/id="postal_code"/, /id="insurance_type"/];
+
+  const seen = new Map();
+  for (const label of CONVERSION_GATED_FORMS) {
+    const source = stripComments(await read(label));
+
+    for (const pattern of bare) {
+      // ContactForm legitimately owns the unprefixed `insurance_type` id — it is
+      // the canonical intake form and the harnesses key on it — so it is the one
+      // permitted holder. Everything else must be prefixed.
+      if (pattern.source.includes('insurance_type') && label === INTAKE_FORM) continue;
+      if (pattern.test(source)) {
+        fail(check, `${label} uses a bare ${pattern.source}; scope it to the component ` +
+          `(e.g. doctor_postal_code) so two forms on one page cannot collide.`);
+      }
+    }
+
+    for (const m of source.matchAll(/id="([a-z0-9_]+)"/g)) {
+      const id = m[1];
+      if (!/_postal_code$|_insurance_type$|^insurance_type$/.test(id)) continue;
+      if (seen.has(id) && seen.get(id) !== label) {
+        fail(check, `id "${id}" is rendered by both ${seen.get(id)} and ${label}; ` +
+          `a page showing both would contain duplicate ids.`);
+      }
+      seen.set(id, label);
+    }
+  }
+}
+
 const CHECKS = [
   ['accepted-lead event is consent-independent', checkAcceptedLeadIsConsentIndependent],
   ['unqualified leads cannot fire the qualified conversion', checkUnqualifiedLeadsDoNotConvert],
@@ -675,6 +743,7 @@ const CHECKS = [
   ['ZIP stays in the intake form', checkZipSurvivesInIntake],
   ['best time to contact stays removed from intake', checkBestTimeStaysRemovedFromIntake],
   ['every intake form gates the qualified conversion', checkEveryIntakeFormGatesTheConversion],
+  ['intake form element ids are component-scoped', checkFormElementIdsAreScoped],
   ['ZIP is not an advertising parameter', checkZipIsNotAnAdvertisingParameter],
   ['exactly one canonical push per submission path', checkSingleCanonicalPush],
   ['canonical event shape and market contract', checkEventShape],

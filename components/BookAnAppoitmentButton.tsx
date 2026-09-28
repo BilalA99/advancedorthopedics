@@ -432,7 +432,7 @@ export default function BookAnAppoitmentButton({
                                                     </FormLabel>
                                                     <FormControl>
                                                         <Input 
-                                                            id="postal_code"
+                                                            id="bookappointment_postal_code"
                                                             aria-label="ZIP or postal code"
                                                             name="postalCode"
                                                             inputMode="numeric"

@@ -17,6 +17,7 @@ const INSURANCE_NOT_QUALIFIED = [
 ];
 const INSURANCE_QUALIFIED_NAMED = [
   'workers compensation', 'auto / personal injury (pip)',
+  'self-pay / no insurance',
 ];
 function normalizeInsurance(value: string) {
   return String(value || '')

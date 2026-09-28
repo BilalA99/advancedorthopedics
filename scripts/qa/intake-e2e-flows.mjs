@@ -42,9 +42,9 @@ const FORM_URL = BASE + '/insurance-policy';
 /**
  * Tags the intake form so every selector below is scoped to it.
  *
- * id="postal_code" is duplicated across five form components and the homepage
- * mounts DoctorContactForm lazily, so a bare '#postal_code' can resolve to a hidden
- * input in a different form and make every assertion here meaningless.
+ * Selected by autocomplete="postal-code" rather than by id: the ids are
+ * component-scoped, and selecting on what the field IS keeps this harness working
+ * whatever any one component calls its input.
  */
 const SCOPE = '[data-qa-intake="1"]';
 async function scopeToIntakeForm(page) {
@@ -145,7 +145,7 @@ async function openForm({ behaviour = 'ok', fixedSubmissionId = null } = {}) {
   // Let lazily-mounted forms settle first, so the scope tag lands on the right one.
   await new Promise((r) => setTimeout(r, 1200));
   await scopeToIntakeForm(page);
-  await page.evaluate((sc) => document.querySelector(sc + ' #postal_code')?.scrollIntoView({ block: 'center' }), SCOPE);
+  await page.evaluate((sc) => document.querySelector(sc + ' input[autocomplete="postal-code"]')?.scrollIntoView({ block: 'center' }), SCOPE);
   await new Promise((r) => setTimeout(r, 700));
 
   return { page, posts, consoleErrors };
@@ -264,7 +264,7 @@ async function fill(page, {
   await typeInto(`${SCOPE} #last_name`, last);
   await typeInto(`${SCOPE} input[placeholder="Enter your email"]`, email);
   await typeInto(`${SCOPE} input[placeholder="+1 0123456789"]`, phone);
-  await typeInto(`${SCOPE} #postal_code`, zip);
+  await typeInto(`${SCOPE} input[autocomplete="postal-code"]`, zip);
 
   // State is required and is not prefilled on every page, so set it explicitly.
   const stateSelector = `${SCOPE} [aria-label="Select your state"]`;
@@ -313,7 +313,7 @@ const formState = (page) => page.evaluate((sc) => {
   const form = document.querySelector(sc);
   if (!form) return {};
   return {
-    zip: form.querySelector('#postal_code')?.value,
+    zip: form.querySelector('input[autocomplete="postal-code"]')?.value,
     insurance: form.querySelector('#insurance_type')?.textContent?.trim(),
     state: form.querySelector('[aria-label="Select your state"]')?.textContent?.trim(),
     email: form.querySelector('input[placeholder="Enter your email"]')?.value,
@@ -487,7 +487,7 @@ console.log(`\n=== intake E2E: ${VP.label} against ${BASE} ===\n`);
   check('a 500 keeps the patient on the form', !page.url().includes('/thank-you'));
   const enabled = await page.evaluate(() => !document.querySelector('[data-qa-intake="1"] button[type="submit"]')?.disabled);
   check('a 500 re-enables submit so the patient can retry', enabled);
-  const preserved = await page.evaluate(() => document.querySelector('[data-qa-intake="1"] #postal_code')?.value);
+  const preserved = await page.evaluate(() => document.querySelector('[data-qa-intake="1"] input[autocomplete="postal-code"]')?.value);
   check('a 500 preserves the entered ZIP for the retry', preserved === '33463', String(preserved));
   await page.close();
 }
@@ -570,7 +570,7 @@ for (const p of ['/thank-you', '/thank-you/other']) {
 if (PROFILE === 'mobile') {
   const { page } = await openForm();
   const probe = await page.evaluate(() => {
-    const zip = document.querySelector('[data-qa-intake="1"] #postal_code');
+    const zip = document.querySelector('[data-qa-intake="1"] input[autocomplete="postal-code"]');
     const cs = getComputedStyle(zip);
     return {
       inputMode: zip.getAttribute('inputmode'),
@@ -588,7 +588,7 @@ if (PROFILE === 'mobile') {
   await page.setViewport({ width: 844, height: 390, isMobile: true, hasTouch: true });
   await settle(800);
   const landscape = await page.evaluate(() => {
-    const zip = document.querySelector('[data-qa-intake="1"] #postal_code');
+    const zip = document.querySelector('[data-qa-intake="1"] input[autocomplete="postal-code"]');
     const r = zip.getBoundingClientRect();
     return { present: Boolean(zip), width: r.width, overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1 };
   });
@@ -597,7 +597,7 @@ if (PROFILE === 'mobile') {
 
   // The submit button must be reachable with the keyboard open. Focusing an input
   // is the closest headless proxy: the button must still be in the layout.
-  await page.focus(`${SCOPE} #postal_code`);
+  await page.focus(`${SCOPE} input[autocomplete="postal-code"]`);
   await settle(400);
   const reachable = await page.evaluate(() => {
     const b = document.querySelector('[data-qa-intake="1"] button[type="submit"]');
