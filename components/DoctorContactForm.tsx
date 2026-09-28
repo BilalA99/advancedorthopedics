@@ -21,6 +21,14 @@ import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
 import { BorderBeam } from "@/components/magicui/border-beam";
 import { pushAcceptedLead } from "@/utils/enhancedConversions"
+import {
+  classifyInsurance,
+  destinationFor,
+  getInsuranceOptions,
+  parseLeadRouting,
+  pathForDestination,
+} from "@/lib/insurance-routing"
+import { POSTAL_CODE_ERROR, isValidPostalCode } from "@/lib/postal-code"
 import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
 import { STATE_OPTIONS, slugFromPathname, normalizeState } from "@/lib/stateUtils"
 import { formatPhone, validatePhoneNumber, formatPhoneInput } from "@/lib/phone-formatter"
@@ -41,13 +49,13 @@ const formSchema = z.object({
         // }),
         ,
     reason: z.string().min(2),
-    bestTime: z.string().min(1, "Please provide more detail about your consultation needs"),
+    insuranceType: z.string().min(1, "Please select your insurance"),
     insuranceCardFront: z.instanceof(File).optional().or(z.null()),
     insuranceCardBack: z.instanceof(File).optional().or(z.null()),
     // HONEYPOT FIELD - bots will fill this
     website: z.string().max(0, "Bot detected").optional(),
     postalCode: z.string()
-        .regex(/^\d{5}(?:-\d{4})?$/, "Please enter a valid ZIP code"),
+        .refine(isValidPostalCode, POSTAL_CODE_ERROR),
     country: z.string(),
     state: z.string().min(1, "Please select your state"),
 })
@@ -107,7 +115,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
             email: "",
             phone: "",
             reason: "",
-            bestTime: "",
+            insuranceType: "",
             insuranceCardFront: null,
             insuranceCardBack: null,
             website: "", // honeypot
@@ -203,7 +211,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
             payload.append("email", values.email)
             payload.append("phone", values.phone)
             payload.append("reason", values.reason)
-            payload.append("bestTime", values.bestTime)
+            payload.append("insurance_type", values.insuranceType)
             payload.append("postalCode", values.postalCode)
             payload.append("country", values.country)
             payload.append("state", values.state)
@@ -244,11 +252,23 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                 return
             }
 
-            const accepted = await pushAcceptedLead({ acceptance: res, form_name: 'DoctorContactForm', form_source: formSource, state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode });
+            // Read the body ONCE: a Response body can only be consumed one time, and
+            // pushAcceptedLead accepts an already-parsed object.
+            const body = await res.json().catch(() => null)
+
+            // D10: the SERVER decides qualification and this form obeys it. parseLeadRouting
+            // returns null only when the response carries no decision at all — a browser on
+            // the new build talking to a server still on the old one during a deploy — and
+            // only then do we classify locally, with the same shared function.
+            const serverRouting = parseLeadRouting(body)
+            const qualification = serverRouting?.qualification ?? classifyInsurance(values.insuranceType)
+            const destination = serverRouting?.destination ?? destinationFor(qualification)
+
+            const accepted = await pushAcceptedLead({ acceptance: body, form_name: 'DoctorContactForm', form_source: formSource, state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode, lead_qualification: qualification });
             if (!accepted) return
 
             setOpenContactForm(false)
-            router.push('/thank-you')
+            router.push(pathForDestination(destination))
         } catch (error) {
             console.error("[DoctorContactForm] Submit failed", error)
             setSubmitError("We couldn't submit your request. Please try again in a moment, or call our office.")
@@ -558,7 +578,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
 
                             <FormField
                                 control={form.control}
-                                name="bestTime"
+                                name="insuranceType"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>
@@ -569,21 +589,21 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                 }}
                                                 className={`${timePeriod !== 'night' ? 'text-[#111315]' : 'text-white'} sm:text-md text-sm`}
                                             >
-                                                Best Time To Contact
+                                                Insurance
                                             </span>
                                         </FormLabel>
                                         <FormControl>
                                             <Select onValueChange={field.onChange} value={field.value} >
-                                                <SelectTrigger aria-label="Select Best Time To Contact"
+                                                <SelectTrigger id="doctor_insurance_type" aria-label="Select your insurance"
                                                     className="w-full !sm:h-12 h-10 px-6 bg-[#f0f5ff]  border rounded-sm"
                                                 >
-                                                    <SelectValue placeholder="Select Best Time To Contact" className=" font-[var(--font-inter)] sm:h-12 h-10 text-lg data-[placeholder]:text-red-500" />
+                                                    <SelectValue placeholder="Select your insurance" className=" font-[var(--font-inter)] sm:h-12 h-10 text-lg data-[placeholder]:text-red-500" />
                                                 </SelectTrigger>
                                                 <SelectContent>
                                                     <SelectGroup>
-                                                        {["As Soon As Possible", "Morning", "Afternoon", "Evening"].map((service) => (
-                                                            <SelectItem key={service} value={service}>
-                                                                {service}
+                                                        {getInsuranceOptions().map(({ value, label }) => (
+                                                            <SelectItem key={value} value={value}>
+                                                                {label}
                                                             </SelectItem>
                                                         ))}
                                                     </SelectGroup>
@@ -827,7 +847,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
 
                                             <FormField
                                                 control={form.control}
-                                                name="bestTime"
+                                                name="insuranceType"
                                                 render={({ field }) => (
                                                     <FormItem>
                                                         <FormLabel>
@@ -838,23 +858,23 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                                 }}
                                                                 className={`text-[#111315] sm:text-md text-sm`}
                                                             >
-                                                                Best Time To Contact
+                                                                Insurance
                                                             </span>
                                                         </FormLabel>
                                                         <FormControl>
                                                             <Select onValueChange={field.onChange} value={field.value} >
-                                                                <SelectTrigger aria-label="Select Best Time To Contact"
+                                                                <SelectTrigger id="doctor_compact_insurance_type" aria-label="Select your insurance"
                                                                     className="w-full h-10 px-6 bg-[#f0f5ff]  border rounded-sm"
                                                                 >
-                                                                    <SelectValue placeholder="Select Best Time To Contact" className=" font-[var(--font-inter)] h-10 text-lg data-[placeholder]:text-red-500" />
+                                                                    <SelectValue placeholder="Select your insurance" className=" font-[var(--font-inter)] h-10 text-lg data-[placeholder]:text-red-500" />
                                                                 </SelectTrigger>
                                                                 <SelectContent>
                                                                     <SelectGroup>
-                                                                        {["As Soon As Possible", "Morning", "Afternoon", "Evening"].map((service) => (
-                                                                            <SelectItem key={service} value={service}>
-                                                                                {service}
-                                                                            </SelectItem>
-                                                                        ))}
+                                                                        {getInsuranceOptions().map(({ value, label }) => (
+                                                            <SelectItem key={value} value={value}>
+                                                                {label}
+                                                            </SelectItem>
+                                                        ))}
                                                                     </SelectGroup>
                                                                 </SelectContent>
                                                             </Select>

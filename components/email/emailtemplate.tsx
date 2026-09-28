@@ -12,6 +12,12 @@ interface EmailTemplateProps {
    * stored in Supabase, and never leaves the first-party surface.
    */
   insurance_type?: string,
+  /**
+   * ZIP / postal code. Retained by the 2026-09-24 meeting (only "Best Time To
+   * Contact" was removed). Staff use it to route an enquiry to the nearest
+   * clinic, so it belongs in this notification.
+   */
+  postalCode?: string,
   has_attorney?: string,
   injury_type?: string,
   pain_level?: string,
@@ -42,6 +48,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   reason,
   bestTime,
   insurance_type,
+  postalCode,
   has_attorney,
   injury_type,
   pain_level,
@@ -84,6 +91,12 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           <tr style={{ borderBottom: '1px solid #eee', justifyContent: 'space-evenly', width: '100%' }}>
             <td style={{ padding: '10px 0', fontWeight: 'bold', color: '#555', width: '30%', verticalAlign: 'top' }}>Insurance:</td>
             <td style={{ padding: '10px 0' }}>{insurance_type}</td>
+          </tr>
+          )}
+          {postalCode && (
+          <tr style={{ borderBottom: '1px solid #eee', justifyContent: 'space-evenly', width: '100%' }}>
+            <td style={{ padding: '10px 0', fontWeight: 'bold', color: '#555', width: '30%', verticalAlign: 'top' }}>ZIP Code:</td>
+            <td style={{ padding: '10px 0' }}>{postalCode}</td>
           </tr>
           )}
           {bestTime && (

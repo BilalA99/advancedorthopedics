@@ -9,19 +9,39 @@
  *   D11 — PPO appears explicitly, so a patient who knows they hold a PPO is not
  *         pushed into "Other".
  *
- * ## Why the option list is configuration, not a hard-coded constant
+ * ## The option list is DERIVED, never hand-maintained here
  *
- * The carriers named in the meeting — UnitedHealthcare, Cigna, Aetna, Blue Cross
- * Blue Shield — were discussion, not an approved list. AB owns the final list.
- * So the accepted set is declared once here and gated by
- * `INSURANCE_LIST_APPROVED`: until AB signs off, production keeps the
- * conservative fallback and the only thing waiting on approval is a data edit,
- * not code.
+ * `components/data/insurancePlans.ts` is the practice's authoritative statement of
+ * what it participates in. It is published to patients on /insurance-policy, it
+ * carries a per-plan `status` and the reasoning behind it, and it is what the
+ * clinic actually maintains. So the dropdown is generated from it.
+ *
+ * An earlier version of this module kept its own `APPROVED_PLANS` array behind an
+ * `INSURANCE_LIST_APPROVED` flag. That was a second copy of a list that already
+ * existed, and a second copy is how the form comes to offer a plan the website
+ * says is not accepted — the exact contradiction D10 exists to prevent. There is
+ * now one list. Adding or removing a carrier is an edit to insurancePlans.ts and
+ * the dropdown, the qualification rule and the public page all move together.
+ *
+ * ## How `status` maps to qualification
+ *
+ *   accepted      -> qualified    the practice participates and can bill the plan
+ *   partial       -> unqualified  Medicare/Medicaid: not for spine surgery, "call us"
+ *   not-accepted  -> unqualified  HMO products, Medicare/Medicaid HMO
+ *
+ * `partial` deliberately lands on the unqualified side. A partial plan is a real
+ * lead the clinic still wants and still receives — it just is not an accepted-
+ * insurance conversion, and reporting it as one would put leads the practice
+ * cannot serve for the advertised procedure into Smart Bidding.
+ *
+ * Workers' Compensation and Auto/PIP are `accepted` without being PPO carriers,
+ * and they qualify: the practice treats those patients and bills those payers.
+ * The conversion signal tracks "can we serve this patient", not "is it a PPO".
  *
  * ## Privacy: the insurance answer never reaches an advertising payload
  *
  * This module deliberately exposes qualification as a routing decision and
- * nothing else. The selected carrier is persisted to Supabase (`forms
+ * nothing else. The selected plan is persisted to Supabase (`forms
  * .insurance_type`, first-party) and shown in the internal notification email.
  * It is never added to the canonical lead event, never placed in a URL, and
  * never sent to GA4, Google Ads or Meta.
@@ -29,16 +49,16 @@
  * That follows the rule this codebase already applies to `landing_path` and to
  * the neutral `paid-landing` form source: first-party qualification stays
  * server-side. An unqualified lead therefore produces **no** dataLayer event at
- * all — see `docs/2026-09-26-intake/` for why a distinctly-named
- * `lead_form_submit_unqualified` event was considered and rejected (the event
- * name alone would carry the insurance answer into analytics).
+ * all — see `docs/operations/mso-intake-form-insurance-routing/03-tracking-audit.md`
+ * for why a distinctly-named `lead_form_submit_unqualified` event was considered
+ * and rejected (the event name alone would carry the insurance answer into
+ * analytics).
  *
  * Total lead volume, including unqualified leads, stays measurable from
  * Supabase, which is what Appflow Analytics reads.
  */
 
-/** Flip to `true` only when AB has approved the exact list in `APPROVED_PLANS`. */
-export const INSURANCE_LIST_APPROVED = false;
+import { INSURANCE_PLANS, type InsurancePlan } from "@/components/data/insurancePlans";
 
 export type InsuranceQualification = "qualified" | "unqualified";
 
@@ -50,45 +70,26 @@ export interface InsuranceOption {
   readonly qualification: InsuranceQualification;
 }
 
+/** Only a plan the practice actually participates in is a qualified conversion. */
+function qualificationForPlan(plan: InsurancePlan): InsuranceQualification {
+  return plan.status === "accepted" ? "qualified" : "unqualified";
+}
+
 /**
  * The explicit PPO option required by D11.
  *
  * It leads the list because it answers the question for the largest group of
- * patients before the carrier name matters, matching the framing already used in
- * `components/data/insurancePlans.ts` ("An Aetna PPO is accepted; an Aetna HMO is
- * not").
+ * patients before the carrier name matters, matching the framing the practice
+ * already uses publicly ("An Aetna PPO is accepted; an Aetna HMO is not").
+ *
+ * Its value stays the bare string "PPO" rather than its label, so the value is
+ * stable if the wording of the label is ever tuned.
  */
 export const PPO_OPTION: InsuranceOption = {
   value: "PPO",
   label: "PPO (any carrier)",
   qualification: "qualified",
 };
-
-/**
- * Pending AB approval. Carrier names come from the 2026-09-24 discussion and
- * must be confirmed before `INSURANCE_LIST_APPROVED` is set to `true`.
- *
- * Each entry is PPO-scoped on purpose: the practice accepts PPO plans, so an
- * entry is a carrier whose *PPO* product is accepted, never a blanket statement
- * about that carrier's HMO products.
- */
-export const APPROVED_PLANS: readonly InsuranceOption[] = [
-  { value: "UnitedHealthcare PPO", label: "UnitedHealthcare PPO", qualification: "qualified" },
-  { value: "Cigna PPO", label: "Cigna PPO", qualification: "qualified" },
-  { value: "Aetna PPO", label: "Aetna PPO", qualification: "qualified" },
-  { value: "Blue Cross Blue Shield PPO", label: "Blue Cross Blue Shield PPO", qualification: "qualified" },
-];
-
-/**
- * What production shows until AB approves the carrier list.
- *
- * PPO plus "Other" only. This is the conservative choice: naming a carrier the
- * practice does not in fact accept would route a patient to a qualified
- * thank-you page and fire a qualified conversion for a lead that is not
- * qualified — the exact failure D10 exists to prevent. Showing fewer options
- * under-reports; showing a wrong option corrupts the conversion signal.
- */
-export const FALLBACK_PLANS: readonly InsuranceOption[] = [];
 
 /** Always last, always unqualified. */
 export const OTHER_OPTION: InsuranceOption = {
@@ -97,10 +98,31 @@ export const OTHER_OPTION: InsuranceOption = {
   qualification: "unqualified",
 };
 
-/** The options the intake form renders, in display order. */
+/**
+ * Plans from the authoritative list, in the order a patient should scan them:
+ * PPO carriers first (the common case), then the other payers the practice
+ * accepts, then the plans it does not.
+ *
+ * Within each group the source order is preserved, so the clinic controls
+ * ordering by editing insurancePlans.ts.
+ */
+function planRank(plan: InsurancePlan): number {
+  if (plan.status === "accepted") return plan.isPpoCarrier ? 0 : 1;
+  return 2;
+}
+
+export const PLAN_OPTIONS: readonly InsuranceOption[] = INSURANCE_PLANS
+  .map((plan, index) => ({ plan, index }))
+  .sort((a, b) => planRank(a.plan) - planRank(b.plan) || a.index - b.index)
+  .map(({ plan }) => ({
+    value: plan.name,
+    label: plan.name,
+    qualification: qualificationForPlan(plan),
+  }));
+
+/** The options every intake form renders, in display order. */
 export function getInsuranceOptions(): readonly InsuranceOption[] {
-  const plans = INSURANCE_LIST_APPROVED ? APPROVED_PLANS : FALLBACK_PLANS;
-  return [PPO_OPTION, ...plans, OTHER_OPTION];
+  return [PPO_OPTION, ...PLAN_OPTIONS, OTHER_OPTION];
 }
 
 /**
@@ -152,4 +174,73 @@ export function routeForInsurance(value: string | null | undefined): {
 } {
   const qualification = classifyInsurance(value);
   return { qualification, thankYouPath: thankYouPathFor(qualification) };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Server-authoritative routing decision
+//
+// The qualification that gates the conversion is decided on the SERVER and sent
+// back to the browser, rather than being derived in the browser and trusted.
+// `classifyInsurance` is deterministic and both sides call it, so the two agree
+// by construction — but "the client computed it" and "the server computed it and
+// the client obeyed" are different guarantees, and only the second one holds when
+// the request did not come from our form.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Destination names, so the wire format never carries a raw URL to navigate to. */
+export type LeadDestination = "qualified_thank_you" | "other_thank_you";
+
+export interface LeadRoutingDecision {
+  readonly qualification: InsuranceQualification;
+  readonly destination: LeadDestination;
+}
+
+export function destinationFor(qualification: InsuranceQualification): LeadDestination {
+  return qualification === "qualified" ? "qualified_thank_you" : "other_thank_you";
+}
+
+export function pathForDestination(destination: LeadDestination): string {
+  return destination === "qualified_thank_you"
+    ? QUALIFIED_THANK_YOU_PATH
+    : UNQUALIFIED_THANK_YOU_PATH;
+}
+
+/**
+ * The server's decision for a submitted insurance value.
+ *
+ * Inherits `classifyInsurance`'s fail-closed behaviour: an empty, unknown, stale
+ * or forged value is `"unqualified"` and routes to the neutral confirmation, so a
+ * hand-crafted POST cannot mint a qualified conversion.
+ */
+export function resolveLeadRouting(value: string | null | undefined): LeadRoutingDecision {
+  const qualification = classifyInsurance(value);
+  return { qualification, destination: destinationFor(qualification) };
+}
+
+/**
+ * Reads the decision back off the response, for the browser.
+ *
+ * Returns `null` — rather than a fail-closed `"unqualified"` — when the fields are
+ * absent or malformed. That distinction matters during a deploy: a browser
+ * holding a page from the new build can post to a server still running the old
+ * one, and a hard fail-closed default would silently mark every lead in that
+ * window unqualified and lose real conversions. `null` means "the server did not
+ * say", and the caller falls back to `classifyInsurance` on the same value —
+ * the identical function, so the identical answer.
+ *
+ * A *present but unrecognised* qualification is different: that is corruption or
+ * tampering, not absence, and it fails closed to `"unqualified"`.
+ */
+export function parseLeadRouting(value: unknown): LeadRoutingDecision | null {
+  if (!value || typeof value !== "object") return null;
+  const candidate = value as { qualification?: unknown; destination?: unknown };
+  if (typeof candidate.qualification !== "string") return null;
+
+  const qualification: InsuranceQualification =
+    candidate.qualification === "qualified" ? "qualified" : "unqualified";
+
+  // The destination is re-derived from the qualification rather than taken off
+  // the wire, so a tampered `destination` can never send the patient somewhere
+  // that disagrees with the conversion decision.
+  return { qualification, destination: destinationFor(qualification) };
 }

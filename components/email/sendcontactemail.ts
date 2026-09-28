@@ -61,6 +61,15 @@ async function logLeadToSupabase(data: {
   reason?: string;
   best_time?: string;
   insurance_type?: string;
+  /**
+   * ZIP / postal code, already normalized and validated by lib/postal-code.ts.
+   *
+   * Kept as a string end-to-end: `Number("02134")` is `2134`, a different place.
+   * Column added in 202609270001_add_postal_code.sql — before this writer shipped,
+   * because writing a column that does not exist is what broke lead capture for
+   * four days when `landing_path` was added without a migration.
+   */
+  postal_code?: string;
   form_source?: string;
   attorney_firm?: string;
   attorney_name?: string;
@@ -100,6 +109,7 @@ async function logLeadToSupabase(data: {
       reason:         data.reason         || null,
       best_time:      data.best_time      || null,
       insurance_type: data.insurance_type || null,
+      postal_code:    data.postal_code    || null,
       form_source:    resolveFormSource({ explicitSource: data.form_source }) || null,
       attorney_firm:  data.attorney_firm  || null,
       attorney_name:  data.attorney_name  || null,
@@ -151,6 +161,8 @@ export async function sendUserEmail(formData: {
    * the internal staff email, and is never forwarded to an ad platform.
    */
   insurance_type?: string;
+  /** ZIP / postal code. Normalized and validated upstream; persisted verbatim. */
+  postalCode?: string;
   form_source?: string;
   gclid?: string;
   gbraid?: string;
@@ -169,6 +181,7 @@ export async function sendUserEmail(formData: {
     reason:        formData.reason,
     best_time:     formData.bestTime,
     insurance_type: formData.insurance_type,
+    postal_code:   formData.postalCode,
     form_source:   formData.form_source || 'unknown',
     landing_path:  formData.landing_path,
     gclid:         formData.gclid,
@@ -221,6 +234,8 @@ export async function sendContactEmail(formData: {
   bestTime?: string;
   /** Insurance selection (D10/D11). Staff-facing only. */
   insurance_type?: string;
+  /** ZIP / postal code. Staff-facing: the clinic uses it to route by service area. */
+  postalCode?: string;
   has_attorney?: string;
   injury_type?: string;
   pain_level?: string;
@@ -264,6 +279,7 @@ export async function sendContactEmail(formData: {
         reason: formData.reason,
         bestTime: formData.bestTime,
         insurance_type: formData.insurance_type,
+        postalCode: formData.postalCode,
         has_attorney: formData.has_attorney,
         injury_type: formData.injury_type,
         pain_level: formData.pain_level,

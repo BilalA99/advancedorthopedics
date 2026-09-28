@@ -28,11 +28,11 @@ import {
   thankYouPathFor,
   PPO_OPTION,
   OTHER_OPTION,
-  APPROVED_PLANS,
-  INSURANCE_LIST_APPROVED,
+  PLAN_OPTIONS,
   QUALIFIED_THANK_YOU_PATH,
   UNQUALIFIED_THANK_YOU_PATH,
 } from '../lib/insurance-routing';
+import { INSURANCE_PLANS } from '../components/data/insurancePlans';
 import { pushAcceptedLead } from '../utils/enhancedConversions';
 
 const dom = new JSDOM('<!doctype html><html><body></body></html>', {
@@ -78,27 +78,56 @@ test('PPO is offered first and Other is offered last', () => {
   assert.equal(options[options.length - 1].value, OTHER_OPTION.value);
 });
 
-test('Other is the only unqualified option offered', () => {
-  const unqualified = getInsuranceOptions().filter((o) => o.qualification === 'unqualified');
-  assert.deepEqual(unqualified.map((o) => o.value), [OTHER_OPTION.value]);
+test('the options are derived from the published plan list, not a second copy', () => {
+  const values = getInsuranceOptions().map((o) => o.value);
+  for (const plan of INSURANCE_PLANS) {
+    assert.ok(values.includes(plan.name),
+      `${plan.name} is published on /insurance-policy but is not offered in the form`);
+  }
+  // Exactly the published plans, plus the explicit PPO option and Other.
+  assert.equal(values.length, INSURANCE_PLANS.length + 2);
 });
 
-test('unapproved carrier names are not shown until AB approves the list', () => {
-  const values = getInsuranceOptions().map((o) => o.value);
-  if (INSURANCE_LIST_APPROVED) {
-    for (const plan of APPROVED_PLANS) {
-      assert.ok(values.includes(plan.value), `${plan.value} should be offered once approved`);
+test('a plan the practice does not participate in is never qualified', () => {
+  for (const plan of INSURANCE_PLANS) {
+    const option = PLAN_OPTIONS.find((o) => o.value === plan.name);
+    assert.ok(option, `${plan.name} missing from PLAN_OPTIONS`);
+    if (plan.status === 'accepted') {
+      assert.equal(option.qualification, 'qualified', `${plan.name} is accepted and should qualify`);
+    } else {
+      assert.equal(option.qualification, 'unqualified',
+        `${plan.name} is "${plan.status}" and must NOT fire a qualified conversion`);
     }
-    return;
   }
-  // Gate closed: showing a carrier the practice does not accept would route a
-  // patient to the qualified page AND fire a qualified conversion for a lead
-  // that is not qualified. Under-offering is the safe failure.
-  for (const plan of APPROVED_PLANS) {
-    assert.ok(!values.includes(plan.value),
-      `${plan.value} must not be offered before AB approves the list`);
+});
+
+test('Medicare, Medicaid and HMO products route to the Other flow', () => {
+  // "partial" and "not-accepted" are real leads the clinic still receives, but
+  // they are not accepted-insurance conversions.
+  for (const name of ['Medicare', 'Medicaid', 'HMO plans (any carrier)', 'Medicare or Medicaid HMO']) {
+    assert.equal(classifyInsurance(name), 'unqualified', `${name} must not qualify`);
+    assert.equal(routeForInsurance(name).thankYouPath, UNQUALIFIED_THANK_YOU_PATH);
   }
-  assert.deepEqual(values, [PPO_OPTION.value, OTHER_OPTION.value]);
+});
+
+test('PPO carriers and the other accepted payers qualify', () => {
+  for (const name of [
+    'Blue Cross Blue Shield PPO', 'UnitedHealthcare PPO', 'Cigna PPO', 'Aetna PPO',
+    'Meritain Health PPO', 'MultiPlan / PHCS PPO', 'Bright Health PPO',
+    'Workers’ Compensation', 'Auto / Personal Injury (PIP)',
+  ]) {
+    assert.equal(classifyInsurance(name), 'qualified', `${name} should qualify`);
+    assert.equal(routeForInsurance(name).thankYouPath, QUALIFIED_THANK_YOU_PATH);
+  }
+});
+
+test('PPO carriers are listed before the non-PPO payers and the excluded plans', () => {
+  const values = getInsuranceOptions().map((o) => o.value);
+  const ppoCarrierIdx = values.indexOf('Aetna PPO');
+  const workersIdx = values.indexOf('Workers’ Compensation');
+  const hmoIdx = values.indexOf('HMO plans (any carrier)');
+  assert.ok(ppoCarrierIdx < workersIdx, 'PPO carriers should precede the other accepted payers');
+  assert.ok(workersIdx < hmoIdx, 'accepted payers should precede the ones that are not accepted');
 });
 
 // ───────────────────────── classification fails closed ─────────────────────────
@@ -117,18 +146,18 @@ test('Other classifies as unqualified', () => {
 });
 
 test('empty, missing and unknown values fail closed to unqualified', () => {
-  for (const value of ['', '   ', null, undefined, 'Medicaid', 'Humana HMO', 'PPO ']) {
-    if (value === 'PPO ') continue; // trimmed above; kept to document the boundary
+  for (const value of ['', '   ', null, undefined, 'Humana', 'Humana HMO', 'Aetna', 'Aetna HMO', 'true']) {
     assert.equal(classifyInsurance(value as string | null | undefined), 'unqualified',
       `${JSON.stringify(value)} must not be treated as qualified`);
   }
 });
 
-test('a carrier not currently offered cannot be qualified by a hand-crafted POST', () => {
-  // Simulates a stale cached page or a forged submission naming a carrier that
-  // is real in APPROVED_PLANS but not yet enabled.
-  if (INSURANCE_LIST_APPROVED) return;
-  assert.equal(classifyInsurance('Aetna PPO'), 'unqualified');
+test('a carrier name alone does not qualify — the PPO product does', () => {
+  // The practice accepts an Aetna PPO and not an Aetna HMO, so the bare carrier
+  // name is not an answer and must not be treated as one.
+  assert.equal(classifyInsurance('Aetna'), 'unqualified');
+  assert.equal(classifyInsurance('Aetna PPO'), 'qualified');
+  assert.equal(classifyInsurance('Aetna HMO'), 'unqualified');
 });
 
 // ───────────────────────── routing (D10) ─────────────────────────
