@@ -88,6 +88,40 @@ test('the options are derived from the published plan list, not a second copy', 
   assert.equal(values.length, INSURANCE_PLANS.length + 2);
 });
 
+test('carrier labels drop the PPO suffix but the stored VALUE keeps it', () => {
+  // The lead-sheet automation classifies priority with
+  //   insurance_type.toLowerCase().indexOf('ppo') !== -1
+  // (Mountain Spine Lead Sheet Auto Sync -> getLeadPriority). If the stored value
+  // ever loses "PPO", every lead silently becomes STANDARD and the front desk's
+  // HIGH VALUE / PPO prioritisation collapses. Labels may change freely; values
+  // may not.
+  const aetna = getInsuranceOptions().find((o) => o.value === 'Aetna PPO');
+  assert.ok(aetna, 'Aetna PPO missing from the options');
+  assert.equal(aetna.label, 'Aetna', 'the patient-facing label should drop the PPO suffix');
+  assert.equal(aetna.value, 'Aetna PPO', 'the STORED value must keep PPO');
+
+  for (const plan of INSURANCE_PLANS) {
+    if (!plan.isPpoCarrier) continue;
+    const option = getInsuranceOptions().find((o) => o.value === plan.name);
+    assert.ok(option, plan.name + ' missing');
+    assert.doesNotMatch(option.label, /PPO/, option.label + ' still shows PPO to the patient');
+    assert.match(option.value.toLowerCase(), /ppo/, plan.name + ' value lost its PPO marker');
+  }
+});
+
+test('every qualified option still carries a PPO-detectable value or is a named payer', () => {
+  // Workers' Comp and Auto/PIP are qualified without being PPO — they are handled
+  // by name downstream, not by the substring check. Everything else that qualifies
+  // must remain detectable as PPO.
+  const namedPayers = ['Workers’ Compensation', 'Auto / Personal Injury (PIP)'];
+  for (const option of getInsuranceOptions()) {
+    if (option.qualification !== 'qualified') continue;
+    if (namedPayers.indexOf(option.value) !== -1) continue;
+    assert.match(option.value.toLowerCase(), /ppo/,
+      option.value + ' qualifies but is not PPO-detectable by the lead sheet');
+  }
+});
+
 test('a plan the practice does not participate in is never qualified', () => {
   for (const plan of INSURANCE_PLANS) {
     const option = PLAN_OPTIONS.find((o) => o.value === plan.name);

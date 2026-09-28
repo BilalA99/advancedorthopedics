@@ -111,12 +111,38 @@ function planRank(plan: InsurancePlan): number {
   return 2;
 }
 
+/**
+ * The patient-facing label for a plan.
+ *
+ * Drops the trailing " PPO" from carrier names, so the dropdown reads "Aetna"
+ * rather than "Aetna PPO" seven times over. The plan-type options —
+ * "HMO plans (any carrier)", "Medicare or Medicaid HMO" — keep their wording,
+ * because the plan type IS the answer there rather than a suffix on a carrier.
+ *
+ * The stored `value` is deliberately NOT changed. Two things depend on the
+ * literal string:
+ *
+ *   1. The lead-sheet automation classifies priority with
+ *      `insurance_type.toLowerCase().indexOf('ppo') !== -1`
+ *      (Mountain Spine Lead Sheet Auto Sync → getLeadPriority). Strip "PPO" from
+ *      the value and every lead silently becomes STANDARD, collapsing the
+ *      ⭐ HIGH VALUE / ✅ PPO prioritisation the front desk works from.
+ *   2. Rows already in Supabase carry the full name, so changing it would split
+ *      one carrier across two spellings in every historical report.
+ *
+ * Label and value are therefore allowed to differ. That is the whole reason the
+ * option type has both.
+ */
+function patientFacingLabel(plan: InsurancePlan): string {
+  return plan.isPpoCarrier ? plan.name.replace(/\s+PPO$/, "") : plan.name;
+}
+
 export const PLAN_OPTIONS: readonly InsuranceOption[] = INSURANCE_PLANS
   .map((plan, index) => ({ plan, index }))
   .sort((a, b) => planRank(a.plan) - planRank(b.plan) || a.index - b.index)
   .map(({ plan }) => ({
     value: plan.name,
-    label: plan.name,
+    label: patientFacingLabel(plan),
     qualification: qualificationForPlan(plan),
   }));
 

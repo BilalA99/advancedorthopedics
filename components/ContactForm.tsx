@@ -384,10 +384,18 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
                     </SelectContent>
                   </Select>
                 </FormControl>
+                {/*
+                  This line carries weight the option labels no longer do. The
+                  carriers are listed by name alone ("Aetna", not "Aetna PPO"), so
+                  nothing in the list itself tells an HMO patient that their plan is
+                  a different answer. Saying it here keeps the distinction visible
+                  without repeating "PPO" on seven options.
+                */}
                 <p className="text-xs text-[#838890]">
-                  Mountain Spine &amp; Orthopedics is a PPO practice. Selecting
-                  &quot;Other&quot; still sends us your request — our team will go over
-                  your options with you.
+                  Mountain Spine &amp; Orthopedics is a PPO practice — the carriers
+                  above are their PPO plans. If you have an HMO, choose &quot;HMO plans
+                  (any carrier)&quot;. Either way your request reaches us, and our team
+                  will go over your options with you.
                 </p>
                 <FormMessage />
               </FormItem>
