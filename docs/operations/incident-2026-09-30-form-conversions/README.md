@@ -349,6 +349,87 @@ They have been deleted. They were inflating the September lead count by 8 and wo
 have shown up in the tracker as real FL leads. Resend's idempotency key means the
 staff inbox likely received one or two notifications rather than eight.
 
+## Site-side repair — identity now precedes the conversion (1 October)
+
+Enhanced conversions were left unattached in v38 because the identity arrived too
+late to be read. That is fixed in `utils/enhancedConversions.ts`.
+
+### The constraint that makes this non-obvious
+
+The naive fix — await the hash, push identity, then push the lead event — is worse
+than the bug. It puts a consent check and a SHA-256 in front of the one event that
+must fire for every server-accepted lead, which is precisely the mistake behind the
+earlier consent-gating incident where every visitor who ignored the cookie banner
+became an invisible lead.
+
+So the ordering had to change **without** the lead event ever waiting on enrichment.
+
+### How
+
+`pushAcceptedLead` already awaits the server's response body. Hashing now starts
+*before* that await and runs concurrently with it, then both are awaited together:
+
+```ts
+const preparedEC = prepareHashedEC({ email, phone, firstName, lastName, postalCode, country });
+
+const [accepted] = await Promise.all([
+  acceptance instanceof Response ? readLeadAcceptance(acceptance) : …,
+  preparedEC.promise,
+]);
+```
+
+`Promise.all` does not serialise these — the hash has been running throughout. The
+lead event waits for `max(response, hash)`, not their sum, and the hash is bounded
+by `HASH_BUDGET_MS` (500ms) so a broken or hostile Web Crypto cannot hold it up. In
+practice four SHA-256 digests of short strings are sub-millisecond and the observed
+cost is zero.
+
+`pushFormSubmit` then pushes `ec_capture` ahead of the canonical event when the
+identity is in hand, and suppresses the old late push so one submission never
+produces two identity events.
+
+### A race I got wrong first, caught by the test
+
+The first attempt used a synchronous `peek()` and pushed whatever had already
+settled. It looked elegant and was wrong: `buildHashedEC` awaits four
+`crypto.subtle.digest` calls, so it loses to an in-memory response read every time.
+The test caught it immediately —
+
+```
+not ok 1 - identity is on the dataLayer BEFORE the conversion event
+  error: 'got ["lead_form_submit_success","ec_capture"]'
+```
+
+Had it been asserted by eye on a slow network it would have looked fine and shipped
+as a coin toss. Ordering is now awaited explicitly rather than hoped for.
+
+The same test run also showed a lead with no email or phone still emitting an
+identity payload of all-undefined digests — an event that looks like identity,
+matches nothing, and makes "did identity go out?" unanswerable from the dataLayer.
+Now suppressed.
+
+### Verification
+
+`tests/measurement-identity-ordering.test.ts`, 7 cases, asserting both halves:
+
+| Case | Asserts |
+| --- | --- |
+| identity precedes the conversion event | the fix works |
+| exactly one identity push per submission | no double-fire for ec_capture listeners |
+| refused marketing consent | identity suppressed, lead event still fires |
+| broken Web Crypto | lead event still fires |
+| no identity at all | lead event still fires, no empty payload |
+| unqualified lead | neither event — insurance answer never reaches advertising |
+| hashed content | no plaintext email, phone or name |
+
+Full suite 155/155, `validate-measurement-contract` 15/15, `validate-faq-ssr-contract`
+3/3, typecheck at its 44-error baseline.
+
+**This needs the GTM half to take effect** — the conversion tags must read the
+variable. See `claude-for-chrome-final.md`, which attaches it *without* a setup tag,
+and whose most important check is that the conversion still fires when identity is
+absent.
+
 ## Still open
 
 1. **Decide whether to keep the two AW- Google tags.** They were not the fix and they
