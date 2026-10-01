@@ -111,34 +111,49 @@ for (const { t, idx } of adsTags) {
     const adds = r.filter((c) => c[0] === 'add').flatMap((c) => c.slice(1));
     return adds.includes(idx);
   });
-  // A __awct conversion tag does not send its own beacon. It routes through a
-  // Google tag (__googtag) registered for the same AW- destination. If no such
-  // tag exists ANYWHERE in the container, the conversion has nowhere to go and
-  // fails silently — no console error, no network request, nothing in the UI.
+  // Whether a Google tag (__googtag) exists for this conversion's AW- destination.
   //
-  // Look across the whole container, not just this tag's setup_tags: the Google
-  // tag is normally its own Initialization-triggered tag, not a setup tag. And
-  // note GTM stores the ID bare ("17270956371"), never with the "AW-" prefix —
-  // grepping the container for "AW-" finds nothing and reads as "no Ads tags",
-  // which is wrong.
+  // DO NOT read "none" as "this tag cannot send". An earlier version of this
+  // script said exactly that and it was wrong: the FL conversion recorded 23
+  // conversions through 22 September with no __googtag in the container at all.
+  // GTM's __awct template can load its own conversion pixel, so the absence of a
+  // Google tag is a configuration observation, not a verdict.
+  //
+  // It is still worth printing: a Google tag is the modern setup, and it is what
+  // enhanced conversions and remarketing route through. Just do not diagnose from
+  // it. Only a network capture settles whether a conversion actually sends —
+  // scripts/qa/prod-gtm-trigger-probe.mjs.
+  //
+  // Note GTM stores the ID bare ("17270956371"), never with the "AW-" prefix, so
+  // grepping a container for "AW-" finds nothing and reads as "no Ads tags".
   const googTag = tags.findIndex(
     (x) => x.function === '__googtag' && String(x.vtp_tagId || '').replace(/^AW-/, '') === String(t.vtp_conversionId)
   );
   console.log(
     googTag === -1
-      ? `    transport: MISSING — no __googtag for AW-${t.vtp_conversionId}. This tag cannot send.`
-      : `    transport: tag#${googTag} __googtag ${tags[googTag].vtp_tagId} — OK`
+      ? `    google tag: none for AW-${t.vtp_conversionId} (not proof it cannot send — verify with a network capture)`
+      : `    google tag: tag#${googTag} __googtag ${tags[googTag].vtp_tagId}`
   );
 
-  // setup_tags are a separate thing and are easy to mistake for the transport.
-  // __awud is the enhanced-conversions user-data tag: it supplies hashed user
-  // data to a conversion, it is NOT a destination and does not make the tag able
-  // to send.
+  // THIS is the line that actually matters, and the one that took longest to find.
+  //
+  // A setup tag GATES the tag it is attached to: GTM fires it first and holds the
+  // conversion until it reports completion. One that never completes blocks the
+  // conversion silently and forever, and the conversion then appears under "Tags
+  // Not Fired" with a perfectly correct trigger — which reads as a trigger problem
+  // and is not one.
+  //
+  // That is what stopped Florida form conversions on 22 September 2026: container
+  // v37 attached a __awud user-data tag as a setup tag, and that tag waits on
+  // dataLayer keys the site only pushes afterwards. Nothing about the conversion
+  // tag itself was wrong, which is why it survived inspection for over a week.
   const setupRefs = (t.setup_tags || []).filter((x) => Array.isArray(x)).map((x) => x[1]);
   for (const s of setupRefs) {
     const st = tags[s];
-    const what = st && st.function === '__awud' ? 'enhanced-conversions user data (not a transport)' : 'setup tag';
-    console.log(`    setup:     tag#${s} ${st ? st.function : '(missing)'} — ${what}`);
+    const what = st && st.function === '__awud'
+      ? 'enhanced-conversions user data — GATES this conversion; check what it waits on below'
+      : 'gates this conversion until it completes';
+    console.log(`    setup tag: tag#${s} ${st ? st.function : '(missing)'} — ${what}`);
   }
 
   if (!firing.length) {

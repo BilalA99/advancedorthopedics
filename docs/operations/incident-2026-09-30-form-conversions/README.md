@@ -5,10 +5,20 @@ more than the half that is right.**
 
 ## Answer in one line
 
-Forms are working and leads are arriving. What has stopped is the **Google Ads
-conversion tag** — it is correctly configured, correctly triggered, and never
-fires. Separately, New Jersey really has produced no form leads since 23 September,
-so the $184 is a genuine media problem, not a reporting artifact.
+**RESOLVED 1 October 2026 — GTM container v38.** Form conversions stopped on 22
+September because container **v37** (21 September, "Update Thank You Page conversion
+tags") attached a user-data tag as a **setup tag** on both conversion tags. A setup
+tag gates the tag it is attached to, and this one waits on dataLayer keys the site
+only pushes afterwards, so it never completed and the conversion never fired.
+Removing it restored both accounts; verified by network capture on the published
+container.
+
+Lead capture was never broken — leads were arriving in the database the whole time.
+
+> **A wrong call of mine, corrected below.** I first diagnosed this as a missing
+> Google tag and said the conversion tags "cannot send" without one. That was wrong.
+> The Florida tag recorded 23 conversions through 22 September with no Google tag in
+> the container at all. See [What I got wrong](#what-i-got-wrong).
 
 ## What was verified, and how
 
@@ -80,9 +90,13 @@ googleadservices.com contacted: FALSE
 The GA4 tag fires. The Google Ads conversion tag does not — `googleadservices.com`
 is never contacted, so no conversion beacon leaves the browser.
 
-## Root cause — most likely, and how to confirm in one click
+## The first diagnosis — superseded, kept because the reasoning matters
 
-The container has exactly one Google tag:
+What follows was my original root cause. **It is wrong.** It is kept because the
+decoding technique it introduced is sound and because the way it failed is the most
+useful thing in this document.
+
+The container had exactly one Google tag:
 
 ```
 tag#0  __googtag  vtp_tagId = "G-XXHSYV3NMD"      ← GA4 only
@@ -214,6 +228,51 @@ request is still in flight, so it is ready to push synchronously *ahead* of the
 canonical event rather than after it. That keeps the lead event consent-independent
 and gives the conversion its user data at fire time.
 
+## What I got wrong
+
+I diagnosed this as a missing Google tag — no `__googtag` for either AW- destination,
+therefore the conversion tags had no transport and could not send. I stated it as
+fact, built a check into `gtm-container-decode.mjs` that printed "This tag cannot
+send", and wrote a brief telling someone to go fix it.
+
+**The Ads data refutes it.** `Thank You Page GTM` recorded **23 form conversions in
+September**, its last on **22 September** — all of them while no Google tag existed
+in the container. A `__awct` tag can load its own conversion pixel. "No Google tag"
+was a true observation and a false conclusion.
+
+What misled me: my own probe showed zero requests to `googleadservices.com` when the
+event fired, and I had an explanation ready that fit. But the probe could not
+distinguish "fired and had nowhere to send" from "never fired at all" — it only saw
+the absence of a request. The setup tag meant the tag never fired. I took a single
+observation consistent with two causes and reported the one I had already thought of.
+
+The Ads console answered it in one number that I never had access to: the date of
+the last recorded conversion. **22 September — one day after v37 was published.**
+That alone localises the cause to v37 and rules out anything that was already true
+before it, which included the missing Google tag.
+
+Corrections made:
+
+- `gtm-container-decode.mjs` no longer claims a tag cannot send. It reports whether
+  a Google tag exists and says explicitly that this is not proof, pointing at the
+  network probe as the only thing that settles it.
+- The same script now flags a setup tag as **gating** the conversion, which is what
+  actually matters and what the first version buried.
+
+### The two Google tags were not the fix
+
+They were added on my recommendation and they were not necessary. They are not
+inert, either: they make the site send remarketing and view-through pings to both
+Ads accounts on every page load, which it was not doing before. My own probe
+confirms it — the page no longer reaches network idle, and `viewthroughconversion`
+requests now fire for both conversion IDs.
+
+That is defensible (it is the modern setup, and it is what enhanced conversions and
+remarketing audiences route through) but it is a real change in what is collected
+about every visitor, made for a reason that turned out to be wrong. **It is worth a
+deliberate decision to keep or remove, rather than being left in by accident.**
+Consent Mode still applies to them.
+
 ## The thing most likely to be misread: you may be looking at the wrong number
 
 One conversion signal **is** reaching Google right now:
@@ -252,12 +311,31 @@ themselves are up (`/locations/new-jersey`, `/locations/new-york`,
 `/locations/new-jersey/paramus-orthopedics` all return 200 and render a lead form),
 so this is a demand/targeting problem rather than a broken page:
 
-- $184 over seven days is roughly $26/day against a $4,000/month NJNY budget —
-  about 20% of the pace that budget implies. Low spend produces low lead counts.
-- Worth checking: are the NJ campaigns limited by budget, disapproved, or
-  geo-targeted somewhere with no volume?
+### What the Ads account actually shows (read 1 October)
 
-This needs the Ads account, not the codebase.
+- **No New York campaign exists.** NJ-Outer explicitly *excludes* all of New York
+  State, New York City, the Bronx and Yonkers, and nothing else targets NY. The
+  account carries an NY conversion ID and an NY market in the container, but buys no
+  NY traffic at all.
+- **NJ-Central — Non-Brand Search** ($58/day) is *limited by search volume*, and took
+  209 impressions with **0 clicks** on 30 September. Its Dynamic Search Ads setting
+  targets **"all URLs Google knows about"** — on a 769-page site full of blog,
+  condition and treatment pages, that is a standing waste risk and should be narrowed
+  to the pages that actually convert.
+- **NJ-Outer — Non-Brand Search** ($61/day) is *limited by budget*: $811.58 over 14
+  days, 142 clicks, ~3.5% CTR, $5.72 avg CPC, 13 conversions. This is the one with
+  demand to absorb more money.
+- **44% of 14-day spend ($698) sits in Google's hidden "Other search terms"**, so
+  nearly half the budget is not attributable to a visible query. The visible terms
+  are relevant ("orthopedic doctor near me", "back specialist near me").
+- The two highest-spend ads have **Poor** ad strength.
+- Geo-targeting is correctly set to **Presence** (not "presence or interest") on both
+  campaigns, and no ads are disapproved.
+- **NJ's `Submit lead form` records $0 per conversion** because the tag sends
+  `value=0`. Ads' $1 fallback only applies when no value is sent at all, so
+  value-based bidding has nothing to work with.
+
+The geo gap and the DSA setting are the two worth acting on first.
 
 ## A correction I owe you
 
@@ -271,12 +349,31 @@ They have been deleted. They were inflating the September lead count by 8 and wo
 have shown up in the tracker as real FL leads. Resend's idempotency key means the
 staff inbox likely received one or two notifications rather than eight.
 
-## What I could not do
+## Still open
 
-The Chrome connector was not available this session, so I had **no access to the
-Google Ads UI or the GTM editing UI**. Everything above is from production
-Supabase, the published GTM container, and live browser probes I drove with
-Puppeteer.
+1. **Decide whether to keep the two AW- Google tags.** They were not the fix and they
+   add remarketing collection on every page load. See
+   [What I got wrong](#what-i-got-wrong).
+2. **Re-attach enhanced conversions properly.** They are unattached in v38. The
+   repair is site-side: hash the identity while the server request is in flight so
+   it can be pushed *ahead* of the canonical event instead of after it. Until then
+   Ads still reports `ec_mode=a` and "Enhanced conversions is enabled" on the FL
+   action, which overstates what is actually being sent.
+3. **Reconcile the $184.** It does not match this account's $877.50 for the same
+   window.
+4. **No New York paid search at all**, and the NJ-Central DSA targets every URL
+   Google knows about.
+5. **4 test conversions** (2 FL, 2 NJ) were created during verification, identifiable
+   by order IDs beginning `chrome-probe-`. They carry no gclid so they attach to no
+   campaign, but they do sit in the conversion action totals for 1 October.
+
+## Access notes
+
+The Chrome connector was never available to this session, so the GTM and Ads UI work
+was done by Claude for Chrome on the Seo@ profile, and everything else from
+production Supabase, the published GTM container, and Puppeteer probes. The GA4
+`503`s seen during that work were an ad blocker in that browser, not an outage —
+GA4 Realtime received every probe.
 
 That leaves exactly two things open, both requiring your login:
 

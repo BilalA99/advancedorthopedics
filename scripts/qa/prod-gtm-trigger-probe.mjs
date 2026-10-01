@@ -26,7 +26,13 @@ import { randomUUID } from 'node:crypto';
 const BASE = process.argv[2] || 'https://mountainspineorthopedics.com';
 const MARKETS = (process.argv[3] || 'FL,NJ,NY,GA,PA').split(',');
 
-const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-dev-shm-usage'] });
+// protocolTimeout: request interception on a page this heavy can stall a CDP
+// round-trip past the 180s default and abort the run mid-probe.
+const browser = await puppeteer.launch({
+  headless: true,
+  protocolTimeout: 300000,
+  args: ['--no-sandbox', '--disable-dev-shm-usage'],
+});
 
 console.log(`\nGTM trigger probe — ${BASE}`);
 console.log('(pushes the canonical lead event; no form, no lead, nothing persisted)\n');
@@ -60,7 +66,10 @@ for (const market of MARKETS) {
     } catch {}
   });
 
-  await page.goto(BASE + '/find-care/book-an-appointment', { waitUntil: 'networkidle2', timeout: 90000 });
+  // domcontentloaded, not networkidle2: since the AW- Google tags were added the
+  // page keeps sending remarketing pings, so the network never goes idle and the
+  // navigation would time out before the probe ever runs.
+  await page.goto(BASE + '/find-care/book-an-appointment', { waitUntil: 'domcontentloaded', timeout: 90000 });
   // Let GTM boot and the consent update settle before measuring.
   await new Promise((r) => setTimeout(r, 4000));
 
