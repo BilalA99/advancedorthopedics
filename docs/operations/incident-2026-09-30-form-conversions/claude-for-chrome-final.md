@@ -1,72 +1,80 @@
-# Claude for Chrome — final prompt (re-attach enhanced conversions, fix value, trim waste)
+# Claude for Chrome — remove the Google tags, then attach enhanced conversions
 
 Run on the **Seo@ profile** (`seo@appflowstudio.io`, Chrome's `Profile 7`).
 
-Prerequisite: the site-side fix must be deployed first. Conversions already work
-without this prompt — this run restores enhanced conversions and cleans up the
-things the audit surfaced. Nothing here is urgent in the way the last one was.
+Supersedes the previous version of this file, whose Task 1 was unachievable and
+whose Task 4 was based on a DSA setting that does not exist. Both are corrected
+here.
 
 ---
 
-You have full ownership. Work through this end to end without asking me to confirm
-each step. Stop only if something contradicts what is written here.
+You have full ownership. Work end to end without confirming each step. Stop if
+something contradicts what is written here.
 
-## Context
+GTM **GTM-T57SB8NQ**. Ads **AW-17270956371** (FL, 721-766-1742), **AW-17988324873**
+(NJ/NY, 147-098-7566). Live container is **v38**; conversions currently fire for
+both markets and that must still be true when you finish.
 
-Site: mountainspineorthopedics.com. GTM container **GTM-T57SB8NQ**. Google Ads
-**AW-17270956371** (Florida, account 721-766-1742) and **AW-17988324873** (NJ/NY,
-account 147-098-7566).
+## Both of your questions, answered
 
-Your last run fixed the outage: container **v38** removed a `__awud` user-data tag
-that had been attached as a **setup tag** on both conversion tags and was gating
-them. Conversions now fire — I re-verified independently from a clean headless
-browser on the published container, FL and NJ both.
+**1. Should enhanced conversions go on the Google tag as `user_data`? No.** I decoded
+the published container. Both Google tags are bare — `vtp_tagId` and nothing else —
+and they fire on **Initialization – All Pages**, i.e. at page load. A `user_data`
+parameter there is evaluated when that tag fires. The site pushes
+`enhanced_conversion_data` when the visitor submits the form, which is much later on
+the same page. It would read an empty variable every time. Do not do it.
 
-Enhanced conversions were left unattached, deliberately, because the identity data
-arrived on the dataLayer *after* the conversion tag read it. **That is now fixed in
-the site code and deployed.** `enhanced_conversion_data` is pushed in an `ec_capture`
-event *before* `lead_form_submit_success`, so the data is present when the
-conversion fires. It is still consent-gated and still SHA-256 hashed.
+**2. The lead value is deferred.** See Task 4 — it needs one number from the account
+that I do not have, and it may turn out to be a non-issue entirely.
 
-## Task 1 — Re-attach enhanced conversions, the safe way
+## The actual fix: remove the two Google tags
 
-**Do not restore the setup tag.** That is what caused the outage. A setup tag gates
-the conversion; if the user data is ever missing — a visitor who declined marketing
-consent, a browser without Web Crypto — the conversion would hang again and we would
-be back where we started. The site is built so that case is normal and expected.
+You found that GTM hides the enhanced-conversions field on a conversion tag when a
+Google tag for that destination exists in the container ("this tag will use the
+configuration of Google tag mountainspinestream"). That is exactly what happened,
+and **those two Google tags are mine** — I had you add them on 30 September on a
+diagnosis that turned out to be wrong.
 
-Instead, on **each** conversion tag (`Thank You Page` for FL, `Thank You Page For
-NJ/NY`):
+They were never the fix. The Florida conversion tag recorded 23 conversions through
+22 September with no Google tag in the container at all. What actually broke things
+was the `__awud` setup tag from v37, which you already removed.
 
-1. Open the tag. Confirm **Tag Sequencing** has no setup tag. Leave it that way.
-2. Tick **"Include user-provided data from your website"**.
-3. Select the existing user-provided data variable (the `__awec` one that
-   `Lead Submit Form Enhanced` was using — it reads `enhanced_conversion_data.*`).
-   Do not create a new one; reusing it keeps one definition.
+So they are not neutral: they add remarketing and view-through pings on every page
+load that the site was not sending before, **and** they are what blocks the correct
+enhanced-conversions setup. Removing them reverts an unnecessary change and restores
+the per-tag field, which reads its variable when the conversion fires — which is the
+behaviour we need.
 
-This reads the identity at fire time but does **not** gate the tag. If the data is
-absent the conversion still fires, just without enhancement. That is the behaviour
-we want and the distinction that matters.
+### Task 1 — Remove them
 
-Leave the `Lead Submit Form Enhanced` tags themselves unattached and untriggered.
+1. Delete (or pause) `Google Tag — AW-17270956371 (FL)` and
+   `Google Tag — AW-17988324873 (NJ/NY)`. Do not touch the GA4 Google tag
+   `G-XXHSYV3NMD`, and do not touch `mountainspinestream` if that is a different
+   Google tag — tell me what it is and what ID it carries before you remove anything
+   that is not one of the two I named.
+2. Reopen `Thank You Page`. The **"Enable manual enhanced conversions"** field should
+   now be visible. If it is still hidden, stop and tell me — something else in the
+   container is registering that destination.
 
-## Task 2 — Fix the conversion value
+### Task 2 — Attach enhanced conversions, without gating
 
-NJ's `Submit lead form` records **$0** per conversion because the tag sends
-`value=0`. Google's $1 fallback only applies when **no** value is sent at all, so
-value-based bidding currently has nothing to work with.
+On **each** conversion tag (`Thank You Page` FL, `Thank You Page For NJ/NY`):
 
-On both conversion tags, **clear the Conversion Value field entirely** — leave it
-empty rather than setting it to 0. Do not invent a lead value; if we want a real
-number later that is a business decision, not a tag setting.
+1. Confirm **Tag Sequencing has no setup tag**. Leave it that way. A setup tag gates
+   the conversion, and that is what caused the outage — missing user data is a normal
+   case here, not an error.
+2. Enable manual enhanced conversions and point it at the existing `__awec`
+   user-provided-data variable (the one `Lead Submit Form Enhanced` used, reading
+   `enhanced_conversion_data.*`). Reuse it; do not create a second definition.
+
+Leave the `Lead Submit Form Enhanced` tags unattached and untriggered.
 
 ## Task 3 — Verify, then publish
 
-In Preview, on `https://mountainspineorthopedics.com/find-care/book-an-appointment`.
-Clear `_gcl_aw`, `gclid` and `mso_gclid` cookies first if any test values remain.
+Preview on `https://mountainspineorthopedics.com/find-care/book-an-appointment`.
+Clear `_gcl_aw`, `gclid` and `mso_gclid` first.
 
-Because the site now pushes identity first, test it the way the site does — push
-both events in order:
+**Test A — identity present.** Push both, in this order, as the site does:
 
 ```js
 dataLayer.push({
@@ -86,63 +94,88 @@ dataLayer.push({
 });
 ```
 
-Those digests are 64-character dummies, not real hashes of anything. They are the
-right shape to prove the plumbing; they will not match a real user, which is fine —
-we are testing transport, not match rate.
+Expect `googleadservices.com/pagead/conversion/17270956371/` **carrying user-data
+parameters** (`em=`/`pn=`, or `tv.1~em`, or `ec_mode` alongside hashed fields). A
+conversion with no user-data parameters means Task 2 did not take.
 
-Required evidence:
+**Test B — the regression test, and the one that matters most.** Reload. Push ONLY
+the `lead_form_submit_success` event, with no `ec_capture` first. **The conversion
+must still fire.** If it does not, the tag is gated again — revert everything and
+tell me. This is the exact failure that took conversions down for nine days.
 
-1. `Thank You Page` fires — **not** blocked, not "still running".
-2. A request to `googleadservices.com/pagead/conversion/17270956371/` **containing
-   user data** — look for an `em=`/`pn=` or `tv.1~em` style parameter, or `ec_mode`
-   alongside the hashed fields. A conversion request with no user-data parameters
-   means Task 1 did not take.
-3. Repeat with `market: 'NJ'` → `/pagead/conversion/17988324873/`.
-4. **Then test the failure case**, which matters more than the success case: reload,
-   push ONLY the `lead_form_submit_success` event with no `ec_capture` first, and
-   confirm the conversion **still fires**. If it does not, the tag is gated again —
-   stop, revert, and tell me.
+**Test C — NJ.** Repeat Test A with `market: 'NJ'` → `/pagead/conversion/17988324873/`.
+
+**Test D — conversions survive removing the Google tags.** This is the risk in Task 1.
+Tests A–C already prove it in Preview; after publishing, reload the **live** page
+(not Preview, cache-busted) and confirm a conversion request still fires for FL.
 
 Publish only if all four pass. Version name:
-`Re-attach enhanced conversions without gating; clear zero conversion value`.
+`Remove AW Google tags; attach enhanced conversions on the conversion tags`.
 
-## Task 4 — Trim the NJ waste
+## Task 4 — The conversion value question
 
-In the NJ/NY account (147-098-7566):
+You found the value field is already empty and `value=0` comes from the tag itself.
+Before anyone sets a number, I need to know whether it matters at all:
 
-1. **NJ-Central — Non-Brand Search** has Dynamic Search Ads targeting **"all URLs
-   Google knows about"**. The site has 769 pages, most of them blog, condition and
-   treatment content that does not convert. Narrow DSA to specific pages — the
-   `/locations/new-jersey/*` pages and the main treatment pages — or turn DSA off on
-   that campaign if narrowing is not straightforward. Tell me which you did.
-2. **NJ-Outer — Non-Brand Search** is *limited by budget* at $61/day while NJ-Central
-   is *limited by search volume* at $58/day. NJ-Outer is the one with demand it
-   cannot serve. **Do not change budgets** — just confirm the current daily amounts
-   and 14-day spend for each so I can decide the shift.
-3. The two highest-spend ads have **Poor** ad strength. List them with their headline
-   and description counts so I can see what they are missing. Do not rewrite them.
+- Report the **bidding strategy** on every active campaign in both accounts.
+- If they are all Maximize Conversions, Target CPA, or Manual CPC, then conversion
+  value is unused and `$0` is a non-issue. Say so and change nothing.
+- If any campaign uses **Maximize Conversion Value or Target ROAS**, then $0 is
+  actively breaking bidding. Do not invent a number — report which campaigns, and I
+  will get a per-lead value from Bilal and have you set it once on the Ads conversion
+  action ("Use the same value for each conversion"), not on the tag.
 
-**Ignore New York.** There is no NY campaign and that is intentional — it is not in
-the plan yet. Do not create one and do not flag it again.
+Every conversion that fires is already a qualified lead — unqualified ones are gated
+out in the site code and never reach Ads — so one flat value is the right shape.
 
-## Task 5 — Clean up
+## Task 5 — The policy and asset findings (these are real, act on them)
 
-Four test conversions from the last run are in the accounts (2 FL, 2 NJ), identifiable
-by order IDs beginning `chrome-probe-`. They carry no gclid so they attach to no
-campaign. Confirm whether Google Ads lets you exclude or remove them; if not, just
-tell me the dates and counts so they are on record rather than quietly in the totals.
+In NJ/NY, you found things more serious than the budget question. **Do not change
+them yet — report them precisely so I can decide.**
+
+1. **Three disapproved image assets**: Clickbait, Clickbait +1, Past Violation. Give
+   me the ad groups they sit in and, if visible, the stated reason. "Past Violation"
+   on a healthcare account is worth understanding before it spreads.
+2. **Sitelinks named "Personal Injury", "Car Accident", "Slip And Fall Injuries"** in
+   an orthopedic campaign. These look like they came from a personal-injury law
+   account. List every sitelink on both NJ campaigns with its final URL, so I can see
+   whether they point at this site at all. If any point at a different domain, say so
+   immediately — that is a misconfiguration worth stopping for.
+3. There is also a sitelink named **"New York"**. No NY campaign is intentional, but a
+   sitelink pointing at NY content from an NJ campaign is a different thing. Report
+   its URL.
+4. Sitelinks and callouts showing **"Eligible (Limited)" under "Health in personalized
+   advertising"** — list which, so we know what is actually serving.
+
+## Task 6 — Ad strength (report only)
+
+Both Poor ads are in ORTHO SURGEON GENERAL with identical copy. You found 15
+headlines (the maximum) with **"Orthopedic Surgeon Near You" pinned to position 1**.
+The pin is almost certainly the drag, not missing assets. Confirm the pin, and report
+the exact description count — you saw 2 in the asset report but the ad row suggested
+4. Do not rewrite the ads.
+
+## Dropped from the previous brief
+
+**Ignore DSA entirely.** You corrected this: NJ-Central has no DSA — empty Website
+field, both ad groups Standard, and "use all URLs Google knows about" was default
+help text, not live targeting. There is nothing to narrow. Good catch.
+
+**Ignore New York.** No NY campaign is intentional and not in the plan.
+
+**Test conversions need no cleanup.** You confirmed the probes never became
+conversions (tag pings with no click attached are not recorded), so nothing is
+sitting in the totals.
 
 ## Report back
 
-1. What you changed, per tag, and the published version number.
-2. The four pieces of verification evidence from Task 3, especially #4 — the
-   conversion firing *without* identity present. That is the regression test for the
-   outage we just fixed.
-3. What you did to the DSA targeting, and the budget/spend figures.
-4. Anything that contradicts the above.
-
-Accuracy over reassurance. If a step did not work, say so — the last run's value was
-entirely in it stopping rather than publishing something that looked done.
+1. What you removed and what you changed, per tag, with the published version number.
+2. All four Task 3 results, **especially Test B** — the conversion firing with no
+   identity present.
+3. Bidding strategies (Task 4) and your verdict on whether $0 matters.
+4. The policy/sitelink findings verbatim, with URLs.
+5. Anything contradicting the above. Your last two reports were right to stop; that
+   is worth more than a run that looks finished.
 
 ---
 
@@ -153,6 +186,6 @@ node scripts/qa/gtm-container-decode.mjs GTM-T57SB8NQ
 node scripts/qa/prod-gtm-trigger-probe.mjs https://mountainspineorthopedics.com FL,NJ
 ```
 
-The decoder must still show **no setup tag** on tags 6 and 10 — if a `setup tag:`
-line reappears there, enhanced conversions were attached the wrong way and the
-outage is back. The probe must still report one conversion ping per market.
+Expected: tags 6 and 10 show **no setup tag** (a `setup tag:` line there means the
+outage is back), the `google tag:` line reads **none** for both AW- destinations, and
+the probe still reports one conversion ping per market.

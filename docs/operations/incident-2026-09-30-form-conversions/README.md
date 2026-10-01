@@ -267,11 +267,37 @@ Ads accounts on every page load, which it was not doing before. My own probe
 confirms it — the page no longer reaches network idle, and `viewthroughconversion`
 requests now fire for both conversion IDs.
 
-That is defensible (it is the modern setup, and it is what enhanced conversions and
-remarketing audiences route through) but it is a real change in what is collected
-about every visitor, made for a reason that turned out to be wrong. **It is worth a
-deliberate decision to keep or remove, rather than being left in by accident.**
-Consent Mode still applies to them.
+That is a real change in what is collected about every visitor, made for a reason
+that turned out to be wrong. Consent Mode still applies to them.
+
+**And on 1 October they turned out to be actively harmful**, not merely unnecessary.
+GTM hides the enhanced-conversions field on a conversion tag when a Google tag for
+that destination exists in the container — the tag editor says so directly ("this tag
+will use the configuration of Google tag …"). So the two tags I added are what made
+the correct enhanced-conversions setup impossible to reach.
+
+The alternative GTM offers in that state — a `user_data` parameter on the Google tag
+— cannot work here either. Both Google tags are bare (`vtp_tagId` and nothing else)
+and fire on **Initialization – All Pages**, so that parameter is evaluated at page
+load. This site pushes `enhanced_conversion_data` when the visitor submits, much
+later on the same page. It would read an empty variable every time.
+
+**Decision: remove them.** It reverts an unnecessary change, drops the remarketing
+pings, and restores the per-conversion-tag field, which reads its variable when the
+conversion fires. The risk — do conversions still send without a Google tag? — is
+answered by the same evidence that overturned the original diagnosis: they sent 23 of
+them through 22 September with no Google tag present. It is still verified by network
+capture before publishing, in `claude-for-chrome-final.md` Test D.
+
+### A pattern worth naming
+
+Three times now a confident structural claim of mine has been overturned by one
+number from a console I could not read: "the tag cannot send" (refuted by the last
+conversion date), "the Google tags are harmless" (refuted by the tag editor hiding a
+field), and the DSA targeting that did not exist (refuted by an empty Website field).
+In each case the codebase and the published container supported my reading and the
+live account did not. The lesson is not to decode less — the container work found the
+setup tag — but to label what is inference until an account confirms it.
 
 ## The thing most likely to be misread: you may be looking at the wrong number
 
