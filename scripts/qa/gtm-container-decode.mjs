@@ -111,28 +111,30 @@ for (const { t, idx } of adsTags) {
     const adds = r.filter((c) => c[0] === 'add').flatMap((c) => c.slice(1));
     return adds.includes(idx);
   });
-  // Whether a Google tag (__googtag) exists for this conversion's AW- destination.
+  // Whether a __googtag in THIS CONTAINER names this conversion's AW- destination.
   //
-  // DO NOT read "none" as "this tag cannot send". An earlier version of this
-  // script said exactly that and it was wrong: the FL conversion recorded 23
-  // conversions through 22 September with no __googtag in the container at all.
-  // GTM's __awct template can load its own conversion pixel, so the absence of a
-  // Google tag is a configuration observation, not a verdict.
+  // This question cannot be answered from the container, and two earlier versions
+  // of this script pretended otherwise. A Google tag carries a list of
+  // DESTINATIONS configured in the Google tag UI, not in GTM, and the container
+  // stores only its primary id. Here, `__googtag G-XXHSYV3NMD` (the GA4 tag) loads
+  // a Google tag whose destinations include BOTH AW-17270956371 and
+  // AW-17988324873 — invisible in this JSON, and the reason the conversions sent
+  // fine for months while this script reported "no Google tag".
   //
-  // It is still worth printing: a Google tag is the modern setup, and it is what
-  // enhanced conversions and remarketing route through. Just do not diagnose from
-  // it. Only a network capture settles whether a conversion actually sends —
+  // So treat "none in container" as "unknown", never as "cannot send". The only
+  // thing that settles it is a network capture:
   // scripts/qa/prod-gtm-trigger-probe.mjs.
   //
-  // Note GTM stores the ID bare ("17270956371"), never with the "AW-" prefix, so
-  // grepping a container for "AW-" finds nothing and reads as "no Ads tags".
+  // (Note also that GTM stores the id bare — "17270956371", never "AW-…" — so
+  // grepping a container for "AW-" finds nothing and reads as "no Ads tags".)
   const googTag = tags.findIndex(
     (x) => x.function === '__googtag' && String(x.vtp_tagId || '').replace(/^AW-/, '') === String(t.vtp_conversionId)
   );
   console.log(
     googTag === -1
-      ? `    google tag: none for AW-${t.vtp_conversionId} (not proof it cannot send — verify with a network capture)`
-      : `    google tag: tag#${googTag} __googtag ${tags[googTag].vtp_tagId}`
+      ? `    google tag: none named in container for AW-${t.vtp_conversionId} — UNKNOWN, not absent.` +
+        `\n                A Google tag's destination list lives outside the container; verify by network capture.`
+      : `    google tag: tag#${googTag} __googtag ${tags[googTag].vtp_tagId} (destinations still not visible here)`
   );
 
   // THIS is the line that actually matters, and the one that took longest to find.

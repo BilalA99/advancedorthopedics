@@ -289,6 +289,28 @@ answered by the same evidence that overturned the original diagnosis: they sent 
 them through 22 September with no Google tag present. It is still verified by network
 capture before publishing, in `claude-for-chrome-final.md` Test D.
 
+### The fact that explains all of it (found 1 October)
+
+`mountainspinestream` is a single Google tag carrying `G-XXHSYV3NMD`,
+**AW-17270956371** and **AW-17988324873** as destinations, loaded by the
+`GA4 - Configuration` tag.
+
+A Google tag's destination list is configured in the Google tag UI, **not in GTM**,
+and the container stores only its primary id. So both AW- destinations were on the
+page the entire time, and nothing in `gtm.js` could ever have shown that.
+
+That is the single fact behind every wrong call here:
+
+- "No transport, the tag cannot send" — the transport existed, invisibly.
+- "The two Google tags I added are what hides the enhanced-conversions field" —
+  `mountainspinestream` hides it, and removing mine changed nothing.
+- It also explains the original design. Whoever built this used a `__awud` **setup
+  tag** because the per-tag enhanced-conversions field was already hidden by
+  `mountainspinestream`. The setup tag was the only route GTM left open — and it was
+  the wrong one, because a setup tag gates the conversion.
+
+`gtm-container-decode.mjs` now prints `UNKNOWN, not absent` for this, with the reason.
+
 ### A pattern worth naming
 
 Three times now a confident structural claim of mine has been overturned by one
