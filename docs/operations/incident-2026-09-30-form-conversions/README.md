@@ -94,6 +94,38 @@ conversion ID; with no such destination on the page it has nothing to send throu
 and fails silently — no console error, no network request, nothing in the UI to
 suggest a problem.
 
+Two things made this easy to miss, and both produced a wrong answer here first:
+
+1. **GTM stores the conversion ID bare** — `"17270956371"`, never `"AW-…"`. Grepping
+   the container for `AW-` returns nothing, which reads as "there are no Ads tags"
+   when in fact there are three.
+2. **The conversion tags DO have `setup_tags`**, which looks like the transport and
+   is not. `tag#6 setup→ tag#22` and `tag#10 setup→ tag#23` are both `__awud` —
+   the enhanced-conversions *user data* tag. It supplies hashed user data to a
+   conversion; it is not a destination and does not let the tag send.
+
+`scripts/qa/gtm-container-decode.mjs` now prints the transport verdict per tag, so
+neither mistake can be repeated silently:
+
+```
+tag#6   transport: MISSING — no __googtag for AW-17270956371. This tag cannot send.
+        setup:     tag#22 __awud — enhanced-conversions user data (not a transport)
+tag#7   transport: MISSING — no __googtag for AW-17270956371. This tag cannot send.
+tag#10  transport: MISSING — no __googtag for AW-17988324873. This tag cannot send.
+```
+
+### This is broader than forms
+
+`tag#7` is the **"Contact Us" click conversion** (`gtm.click` on `Contact Us`), and
+it has the same missing transport. So the FL account has been losing *both* the
+form conversion and the contact-click conversion, not forms alone.
+
+That is consistent with the reported symptom rather than contradicting it: the
+phone numbers that ARE counting are Google's own call reporting (call extensions
+and forwarding numbers), which Google counts on its side and which never depended
+on a tag in this container. Everything the website itself was supposed to report
+has been silent.
+
 **Confirm and fix in GTM (5 minutes):**
 
 1. Tags → New → **Google tag**, Tag ID `AW-17270956371`, trigger **Initialization —
@@ -101,6 +133,10 @@ suggest a problem.
 2. Preview, push a test lead, confirm `Thank You Page` fires and a request goes to
    `googleadservices.com/pagead/conversion/17270956371/`.
 3. Publish.
+
+Adding the two Google tags fixes all three conversion tags at once — the form
+conversions for both accounts *and* the Contact Us click conversion — because they
+all fail for the same single reason.
 
 Re-run `node scripts/qa/prod-gtm-trigger-probe.mjs` afterwards — it passes only
 when `googleadservices.com` is actually contacted.

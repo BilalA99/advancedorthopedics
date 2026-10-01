@@ -83,6 +83,25 @@ const describePredicate = (n) => {
   return `${left} ${fn} ${JSON.stringify(p.arg1)}`;
 };
 
+// Every tag, so a dependency between tags is visible rather than assumed.
+//
+// `setup_tags` matters more than it looks: a __awct conversion tag transports
+// through a Google tag (__googtag) registered for its conversion ID, and GTM
+// wires that as a setup tag — "fire tag N first, then me". Reading only the
+// __awct tags and grepping for an AW- prefix misses it twice over, because the
+// prefix is not stored (the ID is bare) and the dependency lives on the tag, not
+// in the trigger. Both of those produced wrong conclusions here before.
+console.log('All tags:');
+tags.forEach((t, n) => {
+  const id = t.vtp_tagId || t.vtp_conversionId || t.vtp_measurementId || '';
+  const setup = (t.setup_tags || []).filter((x) => Array.isArray(x)).map((x) => `tag#${x[1]}`);
+  console.log(
+    `  tag#${String(n).padStart(2)}  ${String(t.function).padEnd(12)} ` +
+    `${String(id).padEnd(18)}${setup.length ? '  setup→ ' + setup.join(', ') : ''}`
+  );
+});
+console.log('');
+
 // Google Ads Conversion Tracking tags and what fires them.
 const adsTags = tags.map((t, idx) => ({ t, idx })).filter(({ t }) => t.function === '__awct');
 console.log(`Google Ads Conversion Tracking tags: ${adsTags.length}`);
@@ -92,6 +111,36 @@ for (const { t, idx } of adsTags) {
     const adds = r.filter((c) => c[0] === 'add').flatMap((c) => c.slice(1));
     return adds.includes(idx);
   });
+  // A __awct conversion tag does not send its own beacon. It routes through a
+  // Google tag (__googtag) registered for the same AW- destination. If no such
+  // tag exists ANYWHERE in the container, the conversion has nowhere to go and
+  // fails silently — no console error, no network request, nothing in the UI.
+  //
+  // Look across the whole container, not just this tag's setup_tags: the Google
+  // tag is normally its own Initialization-triggered tag, not a setup tag. And
+  // note GTM stores the ID bare ("17270956371"), never with the "AW-" prefix —
+  // grepping the container for "AW-" finds nothing and reads as "no Ads tags",
+  // which is wrong.
+  const googTag = tags.findIndex(
+    (x) => x.function === '__googtag' && String(x.vtp_tagId || '').replace(/^AW-/, '') === String(t.vtp_conversionId)
+  );
+  console.log(
+    googTag === -1
+      ? `    transport: MISSING — no __googtag for AW-${t.vtp_conversionId}. This tag cannot send.`
+      : `    transport: tag#${googTag} __googtag ${tags[googTag].vtp_tagId} — OK`
+  );
+
+  // setup_tags are a separate thing and are easy to mistake for the transport.
+  // __awud is the enhanced-conversions user-data tag: it supplies hashed user
+  // data to a conversion, it is NOT a destination and does not make the tag able
+  // to send.
+  const setupRefs = (t.setup_tags || []).filter((x) => Array.isArray(x)).map((x) => x[1]);
+  for (const s of setupRefs) {
+    const st = tags[s];
+    const what = st && st.function === '__awud' ? 'enhanced-conversions user data (not a transport)' : 'setup tag';
+    console.log(`    setup:     tag#${s} ${st ? st.function : '(missing)'} — ${what}`);
+  }
+
   if (!firing.length) {
     console.log('    FIRING TRIGGERS: none — this tag is published but nothing fires it.');
     continue;
