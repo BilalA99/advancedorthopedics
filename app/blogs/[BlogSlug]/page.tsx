@@ -5,7 +5,6 @@
     import BlogSections from '@/components/BlogSections';
     import BlogConversionModule from '@/components/BlogConversionModule';
     import BlogFAQSection from '@/components/BlogFAQSection';
-    import PreferredSourceCTA from '@/components/PreferredSourceCTA';
     import BlogRecentPosts from '@/components/BlogRecentPosts';
     import RelatedPosts from '@/components/RelatedPosts';
     import ContactUsSection from '@/components/ContactUsSection';
@@ -55,12 +54,6 @@
             
             {/* Server-rendered FAQ section */}
             {faqs.length > 0 && <BlogFAQSection faqs={faqs} />}
-
-            {/* Preferred source ask. Sits after the article and its FAQ — the
-                reader has just been helped, which is when "see more of this" is a
-                fair thing to ask — and BEFORE the conversion module, so it never
-                competes with the booking CTA for attention. */}
-            <PreferredSourceCTA className="mt-8" />
 
             {/* Conversion module — after the article body so it reads as the
                 natural next step rather than competing with the content. */}

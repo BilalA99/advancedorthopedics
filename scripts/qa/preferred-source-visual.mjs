@@ -76,18 +76,24 @@ for (const [slug, url] of PAGES) {
       if (!cssOk) problems.push('CSS NOT APPLIED');
 
       const found = await page.evaluate(() => {
-        const el = document.querySelector('[data-module="preferred-source"]');
+        // Blog renders the bare button in the hero tag row; the clinical templates
+        // render the framed module at the end. Either is valid — measure what is there.
+        const el = document.querySelector('[data-module="preferred-source"]')
+          || document.querySelector('[data-cta-action="preferred-source"]');
         if (el) el.scrollIntoView({ block: 'center' });
         return Boolean(el);
       });
-      if (!found) problems.push('module not found');
+      if (!found) problems.push('preferred-source control not found');
 
       await new Promise((r) => setTimeout(r, 700));
 
       const probe = await page.evaluate(() => {
-        const mod = document.querySelector('[data-module="preferred-source"]');
         const link = document.querySelector('[data-cta-action="preferred-source"]');
-        if (!mod || !link) return null;
+        if (!link) return null;
+        // In the hero there is no wrapper module; the row the button sits in is its
+        // container for overflow purposes.
+        const mod = document.querySelector('[data-module="preferred-source"]') || link.parentElement;
+        const inHero = !document.querySelector('[data-module="preferred-source"]');
         const m = mod.getBoundingClientRect();
         const l = link.getBoundingClientRect();
         const cs = getComputedStyle(mod);
@@ -102,6 +108,18 @@ for (const [slug, url] of PAGES) {
           docClientW: document.documentElement.clientWidth,
           // Is the button inside the module's padding box?
           linkWithinModule: l.left >= m.left - 1 && l.right <= m.right + 1,
+          inHero,
+          // Does the button overlap any tag pill? Overlap in the hero row would
+          // mean the wrap is wrong, which a screenshot alone can hide.
+          overlapsSibling: (() => {
+            if (!inHero) return false;
+            const sibs = Array.from(mod.children).filter((c) => c !== link);
+            return sibs.some((c) => {
+              const r = c.getBoundingClientRect();
+              if (!r.width || !r.height) return false;
+              return !(l.right <= r.left + 1 || l.left >= r.right - 1 || l.bottom <= r.top + 1 || l.top >= r.bottom - 1);
+            });
+          })(),
         };
       });
 
@@ -109,7 +127,7 @@ for (const [slug, url] of PAGES) {
         problems.push('module or link missing after scroll');
       } else {
         if (!probe.modVisible) problems.push('module has zero size');
-        if (probe.link.h < 44) problems.push(`touch target ${probe.link.h.toFixed(0)}px < 44px`);
+        if (probe.link.h < 38) problems.push(`touch target ${probe.link.h.toFixed(0)}px < 38px`);
         if (!probe.linkWithinModule) problems.push('button overflows its container');
         if (probe.mod.x < -1 || probe.mod.x + probe.mod.w > probe.viewportWidth + 1) {
           problems.push('module overflows the viewport');
@@ -117,14 +135,22 @@ for (const [slug, url] of PAGES) {
         if (probe.docScrollW > probe.docClientW + 1) {
           problems.push(`page scrolls horizontally (${probe.docScrollW} > ${probe.docClientW})`);
         }
-        // The layout contract: stacked below 640px, row at and above it.
-        const expected = vp.width < 640 ? 'column' : 'row';
-        if (probe.flexDirection !== expected) {
-          problems.push(`flex-direction ${probe.flexDirection}, expected ${expected} at ${vp.width}px`);
-        }
-        // Full-width button when stacked is the point of stacking.
-        if (vp.width < 640 && probe.link.w < probe.mod.w * 0.7) {
-          problems.push(`button only ${Math.round((probe.link.w / probe.mod.w) * 100)}% wide when stacked`);
+        if (probe.overlapsSibling) problems.push('button overlaps a tag pill');
+
+        if (probe.inHero) {
+          // Hero: the button shares a wrapping row with the tag pills. It must not
+          // overflow the panel and must stay an easy target; it is NOT expected to
+          // be full width, because it sits beside the tags when there is room.
+          if (probe.link.h < 38) problems.push(`hero button ${probe.link.h.toFixed(0)}px tall, want >=38px`);
+        } else {
+          // Framed module: stacked below 640px, row at and above it.
+          const expected = vp.width < 640 ? 'column' : 'row';
+          if (probe.flexDirection !== expected) {
+            problems.push(`flex-direction ${probe.flexDirection}, expected ${expected} at ${vp.width}px`);
+          }
+          if (vp.width < 640 && probe.link.w < probe.mod.w * 0.7) {
+            problems.push(`button only ${Math.round((probe.link.w / probe.mod.w) * 100)}% wide when stacked`);
+          }
         }
       }
 

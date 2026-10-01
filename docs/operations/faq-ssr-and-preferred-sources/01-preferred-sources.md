@@ -44,19 +44,31 @@ nothing here.
 
 ## Where it appears
 
-| Template | File | Placement |
-| --- | --- | --- |
-| Blog post | `app/blogs/[BlogSlug]/page.tsx` | after the article and its FAQ, before the conversion module |
-| Treatment | `app/treatments/[TreatmentDetails]/page.tsx` | after the FAQ — both the new and legacy format branches |
-| Condition | `app/conditions/[slug]/ConditionPage.tsx` | after the FAQ — both the new and legacy format branches |
+| Template | File | Shape | Placement |
+| --- | --- | --- | --- |
+| Blog post | `components/BlogContent.tsx` | bare button | in the hero panel, last item in the tag row |
+| Treatment | `app/treatments/[TreatmentDetails]/page.tsx` | framed module | after the FAQ — both the new and legacy format branches |
+| Condition | `app/conditions/[slug]/ConditionPage.tsx` | framed module | after the FAQ — both the new and legacy format branches |
 
 Five call sites, because the treatment and condition templates each render two
 format branches and missing one would leave half the pages without it.
 
-**The placement is deliberate.** It sits *after* the FAQ — the reader has just had
+**Two placements, for two different page shapes.**
+
+On treatments and conditions it sits *after* the FAQ — the reader has just had
 their question answered, which is the moment "see more of this" is a fair thing to
 ask — and *before* the booking CTA, so it never competes with the conversion the
 page exists for. It is a secondary ask and it looks like one.
+
+On blog posts it sits in the hero, in the row of tag pills under the title. A blog
+hero already carries the article's identity — breadcrumb, title, standfirst, topic
+tags, byline, date — and "follow this publication" belongs with that identity
+rather than appended as a footer. It is also visible without scrolling a long
+article, which the article-end placement was not.
+
+Each page renders exactly one. `scripts/qa/preferred-source-audit.mjs` fails if a
+page renders more than one link: asking the same reader twice is a defect, and the
+blog template briefly had both while the hero version was being added.
 
 ## The link
 
@@ -71,24 +83,47 @@ asserts this, because passing a path would silently produce a dead nomination.
 
 ## Visual design
 
-One module, one layout. It is a bordered row in the site's neutral surface
-(`#FAFAFA` on `#DCDEE1`), deliberately quieter than the blue conversion module it
-sits above — two tinted cards stacked would read as two competing CTAs, which is
-the opposite of the intent.
+Two shapes, one `<a>`. `components/PreferredSourceCTA.tsx` exports the bare button
+and a framed module that wraps that same button, so the destination, wording and
+accessible name cannot drift between them — only the surrounding layout differs.
 
-- **Under 640px** it stacks: heading, one line of explanation, then a full-width
-  button. Full-width because a thumb-reachable target at the bottom of a long
-  article matters more than horizontal tidiness.
-- **640px and up** it becomes a row — text left, button right, vertically centred —
-  so it reads as a single quiet band rather than a stacked block interrupting the
-  page.
+**The framed module** (`PreferredSourceCTA`, the default export) is a bordered row
+in the site's neutral surface (`#FAFAFA` on `#DCDEE1`), deliberately quieter than
+the blue conversion module it sits above — two tinted cards stacked would read as
+two competing CTAs, which is the opposite of the intent. It carries a heading and
+one line of explanation because nothing near the end of a page says what the ask
+is. Under 640px it stacks to a full-width button; at 640px and up it becomes a row
+with the text left and the button right.
 
-An earlier draft carried a second, blue-tinted variant. It was removed: it was
-unused, and in the one place it would have gone it would have been wrong for the
-reason above.
+**The bare button** (`PreferredSourceButton`, with `compact`) is for the blog hero,
+where the surrounding panel already supplies the context and a heading would be
+redundant. It is solid brand blue (`#0A50EC`) rather than the pale pill styling of
+the tags beside it, because in that row it has to read as the one actionable thing
+and not as a fourth tag. A separator rule sits between the tags and the button at
+640px and up, and is hidden below that, where the row wraps and a rule mid-wrap
+would look like a mistake.
 
-The button gets `min-h-[44px]`, matching the site's existing touch-target
-floor.
+Measured at five widths (320 / 390 / 768 / 1440 / 1920) — `evidence/hero/`:
+
+- **1440 and 1920**: tags and button on one line, separator visible.
+- **768**: same single line, comfortably.
+- **390**: tags fill one line, button wraps to its own centred line.
+- **320**: tags wrap to two lines, button on a third. `gap-y-3` keeps the rows
+  apart — a taller control in a wrapping row needs more vertical gap than
+  horizontal, which is why the gap is split rather than uniform.
+
+The button never overlaps a tag at any width; `scripts/qa/preferred-source-visual.mjs`
+asserts this against the tag pills' own rects.
+
+**Touch target.** The framed module's button is `min-h-[44px]`, the site's
+touch-target floor. The hero's is `min-h-[40px]`: the row also holds ~28px tag
+pills, and a full 44px control there towers over them. 40px is still an easy
+target, and the row gap means there is nothing adjacent to mis-tap — the nearest
+interactive element is a tag pill several pixels away, and tags are not links.
+
+An earlier draft carried a second, blue-tinted framed variant. It was removed: it
+was unused, and in the one place it would have gone it would have been wrong for
+the reason above.
 
 ### Accessibility
 

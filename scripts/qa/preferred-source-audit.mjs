@@ -49,12 +49,15 @@ for (const [path, family] of PAGES) {
     continue;
   }
 
-  // The module marker and the link itself, both in the raw server HTML.
+  // The LINK is the invariant, not its framing. The blog renders the bare button
+  // in the hero tag row (no wrapper); the clinical templates render the framed
+  // module at the end of the page. Both are correct — what must never happen is
+  // a page carrying zero links, or asking the same reader twice.
   const moduleCount = (html.match(/data-module="preferred-source"/g) || []).length;
   const linkCount = (html.match(/data-cta-action="preferred-source"/g) || []).length;
-  check('module is server-rendered', moduleCount >= 1, `${moduleCount} instance(s)`);
-  check('rendered exactly once', moduleCount === 1 && linkCount === 1,
-    `module x${moduleCount}, link x${linkCount}`);
+  check('control is server-rendered', linkCount >= 1, `${linkCount} link(s), ${moduleCount} framed module(s)`);
+  check('rendered exactly once', linkCount === 1,
+    `link x${linkCount}${linkCount === 1 ? (moduleCount ? ' (framed module)' : ' (bare button, hero)') : ''}`);
 
   // Google's deeplink, exactly: the bare domain, no path.
   const hrefMatch = html.match(/href="(https:\/\/www\.google\.com\/preferences\/source\?q=[^"]*)"/);

@@ -19,10 +19,10 @@ import { SITE_URL } from "@/lib/seo";
  * The deeplink is the right choice for this site, for four reasons that all point
  * the same way:
  *
- *   1. **No third-party script.** The JS button is a render-blocking-ish async
- *      request on every article, condition and treatment page — the highest-volume
- *      templates on the site — for a control that most readers will never click.
- *      A link costs nothing and cannot shift layout.
+ *   1. **No third-party script.** The JS button is an async request on every
+ *      article, condition and treatment page — the highest-volume templates on the
+ *      site — for a control that most readers will never click. A link costs
+ *      nothing and cannot shift layout.
  *   2. **No consent question.** This site runs Consent Mode and a cookie banner,
  *      and its measurement contract is deliberate about what may load before a
  *      visitor chooses. Injecting a Google script that may set storage would need
@@ -30,17 +30,26 @@ import { SITE_URL } from "@/lib/seo";
  *   3. **It is server-rendered.** The button, its wording and its destination are
  *      in the HTML a crawler and an LLM read. A JS-injected control is not.
  *   4. **It matches the site.** The JS button renders Google's own styling, which
- *      does not sit inside this design system. This one uses the same tokens as
- *      every other module on the page.
+ *      does not sit inside this design system.
  *
  * ## Scope
  *
  * Google accepts domain- and subdomain-level sources only — never a path — so the
  * link always nominates the bare domain regardless of which page it appears on.
  *
- * Worth knowing: the feature's Top Stories surface is news-oriented, so the
- * clearest fit is the blog. It also feeds AI Overviews and AI Mode, which is why
- * it is reasonable on the evergreen clinical templates too.
+ * ## Two shapes, one link
+ *
+ * `PreferredSourceButton` is the bare control, for a place that already supplies
+ * its own framing — the blog hero, where it sits in the tag row beneath the title
+ * and the surrounding panel makes the context obvious.
+ *
+ * The default export wraps that same button in a self-explanatory block, for the
+ * end of a page where nothing nearby says what the ask is.
+ *
+ * Both render the identical `<a>`, so they cannot drift in destination, wording or
+ * accessible name — only in surrounding layout. A page should use exactly ONE:
+ * asking the same reader twice is a defect, and
+ * `scripts/qa/preferred-source-audit.mjs` fails if a page renders it more than once.
  */
 
 /** Google accepts a domain or subdomain, never a path. */
@@ -48,46 +57,80 @@ const PREFERRED_SOURCE_DOMAIN = new URL(SITE_URL).hostname;
 const PREFERRED_SOURCE_HREF =
   `https://www.google.com/preferences/source?q=${encodeURIComponent(PREFERRED_SOURCE_DOMAIN)}`;
 
-export default function PreferredSourceCTA({ className = "" }: { className?: string }) {
-  const label = "Add Mountain Spine & Orthopedics as a preferred source on Google";
+/**
+ * The accessible name.
+ *
+ * The visible text reads "Add as preferred source", which is clear in place and
+ * ambiguous out of context — someone tabbing through, or listing the page's links
+ * in a screen reader, would not know where it goes or who it is for.
+ */
+const A11Y_LABEL = "Add Mountain Spine & Orthopedics as a preferred source on Google";
 
-  // Extracted so the markup below stays readable; the link is the whole point of
-  // the module and everything around it is framing.
-  const link = (
+/**
+ * The bare control.
+ *
+ * Solid brand blue, because in the hero it sits in a row of pale tag pills and has
+ * to read as the one actionable thing there rather than as another tag.
+ */
+export function PreferredSourceButton({
+  className = "",
+  compact = false,
+}: {
+  className?: string;
+  /** Tighter, for sitting inline beside small pills. */
+  compact?: boolean;
+}) {
+  return (
     <a
       href={PREFERRED_SOURCE_HREF}
       target="_blank"
       rel="noopener noreferrer"
       data-cta-action="preferred-source"
-      aria-label={label}
+      aria-label={A11Y_LABEL}
       className={
-        "inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full " +
-        "bg-[#0A50EC] px-5 py-2.5 text-sm font-medium text-white transition-colors " +
-        "hover:bg-[#0942c4] focus-visible:outline focus-visible:outline-2 " +
-        "focus-visible:outline-offset-2 focus-visible:outline-[#0A50EC] " +
-        // Full-width when stacked (under 640px) so it is thumb-reachable at the
-        // end of a long article; intrinsic width once it sits beside the text.
-        "w-full sm:w-auto shrink-0"
+        "group inline-flex items-center justify-center gap-2 rounded-full " +
+        "bg-[#0A50EC] font-medium text-white " +
+        "transition-[background-color,box-shadow,transform] duration-200 " +
+        "hover:bg-[#0942c4] active:scale-[0.98] " +
+        "shadow-[0_2px_10px_rgba(10,80,236,0.28)] hover:shadow-[0_5px_18px_rgba(10,80,236,0.38)] " +
+        "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 " +
+        "focus-visible:outline-[#0A50EC] " +
+        // 40px inline vs 44px standalone. In the hero the row also holds ~28px tag
+        // pills, and a full 44px control there towers over them; 40px keeps the row
+        // balanced while staying an easy target, and the row gap means there is
+        // nothing adjacent to mis-tap.
+        (compact
+          ? "min-h-[40px] px-4 py-2 text-[13px] sm:text-sm"
+          : "min-h-[44px] w-full px-5 py-2.5 text-sm sm:w-auto") +
+        (className ? " " + className : "")
       }
     >
-      {/* Decorative: the accessible name comes from aria-label on the link. */}
       <svg
-        width="18"
-        height="18"
+        width={compact ? "15" : "16"}
+        height={compact ? "15" : "16"}
         viewBox="0 0 24 24"
         fill="none"
         aria-hidden="true"
-        className="shrink-0"
+        className="shrink-0 transition-transform duration-200 group-hover:scale-110"
       >
         <path
           d="M12 3.5l2.6 5.27 5.82.85-4.21 4.1.99 5.78L12 16.77l-5.2 2.73.99-5.78-4.21-4.1 5.82-.85L12 3.5z"
           fill="currentColor"
         />
       </svg>
-      <span>Add as preferred source</span>
+      <span className="whitespace-nowrap">Add as preferred source</span>
     </a>
   );
+}
 
+/**
+ * The self-explanatory block, for the end of a page.
+ *
+ * Neutral surface rather than the blue of the conversion module it sits above:
+ * two tinted cards stacked would read as two competing CTAs, and this is the
+ * secondary ask.
+ */
+export default function PreferredSourceCTA({ className = "" }: { className?: string }) {
   return (
     <aside
       aria-labelledby="preferred-source-heading"
@@ -114,7 +157,7 @@ export default function PreferredSourceCTA({ className = "" }: { className?: str
           orthopedic and spine guidance more often in your Google results.
         </p>
       </div>
-      {link}
+      <PreferredSourceButton className="shrink-0" />
     </aside>
   );
 }
