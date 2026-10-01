@@ -176,6 +176,40 @@ for (const { t, idx } of adsTags) {
   console.log(`tag#${idx}:`, JSON.stringify(copy));
 }
 
+// __awud = Google Ads User-Provided Data. It is wired as a SETUP tag on the
+// conversion tags, which means GTM fires it first and holds the conversion until
+// it reports completion. A __awud that never completes therefore blocks the
+// conversion silently and indefinitely — the conversion shows under "Tags Not
+// Fired" with a correctly-matching trigger, which looks like a trigger problem
+// and is not one.
+//
+// What it reads decides whether that can happen in production or only under a
+// synthetic probe: a tag reading dataLayer keys the site never sends will hang
+// on every real lead too, while one reading page elements may resolve on a real
+// submission and not on a bare dataLayer push.
+console.log('');
+console.log('--- RAW: the awud (user-provided data) tags, and what they read ---');
+tags.forEach((t, idx) => {
+  if (t.function !== '__awud') return;
+  console.log(`tag#${idx}:`, JSON.stringify(t));
+  // Follow macro references transitively: the tag points at one __awec variable,
+  // which in turn points at one variable per user-data field. The field-level
+  // variables are the interesting ones — they name the dataLayer keys the tag is
+  // waiting for, which is what decides whether the site can ever satisfy it.
+  const seen = new Set();
+  const walk = (node, depth) => {
+    JSON.stringify(node).replace(/\["macro",(\d+)\]/g, (_, s) => {
+      const n = Number(s);
+      if (seen.has(n)) return '';
+      seen.add(n);
+      console.log(`    ${'  '.repeat(depth)}macro#${n}: ${describeMacro(n)}`);
+      if (macros[n] && macros[n].function !== '__v') walk(macros[n], depth + 1);
+      return '';
+    });
+  };
+  walk(t, 0);
+});
+
 // Every predicate that mentions a lead event or a market, for orientation.
 console.log('\nPredicates mentioning lead_form_submit_success or market:');
 predicates.forEach((p, n) => {

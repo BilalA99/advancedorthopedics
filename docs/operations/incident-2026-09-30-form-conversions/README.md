@@ -146,6 +146,74 @@ tag is paused in the workspace (paused tags are excluded from the published
 container — but these ARE published, so this is unlikely); or the conversion action
 was deleted in Ads, which invalidates the label.
 
+## Second fault — found in GTM Preview on 1 October, root-caused in the code
+
+Adding the two Google tags was necessary and **not sufficient**. With both in place
+and the container in Preview, the FL conversion still sent nothing:
+
+- `Lead Submit Form Enhanced` (the `__awud` setup tag) showed **"Still running"**
+  and never completed.
+- `Thank You Page` (the FL conversion tag) sat under **Tags Not Fired**, with its
+  trigger matching correctly.
+- The GTM beacon read `tr=1gaawe.1awud.5gaawe` — no `awct` in it.
+
+A setup tag gates the tag it is attached to: GTM fires it first and holds the
+conversion until it reports completion. One that never completes blocks the
+conversion silently and forever, and the conversion appears under "Tags Not Fired"
+with a perfectly correct trigger — which reads as a trigger problem and is not one.
+
+### Why it never completes — this is an ordering defect, not a probe artifact
+
+The `__awud` tags read a `__awec` variable in **MANUAL** mode, which reads these
+dataLayer keys (`scripts/qa/gtm-container-decode.mjs` resolves this transitively):
+
+```
+tag#22 __awud  ->  macro#17 __awec (MANUAL)
+                     macro#11  dataLayer["enhanced_conversion_data.address.country"]
+                     macro#14  dataLayer["enhanced_conversion_data.address.postal_code"]
+                     macro#12/13/15/16  custom JS (last name, phone, first name, email)
+```
+
+The site pushes `enhanced_conversion_data` — but **after** the canonical event, and
+only for visitors who granted marketing consent. From `utils/enhancedConversions.ts`:
+
+```
+STEP 1  dataLayer.push(buildCanonicalLeadEvent(...))   <- synchronous, first, consent-independent
+        ...
+        if (!isAdvertisingAllowed()) return;           <- consent gate
+        await pushEC(ecData)                           <- async SHA-256, pushes { event: 'ec_capture',
+                                                          enhanced_conversion_data: {...} }
+```
+
+So at the instant GTM runs the setup tag — immediately on `lead_form_submit_success`
+— every key it reads is **undefined**. The data it is waiting for is pushed later,
+in a different event, behind a consent check, after an async hash.
+
+That is not a quirk of the synthetic probe. It is the ordering on **every real
+lead**, and for any visitor who declined marketing consent the data never arrives
+at all. The deliberate design decision that keeps the lead event consent-independent
+(documented in that file, and correct) is precisely what starves the setup tag.
+
+**Both faults had to be fixed together.** The missing Google tag meant the
+conversion had no transport; the setup tag meant it never fired in the first place.
+Fixing either alone changes nothing observable, which is why the first fix verified
+as a failure and that failure was informative rather than a setback.
+
+### The fix
+
+Remove `Lead Submit Form Enhanced` as a **setup tag** from both conversion tags, and
+publish that together with the two Google tags.
+
+Enhanced conversions are then not attached, and that is the right trade for now:
+a conversion that reports without identity enrichment is worth incomparably more
+than one that never reports. Re-attaching them is a follow-up, not a blocker —
+moving the `__awud` to its own trigger on `ec_capture` does **not** work, because
+Google applies user data to *subsequent* conversions, not retroactively to one that
+already fired. The real repair is site-side: hash the identity while the server
+request is still in flight, so it is ready to push synchronously *ahead* of the
+canonical event rather than after it. That keeps the lead event consent-independent
+and gives the conversion its user data at fire time.
+
 ## The thing most likely to be misread: you may be looking at the wrong number
 
 One conversion signal **is** reaching Google right now:
