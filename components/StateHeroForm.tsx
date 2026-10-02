@@ -25,6 +25,14 @@ import { Textarea } from '@/components/ui/textarea'
 import { User, Mail, Phone, Lock } from 'lucide-react'
 import { formatPhoneInput } from '@/lib/phone-formatter'
 import { pushAcceptedLead } from '@/utils/enhancedConversions'
+import {
+  classifyInsurance,
+  destinationFor,
+  getInsuranceOptions,
+  parseLeadRouting,
+  pathForDestination,
+} from "@/lib/insurance-routing"
+import { POSTAL_CODE_ERROR, isValidPostalCode } from "@/lib/postal-code"
 import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid'
 import { useRouter } from 'next/navigation'
 import { STATE_OPTIONS, normalizeState } from '@/lib/stateUtils'
@@ -36,8 +44,8 @@ const formSchema = z.object({
   phone: z.string().min(1, 'Phone required'),
   postalCode: z
     .string()
-    .regex(/^\d{5}(?:-\d{4})?$/, 'Enter a valid ZIP code'),
-  bestTime: z.string().min(1, 'Please select a time'),
+    .refine(isValidPostalCode, POSTAL_CODE_ERROR),
+  insuranceType: z.string().min(1, "Please select your insurance"),
   reason: z.string().min(2, 'Please describe your needs'),
   country: z.string(),
   state: z.string().min(1, 'Please select your state'),
@@ -67,7 +75,7 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
       email: '',
       phone: '',
       postalCode: '',
-      bestTime: '',
+      insuranceType: '',
       reason: '',
       country: 'US',
       state: resolvedState,
@@ -91,7 +99,7 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
           email: values.email,
           phone: values.phone,
           reason: values.reason,
-          bestTime: values.bestTime,
+          insurance_type: values.insuranceType,
           postalCode: values.postalCode,
           country: values.country,
           state: values.state,
@@ -117,10 +125,22 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
         return
       }
 
-      const accepted = await pushAcceptedLead({ acceptance: res, form_name: 'StateHeroForm', form_source: 'state-consultation', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode })
+      // Read the body ONCE: a Response body can only be consumed one time, and
+      // pushAcceptedLead accepts an already-parsed object.
+      const body = await res.json().catch(() => null)
+
+      // D10: the SERVER decides qualification and this form obeys it. parseLeadRouting
+      // returns null only when the response carries no decision at all — a browser on
+      // the new build talking to a server still on the old one during a deploy — and
+      // only then do we classify locally, with the same shared function.
+      const serverRouting = parseLeadRouting(body)
+      const qualification = serverRouting?.qualification ?? classifyInsurance(values.insuranceType)
+      const destination = serverRouting?.destination ?? destinationFor(qualification)
+
+      const accepted = await pushAcceptedLead({ acceptance: body, form_name: 'StateHeroForm', form_source: 'state-consultation', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode, lead_qualification: qualification })
       if (!accepted) return
 
-      router.push('/thank-you')
+      router.push(pathForDestination(destination))
     } catch (error) {
       console.error('[StateHeroForm] Submit failed', error)
       setDisabled(false)
@@ -334,7 +354,7 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
 
                     <FormField
                       control={form.control}
-                      name="bestTime"
+                      name="insuranceType"
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
@@ -342,19 +362,14 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
                               onValueChange={field.onChange}
                               value={field.value}
                             >
-                              <SelectTrigger aria-label="Best time to contact" className="h-11 text-sm bg-white/70 border-[#DCDEE1] rounded-sm">
-                                <SelectValue placeholder="Best time to contact" />
+                              <SelectTrigger id="statehero_insurance_type" aria-label="Select your insurance" className="h-11 text-sm bg-white/70 border-[#DCDEE1] rounded-sm">
+                                <SelectValue placeholder="Select your insurance" />
                               </SelectTrigger>
                               <SelectContent>
                                 <SelectGroup>
-                                  {[
-                                    'As Soon As Possible',
-                                    'Morning',
-                                    'Afternoon',
-                                    'Evening',
-                                  ].map((t) => (
-                                    <SelectItem key={t} value={t}>
-                                      {t}
+                                  {getInsuranceOptions().map(({ value, label }) => (
+                                    <SelectItem key={value} value={value}>
+                                      {label}
                                     </SelectItem>
                                   ))}
                                 </SelectGroup>

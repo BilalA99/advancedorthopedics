@@ -4,6 +4,7 @@ import {
   sendContactEmail,
   sendUserEmail,
 } from "@/components/email/sendcontactemail";
+import { resolveIntake } from "@/lib/intake-submission";
 
 const MAX_UPLOAD_SIZE = 4 * 1024 * 1024;
 const MAX_REQUEST_SIZE = 6 * 1024 * 1024;
@@ -76,16 +77,28 @@ export async function POST(request: Request) {
     const email = getString(formData, "email");
     const phone = getString(formData, "phone");
     const reason = getString(formData, "reason");
-    const bestTime = getString(formData, "bestTime");
     const state = getString(formData, "state");
     const fullName = `${firstName} ${lastName}`.trim();
+
+    // ZIP format and insurance qualification are decided here, on the server, by
+    // the same rule every other intake endpoint uses (lib/intake-submission.ts).
+    const intake = resolveIntake({
+      insuranceType: getString(formData, "insurance_type"),
+      postalCode: getString(formData, "postalCode"),
+    });
+    if (!intake.ok) {
+      return NextResponse.json({ ok: false, error: intake.error, field: intake.field }, { status: 400 });
+    }
+    const { postalCode, routing } = intake;
+    const insuranceType = getString(formData, "insurance_type");
 
     await sendContactEmail({
       name: fullName,
       email,
       phone,
       reason,
-      bestTime,
+      insurance_type: insuranceType,
+      postalCode,
       state,
       form_source: getString(formData, "form_source") || "general-contact",
       insuranceCardFront,
@@ -106,7 +119,8 @@ export async function POST(request: Request) {
       phone,
       state,
       reason,
-      bestTime,
+      insurance_type: insuranceType,
+      postalCode,
       form_source: getString(formData, "form_source") || "general-contact",
       landing_path: getString(formData, "landing_path"),
       gclid: getString(formData, "gclid"),
@@ -119,7 +133,7 @@ export async function POST(request: Request) {
       utm_content: getString(formData, "utm_content"),
     });
 
-    return NextResponse.json(acceptance);
+    return NextResponse.json({ ...acceptance, ...routing });
   } catch (error) {
     console.error("[DoctorContact] Submission failed", error);
     return NextResponse.json({ ok: false }, { status: 500 });

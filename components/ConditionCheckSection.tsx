@@ -13,6 +13,24 @@ import { sendConditionCheckEmail } from '@/components/email/sendcontactemail'
 import { useRouter } from 'next/navigation'
 import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid'
 import { pushAcceptedLead } from '@/utils/enhancedConversions'
+import {
+  classifyInsurance,
+  destinationFor,
+  getInsuranceOptions,
+  parseLeadRouting,
+  pathForDestination,
+} from '@/lib/insurance-routing'
+
+/**
+ * Value -> patient-facing label for the insurance question.
+ *
+ * The question's options are canonical VALUES ("Aetna PPO"), because that is what
+ * gets stored and what the lead sheet's PPO detection reads. The patient sees the
+ * short label ("Aetna").
+ */
+const INSURANCE_LABELS: Record<string, string> = Object.fromEntries(
+  getInsuranceOptions().map((o) => [o.value, o.label]),
+)
 
 
 const formSchema = z.object({
@@ -112,6 +130,13 @@ export default function ConditionCheckSection({
       utm_content: attribution.utm_content,
     })
     if (data) {
+      // D10: the server decides qualification (sendConditionCheckEmail returns it)
+      // and this form obeys. Without it the questionnaire fired the qualified
+      // conversion for every submission regardless of the plan selected.
+      const serverRouting = parseLeadRouting(data)
+      const qualification = serverRouting?.qualification ?? classifyInsurance(values.insurance_type)
+      const destination = serverRouting?.destination ?? destinationFor(qualification)
+
       await pushAcceptedLead({
         acceptance: data,
         form_name: 'ConditionCheckForm',
@@ -121,11 +146,11 @@ export default function ConditionCheckSection({
         phone: values.phone,
         firstName: values.first_name,
         lastName: values.last_name,
+        lead_qualification: qualification,
       })
       ConditionForm.reset()
-      //setAppointmentConfirm(true)
       setDisabled(false)
-      router.push('/thank-you')
+      router.push(pathForDestination(destination))
     }
   }
   return (
@@ -258,7 +283,9 @@ export default function ConditionCheckSection({
                             <SelectContent>
                               <SelectGroup>
                                 {question.options.map((option: string) => (
-                                  <SelectItem key={option} value={option}>{option}</SelectItem>
+                                  <SelectItem key={option} value={option}>
+                                    {INSURANCE_LABELS[option] || option}
+                                  </SelectItem>
                                 ))}
                               </SelectGroup>
                             </SelectContent>

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import React from 'react';
 import { buildCanonical } from '@/lib/seo';
 import { isProviderVisible, providerIds } from '@/lib/providers/providerVisibility';
+import { INJECTION_FAQS } from './faqs';
 
 const BASE_URL = 'https://mountainspineorthopedics.com';
 const PAGE_PATH = '/treatments/orthopedic-injections';
@@ -275,103 +276,34 @@ const consolidatedSchema = {
       ],
     },
 
-    // ── 6. FAQPage — ALL 9 questions (must match page content exactly) ──────
+    // ── 6. FAQPage — DERIVED from the one FAQ source, never hand-written ────
+    //
+    // This block used to be a second, hand-maintained copy of the page's FAQs. It
+    // drifted: three of its answers described content that appeared nowhere on the
+    // rendered page, and its own comment claimed "ALL 9 questions (must match page
+    // content exactly)" while carrying 11 that did not match. Structured data
+    // asserting content the page does not show is a Google violation, and for an
+    // LLM reading the page it is a flat contradiction between the markup and the
+    // visible text.
+    //
+    // Deriving it from INJECTION_FAQS makes that class of drift impossible: the
+    // schema is now a projection of exactly what the visitor reads.
     {
       '@type': 'FAQPage',
       '@id': faqId,
       url: PAGE_URL,
       about: { '@id': procedureId },
       isPartOf: { '@id': webpageId },
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'How long does a cortisone shot last?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Varies by injection type and location. Cortisone shots for joints typically provide 4–8 weeks of significant relief; some patients experience 3–6 months. Epidural steroid injections for back or neck pain often last 3–6 months. Hyaluronic acid (gel) knee injections typically provide 6 months or more. Individual results vary based on severity of condition, patient age, and activity level.',
-          },
+      mainEntity: INJECTION_FAQS.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          // The rendered answer shows **bold** as <strong>; the schema takes the
+          // same string as plain text, so the two can never say different things.
+          text: faq.answer.replace(/\*\*/g, ''),
         },
-        {
-          '@type': 'Question',
-          name: 'Does a cortisone shot hurt?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Most patients report mild discomfort — similar to a blood draw or vaccine. A local anesthetic is applied to numb the skin before the injection, significantly reducing pain. The injection itself may cause brief pressure or a burning sensation as medication enters the joint or spinal space, which typically resolves within seconds. Post-injection soreness at the site for 24–48 hours is normal and usually managed with ice.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'How many cortisone shots can I get per year?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'The generally accepted limit is 3–4 cortisone shots per joint per year. Frequent corticosteroid injections can weaken cartilage and tendons over time. Your orthopedic specialist will evaluate whether additional injections are appropriate based on your response to prior injections and overall treatment goals.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'What is the difference between a cortisone shot and a gel injection?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Cortisone shots (corticosteroid injections) deliver anti-inflammatory medication to reduce swelling and pain. Gel injections (hyaluronic acid or viscosupplementation) add lubricating fluid to the joint, primarily used for knee osteoarthritis. Cortisone works faster (2–7 days) with stronger immediate effect; gel injections may last longer (6+ months) for appropriate candidates.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Do I need a referral for an orthopedic injection?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'No. At Mountain Spine & Orthopedics, you do not need a referral to schedule a consultation for injection therapy. You can book directly online or by calling your nearest location. PPO insurance plans allow direct access to specialists.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'What is an epidural steroid injection?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'An epidural steroid injection (ESI) delivers corticosteroid medication directly into the epidural space surrounding the spinal cord and nerve roots. It is most commonly used for back pain caused by herniated discs, spinal stenosis, or nerve compression causing sciatica. ESIs are performed under fluoroscopy guidance, typically take 15–20 minutes, and are performed as an outpatient procedure.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'What is a facet joint injection?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Facet joint injections treat pain originating from the small joints along the spine that connect vertebrae to each other. The injection delivers corticosteroid medication directly into the affected facet joint under fluoroscopy guidance. Relief typically lasts several months. Facet injections also serve a diagnostic function to confirm the facet joint as the pain source.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'How much does a cortisone shot cost with insurance?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'With PPO insurance, your out-of-pocket cost is typically your standard specialist copay plus any remaining deductible responsibility. PPO insurance plans cover medically necessary orthopedic injections when documented as treatment for a diagnosed condition. Mountain Spine & Orthopedics accepts PPO insurance plans.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Who qualifies for the free MRI review?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'The complimentary MRI review is available to patients who carry PPO insurance and have existing MRI imaging (within the last 2 years) of the spine, knee, shoulder, hip, or other affected joint. One of our board-certified specialists evaluates your imaging and discusses whether an orthopedic injection or another treatment path is the right next step — no obligation to proceed.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Does insurance cover orthopedic injections?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Yes. PPO insurance plans cover medically necessary orthopedic injections, including cortisone shots, epidural steroid injections, facet joint injections, and SI joint injections, when ordered by a physician for a documented diagnosis. Mountain Spine & Orthopedics accepts Aetna, Blue Cross Blue Shield, Cigna, UnitedHealthcare, and other PPO carriers. Call our office or use our online insurance verification tool to confirm your specific coverage before your appointment.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'How quickly can I get an orthopedic injection appointment?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Mountain Spine & Orthopedics offers same-week appointments at 23 locations across Florida, New Jersey, New York, Pennsylvania, and Georgia. No referral is required for PPO-insured patients. You can book online 24/7 or call (561) 223-9959 to speak with a patient coordinator. Most new patients are seen within 2–5 business days.',
-          },
-        },
-      ],
+      })),
     },
 
     // ── 7. ItemList — injection types ───────────────────────────────────────

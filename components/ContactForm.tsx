@@ -1,5 +1,5 @@
 "use client"
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -24,6 +24,14 @@ import { useRouter, usePathname } from "next/navigation"
 import { pushAcceptedLead } from "@/utils/enhancedConversions"
 import { STATE_OPTIONS, slugFromPathname, normalizeState } from "@/lib/stateUtils"
 import { resolveFormSource } from "@/lib/lead-contract"
+import {
+  classifyInsurance,
+  destinationFor,
+  getInsuranceOptions,
+  parseLeadRouting,
+  pathForDestination,
+} from "@/lib/insurance-routing"
+import { POSTAL_CODE_ERROR, isValidPostalCode, normalizePostalCode } from "@/lib/postal-code"
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -31,9 +39,13 @@ const formSchema = z.object({
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   reason: z.string().min(2, "Please provide more detail about your consultation needs"),
-  bestTime: z.string().min(1, "Please provide more detail about your consultation needs"),
-  postalCode: z.string()
-    .regex(/^\d{5}(?:-\d{4})?$/, "Please enter a valid ZIP code"),
+  // D11 (2026-09-24): insurance is required and PPO appears explicitly, so a
+  // patient who knows they hold a PPO is never pushed into "Other".
+  insuranceType: z.string().min(1, "Please select your insurance"),
+  // ZIP is RETAINED. The 2026-09-24 meeting removed only "Best Time To Contact";
+  // ZIP stays in the form, validated, stored and reported. The rule lives in
+  // lib/postal-code.ts so this validator and the server's cannot drift apart.
+  postalCode: z.string().refine(isValidPostalCode, POSTAL_CODE_ERROR),
   country: z.string(),
   state: z.string().min(1, "Please select your state"),
 })
@@ -44,6 +56,7 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
   const [submitError, setSubmitError] = useState<string | null>(null)
   const [attribution, setAttribution] = useState(EMPTY_ATTRIBUTION)
   const router = useRouter()
+  const submittingRef = useRef(false)
 
   useEffect(() => {
     setAttribution(getAttributionData())
@@ -58,7 +71,7 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
       email: "",
       phone: "",
       reason: "",
-      bestTime: "",
+      insuranceType: "",
       postalCode: "",
       country: "US",
       state: resolvedState,
@@ -67,10 +80,21 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
 
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    // setDisabled is async, so on a fast double-click both handlers can pass the
+    // `disabled` check before React re-renders. A ref flips synchronously and is
+    // what actually makes a double submit impossible.
+    if (submittingRef.current) return
+    submittingRef.current = true
     setDisabled(true)
     setSubmitError(null)
     try {
       const formSource = resolveFormSource({ pathname, formId: 'ConsultationForm' })
+      // Normalize once, here, so the value the endpoint stores, the value the staff
+      // email shows and the value Enhanced Conversions hashes are the same string.
+      // A mobile numeric keypad has no hyphen, so a patient entering a ZIP+4 there
+      // types nine bare digits — normalizePostalCode turns that into 12345-6789
+      // rather than failing them for using the keyboard we asked for.
+      const postalCode = normalizePostalCode(values.postalCode)
       const res = await fetch("/api/forms/consultation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -80,8 +104,10 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
           email: values.email,
           phone: values.phone,
           reason: values.reason,
-          bestTime: values.bestTime,
-          postalCode: values.postalCode,
+          // Persisted to Supabase forms.insurance_type only. Never sent to GA4,
+          // Google Ads or Meta — see lib/insurance-routing.ts.
+          insurance_type: values.insuranceType,
+          postalCode,
           country: values.country,
           state: values.state,
           form_source: formSource,
@@ -101,22 +127,51 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
         return
       }
 
+      // Read the body ONCE. pushAcceptedLead accepts either a Response or an
+      // already-parsed body, and a Response body can only be consumed once — so
+      // parsing here and passing the object is required, not a style choice.
+      const body = await res.json().catch(() => null)
+
       if (!res.ok) {
-        setSubmitError("We couldn't submit your request. Please try again in a moment, or call our office.")
+        const fieldError = typeof (body as { error?: unknown })?.error === 'string'
+          ? (body as { error: string }).error
+          : null
+        setSubmitError(fieldError || "We couldn't submit your request. Please try again in a moment, or call our office.")
         setDisabled(false)
         return
       }
 
-      const accepted = await pushAcceptedLead({ acceptance: res, form_name: 'ConsultationForm', form_source: formSource, state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode });
-      if (!accepted) return
+      // D10: qualification decides BOTH whether the qualified conversion fires
+      // and which confirmation page the patient sees.
+      //
+      // The SERVER decides it (see the route handler) and we obey. parseLeadRouting
+      // returns null only when the response carries no decision at all — a browser
+      // on the new build talking to a server still on the old one during a deploy —
+      // and only then do we classify locally, with the same shared function, so the
+      // answer is identical rather than merely similar. An unrecognised value is
+      // treated as unqualified by parseLeadRouting, which fails closed.
+      const serverRouting = parseLeadRouting(body)
+      const qualification = serverRouting?.qualification ?? classifyInsurance(values.insuranceType)
+      const destination = serverRouting?.destination ?? destinationFor(qualification)
+
+      const accepted = await pushAcceptedLead({ acceptance: body, form_name: 'ConsultationForm', form_source: formSource, state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode, lead_qualification: qualification });
+      if (!accepted) {
+        setSubmitError("We couldn't confirm your request. Please try again in a moment, or call our office.")
+        setDisabled(false)
+        return
+      }
 
       form.reset()
-      router.push('/thank-you')
+      // Deliberately stays disabled through navigation. Re-enabling here — which a
+      // `finally` block used to do — reopened the button for the frames between the
+      // response landing and the route actually changing, and a second submit in
+      // that window is a SECOND lead: the server mints a fresh submission id per
+      // request, so neither the in-page emitted-id set nor Resend's idempotency key
+      // would collapse it into one conversion.
+      router.push(pathForDestination(destination))
     } catch (error) {
       console.error("[ConsultationForm] Submit failed", error)
       setSubmitError("We couldn't submit your request. Please try again in a moment, or call our office.")
-      setDisabled(false)
-    } finally {
       setDisabled(false)
     }
   }
@@ -225,17 +280,28 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
                 const { name: _, ...fieldProps } = field;
                 return (
                   <FormItem>
-                    <FormLabel className="text-sm text-[#838890] font-semibold">ZIP / Postal Code<span className="text-red-500">*</span></FormLabel>
+                    {/*
+                      The id is component-scoped. It used to be a bare "postal_code",
+                      which four other form components also used — so on a page
+                      rendering more than one of them (the homepage mounts
+                      DoctorContactForm lazily alongside this form) the document held
+                      duplicate ids, and both label[for] and getElementById resolved
+                      to whichever copy came first, often a hidden one. Scoping the id
+                      makes the htmlFor association below correct again.
+                    */}
+                    <FormLabel htmlFor="consultation_postal_code" className="text-sm text-[#838890] font-semibold">ZIP / Postal Code<span className="text-red-500">*</span></FormLabel>
                     <FormControl>
-                      <Input 
-                        id="postal_code"
+                      <Input
+                        id="consultation_postal_code"
                         aria-label="ZIP or postal code"
                         name="postalCode"
+                        type="text"
                         inputMode="numeric"
                         autoComplete="postal-code"
-                        placeholder="e.g., 33463" 
-                        className="h-12 text-lg border-[#DCDEE1] bg-[#FAFAFA]" 
-                        {...fieldProps} 
+                        maxLength={10}
+                        placeholder="e.g., 33463"
+                        className="h-12 text-lg border-[#DCDEE1] bg-[#FAFAFA]"
+                        {...fieldProps}
                       />
                     </FormControl>
                     <FormMessage />
@@ -269,34 +335,65 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
             />
           </div>
 
+          {/*
+            Insurance (D10 + D11, 2026-09-24).
+
+            Replaces "Best Time To Contact", which was removed as a meeting
+            decision. Options and qualification come from
+            lib/insurance-routing.ts — a single source of truth shared with the
+            routing logic in onSubmit, so the dropdown and the conversion
+            decision can never disagree.
+
+            The selected value goes to Supabase only. It is not added to the
+            canonical lead event, not put in a URL, and not sent to any ad
+            platform.
+          */}
           <FormField
             control={form.control}
-            name="bestTime"
+            name="insuranceType"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm text-[#838890] font-semibold">
-
-                  Best Time To Contact
+                <FormLabel htmlFor="insurance_type" className="text-sm text-[#838890] font-semibold">
+                  Insurance
                   <span className="text-red-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Select onValueChange={field.onChange} value={field.value} >
-                    <SelectTrigger aria-label="Select Best Time To Contact"
-                      className="w-full h-12 px-6 bg-[#f0f5ff]  border rounded-sm"
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <SelectTrigger
+                      id="insurance_type"
+                      aria-label="Select your insurance"
+                      className="w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm"
                     >
-                      <SelectValue placeholder="Select Best Time To Contact" className=" font-[var(--font-inter)] h-12 text-lg data-[placeholder]:text-red-500" />
+                      <SelectValue
+                        placeholder="Select your insurance"
+                        className="font-[var(--font-inter)] h-12 text-lg"
+                      />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        {["As Soon As Possible", "Morning", "Afternoon", "Evening"].map((service) => (
-                          <SelectItem key={service} value={service}>
-                            {service}
+                        {getInsuranceOptions().map(({ value, label }) => (
+                          <SelectItem key={value} value={value}>
+                            {label}
                           </SelectItem>
                         ))}
                       </SelectGroup>
                     </SelectContent>
                   </Select>
                 </FormControl>
+                {/*
+                  This line carries weight the option labels no longer do. The
+                  carriers are listed by name alone ("Aetna", not "Aetna PPO"), so
+                  nothing in the list itself tells an HMO patient that their plan is
+                  a different answer. Saying it here keeps the distinction visible
+                  without repeating "PPO" on seven options.
+                */}
+                <p className="text-xs text-[#838890]">
+                  Mountain Spine &amp; Orthopedics is a PPO practice — the carriers
+                  above are their PPO plans. If you have an HMO, choose &quot;HMO plans
+                  (any carrier)&quot;. Either way your request reaches us, and our team
+                  will go over your options with you.
+                </p>
+                <FormMessage />
               </FormItem>
             )}
           />

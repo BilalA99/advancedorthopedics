@@ -19,6 +19,14 @@ import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
 import { Dialog, DialogContent, DialogTitle } from "./ui/dialog"
 import { motion } from "framer-motion"
 import { pushAcceptedLead } from "@/utils/enhancedConversions"
+import {
+  classifyInsurance,
+  destinationFor,
+  getInsuranceOptions,
+  parseLeadRouting,
+  pathForDestination,
+} from "@/lib/insurance-routing"
+import { POSTAL_CODE_ERROR, isValidPostalCode } from "@/lib/postal-code"
 import { STATE_OPTIONS } from "@/lib/stateUtils"
 import { useRouter } from "next/navigation"
 
@@ -28,9 +36,9 @@ const formSchema = z.object({
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   reason: z.string().min(2, "Please provide more detail about your consultation needs"),
-  bestTime: z.string().min(1, "Please provide more detail about your consultation needs"),
+  insuranceType: z.string().min(1, "Please select your insurance"),
   postalCode: z.string()
-    .regex(/^\d{5}(?:-\d{4})?$/, "Please enter a valid ZIP code"),
+    .refine(isValidPostalCode, POSTAL_CODE_ERROR),
   country: z.string(),
   state: z.string().min(1, "Please select your state"),
 })
@@ -61,7 +69,7 @@ export function PatientAdvocateForm() {
       email: "",
       phone: "",
       reason: "",
-      bestTime: "",
+      insuranceType: "",
       postalCode: "",
       country: "US",
       state: "",
@@ -81,7 +89,7 @@ export function PatientAdvocateForm() {
           email: values.email,
           phone: values.phone,
           reason: values.reason,
-          bestTime: values.bestTime,
+          insurance_type: values.insuranceType,
           postalCode: values.postalCode,
           country: values.country,
           state: values.state,
@@ -106,11 +114,33 @@ export function PatientAdvocateForm() {
         return
       }
 
-      const accepted = await pushAcceptedLead({ acceptance: res, form_name: 'PatientAdvocateForm', form_source: 'patient-advocate', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode });
+      // Read the body ONCE: a Response body can only be consumed one time, and
+      // pushAcceptedLead accepts an already-parsed object.
+      const body = await res.json().catch(() => null)
+
+      // D10: the SERVER decides qualification and this form obeys it. parseLeadRouting
+      // returns null only when the response carries no decision at all — a browser on
+      // the new build talking to a server still on the old one during a deploy — and
+      // only then do we classify locally, with the same shared function.
+      const serverRouting = parseLeadRouting(body)
+      const qualification = serverRouting?.qualification ?? classifyInsurance(values.insuranceType)
+      const destination = serverRouting?.destination ?? destinationFor(qualification)
+
+      const accepted = await pushAcceptedLead({ acceptance: body, form_name: 'PatientAdvocateForm', form_source: 'patient-advocate', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode, lead_qualification: qualification });
       if (!accepted) return
 
-      setAppointmentConfirm(true)
       form.reset()
+
+      // An unqualified lead goes to the neutral confirmation page: it carries the
+      // explanation about insurance and the phone number, which this form's generic
+      // success dialog does not. A qualified lead keeps the existing dialog, so the
+      // behaviour patients already see is unchanged.
+      if (destination === 'other_thank_you') {
+        router.push(pathForDestination(destination))
+        return
+      }
+
+      setAppointmentConfirm(true)
     } catch (error) {
       console.error("[PatientAdvocateForm] Submit failed", error)
     } finally {
@@ -241,7 +271,7 @@ export function PatientAdvocateForm() {
                     <FormLabel className="text-sm text-[#838890] font-semibold">ZIP / Postal Code<span className="text-red-500">*</span></FormLabel>
                     <FormControl>
                       <Input 
-                        id="postal_code"
+                        id="patientadvocate_postal_code"
                         aria-label="ZIP or postal code"
                         name="postalCode"
                         inputMode="numeric"
@@ -282,31 +312,35 @@ export function PatientAdvocateForm() {
 
           <FormField
             control={form.control}
-            name="bestTime"
+            name="insuranceType"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="text-sm text-[#838890] font-semibold">
-                  Best Time Contact
+                  Insurance
                   <span className="text-red-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Select onValueChange={field.onChange} value={field.value} >
-                    <SelectTrigger aria-label="Best Contact Time"
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <SelectTrigger
+                      id="patientadvocate_insurance_type"
+                      aria-label="Select your insurance"
                       className="w-full h-12 px-6 bg-[#f0f5ff]  border rounded-sm"
                     >
-                      <SelectValue placeholder="Best Contact Time" className=" font-[var(--font-inter)] h-12 text-lg data-[placeholder]:text-red-500" />
+                      <SelectValue placeholder="Select your insurance" className=" font-[var(--font-inter)] h-12 text-lg" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        {["As Soon As Possible", "Morning", "Afternoon", "Evening"].map((service) => (
-                          <SelectItem key={service} value={service}>
-                            {service}
+                        {getInsuranceOptions().map(({ value, label }) => (
+                          <SelectItem key={value} value={value}>
+                            {label}
                           </SelectItem>
                         ))}
                       </SelectGroup>
                     </SelectContent>
                   </Select>
                 </FormControl>
+                {/* Without this the required-insurance error was invisible. */}
+                <FormMessage />
               </FormItem>
             )}
           />

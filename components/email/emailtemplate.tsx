@@ -5,7 +5,19 @@ interface EmailTemplateProps {
   email: string,
   phone: string,
   reason: string,
-  bestTime: string,
+  /** Optional since D10 (2026-09-24) removed "Best Time To Contact" from intake. */
+  bestTime?: string,
+  /**
+   * Insurance selection (D10/D11). Staff-facing only — it is shown here and
+   * stored in Supabase, and never leaves the first-party surface.
+   */
+  insurance_type?: string,
+  /**
+   * ZIP / postal code. Retained by the 2026-09-24 meeting (only "Best Time To
+   * Contact" was removed). Staff use it to route an enquiry to the nearest
+   * clinic, so it belongs in this notification.
+   */
+  postalCode?: string,
   has_attorney?: string,
   injury_type?: string,
   pain_level?: string,
@@ -35,6 +47,8 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   phone,
   reason,
   bestTime,
+  insurance_type,
+  postalCode,
   has_attorney,
   injury_type,
   pain_level,
@@ -73,10 +87,24 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
       {/* Submitted Information Table */}
       <table style={{ width: '100%', borderCollapse: 'collapse', margin: '20px 0' }}>
         <tbody>
+          {insurance_type && (
+          <tr style={{ borderBottom: '1px solid #eee', justifyContent: 'space-evenly', width: '100%' }}>
+            <td style={{ padding: '10px 0', fontWeight: 'bold', color: '#555', width: '30%', verticalAlign: 'top' }}>Insurance:</td>
+            <td style={{ padding: '10px 0' }}>{insurance_type}</td>
+          </tr>
+          )}
+          {postalCode && (
+          <tr style={{ borderBottom: '1px solid #eee', justifyContent: 'space-evenly', width: '100%' }}>
+            <td style={{ padding: '10px 0', fontWeight: 'bold', color: '#555', width: '30%', verticalAlign: 'top' }}>ZIP Code:</td>
+            <td style={{ padding: '10px 0' }}>{postalCode}</td>
+          </tr>
+          )}
+          {bestTime && (
           <tr style={{ borderBottom: '1px solid #eee', justifyContent: 'space-evenly', width: '100%' }}>
             <td style={{ padding: '10px 0', fontWeight: 'bold', color: '#555', width: '30%', verticalAlign: 'top' }}>Your Preferred Contact Time:</td>
             <td style={{ padding: '10px 0' }}>{bestTime}</td>
           </tr>
+          )}
           <tr style={{ borderBottom: '1px solid #eee', justifyContent: 'space-evenly', width: '100%' }}>
             <td style={{ padding: '10px 0', fontWeight: 'bold', color: '#555', verticalAlign: 'top' }}>Best Contact Email:</td>
             <td style={{ padding: '10px 0' }}>{email}</td>
@@ -141,7 +169,9 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
       )}
 
       <p style={{ color: 'black' }}>
-        We will do our best to reach you during your preferred contact time of <strong>{bestTime}</strong>, using the contact details you provided.
+        {bestTime
+          ? <>We will do our best to reach you during your preferred contact time of <strong>{bestTime}</strong>, using the contact details you provided.</>
+          : <>We will reach out using the contact details you provided.</>}
       </p>
       <p style={{ color: 'black' }}>
         If you have any immediate questions, please don't hesitate to contact us at <a href={`tel:+1${statePhone.tel}`} style={{ color: '#0A50EC' }}>{statePhone.display}</a> or reply to this email.

@@ -4,6 +4,7 @@ import {
   sendContactEmail,
   sendUserEmail,
 } from "@/components/email/sendcontactemail";
+import { resolveIntake } from "@/lib/intake-submission";
 
 type ConsultationPayload = {
   firstName: string;
@@ -11,7 +12,16 @@ type ConsultationPayload = {
   email: string;
   phone: string;
   reason: string;
-  bestTime: string;
+  /**
+   * Insurance selection (D10/D11, 2026-09-24). Persisted to Supabase and shown
+   * in the staff email only — never forwarded to GA4, Google Ads or Meta.
+   */
+  insurance_type?: string;
+  /**
+   * ZIP / postal code. Retained by the 2026-09-24 meeting, which removed only
+   * "Best Time To Contact". Validated here against the same shared rule the form
+   * uses, then persisted to `forms.postal_code`.
+   */
   postalCode?: string;
   country?: string;
   state?: string;
@@ -41,12 +51,34 @@ export async function POST(request: Request) {
 
     const fullName = `${body.firstName} ${body.lastName}`.trim();
 
+    // ─────────────────────────────────────────────────────────────────────────
+    // ZIP format is validated on the server, not only in the browser.
+    //
+    // Both sides call the SAME rule (lib/postal-code.ts), so they cannot drift
+    // apart and reject each other's idea of a valid ZIP.
+    //
+    // A malformed value is rejected; an ABSENT one is not. Three different forms
+    // post here — ConsultationForm and StateHeroForm collect ZIP and require it
+    // client-side, MiniContactForm has never collected it — so requiring ZIP here
+    // would 400 every MiniContactForm lead. Requiredness stays with the form that
+    // shows the patient the error.
+    //
+    // Stored in normalized form, as a STRING, so a ZIP in the 0xxxx band keeps
+    // its leading zero.
+    // ─────────────────────────────────────────────────────────────────────────
+    const intake = resolveIntake({ insuranceType: body.insurance_type, postalCode: body.postalCode });
+    if (!intake.ok) {
+      return NextResponse.json({ ok: false, error: intake.error, field: intake.field }, { status: 400 });
+    }
+    const { postalCode, routing } = intake;
+
     await sendContactEmail({
       name: fullName,
       email: body.email,
       phone: body.phone,
       reason: body.reason,
-      bestTime: body.bestTime,
+      insurance_type: body.insurance_type,
+      postalCode,
       state: body.state,
       form_source: body.form_source || 'general-contact',
       gclid: body.gclid,
@@ -64,7 +96,8 @@ export async function POST(request: Request) {
       phone: body.phone,
       state: body.state,
       reason: body.reason,
-      bestTime: body.bestTime,
+      insurance_type: body.insurance_type,
+      postalCode,
       form_source: body.form_source || 'general-contact',
       gclid: body.gclid,
       gbraid: body.gbraid,
@@ -76,7 +109,10 @@ export async function POST(request: Request) {
       utm_content: body.utm_content,
     });
 
-    return NextResponse.json(acceptance);
+    // The browser obeys `qualification` for the conversion gate and navigates by
+    // `destination`. `acceptance` keeps its existing { ok, submissionId } shape, so
+    // every other caller of this endpoint is unaffected.
+    return NextResponse.json({ ...acceptance, ...routing });
   } catch (error) {
     console.error("[ConsultationForm] Submission failed", error);
     return NextResponse.json({ ok: false }, { status: 500 });

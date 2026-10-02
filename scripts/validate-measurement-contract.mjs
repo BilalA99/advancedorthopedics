@@ -199,7 +199,9 @@ async function checkThankYouIsNotTheConversionSource() {
 
 async function checkFormsShareOneSuccessPath() {
   const files = await collectClientFiles();
-  const forms = files.filter(({ source }) => /\/api\/forms\//.test(source));
+  // Classify on code, not prose: lib/intake-submission.ts and lib/postal-code.ts
+  // name the endpoints in their doc comments without ever posting to one.
+  const forms = files.filter(({ source }) => /\/api\/forms\//.test(stripComments(source)));
 
   if (forms.length < 10) {
     fail('the form inventory is discoverable',
@@ -391,8 +393,358 @@ async function checkMetaFormSourceTriage() {
   }
 }
 
+/**
+ * D10 (2026-09-24): a lead whose insurance is not accepted must not fire the
+ * qualified conversion.
+ *
+ * Structural, not behavioural — tests/measurement-insurance-routing.test.ts
+ * proves the runtime behaviour. This proves a refactor cannot quietly remove the
+ * gate or reorder it after the push, which is the failure mode that would send
+ * unqualified leads into Smart Bidding without any test necessarily noticing.
+ */
+const QUALIFICATION_GATE = /lead_qualification\s*===\s*['"]unqualified['"]/;
+
+async function checkUnqualifiedLeadsDoNotConvert() {
+  const source = stripComments(await read(TRACKING_MODULE));
+  const body = extractFunctionBody(source, 'pushFormSubmit');
+
+  if (!body) {
+    fail('unqualified leads cannot fire the qualified conversion',
+      `could not locate pushFormSubmit in ${TRACKING_MODULE}`);
+    return;
+  }
+
+  const gate = QUALIFICATION_GATE.exec(body);
+  if (!gate) {
+    fail('unqualified leads cannot fire the qualified conversion',
+      `pushFormSubmit no longer tests lead_qualification === 'unqualified'. ` +
+      `Without that gate an "Other"-insurance lead fires the qualified conversion ` +
+      `and corrupts Smart Bidding with leads the practice cannot serve (D10).`);
+    return;
+  }
+
+  const pushIndex = body.search(/dataLayer\s*\.\s*push\s*\(\s*buildCanonicalLeadEvent/);
+  if (pushIndex !== -1 && gate.index > pushIndex) {
+    fail('unqualified leads cannot fire the qualified conversion',
+      `the lead_qualification gate is evaluated AFTER the ${CANONICAL_EVENT} push, ` +
+      `so the conversion has already fired by the time qualification is checked.`);
+  }
+
+  // The gate must actually stop execution, not merely branch around one call.
+  const gateTail = body.slice(gate.index, gate.index + 200);
+  if (!/\breturn\b/.test(gateTail)) {
+    fail('unqualified leads cannot fire the qualified conversion',
+      `the lead_qualification check does not return, so an unqualified lead can ` +
+      `still reach the advertising surfaces below it.`);
+  }
+}
+
+/**
+ * The insurance answer must never become an advertising signal.
+ *
+ * Guards both directions: the tracking module must not import the option list or
+ * carrier names, and the canonical payload builder must not learn an insurance
+ * field. Qualification reaches the tracking module as an opaque
+ * qualified/unqualified flag and nothing more.
+ */
+async function checkInsuranceStaysFirstParty() {
+  const tracking = stripComments(await read(TRACKING_MODULE));
+  const contract = stripComments(await read(CONTRACT_MODULE));
+
+  const carriers = /\b(aetna|cigna|unitedhealthcare|blue\s*cross|bcbs|humana|medicaid|medicare)\b/i;
+  for (const [label, source] of [[TRACKING_MODULE, tracking], [CONTRACT_MODULE, contract]]) {
+    const hit = carriers.exec(source);
+    if (hit) {
+      fail('insurance selections stay first-party',
+        `${label} names the carrier "${hit[1]}". Carrier names belong in ` +
+        `lib/insurance-routing.ts and Supabase, never in the measurement path.`);
+    }
+    if (/insurance_type/.test(source)) {
+      fail('insurance selections stay first-party',
+        `${label} references insurance_type. The measurement path may only see ` +
+        `the opaque lead_qualification flag.`);
+    }
+  }
+
+  const builder = extractFunctionBody(contract, 'buildCanonicalLeadEvent');
+  if (builder && /insurance/i.test(builder)) {
+    fail('insurance selections stay first-party',
+      `buildCanonicalLeadEvent mentions insurance; the advertising payload is a ` +
+      `closed set of six operational keys and must not gain an insurance field.`);
+  }
+}
+
+
+/**
+ * ZIP must stay in the intake form (2026-09-24 kept it; only "Best Time To
+ * Contact" was removed).
+ *
+ * This check exists because the regression already happened: an earlier pass on
+ * this branch removed ZIP alongside best-time, so ZIP stopped being collected,
+ * stopped reaching Enhanced Conversions, and — because it had never been written
+ * to Supabase at all — became unrecoverable. A build must fail rather than ship
+ * that again.
+ *
+ * Structural: it proves the field, both validators, the payload and the column
+ * write are all still wired. tests/measurement-intake-zip.test.ts proves the rule
+ * itself behaves (leading zeros, ZIP+4, whitespace).
+ */
+const INTAKE_FORM = 'components/ContactForm.tsx';
+const INTAKE_ROUTE = 'app/api/forms/consultation/route.ts';
+const PERSISTENCE_MODULE = 'components/email/sendcontactemail.ts';
+const ZIP_MODULE = 'lib/postal-code.ts';
+
+/**
+ * Every form component that posts patient intake to one of the lead endpoints.
+ *
+ * All of them gate the qualified conversion, because all of them reach
+ * pushAcceptedLead, whose `lead_qualification` DEFAULTS to 'qualified'. A form
+ * added here but not wired would fire a qualified Google Ads conversion for an
+ * "Other" lead and nothing would notice — the default is convenient for the
+ * clinical questionnaires that do not ask about insurance, and dangerous for an
+ * intake form that does.
+ */
+const INTAKE_FORMS = [
+  'components/ContactForm.tsx',
+  'components/BodyPartHeroForm.tsx',
+  'components/MobileHeroMiniForm.tsx',
+  'components/DoctorContactForm.tsx',
+  'components/BookAnAppoitmentButton.tsx',
+  'components/BookAnAppointmentPopup.tsx',
+  'components/MiniContactForm.tsx',
+  'components/StateHeroForm.tsx',
+  'components/PatientAdvocateForm.tsx',
+];
+
+/**
+ * Every form that must gate the qualified conversion on the server's decision.
+ *
+ * Wider than INTAKE_FORMS: the clinical questionnaires ask for insurance too and
+ * reach pushAcceptedLead, so ungated they fire a qualified conversion for every
+ * submission regardless of the plan selected.
+ *
+ * They are NOT in INTAKE_FORMS because the best-time invariant does not apply to
+ * them — the 2026-09-24 meeting removed that field from the intake form, and a
+ * clinical questionnaire asking when to call is a different question. Keeping the
+ * two lists separate is what lets each rule have its own correct scope.
+ */
+const CONVERSION_GATED_FORMS = INTAKE_FORMS.concat([
+  'components/CandidacyCheckClient.tsx',
+  'components/ConditionCheckSection.tsx',
+  'app/find-care/free-mri-review/FreeMRIReviewClient.tsx',
+]);
+
+/** Every endpoint that accepts patient intake. */
+const INTAKE_ROUTES = [
+  'app/api/forms/consultation/route.ts',
+  'app/api/forms/doctor/route.ts',
+  'app/api/forms/book-appointment/route.ts',
+  'app/api/forms/patient-advocate/route.ts',
+];
+
+async function checkZipSurvivesInIntake() {
+  const form = stripComments(await read(INTAKE_FORM));
+  const route = stripComments(await read(INTAKE_ROUTE));
+  const persistence = stripComments(await read(PERSISTENCE_MODULE));
+
+  const requirements = [
+    [form, /name="postalCode"/, `${INTAKE_FORM} no longer renders the ZIP field`],
+    [form, /ZIP \/ Postal Code/, `${INTAKE_FORM} no longer labels the ZIP field`],
+    [form, /autoComplete="postal-code"/, `${INTAKE_FORM} dropped ZIP autofill`],
+    [form, /inputMode="numeric"/, `${INTAKE_FORM} dropped the numeric mobile keyboard for ZIP`],
+    [form, /isValidPostalCode/, `${INTAKE_FORM} no longer validates ZIP client-side`],
+    [form, /postalCode, lead_qualification/, `${INTAKE_FORM} no longer sends ZIP to Enhanced Conversions`],
+    [route, /resolveIntake\(/, `${INTAKE_ROUTE} no longer validates ZIP server-side`],
+    [persistence, /postal_code:\s*data\.postal_code/, `${PERSISTENCE_MODULE} no longer writes forms.postal_code`],
+  ];
+
+  for (const [source, pattern, detail] of requirements) {
+    if (!pattern.test(source)) {
+      fail('ZIP stays in the intake form', detail);
+    }
+  }
+
+  // One rule, imported — not a regex copied into each surface, which is how the
+  // client and server come to disagree about what a valid ZIP is. The routes reach
+  // it through lib/intake-submission.ts, which is the same rule one level up.
+  for (const [label, source, importPattern] of [
+    [INTAKE_FORM, form, /@\/lib\/postal-code/],
+    [INTAKE_ROUTE, route, /@\/lib\/(postal-code|intake-submission)/],
+  ]) {
+    if (!importPattern.test(source)) {
+      fail('ZIP stays in the intake form',
+        `${label} does not import the shared ZIP rule from ${ZIP_MODULE}`);
+    }
+    if (/\d\{5\}/.test(source)) {
+      fail('ZIP stays in the intake form',
+        `${label} declares its own ZIP regex. The rule belongs in ${ZIP_MODULE} so ` +
+        `the client and the server cannot drift apart and reject each other's ZIPs.`);
+    }
+  }
+
+  // No intake form may re-declare the rule either. Five of them used to carry
+  // their own copy of /^\d{5}(?:-\d{4})?$/, which is how a ZIP the server accepts
+  // comes to be rejected by one form and not another.
+  for (const formPath of INTAKE_FORMS) {
+    const formSource = stripComments(await read(formPath));
+    if (/\d\{5\}/.test(formSource)) {
+      fail('ZIP stays in the intake form',
+        `${formPath} declares its own ZIP regex instead of importing the shared rule ` +
+        `from ${ZIP_MODULE}.`);
+    }
+  }
+}
+
+/**
+ * "Best Time To Contact" must stay removed from the intake path.
+ *
+ * Scoped to intake on purpose: the MRI-review, candidacy and condition-check
+ * forms still ask the question, and their `best_time` column keeps its history.
+ */
+async function checkBestTimeStaysRemovedFromIntake() {
+  for (const label of [...INTAKE_FORMS, ...INTAKE_ROUTES]) {
+    const source = stripComments(await read(label));
+    if (/bestTime|best_time/i.test(source)) {
+      fail('best time to contact stays removed from intake',
+        `${label} references best time to contact, which the 2026-09-24 meeting removed.`);
+    }
+    if (/["']As Soon As Possible["']/.test(source)) {
+      fail('best time to contact stays removed from intake',
+        `${label} still offers the removed "best time" options.`);
+    }
+  }
+}
+
+/**
+ * Every intake form must gate the qualified conversion on the server's decision.
+ *
+ * Checks the whole chain per form, because any one link breaks it silently:
+ * the options must come from the shared config, the server's answer must be read,
+ * it must be handed to pushAcceptedLead, and navigation must follow it rather than
+ * going to /thank-you unconditionally.
+ */
+async function checkEveryIntakeFormGatesTheConversion() {
+  const check = 'every intake form gates the qualified conversion';
+
+  for (const label of CONVERSION_GATED_FORMS) {
+    const source = stripComments(await read(label));
+
+    if (!/getInsuranceOptions\(\)/.test(source)) {
+      fail(check, `${label} does not render the shared insurance options.`);
+    }
+    if (!/parseLeadRouting\(/.test(source)) {
+      fail(check, `${label} does not read the server's qualification decision.`);
+    }
+    if (!/lead_qualification:\s*qualification/.test(source)) {
+      fail(check, `${label} does not pass lead_qualification to pushAcceptedLead, so ` +
+        `it defaults to 'qualified' and an "Other" lead fires a Google Ads conversion.`);
+    }
+    if (!/pathForDestination\(/.test(source)) {
+      fail(check, `${label} does not route by the server's destination.`);
+    }
+    if (/router\.push\(\s*['"]\/thank-you['"]\s*\)/.test(source)) {
+      fail(check, `${label} still navigates unconditionally to the qualified thank-you page.`);
+    }
+    // The Response body is consumed once; passing the Response after reading it
+    // yields a null acceptance and silently drops the conversion.
+    if (/acceptance:\s*res/.test(source)) {
+      fail(check, `${label} passes the Response to pushAcceptedLead after reading its body.`);
+    }
+  }
+
+  // The questionnaires post through server actions rather than a route handler,
+  // so their server-side decision lives in the action itself.
+  const ACTIONS_MODULE = 'components/email/sendcontactemail.ts';
+  const actions = stripComments(await read(ACTIONS_MODULE));
+  const gatedActions = (actions.match(/resolveLeadRouting\(/g) || []).length;
+  if (gatedActions < 3) {
+    fail(check, `${ACTIONS_MODULE} resolves qualification for only ${gatedActions} of the ` +
+      `3 questionnaire server actions (candidacy, condition check, MRI review).`);
+  }
+
+  for (const label of INTAKE_ROUTES) {
+    const source = stripComments(await read(label));
+    if (!/resolveIntake\(/.test(source)) {
+      fail(check, `${label} does not resolve qualification server-side.`);
+    }
+    if (!/\.\.\.routing/.test(source)) {
+      fail(check, `${label} does not return the routing decision to the browser.`);
+    }
+  }
+}
+
+/**
+ * ZIP must not become an advertising event parameter.
+ *
+ * The canonical lead event is a closed set of operational keys. ZIP belongs in
+ * the lead record, the staff email, and the separate Enhanced Conversions
+ * identity payload (where Google's spec places postal_code) — never as a loose
+ * parameter on the business event that GA4 and Google Ads report on.
+ */
+async function checkZipIsNotAnAdvertisingParameter() {
+  const contract = stripComments(await read(CONTRACT_MODULE));
+  const builder = extractFunctionBody(contract, 'buildCanonicalLeadEvent');
+
+  if (builder && /postal|zip/i.test(builder)) {
+    fail('ZIP is not an advertising parameter',
+      `buildCanonicalLeadEvent mentions a postal code. The canonical payload is a ` +
+      `closed set of operational keys and must not gain a ZIP field.`);
+  }
+  if (/postal|zip/i.test(contract)) {
+    fail('ZIP is not an advertising parameter',
+      `${CONTRACT_MODULE} references a postal code; the lead-event contract must not know about ZIP.`);
+  }
+}
+
+/**
+ * Element ids on the intake forms must be component-scoped.
+ *
+ * Five components render a ZIP input and several render an insurance select. When
+ * they all used the same bare id, any page rendering two of them held duplicate
+ * ids — invalid HTML, and both `label[for]` and `getElementById` then resolve to
+ * whichever copy comes first, which on the homepage is a lazily-mounted hidden
+ * form. That produced a real mis-association and cost real debugging time.
+ */
+async function checkFormElementIdsAreScoped() {
+  const check = 'intake form element ids are component-scoped';
+  const bare = [/id="postal_code"/, /id="insurance_type"/];
+
+  const seen = new Map();
+  for (const label of CONVERSION_GATED_FORMS) {
+    const source = stripComments(await read(label));
+
+    for (const pattern of bare) {
+      // ContactForm legitimately owns the unprefixed `insurance_type` id — it is
+      // the canonical intake form and the harnesses key on it — so it is the one
+      // permitted holder. Everything else must be prefixed.
+      if (pattern.source.includes('insurance_type') && label === INTAKE_FORM) continue;
+      if (pattern.test(source)) {
+        fail(check, `${label} uses a bare ${pattern.source}; scope it to the component ` +
+          `(e.g. doctor_postal_code) so two forms on one page cannot collide.`);
+      }
+    }
+
+    for (const m of source.matchAll(/id="([a-z0-9_]+)"/g)) {
+      const id = m[1];
+      if (!/_postal_code$|_insurance_type$|^insurance_type$/.test(id)) continue;
+      if (seen.has(id) && seen.get(id) !== label) {
+        fail(check, `id "${id}" is rendered by both ${seen.get(id)} and ${label}; ` +
+          `a page showing both would contain duplicate ids.`);
+      }
+      seen.set(id, label);
+    }
+  }
+}
+
 const CHECKS = [
   ['accepted-lead event is consent-independent', checkAcceptedLeadIsConsentIndependent],
+  ['unqualified leads cannot fire the qualified conversion', checkUnqualifiedLeadsDoNotConvert],
+  ['insurance selections stay first-party', checkInsuranceStaysFirstParty],
+  ['ZIP stays in the intake form', checkZipSurvivesInIntake],
+  ['best time to contact stays removed from intake', checkBestTimeStaysRemovedFromIntake],
+  ['every intake form gates the qualified conversion', checkEveryIntakeFormGatesTheConversion],
+  ['intake form element ids are component-scoped', checkFormElementIdsAreScoped],
+  ['ZIP is not an advertising parameter', checkZipIsNotAnAdvertisingParameter],
   ['exactly one canonical push per submission path', checkSingleCanonicalPush],
   ['canonical event shape and market contract', checkEventShape],
   ['obsolete form_submit stays retired', checkLegacyEventNotRestored],

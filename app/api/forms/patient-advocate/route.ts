@@ -4,6 +4,7 @@ import {
   sendContactEmail,
   sendUserEmail,
 } from "@/components/email/sendcontactemail";
+import { resolveIntake } from "@/lib/intake-submission";
 
 type PatientAdvocatePayload = {
   firstName: string;
@@ -11,7 +12,8 @@ type PatientAdvocatePayload = {
   email: string;
   phone: string;
   reason: string;
-  bestTime: string;
+  /** Insurance selection (D10/D11). First-party: Supabase and the staff email only. */
+  insurance_type?: string;
   postalCode?: string;
   country?: string;
   state?: string;
@@ -41,12 +43,21 @@ export async function POST(request: Request) {
 
     const fullName = `${body.firstName} ${body.lastName}`.trim();
 
+    // ZIP format and insurance qualification, decided server-side by the same rule
+    // every other intake endpoint uses (lib/intake-submission.ts).
+    const intake = resolveIntake({ insuranceType: body.insurance_type, postalCode: body.postalCode });
+    if (!intake.ok) {
+      return NextResponse.json({ ok: false, error: intake.error, field: intake.field }, { status: 400 });
+    }
+    const { postalCode, routing } = intake;
+
     await sendContactEmail({
       name: fullName,
       email: body.email,
       phone: body.phone,
       reason: body.reason,
-      bestTime: body.bestTime,
+      insurance_type: body.insurance_type,
+      postalCode,
       state: body.state,
       form_source: body.form_source || 'patient-advocate',
       gclid: body.gclid,
@@ -64,7 +75,8 @@ export async function POST(request: Request) {
       phone: body.phone,
       state: body.state,
       reason: body.reason,
-      bestTime: body.bestTime,
+      insurance_type: body.insurance_type,
+      postalCode,
       form_source: body.form_source || 'patient-advocate',
       gclid: body.gclid,
       gbraid: body.gbraid,
@@ -76,7 +88,7 @@ export async function POST(request: Request) {
       utm_content: body.utm_content,
     });
 
-    return NextResponse.json(acceptance);
+    return NextResponse.json({ ...acceptance, ...routing });
   } catch (error) {
     console.error("[PatientAdvocate] Submission failed", error);
     return NextResponse.json({ ok: false }, { status: 500 });

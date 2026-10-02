@@ -92,6 +92,12 @@ export const INSURANCE_PLANS: InsurancePlan[] = [
     note: 'Handled separately from PPO benefits. We treat auto-accident injuries and can work with your attorney where a letter of protection applies.',
   },
   {
+    name: 'Self-pay / no insurance',
+    aliases: ['self pay', 'selfpay', 'self-pay', 'cash', 'no insurance', 'uninsured', 'out of pocket'],
+    status: 'accepted',
+    note: 'Handled separately from insurance benefits. We see self-pay patients and quote pricing up front, before anything is scheduled.',
+  },
+  {
     name: 'HMO plans (any carrier)',
     aliases: ['hmo', 'health maintenance', 'aetna hmo', 'cigna hmo', 'bcbs hmo', 'united hmo'],
     status: 'not-accepted',

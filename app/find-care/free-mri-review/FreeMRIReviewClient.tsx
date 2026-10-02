@@ -39,8 +39,20 @@ import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/
 import { sendMRIContactEmail } from '@/components/email/sendcontactemail'
 import { redirect } from 'next/navigation'
 import { pushAcceptedLead } from '@/utils/enhancedConversions'
+import {
+  classifyInsurance,
+  destinationFor,
+  getInsuranceOptions,
+  parseLeadRouting,
+  pathForDestination,
+} from '@/lib/insurance-routing'
 import { normalizeState } from '@/lib/stateUtils'
 import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid'
+
+/** Value -> patient-facing label for the insurance question. */
+const INSURANCE_LABELS: Record<string, string> = Object.fromEntries(
+  getInsuranceOptions().map((o) => [o.value, o.label]),
+)
 
 const formSchema = z.object({
   // Step 1 Questions
@@ -193,9 +205,9 @@ const FreeMriReviewSteps = [
       {
         question: "Insurance Type",
         control: "insurance_type" as FormFieldName,
-        options: [
-          "Blue Cross Blue Shield", "Aetna", "Cigna Healthcare", "United Healthcare", "Meritan Health", "Bright Health Group", "Multiplan", "Self-pay"
-        ]
+        // Canonical VALUES from lib/insurance-routing.ts. This list used to be a
+        // fourth private copy whose spellings matched nothing else in the system.
+        options: getInsuranceOptions().map((o) => o.value)
       },
       {
         question: "Best Time to Call",
@@ -248,6 +260,12 @@ export default function FreeMRIReviewClient({ reviews }: { reviews: SocialProofR
     setDisabled(true)
     setSubmitError(null)
     let data
+    // Declared out here because the redirect below sits OUTSIDE the try block:
+    // redirect() throws NEXT_REDIRECT to navigate, so it must not be caught.
+    // Defaults to qualified so a response that carries no decision — an old build
+    // answering a new page mid-deploy — behaves exactly as it did before.
+    let qualification: 'qualified' | 'unqualified' = 'qualified'
+    let destination = destinationFor(qualification)
     try {
       data = await sendMRIContactEmail({
         ...values,
@@ -261,7 +279,14 @@ export default function FreeMRIReviewClient({ reviews }: { reviews: SocialProofR
         utm_content: attribution.utm_content,
       })
       if (data) {
-        await pushAcceptedLead({ acceptance: data, form_name: 'FreeMRIReviewForm', form_source: 'free-mri-review', state: normalizeState(values.state), email: values.email, phone: values.phone, firstName: values.first_name, lastName: values.last_name })
+        // D10: the server decides qualification and this form obeys, so an MRI
+        // review request from a plan the practice cannot serve no longer fires
+        // the qualified conversion.
+        const serverRouting = parseLeadRouting(data)
+        qualification = serverRouting?.qualification ?? classifyInsurance(values.insurance_type)
+        destination = serverRouting?.destination ?? destinationFor(qualification)
+
+        await pushAcceptedLead({ acceptance: data, form_name: 'FreeMRIReviewForm', form_source: 'free-mri-review', state: normalizeState(values.state), email: values.email, phone: values.phone, firstName: values.first_name, lastName: values.last_name, lead_qualification: qualification })
         ConditionForm.reset()
       }
     } catch (error) {
@@ -274,7 +299,7 @@ export default function FreeMRIReviewClient({ reviews }: { reviews: SocialProofR
     // redirect() throws NEXT_REDIRECT to navigate — must stay outside the try/catch
     // above so it is never swallowed.
     if (data) {
-      redirect('/thank-you')
+      redirect(pathForDestination(destination))
     } else {
       setSubmitError("We couldn't submit your request. Please try again in a moment, or call our office.")
       setDisabled(false)
@@ -454,7 +479,7 @@ export default function FreeMRIReviewClient({ reviews }: { reviews: SocialProofR
                                         <SelectGroup>
                                           {question.options.map((service) => (
                                             <SelectItem key={service} value={service}>
-                                              {service}
+                                              {INSURANCE_LABELS[service] || service}
                                             </SelectItem>
                                           ))}
                                         </SelectGroup>

@@ -6,6 +6,13 @@ import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { pushEvent, pushAcceptedLead } from '@/utils/enhancedConversions';
+import {
+  classifyInsurance,
+  destinationFor,
+  getInsuranceOptions,
+  parseLeadRouting,
+  pathForDestination,
+} from '@/lib/insurance-routing';
 import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid';
 import { formatPhoneInput } from '@/lib/phone-formatter';
 import { STATE_OPTIONS } from '@/lib/stateUtils';
@@ -26,7 +33,7 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
     email: '',
     postalCode: '',
     state: defaultState,
-    bestTime: '',
+    insuranceType: '',
     reason: '',
     insuranceCardFront: null as File | null,
     insuranceCardBack: null as File | null,
@@ -96,6 +103,11 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
   const handleFullSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.website && formData.website.length > 0) return;
+    if (!formData.insuranceType) {
+      setError('Please select your insurance.');
+      return;
+    }
+
     if (!formData.state) {
       setError('Please select your state.');
       return;
@@ -109,7 +121,7 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
       payload.append('email', formData.email);
       payload.append('phone', formData.phone);
       payload.append('reason', formData.reason || 'Orthopedic consultation request');
-      payload.append('bestTime', formData.bestTime);
+      payload.append('insurance_type', formData.insuranceType);
       payload.append('postalCode', formData.postalCode);
       payload.append('state', formData.state);
       payload.append('country', 'US');
@@ -147,8 +159,14 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
       if (res.redirected) { router.push(res.url); return; }
       if (!res.ok) throw new Error('Submission failed');
 
+      // Read the body once, then obey the SERVER's qualification decision (D10).
+      const body = await res.json().catch(() => null);
+      const serverRouting = parseLeadRouting(body);
+      const qualification = serverRouting?.qualification ?? classifyInsurance(formData.insuranceType);
+      const destination = serverRouting?.destination ?? destinationFor(qualification);
+
       const accepted = await pushAcceptedLead({
-        acceptance: res,
+        acceptance: body,
         form_name: 'MobileHeroMiniForm',
         form_source: formSource,
         state: formData.state,
@@ -157,12 +175,13 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
         firstName: formData.firstName,
         lastName: formData.lastName,
         postalCode: formData.postalCode,
+        lead_qualification: qualification,
       });
       if (!accepted) throw new Error('Submission was not persisted');
 
       setShowDialog(false);
       setIsSubmitted(true);
-      router.push('/thank-you');
+      router.push(pathForDestination(destination));
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {
@@ -227,7 +246,6 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
               aria-label="Your name"
               placeholder="Your Name"
               value={formData.firstName}
-              autoComplete="given-name"
               onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
               className="w-full pl-10 pr-4 py-3 text-sm bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2358AC]/20 focus:border-[#2358AC] transition-all placeholder:text-[#9CA3AF]"
               style={{ fontFamily: 'var(--font-inter)' }}
@@ -247,7 +265,6 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
               aria-label="Phone number"
               placeholder="Phone Number"
               value={formData.phone}
-              autoComplete="tel"
               onChange={(e) => setFormData({ ...formData, phone: formatPhoneInput(e.target.value) })}
               className="w-full pl-10 pr-4 py-3 text-sm bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2358AC]/20 focus:border-[#2358AC] transition-all placeholder:text-[#9CA3AF]"
               style={{ fontFamily: 'var(--font-inter)' }}
@@ -394,22 +411,25 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
               </div>
             </div>
 
-            {/* Best Time */}
+            {/* Insurance (D10 + D11) — replaces "Best Time To Contact". */}
             <div>
-              <label className="block text-sm font-medium text-[#111315] mb-1.5" style={{ fontFamily: 'var(--font-public-sans)' }}>
-                Best Time To Contact
+              <label htmlFor="mobilehero_insurance_type" className="block text-sm font-medium text-[#111315] mb-1.5" style={{ fontFamily: 'var(--font-public-sans)' }}>
+                Insurance<span className="text-red-500">*</span>
               </label>
               <select
-                value={formData.bestTime}
-                onChange={(e) => setFormData({ ...formData, bestTime: e.target.value })}
+                id="mobilehero_insurance_type"
+                name="insurance_type"
+                required
+                aria-label="Select your insurance"
+                value={formData.insuranceType}
+                onChange={(e) => setFormData({ ...formData, insuranceType: e.target.value })}
                 className="w-full px-4 py-2.5 text-sm bg-[#f0f5ff] border border-[#DCDEE1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2358AC]/20 focus:border-[#2358AC] appearance-none"
                 style={{ fontFamily: 'var(--font-inter)' }}
               >
-                <option value="">Select Best Time To Contact</option>
-                <option value="As Soon As Possible">As Soon As Possible</option>
-                <option value="Morning">Morning</option>
-                <option value="Afternoon">Afternoon</option>
-                <option value="Evening">Evening</option>
+                <option value="">Select your insurance</option>
+                {getInsuranceOptions().map(({ value, label }) => (
+                  <option key={value} value={value}>{label}</option>
+                ))}
               </select>
             </div>
 

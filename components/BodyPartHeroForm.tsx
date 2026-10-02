@@ -6,6 +6,13 @@ import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { pushAcceptedLead } from '@/utils/enhancedConversions';
+import {
+  classifyInsurance,
+  destinationFor,
+  getInsuranceOptions,
+  parseLeadRouting,
+  pathForDestination,
+} from '@/lib/insurance-routing';
 import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid';
 import { formatPhoneInput } from '@/lib/phone-formatter';
 import { STATE_OPTIONS } from '@/lib/stateUtils';
@@ -53,7 +60,7 @@ export default function BodyPartHeroForm({
     email: '',
     postalCode: '',
     state: '',
-    bestTime: '',
+    insuranceType: '',
     reason: '',
     insuranceCardFront: null as File | null,
     insuranceCardBack: null as File | null,
@@ -146,6 +153,11 @@ export default function BodyPartHeroForm({
       return; // Silently reject bot submission
     }
 
+    if (!formData.insuranceType) {
+      setError('Please select your insurance.');
+      return;
+    }
+
     if (!formData.state) {
       setError('Please select your state.');
       return;
@@ -161,7 +173,7 @@ export default function BodyPartHeroForm({
       payload.append('email', formData.email);
       payload.append('phone', formData.phone);
       payload.append('reason', formData.reason || `${bodyPartTitle} pain consultation`);
-      payload.append('bestTime', formData.bestTime);
+      payload.append('insurance_type', formData.insuranceType);
       payload.append('postalCode', formData.postalCode);
       payload.append('state', formData.state);
       payload.append('country', 'US');
@@ -215,14 +227,25 @@ export default function BodyPartHeroForm({
         throw new Error('Submission failed');
       }
 
-      const accepted = await pushAcceptedLead({ acceptance: res, form_name: 'BodyPartHeroForm', form_source: formSource, state: formData.state, email: formData.email, phone: formData.phone, firstName: formData.firstName, lastName: formData.lastName, postalCode: formData.postalCode });
+      // Read the body once: a Response body can only be consumed one time, and
+      // pushAcceptedLead accepts an already-parsed object.
+      const body = await res.json().catch(() => null);
+
+      // D10: the SERVER decides qualification and we obey. parseLeadRouting returns
+      // null only when the response carries no decision — a browser on the new build
+      // talking to a server still on the old one during a deploy — and only then do
+      // we classify locally, with the same shared function.
+      const serverRouting = parseLeadRouting(body);
+      const qualification = serverRouting?.qualification ?? classifyInsurance(formData.insuranceType);
+      const destination = serverRouting?.destination ?? destinationFor(qualification);
+
+      const accepted = await pushAcceptedLead({ acceptance: body, form_name: 'BodyPartHeroForm', form_source: formSource, state: formData.state, email: formData.email, phone: formData.phone, firstName: formData.firstName, lastName: formData.lastName, postalCode: formData.postalCode, lead_qualification: qualification });
       if (!accepted) throw new Error('Submission was not persisted');
 
       setShowDialog(false);
       setIsSubmitted(true);
 
-      // Redirect to thank you page
-      router.push('/thank-you');
+      router.push(pathForDestination(destination));
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {
@@ -494,25 +517,38 @@ export default function BodyPartHeroForm({
               </div>
             </div>
 
-            {/* Best Time to Contact */}
+            {/*
+              Insurance (D10 + D11, 2026-09-24). Replaces "Best Time To Contact",
+              which the meeting removed. Options and qualification come from
+              lib/insurance-routing.ts, which derives them from the practice's
+              published plan list, so this dropdown and the conversion decision
+              cannot disagree.
+
+              The selected value goes to Supabase and the staff email only — never
+              to GA4, Google Ads or Meta.
+            */}
             <div>
               <label
+                htmlFor="bodypart_insurance_type"
                 className="block text-sm font-medium text-[#111315] mb-1.5"
                 style={{ fontFamily: 'var(--font-public-sans)' }}
               >
-                Best Time To Contact
+                Insurance<span className="text-red-500">*</span>
               </label>
               <select
-                value={formData.bestTime}
-                onChange={(e) => setFormData({ ...formData, bestTime: e.target.value })}
+                id="bodypart_insurance_type"
+                name="insurance_type"
+                required
+                aria-label="Select your insurance"
+                value={formData.insuranceType}
+                onChange={(e) => setFormData({ ...formData, insuranceType: e.target.value })}
                 className="w-full px-4 py-2.5 text-sm bg-[#f0f5ff] border border-[#DCDEE1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2358AC]/20 focus:border-[#2358AC] appearance-none"
                 style={{ fontFamily: 'var(--font-inter)' }}
               >
-                <option value="">Select Best Time To Contact</option>
-                <option value="As Soon As Possible">As Soon As Possible</option>
-                <option value="Morning">Morning</option>
-                <option value="Afternoon">Afternoon</option>
-                <option value="Evening">Evening</option>
+                <option value="">Select your insurance</option>
+                {getInsuranceOptions().map(({ value, label }) => (
+                  <option key={value} value={value}>{label}</option>
+                ))}
               </select>
             </div>
 

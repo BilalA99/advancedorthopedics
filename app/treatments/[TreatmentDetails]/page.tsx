@@ -13,6 +13,7 @@ import Link from 'next/link';
 import { conditions } from '@/components/data/conditions';
 import InternalLinkingSection from '@/components/InternalLinkingSection';
 import TreatmentFAQ from '@/components/TreatmentFAQ';
+import PreferredSourceCTA from '@/components/PreferredSourceCTA';
 import { getBodyPartSlugFromTag, getBodyPartFromTag } from '@/lib/bodyPartMapping';
 import { BODY_PARTS } from '@/components/data/bodyParts';
 import { isNonEmptyString } from '@/lib/content-validation';
@@ -778,6 +779,9 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
                 {/* FAQ Section from dedicated data file */}
                 <TreatmentFAQ slug={treatmentContent.slug} />
 
+                {/* Preferred source ask, after the FAQ and before the booking CTA. */}
+                <PreferredSourceCTA className="mt-10" />
+
                 {/* Schedule a Consultation Today */}
                 <div className=' flex flex-col space-y-[16px] '>
                   <h2
@@ -1123,6 +1127,9 @@ export default async function Page({ params }: { params: Promise<{ TreatmentDeta
 
                 {/* FAQ Section from dedicated data file */}
                 <TreatmentFAQ slug={treatment!.slug} />
+
+                {/* Preferred source ask, after the FAQ and before the booking CTA. */}
+                <PreferredSourceCTA className="mt-10" />
 
                 {/* Schedule a Consultation Today */}
                 <div className=' flex flex-col space-y-[16px] '>
