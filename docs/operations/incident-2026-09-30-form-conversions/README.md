@@ -5,7 +5,7 @@ more than the half that is right.**
 
 ## Answer in one line
 
-**RESOLVED 1 October 2026 — GTM container v38.** Form conversions stopped on 22
+**RESOLVED — GTM container v38 (1 Oct), tidied in v39 (2 Oct).** Form conversions stopped on 22
 September because container **v37** (21 September, "Update Thank You Page conversion
 tags") attached a user-data tag as a **setup tag** on both conversion tags. A setup
 tag gates the tag it is attached to, and this one waits on dataLayer keys the site
@@ -477,6 +477,90 @@ Full suite 155/155, `validate-measurement-contract` 15/15, `validate-faq-ssr-con
 variable. See `claude-for-chrome-final.md`, which attaches it *without* a setup tag,
 and whose most important check is that the conversion still fires when identity is
 absent.
+
+## Final state (2 October 2026)
+
+**Container v39 is live and verified independently** — a clean headless browser, no
+extensions, no cookies, no identity pushed, published container:
+
+```
+market=FL  conversion pings: 1   AW-17270956371/soPPCPay3ucaENPCt6tA
+market=NJ  conversion pings: 1   AW-17988324873/m2yGCJfJ5YEcEImcwIFD
+```
+
+The decoder confirms no setup tag on any of the three conversion tags. That is the
+regression check: a `setup tag:` line reappearing on tag 6 or 10 means the outage is
+back.
+
+v39 removed the two redundant AW- Google tags I had added on a wrong diagnosis.
+`mountainspinestream` — the GA4 web data stream's Google tag, container 220432725,
+which is the `v9220432725` visible in every conversion hit — already carries both Ads
+destinations.
+
+### Enhanced conversions: already on, in automatic mode
+
+`mountainspinestream` has **"Allow user-provided data capabilities" ON with automatic
+detection** for email, phone, name and address. "Specify CSS selectors or JavaScript
+variables" is off and the `user_data` code snippet is unused.
+
+So Google scrapes the DOM for identity. Reported coverage on the FL action is roughly
+40–75%.
+
+**This means the 1 October site-side ordering fix is currently inert.** The hashed
+`enhanced_conversion_data` the site now pushes ahead of the conversion is not read by
+anything, because nothing is configured to read it. The change is correct, tested and
+harmless, and it is the prerequisite for the manual path — but today it does no work.
+Recorded here rather than left to look like a win.
+
+### Deferred, not dropped: is the manual path needed?
+
+The number that decides it — the enhanced-conversions **match rate** — does not exist
+yet. Ads reports "Insufficient conversion volume" for FL and no recent data for NJ,
+because the outage blanked the trailing 7-day window.
+
+**Re-read the match rate around 16 October**, once post-fix leads have accumulated:
+Ads → Goals → Conversions → `Thank You Page GTM` → diagnostics.
+
+- Healthy match rate → do nothing. Automatic detection is working and the manual path
+  would be complexity for nothing.
+- Zero or poor → trigger the `__awud` user-data tags on **Custom Event `ec_capture`**,
+  with **no setup tag**. This works only because the site now pushes `ec_capture`
+  ahead of the conversion; Google applies user data to subsequent conversions, never
+  retroactively, which is why a trigger on it would have been useless before.
+
+Note the manual path is also the only one compatible with this site's privacy design.
+Google's CSS-selector option expects plaintext email and phone that it hashes itself;
+this site never exposes plaintext, hashing with SHA-256 before anything reaches the
+dataLayer. Automatic detection works by scraping the rendered form, which is why it
+gets partial coverage rather than none.
+
+### One number nobody has explained
+
+FL coverage shows daily values for 23–29 September, after `Thank You Page GTM` last
+fired on 22 September.
+
+Hypothesis, explicitly not a finding: coverage is likely reported by the Google tag
+from its own telemetry — the share of page loads where automatic detection found
+user data — rather than per recorded conversion. The GA4 Google tag kept firing on
+every page throughout the outage, so detection kept running and reporting while no
+conversion was recorded. That would make coverage and conversion count independent,
+which matches what was seen.
+
+Settle it by re-reading coverage after a week of post-fix traffic. **Treat the FL
+coverage line as unreliable until then.**
+
+## Closed, do not revisit
+
+- **Bidding / `value=0`**: every active campaign uses Maximize Conversions or Manual
+  CPC. No value-based bidding anywhere, so conversion value is unused. Non-issue.
+- **DSA on NJ-Central**: does not exist. The "all URLs Google knows about" text was
+  default help text, not live targeting.
+- **New York**: no campaign, intentional, not in the plan.
+- **Test conversions**: tag pings with no click attached are never recorded. Nothing
+  entered the totals; nothing to clean up.
+- **Ad strength**: the gap is keyword coverage in headlines, not asset count — both
+  Poor ads have 15 headlines and 4 descriptions. A copy pass, not a tracking issue.
+- **Injury sitelinks**: added by Google AI on 27 September, on-domain. Housekeeping.
 
 ## Still open
 
