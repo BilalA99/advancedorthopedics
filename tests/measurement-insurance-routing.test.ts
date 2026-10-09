@@ -31,8 +31,9 @@ import {
   PLAN_OPTIONS,
   QUALIFIED_THANK_YOU_PATH,
   UNQUALIFIED_THANK_YOU_PATH,
+  INSURANCE_HELPER_TEXT,
 } from '../lib/insurance-routing';
-import { INSURANCE_PLANS } from '../components/data/insurancePlans';
+import { INSURANCE_PLANS, GOVERNMENT_AND_HMO_GROUP } from '../components/data/insurancePlans';
 import { pushAcceptedLead } from '../utils/enhancedConversions';
 
 const dom = new JSDOM('<!doctype html><html><body></body></html>', {
@@ -78,14 +79,48 @@ test('PPO is offered first and Other is offered last', () => {
   assert.equal(options[options.length - 1].value, OTHER_OPTION.value);
 });
 
+/** The option a published plan is reachable through — its group, or itself. */
+const optionValueFor = (plan: (typeof INSURANCE_PLANS)[number]) =>
+  plan.formGroup?.value ?? plan.name;
+
 test('the options are derived from the published plan list, not a second copy', () => {
   const values = getInsuranceOptions().map((o) => o.value);
+
+  // Every published plan must still be REACHABLE from the form — directly, or
+  // through the group it belongs to. A plan the practice publishes but the form
+  // cannot express is the drift this whole module exists to prevent.
   for (const plan of INSURANCE_PLANS) {
-    assert.ok(values.includes(plan.name),
-      `${plan.name} is published on /insurance-policy but is not offered in the form`);
+    assert.ok(values.includes(optionValueFor(plan)),
+      `${plan.name} is published on /insurance-policy but is not reachable from the form`);
   }
-  // Exactly the published plans, plus the explicit PPO option and Other.
-  assert.equal(values.length, INSURANCE_PLANS.length + 2);
+
+  // And nothing EXTRA: exactly the ungrouped plans, one option per distinct
+  // group, plus the explicit PPO option and Other. This is the half that catches
+  // a hand-added option creeping back in.
+  const expected =
+    INSURANCE_PLANS.filter((p) => !p.formGroup).length +
+    new Set(INSURANCE_PLANS.filter((p) => p.formGroup).map((p) => p.formGroup!.value)).size +
+    2;
+  assert.equal(values.length, expected,
+    `expected ${expected} options, got ${values.length}: ${values.join(', ')}`);
+});
+
+test('a grouped option is never more permissive than its least-accepted member', () => {
+  // The safety direction for grouping. Collapsing plans must only ever be able to
+  // REMOVE a qualified option, never create one — otherwise adding a plan to a
+  // group could silently start reporting leads the practice cannot serve.
+  const grouped = INSURANCE_PLANS.filter((p) => p.formGroup);
+  assert.ok(grouped.length > 0, 'this test is meaningless with no grouped plans');
+
+  for (const groupValue of new Set(grouped.map((p) => p.formGroup!.value))) {
+    const members = grouped.filter((p) => p.formGroup!.value === groupValue);
+    const option = getInsuranceOptions().find((o) => o.value === groupValue);
+    assert.ok(option, `${groupValue} missing from the options`);
+
+    const everyMemberAccepted = members.every((p) => p.status === 'accepted');
+    assert.equal(option.qualification, everyMemberAccepted ? 'qualified' : 'unqualified',
+      `${groupValue} must be unqualified unless EVERY member is accepted`);
+  }
 });
 
 test('carrier labels drop the PPO suffix but the stored VALUE keeps it', () => {
@@ -128,14 +163,18 @@ test('every qualified option still carries a PPO-detectable value or is a named 
 
 test('a plan the practice does not participate in is never qualified', () => {
   for (const plan of INSURANCE_PLANS) {
-    const option = PLAN_OPTIONS.find((o) => o.value === plan.name);
+    const option = PLAN_OPTIONS.find((o) => o.value === optionValueFor(plan));
     assert.ok(option, `${plan.name} missing from PLAN_OPTIONS`);
-    if (plan.status === 'accepted') {
-      assert.equal(option.qualification, 'qualified', `${plan.name} is accepted and should qualify`);
-    } else {
+    if (plan.status !== 'accepted') {
+      // The direction that matters: a plan the practice does not participate in
+      // must never reach the qualified conversion, grouped or not.
       assert.equal(option.qualification, 'unqualified',
         `${plan.name} is "${plan.status}" and must NOT fire a qualified conversion`);
+    } else if (!plan.formGroup) {
+      assert.equal(option.qualification, 'qualified', `${plan.name} is accepted and should qualify`);
     }
+    // An accepted plan inside a group is covered by the group test above: it may
+    // legitimately be dragged to unqualified by a non-accepted sibling.
   }
 });
 
@@ -163,9 +202,61 @@ test('PPO carriers are listed before the non-PPO payers and the excluded plans',
   const values = getInsuranceOptions().map((o) => o.value);
   const ppoCarrierIdx = values.indexOf('Aetna PPO');
   const workersIdx = values.indexOf('Workers’ Compensation');
-  const hmoIdx = values.indexOf('HMO plans (any carrier)');
+  // The excluded plans are collapsed into one grouped option; take whichever
+  // option the first non-accepted plan is reachable through.
+  const firstExcluded = INSURANCE_PLANS.find((p) => p.status !== 'accepted');
+  assert.ok(firstExcluded, 'the list should contain at least one non-accepted plan');
+  const excludedIdx = values.indexOf(optionValueFor(firstExcluded));
+
   assert.ok(ppoCarrierIdx < workersIdx, 'PPO carriers should precede the other accepted payers');
-  assert.ok(workersIdx < hmoIdx, 'accepted payers should precede the ones that are not accepted');
+  assert.ok(workersIdx < excludedIdx, 'accepted payers should precede the ones that are not accepted');
+});
+
+test('Medicare, Medicaid and HMO are ONE option, and it does not qualify', () => {
+  // The dropdown asked a patient to classify their own plan across four
+  // government/HMO entries that all route identically — the decision they are
+  // least equipped to make, with no routing benefit for getting it right.
+  const options = getInsuranceOptions();
+  const group = options.find((o) => o.value === GOVERNMENT_AND_HMO_GROUP.value);
+
+  assert.ok(group, 'the grouped Medicare/Medicaid/HMO option is missing');
+  assert.equal(group.label, 'Medicare, Medicaid or HMO plan');
+  assert.equal(group.qualification, 'unqualified');
+  assert.equal(classifyInsurance(group.value), 'unqualified');
+  assert.equal(routeForInsurance(group.value).thankYouPath, UNQUALIFIED_THANK_YOU_PATH);
+
+  // None of the four may still appear as its own option.
+  for (const name of ['Medicare', 'Medicaid', 'HMO plans (any carrier)', 'Medicare or Medicaid HMO']) {
+    assert.equal(options.find((o) => o.value === name), undefined,
+      name + ' should be collapsed into the grouped option, not offered separately');
+  }
+});
+
+test('the helper text only names options that actually exist', () => {
+  // This is a real regression. The helper line under the dropdown was hardcoded
+  // in ContactForm.tsx and said: choose "HMO plans (any carrier)". When the
+  // government and HMO plans were collapsed into one option that instruction
+  // pointed at something no longer in the list, so the form was telling patients
+  // to pick an option they could not find.
+  //
+  // Any option name quoted in the helper text must be offered.
+  const labels = getInsuranceOptions().map((o) => o.label);
+  const quoted = INSURANCE_HELPER_TEXT.match(/"([^"]+)"/g) || [];
+
+  assert.ok(quoted.length > 0, 'the helper text should name an option to choose');
+  for (const q of quoted) {
+    const name = q.slice(1, -1);
+    assert.ok(labels.includes(name),
+      `the helper text tells patients to choose "${name}", which is not an option: ${labels.join(', ')}`);
+  }
+});
+
+test('the stored group value carries no PPO marker', () => {
+  // The lead sheet flags priority with insurance_type.indexOf('ppo'). If the
+  // grouped value ever contained "ppo", every Medicare/Medicaid/HMO lead would
+  // show to the front desk as a PPO lead — the worst possible mislabel, since
+  // those are precisely the patients who cannot be billed that way.
+  assert.doesNotMatch(GOVERNMENT_AND_HMO_GROUP.value.toLowerCase(), /ppo/);
 });
 
 // ───────────────────────── classification fails closed ─────────────────────────
