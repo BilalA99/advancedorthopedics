@@ -30,6 +30,7 @@ import {
   getInsuranceOptions,
   parseLeadRouting,
   pathForDestination,
+  INSURANCE_HELPER_TEXT,
 } from "@/lib/insurance-routing"
 import { POSTAL_CODE_ERROR, isValidPostalCode, normalizePostalCode } from "@/lib/postal-code"
 
@@ -387,12 +388,7 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
                   a different answer. Saying it here keeps the distinction visible
                   without repeating "PPO" on seven options.
                 */}
-                <p className="text-xs text-[#838890]">
-                  Mountain Spine &amp; Orthopedics is a PPO practice — the carriers
-                  above are their PPO plans. If you have an HMO, choose &quot;HMO plans
-                  (any carrier)&quot;. Either way your request reaches us, and our team
-                  will go over your options with you.
-                </p>
+                <p className="text-xs text-[#838890]">{INSURANCE_HELPER_TEXT}</p>
                 <FormMessage />
               </FormItem>
             )}

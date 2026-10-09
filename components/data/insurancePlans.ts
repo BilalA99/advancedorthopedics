@@ -22,7 +22,52 @@ export interface InsurancePlan {
   note: string;
   /** Distinguishes true PPO carriers from other payer types we also work with. */
   isPpoCarrier?: boolean;
+  /**
+   * Collapses several plans into ONE intake-form option, without collapsing them
+   * on this page.
+   *
+   * The two surfaces want different things from the same list. This page is the
+   * practice's public statement and needs each plan stated separately, because
+   * Medicare and an HMO are not refused for the same reason and a patient
+   * deserves the one that applies to them. The intake dropdown wants the shortest
+   * list that still routes correctly — a patient choosing between four
+   * government and HMO entries is being asked to classify their own plan, which
+   * is exactly the mistake that sends someone to the wrong page.
+   *
+   * Plans sharing a `formGroup.value` become a single option. The group counts as
+   * qualified only if EVERY member qualifies, so a group can never be more
+   * permissive than its least-accepted member.
+   *
+   * `value` is what lands in Supabase `forms.insurance_type`, so it must stay
+   * stable once live — see lib/insurance-routing.ts on why values and labels are
+   * allowed to differ.
+   */
+  formGroup?: InsuranceFormGroup;
 }
+
+export interface InsuranceFormGroup {
+  readonly value: string;
+  readonly label: string;
+}
+
+/**
+ * The single intake-form option covering Medicare, Medicaid and HMO products.
+ *
+ * All four underlying plans are unqualified, so collapsing them loses nothing in
+ * routing — and it removes the one decision in the dropdown a patient is least
+ * equipped to make correctly. Someone on a Medicare Advantage HMO should not have
+ * to work out whether they are "Medicare", "HMO plans (any carrier)" or "Medicare
+ * or Medicaid HMO"; all three lead to the same place, so the form should not
+ * pretend the distinction matters to it.
+ *
+ * The distinction still matters to the patient, which is why /insurance-policy
+ * keeps all four with their own reasoning, and why the confirmation page for
+ * these plans links there.
+ */
+export const GOVERNMENT_AND_HMO_GROUP: InsuranceFormGroup = {
+  value: 'Medicare / Medicaid / HMO',
+  label: 'Medicare, Medicaid or HMO plan',
+};
 
 /** The single rule that decides most answers on this page. */
 export const PPO_HEADLINE = 'We accept PPO plans';
@@ -102,24 +147,28 @@ export const INSURANCE_PLANS: InsurancePlan[] = [
     aliases: ['hmo', 'health maintenance', 'aetna hmo', 'cigna hmo', 'bcbs hmo', 'united hmo'],
     status: 'not-accepted',
     note: 'We are a PPO practice and do not accept HMO plans — including HMO products from carriers whose PPO plans we do accept. If you are unsure which you have, your member card usually states it.',
+    formGroup: GOVERNMENT_AND_HMO_GROUP,
   },
   {
     name: 'Medicare',
     aliases: ['medicare advantage', 'part b'],
     status: 'partial',
     note: 'We do not participate in Medicare for spine surgery. Other orthopedic services may be available — please call so we can check before you book.',
+    formGroup: GOVERNMENT_AND_HMO_GROUP,
   },
   {
     name: 'Medicaid',
     aliases: ['medi-caid'],
     status: 'partial',
     note: 'We do not participate in Medicaid for spine surgery. Other orthopedic services may be available — please call so we can check before you book.',
+    formGroup: GOVERNMENT_AND_HMO_GROUP,
   },
   {
     name: 'Medicare or Medicaid HMO',
     aliases: ['medicare hmo', 'medicaid hmo'],
     status: 'not-accepted',
     note: 'We do not participate in Medicare or Medicaid HMO plans. Your plan administrator can point you to an in-network orthopedic provider.',
+    formGroup: GOVERNMENT_AND_HMO_GROUP,
   },
 ];
 

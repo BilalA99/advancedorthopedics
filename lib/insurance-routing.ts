@@ -29,6 +29,17 @@
  *   partial       -> unqualified  Medicare/Medicaid: not for spine surgery, "call us"
  *   not-accepted  -> unqualified  HMO products, Medicare/Medicaid HMO
  *
+ * ## Several plans can share one dropdown option
+ *
+ * A plan may carry a `formGroup`, which collapses it with its siblings into a
+ * single option — Medicare, Medicaid, HMO plans and Medicare/Medicaid HMO are one
+ * entry reading "Medicare, Medicaid or HMO plan". The public /insurance-policy
+ * page still lists all four separately with their own reasoning, because they are
+ * declined for different reasons and a patient deserves the one that applies to
+ * them. The form does not need that distinction: all four route identically, so
+ * asking a patient to classify their own plan only creates a chance to get it
+ * wrong.
+ *
  * `partial` deliberately lands on the unqualified side. A partial plan is a real
  * lead the clinic still wants and still receives — it just is not an accepted-
  * insurance conversion, and reporting it as one would put leads the practice
@@ -58,7 +69,11 @@
  * Supabase, which is what Appflow Analytics reads.
  */
 
-import { INSURANCE_PLANS, type InsurancePlan } from "@/components/data/insurancePlans";
+import {
+  INSURANCE_PLANS,
+  GOVERNMENT_AND_HMO_GROUP,
+  type InsurancePlan,
+} from "@/components/data/insurancePlans";
 
 export type InsuranceQualification = "qualified" | "unqualified";
 
@@ -137,19 +152,77 @@ function patientFacingLabel(plan: InsurancePlan): string {
   return plan.isPpoCarrier ? plan.name.replace(/\s+PPO$/, "") : plan.name;
 }
 
-export const PLAN_OPTIONS: readonly InsuranceOption[] = INSURANCE_PLANS
-  .map((plan, index) => ({ plan, index }))
-  .sort((a, b) => planRank(a.plan) - planRank(b.plan) || a.index - b.index)
-  .map(({ plan }) => ({
-    value: plan.name,
-    label: patientFacingLabel(plan),
-    qualification: qualificationForPlan(plan),
-  }));
+/**
+ * Collapses plans that share a `formGroup` into one option.
+ *
+ * The group takes the position of its first member and counts as qualified only
+ * if EVERY member qualifies. That direction is the safe one: a group can never
+ * be more permissive than its least-accepted plan, so adding a plan to a group
+ * can remove a qualified option but can never silently create one.
+ *
+ * Today the only group is Medicare / Medicaid / HMO, all four of whose members
+ * are unqualified, so the collapse changes the list a patient sees and changes
+ * nothing about where any of them is routed.
+ */
+function collapseGroups(plans: readonly InsurancePlan[]): InsuranceOption[] {
+  const options: InsuranceOption[] = [];
+  const groupIndex = new Map<string, number>();
+
+  for (const plan of plans) {
+    const qualification = qualificationForPlan(plan);
+    const group = plan.formGroup;
+
+    if (!group) {
+      options.push({ value: plan.name, label: patientFacingLabel(plan), qualification });
+      continue;
+    }
+
+    const existing = groupIndex.get(group.value);
+    if (existing === undefined) {
+      groupIndex.set(group.value, options.length);
+      options.push({ value: group.value, label: group.label, qualification });
+      continue;
+    }
+
+    // Already present: the group keeps the LEAST permissive qualification.
+    if (qualification === "unqualified") {
+      options[existing] = { ...options[existing], qualification: "unqualified" };
+    }
+  }
+
+  return options;
+}
+
+export const PLAN_OPTIONS: readonly InsuranceOption[] = collapseGroups(
+  INSURANCE_PLANS
+    .map((plan, index) => ({ plan, index }))
+    .sort((a, b) => planRank(a.plan) - planRank(b.plan) || a.index - b.index)
+    .map(({ plan }) => plan),
+);
 
 /** The options every intake form renders, in display order. */
 export function getInsuranceOptions(): readonly InsuranceOption[] {
   return [PPO_OPTION, ...PLAN_OPTIONS, OTHER_OPTION];
 }
+
+/**
+ * The helper line shown under the insurance dropdown.
+ *
+ * It lives here, next to the options, because it NAMES one of them. It was
+ * previously hardcoded in ContactForm.tsx and told patients to choose
+ * "HMO plans (any carrier)" — an option that stopped existing the moment the
+ * government and HMO plans were collapsed into one. The form was then instructing
+ * people to pick something that was not in the list.
+ *
+ * Building the sentence from `GOVERNMENT_AND_HMO_GROUP.label` means renaming that
+ * option rewords this line automatically, and a test asserts the label it names is
+ * actually offered.
+ */
+export const INSURANCE_HELPER_TEXT =
+  `Mountain Spine & Orthopedics is a PPO practice — the carriers above are their ` +
+  `PPO plans. If you have an HMO, Medicare or Medicaid, choose ` +
+  `"${GOVERNMENT_AND_HMO_GROUP.label}". Either way your request reaches us, and ` +
+  `our team will go over your options with you.`;
 
 /**
  * Classifies a submitted insurance value.
