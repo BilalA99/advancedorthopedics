@@ -199,8 +199,8 @@ async function checkThankYouIsNotTheConversionSource() {
 
 async function checkFormsShareOneSuccessPath() {
   const files = await collectClientFiles();
-  // Classify on code, not prose: lib/intake-submission.ts and lib/postal-code.ts
-  // name the endpoints in their doc comments without ever posting to one.
+  // Classify on code, not prose: lib/intake-submission.ts names the endpoints
+  // in its doc comments in their doc comments without ever posting to one.
   const forms = files.filter(({ source }) => /\/api\/forms\//.test(stripComments(source)));
 
   if (forms.length < 10) {
@@ -476,23 +476,22 @@ async function checkInsuranceStaysFirstParty() {
 
 
 /**
- * ZIP must stay in the intake form (2026-09-24 kept it; only "Best Time To
- * Contact" was removed).
+ * ZIP must stay OUT of the intake path (Abubeckr, 2026-10-14, item 7: "Remove ZIP
+ * code and best time to contact").
  *
- * This check exists because the regression already happened: an earlier pass on
- * this branch removed ZIP alongside best-time, so ZIP stopped being collected,
- * stopped reaching Enhanced Conversions, and — because it had never been written
- * to Supabase at all — became unrecoverable. A build must fail rather than ship
- * that again.
- *
- * Structural: it proves the field, both validators, the payload and the column
- * write are all still wired. tests/measurement-intake-zip.test.ts proves the rule
- * itself behaves (leading zeros, ZIP+4, whitespace).
+ * This replaces the earlier "ZIP stays in the intake form" check, which encoded
+ * the opposite decision. Structural: no intake form, intake endpoint, the shared
+ * resolver, the staff email or the Supabase writer may collect, validate, send or
+ * write a ZIP, and the shared ZIP module must not come back. The forms.postal_code
+ * column itself is left in the database on purpose and is not checked here.
+ * tests/measurement-intake-zip.test.ts proves the same rule at runtime.
  */
 const INTAKE_FORM = 'components/ContactForm.tsx';
 const INTAKE_ROUTE = 'app/api/forms/consultation/route.ts';
 const PERSISTENCE_MODULE = 'components/email/sendcontactemail.ts';
 const ZIP_MODULE = 'lib/postal-code.ts';
+const RESOLVER_MODULE = 'lib/intake-submission.ts';
+const STAFF_EMAIL_TEMPLATE = 'components/email/emailtemplate.tsx';
 
 /**
  * Every form component that posts patient intake to one of the lead endpoints.
@@ -542,55 +541,74 @@ const INTAKE_ROUTES = [
   'app/api/forms/patient-advocate/route.ts',
 ];
 
-async function checkZipSurvivesInIntake() {
-  const form = stripComments(await read(INTAKE_FORM));
-  const route = stripComments(await read(INTAKE_ROUTE));
-  const persistence = stripComments(await read(PERSISTENCE_MODULE));
+async function checkZipStaysRemovedFromIntake() {
+  const check = 'ZIP stays removed from intake';
 
-  const requirements = [
-    [form, /name="postalCode"/, `${INTAKE_FORM} no longer renders the ZIP field`],
-    [form, /ZIP \/ Postal Code/, `${INTAKE_FORM} no longer labels the ZIP field`],
-    [form, /autoComplete="postal-code"/, `${INTAKE_FORM} dropped ZIP autofill`],
-    [form, /inputMode="numeric"/, `${INTAKE_FORM} dropped the numeric mobile keyboard for ZIP`],
-    [form, /isValidPostalCode/, `${INTAKE_FORM} no longer validates ZIP client-side`],
-    [form, /postalCode, lead_qualification/, `${INTAKE_FORM} no longer sends ZIP to Enhanced Conversions`],
-    [route, /resolveIntake\(/, `${INTAKE_ROUTE} no longer validates ZIP server-side`],
-    [persistence, /postal_code:\s*data\.postal_code/, `${PERSISTENCE_MODULE} no longer writes forms.postal_code`],
+  const zipPatterns = [
+    [/postalCode/, 'references postalCode'],
+    [/ZIP \/ Postal Code/i, 'labels a ZIP field'],
+    [/autoComplete=["']postal-code["']/, 'renders a postal-code autofill input'],
+    [/isValidPostalCode|normalizePostalCode|POSTAL_CODE_ERROR/, 'validates a ZIP'],
+    [/@\/lib\/postal-code/, 'imports the removed ZIP module'],
   ];
 
-  for (const [source, pattern, detail] of requirements) {
-    if (!pattern.test(source)) {
-      fail('ZIP stays in the intake form', detail);
+  for (const label of [...INTAKE_FORMS, ...INTAKE_ROUTES, RESOLVER_MODULE, STAFF_EMAIL_TEMPLATE, PERSISTENCE_MODULE]) {
+    const source = stripComments(await read(label));
+    for (const [pattern, what] of zipPatterns) {
+      if (pattern.test(source)) {
+        fail(check, `${label} ${what}. ZIP was removed from the intake forms on 2026-10-14.`);
+      }
     }
   }
 
-  // One rule, imported — not a regex copied into each surface, which is how the
-  // client and server come to disagree about what a valid ZIP is. The routes reach
-  // it through lib/intake-submission.ts, which is the same rule one level up.
-  for (const [label, source, importPattern] of [
-    [INTAKE_FORM, form, /@\/lib\/postal-code/],
-    [INTAKE_ROUTE, route, /@\/lib\/(postal-code|intake-submission)/],
-  ]) {
-    if (!importPattern.test(source)) {
-      fail('ZIP stays in the intake form',
-        `${label} does not import the shared ZIP rule from ${ZIP_MODULE}`);
-    }
-    if (/\d\{5\}/.test(source)) {
-      fail('ZIP stays in the intake form',
-        `${label} declares its own ZIP regex. The rule belongs in ${ZIP_MODULE} so ` +
-        `the client and the server cannot drift apart and reject each other's ZIPs.`);
-    }
+  const persistence = stripComments(await read(PERSISTENCE_MODULE));
+  if (/postal_code\s*:/.test(persistence)) {
+    fail(check, `${PERSISTENCE_MODULE} still writes forms.postal_code.`);
   }
 
-  // No intake form may re-declare the rule either. Five of them used to carry
-  // their own copy of /^\d{5}(?:-\d{4})?$/, which is how a ZIP the server accepts
-  // comes to be rejected by one form and not another.
-  for (const formPath of INTAKE_FORMS) {
-    const formSource = stripComments(await read(formPath));
-    if (/\d\{5\}/.test(formSource)) {
-      fail('ZIP stays in the intake form',
-        `${formPath} declares its own ZIP regex instead of importing the shared rule ` +
-        `from ${ZIP_MODULE}.`);
+  try {
+    await read(ZIP_MODULE);
+    fail(check, `${ZIP_MODULE} exists again. ZIP is no longer collected, so the shared rule was removed.`);
+  } catch {
+    // Absent, as intended.
+  }
+}
+
+/**
+ * The intake insurance question is a NATIVE <select> (2026-10-14, item 9), with
+ * the insurance answer kept out of every URL (item 12).
+ *
+ * Every intake form renders the shared components/InsuranceSelect.tsx and none
+ * renders the custom Radix listbox for insurance. The shared component must be a
+ * real <select> and must carry no `name`, so a submit before hydration (a plain
+ * GET of the form) cannot write the answer into the address bar.
+ */
+const INSURANCE_SELECT_MODULE = 'components/InsuranceSelect.tsx';
+
+async function checkInsuranceIsANativeSelect() {
+  const check = 'insurance is a native select and never named';
+
+  const component = stripComments(await read(INSURANCE_SELECT_MODULE));
+  if (!/<select\b/.test(component)) {
+    fail(check, `${INSURANCE_SELECT_MODULE} does not render a native <select>.`);
+  }
+  if (/\bname\s*=/.test(component)) {
+    fail(check, `${INSURANCE_SELECT_MODULE} sets a name attribute; a pre-hydration GET would put the answer in the URL.`);
+  }
+  if (!/getInsuranceOptions\(\)/.test(component)) {
+    fail(check, `${INSURANCE_SELECT_MODULE} does not render the shared insurance options.`);
+  }
+
+  for (const label of INTAKE_FORMS) {
+    const source = stripComments(await read(label));
+    if (!/<InsuranceSelect\b/.test(source)) {
+      fail(check, `${label} does not render the shared native InsuranceSelect.`);
+    }
+    if (/<SelectTrigger[^>]*insurance_type/.test(source)) {
+      fail(check, `${label} still renders the custom listbox for insurance.`);
+    }
+    if (/name=["']insurance_type["']/.test(source)) {
+      fail(check, `${label} names an insurance field; a pre-hydration GET would put the answer in the URL.`);
     }
   }
 }
@@ -629,7 +647,7 @@ async function checkEveryIntakeFormGatesTheConversion() {
   for (const label of CONVERSION_GATED_FORMS) {
     const source = stripComments(await read(label));
 
-    if (!/getInsuranceOptions\(\)/.test(source)) {
+    if (!/getInsuranceOptions\(\)|<InsuranceSelect[\s/>]/.test(source)) {
       fail(check, `${label} does not render the shared insurance options.`);
     }
     if (!/parseLeadRouting\(/.test(source)) {
@@ -647,7 +665,7 @@ async function checkEveryIntakeFormGatesTheConversion() {
     }
     // The Response body is consumed once; passing the Response after reading it
     // yields a null acceptance and silently drops the conversion.
-    if (/acceptance:\s*res/.test(source)) {
+    if (/acceptance:\s*res\b/.test(source)) {
       fail(check, `${label} passes the Response to pushAcceptedLead after reading its body.`);
     }
   }
@@ -685,12 +703,12 @@ async function checkZipIsNotAnAdvertisingParameter() {
   const contract = stripComments(await read(CONTRACT_MODULE));
   const builder = extractFunctionBody(contract, 'buildCanonicalLeadEvent');
 
-  if (builder && /postal|zip/i.test(builder)) {
+  if (builder && /postal|\bzip\b/i.test(builder)) {
     fail('ZIP is not an advertising parameter',
       `buildCanonicalLeadEvent mentions a postal code. The canonical payload is a ` +
       `closed set of operational keys and must not gain a ZIP field.`);
   }
-  if (/postal|zip/i.test(contract)) {
+  if (/postal|\bzip\b/i.test(contract)) {
     fail('ZIP is not an advertising parameter',
       `${CONTRACT_MODULE} references a postal code; the lead-event contract must not know about ZIP.`);
   }
@@ -699,7 +717,7 @@ async function checkZipIsNotAnAdvertisingParameter() {
 /**
  * Element ids on the intake forms must be component-scoped.
  *
- * Five components render a ZIP input and several render an insurance select. When
+ * Several components render an insurance select (and, until 2026-10-14, a ZIP input). When
  * they all used the same bare id, any page rendering two of them held duplicate
  * ids — invalid HTML, and both `label[for]` and `getElementById` then resolve to
  * whichever copy comes first, which on the homepage is a lazily-mounted hidden
@@ -740,7 +758,8 @@ const CHECKS = [
   ['accepted-lead event is consent-independent', checkAcceptedLeadIsConsentIndependent],
   ['unqualified leads cannot fire the qualified conversion', checkUnqualifiedLeadsDoNotConvert],
   ['insurance selections stay first-party', checkInsuranceStaysFirstParty],
-  ['ZIP stays in the intake form', checkZipSurvivesInIntake],
+  ['ZIP stays removed from intake', checkZipStaysRemovedFromIntake],
+  ['insurance is a native select and never named', checkInsuranceIsANativeSelect],
   ['best time to contact stays removed from intake', checkBestTimeStaysRemovedFromIntake],
   ['every intake form gates the qualified conversion', checkEveryIntakeFormGatesTheConversion],
   ['intake form element ids are component-scoped', checkFormElementIdsAreScoped],
