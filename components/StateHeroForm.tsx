@@ -28,11 +28,10 @@ import { pushAcceptedLead } from '@/utils/enhancedConversions'
 import {
   classifyInsurance,
   destinationFor,
-  getInsuranceOptions,
   parseLeadRouting,
   pathForDestination,
 } from "@/lib/insurance-routing"
-import { POSTAL_CODE_ERROR, isValidPostalCode } from "@/lib/postal-code"
+import { InsuranceSelect } from "@/components/InsuranceSelect"
 import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid'
 import { useRouter } from 'next/navigation'
 import { STATE_OPTIONS, normalizeState } from '@/lib/stateUtils'
@@ -42,9 +41,6 @@ const formSchema = z.object({
   lastName: z.string().min(1, 'Last name required'),
   email: z.string().email('Invalid email'),
   phone: z.string().min(1, 'Phone required'),
-  postalCode: z
-    .string()
-    .refine(isValidPostalCode, POSTAL_CODE_ERROR),
   insuranceType: z.string().min(1, "Please select your insurance"),
   reason: z.string().min(2, 'Please describe your needs'),
   country: z.string(),
@@ -74,7 +70,6 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
       lastName: '',
       email: '',
       phone: '',
-      postalCode: '',
       insuranceType: '',
       reason: '',
       country: 'US',
@@ -100,7 +95,6 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
           phone: values.phone,
           reason: values.reason,
           insurance_type: values.insuranceType,
-          postalCode: values.postalCode,
           country: values.country,
           state: values.state,
           form_source: 'state-consultation',
@@ -137,7 +131,7 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
       const qualification = serverRouting?.qualification ?? classifyInsurance(values.insuranceType)
       const destination = serverRouting?.destination ?? destinationFor(qualification)
 
-      const accepted = await pushAcceptedLead({ acceptance: body, form_name: 'StateHeroForm', form_source: 'state-consultation', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode, lead_qualification: qualification })
+      const accepted = await pushAcceptedLead({ acceptance: body, form_name: 'StateHeroForm', form_source: 'state-consultation', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, lead_qualification: qualification })
       if (!accepted) return
 
       router.push(pathForDestination(destination))
@@ -292,7 +286,7 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
               }}
             />
 
-            {/* Phase 2: ZIP, Best Time, Reason — animated expand */}
+            {/* Phase 2: State, Insurance, Reason — animated expand (ZIP removed 2026-10-14) */}
             <AnimatePresence>
               {expanded && (
                 <motion.div
@@ -304,53 +298,27 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
                   className="overflow-hidden"
                 >
                   <div className="space-y-3 pt-1">
-                    <div className="grid grid-cols-2 gap-3">
-                      <FormField
-                        control={form.control}
-                        name="postalCode"
-                        render={({ field }) => {
-                          const { name: _, ...fieldProps } = field
-                          return (
-                            <FormItem>
-                              <FormControl>
-                                <Input
-                                  id="hero_postal"
-                                  aria-label="ZIP or postal code"
-                                  name="postalCode"
-                                  inputMode="numeric"
-                                  autoComplete="postal-code"
-                                  placeholder="ZIP Code"
-                                  className="h-11 text-sm bg-white/70 border-[#DCDEE1] focus:bg-white transition-colors"
-                                  {...fieldProps}
-                                />
-                              </FormControl>
-                              <FormMessage className="text-xs" />
-                            </FormItem>
-                          )
-                        }}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="state"
-                        render={({ field }) => (
-                          <FormItem className="w-full">
-                            <FormControl>
-                              <Select onValueChange={field.onChange} value={field.value}>
-                                <SelectTrigger aria-label="State" className="w-full h-11 text-sm bg-white/70 border border-[#DCDEE1] rounded-md px-3 focus:bg-white transition-colors">
-                                  <SelectValue placeholder="State" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  {STATE_OPTIONS.map(({ value, label }) => (
-                                    <SelectItem key={value} value={value}>{label}</SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
-                            </FormControl>
-                            <FormMessage className="text-xs" />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
+                    <FormField
+                      control={form.control}
+                      name="state"
+                      render={({ field }) => (
+                        <FormItem className="w-full">
+                          <FormControl>
+                            <Select onValueChange={field.onChange} value={field.value}>
+                              <SelectTrigger aria-label="State" className="w-full h-11 text-sm bg-white/70 border border-[#DCDEE1] rounded-md px-3 focus:bg-white transition-colors">
+                                <SelectValue placeholder="State" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {STATE_OPTIONS.map(({ value, label }) => (
+                                  <SelectItem key={value} value={value}>{label}</SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          </FormControl>
+                          <FormMessage className="text-xs" />
+                        </FormItem>
+                      )}
+                    />
 
                     <FormField
                       control={form.control}
@@ -358,23 +326,14 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
-                            <Select
-                              onValueChange={field.onChange}
+                            <InsuranceSelect
+                              id="statehero_insurance_type"
                               value={field.value}
-                            >
-                              <SelectTrigger id="statehero_insurance_type" aria-label="Select your insurance" className="h-11 text-sm bg-white/70 border-[#DCDEE1] rounded-sm">
-                                <SelectValue placeholder="Select your insurance" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectGroup>
-                                  {getInsuranceOptions().map(({ value, label }) => (
-                                    <SelectItem key={value} value={value}>
-                                      {label}
-                                    </SelectItem>
-                                  ))}
-                                </SelectGroup>
-                              </SelectContent>
-                            </Select>
+                              onChange={field.onChange}
+                              onBlur={field.onBlur}
+                              ref={field.ref}
+                              className="h-11 px-3 text-base bg-white/70 border-[#DCDEE1] rounded-sm focus:bg-white transition-colors"
+                            />
                           </FormControl>
                           <FormMessage className="text-xs" />
                         </FormItem>
@@ -389,7 +348,8 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
                           <FormControl>
                             <Textarea
                               placeholder="Briefly describe your condition or question..."
-                              className="min-h-[80px] text-sm resize-none bg-white/70 border-[#DCDEE1] focus:bg-white transition-colors"
+                              rows={3}
+                              className="field-sizing-fixed min-h-0 text-sm resize-none bg-white/70 border-[#DCDEE1] focus:bg-white transition-colors"
                               {...field}
                             />
                           </FormControl>

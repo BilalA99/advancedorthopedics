@@ -22,11 +22,10 @@ import { pushAcceptedLead } from "@/utils/enhancedConversions"
 import {
   classifyInsurance,
   destinationFor,
-  getInsuranceOptions,
   parseLeadRouting,
   pathForDestination,
 } from "@/lib/insurance-routing"
-import { POSTAL_CODE_ERROR, isValidPostalCode } from "@/lib/postal-code"
+import { InsuranceSelect } from "@/components/InsuranceSelect"
 import { STATE_OPTIONS } from "@/lib/stateUtils"
 import { useRouter } from "next/navigation"
 
@@ -37,8 +36,6 @@ const formSchema = z.object({
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   reason: z.string().min(2, "Please provide more detail about your consultation needs"),
   insuranceType: z.string().min(1, "Please select your insurance"),
-  postalCode: z.string()
-    .refine(isValidPostalCode, POSTAL_CODE_ERROR),
   country: z.string(),
   state: z.string().min(1, "Please select your state"),
 })
@@ -70,7 +67,6 @@ export function PatientAdvocateForm() {
       phone: "",
       reason: "",
       insuranceType: "",
-      postalCode: "",
       country: "US",
       state: "",
     },
@@ -90,7 +86,6 @@ export function PatientAdvocateForm() {
           phone: values.phone,
           reason: values.reason,
           insurance_type: values.insuranceType,
-          postalCode: values.postalCode,
           country: values.country,
           state: values.state,
           form_source: 'patient-advocate',
@@ -126,7 +121,7 @@ export function PatientAdvocateForm() {
       const qualification = serverRouting?.qualification ?? classifyInsurance(values.insuranceType)
       const destination = serverRouting?.destination ?? destinationFor(qualification)
 
-      const accepted = await pushAcceptedLead({ acceptance: body, form_name: 'PatientAdvocateForm', form_source: 'patient-advocate', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode, lead_qualification: qualification });
+      const accepted = await pushAcceptedLead({ acceptance: body, form_name: 'PatientAdvocateForm', form_source: 'patient-advocate', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, lead_qualification: qualification });
       if (!accepted) return
 
       form.reset()
@@ -263,31 +258,6 @@ export function PatientAdvocateForm() {
             />
             <FormField
               control={form.control}
-              name="postalCode"
-              render={({ field }) => {
-                const { name: _, ...fieldProps } = field;
-                return (
-                  <FormItem>
-                    <FormLabel className="text-sm text-[#838890] font-semibold">ZIP / Postal Code<span className="text-red-500">*</span></FormLabel>
-                    <FormControl>
-                      <Input 
-                        id="patientadvocate_postal_code"
-                        aria-label="ZIP or postal code"
-                        name="postalCode"
-                        inputMode="numeric"
-                        autoComplete="postal-code"
-                        placeholder="e.g., 33463" 
-                        className="h-12 text-lg border-[#DCDEE1] bg-[#FAFAFA]" 
-                        {...fieldProps} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                );
-              }}
-            />
-            <FormField
-              control={form.control}
               name="state"
               render={({ field }) => (
                 <FormItem>
@@ -320,24 +290,14 @@ export function PatientAdvocateForm() {
                   <span className="text-red-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger
+                  <InsuranceSelect
                       id="patientadvocate_insurance_type"
-                      aria-label="Select your insurance"
-                      className="w-full h-12 px-6 bg-[#f0f5ff]  border rounded-sm"
-                    >
-                      <SelectValue placeholder="Select your insurance" className=" font-[var(--font-inter)] h-12 text-lg" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        {getInsuranceOptions().map(({ value, label }) => (
-                          <SelectItem key={value} value={value}>
-                            {label}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                      value={field.value}
+                      onChange={field.onChange}
+                      onBlur={field.onBlur}
+                      ref={field.ref}
+                      className="h-12 px-6 text-lg bg-[#f0f5ff]"
+                  />
                 </FormControl>
                 {/* Without this the required-insurance error was invisible. */}
                 <FormMessage />
@@ -353,7 +313,7 @@ export function PatientAdvocateForm() {
               <FormItem>
                 <FormLabel className="text-sm text-[#838890] font-semibold">Consultation Reason<span className="text-red-500">*</span></FormLabel>
                 <FormControl>
-                  <Textarea placeholder="Consultation Reason" className="min-h-[200px] text-lg resize-none  border-[#DCDEE1]  bg-[#FAFAFA]" {...field} />
+                  <Textarea rows={3} placeholder="Consultation Reason" className="field-sizing-fixed min-h-0 text-lg resize-none  border-[#DCDEE1]  bg-[#FAFAFA]" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

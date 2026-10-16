@@ -15,10 +15,10 @@ import { pushAcceptedLead } from "@/utils/enhancedConversions"
 import {
   classifyInsurance,
   destinationFor,
-  getInsuranceOptions,
   parseLeadRouting,
   pathForDestination,
 } from "@/lib/insurance-routing"
+import { InsuranceSelect } from "@/components/InsuranceSelect"
 
 const formSchema = z.object({
   name: z.string().min(2, "name must be at least 2 characters"),
@@ -208,22 +208,14 @@ export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor
                   Insurance<span className="text-red-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger
+                  <InsuranceSelect
                       id="minicontact_insurance_type"
-                      aria-label="Select your insurance"
-                      className="w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm"
-                    >
-                      <SelectValue placeholder="Select your insurance" className="font-[var(--font-inter)] h-12 text-lg" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        {getInsuranceOptions().map(({ value, label }) => (
-                          <SelectItem key={value} value={value}>{label}</SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                      value={field.value}
+                      onChange={field.onChange}
+                      onBlur={field.onBlur}
+                      ref={field.ref}
+                      className="h-12 px-6 text-lg bg-[#f0f5ff]"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -238,7 +230,7 @@ export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor
               <FormItem>
                 <FormLabel className="text-sm text-[#838890] font-semibold">Message (optional)</FormLabel>
                 <FormControl>
-                  <Textarea placeholder="Your Message" className="min-h-[200px] text-lg resize-none  border-[#DCDEE1]  bg-[#FAFAFA]" {...field} />
+                  <Textarea rows={3} placeholder="Your Message" className="field-sizing-fixed min-h-0 text-lg resize-none  border-[#DCDEE1]  bg-[#FAFAFA]" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

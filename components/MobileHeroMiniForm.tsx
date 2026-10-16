@@ -9,10 +9,11 @@ import { pushEvent, pushAcceptedLead } from '@/utils/enhancedConversions';
 import {
   classifyInsurance,
   destinationFor,
-  getInsuranceOptions,
+  INSURANCE_CARD_UPLOAD_LABEL,
   parseLeadRouting,
   pathForDestination,
 } from '@/lib/insurance-routing';
+import { InsuranceSelect } from '@/components/InsuranceSelect';
 import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid';
 import { formatPhoneInput } from '@/lib/phone-formatter';
 import { STATE_OPTIONS } from '@/lib/stateUtils';
@@ -31,7 +32,6 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
     phone: '',
     lastName: '',
     email: '',
-    postalCode: '',
     state: defaultState,
     insuranceType: '',
     reason: '',
@@ -122,7 +122,6 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
       payload.append('phone', formData.phone);
       payload.append('reason', formData.reason || 'Orthopedic consultation request');
       payload.append('insurance_type', formData.insuranceType);
-      payload.append('postalCode', formData.postalCode);
       payload.append('state', formData.state);
       payload.append('country', 'US');
       payload.append('source',
@@ -174,7 +173,6 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
         phone: formData.phone,
         firstName: formData.firstName,
         lastName: formData.lastName,
-        postalCode: formData.postalCode,
         lead_qualification: qualification,
       });
       if (!accepted) throw new Error('Submission was not persisted');
@@ -376,61 +374,36 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
               </div>
             </div>
 
-            {/* ZIP + State */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-[#111315] mb-1.5" style={{ fontFamily: 'var(--font-public-sans)' }}>
-                  ZIP / Postal Code
-                </label>
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  placeholder="e.g., 33463"
-                  autoComplete="postal-code"
-                  value={formData.postalCode}
-                  onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
-                  className="w-full px-4 py-2.5 text-sm bg-[#FAFAFA] border border-[#DCDEE1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2358AC]/20 focus:border-[#2358AC]"
-                  style={{ fontFamily: 'var(--font-inter)' }}
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-[#111315] mb-1.5" style={{ fontFamily: 'var(--font-public-sans)' }}>
-                  State <span className="text-red-500">*</span>
-                </label>
-                <select
-                  value={formData.state}
-                  onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                  className="w-full px-4 py-2.5 text-sm bg-[#f0f5ff] border border-[#DCDEE1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2358AC]/20 focus:border-[#2358AC] appearance-none"
-                  style={{ fontFamily: 'var(--font-inter)' }}
-                >
-                  <option value="">Select your state</option>
-                  {STATE_OPTIONS.map(({ value, label }) => (
-                    <option key={value} value={value}>{label}</option>
-                  ))}
-                </select>
-              </div>
+            {/* State (ZIP removed 2026-10-14) */}
+            <div>
+              <label className="block text-sm font-medium text-[#111315] mb-1.5" style={{ fontFamily: 'var(--font-public-sans)' }}>
+                State <span className="text-red-500">*</span>
+              </label>
+              <select
+                value={formData.state}
+                onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+                className="w-full px-4 py-2.5 text-sm bg-[#f0f5ff] border border-[#DCDEE1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2358AC]/20 focus:border-[#2358AC] appearance-none"
+                style={{ fontFamily: 'var(--font-inter)' }}
+              >
+                <option value="">Select your state</option>
+                {STATE_OPTIONS.map(({ value, label }) => (
+                  <option key={value} value={value}>{label}</option>
+                ))}
+              </select>
             </div>
 
-            {/* Insurance (D10 + D11) — replaces "Best Time To Contact". */}
+            {/* Insurance: required native select, seven options (2026-10-14). */}
             <div>
               <label htmlFor="mobilehero_insurance_type" className="block text-sm font-medium text-[#111315] mb-1.5" style={{ fontFamily: 'var(--font-public-sans)' }}>
                 Insurance<span className="text-red-500">*</span>
               </label>
-              <select
+              <InsuranceSelect
                 id="mobilehero_insurance_type"
-                name="insurance_type"
-                required
-                aria-label="Select your insurance"
                 value={formData.insuranceType}
-                onChange={(e) => setFormData({ ...formData, insuranceType: e.target.value })}
-                className="w-full px-4 py-2.5 text-sm bg-[#f0f5ff] border border-[#DCDEE1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2358AC]/20 focus:border-[#2358AC] appearance-none"
+                onChange={(insuranceType) => setFormData({ ...formData, insuranceType })}
+                className="px-4 py-2.5 text-base bg-[#f0f5ff] border-[#DCDEE1] rounded-lg focus:ring-2 focus:ring-[#2358AC]/20 focus:border-[#2358AC]"
                 style={{ fontFamily: 'var(--font-inter)' }}
-              >
-                <option value="">Select your insurance</option>
-                {getInsuranceOptions().map(({ value, label }) => (
-                  <option key={value} value={value}>{label}</option>
-                ))}
-              </select>
+              />
             </div>
 
             {/* Reason */}
@@ -442,7 +415,7 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
                 placeholder="Describe your symptoms, how long you've been experiencing them, and any treatments you've tried..."
                 value={formData.reason}
                 onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
-                rows={4}
+                rows={3}
                 className="w-full px-4 py-2.5 text-sm bg-[#FAFAFA] border border-[#DCDEE1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2358AC]/20 focus:border-[#2358AC] resize-none"
                 style={{ fontFamily: 'var(--font-inter)' }}
               />
@@ -450,6 +423,9 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
 
             {/* Insurance Cards */}
             <div className="space-y-4">
+              <p className="text-sm font-medium text-[#111315]" style={{ fontFamily: 'var(--font-public-sans)' }}>
+                {INSURANCE_CARD_UPLOAD_LABEL}
+              </p>
               <div className="flex items-center gap-2">
                 <Shield className="h-5 w-5 text-green-600" />
                 <span className="text-sm font-medium text-green-700">HIPAA Compliant &amp; Secure</span>
@@ -457,7 +433,7 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-[#111315] mb-1.5">
-                    Front of Insurance Card <span className="text-xs text-gray-500 font-normal">(Optional)</span>
+                    Front of Insurance Card
                   </label>
                   <label htmlFor="mh-insurance-front" className="flex flex-col items-center justify-center w-full h-28 border-2 border-dashed border-[#DCDEE1] rounded-lg cursor-pointer bg-[#FAFAFA] hover:bg-[#F5F5F5] transition-colors">
                     <input type="file" accept="image/*,.pdf" onChange={(e) => setFormData({ ...formData, insuranceCardFront: e.target.files?.[0] || null })} className="hidden" id="mh-insurance-front" />
@@ -469,7 +445,7 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-[#111315] mb-1.5">
-                    Back of Insurance Card <span className="text-xs text-gray-500 font-normal">(Optional)</span>
+                    Back of Insurance Card
                   </label>
                   <label htmlFor="mh-insurance-back" className="flex flex-col items-center justify-center w-full h-28 border-2 border-dashed border-[#DCDEE1] rounded-lg cursor-pointer bg-[#FAFAFA] hover:bg-[#F5F5F5] transition-colors">
                     <input type="file" accept="image/*,.pdf" onChange={(e) => setFormData({ ...formData, insuranceCardBack: e.target.files?.[0] || null })} className="hidden" id="mh-insurance-back" />

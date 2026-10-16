@@ -25,10 +25,11 @@ import { pushAcceptedLead } from "@/utils/enhancedConversions"
 import {
   classifyInsurance,
   destinationFor,
-  getInsuranceOptions,
+  INSURANCE_CARD_UPLOAD_LABEL,
   parseLeadRouting,
   pathForDestination,
 } from "@/lib/insurance-routing"
+import { InsuranceSelect } from "@/components/InsuranceSelect"
 import { resolveFormSource } from "@/lib/lead-contract"
 const formSchema = z.object({
     name: z.string().min(2, "name must be at least 2 characters"),
@@ -256,22 +257,14 @@ export default function BookAnAppointmentPopup() {
                                         </span>
                                     </FormLabel>
                                     <FormControl>
-                                        <Select onValueChange={field.onChange} value={field.value} >
-                                            <SelectTrigger id="bookappointmentpopup_insurance_type" aria-label="Select your insurance"
-                                                className="w-full h-12 px-6 bg-[#f0f5ff]  border rounded-sm"
-                                            >
-                                                <SelectValue placeholder="Select your insurance" className=" font-[var(--font-inter)] h-12 text-lg data-[placeholder]:text-red-500" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectGroup>
-                                                    {getInsuranceOptions().map(({ value, label }) => (
-                                                            <SelectItem key={value} value={value}>
-                                                                {label}
-                                                            </SelectItem>
-                                                        ))}
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
+                                        <InsuranceSelect
+                                            id="bookappointmentpopup_insurance_type"
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                            onBlur={field.onBlur}
+                                            ref={field.ref}
+                                            className="h-12 px-6 text-lg bg-[#f0f5ff]"
+                                        />
                                     </FormControl>
                                 </FormItem>
                             )}
@@ -284,7 +277,7 @@ export default function BookAnAppointmentPopup() {
                                 <FormItem>
                                     <FormLabel className="text-sm text-[#111315] font-semibold">Consultation Reason</FormLabel>
                                     <FormControl>
-                                        <Textarea placeholder="Consultation Reason" className="min-h-[200px] text-lg resize-none  border-[#DCDEE1]  bg-[#FAFAFA]" {...field} />
+                                        <Textarea rows={3} placeholder="Consultation Reason" className="field-sizing-fixed min-h-0 text-lg resize-none  border-[#DCDEE1]  bg-[#FAFAFA]" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -293,6 +286,9 @@ export default function BookAnAppointmentPopup() {
 
                         {/* Insurance Card Upload Section */}
                         <div className="space-y-6">
+                            <p className="text-sm font-medium text-[#111315]">
+                                {INSURANCE_CARD_UPLOAD_LABEL}
+                            </p>
                             <div className="flex items-center gap-2 mb-4">
                                 <Shield className="h-5 w-5 text-green-600" />
                                 <span className="text-sm font-medium text-green-700">HIPAA Compliant & Secure</span>
@@ -306,7 +302,6 @@ export default function BookAnAppointmentPopup() {
                                     <FormItem>
                                         <FormLabel className="text-sm text-[#111315] font-semibold">
                                             Front of Insurance Card
-                                            <span className="text-xs text-gray-500 font-normal ml-1">(Optional)</span>
                                         </FormLabel>
                                         <FormControl>
                                             <div className="relative">
@@ -353,7 +348,6 @@ export default function BookAnAppointmentPopup() {
                                     <FormItem>
                                         <FormLabel className="text-sm text-[#111315] font-semibold">
                                             Back of Insurance Card
-                                            <span className="text-xs text-gray-500 font-normal ml-1">(Optional)</span>
                                         </FormLabel>
                                         <FormControl>
                                             <div className="relative">

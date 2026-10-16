@@ -27,12 +27,10 @@ import { resolveFormSource } from "@/lib/lead-contract"
 import {
   classifyInsurance,
   destinationFor,
-  getInsuranceOptions,
   parseLeadRouting,
   pathForDestination,
-  INSURANCE_HELPER_TEXT,
 } from "@/lib/insurance-routing"
-import { POSTAL_CODE_ERROR, isValidPostalCode, normalizePostalCode } from "@/lib/postal-code"
+import { InsuranceSelect } from "@/components/InsuranceSelect"
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -40,13 +38,9 @@ const formSchema = z.object({
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   reason: z.string().min(2, "Please provide more detail about your consultation needs"),
-  // D11 (2026-09-24): insurance is required and PPO appears explicitly, so a
-  // patient who knows they hold a PPO is never pushed into "Other".
+  // Required native dropdown, seven options (Abubeckr, 2026-10-14, item 9).
+  // ZIP / postal code was removed on the same date (item 7).
   insuranceType: z.string().min(1, "Please select your insurance"),
-  // ZIP is RETAINED. The 2026-09-24 meeting removed only "Best Time To Contact";
-  // ZIP stays in the form, validated, stored and reported. The rule lives in
-  // lib/postal-code.ts so this validator and the server's cannot drift apart.
-  postalCode: z.string().refine(isValidPostalCode, POSTAL_CODE_ERROR),
   country: z.string(),
   state: z.string().min(1, "Please select your state"),
 })
@@ -73,7 +67,6 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
       phone: "",
       reason: "",
       insuranceType: "",
-      postalCode: "",
       country: "US",
       state: resolvedState,
     },
@@ -90,12 +83,6 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
     setSubmitError(null)
     try {
       const formSource = resolveFormSource({ pathname, formId: 'ConsultationForm' })
-      // Normalize once, here, so the value the endpoint stores, the value the staff
-      // email shows and the value Enhanced Conversions hashes are the same string.
-      // A mobile numeric keypad has no hyphen, so a patient entering a ZIP+4 there
-      // types nine bare digits — normalizePostalCode turns that into 12345-6789
-      // rather than failing them for using the keyboard we asked for.
-      const postalCode = normalizePostalCode(values.postalCode)
       const res = await fetch("/api/forms/consultation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -108,7 +95,6 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
           // Persisted to Supabase forms.insurance_type only. Never sent to GA4,
           // Google Ads or Meta — see lib/insurance-routing.ts.
           insurance_type: values.insuranceType,
-          postalCode,
           country: values.country,
           state: values.state,
           form_source: formSource,
@@ -155,7 +141,7 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
       const qualification = serverRouting?.qualification ?? classifyInsurance(values.insuranceType)
       const destination = serverRouting?.destination ?? destinationFor(qualification)
 
-      const accepted = await pushAcceptedLead({ acceptance: body, form_name: 'ConsultationForm', form_source: formSource, state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode, lead_qualification: qualification });
+      const accepted = await pushAcceptedLead({ acceptance: body, form_name: 'ConsultationForm', form_source: formSource, state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, lead_qualification: qualification });
       if (!accepted) {
         setSubmitError("We couldn't confirm your request. Please try again in a moment, or call our office.")
         setDisabled(false)
@@ -276,42 +262,6 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
             />
             <FormField
               control={form.control}
-              name="postalCode"
-              render={({ field }) => {
-                const { name: _, ...fieldProps } = field;
-                return (
-                  <FormItem>
-                    {/*
-                      The id is component-scoped. It used to be a bare "postal_code",
-                      which four other form components also used — so on a page
-                      rendering more than one of them (the homepage mounts
-                      DoctorContactForm lazily alongside this form) the document held
-                      duplicate ids, and both label[for] and getElementById resolved
-                      to whichever copy came first, often a hidden one. Scoping the id
-                      makes the htmlFor association below correct again.
-                    */}
-                    <FormLabel htmlFor="consultation_postal_code" className="text-sm text-[#838890] font-semibold">ZIP / Postal Code<span className="text-red-500">*</span></FormLabel>
-                    <FormControl>
-                      <Input
-                        id="consultation_postal_code"
-                        aria-label="ZIP or postal code"
-                        name="postalCode"
-                        type="text"
-                        inputMode="numeric"
-                        autoComplete="postal-code"
-                        maxLength={10}
-                        placeholder="e.g., 33463"
-                        className="h-12 text-lg border-[#DCDEE1] bg-[#FAFAFA]"
-                        {...fieldProps}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                );
-              }}
-            />
-            <FormField
-              control={form.control}
               name="state"
               render={({ field }) => (
                 <FormItem>
@@ -339,9 +289,9 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
           {/*
             Insurance (D10 + D11, 2026-09-24).
 
-            Replaces "Best Time To Contact", which was removed as a meeting
-            decision. Options and qualification come from
-            lib/insurance-routing.ts — a single source of truth shared with the
+            Replaces "Best Time To Contact" and "ZIP", both removed (2026-10-14).
+            A native select (components/InsuranceSelect.tsx). Options and
+            qualification come from lib/insurance-routing.ts — a single source of truth shared with the
             routing logic in onSubmit, so the dropdown and the conversion
             decision can never disagree.
 
@@ -359,36 +309,15 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
                   <span className="text-red-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger
-                      id="insurance_type"
-                      aria-label="Select your insurance"
-                      className="w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm"
-                    >
-                      <SelectValue
-                        placeholder="Select your insurance"
-                        className="font-[var(--font-inter)] h-12 text-lg"
-                      />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        {getInsuranceOptions().map(({ value, label }) => (
-                          <SelectItem key={value} value={value}>
-                            {label}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                  <InsuranceSelect
+                    id="insurance_type"
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    ref={field.ref}
+                    className="h-12 px-6 bg-[#f0f5ff] text-lg"
+                  />
                 </FormControl>
-                {/*
-                  This line carries weight the option labels no longer do. The
-                  carriers are listed by name alone ("Aetna", not "Aetna PPO"), so
-                  nothing in the list itself tells an HMO patient that their plan is
-                  a different answer. Saying it here keeps the distinction visible
-                  without repeating "PPO" on seven options.
-                */}
-                <p className="text-xs text-[#838890]">{INSURANCE_HELPER_TEXT}</p>
                 <FormMessage />
               </FormItem>
             )}
@@ -402,7 +331,7 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
               <FormItem>
                 <FormLabel className="text-sm text-[#838890] font-semibold">Consultation Reason<span className="text-red-500">*</span></FormLabel>
                 <FormControl>
-                  <Textarea placeholder="Consultation Reason" className="min-h-[200px] text-lg resize-none  border-[#DCDEE1]  bg-[#FAFAFA]" {...field} />
+                  <Textarea rows={3} placeholder="Consultation Reason" className="field-sizing-fixed min-h-0 text-lg resize-none  border-[#DCDEE1]  bg-[#FAFAFA]" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

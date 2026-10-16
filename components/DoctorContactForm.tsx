@@ -24,11 +24,11 @@ import { pushAcceptedLead } from "@/utils/enhancedConversions"
 import {
   classifyInsurance,
   destinationFor,
-  getInsuranceOptions,
+  INSURANCE_CARD_UPLOAD_LABEL,
   parseLeadRouting,
   pathForDestination,
 } from "@/lib/insurance-routing"
-import { POSTAL_CODE_ERROR, isValidPostalCode } from "@/lib/postal-code"
+import { InsuranceSelect } from "@/components/InsuranceSelect"
 import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
 import { STATE_OPTIONS, slugFromPathname, normalizeState } from "@/lib/stateUtils"
 import { formatPhone, validatePhoneNumber, formatPhoneInput } from "@/lib/phone-formatter"
@@ -54,8 +54,6 @@ const formSchema = z.object({
     insuranceCardBack: z.instanceof(File).optional().or(z.null()),
     // HONEYPOT FIELD - bots will fill this
     website: z.string().max(0, "Bot detected").optional(),
-    postalCode: z.string()
-        .refine(isValidPostalCode, POSTAL_CODE_ERROR),
     country: z.string(),
     state: z.string().min(1, "Please select your state"),
 })
@@ -119,7 +117,6 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
             insuranceCardFront: null,
             insuranceCardBack: null,
             website: "", // honeypot
-            postalCode: "",
             country: "US",
             state: resolvedState,
         },
@@ -212,7 +209,6 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
             payload.append("phone", values.phone)
             payload.append("reason", values.reason)
             payload.append("insurance_type", values.insuranceType)
-            payload.append("postalCode", values.postalCode)
             payload.append("country", values.country)
             payload.append("state", values.state)
             payload.append("gclid", attribution.gclid)
@@ -264,7 +260,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
             const qualification = serverRouting?.qualification ?? classifyInsurance(values.insuranceType)
             const destination = serverRouting?.destination ?? destinationFor(qualification)
 
-            const accepted = await pushAcceptedLead({ acceptance: body, form_name: 'DoctorContactForm', form_source: formSource, state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode, lead_qualification: qualification });
+            const accepted = await pushAcceptedLead({ acceptance: body, form_name: 'DoctorContactForm', form_source: formSource, state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, lead_qualification: qualification });
             if (!accepted) return
 
             setOpenContactForm(false)
@@ -508,73 +504,37 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                 }}
                             />
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <FormField
-                                    control={form.control}
-                                    name="postalCode"
-                                    render={({ field }) => {
-                                        const { name: _, ...fieldProps } = field;
-                                        return (
-                                            <FormItem>
-                                                <FormLabel className="">
-                                                    <span
-                                                        style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }}
-                                                        className={`${timePeriod !== 'night' ? 'text-[#111315]' : 'text-white'} sm:text-md text-sm`}
-                                                    >
-                                                        ZIP / Postal Code
-                                                    </span>
-                                                </FormLabel>
-                                                <FormControl>
-                                                    <div className="flex">
-                                                        <Input
-                                                            id="doctor_postal_code"
-                                                            aria-label="ZIP or postal code"
-                                                            name="postalCode"
-                                                            inputMode="numeric"
-                                                            autoComplete="postal-code"
-                                                            placeholder="e.g., 33463"
-                                                            className="sm:h-12 h-10 text-lg border-[#DCDEE1] bg-[#FAFAFA]"
-                                                            {...fieldProps}
-                                                        />
-                                                    </div>
-                                                </FormControl>
-                                                <FormMessage />
-                                            </FormItem>
-                                        );
-                                    }}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="state"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>
-                                                <span
-                                                    style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }}
-                                                    className={`${timePeriod !== 'night' ? 'text-[#111315]' : 'text-white'} sm:text-md text-sm`}
-                                                >
-                                                    State
-                                                </span>
-                                            </FormLabel>
-                                            <FormControl>
-                                                <Select onValueChange={field.onChange} value={field.value}>
-                                                    <SelectTrigger aria-label="Select state" className="w-full sm:h-12 h-10 px-4 bg-[#f0f5ff] border rounded-sm">
-                                                        <SelectValue placeholder="Select state" />
-                                                    </SelectTrigger>
-                                                    <SelectContent>
-                                                        <SelectGroup>
-                                                            {STATE_OPTIONS.map(({ value, label }) => (
-                                                                <SelectItem key={value} value={value}>{label}</SelectItem>
-                                                            ))}
-                                                        </SelectGroup>
-                                                    </SelectContent>
-                                                </Select>
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
+                            <FormField
+                                control={form.control}
+                                name="state"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>
+                                            <span
+                                                style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }}
+                                                className={`${timePeriod !== 'night' ? 'text-[#111315]' : 'text-white'} sm:text-md text-sm`}
+                                            >
+                                                State
+                                            </span>
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Select onValueChange={field.onChange} value={field.value}>
+                                                <SelectTrigger aria-label="Select state" className="w-full sm:h-12 h-10 px-4 bg-[#f0f5ff] border rounded-sm">
+                                                    <SelectValue placeholder="Select state" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectGroup>
+                                                        {STATE_OPTIONS.map(({ value, label }) => (
+                                                            <SelectItem key={value} value={value}>{label}</SelectItem>
+                                                        ))}
+                                                    </SelectGroup>
+                                                </SelectContent>
+                                            </Select>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
 
                             <FormField
                                 control={form.control}
@@ -593,22 +553,14 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                             </span>
                                         </FormLabel>
                                         <FormControl>
-                                            <Select onValueChange={field.onChange} value={field.value} >
-                                                <SelectTrigger id="doctor_insurance_type" aria-label="Select your insurance"
-                                                    className="w-full !sm:h-12 h-10 px-6 bg-[#f0f5ff]  border rounded-sm"
-                                                >
-                                                    <SelectValue placeholder="Select your insurance" className=" font-[var(--font-inter)] sm:h-12 h-10 text-lg data-[placeholder]:text-red-500" />
-                                                </SelectTrigger>
-                                                <SelectContent>
-                                                    <SelectGroup>
-                                                        {getInsuranceOptions().map(({ value, label }) => (
-                                                            <SelectItem key={value} value={value}>
-                                                                {label}
-                                                            </SelectItem>
-                                                        ))}
-                                                    </SelectGroup>
-                                                </SelectContent>
-                                            </Select>
+                                            <InsuranceSelect
+                                                id="doctor_insurance_type"
+                                                value={field.value}
+                                                onChange={field.onChange}
+                                                onBlur={field.onBlur}
+                                                ref={field.ref}
+                                                className="sm:h-12 h-10 px-6 text-lg bg-[#f0f5ff]"
+                                            />
                                         </FormControl>
                                     </FormItem>
                                 )}
@@ -779,71 +731,37 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                 />
                                             </div>
 
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                                <FormField
-                                                    control={form.control}
-                                                    name="postalCode"
-                                                    render={({ field }) => {
-                                                        const { name: _, ...fieldProps } = field;
-                                                        return (
-                                                            <FormItem>
-                                                                <FormLabel>
-                                                                    <span
-                                                                        style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }}
-                                                                        className="text-[#111315] sm:text-md text-sm"
-                                                                    >
-                                                                        ZIP / Postal Code
-                                                                    </span>
-                                                                </FormLabel>
-                                                                <FormControl>
-                                                                    <Input
-                                                                        id="doctor_compact_postal_code"
-                                                                        aria-label="ZIP or postal code"
-                                                                        name="postalCode"
-                                                                        inputMode="numeric"
-                                                                        autoComplete="postal-code"
-                                                                        placeholder="e.g., 33463"
-                                                                        className="h-10 text-lg border-[#DCDEE1] bg-[#FAFAFA]"
-                                                                        {...fieldProps}
-                                                                    />
-                                                                </FormControl>
-                                                                <FormMessage />
-                                                            </FormItem>
-                                                        );
-                                                    }}
-                                                />
-                                                <FormField
-                                                    control={form.control}
-                                                    name="state"
-                                                    render={({ field }) => (
-                                                        <FormItem>
-                                                            <FormLabel>
-                                                                <span
-                                                                    style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }}
-                                                                    className="text-[#111315] sm:text-md text-sm"
-                                                                >
-                                                                    State
-                                                                </span>
-                                                            </FormLabel>
-                                                            <FormControl>
-                                                                <Select onValueChange={field.onChange} value={field.value}>
-                                                                    <SelectTrigger aria-label="Select state" className="w-full h-10 px-4 bg-[#f0f5ff] border rounded-sm">
-                                                                        <SelectValue placeholder="Select state" />
-                                                                    </SelectTrigger>
-                                                                    <SelectContent>
-                                                                        <SelectGroup>
-                                                                            {STATE_OPTIONS.map(({ value, label }) => (
-                                                                                <SelectItem key={value} value={value}>{label}</SelectItem>
-                                                                            ))}
-                                                                        </SelectGroup>
-                                                                    </SelectContent>
-                                                                </Select>
-                                                            </FormControl>
-                                                            <FormMessage />
-                                                        </FormItem>
-                                                    )}
-                                                />
-                                            </div>
+                                            <FormField
+                                                control={form.control}
+                                                name="state"
+                                                render={({ field }) => (
+                                                    <FormItem>
+                                                        <FormLabel>
+                                                            <span
+                                                                style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }}
+                                                                className="text-[#111315] sm:text-md text-sm"
+                                                            >
+                                                                State
+                                                            </span>
+                                                        </FormLabel>
+                                                        <FormControl>
+                                                            <Select onValueChange={field.onChange} value={field.value}>
+                                                                <SelectTrigger aria-label="Select state" className="w-full h-10 px-4 bg-[#f0f5ff] border rounded-sm">
+                                                                    <SelectValue placeholder="Select state" />
+                                                                </SelectTrigger>
+                                                                <SelectContent>
+                                                                    <SelectGroup>
+                                                                        {STATE_OPTIONS.map(({ value, label }) => (
+                                                                            <SelectItem key={value} value={value}>{label}</SelectItem>
+                                                                        ))}
+                                                                    </SelectGroup>
+                                                                </SelectContent>
+                                                            </Select>
+                                                        </FormControl>
+                                                        <FormMessage />
+                                                    </FormItem>
+                                                )}
+                                            />
 
                                             <FormField
                                                 control={form.control}
@@ -862,22 +780,14 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                             </span>
                                                         </FormLabel>
                                                         <FormControl>
-                                                            <Select onValueChange={field.onChange} value={field.value} >
-                                                                <SelectTrigger id="doctor_compact_insurance_type" aria-label="Select your insurance"
-                                                                    className="w-full h-10 px-6 bg-[#f0f5ff]  border rounded-sm"
-                                                                >
-                                                                    <SelectValue placeholder="Select your insurance" className=" font-[var(--font-inter)] h-10 text-lg data-[placeholder]:text-red-500" />
-                                                                </SelectTrigger>
-                                                                <SelectContent>
-                                                                    <SelectGroup>
-                                                                        {getInsuranceOptions().map(({ value, label }) => (
-                                                            <SelectItem key={value} value={value}>
-                                                                {label}
-                                                            </SelectItem>
-                                                        ))}
-                                                                    </SelectGroup>
-                                                                </SelectContent>
-                                                            </Select>
+                                                            <InsuranceSelect
+                                                                id="doctor_compact_insurance_type"
+                                                                value={field.value}
+                                                                onChange={field.onChange}
+                                                                onBlur={field.onBlur}
+                                                                ref={field.ref}
+                                                                className="sm:h-12 h-10 px-6 text-lg bg-[#f0f5ff]"
+                                                            />
                                                         </FormControl>
                                                     </FormItem>
                                                 )}
@@ -890,7 +800,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                     <FormItem>
                                                         <FormLabel className="text-sm text-[#111315] font-semibold">Consultation Reason</FormLabel>
                                                         <FormControl>
-                                                            <Textarea placeholder="Consultation Reason" className="min-h-[200px] text-lg resize-none  border-[#DCDEE1]  bg-[#FAFAFA]" {...field} />
+                                                            <Textarea rows={3} placeholder="Consultation Reason" className="field-sizing-fixed min-h-0 text-lg resize-none  border-[#DCDEE1]  bg-[#FAFAFA]" {...field} />
                                                         </FormControl>
                                                         <FormMessage />
                                                     </FormItem>
@@ -899,6 +809,9 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
 
                                             {/* Insurance Card Upload Section */}
                                             <div className="space-y-6">
+                                                <p className="text-sm font-medium text-[#111315]">
+                                                    {INSURANCE_CARD_UPLOAD_LABEL}
+                                                </p>
                                                 <div className="flex items-center gap-2 mb-4">
                                                     <Shield className="h-5 w-5 text-green-600" />
                                                     <span className="text-sm font-medium text-green-700">HIPAA Compliant & Secure</span>
@@ -913,7 +826,6 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                             <FormItem className='sm:w-1/2 w-full'>
                                                                 <FormLabel className="text-sm text-[#111315] font-semibold">
                                                                     Front of Insurance Card
-                                                                    <span className="text-xs text-gray-500 font-normal ml-1">(Optional)</span>
                                                                 </FormLabel>
                                                                 <FormControl>
                                                                     <div className="relative">
@@ -960,7 +872,6 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                             <FormItem className='sm:w-1/2 w-full'>
                                                                 <FormLabel className="text-sm text-[#111315] font-semibold">
                                                                     Back of Insurance Card
-                                                                    <span className="text-xs text-gray-500 font-normal ml-1">(Optional)</span>
                                                                 </FormLabel>
                                                                 <FormControl>
                                                                     <div className="relative">
