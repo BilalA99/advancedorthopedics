@@ -14,7 +14,6 @@ type PatientAdvocatePayload = {
   reason: string;
   /** Insurance selection (D10/D11). First-party: Supabase and the staff email only. */
   insurance_type?: string;
-  postalCode?: string;
   country?: string;
   state?: string;
   form_source?: string;
@@ -43,13 +42,10 @@ export async function POST(request: Request) {
 
     const fullName = `${body.firstName} ${body.lastName}`.trim();
 
-    // ZIP format and insurance qualification, decided server-side by the same rule
-    // every other intake endpoint uses (lib/intake-submission.ts).
-    const intake = resolveIntake({ insuranceType: body.insurance_type, postalCode: body.postalCode });
-    if (!intake.ok) {
-      return NextResponse.json({ ok: false, error: intake.error, field: intake.field }, { status: 400 });
-    }
-    const { postalCode, routing } = intake;
+    // Insurance qualification, decided server-side by the same rule every other
+    // intake endpoint uses (lib/intake-submission.ts). ZIP is no longer read.
+    const intake = resolveIntake({ insuranceType: body.insurance_type });
+    const { routing } = intake;
 
     await sendContactEmail({
       name: fullName,
@@ -57,7 +53,6 @@ export async function POST(request: Request) {
       phone: body.phone,
       reason: body.reason,
       insurance_type: body.insurance_type,
-      postalCode,
       state: body.state,
       form_source: body.form_source || 'patient-advocate',
       gclid: body.gclid,
@@ -76,7 +71,6 @@ export async function POST(request: Request) {
       state: body.state,
       reason: body.reason,
       insurance_type: body.insurance_type,
-      postalCode,
       form_source: body.form_source || 'patient-advocate',
       gclid: body.gclid,
       gbraid: body.gbraid,

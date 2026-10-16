@@ -80,17 +80,13 @@ export async function POST(request: Request) {
     const state = getString(formData, "state");
     const fullName = `${firstName} ${lastName}`.trim();
 
-    // ZIP format and insurance qualification, decided server-side by the same rule
-    // every other intake endpoint uses (lib/intake-submission.ts).
+    // Insurance qualification, decided server-side by the same rule every other
+    // intake endpoint uses (lib/intake-submission.ts). ZIP is no longer read.
     const insuranceType = getString(formData, "insurance_type");
     const intake = resolveIntake({
       insuranceType,
-      postalCode: getString(formData, "postalCode"),
     });
-    if (!intake.ok) {
-      return NextResponse.json({ ok: false, error: intake.error, field: intake.field }, { status: 400 });
-    }
-    const { postalCode, routing } = intake;
+    const { routing } = intake;
 
     await sendContactEmail({
       name: fullName,
@@ -98,7 +94,6 @@ export async function POST(request: Request) {
       phone,
       reason,
       insurance_type: insuranceType,
-      postalCode,
       state,
       form_source: getString(formData, "form_source") || "book-appointment",
       insuranceCardFront,
@@ -120,7 +115,6 @@ export async function POST(request: Request) {
       state,
       reason,
       insurance_type: insuranceType,
-      postalCode,
       form_source: getString(formData, "form_source") || "book-appointment",
       gclid: getString(formData, "gclid"),
       gbraid: getString(formData, "gbraid"),
