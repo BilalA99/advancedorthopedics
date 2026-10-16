@@ -4,7 +4,16 @@
  * Deployed as the "Mountain Spine Lead Sheet Auto Sync" web app, called by the
  * Supabase database trigger on insert into public.forms.
  *
- * ── CHANGES IN THIS VERSION (2026-10-02) ───────────────────────────────────
+ * ── CHANGES IN THIS VERSION (2026-10-15) ───────────────────────────────────
+ *
+ * The intake dropdown now has exactly seven options (Abubeckr's checklist,
+ * 2026-10-14) and the site stores the option text as shown, with no "PPO"
+ * suffix. Five are accepted plans, two are not; see NOT_ACCEPTED_INSURANCE and
+ * ACCEPTED_INSURANCE below. Without this change every new form lead would read
+ * STANDARD, because none of the seven contains "ppo". The site also stopped
+ * collecting ZIP; the ZIP column stays and new rows simply leave it blank.
+ *
+ * ── CHANGES IN THE PREVIOUS VERSION (2026-10-02) ──────────────────────────
  *
  * 1. ZIP is captured. The intake forms collect a postal code and it is stored in
  *    `forms.postal_code`, but this script never read it, so the front desk could
@@ -126,8 +135,28 @@ var T_LOCATION = 16;
  * cannot be affected by this list being stale.
  */
 var NOT_ACCEPTED_INSURANCE = [
+  // The two unqualified options on the site since 2026-10-15.
+  'medicare / medicaid / tricare',
+  'marketplace or self-pay',
+  // Older wording, kept so earlier rows keep their label.
   'medicare / medicaid / hmo',
   'other',
+];
+
+/**
+ * The five accepted options on the site since 2026-10-15. None contains "ppo",
+ * so getLeadPriority checks this list as well as the "ppo" substring (which
+ * still catches older stored values such as "Aetna PPO"). A lead on one of
+ * these is shown as ✅ PPO / ⭐ HIGH VALUE: in this sheet that label means
+ * "a plan the practice participates in", which is what the front desk acts on.
+ * Keep in step with lib/insurance-routing.ts and Code.gs.
+ */
+var ACCEPTED_INSURANCE = [
+  'florida blue / blue cross blue shield',
+  'unitedhealthcare',
+  'aetna',
+  'cigna',
+  'other job insurance',
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -234,7 +263,8 @@ function isNotAcceptedInsurance(insurance_type) {
 function getLeadPriority(insurance_type, reason) {
   if (isNotAcceptedInsurance(insurance_type)) return '⛔ NOT ACCEPTED';
 
-  var isPPO = insurance_type && insurance_type.toLowerCase().indexOf('ppo') !== -1;
+  var v = insurance_type ? String(insurance_type).toLowerCase().trim() : '';
+  var isPPO = !!v && (v.indexOf('ppo') !== -1 || ACCEPTED_INSURANCE.indexOf(v) !== -1);
   var highValueKeywords = [
     'herniated', 'disc', 'stenosis', 'degenerative', 'radiculopathy',
     'sciatica', 'fusion', 'laminectomy', 'discectomy', 'spine surgery',
@@ -731,7 +761,7 @@ function testConnection() {
       created_at: new Date().toISOString(),
       patient_name: 'FL Test Patient', patient_email: 'fltest@example.com',
       patient_phone: '(561) 555-1001', state: 'FL', postal_code: '33301',
-      reason: 'herniated disc lower back pain', insurance_type: 'Aetna PPO',
+      reason: 'herniated disc lower back pain', insurance_type: 'Aetna',
       form_source: 'book-appointment', best_time: 'Morning',
       attorney_firm: '', attorney_name: '',
       gclid: 'CjwKCAiA_FL_test_gclid_001',
@@ -745,7 +775,7 @@ function testConnection() {
       created_at: new Date().toISOString(),
       patient_name: 'NJ Test Patient', patient_email: 'njtest@example.com',
       patient_phone: '(973) 555-2002', state: 'NJ', postal_code: '07621',
-      reason: 'sciatica nerve pain', insurance_type: 'Cigna PPO',
+      reason: 'sciatica nerve pain', insurance_type: 'Cigna',
       form_source: 'free-mri-review', best_time: 'Afternoon',
       attorney_firm: '', attorney_name: '',
       gclid: 'CjwKCAiA_NJ_test_gclid_002',
@@ -773,7 +803,7 @@ function testConnection() {
       patient_name: 'Medicare Test Patient', patient_email: 'medicare@example.com',
       patient_phone: '(954) 555-4004', state: 'FL', postal_code: '33301',
       reason: 'spinal stenosis and sciatica',
-      insurance_type: 'Medicare / Medicaid / HMO',
+      insurance_type: 'Medicare / Medicaid / TRICARE',
       form_source: 'book-appointment', best_time: '',
       attorney_firm: '', attorney_name: '', gclid: '',
       utm_source: 'organic', utm_medium: '', utm_campaign: '',

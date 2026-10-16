@@ -156,29 +156,43 @@ var PPO_CONFIRMED_VALUE = 'PPO Confirmed';
 // ─────────────────────────────────────────────────────────────────────────────
 //  INSURANCE QUALIFICATION
 //
-//  Mirrors lib/insurance-routing.ts on the website, which derives the dropdown
-//  from components/data/insurancePlans.ts. Kept as a RULE rather than a copy of
-//  the carrier list, so adding a carrier on the site does not require editing
-//  this file:
+//  Mirrors lib/insurance-routing.ts on the website. Since 2026-10-15 the intake
+//  dropdown has exactly seven options (Abubeckr's checklist, 2026-10-14) and the
+//  site STORES the option text as shown, with no "PPO" suffix:
 //
-//    - anything explicitly not accepted  -> NOT qualified
-//    - Workers' Comp and Auto/PIP        -> qualified (accepted, but not PPO)
-//    - anything else containing "ppo"    -> qualified
+//    Florida Blue / Blue Cross Blue Shield   qualified
+//    UnitedHealthcare                        qualified
+//    Aetna                                   qualified
+//    Cigna                                   qualified
+//    Other job insurance                     qualified
+//    Medicare / Medicaid / TRICARE           NOT qualified
+//    Marketplace or self-pay                 NOT qualified
 //
-//  The website shows carriers WITHOUT the PPO suffix ("Aetna", not "Aetna PPO")
-//  but STORES the full name, precisely so this substring rule and the receiver
-//  script's getLeadPriority() keep working. Do not "tidy" the stored values.
+//  The rule, in order:
+//    - explicitly not qualified (the two above, plus older wording) -> NOT qualified
+//    - one of the five qualified options, or an older named payer    -> qualified
+//    - anything else containing "ppo" (older stored values such as
+//      "Aetna PPO", and hand-typed sheet edits)                       -> qualified
+//
+//  If the site's options change, update both lists here AND in
+//  lead-sheet-auto-sync.gs, then run scripts/qa/verify-apps-script-rule.ts.
 // ─────────────────────────────────────────────────────────────────────────────
 
 var INSURANCE_NOT_QUALIFIED = [
+  // The two unqualified options on the site since 2026-10-15.
+  'medicare / medicaid / tricare',
+  'marketplace or self-pay',
+  // Older wording, kept so earlier rows keep their label.
   'hmo plans (any carrier)',
   'medicare',
   'medicaid',
   'medicare or medicaid hmo',
+  'medicare / medicaid / hmo',
+  'self-pay / no insurance',
   'other',
   'other / not listed',
   // Guards the substring rule below against the front desk's own vocabulary:
-  // "Non-PPO" is a PPO Status value, and it CONTAINS "ppo". Without these two
+  // "Non-PPO" is a PPO Status value, and it CONTAINS "ppo". Without these
   // entries a lead explicitly marked as non-PPO would be counted as qualified.
   'non-ppo',
   'non ppo',
@@ -186,13 +200,16 @@ var INSURANCE_NOT_QUALIFIED = [
 ];
 
 var INSURANCE_QUALIFIED_NAMED = [
+  // The five qualified options on the site since 2026-10-15. None contains
+  // "ppo", so the substring rule below would miss every one of them.
+  'florida blue / blue cross blue shield',
+  'unitedhealthcare',
+  'aetna',
+  'cigna',
+  'other job insurance',
+  // Older accepted payers that are not PPOs.
   'workers compensation',
-  'auto / personal injury (pip)',
-  // Accepted payer without being a PPO, so the substring rule below would miss it.
-  // Note the receiver's getLeadPriority will still label these STANDARD rather
-  // than PPO — correct, since it is not a PPO. Priority and qualification are
-  // different questions.
-  'self-pay / no insurance'
+  'auto / personal injury (pip)'
 ];
 
 /** Lower-cases, trims and flattens curly apostrophes so comparisons are stable. */
@@ -1317,7 +1334,11 @@ function testConnection() {
     ['Workers’ Compensation', true], ['Auto / Personal Injury (PIP)', true],
     ['HMO plans (any carrier)', false], ['Medicare', false], ['Medicaid', false],
     ['Medicare or Medicaid HMO', false], ['Other', false], ['', false],
-    ['Aetna', false]
+    ['Non-PPO', false],
+    // The seven site options since 2026-10-15
+    ['Florida Blue / Blue Cross Blue Shield', true], ['UnitedHealthcare', true],
+    ['Aetna', true], ['Cigna', true], ['Other job insurance', true],
+    ['Medicare / Medicaid / TRICARE', false], ['Marketplace or self-pay', false]
   ];
   var bad = [];
   cases.forEach(function(c) {
