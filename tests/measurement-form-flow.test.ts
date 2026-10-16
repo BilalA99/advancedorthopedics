@@ -225,8 +225,14 @@ async function collectFormSources(): Promise<Array<{ path: string; source: strin
         await walk(child);
       } else if (entry.name.endsWith('.tsx') || entry.name.endsWith('.ts')) {
         const source = await readFile(child, 'utf8');
-        // A form is any client module that posts to a lead API route.
-        if (/\/api\/forms\//.test(source)) {
+        // A form is any client module that posts to a lead API route IN CODE.
+        // Comments are stripped first: several modules name the endpoints in prose
+        // while never posting to one, and matching those classifies a server-side
+        // helper as a form and fails on it for not calling a browser-only function.
+        const code = source
+          .replace(/\/\*[\s\S]*?\*\//g, '')
+          .replace(/^\s*\/\/.*$/gm, '');
+        if (/\/api\/forms\//.test(code)) {
           found.push({ path: decodeURIComponent(child.pathname), source });
         }
       }

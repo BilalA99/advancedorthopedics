@@ -1,0 +1,133 @@
+{
+  "base": "http://localhost:3000",
+  "total": 18,
+  "failed": 0,
+  "results": [
+    {
+      "page": "home",
+      "viewport": "320x568-iphone-se1",
+      "kind": "mobile",
+      "failures": [],
+      "note": ""
+    },
+    {
+      "page": "home",
+      "viewport": "360x800-android",
+      "kind": "mobile",
+      "failures": [],
+      "note": ""
+    },
+    {
+      "page": "home",
+      "viewport": "375x667-iphone-se2",
+      "kind": "mobile",
+      "failures": [],
+      "note": ""
+    },
+    {
+      "page": "home",
+      "viewport": "390x844-iphone-12",
+      "kind": "mobile",
+      "failures": [],
+      "note": ""
+    },
+    {
+      "page": "home",
+      "viewport": "393x852-iphone-15",
+      "kind": "mobile",
+      "failures": [],
+      "note": ""
+    },
+    {
+      "page": "home",
+      "viewport": "412x915-pixel",
+      "kind": "mobile",
+      "failures": [],
+      "note": ""
+    },
+    {
+      "page": "home",
+      "viewport": "414x896-iphone-xr",
+      "kind": "mobile",
+      "failures": [],
+      "note": ""
+    },
+    {
+      "page": "home",
+      "viewport": "768x1024-ipad",
+      "kind": "mobile",
+      "failures": [],
+      "note": "ZIP 14px (<16px, iOS zooms on focus) — sitewide shadcn md:text-sm, pre-existing"
+    },
+    {
+      "page": "home",
+      "viewport": "820x1180-ipad-air",
+      "kind": "mobile",
+      "failures": [],
+      "note": "ZIP 14px (<16px, iOS zooms on focus) — sitewide shadcn md:text-sm, pre-existing"
+    },
+    {
+      "page": "insurance-policy",
+      "viewport": "320x568-iphone-se1",
+      "kind": "mobile",
+      "failures": [],
+      "note": ""
+    },
+    {
+      "page": "insurance-policy",
+      "viewport": "360x800-android",
+      "kind": "mobile",
+      "failures": [],
+      "note": ""
+    },
+    {
+      "page": "insurance-policy",
+      "viewport": "375x667-iphone-se2",
+      "kind": "mobile",
+      "failures": [],
+      "note": ""
+    },
+    {
+      "page": "insurance-policy",
+      "viewport": "390x844-iphone-12",
+      "kind": "mobile",
+      "failures": [],
+      "note": ""
+    },
+    {
+      "page": "insurance-policy",
+      "viewport": "393x852-iphone-15",
+      "kind": "mobile",
+      "failures": [],
+      "note": ""
+    },
+    {
+      "page": "insurance-policy",
+      "viewport": "412x915-pixel",
+      "kind": "mobile",
+      "failures": [],
+      "note": ""
+    },
+    {
+      "page": "insurance-policy",
+      "viewport": "414x896-iphone-xr",
+      "kind": "mobile",
+      "failures": [],
+      "note": ""
+    },
+    {
+      "page": "insurance-policy",
+      "viewport": "768x1024-ipad",
+      "kind": "mobile",
+      "failures": [],
+      "note": "ZIP 14px (<16px, iOS zooms on focus) — sitewide shadcn md:text-sm, pre-existing"
+    },
+    {
+      "page": "insurance-policy",
+      "viewport": "820x1180-ipad-air",
+      "kind": "mobile",
+      "failures": [],
+      "note": "ZIP 14px (<16px, iOS zooms on focus) — sitewide shadcn md:text-sm, pre-existing"
+    }
+  ]
+}

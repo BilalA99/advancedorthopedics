@@ -20,6 +20,7 @@ import { srOnly } from '@/lib/seo';
 import InternalLinkingSection from '@/components/InternalLinkingSection';
 import { SpecialistPages } from '@/components/data/specialists';
 import ConditionFAQ from '@/components/ConditionFAQ';
+import PreferredSourceCTA from '@/components/PreferredSourceCTA';
 import { getBodyPartSlugFromTag, getBodyPartFromTag } from '@/lib/bodyPartMapping';
 import { BODY_PARTS } from '@/components/data/bodyParts';
 import { RichTextContent } from '@/components/RichTextContent';
@@ -915,6 +916,9 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
 
                 {/* FAQ Section from dedicated data file */}
                 <ConditionFAQ slug={conditionContent!.slug} />
+
+                {/* Preferred source ask, after the FAQ and before the booking CTA. */}
+                <PreferredSourceCTA className="mt-10" />
               </>
             ) : (
               <>
@@ -1094,6 +1098,9 @@ export default async function ConditionPage({ conditionSlug }: { conditionSlug: 
 
                 {/* FAQ Section from dedicated data file */}
                 <ConditionFAQ slug={condition_details!.slug} />
+
+                {/* Preferred source ask, after the FAQ and before the booking CTA. */}
+                <PreferredSourceCTA className="mt-10" />
               </>
             )}
           </section>

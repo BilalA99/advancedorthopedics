@@ -2,6 +2,20 @@ import Image from 'next/image'
 import PatientFormsLanding from '@/public/PatientFormsLanding.jpeg'
 import ContactUsSection from '@/components/ContactUsSection'
 import ConditionCheckSection from '@/components/ConditionCheckSection'
+import { getInsuranceOptions } from "@/lib/insurance-routing"
+
+/**
+ * The insurance options, from the one canonical list.
+ *
+ * This page used to carry its own copy — "Cigna Healthcare", "Meritan Health"
+ * (a typo), "Multiplan", "United Healthcare" — none of which matched the values
+ * the rest of the system stores. Those leads could never be classified, and the
+ * lead sheet's PPO detection (which looks for the substring "ppo") marked every
+ * one of them STANDARD.
+ *
+ * Values are stored; labels are what the patient reads.
+ */
+const INSURANCE_VALUES = getInsuranceOptions().map((o) => o.value)
 
 const ConditionCheckSteps = [
   {
@@ -35,7 +49,7 @@ const ConditionCheckSteps = [
       { question: "Email", control: "email", options: [] },
       { question: "Phone", control: "phone", options: [] },
       { question: "State", control: "state", options: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"] },
-      { question: "Insurance Type", control: "insurance_type", options: ["Blue Cross Blue Shield", "Aetna", "Cigna Healthcare", "United Healthcare", "Meritan Health", "Bright Health Group", "Multiplan", "Self-pay"] },
+      { question: "Insurance Type", control: "insurance_type", options: INSURANCE_VALUES },
       { question: "Comments", control: "comments", options: [] },
       { question: 'Email Opt Out', control: 'email_optout', options: [] }
     ]

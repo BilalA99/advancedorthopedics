@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Calendar, User } from 'lucide-react';
 import BlogTitleAnimated from './BlogTitleAnimated';
+import { PreferredSourceButton } from "@/components/PreferredSourceCTA";
 
 interface BlogContentProps {
   blog: {
@@ -83,10 +84,28 @@ export default function BlogContent({ blog }: BlogContentProps) {
                 className="text-[#1C2340] text-2xl md:text-5xl lg:text-6xl w-full text-center"
               />
               <p style={{ fontWeight: 400, lineHeight: "150%" }} className="text-[#394257] md:text-lg text-base w-full text-center">{info.desc}</p>
-              <div className="flex flex-wrap gap-2 mt-2 justify-center">
+              {/*
+                Tags, then the preferred-source ask as the last item in the same
+                row. The tags are pale, non-interactive pills; the button is solid
+                brand blue, so the one thing here that can be clicked looks like it.
+
+                gap-y-3 rather than gap-2 because the button is taller than a tag
+                pill — with a uniform small gap the wrapped rows sit too close and
+                the button crowds the pills above it.
+
+                The row wraps, so on a narrow screen the button naturally falls onto
+                its own line at full row width instead of being squeezed beside a
+                tag. No breakpoint needed; the layout does it.
+              */}
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-3 mt-2 justify-center">
                 {info.tags.map((tag: string, index: number) => (
                   <span key={index} className="bg-[#f3f6ff] text-[#1C2340] px-3 py-1 rounded-full text-sm border border-[#d9e2ff]">{tag}</span>
                 ))}
+                {/* Separator: says "this is not another tag" without adding words.
+                    Hidden under 640px, where the button is usually on its own line
+                    and a floating rule would just be noise. */}
+                <span aria-hidden="true" className="hidden sm:block h-5 w-px bg-[#1C2340]/20 mx-1" />
+                <PreferredSourceButton compact />
               </div>
               <div className="flex items-center gap-6 mt-4 text-sm text-[#1C2340] flex-wrap justify-center">
                 {info.author && (

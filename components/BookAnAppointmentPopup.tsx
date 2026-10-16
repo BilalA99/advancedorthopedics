@@ -22,12 +22,20 @@ import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
 import { usePathname, useRouter } from "next/navigation"
 import { appendPreparedUploads } from "@/lib/client-upload"
 import { pushAcceptedLead } from "@/utils/enhancedConversions"
+import {
+  classifyInsurance,
+  destinationFor,
+  INSURANCE_CARD_UPLOAD_LABEL,
+  parseLeadRouting,
+  pathForDestination,
+} from "@/lib/insurance-routing"
+import { InsuranceSelect } from "@/components/InsuranceSelect"
 import { resolveFormSource } from "@/lib/lead-contract"
 const formSchema = z.object({
     name: z.string().min(2, "name must be at least 2 characters"),
     email: z.string().email("Invalid email address"),
     phone: z.string().min(10, "Phone number must be at least 10 digits"),
-    bestTime: z.string().min(1, "Please select a time"),
+    insuranceType: z.string().min(1, "Please select your insurance"),
     date: z.date({
         required_error: "Please select a date",
     }),
@@ -58,7 +66,7 @@ export default function BookAnAppointmentPopup() {
             email: "",
             phone: "",
             reason: "",
-            bestTime: ""
+            insuranceType: ""
         },
     })
 
@@ -75,7 +83,7 @@ export default function BookAnAppointmentPopup() {
             payload.append('email', values.email)
             payload.append('phone', values.phone)
             payload.append('reason', values.reason)
-            payload.append('bestTime', values.bestTime)
+            payload.append("insurance_type", values.insuranceType)
             payload.append('form_source', formSource)
             payload.append('gclid', attribution.gclid)
             payload.append('gbraid', attribution.gbraid)
@@ -112,8 +120,20 @@ export default function BookAnAppointmentPopup() {
                 return
             }
 
+            // Read the body ONCE: a Response body can only be consumed one time, and
+            // pushAcceptedLead accepts an already-parsed object.
+            const body = await res.json().catch(() => null)
+
+            // D10: the SERVER decides qualification and this form obeys it. parseLeadRouting
+            // returns null only when the response carries no decision at all — a browser on
+            // the new build talking to a server still on the old one during a deploy — and
+            // only then do we classify locally, with the same shared function.
+            const serverRouting = parseLeadRouting(body)
+            const qualification = serverRouting?.qualification ?? classifyInsurance(values.insuranceType)
+            const destination = serverRouting?.destination ?? destinationFor(qualification)
+
             const accepted = await pushAcceptedLead({
-                acceptance: res,
+                acceptance: body,
                 form_name: 'BookAnAppointmentPopup',
                 form_source: formSource,
                 state: '',
@@ -121,10 +141,11 @@ export default function BookAnAppointmentPopup() {
                 phone: values.phone,
                 firstName,
                 lastName,
+                lead_qualification: qualification,
             })
             if (!accepted) return
 
-            router.push('/thank-you')
+            router.push(pathForDestination(destination))
         } catch (error) {
             console.error('Error submitting form:', error)
         } finally {
@@ -221,7 +242,7 @@ export default function BookAnAppointmentPopup() {
 
                         <FormField
                             control={form.control}
-                            name="bestTime"
+                            name="insuranceType"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>
@@ -232,26 +253,18 @@ export default function BookAnAppointmentPopup() {
                                             }}
                                             className='text-[#111315] text-md'
                                         >
-                                            Best Time To Contact
+                                            Insurance
                                         </span>
                                     </FormLabel>
                                     <FormControl>
-                                        <Select onValueChange={field.onChange} value={field.value} >
-                                            <SelectTrigger aria-label="Select Best Time To Contact"
-                                                className="w-full h-12 px-6 bg-[#f0f5ff]  border rounded-sm"
-                                            >
-                                                <SelectValue placeholder="Select Best Time To Contact" className=" font-[var(--font-inter)] h-12 text-lg data-[placeholder]:text-red-500" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectGroup>
-                                                    {["As Soon As Possible", "Morning", "Afternoon", "Evening"].map((service) => (
-                                                        <SelectItem key={service} value={service}>
-                                                            {service}
-                                                        </SelectItem>
-                                                    ))}
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
+                                        <InsuranceSelect
+                                            id="bookappointmentpopup_insurance_type"
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                            onBlur={field.onBlur}
+                                            ref={field.ref}
+                                            className="h-12 px-6 text-lg bg-[#f0f5ff]"
+                                        />
                                     </FormControl>
                                 </FormItem>
                             )}
@@ -264,7 +277,7 @@ export default function BookAnAppointmentPopup() {
                                 <FormItem>
                                     <FormLabel className="text-sm text-[#111315] font-semibold">Consultation Reason</FormLabel>
                                     <FormControl>
-                                        <Textarea placeholder="Consultation Reason" className="min-h-[200px] text-lg resize-none  border-[#DCDEE1]  bg-[#FAFAFA]" {...field} />
+                                        <Textarea rows={3} placeholder="Consultation Reason" className="field-sizing-fixed min-h-0 text-lg resize-none  border-[#DCDEE1]  bg-[#FAFAFA]" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -273,6 +286,9 @@ export default function BookAnAppointmentPopup() {
 
                         {/* Insurance Card Upload Section */}
                         <div className="space-y-6">
+                            <p className="text-sm font-medium text-[#111315]">
+                                {INSURANCE_CARD_UPLOAD_LABEL}
+                            </p>
                             <div className="flex items-center gap-2 mb-4">
                                 <Shield className="h-5 w-5 text-green-600" />
                                 <span className="text-sm font-medium text-green-700">HIPAA Compliant & Secure</span>
@@ -286,7 +302,6 @@ export default function BookAnAppointmentPopup() {
                                     <FormItem>
                                         <FormLabel className="text-sm text-[#111315] font-semibold">
                                             Front of Insurance Card
-                                            <span className="text-xs text-gray-500 font-normal ml-1">(Optional)</span>
                                         </FormLabel>
                                         <FormControl>
                                             <div className="relative">
@@ -333,7 +348,6 @@ export default function BookAnAppointmentPopup() {
                                     <FormItem>
                                         <FormLabel className="text-sm text-[#111315] font-semibold">
                                             Back of Insurance Card
-                                            <span className="text-xs text-gray-500 font-normal ml-1">(Optional)</span>
                                         </FormLabel>
                                         <FormControl>
                                             <div className="relative">

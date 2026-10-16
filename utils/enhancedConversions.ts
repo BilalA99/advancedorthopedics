@@ -175,11 +175,95 @@ async function buildHashedEC(n: ECOut) {
 }
 
 /**
+ * Hard ceiling on hashing before the lead event gives up waiting for it.
+ *
+ * Unreachable in practice — four SHA-256 digests of short strings are sub-
+ * millisecond, and they run concurrently with the server response read, so the
+ * observed cost is zero. It exists so that a browser with a broken or hostile
+ * Web Crypto cannot hold up the one event that must fire for every lead.
+ */
+const HASH_BUDGET_MS = 500;
+
+/**
+ * Hashes the identity WITHOUT pushing it, so the caller can start the work early.
+ *
+ * ## Why this exists (incident 2026-09-30)
+ *
+ * Google Ads attaches user-provided data to a conversion only if that data is on
+ * the dataLayer at the moment the conversion tag reads it. For over a week it was
+ * not: `pushFormSubmit` pushed the canonical lead event first and the identity
+ * afterwards, so the conversion tag always read an empty variable.
+ *
+ * That ordering was not an oversight — the lead event runs first precisely so no
+ * enrichment can delay or suppress it. The fix therefore cannot be "push identity
+ * first and await it", which would put a hash and a consent check in front of the
+ * one event that must never be blocked.
+ *
+ * Instead the hash is started EARLY, during a wait the caller is already doing —
+ * reading the server's response body — and both are awaited together. The lead
+ * event waits for max(response, hash) rather than their sum, and the hash is
+ * bounded by HASH_BUDGET_MS, so the added cost is unmeasurable in practice and
+ * bounded in theory. See `pushAcceptedLead`.
+ *
+ * Never throws and never rejects: returns null when there is no consent, no
+ * identity, or the hash fails. A null simply means the conversion goes out without
+ * enhanced data, which is exactly the behaviour before this existed.
+ */
+export type PreparedIdentity = {
+  /** Settles when hashing finishes. Never rejects; resolves null on failure. */
+  readonly promise: Promise<Record<string, unknown> | null>;
+  /**
+   * The hash if it has ALREADY finished, otherwise undefined. Synchronous.
+   *
+   * The caller uses this instead of awaiting, so "is the identity ready?" costs
+   * nothing and cannot delay the lead event even by a microtask. An earlier draft
+   * used Promise.race against an already-resolved sentinel and was wrong: the
+   * .catch() wrapper on the real promise adds a tick, so the sentinel always won
+   * and the identity was never pushed in time.
+   */
+  peek(): Record<string, unknown> | null | undefined;
+};
+
+export function prepareHashedEC(v: ECIn): PreparedIdentity {
+  const settledNull: PreparedIdentity = {
+    promise: Promise.resolve(null),
+    peek: () => null,
+  };
+  if (typeof window === 'undefined') return settledNull;
+  // Consent is checked here, at preparation time, and again at push time. Identity
+  // is advertising data under ad_user_data; it must not even be hashed into a
+  // pushable shape for a visitor who declined.
+  if (!isAdvertisingAllowed()) return settledNull;
+  if (!v.email && !v.phone) return settledNull;
+
+  let result: Record<string, unknown> | null | undefined;
+  let promise: Promise<Record<string, unknown> | null>;
+  try {
+    // Watchdog. The caller awaits this promise alongside the server response, so
+    // it must be guaranteed to settle even if Web Crypto never resolves — a
+    // conversion that reports without identity is worth incomparably more than a
+    // lead event that never fires. Four SHA-256 digests of short strings take
+    // well under a millisecond, so this ceiling is unreachable in practice and
+    // exists only so the lead event has a hard bound rather than a hope.
+    promise = Promise.race([
+      buildHashedEC(normalizeEC(v)),
+      new Promise<null>((resolve) => setTimeout(() => resolve(null), HASH_BUDGET_MS)),
+    ]).then(
+      (hashed) => (result = hashed ?? null),
+      () => (result = null),
+    );
+  } catch {
+    return settledNull;
+  }
+  return { promise, peek: () => result };
+}
+
+/**
  * Pushes enhanced conversion data to dataLayer for Google Tag Manager
- * 
+ *
  * This should be called BEFORE navigation to the thank-you page to ensure
  * the data is available when conversion tags fire.
- * 
+ *
  * @param v - User input data (email, phone, name, etc.)
  * @param eventName - Optional event name (default: 'ec_capture')
  */
@@ -332,18 +416,46 @@ type AcceptedLeadContext = {
   lastName?: string;
   postalCode?: string;
   country?: string;
+  /** See pushFormSubmit — D10 insurance qualification. Defaults to 'qualified'. */
+  lead_qualification?: 'qualified' | 'unqualified';
 };
 
 export async function pushAcceptedLead({
   acceptance,
   ...context
 }: AcceptedLeadContext & { acceptance: unknown }): Promise<boolean> {
-  const accepted = acceptance instanceof Response
-    ? await readLeadAcceptance(acceptance)
-    : parseLeadAcceptance(acceptance);
+  // Start hashing BEFORE awaiting the server's response body, so the digest is
+  // computed during a wait that was happening anyway. By the time the lead event
+  // fires below, this promise has long since settled and reading it is free.
+  //
+  // This is what makes enhanced conversions possible without putting anything in
+  // front of the canonical event. Deliberately not awaited here.
+  const preparedEC = prepareHashedEC({
+    email: context.email,
+    phone: context.phone,
+    firstName: context.firstName,
+    lastName: context.lastName,
+    postalCode: context.postalCode,
+    country: context.country,
+  });
+  // Await both together. An earlier version pushed whatever had settled by the
+  // time the lead event fired, which made the ordering depend on whether the hash
+  // happened to win a race against reading the response body — it lost for an
+  // in-memory response, and would have been a coin toss in production.
+  //
+  // Promise.all does NOT serialise these: the hash started above and has been
+  // running throughout. This waits for max(response, hash) rather than their sum,
+  // and the hash is bounded by HASH_BUDGET_MS, so the lead event's worst case is
+  // the response read plus nothing measurable.
+  const [accepted] = await Promise.all([
+    acceptance instanceof Response
+      ? readLeadAcceptance(acceptance)
+      : Promise.resolve(parseLeadAcceptance(acceptance)),
+    preparedEC.promise,
+  ]);
 
   if (!accepted) return false;
-  await pushFormSubmit({ ...context, submission_id: accepted.submissionId });
+  await pushFormSubmit({ ...context, submission_id: accepted.submissionId, preparedEC });
   return true;
 }
 
@@ -358,6 +470,8 @@ export async function pushFormSubmit({
   lastName,
   postalCode,
   country = 'US',
+  lead_qualification = 'qualified',
+  preparedEC,
 }: {
   form_name: string;
   form_source?: FormSource;
@@ -369,6 +483,20 @@ export async function pushFormSubmit({
   lastName?: string;
   postalCode?: string;
   country?: string;
+  /**
+   * Whether this lead met the practice's insurance criteria (D10, 2026-09-24).
+   *
+   * Defaults to 'qualified' so every form that does not ask about insurance
+   * behaves exactly as before. Only forms carrying the insurance dropdown pass
+   * 'unqualified', and they derive it from lib/insurance-routing.ts.
+   */
+  lead_qualification?: 'qualified' | 'unqualified';
+  /**
+   * A hash started earlier by pushAcceptedLead, so the identity can be on the
+   * dataLayer before the conversion tag reads it. Absent when pushFormSubmit is
+   * called directly, in which case enhanced data is attached afterwards as before.
+   */
+  preparedEC?: PreparedIdentity;
 }) {
   if (typeof window === 'undefined') return;
 
@@ -376,6 +504,29 @@ export async function pushFormSubmit({
   if (!acceptance || emittedSubmissionIds.has(acceptance.submissionId)) return;
 
   emittedSubmissionIds.add(acceptance.submissionId);
+
+  // ---------------------------------------------------------------------------
+  // STEP 0 — Qualification gate (D10).
+  //
+  // A lead whose insurance is not accepted is a real, server-accepted lead: it
+  // is persisted to Supabase, it emails the clinic, and the patient still gets a
+  // confirmation page. What it is NOT is a qualified conversion, so it must not
+  // reach Google Ads, Meta, or the enhanced-conversion identity path.
+  //
+  // Returning here — rather than adding an "unqualified" event — is deliberate.
+  // The insurance answer must not reach an advertising payload, and a
+  // distinctly-named event would carry that answer in its own name. Unqualified
+  // volume stays measurable from Supabase, which is where this codebase already
+  // keeps first-party qualification (see lib/insurance-routing.ts, and the
+  // deliberately neutral 'paid-landing' form source).
+  //
+  // This gate is NOT consent-shaped: it asks what kind of lead this is, never
+  // what the visitor permitted. The consent-independence contract is unaffected.
+  //
+  // The submission ID is registered above before this return, so a retry cannot
+  // promote the same submission into a conversion later.
+  // ---------------------------------------------------------------------------
+  if (lead_qualification === 'unqualified') return;
 
   // ---------------------------------------------------------------------------
   // STEP 1 — Business event. Consent-INDEPENDENT by design.
@@ -398,6 +549,37 @@ export async function pushFormSubmit({
     dataLayer?: Array<Record<string, unknown>>;
   };
   measurementWindow.dataLayer = measurementWindow.dataLayer || [];
+
+  // ---------------------------------------------------------------------------
+  // STEP 0.9 — Identity, IF it is already in hand. Consent-GATED. Never blocking.
+  //
+  // Google Ads attaches user-provided data to a conversion only if it is on the
+  // dataLayer when the conversion tag reads it. Pushing it after the lead event —
+  // which is what happened until 2026-10-01 — means the tag always reads nothing.
+  //
+  // So it goes first. peek() is synchronous and this step never waits: by the time
+  // control reaches here, pushAcceptedLead has already awaited the hash alongside
+  // the server response, so the digest is in hand and reading it is free.
+  //
+  // An earlier version raced peek() against an immediately-resolved sentinel and
+  // pushed whatever had settled. That was wrong — buildHashedEC awaits four
+  // crypto.subtle.digest calls, so it loses to an in-memory response read every
+  // time, and on a slow network it would have been a coin toss that looked correct
+  // whenever anyone checked. Ordering is awaited explicitly now, not hoped for.
+  //
+  // When pushFormSubmit is called directly there is no prepared hash, peek() is
+  // undefined, and the identity is attached after the lead event exactly as it was
+  // before. That is a degradation in match rate, never a delay or a lost event.
+  // ---------------------------------------------------------------------------
+  const readyIdentity = preparedEC?.peek();
+  const identityPushed = Boolean(readyIdentity);
+  if (readyIdentity) {
+    measurementWindow.dataLayer.push({
+      event: 'ec_capture',
+      enhanced_conversion_data: readyIdentity,
+    });
+  }
+
   measurementWindow.dataLayer.push(buildCanonicalLeadEvent({
     formId: form_name,
     formSource: form_source,
@@ -449,7 +631,14 @@ export async function pushFormSubmit({
 
   try {
     persistEC(ecData);
-    await pushEC(ecData);
+    // Skip when the identity already went out ahead of the lead event above.
+    // Pushing it twice would put two ec_capture events on the dataLayer for one
+    // submission, and any GTM tag listening on that event would fire twice.
+    //
+    // Also skip when there is nothing to send. A payload of all-undefined digests
+    // is not enhanced data; it is an event that looks like identity, matches
+    // nothing, and makes "did identity go out?" unanswerable from the dataLayer.
+    if (!identityPushed && (email || normalizedPhone)) await pushEC(ecData);
   } catch {
     // Identity enrichment is an optimisation on top of an already-recorded lead.
   }

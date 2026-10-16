@@ -4,6 +4,7 @@ import {
   sendContactEmail,
   sendUserEmail,
 } from "@/components/email/sendcontactemail";
+import { resolveIntake } from "@/lib/intake-submission";
 
 type ConsultationPayload = {
   firstName: string;
@@ -11,8 +12,11 @@ type ConsultationPayload = {
   email: string;
   phone: string;
   reason: string;
-  bestTime: string;
-  postalCode?: string;
+  /**
+   * Insurance selection (D10/D11, 2026-09-24). Persisted to Supabase and shown
+   * in the staff email only — never forwarded to GA4, Google Ads or Meta.
+   */
+  insurance_type?: string;
   country?: string;
   state?: string;
   form_source?: string;
@@ -41,12 +45,17 @@ export async function POST(request: Request) {
 
     const fullName = `${body.firstName} ${body.lastName}`.trim();
 
+    // Insurance qualification is decided here, on the server (lib/intake-submission.ts).
+    // ZIP is no longer collected or read (2026-10-14).
+    const intake = resolveIntake({ insuranceType: body.insurance_type });
+    const { routing } = intake;
+
     await sendContactEmail({
       name: fullName,
       email: body.email,
       phone: body.phone,
       reason: body.reason,
-      bestTime: body.bestTime,
+      insurance_type: body.insurance_type,
       state: body.state,
       form_source: body.form_source || 'general-contact',
       gclid: body.gclid,
@@ -64,7 +73,7 @@ export async function POST(request: Request) {
       phone: body.phone,
       state: body.state,
       reason: body.reason,
-      bestTime: body.bestTime,
+      insurance_type: body.insurance_type,
       form_source: body.form_source || 'general-contact',
       gclid: body.gclid,
       gbraid: body.gbraid,
@@ -76,7 +85,10 @@ export async function POST(request: Request) {
       utm_content: body.utm_content,
     });
 
-    return NextResponse.json(acceptance);
+    // The browser obeys `qualification` for the conversion gate and navigates by
+    // `destination`. `acceptance` keeps its existing { ok, submissionId } shape, so
+    // every other caller of this endpoint is unaffected.
+    return NextResponse.json({ ...acceptance, ...routing });
   } catch (error) {
     console.error("[ConsultationForm] Submission failed", error);
     return NextResponse.json({ ok: false }, { status: 500 });

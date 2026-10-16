@@ -12,6 +12,8 @@ import { LawyerConfirmationTemplate } from './lawyerconfirmationtemplate';
 import { createClient } from '@/utils/supabase/server';
 import { normalizeStateCode } from '@/lib/stateUtils';
 import { resolveFormSource } from '@/lib/lead-contract';
+import { resolveLeadRouting } from '@/lib/insurance-routing';
+import { subjectWithInsurance } from '@/lib/intake-submission';
 
 function getResendClient() {
   const apiKey = process.env.RESEND_API_KEY;
@@ -146,6 +148,11 @@ export async function sendUserEmail(formData: {
   state?: string;
   reason?: string;
   bestTime?: string;
+  /**
+   * Insurance selection (D10/D11). First-party only: it lands in Supabase and
+   * the internal staff email, and is never forwarded to an ad platform.
+   */
+  insurance_type?: string;
   form_source?: string;
   gclid?: string;
   gbraid?: string;
@@ -163,6 +170,7 @@ export async function sendUserEmail(formData: {
     state:         formData.state,
     reason:        formData.reason,
     best_time:     formData.bestTime,
+    insurance_type: formData.insurance_type,
     form_source:   formData.form_source || 'unknown',
     landing_path:  formData.landing_path,
     gclid:         formData.gclid,
@@ -211,7 +219,10 @@ export async function sendContactEmail(formData: {
   email: string;
   phone: string;
   reason: string;
-  bestTime: string;
+  /** Optional since D10 removed "Best Time To Contact" from the intake form. */
+  bestTime?: string;
+  /** Insurance selection (D10/D11). Staff-facing only. */
+  insurance_type?: string;
   has_attorney?: string;
   injury_type?: string;
   pain_level?: string;
@@ -247,13 +258,14 @@ export async function sendContactEmail(formData: {
     const data = await getResendClient().emails.send({
       from: 'Mountain Spine & Orthopedics <no-reply@mountainspineorthopedics.com>',
       to: [toEmail],
-      subject: 'New Contact Form Submission',
+      subject: subjectWithInsurance('New Contact Form Submission', formData.insurance_type),
       react: await EmailTemplate({
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
         reason: formData.reason,
         bestTime: formData.bestTime,
+        insurance_type: formData.insurance_type,
         has_attorney: formData.has_attorney,
         injury_type: formData.injury_type,
         pain_level: formData.pain_level,
@@ -326,7 +338,7 @@ export async function sendMRIContactEmail(formData: {
     await getResendClient().emails.send({
       from: 'Mountain Spine & Orthopedics <no-reply@mountainspineorthopedics.com>',
       to: ['info@mountainspineorthopedics.com'],
-      subject: 'New MRI Review Form Submission',
+      subject: subjectWithInsurance('New MRI Review Form Submission', formData.insurance_type),
       react: await MRIEmailTemplate({
         email: formData.email,
         phone: formData.phone,
@@ -353,7 +365,8 @@ export async function sendMRIContactEmail(formData: {
     console.warn('[sendMRIContactEmail] notification sent but lead not persisted', { submissionId });
   }
 
-  return { ok: true as const, submissionId };
+  // D10: server-decided qualification, as for the other questionnaires.
+  return { ok: true as const, submissionId, ...resolveLeadRouting(formData.insurance_type) };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -406,7 +419,7 @@ export async function sendCandidacyEmail(formData: {
     await getResendClient().emails.send({
       from: 'Mountain Spine & Orthopedics <info@mountainspineorthopedics.com>',
       to: ['info@mountainspineorthopedics.com'],
-      subject: 'New Candidacy Form Submission',
+      subject: subjectWithInsurance('New Candidacy Form Submission', formData.insurance_type),
       react: await TreatmentCandidacyEmailTemplate({
         first_name:       formData.first_name,
         last_name:        formData.last_name,
@@ -436,7 +449,11 @@ export async function sendCandidacyEmail(formData: {
     console.warn('[sendCandidacyEmail] notification sent but lead not persisted', { submissionId });
   }
 
-  return { ok: true as const, submissionId };
+  // D10: qualification is decided HERE, not in the browser, exactly as the
+  // /api/forms/* endpoints do it. This questionnaire asks for insurance, so a
+  // lead whose plan the practice cannot serve must not fire the qualified
+  // conversion just because the form submitted successfully.
+  return { ok: true as const, submissionId, ...resolveLeadRouting(formData.insurance_type) };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -492,7 +509,7 @@ export const sendConditionCheckEmail = async (formData: {
     await getResendClient().emails.send({
       from: 'Mountain Spine & Orthopedics <info@mountainspineorthopedics.com>',
       to: ['info@mountainspineorthopedics.com'],
-      subject: 'New Condition Check Form Submission',
+      subject: subjectWithInsurance('New Condition Check Form Submission', formData.insurance_type),
       react: await ConditionCheckEmailTemplate({
         first_name:       formData.first_name,
         last_name:        formData.last_name,
@@ -525,7 +542,8 @@ export const sendConditionCheckEmail = async (formData: {
     console.warn('[sendConditionCheckEmail] notification sent but lead not persisted', { submissionId });
   }
 
-  return { ok: true as const, submissionId };
+  // D10: server-decided qualification, as above.
+  return { ok: true as const, submissionId, ...resolveLeadRouting(formData.insurance_type) };
 };
 
 // ─────────────────────────────────────────────────────────────────────────────

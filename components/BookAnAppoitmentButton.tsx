@@ -24,6 +24,14 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
 import { pushAppointmentCtaClick, pushAcceptedLead } from "@/utils/enhancedConversions"
+import {
+  classifyInsurance,
+  destinationFor,
+  INSURANCE_CARD_UPLOAD_LABEL,
+  parseLeadRouting,
+  pathForDestination,
+} from "@/lib/insurance-routing"
+import { InsuranceSelect } from "@/components/InsuranceSelect"
 import { STATE_OPTIONS, slugFromPathname, normalizeState } from "@/lib/stateUtils"
 import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
 import { ScrollProgress } from "@/components/ui/scroll-progress"
@@ -36,11 +44,9 @@ const formSchema = z.object({
     email: z.string().email("Invalid email address"),
     phone: z.string().min(10, "Phone number must be at least 10 digits"),
     reason: z.string().min(2),
-    bestTime: z.string().min(1, "Please provide more detail about your consultation needs"),
+    insuranceType: z.string().min(1, "Please select your insurance"),
     insuranceCardFront: z.instanceof(File).optional().or(z.null()),
     insuranceCardBack: z.instanceof(File).optional().or(z.null()),
-    postalCode: z.string()
-        .regex(/^\d{5}(?:-\d{4})?$/, "Please enter a valid ZIP code"),
     country: z.string(),
     state: z.string().min(1, "Please select your state"),
 })
@@ -94,10 +100,9 @@ export default function BookAnAppoitmentButton({
             email: "",
             phone: "",
             reason: "",
-            bestTime: "",
+            insuranceType: "",
             insuranceCardFront: null,
             insuranceCardBack: null,
-            postalCode: "",
             country: "US",
             state: resolvedState,
         },
@@ -191,8 +196,7 @@ export default function BookAnAppoitmentButton({
             payload.append("email", values.email)
             payload.append("phone", values.phone)
             payload.append("reason", values.reason)
-            payload.append("bestTime", values.bestTime)
-            payload.append("postalCode", values.postalCode)
+            payload.append("insurance_type", values.insuranceType)
             payload.append("country", values.country)
             payload.append("state", values.state)
             payload.append("gclid", attribution.gclid)
@@ -231,12 +235,24 @@ export default function BookAnAppoitmentButton({
                 return
             }
 
-            const accepted = await pushAcceptedLead({ acceptance: res, form_name: 'BookAnAppoitmentButton', form_source: formSource, state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, postalCode: values.postalCode });
+            // Read the body ONCE: a Response body can only be consumed one time, and
+            // pushAcceptedLead accepts an already-parsed object.
+            const body = await res.json().catch(() => null)
+
+            // D10: the SERVER decides qualification and this form obeys it. parseLeadRouting
+            // returns null only when the response carries no decision at all — a browser on
+            // the new build talking to a server still on the old one during a deploy — and
+            // only then do we classify locally, with the same shared function.
+            const serverRouting = parseLeadRouting(body)
+            const qualification = serverRouting?.qualification ?? classifyInsurance(values.insuranceType)
+            const destination = serverRouting?.destination ?? destinationFor(qualification)
+
+            const accepted = await pushAcceptedLead({ acceptance: body, form_name: 'BookAnAppoitmentButton', form_source: formSource, state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, lead_qualification: qualification });
             if (!accepted) return
 
             setOpen(false)
             form.reset()
-            router.push('/thank-you')
+            router.push(pathForDestination(destination))
         } catch (error) {
             console.error("[BookAppointment] Submit failed", error)
         } finally {
@@ -394,41 +410,6 @@ export default function BookAnAppoitmentButton({
                                     />
                                     <FormField
                                         control={form.control}
-                                        name="postalCode"
-                                        render={({ field }) => {
-                                            const { name: _, ...fieldProps } = field;
-                                            return (
-                                                <FormItem>
-                                                    <FormLabel>
-                                                        <span
-                                                            style={{
-                                                                fontFamily: 'var(--font-public-sans)',
-                                                                fontWeight: 500,
-                                                            }}
-                                                            className='text-[#111315] text-md'
-                                                        >
-                                                            ZIP / Postal Code
-                                                        </span>
-                                                    </FormLabel>
-                                                    <FormControl>
-                                                        <Input 
-                                                            id="postal_code"
-                                                            aria-label="ZIP or postal code"
-                                                            name="postalCode"
-                                                            inputMode="numeric"
-                                                            autoComplete="postal-code"
-                                                            placeholder="e.g., 33463" 
-                                                            className="h-10 text-lg border-[#DCDEE1] bg-[#FAFAFA]" 
-                                                            {...fieldProps} 
-                                                        />
-                                                    </FormControl>
-                                                    <FormMessage />
-                                                </FormItem>
-                                            );
-                                        }}
-                                    />
-                                    <FormField
-                                        control={form.control}
                                         name="state"
                                         render={({ field }) => (
                                             <FormItem>
@@ -455,7 +436,7 @@ export default function BookAnAppoitmentButton({
 
                                 <FormField
                                     control={form.control}
-                                    name="bestTime"
+                                    name="insuranceType"
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormLabel>
@@ -466,26 +447,18 @@ export default function BookAnAppoitmentButton({
                                                     }}
                                                     className='text-[#111315] text-md'
                                                 >
-                                                    Best Time To Contact
+                                                    Insurance
                                                 </span>
                                             </FormLabel>
                                             <FormControl>
-                                                <Select onValueChange={field.onChange} value={field.value} >
-                                                    <SelectTrigger aria-label="Select Best Time To Contact"
-                                                        className="w-full h-10 px-6 bg-[#f0f5ff]  border rounded-sm"
-                                                    >
-                                                        <SelectValue placeholder="Select Best Time To Contact" className=" font-[var(--font-inter)] h-10 text-lg data-[placeholder]:text-red-500" />
-                                                    </SelectTrigger>
-                                                    <SelectContent>
-                                                        <SelectGroup>
-                                                            {["As Soon As Possible", "Morning", "Afternoon", "Evening"].map((service) => (
-                                                                <SelectItem key={service} value={service}>
-                                                                    {service}
-                                                                </SelectItem>
-                                                            ))}
-                                                        </SelectGroup>
-                                                    </SelectContent>
-                                                </Select>
+                                                <InsuranceSelect
+                                                    id="bookappointment_insurance_type"
+                                                    value={field.value}
+                                                    onChange={field.onChange}
+                                                    onBlur={field.onBlur}
+                                                    ref={field.ref}
+                                                    className="h-10 px-6 text-lg bg-[#f0f5ff]"
+                                                />
                                             </FormControl>
                                         </FormItem>
                                     )}
@@ -498,7 +471,7 @@ export default function BookAnAppoitmentButton({
                                         <FormItem>
                                             <FormLabel className="text-sm text-[#111315] font-semibold">Consultation Reason</FormLabel>
                                             <FormControl>
-                                                <Textarea placeholder="Consultation Reason" className="min-h-[200px] text-lg resize-none  border-[#DCDEE1]  bg-[#FAFAFA]" {...field} />
+                                                <Textarea rows={3} placeholder="Consultation Reason" className="field-sizing-fixed min-h-0 text-lg resize-none  border-[#DCDEE1]  bg-[#FAFAFA]" {...field} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
@@ -507,6 +480,9 @@ export default function BookAnAppoitmentButton({
 
                                 {/* Insurance Card Upload Section */}
                                 <div className="space-y-6">
+                                    <p className="text-sm font-medium text-[#111315]">
+                                        {INSURANCE_CARD_UPLOAD_LABEL}
+                                    </p>
                                     <div className="flex items-center gap-2 mb-4">
                                         <Shield className="h-5 w-5 text-green-600" />
                                         <span className="text-sm font-medium text-green-700">HIPAA Compliant & Secure</span>
@@ -521,7 +497,6 @@ export default function BookAnAppoitmentButton({
                                                 <FormItem className='w-1/2'>
                                                     <FormLabel className="text-sm text-[#111315] font-semibold">
                                                         Front of Insurance Card
-                                                        <span className="text-xs text-gray-500 font-normal ml-1">(Optional)</span>
                                                     </FormLabel>
                                                     <FormControl>
                                                         <div className="relative">
@@ -569,7 +544,6 @@ export default function BookAnAppoitmentButton({
                                                 <FormItem className='w-1/2'>
                                                     <FormLabel className="text-sm text-[#111315] font-semibold">
                                                         Back of Insurance Card
-                                                        <span className="text-xs text-gray-500 font-normal ml-1">(Optional)</span>
                                                     </FormLabel>
                                                     <FormControl>
                                                         <div className="relative">

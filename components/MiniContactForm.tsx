@@ -7,16 +7,24 @@ import { useEffect, useState } from "react"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import BookAnAppoitmentButton from "./BookAnAppoitmentButton"
 import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
 import { useRouter } from "next/navigation"
 import { pushAcceptedLead } from "@/utils/enhancedConversions"
+import {
+  classifyInsurance,
+  destinationFor,
+  parseLeadRouting,
+  pathForDestination,
+} from "@/lib/insurance-routing"
+import { InsuranceSelect } from "@/components/InsuranceSelect"
 
 const formSchema = z.object({
   name: z.string().min(2, "name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
-  bestTime: z.string().min(1, "Please select a time"),
+  insuranceType: z.string().min(1, "Please select your insurance"),
   reason: z.string().min(2, "Please provide more detail about your consultation needs"),
 })
 
@@ -34,7 +42,7 @@ export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor
       name: "",
       email: "",
       phone: "",
-      bestTime: "",
+      insuranceType: "",
       reason: "",
     },
   })
@@ -53,7 +61,7 @@ export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor
           email: values.email,
           phone: values.phone,
           reason: values.reason,
-          bestTime: values.bestTime,
+          insurance_type: values.insuranceType,
           form_source: 'general-contact',
           gclid: attribution.gclid,
           gbraid: attribution.gbraid,
@@ -70,8 +78,20 @@ export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor
         return
       }
       if (res.ok) {
+        // Read the body ONCE: a Response body can only be consumed one time, and
+        // pushAcceptedLead accepts an already-parsed object.
+        const body = await res.json().catch(() => null)
+
+        // D10: the SERVER decides qualification and this form obeys it. parseLeadRouting
+        // returns null only when the response carries no decision at all — a browser on
+        // the new build talking to a server still on the old one during a deploy — and
+        // only then do we classify locally, with the same shared function.
+        const serverRouting = parseLeadRouting(body)
+        const qualification = serverRouting?.qualification ?? classifyInsurance(values.insuranceType)
+        const destination = serverRouting?.destination ?? destinationFor(qualification)
+
         const accepted = await pushAcceptedLead({
-          acceptance: res,
+          acceptance: body,
           form_name: 'MiniContactForm',
           form_source: 'general-contact',
           state: '',
@@ -79,9 +99,10 @@ export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor
           phone: values.phone,
           firstName,
           lastName,
+          lead_qualification: qualification,
         })
         if (!accepted) return
-        router.push('/thank-you')
+        router.push(pathForDestination(destination))
       }
     } catch (error) {
       console.error('[MiniContactForm] Submit failed', error)
@@ -169,6 +190,38 @@ export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor
             />
           </div>
 
+          {/*
+            Insurance (D10 + D11, 2026-09-24).
+
+            NOTE: this form previously declared a REQUIRED `bestTime` field in its
+            zod schema and never rendered an input for it, so the resolver could
+            never pass and the form could not be submitted at all. Rendering the
+            replacement field is what makes this form work, not just what satisfies
+            the meeting decision.
+          */}
+          <FormField
+            control={form.control}
+            name="insuranceType"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-sm text-[#838890] font-semibold">
+                  Insurance<span className="text-red-500">*</span>
+                </FormLabel>
+                <FormControl>
+                  <InsuranceSelect
+                      id="minicontact_insurance_type"
+                      value={field.value}
+                      onChange={field.onChange}
+                      onBlur={field.onBlur}
+                      ref={field.ref}
+                      className="h-12 px-6 text-lg bg-[#f0f5ff]"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           {/* Reason Field */}
           <FormField
             control={form.control}
@@ -177,7 +230,7 @@ export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor
               <FormItem>
                 <FormLabel className="text-sm text-[#838890] font-semibold">Message (optional)</FormLabel>
                 <FormControl>
-                  <Textarea placeholder="Your Message" className="min-h-[200px] text-lg resize-none  border-[#DCDEE1]  bg-[#FAFAFA]" {...field} />
+                  <Textarea rows={3} placeholder="Your Message" className="field-sizing-fixed min-h-0 text-lg resize-none  border-[#DCDEE1]  bg-[#FAFAFA]" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
