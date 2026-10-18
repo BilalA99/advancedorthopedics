@@ -31,6 +31,12 @@ import {
   pathForDestination,
 } from "@/lib/insurance-routing"
 import { InsuranceSelect } from "@/components/InsuranceSelect"
+import { DateOfBirthInput } from "@/components/DateOfBirthInput"
+import {
+  DATE_OF_BIRTH_INVALID_MESSAGE,
+  DATE_OF_BIRTH_REQUIRED_MESSAGE,
+  isValidDateOfBirth,
+} from "@/lib/date-of-birth"
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -41,6 +47,8 @@ const formSchema = z.object({
   // Required native dropdown, seven options (Abubeckr, 2026-10-14, item 9).
   // ZIP / postal code was removed on the same date (item 7).
   insuranceType: z.string().min(1, "Please select your insurance"),
+  // Required (2026-10-17). First-party only: see lib/date-of-birth.ts.
+  dateOfBirth: z.string().min(1, DATE_OF_BIRTH_REQUIRED_MESSAGE).refine(isValidDateOfBirth, DATE_OF_BIRTH_INVALID_MESSAGE),
   country: z.string(),
   state: z.string().min(1, "Please select your state"),
 })
@@ -67,6 +75,7 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
       phone: "",
       reason: "",
       insuranceType: "",
+      dateOfBirth: "",
       country: "US",
       state: resolvedState,
     },
@@ -95,6 +104,9 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
           // Persisted to Supabase forms.insurance_type only. Never sent to GA4,
           // Google Ads or Meta — see lib/insurance-routing.ts.
           insurance_type: values.insuranceType,
+          // Persisted to Supabase forms.date_of_birth and the staff email only.
+          // Never sent to GA4, Google Ads or Meta. See lib/date-of-birth.ts.
+          date_of_birth: values.dateOfBirth,
           country: values.country,
           state: values.state,
           form_source: formSource,
@@ -311,6 +323,31 @@ export function ConsultationForm({ defaultState = "" }: { defaultState?: string 
                 <FormControl>
                   <InsuranceSelect
                     id="insurance_type"
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    ref={field.ref}
+                    className="h-12 px-6 bg-[#f0f5ff] text-lg"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Date of birth (2026-10-17). Supabase and the staff email only, never a URL or ad platform. */}
+          <FormField
+            control={form.control}
+            name="dateOfBirth"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel htmlFor="contact_date_of_birth" className="text-sm text-[#838890] font-semibold">
+                  Date of birth
+                  <span className="text-red-500">*</span>
+                </FormLabel>
+                <FormControl>
+                  <DateOfBirthInput
+                    id="contact_date_of_birth"
                     value={field.value}
                     onChange={field.onChange}
                     onBlur={field.onBlur}

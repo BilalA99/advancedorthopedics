@@ -29,6 +29,12 @@ import {
   pathForDestination,
 } from "@/lib/insurance-routing"
 import { InsuranceSelect } from "@/components/InsuranceSelect"
+import { DateOfBirthInput } from "@/components/DateOfBirthInput"
+import {
+  DATE_OF_BIRTH_INVALID_MESSAGE,
+  DATE_OF_BIRTH_REQUIRED_MESSAGE,
+  isValidDateOfBirth,
+} from "@/lib/date-of-birth"
 import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
 import { STATE_OPTIONS, slugFromPathname, normalizeState } from "@/lib/stateUtils"
 import { formatPhone, validatePhoneNumber, formatPhoneInput } from "@/lib/phone-formatter"
@@ -50,6 +56,8 @@ const formSchema = z.object({
         ,
     reason: z.string().min(2),
     insuranceType: z.string().min(1, "Please select your insurance"),
+    // Required (2026-10-17). First-party only: see lib/date-of-birth.ts.
+    dateOfBirth: z.string().min(1, DATE_OF_BIRTH_REQUIRED_MESSAGE).refine(isValidDateOfBirth, DATE_OF_BIRTH_INVALID_MESSAGE),
     insuranceCardFront: z.instanceof(File).optional().or(z.null()),
     insuranceCardBack: z.instanceof(File).optional().or(z.null()),
     // HONEYPOT FIELD - bots will fill this
@@ -114,6 +122,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
             phone: "",
             reason: "",
             insuranceType: "",
+            dateOfBirth: "",
             insuranceCardFront: null,
             insuranceCardBack: null,
             website: "", // honeypot
@@ -209,6 +218,9 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
             payload.append("phone", values.phone)
             payload.append("reason", values.reason)
             payload.append("insurance_type", values.insuranceType)
+            // Supabase forms.date_of_birth and the staff email only. Never GA4,
+            // Google Ads or Meta. See lib/date-of-birth.ts.
+            payload.append("date_of_birth", values.dateOfBirth)
             payload.append("country", values.country)
             payload.append("state", values.state)
             payload.append("gclid", attribution.gclid)
@@ -565,6 +577,38 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                     </FormItem>
                                 )}
                             />
+
+                            {/* Date of birth (2026-10-17). Supabase and the staff email only, never a URL or ad platform. */}
+                            <FormField
+                                control={form.control}
+                                name="dateOfBirth"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>
+                                            <span
+                                                style={{
+                                                    fontFamily: 'var(--font-public-sans)',
+                                                    fontWeight: 500,
+                                                }}
+                                                className={`${timePeriod !== 'night' ? 'text-[#111315]' : 'text-white'} sm:text-md text-sm`}
+                                            >
+                                                Date of birth<span className="text-red-500">*</span>
+                                            </span>
+                                        </FormLabel>
+                                        <FormControl>
+                                            <DateOfBirthInput
+                                                id="doctor_date_of_birth"
+                                                value={field.value}
+                                                onChange={field.onChange}
+                                                onBlur={field.onBlur}
+                                                ref={field.ref}
+                                                className="sm:h-12 h-10 px-6 text-lg bg-[#f0f5ff]"
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
                             {/* HONEYPOT - Hidden from humans, visible to bots */}
                             <FormField
                                 control={form.control}
@@ -789,6 +833,38 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                                 className="sm:h-12 h-10 px-6 text-lg bg-[#f0f5ff]"
                                                             />
                                                         </FormControl>
+                                                    </FormItem>
+                                                )}
+                                            />
+
+                                            {/* Date of birth (2026-10-17). Supabase and the staff email only, never a URL or ad platform. */}
+                                            <FormField
+                                                control={form.control}
+                                                name="dateOfBirth"
+                                                render={({ field }) => (
+                                                    <FormItem>
+                                                        <FormLabel>
+                                                            <span
+                                                                style={{
+                                                                    fontFamily: 'var(--font-public-sans)',
+                                                                    fontWeight: 500,
+                                                                }}
+                                                                className={`text-[#111315] sm:text-md text-sm`}
+                                                            >
+                                                                Date of birth<span className="text-red-500">*</span>
+                                                            </span>
+                                                        </FormLabel>
+                                                        <FormControl>
+                                                            <DateOfBirthInput
+                                                                id="doctor_compact_date_of_birth"
+                                                                value={field.value}
+                                                                onChange={field.onChange}
+                                                                onBlur={field.onBlur}
+                                                                ref={field.ref}
+                                                                className="sm:h-12 h-10 px-6 text-lg bg-[#f0f5ff]"
+                                                            />
+                                                        </FormControl>
+                                                        <FormMessage />
                                                     </FormItem>
                                                 )}
                                             />

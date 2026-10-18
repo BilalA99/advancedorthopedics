@@ -14,6 +14,12 @@ import {
   pathForDestination,
 } from '@/lib/insurance-routing';
 import { InsuranceSelect } from '@/components/InsuranceSelect';
+import { DateOfBirthInput } from '@/components/DateOfBirthInput';
+import {
+  DATE_OF_BIRTH_INVALID_MESSAGE,
+  DATE_OF_BIRTH_REQUIRED_MESSAGE,
+  isValidDateOfBirth,
+} from '@/lib/date-of-birth';
 import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid';
 import { formatPhoneInput } from '@/lib/phone-formatter';
 import { STATE_OPTIONS } from '@/lib/stateUtils';
@@ -34,6 +40,7 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
     email: '',
     state: defaultState,
     insuranceType: '',
+    dateOfBirth: '',
     reason: '',
     insuranceCardFront: null as File | null,
     insuranceCardBack: null as File | null,
@@ -108,6 +115,16 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
       return;
     }
 
+    if (!formData.dateOfBirth) {
+      setError(`${DATE_OF_BIRTH_REQUIRED_MESSAGE}.`);
+      return;
+    }
+
+    if (!isValidDateOfBirth(formData.dateOfBirth)) {
+      setError(`${DATE_OF_BIRTH_INVALID_MESSAGE}.`);
+      return;
+    }
+
     if (!formData.state) {
       setError('Please select your state.');
       return;
@@ -122,6 +139,9 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
       payload.append('phone', formData.phone);
       payload.append('reason', formData.reason || 'Orthopedic consultation request');
       payload.append('insurance_type', formData.insuranceType);
+      // Supabase forms.date_of_birth and the staff email only. Never GA4,
+      // Google Ads or Meta. See lib/date-of-birth.ts.
+      payload.append('date_of_birth', formData.dateOfBirth);
       payload.append('state', formData.state);
       payload.append('country', 'US');
       payload.append('source',
@@ -401,6 +421,20 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
                 id="mobilehero_insurance_type"
                 value={formData.insuranceType}
                 onChange={(insuranceType) => setFormData({ ...formData, insuranceType })}
+                className="px-4 py-2.5 text-base bg-[#f0f5ff] border-[#DCDEE1] rounded-lg focus:ring-2 focus:ring-[#2358AC]/20 focus:border-[#2358AC]"
+                style={{ fontFamily: 'var(--font-inter)' }}
+              />
+            </div>
+
+            {/* Date of birth: required (2026-10-17). Supabase and the staff email only, never a URL or ad platform. */}
+            <div>
+              <label htmlFor="mobilehero_date_of_birth" className="block text-sm font-medium text-[#111315] mb-1.5" style={{ fontFamily: 'var(--font-public-sans)' }}>
+                Date of birth<span className="text-red-500">*</span>
+              </label>
+              <DateOfBirthInput
+                id="mobilehero_date_of_birth"
+                value={formData.dateOfBirth}
+                onChange={(dateOfBirth) => setFormData({ ...formData, dateOfBirth })}
                 className="px-4 py-2.5 text-base bg-[#f0f5ff] border-[#DCDEE1] rounded-lg focus:ring-2 focus:ring-[#2358AC]/20 focus:border-[#2358AC]"
                 style={{ fontFamily: 'var(--font-inter)' }}
               />

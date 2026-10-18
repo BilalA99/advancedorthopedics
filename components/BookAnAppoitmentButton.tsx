@@ -32,6 +32,12 @@ import {
   pathForDestination,
 } from "@/lib/insurance-routing"
 import { InsuranceSelect } from "@/components/InsuranceSelect"
+import { DateOfBirthInput } from "@/components/DateOfBirthInput"
+import {
+  DATE_OF_BIRTH_INVALID_MESSAGE,
+  DATE_OF_BIRTH_REQUIRED_MESSAGE,
+  isValidDateOfBirth,
+} from "@/lib/date-of-birth"
 import { STATE_OPTIONS, slugFromPathname, normalizeState } from "@/lib/stateUtils"
 import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
 import { ScrollProgress } from "@/components/ui/scroll-progress"
@@ -45,6 +51,8 @@ const formSchema = z.object({
     phone: z.string().min(10, "Phone number must be at least 10 digits"),
     reason: z.string().min(2),
     insuranceType: z.string().min(1, "Please select your insurance"),
+    // Required (2026-10-17). First-party only: see lib/date-of-birth.ts.
+    dateOfBirth: z.string().min(1, DATE_OF_BIRTH_REQUIRED_MESSAGE).refine(isValidDateOfBirth, DATE_OF_BIRTH_INVALID_MESSAGE),
     insuranceCardFront: z.instanceof(File).optional().or(z.null()),
     insuranceCardBack: z.instanceof(File).optional().or(z.null()),
     country: z.string(),
@@ -101,6 +109,7 @@ export default function BookAnAppoitmentButton({
             phone: "",
             reason: "",
             insuranceType: "",
+            dateOfBirth: "",
             insuranceCardFront: null,
             insuranceCardBack: null,
             country: "US",
@@ -197,6 +206,9 @@ export default function BookAnAppoitmentButton({
             payload.append("phone", values.phone)
             payload.append("reason", values.reason)
             payload.append("insurance_type", values.insuranceType)
+            // Supabase forms.date_of_birth and the staff email only. Never GA4,
+            // Google Ads or Meta. See lib/date-of-birth.ts.
+            payload.append("date_of_birth", values.dateOfBirth)
             payload.append("country", values.country)
             payload.append("state", values.state)
             payload.append("gclid", attribution.gclid)
@@ -432,6 +444,27 @@ export default function BookAnAppoitmentButton({
                                             </FormItem>
                                         )}
                                     />
+                                    {/* Date of birth (2026-10-17), beside State. Supabase and the staff email only, never a URL or ad platform. */}
+                                    <FormField
+                                        control={form.control}
+                                        name="dateOfBirth"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel htmlFor="bookappointment_date_of_birth" className="text-sm text-[#111315] font-semibold">Date of birth<span className="text-red-500">*</span></FormLabel>
+                                                <FormControl>
+                                                    <DateOfBirthInput
+                                                        id="bookappointment_date_of_birth"
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+                                                        onBlur={field.onBlur}
+                                                        ref={field.ref}
+                                                        className="h-10 px-4 text-base bg-[#f0f5ff]"
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
                                 </div>
 
                                 <FormField
@@ -463,6 +496,7 @@ export default function BookAnAppoitmentButton({
                                         </FormItem>
                                     )}
                                 />
+
                                 {/* Reason Field */}
                                 <FormField
                                     control={form.control}

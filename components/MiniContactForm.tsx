@@ -19,12 +19,20 @@ import {
   pathForDestination,
 } from "@/lib/insurance-routing"
 import { InsuranceSelect } from "@/components/InsuranceSelect"
+import { DateOfBirthInput } from "@/components/DateOfBirthInput"
+import {
+  DATE_OF_BIRTH_INVALID_MESSAGE,
+  DATE_OF_BIRTH_REQUIRED_MESSAGE,
+  isValidDateOfBirth,
+} from "@/lib/date-of-birth"
 
 const formSchema = z.object({
   name: z.string().min(2, "name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   insuranceType: z.string().min(1, "Please select your insurance"),
+  // Required (2026-10-17). First-party only: see lib/date-of-birth.ts.
+  dateOfBirth: z.string().min(1, DATE_OF_BIRTH_REQUIRED_MESSAGE).refine(isValidDateOfBirth, DATE_OF_BIRTH_INVALID_MESSAGE),
   reason: z.string().min(2, "Please provide more detail about your consultation needs"),
 })
 
@@ -43,6 +51,7 @@ export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor
       email: "",
       phone: "",
       insuranceType: "",
+      dateOfBirth: "",
       reason: "",
     },
   })
@@ -62,6 +71,9 @@ export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor
           phone: values.phone,
           reason: values.reason,
           insurance_type: values.insuranceType,
+          // Supabase forms.date_of_birth and the staff email only. Never GA4,
+          // Google Ads or Meta. See lib/date-of-birth.ts.
+          date_of_birth: values.dateOfBirth,
           form_source: 'general-contact',
           gclid: attribution.gclid,
           gbraid: attribution.gbraid,
@@ -210,6 +222,30 @@ export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor
                 <FormControl>
                   <InsuranceSelect
                       id="minicontact_insurance_type"
+                      value={field.value}
+                      onChange={field.onChange}
+                      onBlur={field.onBlur}
+                      ref={field.ref}
+                      className="h-12 px-6 text-lg bg-[#f0f5ff]"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Date of birth (2026-10-17). Supabase and the staff email only, never a URL or ad platform. */}
+          <FormField
+            control={form.control}
+            name="dateOfBirth"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-sm text-[#838890] font-semibold">
+                  Date of birth<span className="text-red-500">*</span>
+                </FormLabel>
+                <FormControl>
+                  <DateOfBirthInput
+                      id="minicontact_date_of_birth"
                       value={field.value}
                       onChange={field.onChange}
                       onBlur={field.onBlur}

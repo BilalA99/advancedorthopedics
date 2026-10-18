@@ -12,6 +12,11 @@ interface EmailTemplateProps {
    * stored in Supabase, and never leaves the first-party surface.
    */
   insurance_type?: string,
+  /**
+   * Intake date of birth, already formatted for staff (MM/DD/YYYY or "Not
+   * provided") by sendContactEmail. Body only, never the subject line.
+   */
+  date_of_birth?: string,
   has_attorney?: string,
   injury_type?: string,
   pain_level?: string,
@@ -42,6 +47,7 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   reason,
   bestTime,
   insurance_type,
+  date_of_birth,
   has_attorney,
   injury_type,
   pain_level,
@@ -84,6 +90,12 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
           <tr style={{ borderBottom: '1px solid #eee', justifyContent: 'space-evenly', width: '100%' }}>
             <td style={{ padding: '10px 0', fontWeight: 'bold', color: '#555', width: '30%', verticalAlign: 'top' }}>Insurance:</td>
             <td style={{ padding: '10px 0' }}>{insurance_type}</td>
+          </tr>
+          )}
+          {date_of_birth && (
+          <tr style={{ borderBottom: '1px solid #eee', justifyContent: 'space-evenly', width: '100%' }}>
+            <td style={{ padding: '10px 0', fontWeight: 'bold', color: '#555', width: '30%', verticalAlign: 'top' }}>Date of Birth:</td>
+            <td style={{ padding: '10px 0' }}>{date_of_birth}</td>
           </tr>
           )}
           {bestTime && (

@@ -30,12 +30,20 @@ import {
   pathForDestination,
 } from "@/lib/insurance-routing"
 import { InsuranceSelect } from "@/components/InsuranceSelect"
+import { DateOfBirthInput } from "@/components/DateOfBirthInput"
+import {
+  DATE_OF_BIRTH_INVALID_MESSAGE,
+  DATE_OF_BIRTH_REQUIRED_MESSAGE,
+  isValidDateOfBirth,
+} from "@/lib/date-of-birth"
 import { resolveFormSource } from "@/lib/lead-contract"
 const formSchema = z.object({
     name: z.string().min(2, "name must be at least 2 characters"),
     email: z.string().email("Invalid email address"),
     phone: z.string().min(10, "Phone number must be at least 10 digits"),
     insuranceType: z.string().min(1, "Please select your insurance"),
+    // Required (2026-10-17). First-party only: see lib/date-of-birth.ts.
+    dateOfBirth: z.string().min(1, DATE_OF_BIRTH_REQUIRED_MESSAGE).refine(isValidDateOfBirth, DATE_OF_BIRTH_INVALID_MESSAGE),
     date: z.date({
         required_error: "Please select a date",
     }),
@@ -66,7 +74,8 @@ export default function BookAnAppointmentPopup() {
             email: "",
             phone: "",
             reason: "",
-            insuranceType: ""
+            insuranceType: "",
+            dateOfBirth: ""
         },
     })
 
@@ -84,6 +93,9 @@ export default function BookAnAppointmentPopup() {
             payload.append('phone', values.phone)
             payload.append('reason', values.reason)
             payload.append("insurance_type", values.insuranceType)
+            // Supabase forms.date_of_birth and the staff email only. Never GA4,
+            // Google Ads or Meta. See lib/date-of-birth.ts.
+            payload.append("date_of_birth", values.dateOfBirth)
             payload.append('form_source', formSource)
             payload.append('gclid', attribution.gclid)
             payload.append('gbraid', attribution.gbraid)
@@ -266,6 +278,38 @@ export default function BookAnAppointmentPopup() {
                                             className="h-12 px-6 text-lg bg-[#f0f5ff]"
                                         />
                                     </FormControl>
+                                </FormItem>
+                            )}
+                        />
+
+                        {/* Date of birth (2026-10-17). Supabase and the staff email only, never a URL or ad platform. */}
+                        <FormField
+                            control={form.control}
+                            name="dateOfBirth"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>
+                                        <span
+                                            style={{
+                                                fontFamily: 'var(--font-public-sans)',
+                                                fontWeight: 500,
+                                            }}
+                                            className='text-[#111315] text-md'
+                                        >
+                                            Date of birth<span className="text-red-500">*</span>
+                                        </span>
+                                    </FormLabel>
+                                    <FormControl>
+                                        <DateOfBirthInput
+                                            id="bookappointmentpopup_date_of_birth"
+                                            value={field.value}
+                                            onChange={field.onChange}
+                                            onBlur={field.onBlur}
+                                            ref={field.ref}
+                                            className="h-12 px-6 text-lg bg-[#f0f5ff]"
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
                                 </FormItem>
                             )}
                         />

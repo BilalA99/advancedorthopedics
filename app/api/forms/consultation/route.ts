@@ -5,6 +5,7 @@ import {
   sendUserEmail,
 } from "@/components/email/sendcontactemail";
 import { resolveIntake } from "@/lib/intake-submission";
+import { normalizeDateOfBirth } from "@/lib/date-of-birth";
 
 type ConsultationPayload = {
   firstName: string;
@@ -17,6 +18,8 @@ type ConsultationPayload = {
    * in the staff email only — never forwarded to GA4, Google Ads or Meta.
    */
   insurance_type?: string;
+  /** Date of birth, YYYY-MM-DD (lib/date-of-birth.ts). Supabase and the staff email body only. */
+  date_of_birth?: string;
   country?: string;
   state?: string;
   form_source?: string;
@@ -49,6 +52,8 @@ export async function POST(request: Request) {
     // ZIP is no longer collected or read (2026-10-14).
     const intake = resolveIntake({ insuranceType: body.insurance_type });
     const { routing } = intake;
+    // Normalised, never rejected: a missing or invalid value is stored as NULL.
+    const dateOfBirth = normalizeDateOfBirth(body.date_of_birth) ?? undefined;
 
     await sendContactEmail({
       name: fullName,
@@ -56,6 +61,7 @@ export async function POST(request: Request) {
       phone: body.phone,
       reason: body.reason,
       insurance_type: body.insurance_type,
+      date_of_birth: dateOfBirth,
       state: body.state,
       form_source: body.form_source || 'general-contact',
       gclid: body.gclid,
@@ -74,6 +80,7 @@ export async function POST(request: Request) {
       state: body.state,
       reason: body.reason,
       insurance_type: body.insurance_type,
+      date_of_birth: dateOfBirth,
       form_source: body.form_source || 'general-contact',
       gclid: body.gclid,
       gbraid: body.gbraid,

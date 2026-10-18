@@ -614,6 +614,71 @@ async function checkInsuranceIsANativeSelect() {
 }
 
 /**
+ * The intake date of birth (2026-10-17) is patient personal data and stays
+ * first-party: Supabase forms.date_of_birth and the staff email BODY, nothing else.
+ *
+ * Structural, both directions. The measurement path (tracking module, canonical
+ * contract, Meta pixel) must not mention it at all. The shared input must be a
+ * native date input with no `name` (a pre-hydration GET would put a named field in
+ * the URL, item 12). Every intake form renders it, every intake endpoint normalises
+ * it, and no email subject carries it.
+ * tests/measurement-intake-dob.test.ts proves the same rule at runtime.
+ */
+const DATE_OF_BIRTH_INPUT_MODULE = 'components/DateOfBirthInput.tsx';
+const META_PIXEL_MODULE = 'lib/meta-pixel.ts';
+
+async function checkDateOfBirthStaysFirstParty() {
+  const check = 'date of birth stays first-party and is never named';
+  const dobPattern = /date_?of_?birth|dateOfBirth|\bdob\b|\bbday\b|birth_?date/i;
+
+  for (const label of [TRACKING_MODULE, CONTRACT_MODULE, META_PIXEL_MODULE]) {
+    const source = stripComments(await read(label));
+    const hit = dobPattern.exec(source);
+    if (hit) {
+      fail(check, `${label} mentions "${hit[0]}". A date of birth must never reach GA4, Google Ads or Meta.`);
+    }
+  }
+
+  const component = stripComments(await read(DATE_OF_BIRTH_INPUT_MODULE));
+  if (!/type="date"/.test(component)) {
+    fail(check, `${DATE_OF_BIRTH_INPUT_MODULE} is not a native date input.`);
+  }
+  if (/\bname\s*=/.test(component)) {
+    fail(check, `${DATE_OF_BIRTH_INPUT_MODULE} sets a name attribute; a pre-hydration GET would put the date of birth in the URL.`);
+  }
+
+  for (const label of INTAKE_FORMS) {
+    const source = stripComments(await read(label));
+    if (!/<DateOfBirthInput\b/.test(source)) {
+      fail(check, `${label} does not render the shared DateOfBirthInput.`);
+    }
+    if (/name=["']date_of_birth["']/.test(source)) {
+      fail(check, `${label} names a date of birth field; a pre-hydration GET would put it in the URL.`);
+    }
+    if (/pushAcceptedLead\([^)]*dateOfBirth/.test(source)) {
+      fail(check, `${label} passes the date of birth to pushAcceptedLead.`);
+    }
+  }
+
+  for (const label of INTAKE_ROUTES) {
+    const source = stripComments(await read(label));
+    if (!/normalizeDateOfBirth\(/.test(source)) {
+      fail(check, `${label} does not normalise date_of_birth with lib/date-of-birth.ts.`);
+    }
+  }
+
+  const persistence = stripComments(await read(PERSISTENCE_MODULE));
+  for (const line of persistence.split(/\r?\n/)) {
+    if (/subject\s*:/.test(line) && dobPattern.test(line)) {
+      fail(check, `${PERSISTENCE_MODULE} puts the date of birth in an email subject: ${line.trim()}`);
+    }
+  }
+  if (dobPattern.test(stripComments(await read(RESOLVER_MODULE)))) {
+    fail(check, `${RESOLVER_MODULE} mentions the date of birth; the subject builder must not carry it.`);
+  }
+}
+
+/**
  * "Best Time To Contact" must stay removed from the intake path.
  *
  * Scoped to intake on purpose: the MRI-review, candidacy and condition-check
@@ -760,6 +825,7 @@ const CHECKS = [
   ['insurance selections stay first-party', checkInsuranceStaysFirstParty],
   ['ZIP stays removed from intake', checkZipStaysRemovedFromIntake],
   ['insurance is a native select and never named', checkInsuranceIsANativeSelect],
+  ['date of birth stays first-party and is never named', checkDateOfBirthStaysFirstParty],
   ['best time to contact stays removed from intake', checkBestTimeStaysRemovedFromIntake],
   ['every intake form gates the qualified conversion', checkEveryIntakeFormGatesTheConversion],
   ['intake form element ids are component-scoped', checkFormElementIdsAreScoped],

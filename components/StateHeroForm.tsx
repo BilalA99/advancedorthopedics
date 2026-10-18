@@ -10,6 +10,7 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from '@/components/ui/form'
 import {
@@ -32,6 +33,12 @@ import {
   pathForDestination,
 } from "@/lib/insurance-routing"
 import { InsuranceSelect } from "@/components/InsuranceSelect"
+import { DateOfBirthInput } from "@/components/DateOfBirthInput"
+import {
+  DATE_OF_BIRTH_INVALID_MESSAGE,
+  DATE_OF_BIRTH_REQUIRED_MESSAGE,
+  isValidDateOfBirth,
+} from "@/lib/date-of-birth"
 import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid'
 import { useRouter } from 'next/navigation'
 import { STATE_OPTIONS, normalizeState } from '@/lib/stateUtils'
@@ -42,6 +49,8 @@ const formSchema = z.object({
   email: z.string().email('Invalid email'),
   phone: z.string().min(1, 'Phone required'),
   insuranceType: z.string().min(1, "Please select your insurance"),
+  // Required (2026-10-17). First-party only: see lib/date-of-birth.ts.
+  dateOfBirth: z.string().min(1, DATE_OF_BIRTH_REQUIRED_MESSAGE).refine(isValidDateOfBirth, DATE_OF_BIRTH_INVALID_MESSAGE),
   reason: z.string().min(2, 'Please describe your needs'),
   country: z.string(),
   state: z.string().min(1, 'Please select your state'),
@@ -71,6 +80,7 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
       email: '',
       phone: '',
       insuranceType: '',
+      dateOfBirth: '',
       reason: '',
       country: 'US',
       state: resolvedState,
@@ -95,6 +105,9 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
           phone: values.phone,
           reason: values.reason,
           insurance_type: values.insuranceType,
+          // Supabase forms.date_of_birth and the staff email only. Never GA4,
+          // Google Ads or Meta. See lib/date-of-birth.ts.
+          date_of_birth: values.dateOfBirth,
           country: values.country,
           state: values.state,
           form_source: 'state-consultation',
@@ -328,6 +341,31 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
                           <FormControl>
                             <InsuranceSelect
                               id="statehero_insurance_type"
+                              value={field.value}
+                              onChange={field.onChange}
+                              onBlur={field.onBlur}
+                              ref={field.ref}
+                              className="h-11 px-3 text-base bg-white/70 border-[#DCDEE1] rounded-sm focus:bg-white transition-colors"
+                            />
+                          </FormControl>
+                          <FormMessage className="text-xs" />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Date of birth (2026-10-17). Supabase and the staff email only, never a URL or ad platform.
+                        A date input has no placeholder, so unlike its neighbours it carries a small label. */}
+                    <FormField
+                      control={form.control}
+                      name="dateOfBirth"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel htmlFor="statehero_date_of_birth" className="text-xs text-[#838890] font-semibold">
+                            Date of birth<span className="text-red-500">*</span>
+                          </FormLabel>
+                          <FormControl>
+                            <DateOfBirthInput
+                              id="statehero_date_of_birth"
                               value={field.value}
                               onChange={field.onChange}
                               onBlur={field.onBlur}

@@ -14,6 +14,7 @@ import { normalizeStateCode } from '@/lib/stateUtils';
 import { resolveFormSource } from '@/lib/lead-contract';
 import { resolveLeadRouting } from '@/lib/insurance-routing';
 import { subjectWithInsurance } from '@/lib/intake-submission';
+import { normalizeDateOfBirth, formatDateOfBirthForStaff } from '@/lib/date-of-birth';
 
 function getResendClient() {
   const apiKey = process.env.RESEND_API_KEY;
@@ -63,6 +64,8 @@ async function logLeadToSupabase(data: {
   reason?: string;
   best_time?: string;
   insurance_type?: string;
+  /** YYYY-MM-DD. Supabase only, never an ad or analytics parameter. */
+  date_of_birth?: string;
   form_source?: string;
   attorney_firm?: string;
   attorney_name?: string;
@@ -102,6 +105,7 @@ async function logLeadToSupabase(data: {
       reason:         data.reason         || null,
       best_time:      data.best_time      || null,
       insurance_type: data.insurance_type || null,
+      date_of_birth:  normalizeDateOfBirth(data.date_of_birth),
       form_source:    resolveFormSource({ explicitSource: data.form_source }) || null,
       attorney_firm:  data.attorney_firm  || null,
       attorney_name:  data.attorney_name  || null,
@@ -153,6 +157,8 @@ export async function sendUserEmail(formData: {
    * the internal staff email, and is never forwarded to an ad platform.
    */
   insurance_type?: string;
+  /** Intake date of birth (YYYY-MM-DD). First-party only, like insurance_type. */
+  date_of_birth?: string;
   form_source?: string;
   gclid?: string;
   gbraid?: string;
@@ -171,6 +177,7 @@ export async function sendUserEmail(formData: {
     reason:        formData.reason,
     best_time:     formData.bestTime,
     insurance_type: formData.insurance_type,
+    date_of_birth: formData.date_of_birth,
     form_source:   formData.form_source || 'unknown',
     landing_path:  formData.landing_path,
     gclid:         formData.gclid,
@@ -223,6 +230,8 @@ export async function sendContactEmail(formData: {
   bestTime?: string;
   /** Insurance selection (D10/D11). Staff-facing only. */
   insurance_type?: string;
+  /** Intake date of birth (YYYY-MM-DD). Email body only, never the subject. */
+  date_of_birth?: string;
   has_attorney?: string;
   injury_type?: string;
   pain_level?: string;
@@ -266,6 +275,7 @@ export async function sendContactEmail(formData: {
         reason: formData.reason,
         bestTime: formData.bestTime,
         insurance_type: formData.insurance_type,
+        date_of_birth: formatDateOfBirthForStaff(formData.date_of_birth),
         has_attorney: formData.has_attorney,
         injury_type: formData.injury_type,
         pain_level: formData.pain_level,

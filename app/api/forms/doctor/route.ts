@@ -5,6 +5,7 @@ import {
   sendUserEmail,
 } from "@/components/email/sendcontactemail";
 import { resolveIntake } from "@/lib/intake-submission";
+import { normalizeDateOfBirth } from "@/lib/date-of-birth";
 
 const MAX_UPLOAD_SIZE = 4 * 1024 * 1024;
 const MAX_REQUEST_SIZE = 6 * 1024 * 1024;
@@ -87,6 +88,9 @@ export async function POST(request: Request) {
     });
     const { routing } = intake;
     const insuranceType = getString(formData, "insurance_type");
+    // Normalised, never rejected: a missing or invalid value is stored as NULL.
+    const dateOfBirth =
+      normalizeDateOfBirth(getString(formData, "date_of_birth")) ?? undefined;
 
     await sendContactEmail({
       name: fullName,
@@ -94,6 +98,7 @@ export async function POST(request: Request) {
       phone,
       reason,
       insurance_type: insuranceType,
+      date_of_birth: dateOfBirth,
       state,
       form_source: getString(formData, "form_source") || "general-contact",
       insuranceCardFront,
@@ -115,6 +120,7 @@ export async function POST(request: Request) {
       state,
       reason,
       insurance_type: insuranceType,
+      date_of_birth: dateOfBirth,
       form_source: getString(formData, "form_source") || "general-contact",
       landing_path: getString(formData, "landing_path"),
       gclid: getString(formData, "gclid"),
