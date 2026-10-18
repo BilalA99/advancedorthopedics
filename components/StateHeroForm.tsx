@@ -36,7 +36,6 @@ import { InsuranceSelect } from "@/components/InsuranceSelect"
 import { DateOfBirthInput } from "@/components/DateOfBirthInput"
 import {
   DATE_OF_BIRTH_INVALID_MESSAGE,
-  DATE_OF_BIRTH_REQUIRED_MESSAGE,
   isValidDateOfBirth,
 } from "@/lib/date-of-birth"
 import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid'
@@ -49,8 +48,8 @@ const formSchema = z.object({
   email: z.string().email('Invalid email'),
   phone: z.string().min(1, 'Phone required'),
   insuranceType: z.string().min(1, "Please select your insurance"),
-  // Required (2026-10-17). First-party only: see lib/date-of-birth.ts.
-  dateOfBirth: z.string().min(1, DATE_OF_BIRTH_REQUIRED_MESSAGE).refine(isValidDateOfBirth, DATE_OF_BIRTH_INVALID_MESSAGE),
+  // Optional (2026-10-18). First-party only: see lib/date-of-birth.ts.
+  dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE),
   reason: z.string().min(2, 'Please describe your needs'),
   country: z.string(),
   state: z.string().min(1, 'Please select your state'),
@@ -361,7 +360,7 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel htmlFor="statehero_date_of_birth" className="text-xs text-[#838890] font-semibold">
-                            Date of birth<span className="text-red-500">*</span>
+                            Date of birth (optional)
                           </FormLabel>
                           <FormControl>
                             <DateOfBirthInput

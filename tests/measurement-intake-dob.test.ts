@@ -1,7 +1,7 @@
 /**
  * The intake date of birth (Abubeckr and Israel, 2026-10-17, checklist thread).
  *
- *   - required on every intake form, as a native date input with no `name`;
+ *   - optional on every intake form (2026-10-18), a native date input with no `name`;
  *   - one validation rule, shared by the browser and the server;
  *   - the server never rejects a lead over it: missing or invalid is stored NULL;
  *   - it reaches the staff email body, never the subject, never a tracking module.
@@ -91,7 +91,11 @@ test('every intake form renders the date of birth and sends it as date_of_birth'
     const source = stripComments(readSource(file));
     assert.match(source, /<DateOfBirthInput\b/, `${file} renders no DateOfBirthInput`);
     assert.match(source, /date_of_birth/, `${file} does not send date_of_birth`);
-    assert.match(source, /isValidDateOfBirth|DATE_OF_BIRTH_REQUIRED_MESSAGE/, `${file} does not require it`);
+    assert.match(source, /isValidDateOfBirth/, `${file} does not check that a typed date is real`);
+    // Optional (Israel and Abubeckr, 2026-10-18): no form may require it.
+    assert.doesNotMatch(source, /DATE_OF_BIRTH_REQUIRED_MESSAGE/, `${file} requires the date of birth`);
+    assert.doesNotMatch(source, /Date of birth\s*<span className="text-red-500">\*<\/span>/,
+      `${file} marks the date of birth as required`);
   }
 });
 

@@ -17,7 +17,6 @@ import { InsuranceSelect } from '@/components/InsuranceSelect';
 import { DateOfBirthInput } from '@/components/DateOfBirthInput';
 import {
   DATE_OF_BIRTH_INVALID_MESSAGE,
-  DATE_OF_BIRTH_REQUIRED_MESSAGE,
   isValidDateOfBirth,
 } from '@/lib/date-of-birth';
 import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid';
@@ -165,12 +164,7 @@ export default function BodyPartHeroForm({
       return;
     }
 
-    if (!formData.dateOfBirth) {
-      setError(`${DATE_OF_BIRTH_REQUIRED_MESSAGE}.`);
-      return;
-    }
-
-    if (!isValidDateOfBirth(formData.dateOfBirth)) {
+    if (formData.dateOfBirth && !isValidDateOfBirth(formData.dateOfBirth)) {
       setError(`${DATE_OF_BIRTH_INVALID_MESSAGE}.`);
       return;
     }
@@ -550,7 +544,7 @@ export default function BodyPartHeroForm({
                 className="block text-sm font-medium text-[#111315] mb-1.5"
                 style={{ fontFamily: 'var(--font-public-sans)' }}
               >
-                Date of birth<span className="text-red-500">*</span>
+                Date of birth (optional)
               </label>
               <DateOfBirthInput
                 id="bodypart_date_of_birth"

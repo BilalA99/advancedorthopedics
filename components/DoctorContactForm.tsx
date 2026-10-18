@@ -32,7 +32,6 @@ import { InsuranceSelect } from "@/components/InsuranceSelect"
 import { DateOfBirthInput } from "@/components/DateOfBirthInput"
 import {
   DATE_OF_BIRTH_INVALID_MESSAGE,
-  DATE_OF_BIRTH_REQUIRED_MESSAGE,
   isValidDateOfBirth,
 } from "@/lib/date-of-birth"
 import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
@@ -56,8 +55,8 @@ const formSchema = z.object({
         ,
     reason: z.string().min(2),
     insuranceType: z.string().min(1, "Please select your insurance"),
-    // Required (2026-10-17). First-party only: see lib/date-of-birth.ts.
-    dateOfBirth: z.string().min(1, DATE_OF_BIRTH_REQUIRED_MESSAGE).refine(isValidDateOfBirth, DATE_OF_BIRTH_INVALID_MESSAGE),
+    // Optional (2026-10-18). First-party only: see lib/date-of-birth.ts.
+    dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE),
     insuranceCardFront: z.instanceof(File).optional().or(z.null()),
     insuranceCardBack: z.instanceof(File).optional().or(z.null()),
     // HONEYPOT FIELD - bots will fill this
@@ -592,7 +591,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                 }}
                                                 className={`${timePeriod !== 'night' ? 'text-[#111315]' : 'text-white'} sm:text-md text-sm`}
                                             >
-                                                Date of birth<span className="text-red-500">*</span>
+                                                Date of birth (optional)
                                             </span>
                                         </FormLabel>
                                         <FormControl>
@@ -851,7 +850,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                                 }}
                                                                 className={`text-[#111315] sm:text-md text-sm`}
                                                             >
-                                                                Date of birth<span className="text-red-500">*</span>
+                                                                Date of birth (optional)
                                                             </span>
                                                         </FormLabel>
                                                         <FormControl>

@@ -19,8 +19,8 @@ import { DATE_OF_BIRTH_LABEL, DATE_OF_BIRTH_MIN, todayIsoDate } from "@/lib/date
  * - Font size 16px or more (the forms pass text-lg / text-base), so iOS Safari
  *   does not zoom the page on focus.
  *
- * Required-ness is enforced by each form's validation, not the native `required`
- * bubble, to match the other fields.
+ * Optional (Israel and Abubeckr, 2026-10-18). Each form checks only that a typed
+ * date is real; an empty field is accepted.
  */
 export type DateOfBirthInputProps = Omit<
   React.ComponentPropsWithoutRef<"input">,
@@ -37,7 +37,6 @@ export const DateOfBirthInput = React.forwardRef<HTMLInputElement, DateOfBirthIn
         ref={ref}
         type="date"
         autoComplete="bday"
-        aria-required="true"
         aria-label={DATE_OF_BIRTH_LABEL}
         data-date-of-birth-input=""
         min={DATE_OF_BIRTH_MIN}

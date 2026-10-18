@@ -1,7 +1,8 @@
 /**
  * The intake date of birth (Abubeckr and Israel, 2026-10-17, checklist thread).
  *
- * Required on every intake form, so the front desk has it before the first call.
+ * Optional on every intake form (Israel and Abubeckr agreed 2026-10-18; required
+ * may come later, decided from the before and after form counts).
  * One rule, shared by the browser (each form's zod schema) and the server (each
  * `/api/forms/*` route), so the two can never disagree about what counts as a
  * real date of birth.
@@ -17,7 +18,7 @@
  *
  * ## Server behaviour: never lose a lead over it
  *
- * The browser enforces "required". The server normalises: a missing or invalid
+ * Both sides accept an empty value. The server normalises: a missing or invalid
  * value is stored as NULL and the email says "Not provided", but the lead is still
  * accepted. A page cached from before this field existed, or a browser that skipped
  * validation, must not turn a real patient enquiry into an error.

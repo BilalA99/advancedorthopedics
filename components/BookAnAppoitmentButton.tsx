@@ -35,7 +35,6 @@ import { InsuranceSelect } from "@/components/InsuranceSelect"
 import { DateOfBirthInput } from "@/components/DateOfBirthInput"
 import {
   DATE_OF_BIRTH_INVALID_MESSAGE,
-  DATE_OF_BIRTH_REQUIRED_MESSAGE,
   isValidDateOfBirth,
 } from "@/lib/date-of-birth"
 import { STATE_OPTIONS, slugFromPathname, normalizeState } from "@/lib/stateUtils"
@@ -51,8 +50,8 @@ const formSchema = z.object({
     phone: z.string().min(10, "Phone number must be at least 10 digits"),
     reason: z.string().min(2),
     insuranceType: z.string().min(1, "Please select your insurance"),
-    // Required (2026-10-17). First-party only: see lib/date-of-birth.ts.
-    dateOfBirth: z.string().min(1, DATE_OF_BIRTH_REQUIRED_MESSAGE).refine(isValidDateOfBirth, DATE_OF_BIRTH_INVALID_MESSAGE),
+    // Optional (2026-10-18). First-party only: see lib/date-of-birth.ts.
+    dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE),
     insuranceCardFront: z.instanceof(File).optional().or(z.null()),
     insuranceCardBack: z.instanceof(File).optional().or(z.null()),
     country: z.string(),
@@ -450,7 +449,7 @@ export default function BookAnAppoitmentButton({
                                         name="dateOfBirth"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel htmlFor="bookappointment_date_of_birth" className="text-sm text-[#111315] font-semibold">Date of birth<span className="text-red-500">*</span></FormLabel>
+                                                <FormLabel htmlFor="bookappointment_date_of_birth" className="text-sm text-[#111315] font-semibold">Date of birth (optional)</FormLabel>
                                                 <FormControl>
                                                     <DateOfBirthInput
                                                         id="bookappointment_date_of_birth"
