@@ -48,6 +48,8 @@ import {
 } from '@/lib/insurance-routing'
 import { normalizeState } from '@/lib/stateUtils'
 import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid'
+import { DateOfBirthInput } from '@/components/DateOfBirthInput'
+import { DATE_OF_BIRTH_INVALID_MESSAGE, isValidDateOfBirth } from '@/lib/date-of-birth'
 
 /** Value -> patient-facing label for the insurance question. */
 const INSURANCE_LABELS: Record<string, string> = Object.fromEntries(
@@ -66,6 +68,7 @@ const formSchema = z.object({
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   state: z.string().min(2, "State must selected"),
   insurance_type: z.string().min(2, "Insurance type must be selected"),
+  dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE),
   comments: z.string(),
   email_optout: z.string(),
   bestTime: z.string().min(1, "Please provide more detail about your consultation needs")
@@ -251,6 +254,7 @@ export default function FreeMRIReviewClient({ reviews }: { reviews: SocialProofR
       phone: "",
       state: "",
       insurance_type: "",
+      dateOfBirth: "",
       comments: "",
       bestTime: "",
       email_optout: "false"
@@ -267,8 +271,10 @@ export default function FreeMRIReviewClient({ reviews }: { reviews: SocialProofR
     let qualification: 'qualified' | 'unqualified' = 'qualified'
     let destination = destinationFor(qualification)
     try {
+      const { dateOfBirth, ...rest } = values
       data = await sendMRIContactEmail({
-        ...values,
+        ...rest,
+        date_of_birth: dateOfBirth || undefined,
         gclid: attribution.gclid,
         gbraid: attribution.gbraid,
         wbraid: attribution.wbraid,
@@ -393,6 +399,7 @@ export default function FreeMRIReviewClient({ reviews }: { reviews: SocialProofR
                 <form className=' flex flex-col space-y-[24px] ' >
                   {
                     FreeMriReviewSteps[ConditionStep - 1].questions.map((question) => (
+                      <React.Fragment key={question.question}>
                       <FormField
                         control={ConditionForm.control}
                         name={question.control}
@@ -514,6 +521,34 @@ export default function FreeMRIReviewClient({ reviews }: { reviews: SocialProofR
                           </FormItem>
                         )}
                       />
+                      {question.control === "insurance_type" ? (
+                        /* Date of birth, optional (2026-10-24): Supabase and the staff email only, never a URL or ad platform. */
+                        <FormField
+                          control={ConditionForm.control}
+                          name="dateOfBirth"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel htmlFor="mrireview_date_of_birth">
+                                <span style={{ fontFamily: "var(--font-public-sans)", fontWeight: 500 }} className="text-black text-lg text-left w-full">
+                                  Date of birth (optional)
+                                </span>
+                              </FormLabel>
+                              <FormControl>
+                                <DateOfBirthInput
+                                  id="mrireview_date_of_birth"
+                                  value={field.value}
+                                  onChange={field.onChange}
+                                  onBlur={field.onBlur}
+                                  ref={field.ref}
+                                  className="h-12 px-3 rounded-md text-lg border-[#DCDEE1] bg-[#FAFAFA]"
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      ) : null}
+                      </React.Fragment>
                     ))
                   }
                 </form>

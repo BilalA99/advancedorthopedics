@@ -12,6 +12,8 @@ interface EmailTemplateProps {
   comments?: string; // Optional
   email_optout?: string | boolean; // Can be string "true"/"false" or boolean
   insurance_type?: string;
+  /** Formatted for staff by the action (MM/DD/YYYY or "Not provided"). Body only. */
+  date_of_birth?: string;
   last_test_date?: string;
   other?: string; // Optional, for "other" insurance/diagnosis
   recent_diagnosis?: string;
@@ -29,6 +31,7 @@ export const MRIEmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   last_name,
   comments,
   insurance_type,
+  date_of_birth,
   last_test_date,
   other,
   recent_diagnosis,
@@ -79,6 +82,12 @@ export const MRIEmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
               <tr style={{ borderBottom: '1px solid #eee' }}>
                 <td style={{ padding: '8px 0', fontWeight: 'bold', color: '#555', verticalAlign: 'top' }}>State:</td>
                 <td style={{ padding: '8px 0', color: '#333' }}>{state}</td>
+              </tr>
+            )}
+            {date_of_birth && (
+              <tr style={{ borderBottom: '1px solid #eee' }}>
+                <td style={{ padding: '8px 0', fontWeight: 'bold', color: '#555', verticalAlign: 'top' }}>Date of Birth:</td>
+                <td style={{ padding: '8px 0', color: '#333' }}>{date_of_birth}</td>
               </tr>
             )}
             {insurance_type && (

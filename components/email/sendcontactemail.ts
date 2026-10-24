@@ -314,6 +314,8 @@ export async function sendMRIContactEmail(formData: {
   comments: string;
   email_optout: string;
   insurance_type: string;
+  /** Optional date of birth, YYYY-MM-DD. Supabase and the staff email body only. */
+  date_of_birth?: string;
   last_test_date: string;
   other: string;
   recent_diagnosis: string;
@@ -336,6 +338,7 @@ export async function sendMRIContactEmail(formData: {
     reason:         formData.recent_diagnosis || formData.comments || undefined,
     best_time:      formData.bestTime,
     insurance_type: formData.insurance_type,
+    date_of_birth:  formData.date_of_birth,
     form_source:    'free-mri-review',
     gclid:          formData.gclid,
     gbraid:         formData.gbraid,
@@ -360,6 +363,7 @@ export async function sendMRIContactEmail(formData: {
         comments: formData.comments,
         email_optout: formData.email_optout,
         insurance_type: formData.insurance_type,
+        date_of_birth: formatDateOfBirthForStaff(formData.date_of_birth),
         last_test_date: formData.last_test_date,
         other: formData.other,
         recent_diagnosis: formData.recent_diagnosis,
@@ -397,6 +401,8 @@ export async function sendCandidacyEmail(formData: {
   smoking: string;
   recent_diagnosis: string;
   insurance_type: string;
+  /** Optional date of birth, YYYY-MM-DD. Supabase and the staff email body only. */
+  date_of_birth?: string;
   last_test_date: string;
   other: string;
   comments: string;
@@ -417,6 +423,7 @@ export async function sendCandidacyEmail(formData: {
     state:          formData.state,
     reason:         formData.condition || undefined,
     insurance_type: formData.insurance_type,
+    date_of_birth:  formData.date_of_birth,
     form_source:    'candidacy-check',
     gclid:          formData.gclid,
     gbraid:         formData.gbraid,
@@ -445,6 +452,7 @@ export async function sendCandidacyEmail(formData: {
         smoking:          formData.smoking,
         recent_diagnosis: formData.recent_diagnosis,
         insurance_type:   formData.insurance_type,
+        date_of_birth:    formatDateOfBirthForStaff(formData.date_of_birth),
         last_test_date:   formData.last_test_date,
         other:            formData.other,
         comments:         formData.comments,
@@ -479,6 +487,8 @@ export const sendConditionCheckEmail = async (formData: {
   phone: string;
   state: string;
   insurance_type: string;
+  /** Optional date of birth, YYYY-MM-DD. Supabase and the staff email body only. */
+  date_of_birth?: string;
   comments: string;
   email_optout: string;
   pain_area: string[];
@@ -507,6 +517,7 @@ export const sendConditionCheckEmail = async (formData: {
     state:          formData.state,
     reason:         formData.pain_area?.join(', ') || undefined,
     insurance_type: formData.insurance_type,
+    date_of_birth:  formData.date_of_birth,
     form_source:    'condition-check',
     gclid:          formData.gclid,
     gbraid:         formData.gbraid,
@@ -530,6 +541,7 @@ export const sendConditionCheckEmail = async (formData: {
         phone:            formData.phone,
         state:            formData.state,
         insurance_type:   formData.insurance_type,
+        date_of_birth:    formatDateOfBirthForStaff(formData.date_of_birth),
         comments:         formData.comments,
         email_optout:     formData.email_optout,
         pain_area:        formData.pain_area,

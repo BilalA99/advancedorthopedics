@@ -23,6 +23,8 @@ interface ConditionCheckEmailProps {
   phone: string;
   state?: string; // Optional
   insurance_type?: string; // Optional
+  /** Formatted for staff by the action (MM/DD/YYYY or "Not provided"). Body only. */
+  date_of_birth?: string;
   comments?: string; // Optional
   email_optout?: string | boolean; // Optional, typically not displayed
 }
@@ -45,6 +47,7 @@ export const ConditionCheckEmailTemplate: React.FC<Readonly<ConditionCheckEmailP
   phone,
   state,
   insurance_type,
+  date_of_birth,
   comments,
   // email_optout is available if needed
 }) => {
@@ -157,6 +160,12 @@ export const ConditionCheckEmailTemplate: React.FC<Readonly<ConditionCheckEmailP
             )}
 
             {/* Insurance Details (from Step 3) */}
+            {date_of_birth && (
+              <tr style={{ borderBottom: '1px solid #eee' }}>
+                <td style={{ padding: '8px 0', fontWeight: 'bold', color: '#555', verticalAlign: 'top' }}>Date of Birth:</td>
+                <td style={{ padding: '8px 0', color: '#333' }}>{date_of_birth}</td>
+              </tr>
+            )}
             {insurance_type && (
               <>
                 <tr style={{ borderBottom: '1px solid #eee' }}>

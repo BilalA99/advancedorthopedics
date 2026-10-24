@@ -662,7 +662,9 @@ async function checkDateOfBirthStaysFirstParty() {
     fail(check, `${DATE_OF_BIRTH_INPUT_MODULE} sets a name attribute; a pre-hydration GET would put the date of birth in the URL.`);
   }
 
-  for (const label of [...INTAKE_FORMS, ...INJURY_FORMS]) {
+  // Every patient lead form: intake, injury pages and the three questionnaires
+  // (date of birth added to the questionnaires 2026-10-24).
+  for (const label of CONVERSION_GATED_FORMS) {
     const source = stripComments(await read(label));
     if (!/<DateOfBirthInput\b/.test(source)) {
       fail(check, `${label} does not render the shared DateOfBirthInput.`);

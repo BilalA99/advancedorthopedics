@@ -45,6 +45,10 @@ const INTAKE_FORMS = [
   'app/injuries/personal-injury/lead-capture-form.tsx',
   'app/injuries/slip-and-fall/lead-capture-form.tsx',
   'app/injuries/work-injury/lead-capture-form.tsx',
+  // The three questionnaires (2026-10-24).
+  'app/find-care/free-mri-review/FreeMRIReviewClient.tsx',
+  'components/CandidacyCheckClient.tsx',
+  'components/ConditionCheckSection.tsx',
 ];
 
 const INTAKE_ROUTES = [
@@ -124,4 +128,10 @@ test('the date of birth never reaches the email subject or a tracking module', (
   }
   assert.match(persistence, /date_of_birth:\s+normalizeDateOfBirth\(data\.date_of_birth\)/,
     'the Supabase writer does not store the normalised date of birth');
+  // The three questionnaire actions write it too (2026-10-24).
+  for (const source of ['free-mri-review', 'candidacy-check', 'condition-check']) {
+    assert.match(persistence,
+      new RegExp(`date_of_birth:\\s+formData\\.date_of_birth,\\s+form_source:\\s+'${source}'`),
+      `the ${source} action does not store the date of birth`);
+  }
 });

@@ -44,6 +44,8 @@ import {
   parseLeadRouting,
   pathForDestination,
 } from '@/lib/insurance-routing'
+import { DateOfBirthInput } from '@/components/DateOfBirthInput'
+import { DATE_OF_BIRTH_INVALID_MESSAGE, isValidDateOfBirth } from '@/lib/date-of-birth'
 
 /**
  * Insurance options from the one canonical list.
@@ -77,6 +79,7 @@ const formSchema = z.object({
   phone: z.string().min(10, "Phone number must be at least 10 digits."),
   state: z.string().min(2, { message: "Please select your state." }),
   insurance_type: z.string().min(2, { message: "Please select an insurance type." }),
+  dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE),
   comments: z.string(),
 })
 
@@ -193,6 +196,7 @@ export default function CandidacyCheckClient({ reviews }: { reviews: SocialProof
       phone: "",
       state: "",
       insurance_type: "",
+      dateOfBirth: "",
       comments: "",
     },
   });
@@ -201,7 +205,8 @@ export default function CandidacyCheckClient({ reviews }: { reviews: SocialProof
     setDisabled(true)
     setSubmitError(null)
     try {
-      const data = await sendCandidacyEmail({ ...values, email_optout: "false", ...attribution });
+      const { dateOfBirth, ...rest } = values
+      const data = await sendCandidacyEmail({ ...rest, date_of_birth: dateOfBirth || undefined, email_optout: "false", ...attribution });
       if (data) {
         // D10: the server decides qualification (sendCandidacyEmail returns it) and
         // this form obeys. Without this the questionnaire fired the qualified
@@ -422,6 +427,7 @@ export default function CandidacyCheckClient({ reviews }: { reviews: SocialProof
             <Form {...form}>
               <form className=' flex flex-col space-y-[24px] ' onSubmit={(e) => e.preventDefault()}>
                 {CandidacyCheckSteps[conditionStep - 1].questions.map((question) => (
+                  <React.Fragment key={question.question}>
                   <FormField
                     control={form.control}
                     name={question.control as any}
@@ -465,6 +471,40 @@ export default function CandidacyCheckClient({ reviews }: { reviews: SocialProof
                       </FormItem>
                     )}
                   />
+                  {question.control === "insurance_type" ? (
+                    /* Date of birth, optional (2026-10-24): Supabase and the staff email only, never a URL or ad platform. */
+                    <FormField
+                      control={form.control}
+                      name="dateOfBirth"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel htmlFor="candidacy_date_of_birth">
+                            <span
+                              style={{
+                                fontFamily: "var(--font-public-sans)",
+                                fontWeight: 500,
+                              }}
+                              className="text-black text-lg text-left w-full"
+                            >
+                              Date of birth (optional)
+                            </span>
+                          </FormLabel>
+                          <FormControl>
+                            <DateOfBirthInput
+                              id="candidacy_date_of_birth"
+                              value={field.value}
+                              onChange={field.onChange}
+                              onBlur={field.onBlur}
+                              ref={field.ref}
+                              className="h-12 px-3 rounded-md text-lg border-[#DCDEE1] bg-[#FAFAFA]"
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  ) : null}
+                  </React.Fragment>
                 ))}
               </form>
             </Form>

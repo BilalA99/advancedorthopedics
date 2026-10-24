@@ -20,6 +20,8 @@ import {
   parseLeadRouting,
   pathForDestination,
 } from '@/lib/insurance-routing'
+import { DateOfBirthInput } from '@/components/DateOfBirthInput'
+import { DATE_OF_BIRTH_INVALID_MESSAGE, isValidDateOfBirth } from '@/lib/date-of-birth'
 
 /**
  * Value -> patient-facing label for the insurance question.
@@ -57,6 +59,7 @@ const formSchema = z.object({
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   state: z.string(),
   insurance_type: z.string(),
+  dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE),
   comments: z.string(),
   email_optout: z.string()
 })
@@ -112,14 +115,17 @@ export default function ConditionCheckSection({
       phone: "",
       state: "",
       insurance_type: "",
+      dateOfBirth: "",
       comments: "",
       email_optout: ""
     },
   })
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setDisabled(true)
+    const { dateOfBirth, ...rest } = values
     const data = await sendConditionCheckEmail({
-      ...values,
+      ...rest,
+      date_of_birth: dateOfBirth || undefined,
       gclid: attribution.gclid,
       gbraid: attribution.gbraid,
       wbraid: attribution.wbraid,
@@ -207,6 +213,7 @@ export default function ConditionCheckSection({
           <Form {...ConditionForm}>
             <form className=' flex flex-col space-y-[24px] ' aria-labelledby="condition-check-step-title">
               {steps[ConditionStep - 1].questions.map((question: any) => (
+                <React.Fragment key={question.question}>
                 <FormField
                   control={ConditionForm.control}
                   name={question.control}
@@ -316,6 +323,32 @@ export default function ConditionCheckSection({
                     </FormItem>
                   )}
                 />
+                {question.control === 'insurance_type' ? (
+                  /* Date of birth, optional (2026-10-24): Supabase and the staff email only, never a URL or ad platform. */
+                  <FormField
+                    control={ConditionForm.control}
+                    name="dateOfBirth"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel htmlFor="conditioncheck_date_of_birth">
+                          <span style={{ fontFamily: "var(--font-public-sans)", fontWeight: 500 }} className="text-black text-lg text-left w-full">Date of birth (optional)</span>
+                        </FormLabel>
+                        <FormControl>
+                          <DateOfBirthInput
+                            id="conditioncheck_date_of_birth"
+                            value={field.value}
+                            onChange={field.onChange}
+                            onBlur={field.onBlur}
+                            ref={field.ref}
+                            className="h-12 px-3 rounded-md text-lg border-[#DCDEE1] bg-[#FAFAFA]"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                ) : null}
+                </React.Fragment>
               ))}
             </form>
           </Form>
