@@ -40,6 +40,11 @@ const INTAKE_FORMS = [
   'components/MiniContactForm.tsx',
   'components/StateHeroForm.tsx',
   'components/PatientAdvocateForm.tsx',
+  // The four injury-page forms (2026-10-24, "please update all of them").
+  'app/injuries/car-accident/lead-capture-form.tsx',
+  'app/injuries/personal-injury/lead-capture-form.tsx',
+  'app/injuries/slip-and-fall/lead-capture-form.tsx',
+  'app/injuries/work-injury/lead-capture-form.tsx',
 ];
 
 const INTAKE_ROUTES = [

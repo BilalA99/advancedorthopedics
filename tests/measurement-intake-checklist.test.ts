@@ -47,6 +47,11 @@ const ROUTED_FORMS = INTAKE_FORMS.concat([
   'components/CandidacyCheckClient.tsx',
   'components/ConditionCheckSection.tsx',
   'app/find-care/free-mri-review/FreeMRIReviewClient.tsx',
+  // The four injury-page forms (2026-10-24).
+  'app/injuries/car-accident/lead-capture-form.tsx',
+  'app/injuries/personal-injury/lead-capture-form.tsx',
+  'app/injuries/slip-and-fall/lead-capture-form.tsx',
+  'app/injuries/work-injury/lead-capture-form.tsx',
 ]);
 
 const INTAKE_ROUTES = [

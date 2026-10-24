@@ -215,7 +215,10 @@ export async function sendUserEmail(formData: {
     console.warn('[sendUserEmail] lead accepted but not persisted', { submissionId });
   }
 
-  return { ok: true as const, submissionId };
+  // The server's qualification decision, for the injury-page forms that call this
+  // action directly (2026-10-24). The /api/forms routes spread their own routing
+  // over this; it is the same function on the same value, so the two agree.
+  return { ok: true as const, submissionId, ...resolveLeadRouting(formData.insurance_type) };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

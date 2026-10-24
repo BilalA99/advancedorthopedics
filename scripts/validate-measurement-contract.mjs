@@ -527,11 +527,26 @@ const INTAKE_FORMS = [
  * clinical questionnaire asking when to call is a different question. Keeping the
  * two lists separate is what lets each rule have its own correct scope.
  */
+/**
+ * The four injury-page lead forms (2026-10-24, Abubeckr: "please update all of
+ * them"). They post through the sendUserEmail server action rather than a route,
+ * ask the same insurance question and an optional date of birth, and gate the
+ * conversion like every other intake form. Kept out of INTAKE_FORMS because they
+ * still ask injury-specific questions (pain level, attorney) that the best-time
+ * and id-scoping rules were not written for.
+ */
+const INJURY_FORMS = [
+  'app/injuries/car-accident/lead-capture-form.tsx',
+  'app/injuries/personal-injury/lead-capture-form.tsx',
+  'app/injuries/slip-and-fall/lead-capture-form.tsx',
+  'app/injuries/work-injury/lead-capture-form.tsx',
+];
+
 const CONVERSION_GATED_FORMS = INTAKE_FORMS.concat([
   'components/CandidacyCheckClient.tsx',
   'components/ConditionCheckSection.tsx',
   'app/find-care/free-mri-review/FreeMRIReviewClient.tsx',
-]);
+], INJURY_FORMS);
 
 /** Every endpoint that accepts patient intake. */
 const INTAKE_ROUTES = [
@@ -647,7 +662,7 @@ async function checkDateOfBirthStaysFirstParty() {
     fail(check, `${DATE_OF_BIRTH_INPUT_MODULE} sets a name attribute; a pre-hydration GET would put the date of birth in the URL.`);
   }
 
-  for (const label of INTAKE_FORMS) {
+  for (const label of [...INTAKE_FORMS, ...INJURY_FORMS]) {
     const source = stripComments(await read(label));
     if (!/<DateOfBirthInput\b/.test(source)) {
       fail(check, `${label} does not render the shared DateOfBirthInput.`);

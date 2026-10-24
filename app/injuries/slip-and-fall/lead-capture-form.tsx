@@ -20,6 +20,18 @@ import { redirect } from "next/navigation"
 import { pushAcceptedLead } from "@/utils/enhancedConversions"
 import { STATE_OPTIONS } from "@/lib/stateUtils"
 import { clinicsForMap as clinics } from "@/components/data/clinicsForMap.generated"
+import {
+    classifyInsurance,
+    destinationFor,
+    parseLeadRouting,
+    pathForDestination,
+} from "@/lib/insurance-routing"
+import { InsuranceSelect } from "@/components/InsuranceSelect"
+import { DateOfBirthInput } from "@/components/DateOfBirthInput"
+import {
+    DATE_OF_BIRTH_INVALID_MESSAGE,
+    isValidDateOfBirth,
+} from "@/lib/date-of-birth"
 
 const leadSchema = z.object({
     firstName: z.string().min(2, "First name is required"),
@@ -30,6 +42,10 @@ const leadSchema = z.object({
     urgency: z.string().min(1, "Please select urgency level"),
     location: z.string().min(1, "Please select preferred location"),
     state: z.string().min(1, "Please select your state"),
+    // Insurance, required (2026-10-24): same seven options and routing as the shared intake forms.
+    insuranceType: z.string().min(1, "Please select your insurance"),
+    // Date of birth, optional: Supabase and the staff email only, never a URL or ad platform.
+    dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE),
 })
 
 type LeadFormData = z.infer<typeof leadSchema>
@@ -65,19 +81,23 @@ export function LeadCaptureForm() {
             urgency: "",
             location: "",
             state: "",
+            insuranceType: "",
+            dateOfBirth: "",
         },
     })
 
 
     async function onSubmit(values: z.infer<typeof leadSchema>) {
         setIsSubmitting(true)
-        const data = await sendContactEmail({ name: values.firstName, email: values.email, phone: values.phone, reason: values.injury, bestTime: values.urgency, injury_type: values.injury, location: values.location, state: values.state, gclid: attribution.gclid, utm_source: attribution.utm_source, utm_medium: attribution.utm_medium, utm_campaign: attribution.utm_campaign, utm_term: attribution.utm_term, utm_content: attribution.utm_content })
+        const data = await sendContactEmail({ name: values.firstName, email: values.email, phone: values.phone, reason: values.injury, bestTime: values.urgency, injury_type: values.injury, location: values.location, state: values.state, insurance_type: values.insuranceType, date_of_birth: values.dateOfBirth || undefined, gclid: attribution.gclid, utm_source: attribution.utm_source, utm_medium: attribution.utm_medium, utm_campaign: attribution.utm_campaign, utm_term: attribution.utm_term, utm_content: attribution.utm_content })
         const acceptance = await sendUserEmail({
             name: values.firstName,
             email: values.email,
             phone: values.phone,
             state: values.state,
             reason: values.injury,
+            insurance_type: values.insuranceType,
+            date_of_birth: values.dateOfBirth || undefined,
             form_source: 'slip-and-fall',
             gclid: attribution.gclid,
             gbraid: attribution.gbraid,
@@ -88,15 +108,20 @@ export function LeadCaptureForm() {
             utm_term: attribution.utm_term,
             utm_content: attribution.utm_content,
         })
-        
+
+        // The server decides qualification and this form obeys, like the shared intake forms.
+        const serverRouting = parseLeadRouting(acceptance)
+        const qualification = serverRouting?.qualification ?? classifyInsurance(values.insuranceType)
+        const destination = serverRouting?.destination ?? destinationFor(qualification)
+
         // Enhanced Conversions
-        await pushAcceptedLead({ acceptance, form_name: 'SlipAndFallLeadForm', form_source: 'slip-and-fall', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName });
-        
+        await pushAcceptedLead({ acceptance, form_name: 'SlipAndFallLeadForm', form_source: 'slip-and-fall', state: values.state, email: values.email, phone: values.phone, firstName: values.firstName, lastName: values.lastName, lead_qualification: qualification });
+
         setIsSubmitting(false)
         if (data) {
             setIsOpen(false)
-            //setAppointmentConfirm(true) 
-            redirect('/thank-you')
+            //setAppointmentConfirm(true)
+            redirect(pathForDestination(destination))
             form.reset()
         }
     }
@@ -593,6 +618,58 @@ export function LeadCaptureForm() {
                                         </Select>
                                         {form.formState.errors.state && <p className="text-sm text-red-600 mt-1">{form.formState.errors.state.message}</p>}
                                     </div>
+
+                                    {/* Insurance, required (2026-10-24): same seven options and routing as the shared intake forms. */}
+                                    <FormField
+                                        control={form.control}
+                                        name="insuranceType"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel htmlFor="slipandfall_insurance_type" className="text-sm text-[#838890] font-semibold">
+                                                    <span style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }} className="text-[#111315] text-md">
+                                                        Insurance <span className="text-red-500">*</span>
+                                                    </span>
+                                                </FormLabel>
+                                                <FormControl>
+                                                    <InsuranceSelect
+                                                        id="slipandfall_insurance_type"
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+                                                        onBlur={field.onBlur}
+                                                        ref={field.ref}
+                                                        className="w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm text-lg"
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+
+                                    {/* Date of birth, optional: Supabase and the staff email only, never a URL or ad platform. */}
+                                    <FormField
+                                        control={form.control}
+                                        name="dateOfBirth"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel htmlFor="slipandfall_date_of_birth" className="text-sm text-[#838890] font-semibold">
+                                                    <span style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }} className="text-[#111315] text-md">
+                                                        Date of birth (optional)
+                                                    </span>
+                                                </FormLabel>
+                                                <FormControl>
+                                                    <DateOfBirthInput
+                                                        id="slipandfall_date_of_birth"
+                                                        value={field.value}
+                                                        onChange={field.onChange}
+                                                        onBlur={field.onBlur}
+                                                        ref={field.ref}
+                                                        className="w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm text-lg"
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
 
                                     <Button
                                         type="submit"
