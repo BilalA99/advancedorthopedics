@@ -33,6 +33,8 @@ import { InsuranceSelect } from "@/components/InsuranceSelect"
 import { DateOfBirthInput } from "@/components/DateOfBirthInput"
 import {
   DATE_OF_BIRTH_INVALID_MESSAGE,
+  UNDER_MINIMUM_AGE_MESSAGE,
+  isUnderMinimumAge,
   isValidDateOfBirth,
 } from "@/lib/date-of-birth"
 import { resolveFormSource } from "@/lib/lead-contract"
@@ -42,7 +44,7 @@ const formSchema = z.object({
     phone: z.string().min(10, "Phone number must be at least 10 digits"),
     insuranceType: z.string().min(1, "Please select your insurance"),
     // Optional (2026-10-18). First-party only: see lib/date-of-birth.ts.
-    dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE),
+    dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE).refine((value) => !isUnderMinimumAge(value), UNDER_MINIMUM_AGE_MESSAGE),
     date: z.date({
         required_error: "Please select a date",
     }),
@@ -77,6 +79,9 @@ export default function BookAnAppointmentPopup() {
             dateOfBirth: ""
         },
     })
+    // Under 20 is not accepted (2026-10-25); the message shows under the date field.
+    const dateOfBirthValue = form.watch("dateOfBirth")
+    const underMinimumAge = isUnderMinimumAge(dateOfBirthValue)
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
@@ -446,7 +451,7 @@ export default function BookAnAppointmentPopup() {
 
                         <button
                             type="submit"
-                            disabled={loading}
+                            disabled={loading || underMinimumAge}
                             className="w-full self-center flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {loading ? (

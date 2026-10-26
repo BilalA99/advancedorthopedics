@@ -45,7 +45,7 @@ import {
   pathForDestination,
 } from '@/lib/insurance-routing'
 import { DateOfBirthInput } from '@/components/DateOfBirthInput'
-import { DATE_OF_BIRTH_INVALID_MESSAGE, isValidDateOfBirth } from '@/lib/date-of-birth'
+import { DATE_OF_BIRTH_INVALID_MESSAGE, UNDER_MINIMUM_AGE_MESSAGE, isUnderMinimumAge, isValidDateOfBirth } from '@/lib/date-of-birth'
 
 /**
  * Insurance options from the one canonical list.
@@ -79,7 +79,7 @@ const formSchema = z.object({
   phone: z.string().min(10, "Phone number must be at least 10 digits."),
   state: z.string().min(2, { message: "Please select your state." }),
   insurance_type: z.string().min(2, { message: "Please select an insurance type." }),
-  dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE),
+  dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE).refine((value) => !isUnderMinimumAge(value), UNDER_MINIMUM_AGE_MESSAGE),
   comments: z.string(),
 })
 
@@ -200,6 +200,9 @@ export default function CandidacyCheckClient({ reviews }: { reviews: SocialProof
       comments: "",
     },
   });
+  // Under 20 is not accepted (2026-10-25); the message shows under the date field.
+  const dateOfBirthValue = form.watch("dateOfBirth");
+  const underMinimumAge = isUnderMinimumAge(dateOfBirthValue);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setDisabled(true)
@@ -536,7 +539,7 @@ export default function CandidacyCheckClient({ reviews }: { reviews: SocialProof
                 : <></>
             }
             <button
-              disabled={disabled}
+              disabled={disabled || (conditionStep == 3 && underMinimumAge)}
               onClick={() => {
                 if (conditionStep != 3) {
                   setConditionStep(Math.min(3, conditionStep + 1))

@@ -2,7 +2,13 @@
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { DATE_OF_BIRTH_LABEL, DATE_OF_BIRTH_MIN, todayIsoDate } from "@/lib/date-of-birth"
+import {
+  DATE_OF_BIRTH_LABEL,
+  DATE_OF_BIRTH_MIN,
+  UNDER_MINIMUM_AGE_MESSAGE,
+  isUnderMinimumAge,
+  todayIsoDate,
+} from "@/lib/date-of-birth"
 
 /**
  * The intake date of birth question, as a NATIVE date input (2026-10-17).
@@ -32,7 +38,12 @@ export type DateOfBirthInputProps = Omit<
 
 export const DateOfBirthInput = React.forwardRef<HTMLInputElement, DateOfBirthInputProps>(
   function DateOfBirthInput({ value, onChange, className, ...props }, ref) {
+    // Under 20 (2026-10-25): say so right away, before the patient reaches the
+    // button. Each form also disables its submit button and its validation
+    // refuses the date, so this message is the explanation, not the block.
+    const underAge = isUnderMinimumAge(value)
     return (
+      <>
       <input
         ref={ref}
         type="date"
@@ -50,8 +61,15 @@ export const DateOfBirthInput = React.forwardRef<HTMLInputElement, DateOfBirthIn
           value ? "text-[#111315]" : "text-[#838890]",
           className,
         )}
+        aria-invalid={underAge || undefined}
         {...props}
       />
+      {underAge ? (
+        <p role="alert" data-under-minimum-age="" className="mt-1 text-sm text-red-600">
+          {UNDER_MINIMUM_AGE_MESSAGE}
+        </p>
+      ) : null}
+      </>
     )
   },
 )

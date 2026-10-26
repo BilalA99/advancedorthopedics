@@ -83,6 +83,36 @@ export function isValidDateOfBirth(value: string | null | undefined): boolean {
   return normalizeDateOfBirth(value) !== null;
 }
 
+/**
+ * The practice does not see patients under 20, whatever their insurance
+ * (Abubeckr, 2026-10-25: "19 and younger on the date of birth we do not take ...
+ * no matter the insurance"). Israel's plan, same thread: disable the submit
+ * button with a short message when a date of birth under 20 is entered.
+ *
+ * The date of birth stays optional, so a blank one is never blocked by this.
+ */
+export const MINIMUM_PATIENT_AGE = 20;
+export const UNDER_MINIMUM_AGE_MESSAGE =
+  "Sorry, we can only see patients 20 and older." as const;
+
+/** Whole years old on `now` (local date), or null when the value is not a real date of birth. */
+export function ageOn(value: string | null | undefined, now: Date = new Date()): number | null {
+  const iso = normalizeDateOfBirth(value, now);
+  if (!iso) return null;
+  const [y, m, d] = iso.split("-").map(Number);
+  const month = now.getMonth() + 1;
+  const day = now.getDate();
+  let age = now.getFullYear() - y;
+  if (month < m || (month === m && day < d)) age -= 1;
+  return age;
+}
+
+/** True only for a real date of birth that makes the patient younger than 20. */
+export function isUnderMinimumAge(value: string | null | undefined, now: Date = new Date()): boolean {
+  const age = ageOn(value, now);
+  return age !== null && age < MINIMUM_PATIENT_AGE;
+}
+
 /** How the staff email shows it: MM/DD/YYYY, US style, or "Not provided". */
 export function formatDateOfBirthForStaff(value: string | null | undefined): string {
   const iso = normalizeDateOfBirth(value);

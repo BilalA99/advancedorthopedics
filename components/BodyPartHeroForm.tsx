@@ -17,6 +17,8 @@ import { InsuranceSelect } from '@/components/InsuranceSelect';
 import { DateOfBirthInput } from '@/components/DateOfBirthInput';
 import {
   DATE_OF_BIRTH_INVALID_MESSAGE,
+  UNDER_MINIMUM_AGE_MESSAGE,
+  isUnderMinimumAge,
   isValidDateOfBirth,
 } from '@/lib/date-of-birth';
 import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid';
@@ -76,6 +78,8 @@ export default function BodyPartHeroForm({
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState('');
   const [showDialog, setShowDialog] = useState(false);
+  // Under 20 is not accepted (2026-10-25); the message shows under the date field.
+  const underMinimumAge = isUnderMinimumAge(formData.dateOfBirth);
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
   const [attribution, setAttribution] = useState(EMPTY_ATTRIBUTION);
   const formRef = useRef<HTMLFormElement>(null);
@@ -166,6 +170,11 @@ export default function BodyPartHeroForm({
 
     if (formData.dateOfBirth && !isValidDateOfBirth(formData.dateOfBirth)) {
       setError(`${DATE_OF_BIRTH_INVALID_MESSAGE}.`);
+      return;
+    }
+
+    if (isUnderMinimumAge(formData.dateOfBirth)) {
+      setError(`${UNDER_MINIMUM_AGE_MESSAGE}`);
       return;
     }
 
@@ -667,7 +676,7 @@ export default function BodyPartHeroForm({
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isSubmitting || underMinimumAge}
               className="w-full bg-[#0A50EC] hover:bg-[#252932] text-white py-3.5 px-6 rounded-full font-medium flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
               style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }}
             >

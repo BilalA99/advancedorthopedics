@@ -690,8 +690,13 @@ async function checkDateOfBirthStaysFirstParty() {
       fail(check, `${PERSISTENCE_MODULE} puts the date of birth in an email subject: ${line.trim()}`);
     }
   }
-  if (dobPattern.test(stripComments(await read(RESOLVER_MODULE)))) {
-    fail(check, `${RESOLVER_MODULE} mentions the date of birth; the subject builder must not carry it.`);
+  // Only the subject builder: resolveIntake takes the date of birth on purpose
+  // since 2026-10-26, to route an under-20 lead as unqualified.
+  const subjectBuilder = extractFunctionBody(stripComments(await read(RESOLVER_MODULE)), 'subjectWithInsurance');
+  if (!subjectBuilder) {
+    fail(check, `${RESOLVER_MODULE} no longer has subjectWithInsurance; update this check.`);
+  } else if (dobPattern.test(subjectBuilder)) {
+    fail(check, `${RESOLVER_MODULE} subjectWithInsurance mentions the date of birth; the subject must not carry it.`);
   }
 }
 

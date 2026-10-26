@@ -230,8 +230,9 @@ test('historical best_time values are preserved, not destroyed', () => {
 // ─────────────── server-authoritative qualification (section 9) ───────────────
 
 test('the server decides qualification, and the endpoint returns it', () => {
-  assert.match(RESOLVER, /resolveLeadRouting\(insuranceType\)/, 'the shared resolver does not classify insurance server-side');
-  assert.match(ROUTE, /resolveIntake\(\{ insuranceType: body\.insurance_type \}\)/, 'endpoint does not classify insurance server-side');
+  // Since 2026-10-26 the date of birth rides along, so an under-20 lead is unqualified.
+  assert.match(RESOLVER, /resolveLeadRouting\(insuranceType(, dateOfBirth)?\)/, 'the shared resolver does not classify insurance server-side');
+  assert.match(ROUTE, /resolveIntake\(\{ insuranceType: body\.insurance_type(, dateOfBirth)? \}\)/, 'endpoint does not classify insurance server-side');
   assert.match(ROUTE, /\.\.\.acceptance, \.\.\.routing/, 'endpoint does not return the routing decision');
 
   // Every intake endpoint, not just this one.

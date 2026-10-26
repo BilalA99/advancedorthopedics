@@ -29,6 +29,8 @@ import { InsuranceSelect } from "@/components/InsuranceSelect"
 import { DateOfBirthInput } from "@/components/DateOfBirthInput"
 import {
   DATE_OF_BIRTH_INVALID_MESSAGE,
+  UNDER_MINIMUM_AGE_MESSAGE,
+  isUnderMinimumAge,
   isValidDateOfBirth,
 } from "@/lib/date-of-birth"
 import { STATE_OPTIONS } from "@/lib/stateUtils"
@@ -42,7 +44,7 @@ const formSchema = z.object({
   reason: z.string().min(2, "Please provide more detail about your consultation needs"),
   insuranceType: z.string().min(1, "Please select your insurance"),
   // Optional (2026-10-18). First-party only: see lib/date-of-birth.ts.
-  dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE),
+  dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE).refine((value) => !isUnderMinimumAge(value), UNDER_MINIMUM_AGE_MESSAGE),
   country: z.string(),
   state: z.string().min(1, "Please select your state"),
 })
@@ -79,6 +81,9 @@ export function PatientAdvocateForm() {
       state: "",
     },
   })
+  // Under 20 is not accepted (2026-10-25); the message shows under the date field.
+  const dateOfBirthValue = form.watch("dateOfBirth")
+  const underMinimumAge = isUnderMinimumAge(dateOfBirthValue)
 
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -354,7 +359,7 @@ export function PatientAdvocateForm() {
               </FormItem>
             )}
           />
-          <button type="submit" className="w-full self-center flex items-center justify-center mt-[40px]" disabled={disabled} >
+          <button type="submit" className="w-full self-center flex items-center justify-center mt-[40px]" disabled={disabled || underMinimumAge} >
             {disabled ? (
               <div className="max-h-[56px] group h-full px-[32px] py-[16px] hover:bg-[#252932] rounded-[62px] relative flex bg-[#0A50EC] text-white text-[14px] font-semibold w-full justify-center items-center hover:cursor-not-allowed">
                 <span className="text-white">Sending...</span>

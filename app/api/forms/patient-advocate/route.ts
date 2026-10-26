@@ -47,10 +47,10 @@ export async function POST(request: Request) {
 
     // Insurance qualification, decided server-side by the same rule every other
     // intake endpoint uses (lib/intake-submission.ts). ZIP is no longer read.
-    const intake = resolveIntake({ insuranceType: body.insurance_type });
-    const { routing } = intake;
     // Normalised, never rejected: a missing or invalid value is stored as NULL.
     const dateOfBirth = normalizeDateOfBirth(body.date_of_birth) ?? undefined;
+    const intake = resolveIntake({ insuranceType: body.insurance_type, dateOfBirth });
+    const { routing } = intake;
 
     await sendContactEmail({
       name: fullName,

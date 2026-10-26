@@ -218,7 +218,7 @@ export async function sendUserEmail(formData: {
   // The server's qualification decision, for the injury-page forms that call this
   // action directly (2026-10-24). The /api/forms routes spread their own routing
   // over this; it is the same function on the same value, so the two agree.
-  return { ok: true as const, submissionId, ...resolveLeadRouting(formData.insurance_type) };
+  return { ok: true as const, submissionId, ...resolveLeadRouting(formData.insurance_type, formData.date_of_birth) };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -383,7 +383,7 @@ export async function sendMRIContactEmail(formData: {
   }
 
   // D10: server-decided qualification, as for the other questionnaires.
-  return { ok: true as const, submissionId, ...resolveLeadRouting(formData.insurance_type) };
+  return { ok: true as const, submissionId, ...resolveLeadRouting(formData.insurance_type, formData.date_of_birth) };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -474,7 +474,7 @@ export async function sendCandidacyEmail(formData: {
   // /api/forms/* endpoints do it. This questionnaire asks for insurance, so a
   // lead whose plan the practice cannot serve must not fire the qualified
   // conversion just because the form submitted successfully.
-  return { ok: true as const, submissionId, ...resolveLeadRouting(formData.insurance_type) };
+  return { ok: true as const, submissionId, ...resolveLeadRouting(formData.insurance_type, formData.date_of_birth) };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -568,7 +568,7 @@ export const sendConditionCheckEmail = async (formData: {
   }
 
   // D10: server-decided qualification, as above.
-  return { ok: true as const, submissionId, ...resolveLeadRouting(formData.insurance_type) };
+  return { ok: true as const, submissionId, ...resolveLeadRouting(formData.insurance_type, formData.date_of_birth) };
 };
 
 // ─────────────────────────────────────────────────────────────────────────────

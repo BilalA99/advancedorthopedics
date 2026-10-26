@@ -17,11 +17,15 @@ import { renderToStaticMarkup } from 'react-dom/server';
 
 import { DateOfBirthInput } from '../components/DateOfBirthInput';
 import {
+  ageOn,
   formatDateOfBirthForStaff,
+  isUnderMinimumAge,
   isValidDateOfBirth,
   normalizeDateOfBirth,
+  UNDER_MINIMUM_AGE_MESSAGE,
 } from '../lib/date-of-birth';
-import { subjectWithInsurance } from '../lib/intake-submission';
+import { resolveIntake, subjectWithInsurance } from '../lib/intake-submission';
+import { resolveLeadRouting } from '../lib/insurance-routing';
 
 const root = path.join(import.meta.dirname, '..');
 const readSource = (rel: string) => readFileSync(path.join(root, rel), 'utf8');
@@ -133,5 +137,60 @@ test('the date of birth never reaches the email subject or a tracking module', (
     assert.match(persistence,
       new RegExp(`date_of_birth:\\s+formData\\.date_of_birth,\\s+form_source:\\s+'${source}'`),
       `the ${source} action does not store the date of birth`);
+  }
+});
+
+// ───────────── under 20 is not accepted (Abubeckr, 2026-10-25) ─────────────
+
+test('age is whole years, and the 20th birthday is the first accepted day', () => {
+  const today = new Date(2026, 9, 26, 12); // 26 Oct 2026, local time
+  assert.equal(ageOn('2006-10-26', today), 20);
+  assert.equal(ageOn('2006-10-27', today), 19);
+  assert.equal(isUnderMinimumAge('2006-10-26', today), false);
+  assert.equal(isUnderMinimumAge('2006-10-27', today), true);
+  assert.equal(isUnderMinimumAge('2010-01-01', today), true);
+  assert.equal(isUnderMinimumAge('1985-04-23', today), false);
+});
+
+test('a blank or invalid date of birth is never treated as under 20', () => {
+  for (const value of ['', null, undefined, '2010-02-30', 'not a date']) {
+    assert.equal(isUnderMinimumAge(value as string), false, String(value));
+  }
+});
+
+test('an under-20 lead is unqualified whatever the insurance, on the server', () => {
+  const young = '2015-06-01';
+  assert.deepEqual(resolveLeadRouting('Aetna', young),
+    { qualification: 'unqualified', destination: 'other_thank_you' });
+  assert.equal(resolveIntake({ insuranceType: 'Aetna', dateOfBirth: young }).routing.qualification, 'unqualified');
+  // Blank date of birth: insurance alone decides, as before.
+  assert.equal(resolveLeadRouting('Aetna', '').qualification, 'qualified');
+  assert.equal(resolveLeadRouting('Aetna', '1985-04-23').qualification, 'qualified');
+});
+
+test('the date input shows the under-20 message itself', () => {
+  const young = React.createElement(DateOfBirthInput, { id: 'dob', value: '2015-06-01', onChange: () => {} });
+  const adult = React.createElement(DateOfBirthInput, { id: 'dob', value: '1985-04-23', onChange: () => {} });
+  assert.match(renderToStaticMarkup(young), new RegExp(UNDER_MINIMUM_AGE_MESSAGE.replace(/[.]/g, '\.')));
+  assert.doesNotMatch(renderToStaticMarkup(adult), /20 and older/);
+});
+
+test('every patient form refuses an under-20 date and disables its submit button', () => {
+  for (const file of INTAKE_FORMS) {
+    const source = stripComments(readSource(file));
+    assert.match(source, /isUnderMinimumAge\(/, `${file} does not check the minimum age`);
+    // MiniContactForm has no submit button of its own (its only button opens the
+    // Book an Appointment popup); its validation still refuses an under-20 date.
+    if (file === 'components/MiniContactForm.tsx') continue;
+    assert.match(source, /disabled=\{[^}]*(underMinimumAge|isUnderMinimumAge)/, `${file} does not disable its submit button for under 20`);
+  }
+});
+
+test('every server action and endpoint passes the date of birth into the routing decision', () => {
+  // Raw source: stripComments would treat the "/*" in "/api/forms/*" as a comment start.
+  const actions = readSource('components/email/sendcontactemail.ts');
+  assert.equal((actions.match(/resolveLeadRouting\(formData\.insurance_type, formData\.date_of_birth\)/g) || []).length, 4);
+  for (const file of INTAKE_ROUTES) {
+    assert.match(stripComments(readSource(file)), /resolveIntake\(\{[^}]*dateOfBirth/, `${file} does not pass the date of birth to resolveIntake`);
   }
 });

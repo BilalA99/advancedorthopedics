@@ -33,12 +33,15 @@ export type IntakeResolution = { ok: true; routing: LeadRoutingDecision };
  */
 export function resolveIntake({
   insuranceType,
+  dateOfBirth,
 }: {
   insuranceType?: string | null;
+  /** Under 20 is never qualified (2026-10-25); blank is not judged. */
+  dateOfBirth?: string | null;
 }): IntakeResolution {
   return {
     ok: true,
-    routing: resolveLeadRouting(insuranceType),
+    routing: resolveLeadRouting(insuranceType, dateOfBirth),
   };
 }
 

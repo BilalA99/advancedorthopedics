@@ -21,7 +21,7 @@ import {
   pathForDestination,
 } from '@/lib/insurance-routing'
 import { DateOfBirthInput } from '@/components/DateOfBirthInput'
-import { DATE_OF_BIRTH_INVALID_MESSAGE, isValidDateOfBirth } from '@/lib/date-of-birth'
+import { DATE_OF_BIRTH_INVALID_MESSAGE, UNDER_MINIMUM_AGE_MESSAGE, isUnderMinimumAge, isValidDateOfBirth } from '@/lib/date-of-birth'
 
 /**
  * Value -> patient-facing label for the insurance question.
@@ -59,7 +59,7 @@ const formSchema = z.object({
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   state: z.string(),
   insurance_type: z.string(),
-  dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE),
+  dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE).refine((value) => !isUnderMinimumAge(value), UNDER_MINIMUM_AGE_MESSAGE),
   comments: z.string(),
   email_optout: z.string()
 })
@@ -120,6 +120,9 @@ export default function ConditionCheckSection({
       email_optout: ""
     },
   })
+  // Under 20 is not accepted (2026-10-25); the message shows under the date field.
+  const dateOfBirthValue = ConditionForm.watch("dateOfBirth")
+  const underMinimumAge = isUnderMinimumAge(dateOfBirthValue)
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setDisabled(true)
     const { dateOfBirth, ...rest } = values
@@ -365,7 +368,7 @@ export default function ConditionCheckSection({
           ) : null}
           <button
             type="button"
-            disabled={disabled}
+            disabled={disabled || (ConditionStep == steps.length && underMinimumAge)}
             onClick={() => {
               if (ConditionStep != steps.length) {
                 setConditionStep(Math.min(steps.length, ConditionStep + 1))

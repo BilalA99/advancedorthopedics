@@ -49,7 +49,7 @@ import {
 import { normalizeState } from '@/lib/stateUtils'
 import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid'
 import { DateOfBirthInput } from '@/components/DateOfBirthInput'
-import { DATE_OF_BIRTH_INVALID_MESSAGE, isValidDateOfBirth } from '@/lib/date-of-birth'
+import { DATE_OF_BIRTH_INVALID_MESSAGE, UNDER_MINIMUM_AGE_MESSAGE, isUnderMinimumAge, isValidDateOfBirth } from '@/lib/date-of-birth'
 
 /** Value -> patient-facing label for the insurance question. */
 const INSURANCE_LABELS: Record<string, string> = Object.fromEntries(
@@ -68,7 +68,7 @@ const formSchema = z.object({
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   state: z.string().min(2, "State must selected"),
   insurance_type: z.string().min(2, "Insurance type must be selected"),
-  dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE),
+  dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE).refine((value) => !isUnderMinimumAge(value), UNDER_MINIMUM_AGE_MESSAGE),
   comments: z.string(),
   email_optout: z.string(),
   bestTime: z.string().min(1, "Please provide more detail about your consultation needs")
@@ -260,6 +260,9 @@ export default function FreeMRIReviewClient({ reviews }: { reviews: SocialProofR
       email_optout: "false"
     },
   })
+  // Under 20 is not accepted (2026-10-25); the message shows under the date field.
+  const dateOfBirthValue = ConditionForm.watch("dateOfBirth")
+  const underMinimumAge = isUnderMinimumAge(dateOfBirthValue)
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setDisabled(true)
     setSubmitError(null)
@@ -575,7 +578,7 @@ export default function FreeMRIReviewClient({ reviews }: { reviews: SocialProofR
                   : <></>
               }
               <button
-                disabled={disabled}
+                disabled={disabled || (ConditionStep == 2 && underMinimumAge)}
                 onClick={
                   () => {
                     // const parse = formSchema.safeParse(ConditionForm.getValues());

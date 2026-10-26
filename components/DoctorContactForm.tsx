@@ -32,6 +32,8 @@ import { InsuranceSelect } from "@/components/InsuranceSelect"
 import { DateOfBirthInput } from "@/components/DateOfBirthInput"
 import {
   DATE_OF_BIRTH_INVALID_MESSAGE,
+  UNDER_MINIMUM_AGE_MESSAGE,
+  isUnderMinimumAge,
   isValidDateOfBirth,
 } from "@/lib/date-of-birth"
 import { EMPTY_ATTRIBUTION, getAttributionData } from "@/lib/gclid"
@@ -56,7 +58,7 @@ const formSchema = z.object({
     reason: z.string().min(2),
     insuranceType: z.string().min(1, "Please select your insurance"),
     // Optional (2026-10-18). First-party only: see lib/date-of-birth.ts.
-    dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE),
+    dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE).refine((value) => !isUnderMinimumAge(value), UNDER_MINIMUM_AGE_MESSAGE),
     insuranceCardFront: z.instanceof(File).optional().or(z.null()),
     insuranceCardBack: z.instanceof(File).optional().or(z.null()),
     // HONEYPOT FIELD - bots will fill this
@@ -129,6 +131,9 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
             state: resolvedState,
         },
     })
+    // Under 20 is not accepted (2026-10-25); the message shows under the date field.
+    const dateOfBirthValue = form.watch("dateOfBirth")
+    const underMinimumAge = isUnderMinimumAge(dateOfBirthValue)
 
     useEffect(() => {
         setAttribution(getAttributionData())
@@ -1007,7 +1012,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
 
                                             <button
                                                 className="w-full self-center flex items-center justify-center"
-                                                disabled={disabled}
+                                                disabled={disabled || underMinimumAge}
                                                 onClick={form.handleSubmit(onSubmit)}
                                             >
                                                 {disabled ? (

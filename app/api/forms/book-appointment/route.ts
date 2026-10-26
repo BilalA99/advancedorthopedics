@@ -89,6 +89,7 @@ export async function POST(request: Request) {
       normalizeDateOfBirth(getString(formData, "date_of_birth")) ?? undefined;
     const intake = resolveIntake({
       insuranceType,
+      dateOfBirth,
     });
     const { routing } = intake;
 

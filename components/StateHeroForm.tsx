@@ -36,6 +36,8 @@ import { InsuranceSelect } from "@/components/InsuranceSelect"
 import { DateOfBirthInput } from "@/components/DateOfBirthInput"
 import {
   DATE_OF_BIRTH_INVALID_MESSAGE,
+  UNDER_MINIMUM_AGE_MESSAGE,
+  isUnderMinimumAge,
   isValidDateOfBirth,
 } from "@/lib/date-of-birth"
 import { EMPTY_ATTRIBUTION, getAttributionData } from '@/lib/gclid'
@@ -49,7 +51,7 @@ const formSchema = z.object({
   phone: z.string().min(1, 'Phone required'),
   insuranceType: z.string().min(1, "Please select your insurance"),
   // Optional (2026-10-18). First-party only: see lib/date-of-birth.ts.
-  dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE),
+  dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE).refine((value) => !isUnderMinimumAge(value), UNDER_MINIMUM_AGE_MESSAGE),
   reason: z.string().min(2, 'Please describe your needs'),
   country: z.string(),
   state: z.string().min(1, 'Please select your state'),
@@ -85,6 +87,9 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
       state: resolvedState,
     },
   })
+  // Under 20 is not accepted (2026-10-25); the message shows under the date field.
+  const dateOfBirthValue = form.watch("dateOfBirth")
+  const underMinimumAge = isUnderMinimumAge(dateOfBirthValue)
 
   const handleFirstPhase = async () => {
     const valid = await form.trigger(['firstName', 'lastName', 'email', 'phone'])
@@ -427,7 +432,7 @@ export default function StateHeroForm({ defaultState, stateName }: Props) {
             ) : (
               <button
                 type="submit"
-                disabled={disabled}
+                disabled={disabled || underMinimumAge}
                 className="w-full h-12 mt-1 rounded-[62px] bg-[#0A50EC] text-white font-semibold text-sm hover:bg-[#252932] transition-colors duration-200 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 style={{ fontFamily: 'var(--font-public-sans)' }}
               >

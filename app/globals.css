@@ -338,3 +338,11 @@ ol li p {
    rhythm inside these containers only. */
 .rich-prose p + p { margin-top: 1em; }
 .rich-prose p + ul, .rich-prose ul + p, .rich-prose p + h3, .rich-prose h3 + p { margin-top: 0.75em; }
+
+/* Under 20 is not accepted (2026-10-25). When a form shows that message, its
+   disabled submit button must also look disabled; some buttons wrap the blue
+   pill in a plain element, so dim the whole button. Scoped to that case only. */
+form:has([data-under-minimum-age]) button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

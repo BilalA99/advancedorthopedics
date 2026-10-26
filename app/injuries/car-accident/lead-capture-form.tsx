@@ -30,6 +30,8 @@ import { InsuranceSelect } from "@/components/InsuranceSelect"
 import { DateOfBirthInput } from "@/components/DateOfBirthInput"
 import {
     DATE_OF_BIRTH_INVALID_MESSAGE,
+    UNDER_MINIMUM_AGE_MESSAGE,
+    isUnderMinimumAge,
     isValidDateOfBirth,
 } from "@/lib/date-of-birth"
 
@@ -49,7 +51,7 @@ const leadSchema = z.object({
     // Insurance, required (2026-10-24): same seven options and routing as the shared intake forms.
     insuranceType: z.string().min(1, "Please select your insurance"),
     // Date of birth, optional: Supabase and the staff email only, never a URL or ad platform.
-    dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE),
+    dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE).refine((value) => !isUnderMinimumAge(value), UNDER_MINIMUM_AGE_MESSAGE),
 })
 
 type LeadFormData = z.infer<typeof leadSchema>
@@ -109,6 +111,9 @@ export function CarAccidentLeadCaptureForm() {
             dateOfBirth: "",
         },
     })
+    // Under 20 is not accepted (2026-10-25); the message shows under the date field.
+    const dateOfBirthValue = form.watch("dateOfBirth")
+    const underMinimumAge = isUnderMinimumAge(dateOfBirthValue)
     async function onSubmit(values: z.infer<typeof leadSchema>) {
         setIsSubmitting(true)
         const data = await sendContactEmail({ name: values.firstName, email: values.email, phone: values.phone, reason: values.injuryType, bestTime: values.painLevel, has_attorney: values.hasAttorney, injury_type: values.injuryType, pain_level: values.painLevel, location: values.location, state: values.state, insurance_type: values.insuranceType, date_of_birth: values.dateOfBirth || undefined, gclid: attribution.gclid, utm_source: attribution.utm_source, utm_medium: attribution.utm_medium, utm_campaign: attribution.utm_campaign, utm_term: attribution.utm_term, utm_content: attribution.utm_content })
@@ -734,7 +739,7 @@ export function CarAccidentLeadCaptureForm() {
 
                                 <Button
                                     className="w-full max-h-[56px] h-full px-[32px] py-[16px] rounded-[62px] relative flex bg-[#0A50EC] text-white text-[14px] font-semibold justify-center items-center hover:cursor-pointer"
-                                    disabled={isSubmitting}
+                                    disabled={isSubmitting || underMinimumAge}
                                     onClick={(e) => {
                                         e.preventDefault()
                                         form.handleSubmit(onSubmit)()

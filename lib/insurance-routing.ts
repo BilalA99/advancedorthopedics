@@ -37,6 +37,8 @@
  * docs/operations/mso-intake-form-insurance-routing/03-tracking-audit.md.
  */
 
+import { isUnderMinimumAge } from "@/lib/date-of-birth";
+
 export type InsuranceQualification = "qualified" | "unqualified";
 
 export interface InsuranceOption {
@@ -157,8 +159,14 @@ export function pathForDestination(destination: LeadDestination): string {
  * or forged value is `"unqualified"` and routes to the neutral confirmation, so a
  * hand-crafted POST cannot mint a qualified conversion.
  */
-export function resolveLeadRouting(value: string | null | undefined): LeadRoutingDecision {
-  const qualification = classifyInsurance(value);
+export function resolveLeadRouting(
+  value: string | null | undefined,
+  dateOfBirth?: string | null,
+): LeadRoutingDecision {
+  // Under 20 is never a qualified lead, whatever the plan (Abubeckr, 2026-10-25).
+  // The forms already refuse an under-20 date; this covers a stale page or a
+  // hand-made POST. A blank date of birth is not judged (the field is optional).
+  const qualification = isUnderMinimumAge(dateOfBirth) ? "unqualified" : classifyInsurance(value);
   return { qualification, destination: destinationFor(qualification) };
 }
 

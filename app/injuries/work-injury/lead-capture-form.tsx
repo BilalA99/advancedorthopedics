@@ -28,6 +28,8 @@ import { InsuranceSelect } from "@/components/InsuranceSelect"
 import { DateOfBirthInput } from "@/components/DateOfBirthInput"
 import {
     DATE_OF_BIRTH_INVALID_MESSAGE,
+    UNDER_MINIMUM_AGE_MESSAGE,
+    isUnderMinimumAge,
     isValidDateOfBirth,
 } from "@/lib/date-of-birth"
 
@@ -43,7 +45,7 @@ const leadSchema = z.object({
     // Insurance, required (2026-10-24): same seven options and routing as the shared intake forms.
     insuranceType: z.string().min(1, "Please select your insurance"),
     // Date of birth, optional: Supabase and the staff email only, never a URL or ad platform.
-    dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE),
+    dateOfBirth: z.string().refine((value) => value === "" || isValidDateOfBirth(value), DATE_OF_BIRTH_INVALID_MESSAGE).refine((value) => !isUnderMinimumAge(value), UNDER_MINIMUM_AGE_MESSAGE),
 })
 
 type LeadFormData = z.infer<typeof leadSchema>
@@ -91,6 +93,9 @@ export function WorkInjuryLeadCaptureForm() {
             dateOfBirth: "",
         },
     })
+    // Under 20 is not accepted (2026-10-25); the message shows under the date field.
+    const dateOfBirthValue = form.watch("dateOfBirth")
+    const underMinimumAge = isUnderMinimumAge(dateOfBirthValue)
 
     async function onSubmit(values: z.infer<typeof leadSchema>) {
         setIsSubmitting(true)
@@ -569,7 +574,7 @@ export function WorkInjuryLeadCaptureForm() {
                                 <Button
                                     type="button"
                                     className="w-full max-h-[56px] h-full px-[32px] py-[16px] rounded-[62px] relative flex bg-[#0A50EC] text-white text-[14px] font-semibold justify-center items-center hover:cursor-pointer"
-                                    disabled={isSubmitting}
+                                    disabled={isSubmitting || underMinimumAge}
                                     data-cta="work-injury-schedule-evaluation"
                                     onClick={(e) => {
                                         e.preventDefault()
