@@ -605,8 +605,8 @@ export function CarAccidentLeadCaptureForm() {
                                             </FormLabel>
                                             <FormControl>
                                                 <Select onValueChange={(value) => field.onChange(value)}>
-                                                    <SelectTrigger aria-label="Select pain level" className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm`}>
-                                                        <SelectValue placeholder="Select pain level" className="font-[var(--font-inter)] h-12 text-lg" />
+                                                    <SelectTrigger aria-label="Select location" className={`w-full h-12 px-6 bg-[#f0f5ff] border rounded-sm`}>
+                                                        <SelectValue placeholder="Select location" className="font-[var(--font-inter)] h-12 text-lg" />
                                                     </SelectTrigger>
                                                     <SelectContent>
                                                         {clinics.map((level) => (
