@@ -166,7 +166,7 @@ export function PatientAdvocateForm() {
       <Form {...form}
 
       >
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-1">
+        <form method="post" onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-1">
           <input type="hidden" name="country" value="US" />
           <input type="hidden" name="gclid" value={attribution.gclid} />
           <input type="hidden" name="utm_source" value={attribution.utm_source} />

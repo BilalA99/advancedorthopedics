@@ -322,7 +322,7 @@ export default function BodyPartHeroForm({
         </div>
 
         {/* Initial Form */}
-        <form onSubmit={handleInitialSubmit} className="space-y-3">
+        <form method="post" onSubmit={handleInitialSubmit} className="space-y-3">
           {/* Name Field */}
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -408,7 +408,7 @@ export default function BodyPartHeroForm({
             Complete Your {bodyPartTitle} Pain Consultation Request
           </DialogTitle>
 
-          <form
+          <form method="post"
             ref={formRef}
             className="space-y-4 p-1 overflow-y-auto flex-1 pr-2 relative"
             onSubmit={handleFullSubmit}

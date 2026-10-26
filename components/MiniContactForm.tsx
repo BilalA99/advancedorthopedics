@@ -137,7 +137,7 @@ export function MiniContactForm({ backgroundcolor = 'white' }: { backgroundcolor
       <Form {...form}
 
       >
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
+        <form method="post" onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
           {/* Name Fields */}
           <div className="grid grid-cols-1  gap-6">
             <FormField

@@ -214,7 +214,7 @@ export default function ConditionCheckSection({
             </div>
           ) : null}
           <Form {...ConditionForm}>
-            <form className=' flex flex-col space-y-[24px] ' aria-labelledby="condition-check-step-title">
+            <form method="post" className=' flex flex-col space-y-[24px] ' aria-labelledby="condition-check-step-title">
               {steps[ConditionStep - 1].questions.map((question: any) => (
                 <React.Fragment key={question.question}>
                 <FormField

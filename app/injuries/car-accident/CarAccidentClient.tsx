@@ -1277,7 +1277,7 @@ export default function CarAccidentClient({ faqs, doctors }: CarAccidentClientPr
                                         >
                                             {/* <Card className="p-6">
                                                     <h3 className="text-xl font-semibold mb-4">Attorney Coordination Form</h3>
-                                                    <form className="space-y-4">
+                                                    <form method="post" className="space-y-4">
                                                         <div className="grid md:grid-cols-2 gap-4">
                                                             <div className="flex flex-col gap-2">
                                                                 <Label htmlFor="firm-name">Law Firm Name</Label>

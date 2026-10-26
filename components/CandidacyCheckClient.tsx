@@ -428,7 +428,7 @@ export default function CandidacyCheckClient({ reviews }: { reviews: SocialProof
             }
 
             <Form {...form}>
-              <form className=' flex flex-col space-y-[24px] ' onSubmit={(e) => e.preventDefault()}>
+              <form method="post" className=' flex flex-col space-y-[24px] ' onSubmit={(e) => e.preventDefault()}>
                 {CandidacyCheckSteps[conditionStep - 1].questions.map((question) => (
                   <React.Fragment key={question.question}>
                   <FormField

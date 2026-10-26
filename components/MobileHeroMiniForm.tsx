@@ -243,7 +243,7 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
           </p>
         </div>
 
-        <form onSubmit={handleInitialSubmit} className="space-y-3">
+        <form method="post" onSubmit={handleInitialSubmit} className="space-y-3">
           {/* Honeypot */}
           <input
             type="text"
@@ -318,7 +318,7 @@ export default function MobileHeroMiniForm({ pageType, cityName, defaultState = 
             Complete Your Appointment Request
           </DialogTitle>
 
-          <form ref={formRef} className="space-y-4 p-1 overflow-y-auto flex-1 pr-2 relative" onSubmit={handleFullSubmit}>
+          <form method="post" ref={formRef} className="space-y-4 p-1 overflow-y-auto flex-1 pr-2 relative" onSubmit={handleFullSubmit}>
             <input type="hidden" name="country" value="US" />
 
             {/* Name */}

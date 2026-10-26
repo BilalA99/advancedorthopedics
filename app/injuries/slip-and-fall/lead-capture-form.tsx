@@ -262,7 +262,7 @@ export function LeadCaptureForm() {
                 </div>
 
                 <Form {...form}>
-                    <form className="space-y-6">
+                    <form method="post" className="space-y-6">
                         <div className="grid grid-cols-2 gap-4">
 
                             <FormField
@@ -370,7 +370,7 @@ export function LeadCaptureForm() {
                             )}
                         />
 
-                        <Button
+                        <Button type="button"
                             className="w-full max-h-[56px] h-full px-[32px] py-[16px] rounded-[62px] relative flex bg-[#0A50EC] text-white text-[14px] font-semibold justify-center items-center hover:cursor-pointer"
                             disabled={isSubmitting}
                             data-cta="schedule-evaluation"
@@ -416,7 +416,7 @@ export function LeadCaptureForm() {
                                     <Calendar className="w-5 h-5 text-[#0A50EC] shrink-0" />
                                     Schedule Your Evaluation
                                 </DialogTitle>
-                                <form className="space-y-4 flex flex-col ">
+                                <form method="post" className="space-y-4 flex flex-col ">
 
                                     <div className="grid grid-cols-2 gap-4">
 

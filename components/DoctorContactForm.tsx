@@ -330,7 +330,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
             {/* Content */}
             <div className="relative z-10">
                 <Form {...form}>
-                    <form className="sm:space-y-8 space-y-4">
+                    <form method="post" className="sm:space-y-8 space-y-4">
                         <input type="hidden" name="country" value="US" />
                         {/* Contact Fields */}
                         <div className="w-full flex flex-col sm:space-y-6 space-y-4">
@@ -638,7 +638,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                             <DialogContent className="rounded-[20px] max-h-[90vh] sm:min-w-3xl overflow-hidden flex flex-col" >
                                 <DialogTitle>Book Your Appointment</DialogTitle>
                                 <Form {...form}>
-                                    <form
+                                    <form method="post"
                                         ref={formRef}
                                         className="sm:space-y-6 space-y-2 p-1 overflow-y-auto flex-1 pr-2 relative"
                                         onSubmit={form.handleSubmit(onSubmit)}

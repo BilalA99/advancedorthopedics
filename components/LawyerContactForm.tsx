@@ -266,7 +266,7 @@ export function LawyerContactForm() {
 
                 {/* Step 1: Basic attorney info */}
                 <Form {...form}>
-                    <form className="space-y-6">
+                    <form method="post" className="space-y-6">
                         <div className="grid grid-cols-2 gap-4">
                             <FormField
                                 control={form.control}
@@ -342,7 +342,7 @@ export function LawyerContactForm() {
                             Complete Attorney Coordination Request
                         </DialogTitle>
                         <Form {...form}>
-                            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+                            <form method="post" onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
                                 {/* Attorney Info (prefilled) */}
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <FormField control={form.control} name="firmName" render={({ field }) => (

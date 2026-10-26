@@ -399,7 +399,7 @@ export default function FreeMRIReviewClient({ reviews }: { reviews: SocialProofR
                   <></>
               }
               <Form {...ConditionForm}>
-                <form className=' flex flex-col space-y-[24px] ' >
+                <form method="post" className=' flex flex-col space-y-[24px] ' >
                   {
                     FreeMriReviewSteps[ConditionStep - 1].questions.map((question) => (
                       <React.Fragment key={question.question}>

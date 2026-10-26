@@ -702,6 +702,27 @@ async function checkDateOfBirthStaysFirstParty() {
 }
 
 /**
+ * Every lead form posts, never GETs, if it is submitted before the page loads
+ * (2026-10-26). A <form> with no method defaults to GET, so a tap before the
+ * JavaScript loads wrote every named field (name, email, phone) into the URL,
+ * where analytics records it as the page address. method="post" keeps the
+ * fields in the request body.
+ */
+async function checkLeadFormsNeverGet() {
+  const check = 'lead forms never submit as GET';
+  for (const label of [...CONVERSION_GATED_FORMS, 'components/LawyerContactForm.tsx']) {
+    const source = stripComments(await read(label));
+    const tags = source.match(/<form(?=[\s>])[^>]*/g) || [];
+    if (tags.length === 0) fail(check, `${label} has no <form> tag; update this check.`);
+    for (const tag of tags) {
+      if (!/method="post"/.test(tag)) {
+        fail(check, `${label} has a <form> without method="post"; a submit before the page loads would put the fields in the URL.`);
+      }
+    }
+  }
+}
+
+/**
  * "Best Time To Contact" must stay removed from the intake path.
  *
  * Scoped to intake on purpose: the MRI-review, candidacy and condition-check
@@ -849,6 +870,7 @@ const CHECKS = [
   ['ZIP stays removed from intake', checkZipStaysRemovedFromIntake],
   ['insurance is a native select and never named', checkInsuranceIsANativeSelect],
   ['date of birth stays first-party and is never named', checkDateOfBirthStaysFirstParty],
+  ['lead forms never submit as GET', checkLeadFormsNeverGet],
   ['best time to contact stays removed from intake', checkBestTimeStaysRemovedFromIntake],
   ['every intake form gates the qualified conversion', checkEveryIntakeFormGatesTheConversion],
   ['intake form element ids are component-scoped', checkFormElementIdsAreScoped],

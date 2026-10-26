@@ -308,7 +308,7 @@ export default function BookAnAppoitmentButton({
                 <DialogContent className="max-h-[90vh] w-full sm:min-w-[36rem] md:min-w-3xl overflow-hidden flex flex-col rounded-none sm:rounded-[20px] p-4 sm:p-6" >
                     <DialogTitle>Book an Appointment</DialogTitle>
                     <Form {...form}>
-                        <form
+                        <form method="post"
                             ref={formRef}
                             className="space-y-6 p-1 sm:p-1 overflow-y-auto flex-1 pr-2 relative"
                             onSubmit={form.handleSubmit(onSubmit)}

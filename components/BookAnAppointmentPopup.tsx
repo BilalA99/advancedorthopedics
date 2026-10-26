@@ -183,7 +183,7 @@ export default function BookAnAppointmentPopup() {
             >
                 {/* Might need to add location selector here and replace appointment date and time with Best */}
                 <Form {...form} >
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
+                    <form method="post" onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
 
                         {/* Name Fields */}
                         <div className="grid grid-cols-1  gap-6">
