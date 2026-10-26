@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { cn } from "@/lib/utils"
-import { getInsuranceOptions, INSURANCE_PLACEHOLDER } from "@/lib/insurance-routing"
+import { getInsuranceOptions, INSURANCE_PLACEHOLDER, type InjuryInsuranceExtra } from "@/lib/insurance-routing"
 
 /**
  * The intake insurance question, as a NATIVE <select> (Abubeckr, 2026-10-14, item 9).
@@ -33,10 +33,12 @@ export type InsuranceSelectProps = Omit<
 > & {
   value: string
   onChange: (value: string) => void
+  /** Injury pages only: adds Auto insurance / PIP or Workers' compensation (2026-10-26). */
+  extra?: InjuryInsuranceExtra
 }
 
 export const InsuranceSelect = React.forwardRef<HTMLSelectElement, InsuranceSelectProps>(
-  function InsuranceSelect({ value, onChange, className, ...props }, ref) {
+  function InsuranceSelect({ value, onChange, className, extra, ...props }, ref) {
     return (
       <select
         ref={ref}
@@ -55,7 +57,7 @@ export const InsuranceSelect = React.forwardRef<HTMLSelectElement, InsuranceSele
         <option value="" disabled>
           {INSURANCE_PLACEHOLDER}
         </option>
-        {getInsuranceOptions().map(({ value: optionValue, label }) => (
+        {getInsuranceOptions(extra).map(({ value: optionValue, label }) => (
           <option key={optionValue} value={optionValue}>
             {label}
           </option>

@@ -411,7 +411,7 @@ export function LeadCaptureForm() {
                         </Alert> */}
                         <Dialog open={isOpen} onOpenChange={setIsOpen}>
 
-                            <DialogContent>
+                            <DialogContent className="max-h-[90vh] overflow-y-auto">
                                 <DialogTitle className="flex items-center gap-2 text-[#111315] text-2xl" style={{ fontFamily: 'var(--font-public-sans)', fontWeight: 500 }}>
                                     <Calendar className="w-5 h-5 text-[#0A50EC] shrink-0" />
                                     Schedule Your Evaluation
@@ -636,7 +636,7 @@ export function LeadCaptureForm() {
                                                     </span>
                                                 </FormLabel>
                                                 <FormControl>
-                                                    <InsuranceSelect
+                                                    <InsuranceSelect extra="workers-comp"
                                                         id="slipandfall_insurance_type"
                                                         value={field.value}
                                                         onChange={field.onChange}

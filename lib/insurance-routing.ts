@@ -67,9 +67,38 @@ export const INSURANCE_OPTIONS: readonly InsuranceOption[] = Object.freeze([
   option("Marketplace or self-pay", "unqualified"),
 ]);
 
-/** The options every intake form renders, in display order. */
-export function getInsuranceOptions(): readonly InsuranceOption[] {
-  return INSURANCE_OPTIONS;
+/**
+ * Plans accepted only on the injury pages (Abubeckr and Bilal, 2026-10-24: "include
+ * auto insurance/PIP on the accident forms and workers' comp on the work injury
+ * form. Those are accepted patient types"). Israel, 2026-10-26: Auto/PIP on car
+ * accident and personal injury, workers' comp on work injury and slip and fall.
+ * Both are qualified: tracked thank-you page and the qualified conversion.
+ */
+export const AUTO_PIP_OPTION: InsuranceOption = Object.freeze(option("Auto insurance / PIP", "qualified"));
+export const WORKERS_COMP_OPTION: InsuranceOption = Object.freeze(option("Workers' compensation", "qualified"));
+
+/** Which injury-page extra a form shows, if any. */
+export type InjuryInsuranceExtra = "auto-pip" | "workers-comp";
+
+const INJURY_EXTRAS: Readonly<Record<InjuryInsuranceExtra, InsuranceOption>> = Object.freeze({
+  "auto-pip": AUTO_PIP_OPTION,
+  "workers-comp": WORKERS_COMP_OPTION,
+});
+
+/**
+ * The options a form renders, in display order. With an injury extra, that plan
+ * sits after "Other job insurance", the last accepted option, so the accepted
+ * plans stay together above the two that are not accepted.
+ */
+export function getInsuranceOptions(extra?: InjuryInsuranceExtra): readonly InsuranceOption[] {
+  if (!extra) return INSURANCE_OPTIONS;
+  const at = INSURANCE_OPTIONS.findIndex((o) => o.value === "Other job insurance") + 1;
+  return [...INSURANCE_OPTIONS.slice(0, at), INJURY_EXTRAS[extra], ...INSURANCE_OPTIONS.slice(at)];
+}
+
+/** Every value the server recognises: the seven plus the injury-page extras. */
+function allKnownOptions(): readonly InsuranceOption[] {
+  return [...INSURANCE_OPTIONS, AUTO_PIP_OPTION, WORKERS_COMP_OPTION];
 }
 
 /**
@@ -85,7 +114,7 @@ export function classifyInsurance(value: string | null | undefined): InsuranceQu
   const normalized = (value ?? "").trim().toLowerCase();
   if (!normalized) return "unqualified";
 
-  const match = getInsuranceOptions().find(
+  const match = allKnownOptions().find(
     (option) => option.value.toLowerCase() === normalized,
   );
   return match?.qualification === "qualified" ? "qualified" : "unqualified";

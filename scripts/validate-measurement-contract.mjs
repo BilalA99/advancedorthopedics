@@ -610,7 +610,8 @@ async function checkInsuranceIsANativeSelect() {
   if (/\bname\s*=/.test(component)) {
     fail(check, `${INSURANCE_SELECT_MODULE} sets a name attribute; a pre-hydration GET would put the answer in the URL.`);
   }
-  if (!/getInsuranceOptions\(\)/.test(component)) {
+  // getInsuranceOptions(extra) since 2026-10-26: the injury pages add one plan.
+  if (!/getInsuranceOptions\((extra)?\)/.test(component)) {
     fail(check, `${INSURANCE_SELECT_MODULE} does not render the shared insurance options.`);
   }
 
