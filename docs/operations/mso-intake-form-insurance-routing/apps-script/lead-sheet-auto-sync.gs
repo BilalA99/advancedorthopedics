@@ -157,6 +157,9 @@ var ACCEPTED_INSURANCE = [
   'aetna',
   'cigna',
   'other job insurance',
+  // Injury pages only, accepted since 2026-10-26 (site PR #109).
+  'auto insurance / pip',
+  "workers' compensation",
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
