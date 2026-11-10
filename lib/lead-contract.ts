@@ -25,6 +25,10 @@ export const FORM_SOURCES = [
   // channel, never the condition the ad group targeted, so no health signal
   // reaches GA4/Google Ads. First-party qualification stays in Supabase.
   "paid-landing",
+  // Meta Instant Form submissions, delivered by app/api/webhooks/meta-leadgen.
+  // The lead is captured inside Facebook/Instagram, so the "page it came from"
+  // is an ad, not a route on this site.
+  "meta-instant-form",
 ] as const;
 
 export type FormSource = (typeof FORM_SOURCES)[number];

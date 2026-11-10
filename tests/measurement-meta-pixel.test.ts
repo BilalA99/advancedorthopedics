@@ -157,12 +157,17 @@ test('clinical assessment form sources can never produce a Meta Lead', () => {
   }
 });
 
-test('every non-clinical form source is Meta-eligible', async () => {
+test('every form source is eligible unless clinical or already Meta-attributed', async () => {
   const { FORM_SOURCES } = await import('../lib/lead-contract');
+  // Suppression has exactly two causes, and they are not the same thing.
   const clinical = new Set(['condition-check', 'candidacy-check', 'free-mri-review']);
+  // Captured by Meta itself, so Meta has already counted that conversion.
+  // Reporting it back as a website Lead would double-count one lead per ad.
+  const alreadyAttributedByMeta = new Set(['meta-instant-form']);
   for (const source of FORM_SOURCES) {
+    const suppressed = clinical.has(source) || alreadyAttributedByMeta.has(source);
     assert.equal(
-      isMetaEligibleFormSource(source), !clinical.has(source),
+      isMetaEligibleFormSource(source), !suppressed,
       `${source} eligibility is wrong`,
     );
   }

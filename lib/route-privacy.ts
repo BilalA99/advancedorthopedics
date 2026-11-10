@@ -132,6 +132,10 @@ export const META_INELIGIBLE_FORM_SOURCES = [
   "condition-check",
   "candidacy-check",
   "free-mri-review",
+  // Not a clinical-data case. This lead was captured BY Meta inside an Instant
+  // Form, so reporting it back to Meta as a website Lead would double-count the
+  // same conversion against the same ad. Meta already attributes it natively.
+  "meta-instant-form",
 ] as const;
 
 /**
