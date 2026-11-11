@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { waitUntil } from "@vercel/functions";
 
-import { sendContactEmail } from "@/components/email/sendcontactemail";
+import { sendMetaLeadEmail } from "@/components/email/sendcontactemail";
 import {
   extractLeadgenChanges,
   mapLeadToContact,
@@ -15,9 +15,12 @@ import {
  *
  * Meta POSTs here the moment someone submits one of the Meta ads' Instant
  * Forms. We verify the signature, acknowledge immediately, then fetch the lead
- * and hand it to the SAME `sendContactEmail` path every website form already
- * uses — same Resend sender, same template staff recognise, same `info@`
- * recipient, same 24h idempotency key.
+ * and hand it to `sendMetaLeadEmail` — the same Resend sender and the same
+ * `info@` recipient every website form already uses, but a STAFF-facing
+ * template rather than the patient-facing one, because a scheduler reading this
+ * needs the phone number and the action, not a thank-you letter.
+ *
+ * Idempotency is keyed on Meta's lead id, so a webhook retry cannot double-send.
  *
  * Why a webhook rather than polling: Meta offers no native email delivery and
  * deletes Instant Form leads after 90 days, so the alternative is discovering
@@ -52,11 +55,28 @@ async function deliver(change: LeadgenValue, token: string): Promise<void> {
   const lead = await fetchLead(leadgenId, token);
   const contact = mapLeadToContact(lead, change);
 
-  await sendContactEmail({
-    ...contact,
-    reason: "Appointment request submitted through a Meta ad (Instant Form)",
-    state: "FL",
-    form_source: "meta-instant-form",
+  // Meta reports created_time in ISO; show it in clinic time so the scheduler
+  // can judge how fresh the lead is at a glance.
+  const submittedAt = lead.created_time
+    ? new Date(lead.created_time).toLocaleString("en-US", {
+        timeZone: "America/New_York",
+        dateStyle: "medium",
+        timeStyle: "short",
+      })
+    : undefined;
+
+  await sendMetaLeadEmail({
+    name: contact.name,
+    email: contact.email,
+    phone: contact.phone,
+    location: contact.location,
+    platform: contact.utm_source,
+    leadId: leadgenId,
+    formId: lead.form_id || change.form_id,
+    campaignId: contact.utm_campaign,
+    adsetId: contact.utm_term,
+    adId: contact.utm_content,
+    submittedAt,
   });
 
   // Identifiers only — never contact fields.

@@ -7,6 +7,7 @@ import { MRIEmailTemplate } from './mrireviewtemplate';
 import { TreatmentCandidacyEmailTemplate } from './candidemailtemplate';
 import { ConditionCheckEmailTemplate } from './conditioncheckemailtemplate';
 import { UserEmailTemplate } from './useremailtemplate';
+import { MetaLeadEmailTemplate } from './metaleadtemplate';
 import { LawyerEmailTemplate } from './lawyeremailtemplate';
 import { LawyerConfirmationTemplate } from './lawyerconfirmationtemplate';
 import { createClient } from '@/utils/supabase/server';
@@ -679,5 +680,84 @@ export async function sendLawyerConfirmationEmail(formData: {
   } catch (error) {
     console.error('[sendLawyerConfirmationEmail]', error);
     throw new Error('Failed to send attorney confirmation email');
+  }
+}
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// sendMetaLeadEmail — STAFF notification for a Meta Instant Form lead
+//
+// Separate from sendContactEmail because the audience is different. A Meta lead
+// has no website session behind it: no date of birth, no insurance, no
+// reason-for-visit, because the Instant Form deliberately collects contact
+// details only. Reusing the patient-facing template meant staff received a
+// letter addressed to the patient, with blank rows for fields that can never be
+// populated from this source.
+//
+// Idempotency is keyed on Meta's own lead id, which is the correct key: Meta
+// retries a webhook for up to ~36h, and the lead id is stable across retries.
+// ─────────────────────────────────────────────────────────────────────────────
+export async function sendMetaLeadEmail(formData: {
+  name?: string;
+  email?: string;
+  phone?: string;
+  location?: string;
+  platform?: string;
+  leadId: string;
+  formId?: string;
+  campaignId?: string;
+  adsetId?: string;
+  adId?: string;
+  submittedAt?: string;
+  destinationEmail?: string;
+}) {
+  // Persist first, best-effort: Meta deletes Instant Form leads after 90 days,
+  // so this is the only durable record. Never allowed to block the email.
+  const { submissionId, persisted } = await logLeadToSupabase({
+    patient_name:  formData.name,
+    patient_email: formData.email,
+    patient_phone: formData.phone,
+    state:         'FL',
+    reason:        'Appointment request submitted through a Meta ad (Instant Form)',
+    form_source:   'meta-instant-form',
+    utm_source:    formData.platform === 'instagram' ? 'instagram' : 'facebook',
+    utm_medium:    'paid_social',
+    utm_campaign:  formData.campaignId,
+    utm_term:      formData.adsetId,
+    utm_content:   formData.adId,
+  });
+
+  try {
+    const toEmail = formData.destinationEmail || 'info@mountainspineorthopedics.com';
+    const who = formData.name?.trim();
+    const where = formData.location?.trim();
+    // Subject carries what the scheduler needs to triage from the inbox list.
+    const subject = ['New Meta Ad Lead', who, where].filter(Boolean).join(' — ');
+
+    const data = await getResendClient().emails.send({
+      from: 'Mountain Spine & Orthopedics <no-reply@mountainspineorthopedics.com>',
+      to: [toEmail],
+      subject,
+      react: await MetaLeadEmailTemplate({
+        name:       formData.name,
+        email:      formData.email,
+        phone:      formData.phone,
+        location:   formData.location,
+        platform:   formData.platform,
+        leadId:     formData.leadId,
+        formId:     formData.formId,
+        campaignId: formData.campaignId,
+        adsetId:    formData.adsetId,
+        adId:       formData.adId,
+        submittedAt: formData.submittedAt,
+      }),
+    }, {
+      idempotencyKey: buildIdempotencyKey('meta-lead', [formData.leadId]),
+    });
+
+    return { ...data, submissionId, persisted };
+  } catch (error) {
+    console.error('[sendMetaLeadEmail]', error);
+    throw new Error('Failed to send Meta lead email');
   }
 }
