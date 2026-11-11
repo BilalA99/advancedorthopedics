@@ -72,10 +72,9 @@ test('banner ignored (no consent stored) still emits the canonical accepted-lead
   assert.equal(canonical().length, 1, 'a server-accepted lead must always produce the business event');
   assert.equal(canonical()[0].market, 'FL');
   assert.equal(canonical()[0].submission_id, submissionId);
-  // Owner decision 2026-09-21 (US-only advertising): undecided is an ALLOWED
-  // state, so an ignored banner now also produces the hashed enhanced-identity
-  // push. An explicit refusal still suppresses it — see the rejection test below.
-  assert.equal(enhanced().length, 1, 'undecided is allowed, so enhanced identity is sent');
+  // Opt-in: an ignored banner is not consent, so no hashed enhanced identity.
+  // Consent Mode (denied by default) governs what the tags do with the event.
+  assert.equal(enhanced().length, 0, 'undecided is not consent, so no enhanced identity is sent');
 });
 
 test('all categories rejected still emits the canonical accepted-lead event', async () => {
@@ -145,44 +144,44 @@ test('the measurement-contract build gate passes against the current source', ()
 });
 
 // ---------------------------------------------------------------------------
-// US-default Consent Mode posture (owner decision 2026-09-21).
+// Opt-in Consent Mode posture: denied for every visitor until they accept.
 // ---------------------------------------------------------------------------
 
-test('the Consent Mode default grants globally and denies only EEA/UK/CH', async () => {
+test('the Consent Mode default denies every optional signal, globally', async () => {
   const { readFile } = await import('node:fs/promises');
   const layout = await readFile(new URL('../app/layout.tsx', import.meta.url), 'utf8');
 
   const blocks = [...layout.matchAll(
     /gtag\s*\(\s*['"]consent['"]\s*,\s*['"]default['"]\s*,\s*\{([\s\S]*?)\}\s*\)/g,
   )].map((m) => m[1]);
-  assert.equal(blocks.length, 2, 'expected a global default and a region-scoped override');
+  assert.equal(blocks.length, 1, 'expected exactly one, global, consent default');
+  assert.doesNotMatch(blocks[0], /region\s*:/, 'the default must not be region-scoped');
 
-  const global = blocks.find((b) => !/region\s*:/.test(b));
-  const region = blocks.find((b) => /region\s*:/.test(b));
-  assert.ok(global && region);
-
-  for (const signal of ['ad_storage', 'analytics_storage', 'ad_user_data', 'ad_personalization']) {
-    assert.match(global!, new RegExp(`${signal}\\s*:\\s*'granted'`), `${signal} granted for US`);
-    assert.match(region!, new RegExp(`${signal}\\s*:\\s*'denied'`), `${signal} denied for EEA/UK/CH`);
-  }
-  for (const code of ['GB', 'CH', 'DE', 'FR', 'IE']) {
-    assert.match(region!, new RegExp(`'${code}'`), `region list must include ${code}`);
+  for (const signal of [
+    'ad_storage', 'analytics_storage', 'ad_user_data', 'ad_personalization',
+    'functionality_storage', 'personalization_storage',
+  ]) {
+    assert.match(blocks[0], new RegExp(`${signal}\\s*:\\s*'denied'`), `${signal} denied by default`);
   }
 });
 
-test('the undecided runtime state cannot cancel the granted default', async () => {
+test('the undecided runtime state cannot grant over the denied default', async () => {
   // CookieConsentManager issues a Consent Mode update on mount. If the undecided
-  // categories denied while the HTML default granted, that update would silently
-  // re-break measurement for every visitor who never answers the banner.
-  const { undecidedConsentCategories, getGoogleConsentPayload } = await import('../lib/consent');
-  assert.equal(undecidedConsentCategories.analytics, true);
-  assert.equal(undecidedConsentCategories.marketing, true);
+  // categories granted, that update would override the denied HTML default for
+  // every visitor who never answers the banner.
+  const { undecidedConsentCategories, getGoogleConsentPayload, isAdvertisingAllowed } =
+    await import('../lib/consent');
+  assert.equal(undecidedConsentCategories.analytics, false);
+  assert.equal(undecidedConsentCategories.marketing, false);
+  assert.equal(undecidedConsentCategories.functional, false);
 
   const payload = getGoogleConsentPayload(undecidedConsentCategories);
-  assert.equal(payload.ad_storage, 'granted');
-  assert.equal(payload.analytics_storage, 'granted');
-  assert.equal(payload.ad_user_data, 'granted');
-  assert.equal(payload.ad_personalization, 'granted');
+  for (const signal of ['ad_storage', 'analytics_storage', 'ad_user_data', 'ad_personalization'] as const) {
+    assert.equal(payload[signal], 'denied', `${signal} must be denied while undecided`);
+  }
+
+  window.localStorage.clear();
+  assert.equal(isAdvertisingAllowed(), false, 'an undecided visitor is not an advertising audience');
 });
 
 test('an explicit refusal still denies every advertising signal', async () => {

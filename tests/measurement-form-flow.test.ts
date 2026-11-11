@@ -202,10 +202,9 @@ test('end-to-end: fetch acceptance to dataLayer, for an ignored banner on a paid
     submission_id: submissionId,
   }]);
 
-  // Owner decision 2026-09-21 (US-only advertising): an ignored banner is an
-  // ALLOWED state, so the hashed enhanced-identity push accompanies the lead.
-  // Only an explicit refusal suppresses it.
-  assert.equal(dataLayer().filter((e) => 'enhanced_conversion_data' in e).length, 1);
+  // Opt-in: an ignored banner is not consent, so the lead event is pushed
+  // without the hashed enhanced-identity payload.
+  assert.equal(dataLayer().filter((e) => 'enhanced_conversion_data' in e).length, 0);
 });
 
 // ---------------------------------------------------------------------------

@@ -133,8 +133,9 @@ function getParamWithBuffer(name: string): string | null {
   const direct = getQueryParam(name);
   if (direct) return direct;
   if (Object.keys(readAttributionParamsFromUrl()).length > 0) return null;
-  // The buffer stays locked for a visitor who explicitly declined advertising:
-  // their arrival parameters stay in memory, unread, and die with the page.
+  // The buffer stays locked until the visitor accepts advertising: their
+  // arrival parameters stay in memory, unread, and die with the page unless a
+  // later Accept (GclidCapture re-runs on consent change) releases them.
   if (!isAdvertisingAllowed()) return null;
   return landingBuffer?.[name] ?? null;
 }

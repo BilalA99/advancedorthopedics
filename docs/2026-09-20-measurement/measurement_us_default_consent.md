@@ -1,5 +1,12 @@
 # US-default Consent Mode — 2026-09-21
 
+> **SUPERSEDED (2026-11-10):** the site is opt-in again. Consent Mode defaults to
+> denied for every visitor, and Meta Pixel, CallRail DNI, click-ID attribution and
+> Enhanced Conversions identity wait for an explicit Accept
+> (`isAdvertisingAllowed()` now equals `hasMarketingConsent()`). The build gate in
+> `scripts/validate-measurement-contract.mjs` enforces the opt-in posture. This
+> document is kept as the record of what ran between 2026-09-21 and the change.
+
 **Owner decision:** Mountain Spine advertises only in US states. Google's EU user
 consent policy applies to visitors in the **EEA, UK and Switzerland**, not to US
 traffic. Silence on the banner is therefore no longer treated as an objection.

@@ -135,9 +135,9 @@ export function isCurrentRouteMetaEligible(): boolean {
  * The single gate: advertising is allowed for the current visitor, and the
  * current route is eligible.
  *
- * "Allowed" means undecided OR granted — see isAdvertisingAllowed(). An
- * explicit Reject, or a revocation after acceptance, blocks everything and
- * clears the pixel's cookies.
+ * "Allowed" means the visitor accepted marketing — see isAdvertisingAllowed().
+ * Undecided, an explicit Reject, or a revocation after acceptance blocks
+ * everything and clears the pixel's cookies.
  */
 export function isMetaAllowed(): boolean {
   if (!metaWindow()) return false;
@@ -208,8 +208,10 @@ export function initMetaPixel(): boolean {
     debug(
       !isMetaEnvironmentEnabled()
         ? "suppressed: non-production origin (set NEXT_PUBLIC_META_PIXEL_ID to a test dataset to enable)"
-        : hasDeclinedMarketing()
-          ? "suppressed: visitor declined advertising"
+        : !isAdvertisingAllowed()
+          ? hasDeclinedMarketing()
+            ? "suppressed: visitor declined advertising"
+            : "suppressed: visitor has not accepted advertising"
           : "suppressed: sensitive route",
     );
     return false;

@@ -230,27 +230,12 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){ window.dataLayer.push(arguments); }
             window.gtag = window.gtag || gtag;
-            // DEFAULT: GRANTED. Mountain Spine advertises only in US states, and
-            // Google's EU user consent policy applies to visitors in the EEA, the
-            // UK and Switzerland — not to US traffic. Owner decision 2026-09-21:
-            // a US visitor is measured from the first pageview, without having to
-            // answer the banner first. The banner still governs what happens after
-            // they DO answer: an explicit rejection sends a denying update and
-            // clears the advertising cookies.
-            gtag('consent', 'default', {
-              ad_storage: 'granted',
-              analytics_storage: 'granted',
-              ad_user_data: 'granted',
-              ad_personalization: 'granted',
-              functionality_storage: 'granted',
-              personalization_storage: 'granted',
-              security_storage: 'granted'
-            });
-            // EEA + UK + Switzerland stay denied-by-default. No campaigns run
-            // there, so this carve-out costs no measurable signal, and it keeps
-            // the site correct for an organic visitor from a consent-required
-            // region. Region codes are matched by Google against the visitor's
-            // location, not the business's.
+            // DEFAULT: DENIED, everywhere. This is a healthcare site: no
+            // advertising or analytics storage, and no user data for ads, until
+            // the visitor explicitly accepts in the banner. Accepting sends a
+            // granting update (lib/consent.ts); rejecting or ignoring the banner
+            // leaves this default in place. Supersedes the 2026-09-21 US-granted
+            // default.
             gtag('consent', 'default', {
               ad_storage: 'denied',
               analytics_storage: 'denied',
@@ -258,12 +243,7 @@ export default function RootLayout({
               ad_personalization: 'denied',
               functionality_storage: 'denied',
               personalization_storage: 'denied',
-              security_storage: 'granted',
-              region: [
-                'AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU',
-                'IS','IE','IT','LV','LI','LT','LU','MT','NL','NO','PL','PT','RO',
-                'SK','SI','ES','SE','GB','CH'
-              ]
+              security_storage: 'granted'
             });
           `}
         </Script>

@@ -213,15 +213,15 @@ test('the eligible and ineligible lists partition FORM_SOURCES exactly', async (
 // Adapter guards
 // ---------------------------------------------------------------------------
 
-test('an UNDECIDED visitor is tracked — silence is not an objection', async () => {
+test('an UNDECIDED visitor is not tracked — silence is not consent', async () => {
   const meta = await import('../lib/meta-pixel');
-  // Banner ignored: nothing stored. Site-owner decision of 2026-09-21.
+  // Banner ignored: nothing stored.
   assert.equal(window.localStorage.getItem(CONSENT_STORAGE_KEY), null);
-  assert.equal(meta.isMetaAllowed(), true);
-  assert.equal(meta.initMetaPixel(), true);
-  assert.equal(metaEvents('PageView').length, 1, 'one PageView for the undecided visitor');
-  assert.equal(meta.trackMetaLead('lead-undecided'), true);
-  assert.equal(metaEvents('Lead').length, 1);
+  assert.equal(meta.isMetaAllowed(), false);
+  assert.equal(meta.initMetaPixel(), false);
+  assert.equal(meta.trackMetaLead('lead-undecided'), false);
+  assert.equal(meta.trackMetaContact('contact-undecided'), false);
+  assert.equal(fbqCalls().length, 0, 'nothing may be dispatched to Meta before Accept');
 });
 
 test('an EXPLICIT rejection blocks init and every event', async () => {
@@ -572,7 +572,7 @@ test('an explicit rejection keeps the landing buffer locked', async () => {
   assert.equal(document.cookie.includes('fbclid'), false, 'no attribution cookie after refusal');
 });
 
-test('an UNDECIDED visitor has their paid click persisted', async () => {
+test('an UNDECIDED visitor has nothing persisted until they accept', async () => {
   const { bufferLandingAttribution, captureGclid, captureUtmParams, getAttributionData } =
     await import('../lib/gclid');
   // Nothing stored: the visitor has not answered the banner.
@@ -582,8 +582,16 @@ test('an UNDECIDED visitor has their paid click persisted', async () => {
   captureUtmParams();
 
   goto('/treatments');
+  assert.equal(getAttributionData().fbclid, '', 'undecided keeps the buffer locked');
+  assert.equal(document.cookie.includes('fbclid'), false, 'no attribution cookie before Accept');
+
+  // A later Accept releases the buffered landing click (GclidCapture re-runs
+  // capture on the consent-change event).
+  setConsent(true, true);
+  captureGclid();
+  captureUtmParams();
   const attribution = getAttributionData();
-  assert.equal(attribution.fbclid, 'UNDECIDED_CLICK', 'the click survives without a decision');
+  assert.equal(attribution.fbclid, 'UNDECIDED_CLICK', 'the click survives until the visitor accepts');
   assert.equal(attribution.utm_source, 'meta');
   assert.equal(attribution.meta_ad_id, '555');
 });

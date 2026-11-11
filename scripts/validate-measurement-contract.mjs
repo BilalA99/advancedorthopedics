@@ -109,8 +109,7 @@ async function checkAcceptedLeadIsConsentIndependent() {
     if (!/isAdvertisingAllowed\s*\(/.test(beforeIdentity)) {
       fail('enhanced user data stays consent-gated',
         `${identityCall[1]}() runs in pushFormSubmit without an isAdvertisingAllowed() ` +
-        `guard ahead of it. Identity must still stop on an explicit refusal, even though ` +
-        `undecided US visitors are now allowed.`);
+        `guard ahead of it. Identity is sent only after the visitor accepts marketing.`);
     }
   }
 }
@@ -231,50 +230,30 @@ async function checkConsentModeDefaults() {
     /gtag\s*\(\s*['"]consent['"]\s*,\s*['"]default['"]\s*,\s*\{([\s\S]*?)\}\s*\)/g,
   )].map((m) => m[1]);
 
-  if (blocks.length < 2) {
-    fail('Consent Mode declares a US default and an EEA carve-out',
-      `expected TWO gtag("consent","default") blocks in app/layout.tsx — a granted ` +
-      `global default and a denied region override for EEA/UK/CH — found ${blocks.length}`);
+  if (blocks.length !== 1) {
+    fail('Consent Mode declares one global denied default',
+      `expected ONE gtag("consent","default") block in app/layout.tsx, found ${blocks.length}. ` +
+      `A second (e.g. region-scoped) block could grant somewhere by default.`);
     return;
   }
 
-  const globalBlock = blocks.find((b) => !/region\s*:/.test(b));
-  const regionBlock = blocks.find((b) => /region\s*:/.test(b));
-
-  if (!globalBlock || !regionBlock) {
-    fail('Consent Mode declares a US default and an EEA carve-out',
-      'could not distinguish the global default block from the region-scoped one');
-    return;
+  const [globalBlock] = blocks;
+  if (/region\s*:/.test(globalBlock)) {
+    fail('Consent Mode declares one global denied default',
+      'the consent default is region-scoped; it must apply to every visitor');
   }
 
-  const AD_SIGNALS = ['ad_storage', 'analytics_storage', 'ad_user_data', 'ad_personalization'];
-
-  // US/global: granted. This is what makes an undecided US visitor measurable.
-  for (const signal of AD_SIGNALS) {
+  // Opt-in: nothing optional is granted until the visitor accepts.
+  const DENIED_SIGNALS = [
+    'ad_storage', 'analytics_storage', 'ad_user_data', 'ad_personalization',
+    'functionality_storage', 'personalization_storage',
+  ];
+  for (const signal of DENIED_SIGNALS) {
     const setting = new RegExp(`${signal}\\s*:\\s*['"](\\w+)['"]`).exec(globalBlock);
-    if (!setting) {
-      fail('US visitors are measured by default', `${signal} is missing from the global consent default`);
-    } else if (setting[1] !== 'granted') {
-      fail('US visitors are measured by default',
-        `${signal} defaults to "${setting[1]}". Owner decision 2026-09-21: US-only ` +
-        `advertising, so the global default grants and only EEA/UK/CH is denied.`);
-    }
-  }
-
-  // EEA/UK/CH: denied. Google's EU user consent policy still applies to them.
-  for (const signal of AD_SIGNALS) {
-    const setting = new RegExp(`${signal}\\s*:\\s*['"](\\w+)['"]`).exec(regionBlock);
     if (!setting || setting[1] !== 'denied') {
-      fail('EEA, UK and Switzerland stay denied by default',
-        `${signal} must be "denied" in the region-scoped default; found "${setting ? setting[1] : 'missing'}"`);
-    }
-  }
-
-  // The carve-out must actually cover the consent-required regions.
-  for (const code of ['GB', 'CH', 'DE', 'FR', 'IE', 'IT', 'ES', 'NL', 'SE', 'PL']) {
-    if (!new RegExp(`['"]${code}['"]`).test(regionBlock)) {
-      fail('EEA, UK and Switzerland stay denied by default',
-        `region list is missing "${code}"`);
+      fail('visitors are not measured before they accept',
+        `${signal} must default to "denied"; found "${setting ? setting[1] : 'missing'}". ` +
+        `This is a healthcare site: tracking is opt-in.`);
     }
   }
 
@@ -285,13 +264,29 @@ async function checkConsentModeDefaults() {
     fail('the undecided runtime state matches the Consent Mode default',
       'lib/consent.ts no longer exports undecidedConsentCategories');
   } else {
-    for (const cat of ['analytics', 'marketing']) {
-      if (!new RegExp(`${cat}\\s*:\\s*true`).test(undecided[1])) {
+    for (const cat of ['analytics', 'marketing', 'functional']) {
+      if (!new RegExp(`${cat}\\s*:\\s*false`).test(undecided[1])) {
         fail('the undecided runtime state matches the Consent Mode default',
-          `undecidedConsentCategories.${cat} must be true, otherwise the Consent Mode ` +
-          `update sent on mount denies and cancels the granted default`);
+          `undecidedConsentCategories.${cat} must be false, otherwise the Consent Mode ` +
+          `update sent on mount grants and overrides the denied default`);
       }
     }
+  }
+
+  // Advertising code must require a stored acceptance, not merely the absence
+  // of a refusal.
+  const allowed = /export function isAdvertisingAllowed\s*\(\)\s*\{([\s\S]*?)\n\}/.exec(consent);
+  if (!allowed || !/hasMarketingConsent\s*\(\)/.test(allowed[1]) || /return\s+true/.test(allowed[1])) {
+    fail('advertising waits for an explicit Accept',
+      'isAdvertisingAllowed() in lib/consent.ts must return hasMarketingConsent() ' +
+      'and must not allow an undecided visitor');
+  }
+
+  // CallRail and Meta must not mount for an undecided visitor.
+  const manager = stripComments(await read('components/CookieConsentManager.tsx'));
+  if (/consent\s*===\s*null\s*\|\|/.test(manager)) {
+    fail('advertising waits for an explicit Accept',
+      'CookieConsentManager mounts an advertising script while consent is null (undecided)');
   }
 }
 

@@ -43,9 +43,8 @@ export default function CookieConsentManager() {
     setConsent(stored);
     setShowBanner(!stored);
     setDraft(stored?.categories ?? allDisabled);
-    // An undecided visitor must receive the GRANTED update, matching the
-    // Consent Mode default in app/layout.tsx. Sending a denying update here
-    // would immediately override that default and re-break measurement.
+    // An undecided visitor receives the DENIED update, matching the Consent
+    // Mode default in app/layout.tsx; a stored choice is re-applied as made.
     updateGoogleConsentMode(stored?.categories ?? undecidedConsentCategories);
     setLoaded(true);
 
@@ -55,16 +54,14 @@ export default function CookieConsentManager() {
       setDraft(next?.categories ?? allDisabled);
       setShowBanner(!next);
 
-      // An EXPLICIT refusal (a stored record with marketing off) unmounts
-      // <MetaPixel />, which stops new dispatch, but an already-loaded
-      // fbevents.js stays resident on the page — so tell Meta to stop too.
-      // lib/consent.ts separately expires the first-party _fbp/_fbc and
-      // campaign cookies; cookies on facebook.com are outside this origin and
-      // are not claimed to be removable from here.
-      //
-      // `next === null` means preferences were reset back to UNDECIDED, which
-      // is an allowed state, so it deliberately does not revoke.
-      if (next && !next.categories.marketing) revokeMetaConsent();
+      // Losing marketing consent — an explicit refusal, a revocation, or a
+      // reset back to UNDECIDED (`next === null`) — unmounts <MetaPixel />,
+      // which stops new dispatch, but an already-loaded fbevents.js stays
+      // resident on the page, so tell Meta to stop too. lib/consent.ts
+      // separately expires the first-party _fbp/_fbc and campaign cookies;
+      // cookies on facebook.com are outside this origin and are not claimed to
+      // be removable from here.
+      if (!next?.categories.marketing) revokeMetaConsent();
     };
 
     const openPreferences = (event: Event) => {
@@ -144,10 +141,9 @@ export default function CookieConsentManager() {
   return (
     <>
       {/* CallRail DNI follows the same rule as the rest of the advertising
-          stack: allowed while undecided or granted, stopped on an explicit
-          refusal. Without this, call attribution would be the one channel still
-          missing the undecided majority. */}
-      {consent === null || consent.categories.marketing ? (
+          stack: it loads only after the visitor accepts marketing. Undecided
+          and refused visitors see the site's static phone numbers. */}
+      {consent?.categories.marketing ? (
         <Script
           id="callrail-dni"
           src="//cdn.callrail.com/companies/773929113/e6e5de417599bf7a871c/12/swap.js"
@@ -155,12 +151,11 @@ export default function CookieConsentManager() {
         />
       ) : null}
 
-      {/* Meta advertising pixel mounts while advertising is ALLOWED, which means
-          undecided OR granted. Silence is not treated as an objection; an
-          explicit Reject or a later revocation unmounts it, stops dispatch and
-          clears its cookies. Route eligibility and event suppression live in
-          the component and lib/meta-pixel.ts. */}
-      {consent === null || consent.categories.marketing ? <MetaPixel /> : null}
+      {/* Meta advertising pixel mounts only after the visitor accepts
+          marketing. A later Reject or revocation unmounts it, stops dispatch
+          and clears its cookies. Route eligibility and event suppression live
+          in the component and lib/meta-pixel.ts. */}
+      {consent?.categories.marketing ? <MetaPixel /> : null}
 
       {showBanner ? (
         <section

@@ -28,22 +28,18 @@ export const defaultConsentCategories: ConsentCategories = {
 };
 
 /**
- * What an UNDECIDED visitor gets.
+ * What an UNDECIDED visitor gets: nothing optional. Silence is not consent.
  *
- * Owner decision 2026-09-21: the practice advertises only in US states, where
- * Google's EU user consent policy does not apply, so silence is not treated as
- * an objection. This mirrors the Consent Mode `default` declared in
- * app/layout.tsx, which grants globally and denies only for EEA/UK/CH.
- *
- * Keeping these two in step matters: CookieConsentManager issues a Consent Mode
- * `update` on mount, and if that update denied while the HTML default granted,
- * it would immediately cancel the default and silently re-break measurement.
+ * This mirrors the denied Consent Mode `default` declared in app/layout.tsx.
+ * CookieConsentManager issues a Consent Mode `update` on mount, so the two must
+ * agree — a granting update here would silently override the denied default.
+ * Supersedes the 2026-09-21 decision that treated undecided as granted.
  */
 export const undecidedConsentCategories: ConsentCategories = {
   necessary: true,
-  analytics: true,
-  marketing: true,
-  functional: true,
+  analytics: false,
+  marketing: false,
+  functional: false,
 };
 
 export function getDefaultConsentState(): ConsentState {
@@ -101,28 +97,18 @@ export function hasMarketingConsent() {
 }
 
 /**
- * Whether advertising measurement may run RIGHT NOW.
+ * Whether advertising measurement (Meta Pixel, click-ID attribution, Enhanced
+ * Conversions identity) may run RIGHT NOW.
  *
- * Deliberately distinguishes three states, where hasMarketingConsent() only
- * distinguishes two:
- *
- *   undecided (nothing stored) -> ALLOWED
- *   marketing granted          -> ALLOWED
+ *   undecided (nothing stored)  -> BLOCKED
+ *   marketing granted           -> ALLOWED
  *   marketing explicitly denied -> BLOCKED
  *
- * The site owner's decision (2026-09-21) is that silence is not an objection:
- * advertising measurement runs until the visitor actually declines, and an
- * explicit Reject or a later revocation stops it and clears its cookies.
- *
- * This is deliberately NOT used for Google Enhanced Conversions, which transmit
- * hashed identity and remain gated on hasMarketingConsent(), nor for Google
- * Consent Mode, whose defaults stay denied so Google's own cookieless
- * behaviour applies until the visitor chooses.
+ * Opt-in: nothing advertising-related runs until the visitor accepts marketing
+ * in the banner. Supersedes the 2026-09-21 decision that allowed undecided.
  */
 export function isAdvertisingAllowed() {
-  const state = getConsentState();
-  if (!state) return true; // undecided
-  return Boolean(state.categories.marketing);
+  return hasMarketingConsent();
 }
 
 /** True only for an explicit, stored refusal of marketing. */
@@ -202,10 +188,11 @@ export function setConsentState(categories: Omit<ConsentCategories, "necessary">
 export function resetConsentPreferences() {
   if (!canUseStorage()) return;
   window.localStorage.removeItem(CONSENT_STORAGE_KEY);
-  // Clearing the record returns the visitor to UNDECIDED, which is an allowed
-  // state — so this restores the granted posture rather than denying, and does
-  // not scrub advertising cookies. Only an explicit refusal does that.
+  // Clearing the record returns the visitor to UNDECIDED, which is a denied
+  // state, so deny and scrub exactly as an explicit refusal would.
   updateGoogleConsentMode(undecidedConsentCategories);
+  cleanupNonEssentialCookies(undecidedConsentCategories);
+  cleanupEnhancedConversionSession();
   window.dispatchEvent(new CustomEvent(CONSENT_UPDATED_EVENT, { detail: null }));
 }
 
