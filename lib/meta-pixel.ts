@@ -323,10 +323,15 @@ export function trackMetaContact(eventId: string): boolean {
  * PageView on `history` changes by itself — no `fbq()` call from this codebase
  * is involved. Unmounting the <Script> does not stop it, because the script has
  * already executed and removing the tag does not unload it. So on a
- * client-side navigation from an eligible page into a clinical route
- * (/patient-forms, /condition-check, /find-care/free-mri-review,
- * /find-care/candidacy-check) Meta would transmit a PageView for that URL
- * despite this module staying silent.
+ * client-side navigation from an eligible page into a clinical route Meta
+ * would transmit a PageView for that URL despite this module staying silent.
+ *
+ * The authoritative list of clinical routes is SENSITIVE_PATH_PREFIXES in
+ * lib/route-privacy.ts — do not restate it here. An earlier version of this
+ * comment named four routes that the policy did not actually exclude, and
+ * docs/meta-tracking.md carried the same stale list into its QA checklist,
+ * so anyone verifying against either would have certified a protection that
+ * did not exist. Name the source, not a copy.
  *
  * `fbq('consent','revoke')` is Meta's documented kill switch and suppresses the
  * automatic event too — measured: 0 requests while revoked, and normal

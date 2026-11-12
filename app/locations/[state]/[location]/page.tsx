@@ -1,4 +1,5 @@
 import ClinicsMap from '@/components/ClinicsMap'
+import ConsentGatedMapEmbed from '@/components/ConsentGatedMapEmbed'
 import { TextAnimate } from '@/components/magicui/text-animate'
 import RatingsAndReviews from '@/components/RatingsAndReviews'
 import React from 'react'
@@ -557,14 +558,13 @@ export default async function LocationDetails(
                                     height: 0,
                                 }}
                             >
-                                <div
-                                    className="absolute inset-0 w-full h-full"
-                                    dangerouslySetInnerHTML={{ 
-                                        __html: locationData.mapEmbed
-                                            .replace(/width="[^"]*"/gi, 'width="100%"')
-                                            .replace(/height="[^"]*"/gi, 'height="100%"')
-                                            .replace(/style="[^"]*"/gi, 'style="width: 100%; height: 100%; border: 0; position: absolute; top: 0; left: 0;"')
-                                    }} 
+                                <ConsentGatedMapEmbed
+                                    locationName={locationData.name}
+                                    directionsUrl={locationData.link}
+                                    embedHtml={locationData.mapEmbed
+                                        .replace(/width="[^"]*"/gi, 'width="100%"')
+                                        .replace(/height="[^"]*"/gi, 'height="100%"')
+                                        .replace(/style="[^"]*"/gi, 'style="width: 100%; height: 100%; border: 0; position: absolute; top: 0; left: 0;"')}
                                 />
                             </div>
                         </div>

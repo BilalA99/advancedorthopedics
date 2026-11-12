@@ -111,7 +111,15 @@ test('GCLID, GBRAID, WBRAID, and all supported UTMs persist across navigation', 
   captureUtmParams();
   window.history.replaceState({}, '', '/find-care/book-an-appointment');
 
-  assert.deepEqual(getAttributionData(), {
+  // getAttributionData also carries the consent state the attribution was
+  // captured under (it rides the same path to the offline export, which needs
+  // it to honour a refusal). Assert that separately so this stays a test about
+  // click-ID persistence.
+  const { marketing_consent, consent_recorded_at, ...identifiers } = getAttributionData();
+  assert.equal(marketing_consent, true, 'these fixtures run with marketing granted');
+  assert.equal(typeof consent_recorded_at, 'string');
+
+  assert.deepEqual(identifiers, {
     gclid: 'QA_GCLID_123',
     gbraid: 'QA_GBRAID_123',
     wbraid: 'QA_WBRAID_123',

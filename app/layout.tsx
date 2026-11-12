@@ -245,18 +245,23 @@ export default function RootLayout({
               personalization_storage: 'denied',
               security_storage: 'granted'
             });
+            // Belt and braces for the denied state. ads_data_redaction only has
+            // any effect while ad_storage is denied, so setting it here costs a
+            // granting visitor nothing — but if a Google tag ever loads before a
+            // decision (a regression, a stray install), it stops the gclid being
+            // transmitted in the clear alongside a condition-bearing URL. That
+            // exact combination was observed in production on 2026-11-12.
+            gtag('set', 'ads_data_redaction', true);
+            // Never move click identifiers into the URL as a cookie fallback.
+            gtag('set', 'url_passthrough', false);
           `}
         </Script>
-        {/* Google Tag Manager */}
-        <Script id="gtm-head" strategy="afterInteractive">
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-T57SB8NQ');
-          `}
-        </Script>
+        {/* Google Tag Manager is NOT loaded here.
+            It mounts from <CookieConsentManager /> once the visitor grants
+            analytics or marketing — Basic Consent Mode. An undecided or
+            refusing visitor never contacts googletagmanager.com, so no page
+            URL (and on this site a URL often names a medical condition) is
+            transmitted before an affirmative choice. See docs/consent.md. */}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${ReemKufi.variable} ${inter.variable} ${publicSans.variable} antialiased  overscroll-none `}

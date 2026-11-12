@@ -36,13 +36,50 @@
 /**
  * Path prefixes where no advertising pixel may run.
  *
- * Kept to the genuinely non-public surfaces. Authenticated patient areas would
- * belong here too — none exist in this application today. Deliberately NOT
- * listed: /conditions, /treatments, /patient-forms, /condition-check,
- * /find-care/candidacy-check, /find-care/free-mri-review, and every other
- * public marketing page.
+ * REVISED 2026-11-12. The previous policy listed only "/internal" and argued
+ * that the topic of a public page is not the visitor's diagnosis. That argument
+ * is still sound as a reading of US law — the federal theory that would have
+ * made it a HIPAA violation was vacated in AHA v. Becerra (N.D. Tex., June
+ * 2024) — but it does not survive two things the audit established:
+ *
+ *   1. META'S CONTRACT IS STRICTER THAN THE STATUTE. Business Tools Terms
+ *      section 1.h forbids sharing data "based on, directly or otherwise, health
+ *      information", and requires that event and audience NAMES not imply it. A
+ *      PageView whose URL is /conditions/<diagnosis> is data based on health
+ *      information. Consent does not cure a contractual warranty, and Meta
+ *      signs no BAA, so there is no version of this that consent makes lawful.
+ *
+ *   2. THESE PAGES ARE COLLECTION SURFACES, NOT ARTICLES. The old rationale
+ *      assumed a passive reader. Nearly every condition and treatment page
+ *      renders a name-and-phone lead form in the initial server HTML. The
+ *      visitor is being solicited, and in production Google's automatic
+ *      user-provided-data collection was found enabled against exactly those
+ *      fields. Page topic plus typed identity on one page load reconstructs the
+ *      pairing this file was written to avoid.
+ *
+ * MEASUREMENT COST IS LOW, AND DELIBERATE. Blocking the pixel on these routes
+ * does not lose the conversion: leads submitted here still reach Google Ads
+ * through the GCLID-based offline upload, and Meta's own automated health-data
+ * filtering already drops much of this traffic silently. What is given up is
+ * clinical-page remarketing, which section 1.h did not permit in the first place.
+ *
+ * This list governs the META pixel. Google tags are governed separately — they
+ * now load only after consent (Basic Consent Mode, see CookieConsentManager)
+ * and remain eligible on these routes pending the legal review recorded in
+ * docs/consent.md.
  */
-export const SENSITIVE_PATH_PREFIXES = ["/internal"] as const;
+export const SENSITIVE_PATH_PREFIXES = [
+  "/internal",
+  // Clinical assessments — the visitor's own answers, not page topic.
+  "/condition-check",
+  "/find-care/candidacy-check",
+  "/find-care/free-mri-review",
+  // Diagnosis, procedure or injury named in the URL path.
+  "/conditions",
+  "/treatments",
+  "/area-of-pain",
+  "/injuries",
+] as const;
 
 /**
  * Query keys that would carry a visitor's OWN clinical answers in the URL.

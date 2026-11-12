@@ -63,6 +63,30 @@ function canUseStorage() {
   }
 }
 
+/**
+ * Whether the browser is sending an opt-out preference signal.
+ *
+ * Global Privacy Control is a legally recognised opt-out of the sale/sharing of
+ * personal information under several US state regimes. Mountain Spine serves
+ * FL, NJ, NY, PA and GA, and visitors arrive from everywhere, so the signal is
+ * honoured unconditionally rather than being geo-scoped.
+ *
+ * Scope is deliberate: GPC is an opt-out of targeted advertising, so it forces
+ * MARKETING off. Analytics is left to the visitor — reading it as a blanket
+ * refusal of all measurement would be stricter than the signal means, and would
+ * discard first-party analytics the visitor may be happy to allow.
+ */
+export function hasGlobalPrivacyControl(): boolean {
+  if (typeof navigator === "undefined") return false;
+  return (navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true;
+}
+
+/** Marketing can never be on while GPC is asserted, however it got stored. */
+function applyGlobalPrivacyControl(categories: ConsentCategories): ConsentCategories {
+  if (!hasGlobalPrivacyControl()) return categories;
+  return { ...categories, marketing: false };
+}
+
 export function getConsentState(): ConsentState | null {
   if (!canUseStorage()) return null;
 
@@ -76,12 +100,15 @@ export function getConsentState(): ConsentState | null {
     return {
       version: CONSENT_VERSION,
       timestamp: parsed.timestamp,
-      categories: {
+      // GPC is re-applied on every READ, not just on write. A visitor who
+      // accepted before enabling GPC must not keep a stored marketing grant
+      // that their browser is now actively contradicting.
+      categories: applyGlobalPrivacyControl({
         necessary: true,
         analytics: Boolean(parsed.categories?.analytics),
         marketing: Boolean(parsed.categories?.marketing),
         functional: Boolean(parsed.categories?.functional),
-      },
+      }),
     };
   } catch {
     return null;
@@ -159,15 +186,19 @@ export function updateGoogleConsentMode(categories: ConsentCategories) {
 export function setConsentState(categories: Omit<ConsentCategories, "necessary"> | ConsentCategories) {
   if (!canUseStorage()) return null;
 
+  // Captured before the write so a marketing GRANT -> REVOKE transition can be
+  // detected below.
+  const previous = getConsentState();
+
   const state: ConsentState = {
     version: CONSENT_VERSION,
     timestamp: new Date().toISOString(),
-    categories: {
+    categories: applyGlobalPrivacyControl({
       necessary: true,
       analytics: Boolean(categories.analytics),
       marketing: Boolean(categories.marketing),
       functional: Boolean(categories.functional),
-    },
+    }),
   };
 
   window.localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(state));
@@ -182,11 +213,29 @@ export function setConsentState(categories: Omit<ConsentCategories, "necessary">
   }
 
   window.dispatchEvent(new CustomEvent(CONSENT_UPDATED_EVENT, { detail: state }));
+
+  // WITHDRAWAL OF MARKETING IS THE ONE CASE A RELOAD IS REQUIRED.
+  //
+  // Unmounting <MetaPixel /> and the CallRail <Script> stops React from
+  // rendering them, but the vendor code they loaded is still resident and
+  // executing. fbevents.js is told to stop via fbq consent revoke; CallRail's
+  // swap.js exposes no such control, so it can re-create the calltrk_* cookies
+  // the sweep above just expired, and keeps swapping numbers for the rest of
+  // the page view. Tearing the document down is the only reliable way to
+  // honour the withdrawal within this origin.
+  //
+  // Deliberately NOT done for a first-time Reject: nothing is resident yet,
+  // and reloading the page under someone who just answered a banner is hostile.
+  if (previous?.categories.marketing && !state.categories.marketing) {
+    window.location.reload();
+  }
+
   return state;
 }
 
 export function resetConsentPreferences() {
   if (!canUseStorage()) return;
+  const previous = getConsentState();
   window.localStorage.removeItem(CONSENT_STORAGE_KEY);
   // Clearing the record returns the visitor to UNDECIDED, which is a denied
   // state, so deny and scrub exactly as an explicit refusal would.
@@ -194,6 +243,9 @@ export function resetConsentPreferences() {
   cleanupNonEssentialCookies(undecidedConsentCategories);
   cleanupEnhancedConversionSession();
   window.dispatchEvent(new CustomEvent(CONSENT_UPDATED_EVENT, { detail: null }));
+
+  // Same reasoning as setConsentState: a resident swap.js outlives the unmount.
+  if (previous?.categories.marketing) window.location.reload();
 }
 
 function expireCookie(name: string) {

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Script from "next/script";
 import MetaPixel from "@/components/MetaPixel";
-import { revokeMetaConsent } from "@/lib/meta-pixel";
+import { grantMetaConsent, revokeMetaConsent } from "@/lib/meta-pixel";
 import {
   CONSENT_UPDATED_EVENT,
   OPEN_COOKIE_PREFERENCES_EVENT,
@@ -61,7 +61,17 @@ export default function CookieConsentManager() {
       // separately expires the first-party _fbp/_fbc and campaign cookies;
       // cookies on facebook.com are outside this origin and are not claimed to
       // be removable from here.
-      if (!next?.categories.marketing) revokeMetaConsent();
+      if (!next?.categories.marketing) {
+        revokeMetaConsent();
+      } else {
+        // Symmetric re-grant. Without this, Reject-then-Accept inside a single
+        // page load left the pixel permanently silent: revokeMetaConsent()
+        // issues fbq('consent','revoke') and clears the init flag, <MetaPixel />
+        // then remounts and re-inits — but nothing ever lifted the revoke, so
+        // every subsequent event was dropped until a full reload. No-ops when
+        // fbq is absent, which is the normal first-grant path.
+        grantMetaConsent();
+      }
     };
 
     const openPreferences = (event: Event) => {
@@ -133,13 +143,43 @@ export default function CookieConsentManager() {
 
   function closePreferences() {
     setShowPreferences(false);
+    // Closing without saving is NOT a decision. Opening the panel hid the
+    // banner, so put it back unless a choice is actually stored — otherwise
+    // Escape or a backdrop click retires the prompt for the whole SPA session
+    // (this component mounts once in the root layout and its state does not
+    // reset on client-side navigation) and the visitor is never asked again.
+    if (!getConsentState()) setShowBanner(true);
     previousFocusRef.current?.focus();
   }
 
   if (!loaded) return null;
 
+  // Basic Consent Mode. GTM carries GA4 and both Google Ads destinations, so
+  // it may not load until the visitor has granted at least one of the two
+  // purposes it serves. Functional-only consent does not qualify — nothing in
+  // the container is functional.
+  //
+  // Until this mounts, the denied Consent Mode default in app/layout.tsx stands
+  // and no Google request is made at all. Events pushed to window.dataLayer
+  // before GTM arrives are not lost: dataLayer is a queue, and GTM drains it on
+  // initialization, so a lead submitted and then followed by an Accept still
+  // reports.
+  const gtmAllowed = Boolean(consent?.categories.analytics || consent?.categories.marketing);
+
   return (
     <>
+      {gtmAllowed ? (
+        <Script id="gtm-head" strategy="afterInteractive">
+          {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-T57SB8NQ');
+          `}
+        </Script>
+      ) : null}
+
       {/* CallRail DNI follows the same rule as the rest of the advertising
           stack: it loads only after the visitor accepts marketing. Undecided
           and refused visitors see the site's static phone numbers. */}

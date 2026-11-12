@@ -310,7 +310,13 @@ sent to Meta. One pixel for all five states — never fragment by market.
    config at `connect.facebook.net/signals/config/1114353070995808` enables. The
    automatic PageView behaviour documented in §4 comes from there.
 6. **Pixel Helper** on production: homepage 1 PageView; location page 1 PageView;
-   `/patient-forms`, `/condition-check`, `/find-care/free-mri-review` — none.
+   `/conditions/*`, `/treatments/*`, `/area-of-pain/*`, `/injuries/*`,
+   `/condition-check`, `/find-care/candidacy-check`, `/find-care/free-mri-review`
+   — none. `/patient-forms` DOES get a PageView (it names no condition).
+   The authoritative list is `SENSITIVE_PATH_PREFIXES` in `lib/route-privacy.ts`
+   — check against the code, never against a copy in prose. An earlier version
+   of this checklist listed routes the policy did not actually exclude, so
+   anyone following it would have certified a protection that did not exist.
 
 ## 13. Known limitations
 
@@ -318,7 +324,18 @@ sent to Meta. One pixel for all five states — never fragment by market.
   suppresses them on sensitive routes but the setting should still be reviewed.
 - The loader script remains in the DOM after consent withdrawal; dispatch is
   revoked but the script is not unloaded (browsers cannot unload an executed script).
-- A `PageView` on a public condition page transmits that page's URL, which names
-  the page topic. This is standard for any pixel and is how paid landing pages are
-  measured; it is not a patient-specific signal. Flagged for policy review.
-- `?data=` URLs get no Meta PageView at all. This is an intentional trade.
+- ~~A `PageView` on a public condition page transmits that page's URL...~~
+  **RESOLVED 2026-11-12.** The policy review happened. Condition, treatment,
+  area-of-pain, injury and clinical-assessment routes are now excluded by path.
+  The deciding factor was not US statute — the federal theory was vacated in
+  *AHA v. Becerra* (2024) — but Meta's Business Tools Terms §1.h, which forbids
+  data "based on, directly or otherwise, health information" and which consent
+  cannot waive. See `lib/route-privacy.ts` for the full rationale.
+- ~~`?data=` URLs get no Meta PageView at all.~~ **This was never true.**
+  `SENSITIVE_QUERY_KEYS` is empty, so the query was always eligible. Its hosts
+  (`/conditions`, `/treatments`) are now excluded by path instead, which is the
+  stronger control and makes the point moot.
+- An observed Meta `PageView` reported `dl` as the bare origin with no path.
+  **Do not rely on this** — it could not be reproduced from the code or from
+  `fbevents.js`, and is most likely a browser-extension artifact in the test
+  profile. Rate the risk as if the full URL is transmitted.

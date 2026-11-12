@@ -97,47 +97,60 @@ test('only genuinely non-public surfaces are route-excluded', () => {
   }
 });
 
-test('public assessment landing pages stay measurable', () => {
-  // Landing on a page that OFFERS a symptom checker reveals nothing about the
-  // visitor — these are paid-media destinations. Only the SUBMISSION is
-  // restricted (see the form-source tests below).
+test('clinical assessment pages are route-excluded', () => {
+  // REVISED 2026-11-12. These previously stayed eligible on the argument that
+  // landing on a page which OFFERS a symptom checker reveals nothing about the
+  // visitor. Meta's Business Tools Terms section 1.h forbids data "based on,
+  // directly or otherwise, health information" — and consent cannot cure a
+  // contractual warranty, so the surface itself has to go.
   for (const path of [
     '/condition-check',
     '/find-care/candidacy-check',
     '/find-care/free-mri-review',
-    // A public page offering blank new-patient packets for download. It
-    // collects nothing and must not be excluded.
-    '/patient-forms',
   ]) {
-    assert.equal(isMetaEligibleRoute(path, ''), true, `${path} must stay eligible`);
+    assert.equal(isMetaEligibleRoute(path, ''), false, `${path} must be excluded`);
   }
 });
 
-test('public marketing and content routes remain eligible', () => {
+test('routes naming a diagnosis, procedure or injury are route-excluded', () => {
+  for (const path of [
+    '/conditions',
+    '/conditions/sciatica',
+    '/treatments/orthopedic-injections',
+    '/area-of-pain/back-pain/lumbar-herniated-disc',
+    '/injuries/car-accident',
+  ]) {
+    assert.equal(isMetaEligibleRoute(path, ''), false, `${path} must be excluded`);
+  }
+});
+
+test('non-clinical marketing routes remain eligible', () => {
+  // The restriction is scoped to clinical subject matter. Brand, location,
+  // provider and booking pages carry no diagnosis and stay fully measurable —
+  // this is what keeps Meta useful at all.
   const allowed = [
     '/',
     '/locations/new-jersey/paramus-orthopedics',
-    '/lp/adult-scoliosis-treatment',
-    '/conditions/sciatica',
-    '/treatments/orthopedic-injections',
     '/find-care/book-an-appointment',
     '/about/meetourdoctors/john-doe',
+    '/blogs/some-article',
+    // A public page offering blank new-patient packets for download. It
+    // collects nothing and names no condition.
+    '/patient-forms',
   ];
   for (const path of allowed) {
     assert.equal(isMetaEligibleRoute(path, ''), true, `${path} should stay eligible`);
   }
 });
 
-test('the public ?data= content filter stays measurable', () => {
-  // /conditions?data={"tags":["Spine"]} is a PUBLIC BROWSE FILTER linked from
-  // HomePageUI, NavBar, ServicesAndExpertiseSection and HomeInteractiveAnatomy.
-  // It is equivalent to the path /conditions/sciatica, which is eligible;
-  // excluding one while allowing the other was incoherent and cost real
-  // paid-media measurement.
+test('the ?data= content filter is no longer reachable on an eligible route', () => {
+  // ?data={"tags":["Spine"]} is a public browse filter, not a patient answer,
+  // so it remains a non-sensitive QUERY. The hosts that use it (/conditions,
+  // /treatments) are now excluded by PATH, which is the stronger control.
   const search = `?data=${encodeURIComponent(JSON.stringify({ tags: ['Spine'] }))}`;
-  assert.equal(hasSensitiveQuery(search), false);
-  assert.equal(isMetaEligibleRoute('/conditions', search), true);
-  assert.equal(isMetaEligibleRoute('/treatments', `?data=${encodeURIComponent('{"key":"knee"}')}`), true);
+  assert.equal(hasSensitiveQuery(search), false, 'the query itself is not sensitive');
+  assert.equal(isMetaEligibleRoute('/conditions', search), false, 'excluded by path');
+  assert.equal(isMetaEligibleRoute('/treatments', `?data=${encodeURIComponent('{"key":"knee"}')}`), false);
 });
 
 test('campaign parameters never block tracking', () => {
@@ -515,8 +528,14 @@ test('a late Accept still captures the landing click and campaign', async () => 
   bufferLandingAttribution();
   captureGclid();
   captureUtmParams();
-  // Undecided is an allowed state, so the click is already persisted here.
-  assert.equal(getAttributionData().fbclid, 'IwAR_landing_click_123');
+  // UNDECIDED IS A DENIED STATE. Nothing is readable yet — not from storage and
+  // not from the live URL either. This assertion previously expected the click
+  // to be available here, a leftover from the superseded 2026-09-21 "undecided
+  // is allowed" policy; it kept passing only because getParamWithBuffer read
+  // the URL without consulting consent, which is the exact defect that let a
+  // rejecting visitor's click ID reach the Google Ads offline upload.
+  assert.equal(getAttributionData().fbclid, '', 'an undecided visitor has no readable attribution');
+  assert.equal(getAttributionData().marketing_consent, false);
 
   // Browse away — the parameters are gone from the URL forever.
   goto('/treatments');

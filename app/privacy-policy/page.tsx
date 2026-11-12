@@ -1,147 +1,268 @@
+import Link from 'next/link';
+import CookiePreferencesLink from '@/components/CookiePreferencesLink';
+
+// LAST SUBSTANTIVE REVISION. Hard-coded on purpose.
+//
+// This page previously rendered `new Date().toLocaleDateString()`, so it claimed
+// to have been updated today, every day, forever — a freshness claim that was
+// never true. Update this constant by hand when the text below actually changes.
+const LAST_UPDATED = 'November 12, 2026';
+
+const H2 = 'text-2xl font-semibold text-[#0A50EC] mb-4 border-b-2 border-[#0A50EC] pb-2';
+const BODY = 'text-gray-700 leading-relaxed';
+
+/** Every third-party technology actually running on this site, as of LAST_UPDATED. */
+const TRACKERS = [
+  {
+    vendor: 'Google Tag Manager',
+    purpose: 'Loads and manages the measurement tags listed below.',
+    storage: 'No storage of its own',
+    category: 'Analytics / Advertising',
+  },
+  {
+    vendor: 'Google Analytics 4',
+    purpose: 'Tells us which pages visitors use and how they move through the site.',
+    storage: '_ga, _ga_* cookies',
+    category: 'Analytics',
+  },
+  {
+    vendor: 'Google Ads',
+    purpose:
+      'Measures which ads lead to appointment requests and phone calls, and supports remarketing where configured.',
+    storage: '_gcl_* cookies',
+    category: 'Advertising',
+  },
+  {
+    vendor: 'Meta (Facebook and Instagram) Pixel',
+    purpose: 'Measures which Meta ads lead to appointment requests.',
+    storage: '_fbp, _fbc cookies',
+    category: 'Advertising',
+  },
+  {
+    vendor: 'CallRail',
+    purpose:
+      'Shows a different phone number depending on how you reached the site, so we can tell which ads generate calls.',
+    storage: 'calltrk_* cookies and local storage',
+    category: 'Advertising',
+  },
+  {
+    vendor: 'Google Maps',
+    purpose: 'Displays clinic locations and directions.',
+    storage: 'Google cookies',
+    category: 'Functional',
+  },
+] as const;
 
 export default function PrivacyPolicy() {
   return (
-    <div className="mt-20 bg-white ">
+    <div className="mt-20 bg-white">
       <div className="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-[#0A50EC] mb-4">Privacy Policy</h1>
           <div className="w-24 h-1 bg-[#0A50EC] mx-auto"></div>
+          <p className="mt-4 text-sm text-gray-600">Last updated: {LAST_UPDATED}</p>
         </div>
 
         <div className="prose prose-lg max-w-none">
           <div className="bg-gray-50 border-l-4 border-[#0A50EC] p-6 mb-8">
-            <p className="text-gray-700 leading-relaxed">
-              Thank you for visiting the Mountain Spine & Orthopedics website. Your privacy is important to us. To
-              better protect your privacy, we provide this notice explaining our online information practices and the
-              choices you can make about the way your information is collected and used on this website.
+            <p className={BODY}>
+              This notice explains what Mountain Spine &amp; Orthopedics collects through this website, who we share it
+              with, and the choices you control. It covers this website only. Information you give us as a patient
+              during care is handled under our clinical privacy practices, which are separate from this notice.
             </p>
           </div>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-[#0A50EC] mb-4 border-b-2 border-[#0A50EC] pb-2">
-              The Information We Collect
-            </h2>
-            <p className="text-gray-700 leading-relaxed">
-              You may express an opinion or sign up to be on our mailing list. The types of personally identifiable
-              information that may be collected at these pages include name, email and zip code.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-[#0A50EC] mb-4 border-b-2 border-[#0A50EC] pb-2">
-              How We Use the Information
-            </h2>
-            <div className="space-y-4 text-gray-700 leading-relaxed">
+            <h2 className={H2}>Information We Collect</h2>
+            <div className={`space-y-4 ${BODY}`}>
               <p>
-                We may use the information you provide to respond to your inquiries and to send you materials requested.
+                <strong>Information you give us.</strong> When you request an appointment, ask for a second opinion,
+                request a free MRI review, use a condition or candidacy check, or contact us, we collect the details you
+                enter. Depending on the form, that can include your name, email address, phone number, date of birth,
+                ZIP code, the state you are in, your insurance type, your preferred callback time, and what you tell us
+                about your symptoms, injury, or reason for the visit. If you are working with an attorney on an injury
+                claim, we may also collect that firm&apos;s name.
               </p>
               <p>
-                We sometimes use the non-personally identifiable information that we collect to improve the design and
-                content of our site and to enable us to personalize your Internet experience. We also may use this
-                information in the aggregate to analyze site usage.
+                <strong>Information collected automatically.</strong> Our servers and the measurement tools listed below
+                receive your IP address, browser and device type, the pages you view on this site, the page that
+                referred you, and — if you arrived from an ad — the advertising click identifier in that link.
               </p>
               <p>
-                Although we take appropriate measures to safeguard against unauthorized disclosures of information, we
-                cannot assure you that personally identifiable information that we collect will never be disclosed in a
-                manner that is inconsistent with this Privacy Notice. Inadvertent disclosures may result, for example,
-                when third parties misrepresent their identities in asking the site for access to personally
-                identifiable information about themselves for purposes of correcting possible factual errors in the
-                data.
+                <strong>Location.</strong> If you allow it, your browser may share your approximate location so we can
+                show nearby clinics. This is processed in your browser to sort the clinic list. We do not store it on
+                our servers. Declining does not limit any other part of the site.
               </p>
             </div>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-[#0A50EC] mb-4 border-b-2 border-[#0A50EC] pb-2">
-              Privacy Options
-            </h2>
-            <div className="space-y-4 text-gray-700 leading-relaxed">
+            <h2 className={H2}>How We Use This Information</h2>
+            <div className={`space-y-4 ${BODY}`}>
               <p>
-                If you prefer not to receive traditional mail or other off-line promotions from this or any property
-                please notify us at the email listed below. If you prefer not to receive online information from this
-                website, please contact us at the email provided below.
+                We use the details you submit to respond to your request, schedule care, verify insurance, and keep an
+                internal record of the inquiry. That internal record is kept whatever cookie choices you make — refusing
+                optional cookies never prevents you from requesting care, and never deletes a request you sent us.
               </p>
               <p>
-                Finally, Mountain Spine & Orthopedics will not use or transfer personally identifiable information provided to us in ways
-                unrelated to the ones described above without also providing you an opportunity to opt-out of these
-                unrelated uses.
+                We use information collected automatically to keep the site working and secure, to understand which
+                pages help patients, and to measure which advertising produces appointment requests.
               </p>
             </div>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-[#0A50EC] mb-4 border-b-2 border-[#0A50EC] pb-2">
-              Collection of Information by Third-Party Sites and Sponsors
-            </h2>
-            <p className="text-gray-700 leading-relaxed">
-              The website may contain links to other sites whose information practices may be different than ours.
-              Visitors should consult the other sites' privacy notices, as we have no control over information that is
-              submitted to, or collected by, these third parties.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-[#0A50EC] mb-4 border-b-2 border-[#0A50EC] pb-2">Cookies</h2>
-            <div className="space-y-4 text-gray-700 leading-relaxed">
+            <h2 className={H2}>Cookies and Similar Technologies</h2>
+            <div className={`space-y-4 ${BODY}`}>
               <p>
-                Although we don't use cookies to personally identify you, we may use cookies in the future to understand
-                site usage and to improve the content and offerings on our sites. Cookies are text files that may be
-                placed in your computer's browser to store your preferences.
+                <strong>This website uses cookies.</strong> Necessary cookies and browser storage — which record your
+                cookie choice, keep forms working, and support security — are always active, because the site cannot
+                function without them.
               </p>
               <p>
-                Cookies, by themselves, do not tell us your email address or other personally identifiable information.
+                Everything else is off until you turn it on. Analytics, advertising, and functional technologies load
+                only after you accept them in the cookie banner. If you ignore the banner, or reject it, none of them
+                run.
+              </p>
+
+              <div className="overflow-x-auto my-6 not-prose">
+                <table className="w-full text-sm border border-gray-200">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="text-left p-3 font-semibold text-gray-900 border-b border-gray-200">Provider</th>
+                      <th className="text-left p-3 font-semibold text-gray-900 border-b border-gray-200">
+                        What it does
+                      </th>
+                      <th className="text-left p-3 font-semibold text-gray-900 border-b border-gray-200">Stores</th>
+                      <th className="text-left p-3 font-semibold text-gray-900 border-b border-gray-200">Category</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {TRACKERS.map((t) => (
+                      <tr key={t.vendor} className="align-top">
+                        <td className="p-3 border-b border-gray-100 font-medium text-gray-900">{t.vendor}</td>
+                        <td className="p-3 border-b border-gray-100 text-gray-700">{t.purpose}</td>
+                        <td className="p-3 border-b border-gray-100 text-gray-700">{t.storage}</td>
+                        <td className="p-3 border-b border-gray-100 text-gray-700">{t.category}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <p>
+                <strong>Changing your mind.</strong> You can change or withdraw your choice at any time using{' '}
+                <CookiePreferencesLink />, which is also linked in the footer of every page. Withdrawing advertising
+                consent stops these tools, clears the cookies they set on this site, and reloads the page so nothing
+                already running continues.
+              </p>
+              <p>
+                <strong>Browser privacy signals.</strong> If your browser sends a Global Privacy Control signal, we
+                treat it as a refusal of advertising cookies and keep them off, even if something was accepted
+                previously.
               </p>
             </div>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-[#0A50EC] mb-4 border-b-2 border-[#0A50EC] pb-2">
-              Location Data
-            </h2>
-            <div className="space-y-4 text-gray-700 leading-relaxed">
+            <h2 className={H2}>Who We Share Information With</h2>
+            <div className={`space-y-4 ${BODY}`}>
               <p>
-                To help you find the nearest clinic location, our website may request access to your location data. This information is used solely to provide you with the most relevant clinic locations and is processed entirely on your device (client-side). We do not store, collect, or transmit your location data to our servers.
+                <strong>Advertising and analytics providers.</strong> If you accept the relevant cookies, Google, Meta,
+                and CallRail receive information about your visit, as described in the table above. Where an appointment
+                request results from an advertisement, we may share a one-way encrypted (hashed) version of contact
+                details with Google so the request can be matched to the ad that produced it. This happens only where
+                you have accepted advertising cookies.
               </p>
               <p>
-                You can choose to allow or deny location access when prompted by your browser. If you deny access, you can still use our website, but you may need to manually enter your location to find nearby clinics.
+                <strong>Service providers.</strong> We use Supabase to store inquiries and Resend to deliver the
+                notification email to our staff. These providers process information on our behalf, not for their own
+                advertising.
+              </p>
+              <p>
+                <strong>Pages about medical topics.</strong> We do not allow advertising pixels to run on pages whose
+                address names a specific condition, treatment, or injury, or on our symptom-checker, candidacy, and MRI
+                review pages — regardless of your cookie choices.
+              </p>
+              <p>
+                <strong>We do not sell your personal information,</strong> and we do not share the medical details you
+                submit through a form with advertising platforms.
               </p>
             </div>
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-[#0A50EC] mb-4 border-b-2 border-[#0A50EC] pb-2">
-              Our Commitment to Security
-            </h2>
-            <p className="text-gray-700 leading-relaxed">
-              We have put in place appropriate physical, electronic and managerial procedures to safeguard and help
-              prevent unauthorized access, maintain data security and correctly use the information we collect online.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-[#0A50EC] mb-4 border-b-2 border-[#0A50EC] pb-2">
-              How to Contact Us
-            </h2>
-            <div className="bg-[#0A50EC] text-white p-6 rounded-lg">
-              <p className="leading-relaxed">
-                If you have any questions or concerns about Mountain Spine & Orhtopedics online policy for this site,
-                please contact us via email at{" "}
-                <a
-                  href="mailto:info@mountainspineorthopedics.com"
-                  className="underline hover:text-gray-200 transition-colors"
-                >
+            <h2 className={H2}>Your Choices</h2>
+            <div className={`space-y-4 ${BODY}`}>
+              <p>
+                You can accept, reject, or customize optional cookies at any time using <CookiePreferencesLink />, and
+                you can refuse location access in your browser. To opt out of marketing email or mail, or to ask what we
+                hold about you, email{' '}
+                <a href="mailto:info@mountainspineorthopedics.com" className="text-[#0A50EC] underline">
                   info@mountainspineorthopedics.com
                 </a>
+                . Depending on where you live, you may have additional rights over your personal information; contact us
+                at the same address and we will tell you what applies and how to exercise them.
               </p>
             </div>
           </section>
-        </div>
 
-        <div className="text-center mt-12 pt-8 border-t border-gray-200">
-          <p className="text-gray-500 text-sm">Last updated: {new Date().toLocaleDateString()}</p>
+          <section className="mb-8">
+            <h2 className={H2}>Security and Retention</h2>
+            <div className={`space-y-4 ${BODY}`}>
+              <p>
+                We use physical, electronic, and procedural safeguards to protect the information you submit. No method
+                of transmission over the internet is completely secure, so we cannot guarantee absolute security.
+              </p>
+              <p>
+                We keep inquiry records for as long as needed to respond to you, provide care, and meet our legal and
+                recordkeeping obligations. Cookies set by this site expire on their own; the advertising cookies
+                described above last up to 90 days.
+              </p>
+            </div>
+          </section>
+
+          <section className="mb-8">
+            <h2 className={H2}>Other Websites</h2>
+            <p className={BODY}>
+              This site links to websites we do not operate. We have no control over what those sites collect, and this
+              notice does not apply to them.
+            </p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className={H2}>Children</h2>
+            <p className={BODY}>
+              This website is not directed to children under 13, and we do not knowingly collect their information
+              through it. Appointment requests for a minor should be submitted by a parent or guardian.
+            </p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className={H2}>Changes and Contact</h2>
+            <div className={`space-y-4 ${BODY}`}>
+              <p>
+                If we change this notice, we will update the date at the top of this page. Questions about it can go to{' '}
+                <a href="mailto:info@mountainspineorthopedics.com" className="text-[#0A50EC] underline">
+                  info@mountainspineorthopedics.com
+                </a>{' '}
+                or by phone at{' '}
+                <a href="tel:+15612239959" className="text-[#0A50EC] underline">
+                  (561) 223-9959
+                </a>
+                .
+              </p>
+              <p>
+                See also our{' '}
+                <Link href="/insurance-policy" className="text-[#0A50EC] underline">
+                  accepted insurance
+                </Link>{' '}
+                information.
+              </p>
+            </div>
+          </section>
         </div>
       </div>
     </div>
-  )
+  );
 }
-

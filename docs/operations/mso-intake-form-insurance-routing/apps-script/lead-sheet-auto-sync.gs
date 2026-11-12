@@ -100,10 +100,17 @@ var CONVERSION_VALUES = {
   'book-appointment':      300,
   'doctor-contact':        300,
   'state-consultation':    300,
-  'free-mri-review':       400,
-  'candidacy-check':       500,
-  'condition-check':       200,
-  'attorney-coordination': 600,
+  // FLATTENED 2026-11-12 (consent audit). These were 400 / 500 / 200 / 600,
+  // which made the conversion value a lossless code for WHICH form the patient
+  // completed - and three of those are clinical questionnaires collecting pain
+  // area, symptoms, condition, age, health status, smoking and recent diagnosis.
+  // Uploading that to Google Ads beside a hashed email and phone defeated the
+  // exclusion the website itself enforces. If value bidding is wanted later it
+  // must be based on actual booked revenue, not on which form was filled in.
+  'free-mri-review':       300,
+  'candidacy-check':       300,
+  'condition-check':       300,
+  'attorney-coordination': 300,
   'body-part':             300,
   'default':               300,
 };
@@ -280,6 +287,20 @@ function getLeadPriority(insurance_type, reason) {
   if (isPPO && isHighValue) return '⭐ HIGH VALUE';
   if (isPPO) return '✅ PPO';
   return 'STANDARD';
+}
+
+/**
+ * Form sources that collect the visitor's OWN clinical answers.
+ *
+ * Mirrors META_INELIGIBLE_FORM_SOURCES in lib/route-privacy.ts. The website
+ * already refuses to turn these into an ad-platform conversion; this is the
+ * server-side half of the same rule, which did not exist until 2026-11-12.
+ */
+var CLINICAL_FORM_SOURCES = ['condition-check', 'candidacy-check', 'free-mri-review'];
+
+function isClinicalFormSource(form_source) {
+  if (!form_source) return false;
+  return CLINICAL_FORM_SOURCES.indexOf(String(form_source).trim().toLowerCase()) !== -1;
 }
 
 function getConversionValue(form_source) {
@@ -481,6 +502,36 @@ function appendExportRow(tab, r, conversionName) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 function appendToOfflineImportSheet(sheetId, r, conversionName) {
+  // ---- GATES ADDED 2026-11-12 (consent audit) --------------------------
+  // Everything below this point leaves the practice's systems and lands in a
+  // live Google Ads account, so it is held to a stricter standard than the
+  // internal tabs. The internal recordkeeping above is deliberately NOT gated:
+  // a patient who refuses marketing cookies must still be tracked as a lead.
+
+  // 1. CONSENT. public.forms.marketing_consent is written by the site from the
+  //    visitor's stored banner choice. Anything other than an explicit true -
+  //    including null on rows written before the column existed - fails closed.
+  if (r.marketing_consent !== true) {
+    Logger.log('OFFLINE IMPORT [' + conversionName + ']: no marketing consent - row skipped.');
+    return;
+  }
+
+  // 2. CLINICAL SOURCE. Never upload a completed clinical questionnaire, with
+  //    or without consent. Consent cannot authorise this under Google's
+  //    customer data policy for sensitive categories.
+  if (isClinicalFormSource(r.form_source)) {
+    Logger.log('OFFLINE IMPORT [' + conversionName + ']: clinical form source - row skipped.');
+    return;
+  }
+
+  // 3. QUALIFICATION. The browser suppresses conversions for insurance the
+  //    practice does not accept; this path did not, so Smart Bidding was being
+  //    fed a positive signal the business had already judged worthless.
+  if (isNotAcceptedInsurance(r.insurance_type)) {
+    Logger.log('OFFLINE IMPORT [' + conversionName + ']: unaccepted insurance - row skipped.');
+    return;
+  }
+
   if (!r.gclid || r.gclid.trim() === '') {
     Logger.log('OFFLINE IMPORT [' + conversionName + ']: No GCLID — row skipped.');
     return;
@@ -513,8 +564,17 @@ function appendToOfflineImportSheet(sheetId, r, conversionName) {
     }
 
     // ── Hash user data per Google enhanced conversions spec ───────────────
-    var hashedEmail = hashEmail(r.patient_email);
-    var hashedPhone = hashPhone(r.patient_phone);
+    // IDENTITY IS DELIBERATELY NOT UPLOADED (2026-11-12).
+    // These carried SHA-256 email and phone into the Ads offline import, which
+    // is enhanced conversions for leads by another name. Google's customer data
+    // policy excludes sensitive-category conversions from that feature, and
+    // Google has already blocked the equivalent GA4 feature on this property as
+    // a sensitive category. The columns are kept so the sheet layout and the
+    // Ads column mapping stay valid - blank is read as absent. GCLID-based
+    // matching is unaffected and continues to attribute these conversions.
+    // hashEmail/hashPhone remain defined; re-enable only with counsel sign-off.
+    var hashedEmail = '';
+    var hashedPhone = '';
 
     var conversionTime  = formatConversionTime(r.created_at);
     var conversionValue = getConversionValue(r.form_source);

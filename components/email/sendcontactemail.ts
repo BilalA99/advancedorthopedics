@@ -93,6 +93,8 @@ async function logLeadToSupabase(data: {
    * keep the path out of GA4, because page_path was already there.
    */
   landing_path?: string;
+  marketing_consent?: boolean;
+  consent_recorded_at?: string;
 }): Promise<PersistResult> {
   const submissionId = randomUUID();
   try {
@@ -119,6 +121,12 @@ async function logLeadToSupabase(data: {
       utm_term:       data.utm_term       || null,
       utm_content:    data.utm_content    || null,
       landing_path:   data.landing_path   || null,
+      // Consent state at submission. The offline Google Ads export reads this
+      // and must upload only where it is TRUE — NULL means "not recorded" and
+      // fails closed. Never gate the insert above on it: a patient who refuses
+      // marketing cookies must still be able to request care.
+      marketing_consent:   typeof data.marketing_consent === 'boolean' ? data.marketing_consent : null,
+      consent_recorded_at: data.consent_recorded_at || null,
     });
     if (error) {
       // Loud, structured log so a persistence outage is greppable/alertable and

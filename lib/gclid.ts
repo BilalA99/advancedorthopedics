@@ -2,7 +2,7 @@
 // GCLID + UTM Capture Utility
 // Used for Google Ads offline conversion attribution
 // Mountain Spine & Orthopedics — NJ/NY Expansion
-import { isAdvertisingAllowed } from './consent';
+import { getConsentState, isAdvertisingAllowed } from './consent';
 
 const GCLID_COOKIE_NAME = 'mso_gclid';
 const GCLID_COOKIE_EXPIRY_DAYS = 90;
@@ -33,9 +33,27 @@ const UTM_PARAMS = [
 
 export type UtmParam = typeof UTM_PARAMS[number];
 export type AdClickParam = typeof AD_CLICK_PARAMS[number];
-export type AttributionData = Record<AdClickParam | UtmParam, string>;
+
+/**
+ * Attribution plus the consent state it was captured under.
+ *
+ * The consent fields ride along with the click IDs deliberately: they travel
+ * the same path (form payload -> /api/forms/* -> public.forms -> the Apps
+ * Script offline export), so the downstream consumer that decides whether to
+ * upload a conversion receives the decision in the same row as the identifiers
+ * it would upload. Before this, the server had no consent signal at all and the
+ * export could not honour a refusal.
+ */
+export type AttributionData = Record<AdClickParam | UtmParam, string> & {
+  /** True only on an affirmative, stored marketing grant. Fails closed. */
+  marketing_consent: boolean;
+  /** ISO timestamp of that decision; empty string when none was recorded. */
+  consent_recorded_at: string;
+};
 
 export const EMPTY_ATTRIBUTION: AttributionData = {
+  marketing_consent: false,
+  consent_recorded_at: '',
   gclid: '',
   gbraid: '',
   wbraid: '',
@@ -130,13 +148,30 @@ function snapshotLandingParams(): void {
  */
 function getParamWithBuffer(name: string): string | null {
   snapshotLandingParams();
+
+  // ADVERTISING ATTRIBUTION REQUIRES CONSENT, WHATEVER ITS SOURCE.
+  //
+  // This gate used to sit three lines lower, guarding only the memory buffer,
+  // which left the live-URL branch below completely ungated. A visitor who
+  // landed on /lp/<x>?gclid=... , pressed Reject, and submitted the form on
+  // that same page still had the click ID written into their lead record — and
+  // from there into the Google Ads offline conversion upload. Because paid
+  // traffic LANDS on the parameterised URL and these templates put the lead
+  // form above the fold, that was the common paid path, not an edge case.
+  //
+  // The gate belongs at the top: consent governs the attribution, not the
+  // mechanism by which it is read. Buffering the arrival parameters in memory
+  // stays legitimate — nothing is persisted or transmitted until an Accept
+  // releases them (GclidCapture re-runs capture on CONSENT_UPDATED_EVENT), so a
+  // visitor who browses first and accepts later is still attributed correctly.
+  if (!isAdvertisingAllowed()) return null;
+
   const direct = getQueryParam(name);
   if (direct) return direct;
+  // On a URL that carries attribution, a missing single parameter is
+  // meaningful — a fresh gbraid click legitimately clears a previous gclid —
+  // so no buffer fallback is applied.
   if (Object.keys(readAttributionParamsFromUrl()).length > 0) return null;
-  // The buffer stays locked until the visitor accepts advertising: their
-  // arrival parameters stay in memory, unread, and die with the page unless a
-  // later Accept (GclidCapture re-runs on consent change) releases them.
-  if (!isAdvertisingAllowed()) return null;
   return landingBuffer?.[name] ?? null;
 }
 
@@ -273,8 +308,13 @@ export function getStoredAdClickParams(): Record<AdClickParam, string> {
  * Use this to pass the full attribution payload to your backend.
  */
 export function getAttributionData(): AttributionData {
+  const consent = getConsentState();
   return {
     ...getStoredAdClickParams(),
     ...getStoredUtmParams(),
+    // Captured at the same moment as the identifiers, so the row that reaches
+    // the offline export carries the decision that governs it.
+    marketing_consent: Boolean(consent?.categories.marketing),
+    consent_recorded_at: consent?.timestamp ?? '',
   };
 }
