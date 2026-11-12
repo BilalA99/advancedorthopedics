@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Script from "next/script";
+import Link from "next/link";
 import MetaPixel from "@/components/MetaPixel";
 import { grantMetaConsent, revokeMetaConsent } from "@/lib/meta-pixel";
 import {
@@ -204,9 +205,37 @@ export default function CookieConsentManager() {
           className="fixed bottom-0 left-0 right-0 z-[60] border-t border-slate-200 bg-white/95 px-4 py-4 shadow-[0_-8px_30px_rgba(15,23,42,0.12)] backdrop-blur md:bottom-4 md:left-4 md:right-4 md:mx-auto md:max-w-5xl md:rounded-lg md:border"
         >
           <div className="mx-auto flex max-w-5xl flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            {/* The Privacy Policy link is load-bearing, not decoration.
+                Florida and Pennsylvania are all-party consent states for the
+                interception of electronic communications, and the consent
+                defence in that line of cases turns on the disclosure having
+                been REACHABLE at the moment consent was given — a banner that
+                asks for agreement without a route to what is being agreed to
+                is a materially weaker record. Keep this link here. */}
+            {/* WORDING IS LOAD-BEARING. PENDING COUNSEL SIGN-OFF.
+                Florida's wiretap statute (Fla. Stat. 934.03) requires prior
+                consent of ALL parties "to such interception", and Florida
+                deliberately omitted the federal one-party/party-to-the-
+                communication exception — so the usual "we are a party to our
+                own site's traffic" defence does not exist there. Two Florida
+                decisions (W.W. v. Orlando Health, M.D. Fla. 2025; Crespi v.
+                BayCare, M.D. Fla. 2026) have let FSCA claims past dismissal
+                against health systems on exactly this stack.
+                A generic "we use cookies to measure our marketing" arguably
+                does not disclose the thing being consented to: that named
+                third parties RECEIVE the pages you looked at. This copy says
+                so plainly. Do not water it back down to a generic line. */}
             <p className="max-w-3xl text-sm leading-6 text-[#424959]">
-              We use cookies to improve site performance, understand what pages help patients, and measure our
-              marketing. You can accept all, reject non-essential cookies, or manage preferences.
+              Necessary cookies keep this site working. With your permission, we also let Google, Meta and CallRail
+              receive information about your activity here &mdash; including the pages you view &mdash; so we can
+              measure our advertising. Nothing optional runs until you choose. See our{" "}
+              <Link
+                href="/privacy-policy"
+                className="font-semibold text-[#0A50EC] underline underline-offset-2 hover:text-[#252932]"
+              >
+                Privacy Policy
+              </Link>{" "}
+              for each provider and how to withdraw consent.
             </p>
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
               <button
@@ -260,8 +289,15 @@ export default function CookieConsentManager() {
                   Cookie Preferences
                 </h2>
                 <p className="mt-2 text-sm leading-6 text-[#424959]">
-                  Choose which optional cookies Mountain Spine & Orthopedics may use. Necessary cookies stay active so
-                  forms, security, and site navigation work.
+                  Choose which optional cookies Mountain Spine &amp; Orthopedics may use. Necessary cookies stay active
+                  so forms, security, and site navigation work. Our{" "}
+                  <Link
+                    href="/privacy-policy"
+                    className="font-semibold text-[#0A50EC] underline underline-offset-2 hover:text-[#252932]"
+                  >
+                    Privacy Policy
+                  </Link>{" "}
+                  lists every provider by name.
                 </p>
               </div>
               <button
