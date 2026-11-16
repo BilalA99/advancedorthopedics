@@ -17,10 +17,10 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: getOgImageForPath('/find-care/free-mri-review'),
+        url: getOgImageForPath('/find-care/second-opinion'),
         width: 1200,
         height: 630,
-        alt: 'Board-certified orthopedic spine specialists',
+        alt: 'Get a Second Opinion from Mountain Spine & Orthopedics',
       },
     ],
   },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Get a Second Opinion From Spine Experts | Mountain Spine & Orthopedics',
     description: 'Get a second opinion on recommended spine surgery from Mountain Spine & Orthopedics. Free for patients with PPO private insurance. No referral needed.',
-    images: [getOgImageForPath('/find-care/free-mri-review')],
+    images: [getOgImageForPath('/find-care/second-opinion')],
   },
 };
 

@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react'
 import ContactUsSection from '@/components/ContactUsSection'
 import RatingsAndReviews from '@/components/RatingsAndReviews'
 import Image from 'next/image'
+import Link from 'next/link'
 import AAOS from '@/public/AAOS.png';
 import ACP from '@/public/ACP.png';
 import AOA from '@/public/AOA.png';
@@ -228,7 +229,8 @@ export default function SecondOpinion() {
                     </div>
                 </div>
             </section>
-            <FindCareContactUsSection page={'Get a Second Opinion'} backgroundcolor="white" buttonText="Request a Second Opinion" submitButtonText="Request a Second Opinion" />
+            <div id="request-a-second-opinion" className="scroll-mt-28" />
+            <FindCareContactUsSection page={'Get a Second Opinion'} backgroundcolor="white" header="Request a Second Opinion" buttonText="Request a Second Opinion" submitButtonText="Request a Second Opinion" />
             <div className="w-full flex flex-row items-center justify-evenly bg-white py-20 ">
 
                 <Marquee pauseOnHover className='w-full' >
@@ -286,7 +288,8 @@ export default function SecondOpinion() {
 
 
             <section className='max-w-[1440px] w-full py-[30px] flex flex-row items-center justify-center'>
-                <div
+                <Link
+                    href="#request-a-second-opinion"
                     className=" max-h-[56px] h-full px-[32px] py-[16px] rounded-[62px] relative flex bg-[#0A50EC] text-white text-[14px] font-semibold w-fit lg:w-[40%] justify-center items-center hover:cursor-pointer"
                 >
                     <div className='pr-[10px]'>
@@ -301,8 +304,8 @@ export default function SecondOpinion() {
                             lineHeight: "24px",
                             letterSpacing: "0.02em"
                         }}
-                    >Request for a Second Opinion</span>
-                </div>
+                    >Request a Second Opinion</span>
+                </Link>
             </section>
 
 
