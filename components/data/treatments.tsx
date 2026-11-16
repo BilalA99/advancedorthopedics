@@ -1489,6 +1489,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
         "Selected L5-S1 degenerative disc disease, collapsed disc space, or low-grade spondylolisthesis where a targeted lumbosacral fusion approach is anatomically appropriate",
         "<a href=\"/conditions/spine-deformities\" class=\"underline text-[#252932] hover:text-[#2358AC]\">Spinal deformity</a> including kyphosis or sagittal imbalance requiring surgical correction",
         "Severe spinal fractures, trauma, or spinal instability from infection or tumor",
+        "For a step-by-step decision guide, including what the research shows for each condition and the questions to ask before you schedule, read <a href=\"/blogs/when-is-spinal-fusion-necessary\" class=\"underline text-[#252932] hover:text-[#2358AC]\">When is spinal fusion necessary?</a>",
       ],
     },
     procedure: {
