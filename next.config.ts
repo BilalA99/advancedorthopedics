@@ -62,6 +62,15 @@ const nextConfig: NextConfig = {
     { source: "/area-of-pain/back-pain/sciatica-nerve-pain", destination: "/conditions/sciatica", permanent: true },
     { source: "/area-of-pain/back-pain/lumbar-degenerative-disc-disease", destination: "/conditions/degenerative-disc-disease", permanent: true },
     { source: "/area-of-pain/neck-and-shoulder-pain/neck-and-shoulder-pain-treatment", destination: "/conditions/neck-pain", permanent: true },
+
+    // Blog tag URLs. There has never been an app/blogs/tag route, so every
+    // /blogs/tag/<slug> 404d. The 14 entries that advertised them were pulled
+    // from /sitemap on 2026-09-06, but Google still holds four of them
+    // (neck, knee, lower-spine, spine) and they remain hard 404s in Search
+    // Console. The blog hub filters by tag through a query parameter instead,
+    // so send them there rather than leaving dead ends holding whatever link
+    // equity they still carry. Restore a real route and this can go.
+    { source: "/blogs/tag/:slug*", destination: "/blogs", permanent: true },
     
     // --- HOST/PROTOCOL/CASE NORMALIZATION (301s) - PRODUCTION ONLY ---
     ...(isProduction ? [
