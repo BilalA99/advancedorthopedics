@@ -62,7 +62,7 @@ const faqItems: { question: string, answer: React.ReactElement }[] = [
         question: 'What is a second opinion?',
         answer: (
             <p>
-                A second opinion is a crucial step in your healthcare journey where you ask another expert specialist to review your diagnosis and proposed treatment plan. It ensures you have all the information needed to make a confident decision, confirming the diagnosis is correct and that you are aware of all possible treatment options, including the most advanced <a href="/treatments/surgical-treatments" className="text-blue-600 hover:underline">minimally invasive procedures</a> available.
+                A second opinion is a crucial step in your healthcare journey where you ask another expert specialist to review your diagnosis and proposed treatment plan. It ensures you have all the information needed to make a confident decision, confirming the diagnosis is correct and that you are aware of all possible treatment options, including the <a href="/treatments/surgical-treatments" className="text-blue-600 hover:underline">minimally invasive procedures</a> available.
             </p>
         )
     },
@@ -102,7 +102,7 @@ const faqItems: { question: string, answer: React.ReactElement }[] = [
 
 const Testimonial = (
     <p>
-        A virtual second opinion from Mountain Spine & Orthopedics helps you make an informed decision about your medical treatment from the comfort of your home. For patients who live far away or have difficulty traveling, our service provides direct access to leading spine and orthopedic specialists like {showFeaturedDoctor && (
+        A virtual second opinion from Mountain Spine & Orthopedics helps you make an informed decision about your medical treatment from the comfort of your home. For patients who live far away or have difficulty traveling, our service provides direct access to spine and orthopedic specialists like {showFeaturedDoctor && (
             <><a href="/about/meetourdoctors/dr-scott-katzman" className="text-blue-600 hover:underline">Dr. Katzman</a> and </>
         )}<a href="/about/meetourdoctors/dr-david-cowin" className="text-blue-600 hover:underline">Dr. Cowin</a>. Already have an MRI? Use our <a href="/find-care/free-mri-review" className="text-blue-600 hover:underline">Free MRI Review tool</a> to let our doctors review it free of charge. Ready to talk? <a href="/find-care/book-an-appointment" className="text-blue-600 hover:underline">Book an appointment</a> to discuss your options.
     </p>
@@ -131,7 +131,7 @@ const medicalOrganizationSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalOrganization",
   "name": "Mountain Spine & Orthopedics",
-  "description": "Leading spine and orthopedic specialists in Florida providing advanced minimally invasive treatments, including Band-Aid Back Surgery, laser spine procedures, and comprehensive pain management.",
+  "description": "Spine and orthopedic specialists in Florida providing advanced minimally invasive treatments, including Band-Aid Back Surgery, laser spine procedures, and comprehensive pain management.",
   "url": "https://mountainspineorthopedics.com",
   "logo": "https://mountainspineorthopedics.com/newlogo4.png",
   "image": "https://mountainspineorthopedics.com/herosectionimg.jpg",
@@ -223,12 +223,12 @@ export default function SecondOpinion() {
                             }}
                             className='text-[#252932] text-lg md:text-xl mt-2'
                         >
-                            Our Virtual Second Opinion service offers easy access for remote patients to top specialists.
+                            Our Virtual Second Opinion service offers easy access for remote patients to our specialists.
                         </p>
                     </div>
                 </div>
             </section>
-            <FindCareContactUsSection page={'Get a Second Opinion'} backgroundcolor="white" />
+            <FindCareContactUsSection page={'Get a Second Opinion'} backgroundcolor="white" buttonText="Request a Second Opinion" submitButtonText="Request a Second Opinion" />
             <div className="w-full flex flex-row items-center justify-evenly bg-white py-20 ">
 
                 <Marquee pauseOnHover className='w-full' >
@@ -248,6 +248,37 @@ export default function SecondOpinion() {
 
             </div>
             <RatingsAndReviews reviews={getVisibleReviews(sitewideReviews)} />
+
+            <section className='max-w-[1440px] w-full h-full flex flex-col relative space-y-[60px] px-6 xl:px-[100px] py-[50px]'>
+                <h2
+                    style={{
+                        fontFamily: 'var(--font-public-sans)',
+                        fontWeight: 500,
+                    }}
+                    className=' text-black sm:text-6xl text-4xl text-center w-[90%] self-center'
+                >Told you need spinal fusion?</h2>
+
+                <div className="space-y-[20px] flex flex-col">
+                    <p
+                        style={{
+                            fontFamily: 'var(--font-public-sans)',
+                            fontWeight: 500,
+                        }}
+                        className='text-[#252932] text-lg md:text-xl mt-2'
+                    >
+                        Fusion permanently joins two or more vertebrae, so it's worth being sure it's the right operation before you schedule it, especially if you're trying to fit surgery in before your deductible resets on January 1. Request a review below and our team will explain how to share your imaging and your surgeon's recommendation. A spine specialist will look at your diagnosis, the level or levels proposed for fusion, and whether other options, such as decompression alone or a motion-preserving procedure, fit your case. Reviews are free for patients with PPO private insurance.
+                    </p>
+                    <p
+                        style={{
+                            fontFamily: 'var(--font-public-sans)',
+                            fontWeight: 500,
+                        }}
+                        className='text-[#252932] text-lg md:text-xl mt-2'
+                    >
+                        If you have new leg weakness, numbness in the groin or inner thighs, or loss of bladder or bowel control, go to the emergency room rather than waiting for a review.
+                    </p>
+                </div>
+            </section>
 
             <FAQsSection header={Header} faqItems={faqItems} />
 

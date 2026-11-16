@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { ConsultationForm } from './ContactForm'
 import HomeContactUs from '../public/HomeContactUs.jpeg'
 import { DoctorContactForm } from './DoctorContactForm'
-export default function FindCareContactUsSection({ page, backgroundcolor = '#FAFCFF' }: { page: string, backgroundcolor?: string }) {
+export default function FindCareContactUsSection({ page, backgroundcolor = '#FAFCFF', buttonText, submitButtonText }: { page: string, backgroundcolor?: string, buttonText?: string, submitButtonText?: string }) {
   return (
     <section className={`bg-[${backgroundcolor}] w-full h-full pt-3 lg:pt-[50px] pb-[50px]`}>
       <div className="max-w-[1440px] w-full px-6 lg:px-[40px] mx-auto flex flex-col lg:flex-row space-x-[60px]">
@@ -93,7 +93,7 @@ export default function FindCareContactUsSection({ page, backgroundcolor = '#FAF
           </p>
 
           {/* <ConsultationForm /> */}
-          <DoctorContactForm backgroundcolor="#" />
+          <DoctorContactForm backgroundcolor="#" buttonText={buttonText} submitButtonText={submitButtonText} />
         </div>
       </div>
     </section>

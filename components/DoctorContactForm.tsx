@@ -91,10 +91,11 @@ interface DoctorContactFormProp {
     backgroundcolor: string
     header?: string
     buttonText?: string
+    submitButtonText?: string
     timePeriod?: string
     defaultState?: string
 }
-export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an Appointment', buttonText = 'Book an Appointment', timePeriod = 'day', defaultState = "" }: DoctorContactFormProp) {
+export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an Appointment', buttonText = 'Book an Appointment', submitButtonText = 'Book an Appointment', timePeriod = 'day', defaultState = "" }: DoctorContactFormProp) {
 
     const [openContactForm, setOpenContactForm] = useState(false)
     const [openAppointmentConfirm, setAppointmentConfirm] = useState(false)
@@ -1030,7 +1031,7 @@ export function DoctorContactForm({ backgroundcolor = 'white', header = 'Book an
                                                         <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
                                                     </div>
                                                 ) : (
-                                                    <BookAnAppointmentClient />
+                                                    <BookAnAppointmentClient buttonText={submitButtonText} />
                                                 )}
                                             </button>
 
