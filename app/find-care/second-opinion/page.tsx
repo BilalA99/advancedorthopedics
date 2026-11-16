@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react'
 import ContactUsSection from '@/components/ContactUsSection'
 import RatingsAndReviews from '@/components/RatingsAndReviews'
 import Image from 'next/image'
+import Link from 'next/link'
 import AAOS from '@/public/AAOS.png';
 import ACP from '@/public/ACP.png';
 import AOA from '@/public/AOA.png';
@@ -62,7 +63,7 @@ const faqItems: { question: string, answer: React.ReactElement }[] = [
         question: 'What is a second opinion?',
         answer: (
             <p>
-                A second opinion is a crucial step in your healthcare journey where you ask another expert specialist to review your diagnosis and proposed treatment plan. It ensures you have all the information needed to make a confident decision, confirming the diagnosis is correct and that you are aware of all possible treatment options, including the most advanced <a href="/treatments/surgical-treatments" className="text-blue-600 hover:underline">minimally invasive procedures</a> available.
+                A second opinion is a crucial step in your healthcare journey where you ask another expert specialist to review your diagnosis and proposed treatment plan. It ensures you have all the information needed to make a confident decision, confirming the diagnosis is correct and that you are aware of all possible treatment options, including the <a href="/treatments/surgical-treatments" className="text-blue-600 hover:underline">minimally invasive procedures</a> available.
             </p>
         )
     },
@@ -78,7 +79,7 @@ const faqItems: { question: string, answer: React.ReactElement }[] = [
         question: 'What does a second opinion cost?',
         answer: (
             <p>
-                Many insurance plans cover the cost of a second opinion, especially when surgery is recommended. We recommend checking with your provider about your specific coverage. For more details on navigating costs, you can review our <a href="/insurance-policy" className="text-blue-600 hover:underline">insurance information page</a>.
+                Second-opinion reviews are free for patients with PPO private insurance. Not sure what type of plan you have? Check your insurance card or call us at (561) 223-9959 and we'll confirm it with you before your review.
             </p>
         )
     },
@@ -102,7 +103,7 @@ const faqItems: { question: string, answer: React.ReactElement }[] = [
 
 const Testimonial = (
     <p>
-        A virtual second opinion from Mountain Spine & Orthopedics helps you make an informed decision about your medical treatment from the comfort of your home. For patients who live far away or have difficulty traveling, our service provides direct access to leading spine and orthopedic specialists like {showFeaturedDoctor && (
+        A virtual second opinion from Mountain Spine & Orthopedics helps you make an informed decision about your medical treatment from the comfort of your home. For patients who live far away or have difficulty traveling, our service provides direct access to spine and orthopedic specialists like {showFeaturedDoctor && (
             <><a href="/about/meetourdoctors/dr-scott-katzman" className="text-blue-600 hover:underline">Dr. Katzman</a> and </>
         )}<a href="/about/meetourdoctors/dr-david-cowin" className="text-blue-600 hover:underline">Dr. Cowin</a>. Already have an MRI? Use our <a href="/find-care/free-mri-review" className="text-blue-600 hover:underline">Free MRI Review tool</a> to let our doctors review it free of charge. Ready to talk? <a href="/find-care/book-an-appointment" className="text-blue-600 hover:underline">Book an appointment</a> to discuss your options.
     </p>
@@ -131,7 +132,7 @@ const medicalOrganizationSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalOrganization",
   "name": "Mountain Spine & Orthopedics",
-  "description": "Leading spine and orthopedic specialists in Florida providing advanced minimally invasive treatments, including Band-Aid Back Surgery, laser spine procedures, and comprehensive pain management.",
+  "description": "Spine and orthopedic specialists in Florida providing advanced minimally invasive treatments, including Band-Aid Back Surgery, laser spine procedures, and comprehensive pain management.",
   "url": "https://mountainspineorthopedics.com",
   "logo": "https://mountainspineorthopedics.com/newlogo4.png",
   "image": "https://mountainspineorthopedics.com/herosectionimg.jpg",
@@ -223,12 +224,13 @@ export default function SecondOpinion() {
                             }}
                             className='text-[#252932] text-lg md:text-xl mt-2'
                         >
-                            Our Virtual Second Opinion service offers easy access for remote patients to top specialists.
+                            Our Virtual Second Opinion service offers easy access for remote patients to our specialists.
                         </p>
                     </div>
                 </div>
             </section>
-            <FindCareContactUsSection page={'Get a Second Opinion'} backgroundcolor="white" />
+            <div id="request-a-second-opinion" className="scroll-mt-28" />
+            <FindCareContactUsSection page={'Get a Second Opinion'} backgroundcolor="white" header="Request a Second Opinion" buttonText="Request a Second Opinion" submitButtonText="Request a Second Opinion" />
             <div className="w-full flex flex-row items-center justify-evenly bg-white py-20 ">
 
                 <Marquee pauseOnHover className='w-full' >
@@ -249,13 +251,45 @@ export default function SecondOpinion() {
             </div>
             <RatingsAndReviews reviews={getVisibleReviews(sitewideReviews)} />
 
+            <section className='max-w-[1440px] w-full h-full flex flex-col relative space-y-[60px] px-6 xl:px-[100px] py-[50px]'>
+                <h2
+                    style={{
+                        fontFamily: 'var(--font-public-sans)',
+                        fontWeight: 500,
+                    }}
+                    className=' text-black sm:text-6xl text-4xl text-center w-[90%] self-center'
+                >Told you need spinal fusion?</h2>
+
+                <div className="space-y-[20px] flex flex-col">
+                    <p
+                        style={{
+                            fontFamily: 'var(--font-public-sans)',
+                            fontWeight: 500,
+                        }}
+                        className='text-[#252932] text-lg md:text-xl mt-2'
+                    >
+                        Fusion permanently joins two or more vertebrae, so it's worth being sure it's the right operation before you schedule it, especially if you're trying to fit surgery in before your deductible resets on January 1. Request a review below and our team will explain how to share your imaging and your surgeon's recommendation. A spine specialist will look at your diagnosis, the level or levels proposed for fusion, and whether other options, such as decompression alone or a motion-preserving procedure, fit your case. Reviews are free for patients with PPO private insurance.
+                    </p>
+                    <p
+                        style={{
+                            fontFamily: 'var(--font-public-sans)',
+                            fontWeight: 500,
+                        }}
+                        className='text-[#252932] text-lg md:text-xl mt-2'
+                    >
+                        If you have new leg weakness, numbness in the groin or inner thighs, or loss of bladder or bowel control, go to the emergency room rather than waiting for a review.
+                    </p>
+                </div>
+            </section>
+
             <FAQsSection header={Header} faqItems={faqItems} />
 
             <DoctorsTestitmonial testimonial={Testimonial} />
 
 
             <section className='max-w-[1440px] w-full py-[30px] flex flex-row items-center justify-center'>
-                <div
+                <Link
+                    href="#request-a-second-opinion"
                     className=" max-h-[56px] h-full px-[32px] py-[16px] rounded-[62px] relative flex bg-[#0A50EC] text-white text-[14px] font-semibold w-fit lg:w-[40%] justify-center items-center hover:cursor-pointer"
                 >
                     <div className='pr-[10px]'>
@@ -270,8 +304,8 @@ export default function SecondOpinion() {
                             lineHeight: "24px",
                             letterSpacing: "0.02em"
                         }}
-                    >Request for a Second Opinion</span>
-                </div>
+                    >Request a Second Opinion</span>
+                </Link>
             </section>
 
 

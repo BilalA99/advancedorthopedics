@@ -1520,7 +1520,7 @@ export const treatmentContentPlaceholders: TreatmentContent[] = [
       heading: "Insurance Coverage for Spinal Fusion",
       body: "Spinal fusion is a covered procedure for many diagnoses including scoliosis, trauma, deformity, and instability. **We accept PPO insurance plans only.** We verify all benefits prior to surgery and handle the pre-authorization process for complex procedures including deformity correction.",
     },
-    schedule: "If you have been told spinal fusion may be appropriate, or want a second opinion before deciding, contact Mountain Spine & Orthopedics. Our specialists can review MRI, CT, and standing X-rays to explain whether fusion, decompression, injections, or continued non-surgical care best matches your diagnosis. PPO Insurance Accepted.",
+    schedule: "If you have been told spinal fusion may be appropriate, or want <a href=\"/find-care/second-opinion\" class=\"underline text-[#252932] hover:text-[#2358AC]\">a second opinion</a> before deciding, contact Mountain Spine & Orthopedics. Our specialists can review MRI, CT, and standing X-rays to explain whether fusion, decompression, injections, or continued non-surgical care best matches your diagnosis. PPO Insurance Accepted.",
   },
   {
     id: "transforaminal-lumbar-interbody-fusion",

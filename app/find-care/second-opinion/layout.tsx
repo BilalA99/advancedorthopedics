@@ -4,31 +4,31 @@ import { getOgImageForPath } from "@/lib/og";
 
 export const metadata: Metadata = {
   title: 'Get a Second Opinion From Spine Experts | Mountain Spine & Orthopedics',
-  description: 'Upload your MRI or X-ray and receive a board-certified orthopedic surgeon\'s second opinion within 24 hours — 100% free.',
+  description: 'Get a second opinion on recommended spine surgery from Mountain Spine & Orthopedics. Free for patients with PPO private insurance. No referral needed.',
   robots: { index: true, follow: true },
   alternates: {
     canonical: buildCanonical('/find-care/second-opinion')
   },
   openGraph: {
     title: 'Get a Second Opinion From Spine Experts | Mountain Spine & Orthopedics',
-    description: 'Upload your MRI or X-ray and receive a board-certified orthopedic surgeon\'s second opinion within 24 hours — 100% free.',
+    description: 'Get a second opinion on recommended spine surgery from Mountain Spine & Orthopedics. Free for patients with PPO private insurance. No referral needed.',
     url: buildCanonical('/find-care/second-opinion'),
     siteName: 'Mountain Spine & Orthopedics',
     type: 'website',
     images: [
       {
-        url: getOgImageForPath('/find-care/free-mri-review'),
+        url: getOgImageForPath('/find-care/second-opinion'),
         width: 1200,
         height: 630,
-        alt: 'Board-certified orthopedic spine specialists',
+        alt: 'Get a Second Opinion from Mountain Spine & Orthopedics',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Get a Second Opinion From Spine Experts | Mountain Spine & Orthopedics',
-    description: 'Upload your MRI or X-ray and receive a board-certified orthopedic surgeon\'s second opinion within 24 hours — 100% free.',
-    images: [getOgImageForPath('/find-care/free-mri-review')],
+    description: 'Get a second opinion on recommended spine surgery from Mountain Spine & Orthopedics. Free for patients with PPO private insurance. No referral needed.',
+    images: [getOgImageForPath('/find-care/second-opinion')],
   },
 };
 
