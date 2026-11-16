@@ -5,6 +5,7 @@ import test from 'node:test';
 import {
   extractLeadgenChanges,
   fieldsOf,
+  formatMetaLocation,
   mapLeadToContact,
   verifyMetaSignature,
   type GraphLead,
@@ -152,6 +153,46 @@ test('never invents contact values for a lead with no answers', () => {
   assert.equal(c.email, '');
   assert.equal(c.phone, '');
   assert.equal(c.location, '');
+});
+
+// ── Preferred location ───────────────────────────────────────────────────────
+//
+// Meta returns a CUSTOM question's answer KEY, not its label. These are the
+// nine clinic options plus "not sure" on form 3634773886703639 as of
+// 2026-11-16, in the exact form the Graph API hands them over.
+
+test('renders Meta answer keys as the clinic names staff use', () => {
+  assert.equal(formatMetaLocation('fort_pierce'), 'Fort Pierce');
+  assert.equal(formatMetaLocation('altamonte_springs'), 'Altamonte Springs');
+  assert.equal(formatMetaLocation('south_miami'), 'South Miami');
+  assert.equal(formatMetaLocation('palm_beach_gardens'), 'Palm Beach Gardens');
+  assert.equal(formatMetaLocation('boca_raton'), 'Boca Raton');
+  assert.equal(formatMetaLocation('orlando'), 'Orlando');
+  assert.equal(formatMetaLocation('davenport'), 'Davenport');
+  assert.equal(formatMetaLocation('jacksonville'), 'Jacksonville');
+  assert.equal(formatMetaLocation('hollywood'), 'Hollywood');
+});
+
+test('spells out the one option that is a sentence, not a place', () => {
+  assert.equal(formatMetaLocation('not_sure'), 'Not sure yet');
+});
+
+test('leaves an already-readable location untouched', () => {
+  assert.equal(formatMetaLocation('Hollywood'), 'Hollywood');
+  assert.equal(formatMetaLocation('Palm Beach Gardens'), 'Palm Beach Gardens');
+});
+
+test('never turns a missing location into a fabricated one', () => {
+  assert.equal(formatMetaLocation(''), '');
+  assert.equal(formatMetaLocation('   '), '');
+  assert.equal(formatMetaLocation(null), '');
+  assert.equal(formatMetaLocation(undefined), '');
+});
+
+test('a new clinic key formats correctly without any code change', () => {
+  // The point of title-casing over a lookup table: a location added to the
+  // Instant Form must not reach the front desk as a raw key.
+  assert.equal(formatMetaLocation('winter_garden'), 'Winter Garden');
 });
 
 // ── Measurement contract ─────────────────────────────────────────────────────

@@ -90,6 +90,34 @@ export function fieldsOf(lead: GraphLead): Record<string, string> {
 }
 
 /**
+ * Turns a Meta custom-question answer key into the label a human wrote.
+ *
+ * Meta returns the KEY of a CUSTOM question's chosen option, not its label:
+ * `fort_pierce`, not "Fort Pierce". `preferred_location` is the one answer that
+ * tells a scheduler which clinic to book the patient into, and until now it
+ * reached the staff email in that raw form.
+ *
+ * Title-casing the key is deliberate rather than a hardcoded option table. The
+ * Instant Form's location list changes whenever a clinic opens or closes, and a
+ * lookup table here would quietly fall back to the raw key at exactly the
+ * moment a new location launches — the moment it most needs to read correctly.
+ *
+ * Values that are already labels pass through unchanged, so a form that returns
+ * "Hollywood" still reads "Hollywood".
+ */
+export function formatMetaLocation(value: string | null | undefined): string {
+  const raw = (value || "").trim();
+  if (!raw) return "";
+  // The one option whose label is a sentence rather than a place name.
+  if (raw.toLowerCase() === "not_sure") return "Not sure yet";
+  return raw
+    .split(/[_\-\s]+/)
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+/**
  * Maps a Graph lead onto the shape `sendContactEmail` already expects, so a
  * Meta lead renders in the staff email exactly like a website lead.
  *
@@ -104,7 +132,7 @@ export function mapLeadToContact(lead: GraphLead, change: LeadgenValue = {}): Me
     name,
     email: f.email || "",
     phone: f.phone_number || "",
-    location: f.preferred_location || "",
+    location: formatMetaLocation(f.preferred_location),
     utm_source: lead.platform === "ig" ? "instagram" : "facebook",
     utm_medium: "paid_social",
     utm_campaign: lead.campaign_id || change.campaign_id || "",

@@ -4,7 +4,48 @@
  * Deployed as the "Mountain Spine Lead Sheet Auto Sync" web app, called by the
  * Supabase database trigger on insert into public.forms.
  *
- * ── CHANGES IN THIS VERSION (2026-10-15) ───────────────────────────────────
+ * ── CHANGES IN THIS VERSION (2026-11-16) ───────────────────────────────────
+ *
+ * 1. LEAD SOURCE. A new, LAST column saying which channel a lead came from:
+ *    Meta, Google Ads, Organic Search, AI Search, Referral, Paid — Other, or
+ *    Direct / Unknown. Until now the only way to answer "where did this lead
+ *    come from" was to read five UTM columns plus GCLID and infer it by eye.
+ *
+ *    It is DERIVED, not stored. public.forms has no channel column — it has
+ *    gclid/gbraid/wbraid, five utm_* fields and form_source — and the mapping
+ *    from those to a channel is a business rule that belongs in exactly one
+ *    place. See getLeadSource() for the precedence order and why it is so.
+ *
+ * 2. META LEADS ARE MARKED, NOT IMPORTED. Meta Instant Form leads have been
+ *    landing in this sheet since 2026-11-11 already: the website's
+ *    /api/webhooks/meta-leadgen handler writes them into public.forms with
+ *    form_source='meta-instant-form', and the forms_to_google_sheets trigger
+ *    fires AFTER INSERT on every row with no WHEN clause. They were always
+ *    here; they just looked like ordinary Florida leads because nothing on the
+ *    row said otherwise.
+ *
+ *    So no second importer was added, and none should be. A direct
+ *    Meta-to-Sheets pull would duplicate every one of these rows, and the two
+ *    copies would disagree the moment either side changed.
+ *
+ * 3. Meta rows are tinted blue (#E8F0FE) so they read as a group at a glance.
+ *    The tint is applied only where the row carries no higher-priority warning
+ *    colour: ⛔ / ⭐ / attorney decide who gets phoned and who must not be
+ *    booked, and a channel label must never overwrite them. So that a Meta lead
+ *    stays unmistakable even on a red or amber row, the Lead Source CELL is
+ *    always tinted and bolded on Meta rows — identification never depends on
+ *    the row colour alone.
+ *
+ * 4. Header self-healing now compares the actual header TEXT rather than
+ *    tab.getLastColumn(). On "ALL LEADS" getLastColumn() already returns 26,
+ *    because trailing columns carry stray formatting from earlier manual edits,
+ *    so the old `getLastColumn() < headers.length` test was already false and
+ *    the Lead Source header would never have been written. See getOrCreateTab().
+ *
+ * 5. formatZipCell no longer assumes ZIP is the last column — it is not any
+ *    more. Positions are named: see COL_ZIP and COL_LEAD_SOURCE.
+ *
+ * ── CHANGES IN THE 2026-10-15 VERSION ──────────────────────────────────────
  *
  * The intake dropdown now has exactly seven options (Abubeckr's checklist,
  * 2026-10-14) and the site stores the option text as shown, with no "PPO"
@@ -182,9 +223,13 @@ var TAB_NJNY_EXPORT = 'NJ/NY Export → Google Ads';
 // ─────────────────────────────────────────────────────────────────────────────
 // COLUMN DEFINITIONS
 //
-// ZIP is LAST on purpose. See the header note at the top of this file: inserting
-// it beside State would shift every later column for new rows only, leaving one
-// sheet holding two layouts.
+// New columns are APPENDED, never inserted. See the header note at the top of
+// this file: inserting beside a related column would shift every later column
+// for new rows only, leaving one sheet holding two incompatible layouts and
+// every saved filter and chart silently reading the wrong column.
+//
+// That is why ZIP sits after Lead Priority rather than next to State, and why
+// Lead Source now sits after ZIP rather than next to UTM Source.
 // ─────────────────────────────────────────────────────────────────────────────
 
 var FULL_HEADERS = [
@@ -192,8 +237,18 @@ var FULL_HEADERS = [
   'Reason / Condition', 'Insurance Type', 'Form Source', 'Best Time',
   'Attorney Firm', 'Attorney Name', 'GCLID', 'UTM Source', 'UTM Medium',
   'UTM Campaign', 'UTM Term', 'UTM Content', 'Lead Priority',
-  'ZIP',
+  'ZIP', 'Lead Source',
 ];
+
+// Named 1-based positions within FULL_HEADERS.
+//
+// ZIP used to be addressed as FULL_HEADERS.length, which was true only for as
+// long as ZIP happened to be last. Appending Lead Source made that expression
+// point one column too far, which would have applied the plain-text ZIP format
+// to the Lead Source cell and left real ZIPs to be re-parsed as numbers — the
+// exact leading-zero corruption normalizeZip() exists to prevent.
+var COL_ZIP         = 19;
+var COL_LEAD_SOURCE = 20;
 
 var EXPORT_HEADERS = [
   'Google Click ID', 'Conversion Name', 'Conversion Time',
@@ -287,6 +342,129 @@ function getLeadPriority(insurance_type, reason) {
   if (isPPO && isHighValue) return '⭐ HIGH VALUE';
   if (isPPO) return '✅ PPO';
   return 'STANDARD';
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LEAD SOURCE — which channel the lead actually came from
+//
+// One clean value per lead, so the column can be filtered and pivoted. The fine
+// detail (which network, which campaign, which ad) is already sitting in the
+// UTM columns beside it and is deliberately not duplicated here.
+// ─────────────────────────────────────────────────────────────────────────────
+
+var LEAD_SOURCE_META       = 'Meta';
+var LEAD_SOURCE_GOOGLE     = 'Google Ads';
+var LEAD_SOURCE_PAID_OTHER = 'Paid — Other';
+var LEAD_SOURCE_AI         = 'AI Search';
+var LEAD_SOURCE_ORGANIC    = 'Organic Search';
+var LEAD_SOURCE_REFERRAL   = 'Referral';
+var LEAD_SOURCE_DIRECT     = 'Direct / Unknown';
+
+// utm_source values that mean Meta. The website writes 'facebook' or
+// 'instagram' for Instant Form leads; the rest are what Meta's own in-app
+// browsers and link shims put in a referrer when someone taps through to the
+// website form instead.
+var META_UTM_SOURCES = [
+  'facebook', 'instagram', 'fb', 'ig', 'meta',
+  'facebook.com', 'instagram.com', 'm.facebook.com',
+  'l.facebook.com', 'lm.facebook.com', 'l.instagram.com',
+];
+
+// Assistants that send referral traffic. These are NOT organic search: they
+// convert at a different rate and are worth seeing separately, and this sheet
+// already holds real leads from chatgpt.com going back to 2026-06.
+var AI_UTM_SOURCES = [
+  'chatgpt.com', 'chatgpt', 'openai', 'openai.com',
+  'perplexity', 'perplexity.ai', 'www.perplexity.ai',
+  'copilot', 'copilot.microsoft.com',
+  'gemini', 'gemini.google.com',
+  'claude', 'claude.ai',
+];
+
+var SEARCH_UTM_SOURCES = [
+  'google', 'google.com', 'bing', 'bing.com', 'yahoo', 'duckduckgo',
+  'duckduckgo.com', 'ecosia', 'brave', 'baidu', 'yandex', 'organic',
+];
+
+var PAID_UTM_MEDIUMS = [
+  'cpc', 'ppc', 'paid', 'paidsearch', 'paid_search', 'paid-search', 'cpm',
+];
+
+function hasValue(v) {
+  return !!v && String(v).trim() !== '';
+}
+
+function isMetaLead(leadSource) {
+  return leadSource === LEAD_SOURCE_META;
+}
+
+/**
+ * Channel attribution for one lead row.
+ *
+ * The precedence order is deliberate:
+ *
+ *  1. form_source === 'meta-instant-form' wins outright. The website's Meta
+ *     webhook is the only thing that ever writes that value, which makes it the
+ *     most trustworthy signal on the row — more trustworthy than any utm, which
+ *     a shared link or a copied URL can set to anything at all.
+ *
+ *  2. Then Meta's own utm markers, which catch a Meta ad that sent someone to a
+ *     WEBSITE form rather than an Instant Form. Same spend, same channel, so it
+ *     belongs in the same bucket.
+ *
+ *  3. Then a Google click id. gclid / gbraid / wbraid are written by Google Ads
+ *     itself and an organic visit cannot produce one. gbraid and wbraid are
+ *     checked here even though the rest of this file ignores them: they REPLACE
+ *     gclid on iOS and app campaigns, so such a lead has always shown a blank
+ *     GCLID column and would otherwise be counted as organic — understating
+ *     paid performance in exactly the campaigns hardest to measure already.
+ *
+ *  4. Then paid utm_medium markers, for manual tagging or a stripped click id.
+ *
+ *  5. Only then the unpaid buckets.
+ *
+ * Nothing here decides anything. Like the rest of this sheet it only labels —
+ * the conversion and consent decisions are made server-side on the website and
+ * cannot be affected by this function being wrong.
+ */
+function getLeadSource(r) {
+  var formSource = String(r.form_source || '').trim().toLowerCase();
+  var source     = String(r.utm_source  || '').trim().toLowerCase();
+  var medium     = String(r.utm_medium  || '').trim().toLowerCase();
+
+  // 1 — the website's own Meta Instant Form webhook.
+  if (formSource === 'meta-instant-form') return LEAD_SOURCE_META;
+
+  // 2 — Meta traffic that landed on a website form instead.
+  if (META_UTM_SOURCES.indexOf(source) !== -1) return LEAD_SOURCE_META;
+  if (medium.indexOf('paid_social') !== -1 || medium.indexOf('paid-social') !== -1) {
+    return LEAD_SOURCE_META;
+  }
+
+  // 3 — a Google click id is proof of a paid Google click.
+  if (hasValue(r.gclid) || hasValue(r.gbraid) || hasValue(r.wbraid)) {
+    return LEAD_SOURCE_GOOGLE;
+  }
+
+  // 4 — a paid medium without a click id. Only claim Google when the source
+  //     actually says Google: absorbing some other network's paid clicks into
+  //     the Google Ads number would corrupt the one figure used to judge spend.
+  if (PAID_UTM_MEDIUMS.indexOf(medium) !== -1) {
+    if (!source || source.indexOf('google') !== -1) return LEAD_SOURCE_GOOGLE;
+    return LEAD_SOURCE_PAID_OTHER;
+  }
+
+  // 5 — unpaid.
+  if (AI_UTM_SOURCES.indexOf(source) !== -1) return LEAD_SOURCE_AI;
+  if (SEARCH_UTM_SOURCES.indexOf(source) !== -1 || medium === 'organic') {
+    return LEAD_SOURCE_ORGANIC;
+  }
+  if (source) return LEAD_SOURCE_REFERRAL;
+
+  // No attribution at all. Most of this sheet's history lands here: utm_source
+  // is null on the majority of rows because the site only began tagging later.
+  // Saying "Direct / Unknown" is honest; calling it organic would not be.
+  return LEAD_SOURCE_DIRECT;
 }
 
 /**
@@ -388,18 +566,44 @@ function getOrCreateTab(tabName, headers, headerColor) {
   }
 
   // Self-healing: a tab created before a column was added keeps its old, shorter
-  // header row forever, because the check above only fires on a blank A1. Rewrite
-  // whenever the sheet is narrower than the expected header set. Existing header
-  // text is identical, so this only fills in the new trailing columns.
-  if (tab.getLastColumn() < headers.length) {
+  // header row forever, because the check above only fires on a blank A1.
+  //
+  // This used to test `tab.getLastColumn() < headers.length`, which does not
+  // work on the tabs that actually exist. "ALL LEADS" reports a last column of
+  // 26: trailing columns carry stray formatting from earlier manual edits, and
+  // getLastColumn() counts formatting, not content. The test was therefore
+  // already false, and the Lead Source header would never have appeared.
+  //
+  // Compare the header TEXT instead. That is the thing actually being repaired,
+  // and it stays correct however far a tab's formatting happens to extend.
+  // Existing header text is unchanged, so this only fills in new columns.
+  if (!headersMatch(tab, headers)) {
     writeHeaders(tab, headers, headerColor || '#2358AC');
-    Logger.log('HEADER MIGRATION: "' + tabName + '" widened to ' + headers.length + ' columns.');
+    Logger.log('HEADER MIGRATION: "' + tabName + '" rewritten to ' +
+               headers.length + ' columns.');
   }
 
   return tab;
 }
 
+/** True when row 1 already reads exactly as `headers` across its full width. */
+function headersMatch(tab, headers) {
+  if (tab.getMaxColumns() < headers.length) return false;
+  var existing = tab.getRange(1, 1, 1, headers.length).getValues()[0];
+  for (var i = 0; i < headers.length; i++) {
+    if (String(existing[i] || '').trim() !== headers[i]) return false;
+  }
+  return true;
+}
+
 function writeHeaders(tab, headers, bgColor) {
+  // A sheet defaults to 26 columns, so this has never been needed — but writing
+  // a header past the sheet's width throws, and silently failing to record a
+  // lead because a tab was trimmed is not a trade worth making.
+  if (tab.getMaxColumns() < headers.length) {
+    tab.insertColumnsAfter(tab.getMaxColumns(), headers.length - tab.getMaxColumns());
+  }
+
   tab.getRange(1, 1, 1, headers.length).setValues([headers]);
   tab.getRange(1, 1, 1, headers.length)
     .setBackground(bgColor)
@@ -416,6 +620,14 @@ function writeHeaders(tab, headers, bgColor) {
   tab.setColumnWidth(8, 160);
   tab.setColumnWidth(9, 80);
   tab.setColumnWidth(10, 160);
+
+  // Widths for the appended columns are looked up by name rather than hardcoded
+  // by position, because FULL_HEADERS and EXPORT_HEADERS put them at different
+  // indexes and only one of the two has a Lead Source column at all.
+  var zipIdx = headers.indexOf('ZIP');
+  if (zipIdx !== -1) tab.setColumnWidth(zipIdx + 1, 100);
+  var leadSourceIdx = headers.indexOf('Lead Source');
+  if (leadSourceIdx !== -1) tab.setColumnWidth(leadSourceIdx + 1, 150);
 }
 
 /**
@@ -433,20 +645,47 @@ function formatZipCell(tab, row, column) {
   }
 }
 
-function appendFullRow(tab, row, priority, formSource) {
+// Meta row styling. Blue is unused by the existing priority palette (red /
+// amber / purple / green), so it reads as a channel rather than as a verdict.
+var META_ROW_TINT        = '#E8F0FE'; // row fill
+var META_CELL_TINT       = '#D2E3FC'; // Lead Source cell, one step stronger
+var META_CELL_FONT_COLOR = '#174EA6';
+
+function appendFullRow(tab, row, priority, formSource, leadSource) {
   tab.appendRow(row);
-  var lastRow = tab.getLastRow();
+  var lastRow  = tab.getLastRow();
+  var rowRange = tab.getRange(lastRow, 1, 1, FULL_HEADERS.length);
 
-  formatZipCell(tab, lastRow, FULL_HEADERS.length); // ZIP is the last column
+  formatZipCell(tab, lastRow, COL_ZIP);
 
+  // Priority colours are checked FIRST and Meta's blue only fills the gap they
+  // leave. ⛔ / ⭐ / attorney say who to phone and who must not be booked; where
+  // a lead came from is useful, but it is not a reason to hide any of those.
+  //
+  // In practice this costs Meta nothing today: an Instant Form collects no
+  // insurance, so a Meta lead can never be ⭐, ✅ or ⛔ and always reaches the
+  // blue branch. The ordering matters for the day that stops being true.
   if (priority === '⛔ NOT ACCEPTED') {
-    tab.getRange(lastRow, 1, 1, FULL_HEADERS.length).setBackground('#FDECEA');
+    rowRange.setBackground('#FDECEA');
   } else if (priority === '⭐ HIGH VALUE') {
-    tab.getRange(lastRow, 1, 1, FULL_HEADERS.length).setBackground('#FFF3CD');
+    rowRange.setBackground('#FFF3CD');
   } else if (formSource === 'attorney-coordination') {
-    tab.getRange(lastRow, 1, 1, FULL_HEADERS.length).setBackground('#F3E8FF');
+    rowRange.setBackground('#F3E8FF');
+  } else if (isMetaLead(leadSource)) {
+    rowRange.setBackground(META_ROW_TINT);
   } else if (priority === '✅ PPO') {
-    tab.getRange(lastRow, 1, 1, FULL_HEADERS.length).setBackground('#F0FFF4');
+    rowRange.setBackground('#F0FFF4');
+  }
+
+  // Whatever colour the row ended up, mark the Lead Source cell itself on a
+  // Meta row. A Meta lead sitting on a red ⛔ row must still be identifiable as
+  // Meta without opening the UTM columns, so identification never rests on the
+  // row colour alone.
+  if (isMetaLead(leadSource)) {
+    tab.getRange(lastRow, COL_LEAD_SOURCE)
+       .setBackground(META_CELL_TINT)
+       .setFontColor(META_CELL_FONT_COLOR)
+       .setFontWeight('bold');
   }
 }
 
@@ -728,7 +967,7 @@ function getAccountLabel(state) {
 // ROW BUILDER
 // ─────────────────────────────────────────────────────────────────────────────
 
-function buildFullRow(r, state, priority) {
+function buildFullRow(r, state, priority, leadSource) {
   return [
     r.created_at ? new Date(r.created_at) : new Date(),
     r.patient_name   || '',
@@ -749,6 +988,7 @@ function buildFullRow(r, state, priority) {
     r.utm_content    || '',
     priority,
     normalizeZip(r.postal_code),
+    leadSource,
   ];
 }
 
@@ -762,18 +1002,19 @@ function doPost(e) {
     var r          = payload.record;
     var state      = normalizeState(r.state);
     var priority   = getLeadPriority(r.insurance_type, r.reason);
+    var leadSource = getLeadSource(r);
     var formSource = r.form_source || '';
 
-    var fullRow = buildFullRow(r, state, priority);
+    var fullRow = buildFullRow(r, state, priority, leadSource);
 
     // ── Tab 1: All Leads ──────────────────────────────────────────────────
     var allTab = getOrCreateTab(TAB_ALL, FULL_HEADERS, '#2358AC');
-    appendFullRow(allTab, fullRow, priority, formSource);
+    appendFullRow(allTab, fullRow, priority, formSource, leadSource);
 
     // ── Tab 2: FL Leads + Reference Export + Standalone Import Sheet ──────
     if (FL_STATES.indexOf(state) !== -1) {
       var flTab = getOrCreateTab(TAB_FL, FULL_HEADERS, '#1565C0');
-      appendFullRow(flTab, fullRow, priority, formSource);
+      appendFullRow(flTab, fullRow, priority, formSource, leadSource);
 
       var flExportTab = getOrCreateTab(TAB_FL_EXPORT, EXPORT_HEADERS, '#1B5E20');
       appendExportRow(flExportTab, r, FL_CONVERSION_NAME);
@@ -785,7 +1026,7 @@ function doPost(e) {
     // ── Tab 3: NJ + NY Leads + Reference Export + Standalone Import Sheet ─
     if (NJNY_STATES.indexOf(state) !== -1) {
       var njnyTab = getOrCreateTab(TAB_NJNY, FULL_HEADERS, '#4A148C');
-      appendFullRow(njnyTab, fullRow, priority, formSource);
+      appendFullRow(njnyTab, fullRow, priority, formSource, leadSource);
 
       var njnyExportTab = getOrCreateTab(TAB_NJNY_EXPORT, EXPORT_HEADERS, '#B71C1C');
       appendExportRow(njnyExportTab, r, NJNY_CONVERSION_NAME);
@@ -873,29 +1114,65 @@ function testConnection() {
       utm_term: '', utm_content: '',
     };
 
-    var testRecords = [flTestRecord, njTestRecord, noGclidRecord, notAcceptedRecord];
+    // A Meta Instant Form lead, shaped exactly as the website's meta-leadgen
+    // webhook writes it: contact details only, no insurance, no ZIP, no GCLID,
+    // and marketing_consent null. Must come out as Lead Source "Meta" on a blue
+    // row, and must NOT reach either offline import sheet.
+    var metaTestRecord = {
+      created_at: new Date().toISOString(),
+      patient_name: 'Meta Test Patient', patient_email: 'metatest@example.com',
+      patient_phone: '+17725550606', state: 'FL', postal_code: '',
+      reason: 'Appointment request submitted through a Meta ad (Instant Form)',
+      insurance_type: '', form_source: 'meta-instant-form', best_time: '',
+      attorney_firm: '', attorney_name: '', gclid: '',
+      utm_source: 'facebook', utm_medium: 'paid_social',
+      utm_campaign: '120249813788530446', utm_term: '120249813788910446',
+      utm_content: '120250344643310446',
+    };
+
+    // gbraid instead of gclid — an iOS Google Ads click. The GCLID column stays
+    // blank for these, so before Lead Source existed they were indistinguishable
+    // from organic. Must come out as "Google Ads".
+    var gbraidRecord = {
+      created_at: new Date().toISOString(),
+      patient_name: 'iOS Paid Patient', patient_email: 'gbraid@example.com',
+      patient_phone: '(407) 555-0707', state: 'FL', postal_code: '32801',
+      reason: 'lower back pain', insurance_type: 'Cigna',
+      form_source: 'book-appointment', best_time: 'Morning',
+      attorney_firm: '', attorney_name: '', gclid: '',
+      gbraid: 'Cj0KCQiA_gbraid_test_003',
+      utm_source: '', utm_medium: '', utm_campaign: '',
+      utm_term: '', utm_content: '',
+    };
+
+    var testRecords = [
+      flTestRecord, njTestRecord, noGclidRecord, notAcceptedRecord,
+      metaTestRecord, gbraidRecord,
+    ];
 
     for (var i = 0; i < testRecords.length; i++) {
       var r          = testRecords[i];
       var state      = normalizeState(r.state);
       var priority   = getLeadPriority(r.insurance_type, r.reason);
+      var leadSource = getLeadSource(r);
       var formSource = r.form_source || '';
-      var fullRow    = buildFullRow(r, state, priority);
+      var fullRow    = buildFullRow(r, state, priority, leadSource);
 
       Logger.log('TEST ' + (i + 1) + ': insurance="' + r.insurance_type +
                  '" zip="' + r.postal_code + '" -> priority=' + priority +
+                 ' leadSource=' + leadSource +
                  ' storedZip="' + normalizeZip(r.postal_code) + '"');
 
-      appendFullRow(getOrCreateTab(TAB_ALL, FULL_HEADERS, '#2358AC'), fullRow, priority, formSource);
+      appendFullRow(getOrCreateTab(TAB_ALL, FULL_HEADERS, '#2358AC'), fullRow, priority, formSource, leadSource);
 
       if (FL_STATES.indexOf(state) !== -1) {
-        appendFullRow(getOrCreateTab(TAB_FL, FULL_HEADERS, '#1565C0'), fullRow, priority, formSource);
+        appendFullRow(getOrCreateTab(TAB_FL, FULL_HEADERS, '#1565C0'), fullRow, priority, formSource, leadSource);
         appendExportRow(getOrCreateTab(TAB_FL_EXPORT, EXPORT_HEADERS, '#1B5E20'), r, FL_CONVERSION_NAME);
         appendToOfflineImportSheet(FL_OFFLINE_SHEET_ID, r, FL_CONVERSION_NAME);
       }
 
       if (NJNY_STATES.indexOf(state) !== -1) {
-        appendFullRow(getOrCreateTab(TAB_NJNY, FULL_HEADERS, '#4A148C'), fullRow, priority, formSource);
+        appendFullRow(getOrCreateTab(TAB_NJNY, FULL_HEADERS, '#4A148C'), fullRow, priority, formSource, leadSource);
         appendExportRow(getOrCreateTab(TAB_NJNY_EXPORT, EXPORT_HEADERS, '#B71C1C'), r, NJNY_CONVERSION_NAME);
         appendToOfflineImportSheet(NJNY_OFFLINE_SHEET_ID, r, NJNY_CONVERSION_NAME);
       }
@@ -907,11 +1184,16 @@ function testConnection() {
     Logger.log('SUCCESS');
     Logger.log('FL import sheet:   https://docs.google.com/spreadsheets/d/' + FL_OFFLINE_SHEET_ID);
     Logger.log('NJNY import sheet: https://docs.google.com/spreadsheets/d/' + NJNY_OFFLINE_SHEET_ID);
-    Logger.log('EXPECTED: 1 row in FL import (flTestRecord), 1 row in NJNY import (njTestRecord)');
-    Logger.log('EXPECTED: noGclidRecord and notAcceptedRecord — NOT in either import sheet');
-    Logger.log('CHECK: ZIP is the LAST column and reads 07621 for the NJ row, not 7621');
+    Logger.log('EXPECTED: 0 rows in BOTH import sheets — every fixture now fails a gate.');
+    Logger.log('  flTestRecord / njTestRecord: marketing_consent is not true (consent gate)');
+    Logger.log('  noGclidRecord / notAcceptedRecord / metaTestRecord: no GCLID');
+    Logger.log('  gbraidRecord: gbraid is not gclid, and the import spec takes gclid only');
+    Logger.log('CHECK: ZIP is column S and reads 07621 for the NJ row, not 7621');
+    Logger.log('CHECK: Lead Source is column T on all three lead tabs');
     Logger.log('CHECK: the Medicare row shows ⛔ NOT ACCEPTED on a red background');
-    Logger.log('CHECK: hashed email/phone in columns F and G of both import sheet rows');
+    Logger.log('CHECK: metaTestRecord row is blue (#E8F0FE) and reads Lead Source "Meta"');
+    Logger.log('CHECK: gbraidRecord reads "Google Ads" despite a blank GCLID column');
+    Logger.log('CHECK: noGclidRecord (utm_source=organic) reads "Organic Search"');
 
   } catch(err) {
     Logger.log('testConnection ERROR: ' + err.toString());
@@ -920,20 +1202,169 @@ function testConnection() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// UTILITY — Clear test rows from main leads sheet only
+// ONE-OFF — Backfill Lead Source onto rows written before the column existed
+//
+// doPost only labels NEW leads, so without this every historical row carries a
+// blank Lead Source and the column is useless for anything but the last few
+// days. Run once from the editor after deploying; it is safe to run again.
+//
+// It reads each row's OWN columns rather than re-querying Supabase, because the
+// sheet already holds Form Source, GCLID, UTM Source and UTM Medium — the exact
+// inputs getLeadSource needs — and matching sheet rows back to database rows on
+// timestamp and email would be a guess where this is a certainty.
+//
+// KNOWN GAP: the sheet has no gbraid/wbraid column, so the 10 historical leads
+// carrying one of those INSTEAD of a gclid (6 gbraid-only, 4 wbraid-only as of
+// 2026-11-16) backfill as "Direct / Unknown" when they were really Google Ads.
+// New rows are unaffected — doPost reads gbraid and wbraid straight off the
+// webhook payload. Ten rows is not worth a fragile join to correct.
+//
+// Only blank cells are written. Anything already labelled is left alone, so a
+// second run cannot overwrite a value doPost wrote.
 // ─────────────────────────────────────────────────────────────────────────────
+
+function backfillLeadSource() {
+  var tabNames = [TAB_ALL, TAB_FL, TAB_NJNY];
+  var ss = SpreadsheetApp.openById(SHEET_ID);
+  var grandTotal = 0;
+
+  for (var t = 0; t < tabNames.length; t++) {
+    var tab = ss.getSheetByName(tabNames[t]);
+    if (!tab) {
+      Logger.log('BACKFILL: "' + tabNames[t] + '" not found — skipped.');
+      continue;
+    }
+
+    // Make sure the header exists before writing under it, so a backfill run on
+    // a tab that somehow missed the migration repairs it rather than dropping
+    // values into an unlabelled column.
+    if (!headersMatch(tab, FULL_HEADERS)) {
+      writeHeaders(tab, FULL_HEADERS, '#2358AC');
+      Logger.log('BACKFILL: "' + tabNames[t] + '" header repaired first.');
+    }
+
+    var lastRow = tab.getLastRow();
+    if (lastRow < 2) {
+      Logger.log('BACKFILL: "' + tabNames[t] + '" has no data rows.');
+      continue;
+    }
+
+    var rowCount = lastRow - 1;
+    var values   = tab.getRange(2, 1, rowCount, FULL_HEADERS.length).getValues();
+
+    var column   = [];
+    var metaRows = [];
+    var filled   = 0;
+    var tally    = {};
+
+    for (var i = 0; i < values.length; i++) {
+      var row      = values[i];
+      var existing = String(row[COL_LEAD_SOURCE - 1] || '').trim();
+
+      if (existing !== '') {
+        column.push([existing]);   // already labelled — write it back unchanged
+        continue;
+      }
+
+      // A row with no timestamp AND no name is a spacer, not a lead. Labelling
+      // it would invent a channel for something that is not a lead at all.
+      if (String(row[0] || '').trim() === '' && String(row[1] || '').trim() === '') {
+        column.push(['']);
+        continue;
+      }
+
+      var leadSource = getLeadSource({
+        form_source: row[7],   // Form Source
+        gclid:       row[11],  // GCLID
+        utm_source:  row[12],  // UTM Source
+        utm_medium:  row[13],  // UTM Medium
+      });
+
+      column.push([leadSource]);
+      filled++;
+      tally[leadSource] = (tally[leadSource] || 0) + 1;
+
+      if (isMetaLead(leadSource)) {
+        metaRows.push({ sheetRow: i + 2, priority: String(row[17] || '').trim() });
+      }
+    }
+
+    tab.getRange(2, COL_LEAD_SOURCE, rowCount, 1).setValues(column);
+
+    // Tint historical Meta rows with the same precedence doPost uses: a warning
+    // colour already on the row is never overwritten by the channel tint.
+    for (var m = 0; m < metaRows.length; m++) {
+      var meta     = metaRows[m];
+      var isWarned = meta.priority === '⛔ NOT ACCEPTED' ||
+                     meta.priority === '⭐ HIGH VALUE';
+      if (!isWarned) {
+        tab.getRange(meta.sheetRow, 1, 1, FULL_HEADERS.length)
+           .setBackground(META_ROW_TINT);
+      }
+      tab.getRange(meta.sheetRow, COL_LEAD_SOURCE)
+         .setBackground(META_CELL_TINT)
+         .setFontColor(META_CELL_FONT_COLOR)
+         .setFontWeight('bold');
+    }
+
+    grandTotal += filled;
+    Logger.log('BACKFILL "' + tabNames[t] + '": ' + filled + ' of ' + rowCount +
+               ' rows labelled (' + metaRows.length + ' Meta). ' +
+               JSON.stringify(tally));
+  }
+
+  Logger.log('BACKFILL COMPLETE: ' + grandTotal + ' cells written.');
+  return grandTotal;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// UTILITY — Clear test rows from main leads sheet only
+//
+// SAFETY (2026-11-16): this used to run `deleteRows(2, getLastRow() - 1)` on
+// every tab, which deletes EVERY ROW BELOW THE HEADER — all 800+ real patient
+// leads, not the test rows. It sat one click away from testConnection() in the
+// editor's function picker, under a name that reads as harmless.
+//
+// It now deletes only rows whose Email is an @example.com address, which is
+// what every fixture in testConnection uses and what no real lead can be.
+// Nothing else is touched.
+// ─────────────────────────────────────────────────────────────────────────────
+
+var TEST_EMAIL_DOMAIN = '@example.com';
 
 function clearTestData() {
   var tabNames = [TAB_ALL, TAB_FL, TAB_NJNY, TAB_FL_EXPORT, TAB_NJNY_EXPORT];
   var ss = SpreadsheetApp.openById(SHEET_ID);
+  var grandTotal = 0;
+
   for (var i = 0; i < tabNames.length; i++) {
     var tab = ss.getSheetByName(tabNames[i]);
-    if (tab && tab.getLastRow() > 1) {
-      tab.deleteRows(2, tab.getLastRow() - 1);
-      Logger.log('Cleared: ' + tabNames[i]);
+    if (!tab || tab.getLastRow() < 2) continue;
+
+    // The two layouts put Email in different columns: it is column 3 on the
+    // lead tabs and column 7 on the Google Ads export tabs.
+    var isExportTab = (tabNames[i] === TAB_FL_EXPORT || tabNames[i] === TAB_NJNY_EXPORT);
+    var emailCol    = isExportTab ? 7 : 3;
+
+    var emails  = tab.getRange(2, emailCol, tab.getLastRow() - 1, 1).getValues();
+    var deleted = 0;
+
+    // Bottom-up, so deleting a row cannot shift the rows still to be checked.
+    for (var r = emails.length - 1; r >= 0; r--) {
+      var email = String(emails[r][0] || '').trim().toLowerCase();
+      if (email.slice(-TEST_EMAIL_DOMAIN.length) === TEST_EMAIL_DOMAIN) {
+        tab.deleteRow(r + 2);
+        deleted++;
+      }
     }
+
+    grandTotal += deleted;
+    Logger.log('Cleared ' + deleted + ' test row(s) from: ' + tabNames[i]);
   }
+
+  Logger.log('clearTestData removed ' + grandTotal + ' row(s). Real leads untouched.');
   Logger.log('NOTE: Standalone import sheets not cleared — delete test rows there manually.');
+  return grandTotal;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

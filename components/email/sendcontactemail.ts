@@ -721,12 +721,29 @@ export async function sendMetaLeadEmail(formData: {
 }) {
   // Persist first, best-effort: Meta deletes Instant Form leads after 90 days,
   // so this is the only durable record. Never allowed to block the email.
+
+  // The clinic the patient picked is the single most actionable thing on a Meta
+  // lead - it is what decides who books them - and it was being shown in the
+  // staff email and then dropped before the insert. public.forms has no column
+  // for it, so it rides in `reason`, which is free text and surfaces as the
+  // "Reason / Condition" column of the lead sheet. That column was otherwise a
+  // constant sentence on every Meta row, carrying no information at all.
+  const preferredLocation = formData.location?.trim();
+  const reason = preferredLocation
+    ? `Appointment request submitted through a Meta ad (Instant Form) - preferred location: ${preferredLocation}`
+    : 'Appointment request submitted through a Meta ad (Instant Form)';
+
+  // state is hardcoded because the Instant Form behind these ads asks "Which
+  // Florida location is most convenient for you?" and offers Florida clinics
+  // only, and the single live campaign targets Florida cities exclusively.
+  // If a Meta campaign is ever run outside Florida, this must be derived from
+  // the chosen location rather than left to file every lead under FL.
   const { submissionId, persisted } = await logLeadToSupabase({
     patient_name:  formData.name,
     patient_email: formData.email,
     patient_phone: formData.phone,
     state:         'FL',
-    reason:        'Appointment request submitted through a Meta ad (Instant Form)',
+    reason,
     form_source:   'meta-instant-form',
     utm_source:    formData.platform === 'instagram' ? 'instagram' : 'facebook',
     utm_medium:    'paid_social',
