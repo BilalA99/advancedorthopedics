@@ -78,7 +78,7 @@ const faqItems: { question: string, answer: React.ReactElement }[] = [
         question: 'What does a second opinion cost?',
         answer: (
             <p>
-                Many insurance plans cover the cost of a second opinion, especially when surgery is recommended. We recommend checking with your provider about your specific coverage. For more details on navigating costs, you can review our <a href="/insurance-policy" className="text-blue-600 hover:underline">insurance information page</a>.
+                Second-opinion reviews are free for patients with PPO private insurance. Not sure what type of plan you have? Check your insurance card or call us at (561) 223-9959 and we'll confirm it with you before your review.
             </p>
         )
     },
