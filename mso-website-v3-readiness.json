@@ -1,7 +1,7 @@
 {
   "artifact": "mso-website-v3-readiness",
-  "schema_version": "1.1.0",
-  "generated_at": "2026-11-17 (rev 2 - pre-deployment hardening + deployment)",
+  "schema_version": "1.2.0",
+  "generated_at": "2026-11-17 (rev 3 - DEPLOYED to production)",
   "generated_by": "website environment (Next.js / Supabase / Resend)",
   "consumer": "mso-meta-v3-handoff environment",
   "business": "Mountain Spine & Orthopedics",
@@ -260,11 +260,11 @@
       "owner": "client privacy and security decision-makers"
     }
   },
-  "production_deployment_status": "SUBMITTED - PR OPEN, AWAITING MERGE",
+  "production_deployment_status": "DEPLOYED",
   "production_deployment": {
     "database_migrations": "DEPLOYED",
-    "application_code": "SUBMITTED",
-    "application_code_note": "PR #123 to AppFlow-Studio/advancedorthopedics main, the repo's existing authorized deployment path (production deploys on merge to main). Branch feat/lead-source-channel, 2 commits. Vercel preview deployment PASSED. The merge to main is the final gate and has not been taken from this environment.",
+    "application_code": "DEPLOYED",
+    "application_code_note": "PR #123 squash-merged to main as d2e5119 at 2026-11-17 23:24 UTC. Vercel production deployment Ready in 1m10s. Verified live, not assumed: /api/webhooks/resend and /api/cron/reconcile-deliveries both answer 401 rather than 404, and those routes do not exist in the previous production commit (9cf1d2d), so the new code is definitely serving.",
     "unrelated_code_deployed": false,
     "destructive_database_changes": false,
     "advertising_assets_modified": false,
@@ -275,7 +275,13 @@
     "preview_deployment": "PASS",
     "rebased": "The branch was rebased onto current main after PR #121 landed the same lead-sheet channel-labelling commit this branch carried locally; the duplicate was dropped so only the two Meta V3 commits ship. Typecheck, 282 tests, the measurement validator and the production build were all re-run after the rebase.",
     "env_var_required_before_merge": "SUPABASE_SERVICE_ROLE_KEY must be set in Vercel Production. Meta lead inserts now write as service_role because the tightened RLS policy forbids anon from writing external_*. Without it Meta persistence fails loudly - staff alerts still send and the ingestion queue keeps the lead recoverable - and website forms are unaffected either way.",
-    "deploy_ordering_rule": "ADDITIVE migrations go before the code; RESTRICTING migrations go after it. 202611170001 (columns), 202611170002 and 202611170004 (new tables) were correctly applied first - the old code ignores them. 202611170003 restricts what the old code was doing and should have waited for the deploy; applying it early caused the incident recorded in production_incident_2026_11_17."
+    "deploy_ordering_rule": "ADDITIVE migrations go before the code; RESTRICTING migrations go after it. 202611170001 (columns), 202611170002 and 202611170004 (new tables) were correctly applied first - the old code ignores them. 202611170003 restricts what the old code was doing and should have waited for the deploy; applying it early caused the incident recorded in production_incident_2026_11_17.",
+    "merge_commit": "d2e5119",
+    "merged_at": "2026-11-17T23:24:20Z",
+    "env_vars_set_before_merge": [
+      "SUPABASE_SERVICE_ROLE_KEY (Production, Preview, Development)",
+      "CRON_SECRET (Production, Preview, Development)"
+    ]
   },
   "feature_status": {
     "v2_lead_capture": "DEPLOYED",
@@ -488,7 +494,7 @@
       "done": true
     },
     {
-      "item": "Webhook signature verification tested",
+      "item": "Webhook signature verification tested (locally and live)",
       "done": true
     },
     {
@@ -496,7 +502,7 @@
       "done": true
     },
     {
-      "item": "Anonymous clients cannot impersonate a Meta lead",
+      "item": "Anonymous clients cannot write external_* identity columns",
       "done": true
     },
     {
@@ -516,23 +522,35 @@
       "done": true
     },
     {
-      "item": "Existing website forms unaffected (verified in production)",
+      "item": "SUPABASE_SERVICE_ROLE_KEY and CRON_SECRET set in Vercel Production",
       "done": true
     },
     {
-      "item": "PR opened through the authorized deployment path",
+      "item": "PR #123 merged to main",
       "done": true
     },
     {
-      "item": "SUPABASE_SERVICE_ROLE_KEY set in Vercel Production",
+      "item": "Production deployment Ready and confirmed serving the new code",
+      "done": true
+    },
+    {
+      "item": "Production smoke test passed, existing pages unaffected",
+      "done": true
+    },
+    {
+      "item": "A Meta lead observed persisting with a non-null external_lead_id",
       "done": false
     },
     {
-      "item": "PR #123 merged to main (production deploy)",
+      "item": "Full RLS tightening re-applied (OPEN-11, gated on the line above)",
       "done": false
     },
     {
-      "item": "Post-merge production smoke test",
+      "item": "SUPABASE_SERVICE_ROLE_KEY scope narrowed to Production only",
+      "done": false
+    },
+    {
+      "item": "service_role key rotated after transcript exposure",
       "done": false
     },
     {
@@ -552,18 +570,14 @@
       "done": false
     },
     {
-      "item": "META_PATIENT_CONFIRMATION_ACTIVATION_AT set to the authorized cutover instant",
-      "done": false
-    },
-    {
       "item": "ENABLE_META_PATIENT_CONFIRMATION_EMAIL set to 1",
       "done": false
     }
   ],
-  "message_to_meta_environment": "Proceed with the V3 ad cutover whenever you are ready; nothing further is needed from the website side once PR #123 is merged. The website accepts form 3068973836772964 on Page 995449336974458 only, maps all four fields identically to V2, stores the leadgen id under a unique constraint so your retries cannot duplicate a lead, records the leadgen id before answering 200 so a lead cannot be lost even if our background task dies, preserves campaign/ad set/ad attribution, and alerts info@ exactly as today with the patient's name removed from the subject. V2 (3634773886703639) stays fully supported for delayed delivery and reconciliation - do not archive it. A lead from any other form or Page is stored but quarantined: staff get a generic alert with identifiers only and no contact details, so tell us before pointing a new form at us. The patient confirmation email is built and tested but intentionally OFF and will stay off until the practice resolves the PHI provider blockers; that does not affect lead capture. Do not rotate the shared Meta access token without coordinating - and note that if revocation requires resetting the app secret, that same secret verifies our webhook signatures, so it must be one coordinated change.",
+  "message_to_meta_environment": "The website side is DEPLOYED and verified as of 2026-11-17 23:24 UTC (merge d2e5119). You can attach ads to V3 (3068973836772964) whenever you are ready. The site accepts V2 and V3 on Page 995449336974458 only, maps all four fields identically, stores the leadgen id under a unique constraint so your retries cannot duplicate a lead, records the leadgen id before answering 200 so a lead survives even if our background task dies, preserves campaign/ad set/ad attribution, and alerts info@ with the patient name removed from the subject. V2 (3634773886703639) stays fully supported for delayed delivery and reconciliation - do not archive it. A lead from any other form or Page is stored but quarantined: staff get a generic alert with identifiers only, so tell us before pointing a new form at us. ONE ASK: tell us when the first V3 lead goes through, because we need to observe one persisting with a non-null external_lead_id before we re-apply the final database hardening step. The patient confirmation email remains built, tested and OFF pending the practice resolving the PHI provider blockers; it does not affect lead capture. Do not rotate the shared Meta access token without coordinating - if revocation requires resetting the app secret, that same secret verifies our webhook signatures.",
   "technical_readiness": {
-    "status": "READY",
-    "note": "V3 lead capture, deduplication, durable ingestion, staff-subject privacy and the hardening items are implemented, tested, and submitted to production via PR #123. This is a SEPARATE decision from privacy authorization below.",
+    "status": "DEPLOYED AND VERIFIED",
+    "note": "V3 lead capture, deduplication, durable ingestion, staff-subject privacy and the hardening items are LIVE in production as of 2026-11-17 23:24 UTC and verified by smoke test against the live domain. Two hardening steps remain open and are listed in post_deploy_outstanding: the full RLS tightening (gated on observing a real Meta lead persist) and narrowing the service-role key scope. This remains a SEPARATE decision from privacy authorization, which is unchanged: NOT AUTHORIZED.",
     "blocking_items": []
   },
   "privacy_authorization": {
@@ -734,5 +748,65 @@
     },
     "net_position_vs_before_this_work": "Strictly better. Before: anon could write external_* AND forge form_source. Now: external_* blocked; form_source forgery temporarily possible as it always was.",
     "follow_up_required": "After the release carrying lib/meta-lead-ingest.ts is live AND a Meta lead is observed persisting with a non-null external_lead_id, re-apply the full policy from 202611170003. Re-tighten SQL is in the header of 202611170005."
+  },
+  "production_smoke_test": {
+    "when": "2026-11-17, immediately after the production deployment reached Ready",
+    "target": "https://mountainspineorthopedics.com (live production, not a preview)",
+    "new_code_is_live": "CONFIRMED - /api/webhooks/resend and /api/cron/reconcile-deliveries return 401, not 404. Those routes are absent from the previous production commit, so this is positive proof of which build is serving.",
+    "existing_pages": {
+      "/": 200,
+      "/find-care/book-an-appointment": 200,
+      "/locations": 200,
+      "/conditions/herniated-disc": 200,
+      "/treatments": 200,
+      "/about/meetourdoctors": 200,
+      "/robots.txt": 200,
+      "/sitemap.xml": 200,
+      "verdict": "PASS - no regression to pages, the appointment form route, or the SEO files"
+    },
+    "meta_webhook": {
+      "get_challenge_wrong_token": 403,
+      "post_unsigned": 401,
+      "post_bad_signature": 401,
+      "verdict": "PASS - signature verification live and rejecting"
+    },
+    "resend_webhook_unauthenticated": 401,
+    "cron_unauthenticated": 401,
+    "cron_authenticated": "NOT TESTED - requires CRON_SECRET, which this environment does not hold and should not. Vercel Cron runs it on its own schedule every 30 minutes; check the function logs for '[reconcile-deliveries]' to confirm the first authenticated run.",
+    "database_after_deploy": {
+      "total_forms": 1401,
+      "meta_leads": 12,
+      "leads_with_external_id": 0,
+      "message_deliveries_rows": 0,
+      "meta_lead_ingestions_rows": 0,
+      "note": "All zero because no Meta lead has arrived since the deploy. This is the expected state, not a failure. The 1,401st row is a real modal-appointment website lead that landed at 19:40 UTC and persisted normally."
+    }
+  },
+  "post_deploy_outstanding": {
+    "OPEN-11_re_tighten_rls": {
+      "status": "STILL OPEN - BLOCKED ON A REAL META LEAD",
+      "what": "Re-apply the full anon insert policy from 202611170003, which also forbids anon from writing form_source='meta-instant-form'.",
+      "why_not_yet": "The gate is evidence, not time: it must be done only after a Meta lead has been observed persisting with a NON-NULL external_lead_id, which proves the deployed service_role ingestion path actually works end to end. Re-applying it before that proof risks repeating the 5-hour outage this work already caused once.",
+      "how_to_check": "select count(*) from public.forms where external_lead_id is not null;  -- must be >= 1",
+      "sql": "In the header of supabase/migrations/202611170005_restore_meta_insert_pending_service_role_deploy.sql",
+      "current_exposure_while_open": "A public client can forge form_source='meta-instant-form' (channel attribution and cost-per-lead). It CANNOT write any external_* column and CANNOT cause an email. This is the pre-existing behaviour, not a new exposure."
+    },
+    "env_var_scope": {
+      "status": "RECOMMENDED CHANGE",
+      "finding": "SUPABASE_SERVICE_ROLE_KEY was saved to Production, Preview AND Development. Only Production was needed.",
+      "why_it_matters": "There is one Supabase project behind every environment (NEXT_PUBLIC_SUPABASE_URL is scoped to All Environments), so a Preview deployment can now bypass RLS on the LIVE patient database holding 1,400 records. The Development scope means `vercel env pull` writes the key into a local .env on any developer machine.",
+      "severity": "Moderate. Previews are behind Deployment Protection so not publicly reachable, and no preview receives Meta webhooks (Meta posts only to the production URL). But it widens access to patient data for no benefit, which is the opposite of the access-minimisation in docs/healthcare-privacy-remediation.md.",
+      "action": "Delete the Preview and Development rows for SUPABASE_SERVICE_ROLE_KEY; keep Production. CRON_SECRET on all three is harmless (Vercel Cron only runs in production) and can be left."
+    },
+    "service_role_key_rotation": {
+      "status": "STILL REQUIRED",
+      "detail": "See docs/healthcare-privacy-remediation.md section 2.6. Rotating the project JWT secret invalidates NEXT_PUBLIC_SUPABASE_ANON_KEY too, so both Vercel vars must be updated in one pass followed by a redeploy. Sequence it after this deploy is settled."
+    }
+  },
+  "deployment_reliability_finding": {
+    "observed": "A manual redeploy of the previous production commit (9cf1d2d) failed at 18:22 UTC with: app/layout.tsx -> An error occurred in `next/font` -> TypeError: Cannot read properties of null (reading '1') at @next/font/dist/google/loader.js. Build failed because of webpack errors.",
+    "cause": "next/font/google downloads font CSS at build time. The redeploy ran with 'Skipping build cache, deployment was triggered without cache', so it had to re-fetch from Google Fonts and hit a transient failure.",
+    "not_related_to": "This change set, and the new environment variables. The #123 build three minutes later, with the same environment, succeeded.",
+    "why_it_is_worth_recording": "A cache-less production build of this repo can fail on a Google Fonts hiccup. That is a deploy-reliability risk precisely when it would hurt most: an emergency rollback or redeploy. Mitigation if it recurs: retry the build, or self-host the font via next/font/local. Out of scope here; no change made."
   }
 }
