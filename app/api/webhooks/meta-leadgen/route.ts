@@ -1,91 +1,40 @@
 import { NextResponse } from "next/server";
 import { waitUntil } from "@vercel/functions";
 
-import { sendMetaLeadEmail } from "@/components/email/sendcontactemail";
-import {
-  extractLeadgenChanges,
-  mapLeadToContact,
-  verifyMetaSignature,
-  type GraphLead,
-  type LeadgenValue,
-} from "@/lib/meta-leadgen";
+import { recordReceived } from "@/lib/meta-ingestion-store";
+import { ingestMetaLead } from "@/lib/meta-lead-ingest";
+import { extractLeadgenChanges, verifyMetaSignature, type LeadgenValue } from "@/lib/meta-leadgen";
 
 /**
- * Meta Instant Form -> info@ notification, in real time.
+ * Meta Instant Form -> lead capture, staff alert, patient acknowledgement.
  *
  * Meta POSTs here the moment someone submits one of the Meta ads' Instant
- * Forms. We verify the signature, acknowledge immediately, then fetch the lead
- * and hand it to `sendMetaLeadEmail` — the same Resend sender and the same
- * `info@` recipient every website form already uses, but a STAFF-facing
- * template rather than the patient-facing one, because a scheduler reading this
- * needs the phone number and the action, not a thank-you letter.
- *
- * Idempotency is keyed on Meta's lead id, so a webhook retry cannot double-send.
+ * Forms. We verify the signature, record the lead id durably, acknowledge, then
+ * fetch and process in the background. `lib/meta-lead-ingest.ts` does the
+ * fetch-and-process work, because an App Router route module may export only
+ * route handlers and the reconciliation cron needs to call the same code.
  *
  * Why a webhook rather than polling: Meta offers no native email delivery and
  * deletes Instant Form leads after 90 days, so the alternative is discovering
  * leads on a timer. This arrives in seconds.
  *
- * Privacy: the form behind these ads deliberately collects contact details only
- * — no date of birth, no insurance, nothing clinical. That is strictly less
- * than the website appointment form already sends through this same path.
+ * FORM VERSIONS. Both the V2 form and the V3 form are accepted; the registry is
+ * lib/meta-forms.ts. An unrecognised form, or a lead from an unauthorized Page,
+ * is QUARANTINED rather than rejected: it is still stored, and staff get a
+ * GENERIC alert carrying identifiers only — never contact details — so an
+ * unverifiable lead cannot be mistaken for a real patient to call, and no
+ * automatic patient email goes out. Dropping a real patient over a config
+ * mismatch is the worse failure; so is putting a stranger's details in front of
+ * a scheduler.
+ *
+ * Privacy: the forms behind these ads deliberately collect contact details only
+ * — no date of birth, no insurance, nothing clinical. That is strictly less than
+ * the website appointment form already sends through this same path.
  */
 
 export const runtime = "nodejs";
 // Signature verification needs the raw body, and Meta expects a fast 200.
 export const dynamic = "force-dynamic";
-
-const GRAPH_VERSION = process.env.META_GRAPH_API_VERSION || "v26.0";
-const LEAD_FIELDS = "id,created_time,field_data,campaign_id,adset_id,ad_id,form_id,platform";
-
-async function fetchLead(leadgenId: string, token: string): Promise<GraphLead> {
-  const url =
-    `https://graph.facebook.com/${GRAPH_VERSION}/${leadgenId}` +
-    `?fields=${LEAD_FIELDS}&access_token=${encodeURIComponent(token)}`;
-  const res = await fetch(url, { cache: "no-store" });
-  const json = (await res.json()) as GraphLead;
-  if (!res.ok || json.error) {
-    throw new Error(json.error?.message || `Graph returned ${res.status}`);
-  }
-  return json;
-}
-
-async function deliver(change: LeadgenValue, token: string): Promise<void> {
-  const leadgenId = change.leadgen_id as string;
-  const lead = await fetchLead(leadgenId, token);
-  const contact = mapLeadToContact(lead, change);
-
-  // Meta reports created_time in ISO; show it in clinic time so the scheduler
-  // can judge how fresh the lead is at a glance.
-  const submittedAt = lead.created_time
-    ? new Date(lead.created_time).toLocaleString("en-US", {
-        timeZone: "America/New_York",
-        dateStyle: "medium",
-        timeStyle: "short",
-      })
-    : undefined;
-
-  await sendMetaLeadEmail({
-    name: contact.name,
-    email: contact.email,
-    phone: contact.phone,
-    location: contact.location,
-    platform: contact.utm_source,
-    leadId: leadgenId,
-    formId: lead.form_id || change.form_id,
-    campaignId: contact.utm_campaign,
-    adsetId: contact.utm_term,
-    adId: contact.utm_content,
-    submittedAt,
-  });
-
-  // Identifiers only — never contact fields.
-  console.info("[MetaLeadgen] delivered", {
-    leadgenId,
-    formId: lead.form_id || change.form_id,
-    adId: lead.ad_id || change.ad_id,
-  });
-}
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -135,17 +84,67 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, delivered: 0 });
   }
 
+  // ── Durable receipt, BEFORE the 200 ───────────────────────────────────────
+  //
+  // This is the one database write on the critical path, and it is the fix for
+  // the only remaining way a lead could vanish: everything after the response
+  // runs in `waitUntil`, and if that invocation dies — a deploy, an OOM, a
+  // platform restart — Meta has already been told 200 and will never retry.
+  // Nothing would have known the lead existed.
+  //
+  // Meta keeps the lead retrievable by leadgen id for 90 days, so recording the
+  // id is enough to recover everything else later. One upsert per change is
+  // well inside Meta's timeout; losing a patient is not an acceptable saving.
+  //
+  // Unauthorized pages are recorded too, rather than dropped, so a
+  // misconfiguration is visible and recoverable instead of silent. They are
+  // quarantined downstream and never reach the scheduling workflow.
+  const receipts = await Promise.all(
+    changes.map(async (change) => ({
+      change,
+      recorded: (
+        await recordReceived({
+          leadgenId: change.leadgen_id as string,
+          formId: change.form_id ?? null,
+          pageId: change.page_id ?? null,
+          campaignId: change.campaign_id ?? null,
+          adsetId: change.adgroup_id ?? null,
+          adId: change.ad_id ?? null,
+        })
+      ).recorded,
+    })),
+  );
+
+  const unrecorded = receipts.filter((r) => !r.recorded).length;
+  if (unrecorded > 0) {
+    // Processing still proceeds — the in-memory path is what production has
+    // today, so this is no worse than the status quo — but it is loud, because
+    // the safety net is missing for these leads.
+    console.error("[MetaLeadgen] receipt NOT recorded — lead is not recoverable if this dies", {
+      unrecorded,
+      total: changes.length,
+    });
+  }
+
   // Respond first. Meta treats a slow 200 as a failure and retries, which would
   // double-send; `waitUntil` lets delivery finish after the response is sent.
+  //
+  // `waitUntil` is the platform's supported background-execution primitive, not
+  // a bare floating promise — Vercel keeps the invocation alive until it
+  // settles. It is still only the FIRST attempt. Durability comes from the two
+  // tables: public.meta_lead_ingestions (recorded above, so the lead survives)
+  // and public.message_deliveries (so each message is sent exactly once). The
+  // reconciliation sweep re-drives whatever is left unfinished.
   waitUntil(
     (async () => {
-      for (const change of changes) {
+      for (const { change } of receipts) {
         try {
-          await deliver(change, token);
+          await ingestMetaLead(change, token);
         } catch (error) {
-          // Resend's idempotency key makes a Meta retry safe, so logging loudly
-          // and letting Meta retry is the correct recovery here.
-          console.error("[MetaLeadgen] delivery failed", {
+          // The attempt is already recorded against the ingestion row, so the
+          // sweep will retry. Meta's own retries are safe too: every step is
+          // keyed on a unique column, so a retry resumes rather than duplicates.
+          console.error("[MetaLeadgen] delivery failed — left for reconciliation", {
             leadgenId: change.leadgen_id,
             reason: error instanceof Error ? error.message : String(error),
           });

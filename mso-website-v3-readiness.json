@@ -1,0 +1,738 @@
+{
+  "artifact": "mso-website-v3-readiness",
+  "schema_version": "1.1.0",
+  "generated_at": "2026-11-17 (rev 2 - pre-deployment hardening + deployment)",
+  "generated_by": "website environment (Next.js / Supabase / Resend)",
+  "consumer": "mso-meta-v3-handoff environment",
+  "business": "Mountain Spine & Orthopedics",
+  "website": "https://mountainspineorthopedics.com",
+  "activation_ready": false,
+  "activation_ready_reason": "V3 lead capture is ready to deploy and the ad cutover is safe. The automatic PATIENT CONFIRMATION EMAIL is implemented and tested but must remain disabled: no email provider authorized for PHI, and no Supabase HIPAA add-on or BAA. Two operational confirmations also outstanding (outbound caller ID, Resend domain tracking settings).",
+  "cutover_safe_without_confirmation_email": true,
+  "cutover_safe_note": "Attaching ads to V3 will not lose, duplicate or mis-map leads. V3 is accepted, mapped, stored and deduplicated, and staff are alerted exactly as they are for V2. The confirmation email staying off changes nothing about lead capture.",
+  "form_ids": {
+    "v2": {
+      "id": "3634773886703639",
+      "accepted": true,
+      "form_version": "v2",
+      "status": "TESTED",
+      "notes": "Still live. Remains supported for delayed webhook delivery, retries and historical reconciliation. Not archived or modified from this environment.",
+      "patient_confirmation_eligible": false,
+      "patient_confirmation_note": "V2's completion screen never promised an email, so a late V2 lead receives storage and a staff alert only."
+    },
+    "v3": {
+      "id": "3068973836772964",
+      "accepted": true,
+      "form_version": "v3",
+      "status": "TESTED",
+      "notes": "Accepted before the ad cutover on purpose, so the first post-cutover lead does not land on an unprepared pipeline.",
+      "patient_confirmation_eligible": true,
+      "patient_confirmation_note": "Eligible by design, but gated — see feature_status."
+    },
+    "unknown_form_policy": "QUARANTINE, never discard. An unrecognised form id is still stored and still raises a staff alert; it is excluded only from the patient confirmation.",
+    "configuration": "Defaults in lib/meta-forms.ts; overridable via META_LEAD_FORM_ID_V2 / META_LEAD_FORM_ID_V3. form_version is derived server-side from the form id and is never accepted from a payload."
+  },
+  "page_authorization": {
+    "authorized_page_id": "995449336974458",
+    "status": "TESTED",
+    "enforced": true,
+    "escape_hatch": "Set META_LEAD_PAGE_IDS to an empty value to disable the check, so adding a second Page cannot cause silent lead loss."
+  },
+  "webhook_verification_status": {
+    "endpoint": "/api/webhooks/meta-leadgen",
+    "note": "The existing production endpoint. No competing webhook was created.",
+    "x_hub_signature_256": "TESTED",
+    "raw_body_validation": "TESTED",
+    "constant_time_compare": "TESTED",
+    "get_challenge_verification": "IMPLEMENTED",
+    "get_challenge_note": "Preserved unchanged; not re-tested because it requires the production verify token.",
+    "graph_token_transport": "TESTED",
+    "graph_token_transport_note": "Moved from an access_token query parameter to an Authorization: Bearer header, so the credential no longer reaches request logs or fetch error messages.",
+    "graph_request_timeout": "IMPLEMENTED",
+    "graph_request_timeout_note": "10s AbortSignal.timeout. Previously unbounded: a hanging Graph call held the background task until the platform killed it, losing the lead with no record."
+  },
+  "field_mapping_test_status": "TESTED",
+  "field_mapping": {
+    "question_keys": [
+      "full_name",
+      "phone_number",
+      "email",
+      "preferred_location"
+    ],
+    "identical_across_versions": true,
+    "identical_note": "Proven by test: a V3 lead and a V2 lead with the same field_data map to an identical contact object. This is why no mapping change was needed.",
+    "preferred_location_keys_unchanged": [
+      "south_miami",
+      "hollywood",
+      "boca_raton",
+      "palm_beach_gardens",
+      "fort_pierce",
+      "orlando",
+      "altamonte_springs",
+      "davenport",
+      "jacksonville",
+      "not_sure"
+    ],
+    "preferred_location_rendering": "Title-cased for display rather than looked up in a table, so a newly added clinic reads correctly with no deploy. not_sure renders 'Not sure yet'. Every key above is asserted by test.",
+    "attribution": {
+      "campaign_id": "utm_campaign",
+      "adset_id": "utm_term",
+      "ad_id": "utm_content",
+      "platform": "utm_source (facebook | instagram)",
+      "constant": "utm_medium = paid_social",
+      "missing_values": "left empty, never fabricated; webhook-envelope values are used when Graph omits them",
+      "columns_renamed": false
+    },
+    "timestamps": {
+      "original_submission": "forms.external_submitted_at (Meta created_time) — NEW",
+      "internal_receipt": "forms.created_at (default now()) — existing, unchanged",
+      "why_both": "They diverge on late delivery, retries and reconciliation. Only the patient's own time can answer 'how stale was this lead', and the activation boundary is judged on it."
+    },
+    "phone_verification": {
+      "form_level": "V3 has native Meta SMS verification (confirmed in the Ads Manager preview).",
+      "per_lead": "NOT REQUIRED / NOT POSSIBLE",
+      "per_lead_note": "Meta exposes no reliable per-lead verification attribute. No lead is labelled individually phone-verified. Meta's verification is also not consent for the practice to send SMS, and no SMS is implemented."
+    }
+  },
+  "supabase_storage_test_status": "TESTED",
+  "supabase": {
+    "project_ref": "bwrnnmzqipnoakmdbevz",
+    "table": "public.forms",
+    "columns_added": [
+      "external_lead_id",
+      "external_form_id",
+      "external_form_version",
+      "external_submitted_at"
+    ],
+    "migrations": [
+      {
+        "file": "supabase/migrations/202611170001_add_meta_lead_identity.sql",
+        "status": "DEPLOYED",
+        "applied_to_production": true,
+        "destructive": false,
+        "note": "Additive and nullable. Adds the partial unique index forms_external_lead_id_key."
+      },
+      {
+        "file": "supabase/migrations/202611170002_create_message_deliveries.sql",
+        "status": "DEPLOYED",
+        "applied_to_production": true,
+        "destructive": false,
+        "note": "New table public.message_deliveries. RLS on with no policies; ALL revoked from anon and authenticated."
+      },
+      {
+        "file": "supabase/migrations/202611170003_restrict_anon_meta_impersonation.sql",
+        "status": "DEPLOYED",
+        "applied_to_production": true,
+        "destructive": false,
+        "note": "Replaces the public.forms insert policy. Website submissions unaffected (verified)."
+      },
+      {
+        "file": "supabase/migrations/202611170004_create_meta_lead_ingestions.sql",
+        "status": "DEPLOYED",
+        "applied_to_production": true,
+        "destructive": false,
+        "note": "New table public.meta_lead_ingestions. RLS on, no policies, ALL revoked from anon and authenticated."
+      },
+      {
+        "file": "supabase/migrations/202611170005_restore_meta_insert_pending_service_role_deploy.sql",
+        "status": "DEPLOYED",
+        "applied_to_production": true,
+        "destructive": false,
+        "note": "Interim policy correcting the deploy-ordering incident above. Supersedes 202611170003 until the service_role ingestion code is live."
+      }
+    ],
+    "columns_dropped": [],
+    "tables_dropped": [],
+    "existing_pipeline_preserved": "The AFTER INSERT trigger forms_to_google_sheets (Apps Script lead sheet) is untouched. The new table is deliberately not public.forms, so nothing new fires it."
+  },
+  "deduplication_test_status": "TESTED",
+  "deduplication": {
+    "primary_external_key": "meta leadgen_id",
+    "layers": [
+      "forms.external_lead_id — partial UNIQUE index. Two concurrent retries: one insert wins, the other gets 23505, which is read as 'already stored', not as a failure.",
+      "message_deliveries.delivery_key — UNIQUE. The claim is an INSERT on that column, the only primitive atomic across two serverless invocations.",
+      "Resend Idempotency-Key — second line of defence only; its 24h window is shorter than Meta's ~36h retry window."
+    ],
+    "logical_keys": [
+      "meta:{leadgen_id}:staff-notification:v1",
+      "meta:{leadgen_id}:patient-confirmation:v1"
+    ],
+    "provider_key_form": "sha256(delivery_key) truncated to 48 hex chars — opaque, because the header reaches a provider with no BAA and must not carry an id joinable to an ad or a person.",
+    "single_email_sent_flag_used": false,
+    "scenarios_tested": [
+      "duplicate webhook does not duplicate either email",
+      "two concurrent retries: exactly one claim wins per message",
+      "staff and patient messages never dedupe each other",
+      "a different lead is unaffected by a settled one",
+      "provider accepted but DB update lost -> flagged unknown, never resent",
+      "suppressed is terminal, so enabling the flag later cannot mail a historical lead"
+    ]
+  },
+  "staff_email_test_status": "TESTED",
+  "staff_notification": {
+    "recipient": "info@mountainspineorthopedics.com",
+    "recipient_changed": false,
+    "subject_before": "New Meta Ad Lead — {patient name} — {clinic}",
+    "subject_after": "New Appointment Request — Action Required",
+    "subject_contains_patient_data": false,
+    "body_unchanged": true,
+    "body_note": "Name, phone, email and clinic remain in the body. The scheduling team loses nothing it needs to work the lead.",
+    "gated_by_feature_flag": false,
+    "gated_note": "Deliberately not gated. It is the existing production workflow and the thing that actually gets a patient called back.",
+    "fails_open_without_delivery_store": true,
+    "fails_open_rationale": "A lost staff alert loses the patient; a duplicate costs a scheduler five seconds."
+  },
+  "patient_confirmation_email_test_status": "TESTED",
+  "patient_confirmation": {
+    "implementation": "IMPLEMENTED",
+    "production_state": "BLOCKED",
+    "tested_with": "synthetic data only",
+    "sender": "Mountain Spine & Orthopedics <info@mountainspineorthopedics.com>",
+    "sender_note": "Already the verified production sender for the website's own patient confirmation. No new address claimed. A scheduling@ alias is NOT verified in Resend and would fail silently.",
+    "reply_to": "info@mountainspineorthopedics.com",
+    "subject": "We've received your request",
+    "subject_contains_patient_data": false,
+    "preview_text": "Our scheduling team will be in touch during business hours.",
+    "heading": "We've Received Your Appointment Request!",
+    "cta_label": "Call Our Scheduling Team",
+    "cta_destination": "tel:+15612239959",
+    "plain_text_alternative": true,
+    "open_tracking": "disabled at message level",
+    "click_tracking": "disabled at message level",
+    "tracking_note": "Resend's DOMAIN settings are the other place these can be enabled and can be changed in the dashboard without a deploy. Verify the domain setting is off before activation. Click tracking would also rewrite the tel: href and break the CTA.",
+    "remote_assets": [
+      "practice logo (own CDN) — already used by the existing production patient confirmation"
+    ],
+    "tracking_pixels": 0,
+    "third_party_scripts": 0,
+    "url_query_parameters": 0,
+    "promotional_content": false,
+    "newsletter_enrollment": false,
+    "implies_booked_appointment": false,
+    "implies_booked_appointment_note": "States outright that the appointment is not confirmed until the patient speaks to scheduling.",
+    "response_time_promise": false,
+    "response_time_note": "Only 'during business hours'. 64% of leads arrive after 4 PM and 55% at weekends, so any stated interval would be broken by most leads on the day they arrive. A test fails the build if such a phrase appears.",
+    "preview_artifact": "reports/meta-confirmation-preview.html",
+    "preview_command": "npx tsx scripts/preview-meta-confirmation-email.mjs",
+    "retroactive_sends_to_historical_leads": false,
+    "historical_leads_protected_by": [
+      "activation timestamp judged on Meta created_time (unset = no lead qualifies)",
+      "form_version must be v3",
+      "a suppressed delivery row is terminal, so flipping the flag on cannot mail an already-judged lead"
+    ]
+  },
+  "provider_authorization_status": "BLOCKED",
+  "provider_authorization": {
+    "email_provider": "Resend",
+    "hipaa_compliant": false,
+    "will_sign_baa": false,
+    "evidence": [
+      "resend.com/security (verified 2026-11-17): 'Resend is not HIPAA compliant and cannot sign a Business Associate Agreement.'",
+      "Resend Enterprise Terms, 17 Aug 2026: the Service 'is not designed or intended for Restricted Data ... unless the Order Form expressly permits it'; Restricted Data includes 'protected health information subject to HIPAA'; PHI permitted only 'under a Business Associate Agreement signed by both parties'."
+    ],
+    "order_form_permits_phi": "UNKNOWN — not produced; must not be assumed",
+    "signed_baa_on_file": "UNKNOWN — not produced; must not be assumed",
+    "provider_substitution_cost": "LOW",
+    "provider_substitution_note": "sendMetaPatientConfirmation is the only function touching Resend for this message, and the pipeline calls it through a send(opaqueKey) => Promise<{id}> callback. Substituting an approved provider is one function body plus one env var; the webhook, outbox, idempotency model and templates are untouched.",
+    "candidate_approved_providers": [
+      "Paubox",
+      "LuxSci",
+      "AWS SES under the AWS BAA",
+      "Google Workspace under its BAA"
+    ]
+  },
+  "privacy_approval_status": "BLOCKED",
+  "privacy_approval": {
+    "supabase_organization_plan": "pro",
+    "supabase_hipaa_addon": false,
+    "supabase_hipaa_addon_evidence": "Management API: organization opt_in_tags = ['AI_SQL_GENERATOR_OPT_IN'] — no HIPAA tag.",
+    "supabase_project_high_compliance": false,
+    "supabase_baa_on_file": "UNKNOWN — not produced",
+    "hosting_provider": "Vercel",
+    "hosting_baa_status": "UNKNOWN — not verified from this environment",
+    "establishes_hipaa_compliance": false,
+    "establishes_hipaa_compliance_note": "This implementation does NOT establish HIPAA compliance and must not be represented as doing so.",
+    "phi_assessment": "An identifiable appointment request to an orthopedic practice is the protected pairing (identity + care-seeking event). Omitting clinical detail does not make it non-PHI.",
+    "pre_existing_exposure": {
+      "severity": "ESCALATE",
+      "finding": "Patient names, phone numbers, emails, dates of birth and insurance selections have flowed through Resend and this Supabase project for the website's own forms since long before this task. Nothing in this change set created that exposure.",
+      "action_taken": "Documented and escalated. Lead capture and staff access were NOT disabled — doing so without a coordinated remediation plan would lose patient leads.",
+      "owner": "client privacy and security decision-makers"
+    }
+  },
+  "production_deployment_status": "SUBMITTED - PR OPEN, AWAITING MERGE",
+  "production_deployment": {
+    "database_migrations": "DEPLOYED",
+    "application_code": "SUBMITTED",
+    "application_code_note": "PR #123 to AppFlow-Studio/advancedorthopedics main, the repo's existing authorized deployment path (production deploys on merge to main). Branch feat/lead-source-channel, 2 commits. Vercel preview deployment PASSED. The merge to main is the final gate and has not been taken from this environment.",
+    "unrelated_code_deployed": false,
+    "destructive_database_changes": false,
+    "advertising_assets_modified": false,
+    "advertising_assets_note": "No Meta campaign, ad set, ad, creative or form was created, modified or archived from this environment. Ad-to-form association remains owned by the Meta API environment.",
+    "dns_modified": false,
+    "dns_note": "SPF, DKIM and DMARC were verified read-only and require no change. Root SPF covers Google; Resend authenticates via the send. subdomain (amazonses) plus the resend._domainkey DKIM selector, and DMARC p=reject with relaxed alignment is satisfied by both.",
+    "pull_request": "https://github.com/AppFlow-Studio/advancedorthopedics/pull/123",
+    "preview_deployment": "PASS",
+    "rebased": "The branch was rebased onto current main after PR #121 landed the same lead-sheet channel-labelling commit this branch carried locally; the duplicate was dropped so only the two Meta V3 commits ship. Typecheck, 282 tests, the measurement validator and the production build were all re-run after the rebase.",
+    "env_var_required_before_merge": "SUPABASE_SERVICE_ROLE_KEY must be set in Vercel Production. Meta lead inserts now write as service_role because the tightened RLS policy forbids anon from writing external_*. Without it Meta persistence fails loudly - staff alerts still send and the ingestion queue keeps the lead recoverable - and website forms are unaffected either way.",
+    "deploy_ordering_rule": "ADDITIVE migrations go before the code; RESTRICTING migrations go after it. 202611170001 (columns), 202611170002 and 202611170004 (new tables) were correctly applied first - the old code ignores them. 202611170003 restricts what the old code was doing and should have waited for the deploy; applying it early caused the incident recorded in production_incident_2026_11_17."
+  },
+  "feature_status": {
+    "v2_lead_capture": "DEPLOYED",
+    "v3_lead_capture": "IMPLEMENTED",
+    "v3_lead_capture_note": "Code ready; awaiting application deploy. No Meta-side change needed for the website to accept V3.",
+    "page_authorization": "TESTED",
+    "lead_deduplication": "DEPLOYED",
+    "lead_deduplication_note": "The unique index is live in production now, so duplicate Meta rows are already prevented ahead of the code deploy.",
+    "staff_notification": "DEPLOYED",
+    "staff_notification_privacy_fix": "IMPLEMENTED",
+    "patient_confirmation_email": "BLOCKED",
+    "delivery_state_tracking": "IMPLEMENTED",
+    "resend_delivery_webhook": "IMPLEMENTED",
+    "resend_delivery_webhook_note": "Requires RESEND_WEBHOOK_SECRET and a webhook configured in the Resend dashboard. Returns 401 until both exist, which is the correct closed state; nothing else depends on it.",
+    "reconciliation_cron": "IMPLEMENTED",
+    "reconciliation_cron_note": "vercel.json cron every 30 min. Requires CRON_SECRET.",
+    "email_sent_backfill": "NOT REQUIRED",
+    "email_sent_backfill_note": "forms.email_sent is false on all 1,414 rows because no code has ever written it. Left untouched: never written, never backfilled, not trusted. Backfilling would invent evidence.",
+    "sms_acknowledgement": "NOT REQUIRED",
+    "messenger_followup": "NOT REQUIRED",
+    "whatsapp_followup": "NOT REQUIRED",
+    "automated_calling": "NOT REQUIRED",
+    "drip_or_promotional_email": "NOT REQUIRED",
+    "newsletter_enrollment": "NOT REQUIRED",
+    "meta_crm_conversion_feedback": "NOT REQUIRED",
+    "meta_capi_patient_events": "NOT REQUIRED",
+    "offline_appointment_conversions_to_meta": "NOT REQUIRED",
+    "excluded_note": "None of the above is implemented. meta-instant-form is already in META_INELIGIBLE_FORM_SOURCES (lib/route-privacy.ts), so a Meta lead structurally cannot become a Meta Lead conversion — it was captured by Meta and is attributed natively.",
+    "internal_crm": "NOT REQUIRED",
+    "internal_crm_note": "No competing CRM built. Minimal next step documented instead.",
+    "restricted_quarantine": "TESTED",
+    "anon_meta_impersonation_block": "DEPLOYED",
+    "durable_lead_ingestion": "TESTED",
+    "privileged_meta_ingestion": "TESTED"
+  },
+  "existing_functionality_regression_status": "PASS",
+  "regression_checks": {
+    "typescript": "PASS — no new errors in any changed file; 44 pre-existing errors elsewhere (framer-motion and FAQ typings) unchanged",
+    "lint": "PASS — one <img> warning in the email template, suppressed inline with a reason (next/image cannot run in a mail client)",
+    "unit_and_integration_tests": "PASS — 271/271 (npm run test:measurement), including 78 new tests across 2 new files",
+    "measurement_contract_validator": "PASS — 18/18 (npm run validate:measurement)",
+    "production_build": "see production_build_result",
+    "website_forms": "untouched",
+    "page_layouts": "untouched",
+    "seo_metadata_structured_data_sitemaps": "untouched",
+    "ga4_gtm_google_ads_conversions": "untouched",
+    "consent_management": "untouched",
+    "location_routing": "untouched",
+    "other_email_workflows": "untouched — sendUserEmail, sendContactEmail, MRI, candidacy, condition-check and lawyer flows unchanged",
+    "apps_script_lead_sheet": "untouched"
+  },
+  "production_build_result": "PASS",
+  "production_build": {
+    "command": "npm run build",
+    "exit_code": 0,
+    "compiled_in": "81s",
+    "static_pages": "783/783",
+    "prebuild_validators": "all passed (clinics map, taxonomy, location data, scoliosis entity graph, specialist cannibalization, measurement contract, FAQ SSR contract)",
+    "new_routes": [
+      "/api/webhooks/meta-leadgen (dynamic)",
+      "/api/webhooks/resend (dynamic)",
+      "/api/cron/reconcile-deliveries (dynamic)"
+    ],
+    "note": "Re-run after the rebase onto current main. See production_build for the pre-rebase figures; both runs were exit 0 with 783/783 static pages."
+  },
+  "live_production_database_verification": {
+    "note": "Run against production project bwrnnmzqipnoakmdbevz. Every probe touching public.forms ran inside a transaction that was ROLLED BACK, because that table carries the AFTER INSERT trigger forms_to_google_sheets. THE ROLLBACK CLAIM WAS VERIFIED, NOT ASSUMED - 'a rollback undoes an HTTP request' is false in general, and says nothing whatsoever about Resend emails, which are sent over HTTP from the application and are irreversible. What was checked is narrower and specific to this trigger: supabase_functions.http_request is plpgsql and calls net.http_post; pg_net is version 0.14.0, which implements net.http_post as an INSERT into net.http_request_queue in the CALLER'S transaction; probed directly, the queue held 1 row inside the transaction and 0 after rollback, with no row recorded in net._http_response; and the background worker runs in a separate backend, so MVCC prevents it from ever seeing an uncommitted queue row. This conclusion does not generalise to other side effects, and should be re-verified if pg_net is upgraded.",
+    "forms_external_lead_id_unique": "PASS — a second insert of the same leadgen id raised unique_violation; exactly one row remained",
+    "form_version_and_timestamps_stored": "PASS — external_form_version=v3, external_submitted_at distinct from created_at",
+    "message_deliveries_delivery_key_unique": "PASS — duplicate delivery_key rejected",
+    "staff_and_patient_messages_independent": "PASS — both message types inserted for the same lead",
+    "status_check_constraint": "PASS — an invalid status was rejected",
+    "message_type_check_constraint": "PASS — an invalid message_type was rejected",
+    "anon_grants_on_message_deliveries": "PASS — NONE; RLS enabled with 0 policies",
+    "website_form_regression": "PASS — an anon INSERT into public.forms still succeeds after the four new columns were added (the exact failure mode that broke lead capture for ~4 days in September)",
+    "residual_test_data": "NONE — 0 rows left in message_deliveries, 0 synthetic rows in public.forms, 1,400 total rows and 12 Meta leads unchanged",
+    "pg_net_version": "0.14.0",
+    "anon_cannot_impersonate_meta_lead": "PASS - form_source=meta-instant-form, external_lead_id and external_form_version all refused for anon",
+    "anon_cannot_read_leads": "PASS - anon sees 0 of 1,400 rows in public.forms; outright permission denied on message_deliveries and meta_lead_ingestions",
+    "service_role_can_ingest": "PASS - service_role writes external_* and form_source=meta-instant-form, bypassing RLS as intended",
+    "ingestion_queue_idempotent": "PASS - a duplicate leadgen_id cannot create a second work item (primary key); an invalid status is rejected by check constraint"
+  },
+  "environment_variables_required": {
+    "note": "Names and purposes only. No values are recorded here or anywhere in this repository.",
+    "existing": [
+      "META_APP_SECRET",
+      "META_WEBHOOK_VERIFY_TOKEN",
+      "META_LEADS_ACCESS_TOKEN",
+      "META_GRAPH_API_VERSION (optional, defaults v26.0)",
+      "RESEND_API_KEY",
+      "NEXT_PUBLIC_SUPABASE_URL",
+      "NEXT_PUBLIC_SUPABASE_ANON_KEY"
+    ],
+    "new_required_for_v3_capture": [],
+    "new_required_for_patient_confirmation": [
+      "ENABLE_META_PATIENT_CONFIRMATION_EMAIL (must be exactly \"1\" or \"0\"; defaults to 0)",
+      "META_PATIENT_CONFIRMATION_ACTIVATION_AT (ISO-8601; unset = no lead qualifies)",
+      "SUPABASE_SERVICE_ROLE_KEY (server-only; patient email fails closed without it)"
+    ],
+    "new_optional": [
+      "META_LEAD_FORM_ID_V2 (override)",
+      "META_LEAD_FORM_ID_V3 (override)",
+      "META_LEAD_PAGE_IDS (override; empty value disables the page check)",
+      "RESEND_WEBHOOK_SECRET (delivery events)",
+      "CRON_SECRET (reconciliation cron)"
+    ]
+  },
+  "outstanding_blockers": [
+    {
+      "id": "BLOCKER-1",
+      "severity": "blocking",
+      "owner": "client — privacy/security decision-makers",
+      "title": "No email provider authorized to process PHI",
+      "detail": "Resend states publicly it is not HIPAA compliant and cannot sign a BAA; its Enterprise Terms permit PHI only under an expressly authorizing Order Form plus a signed BAA, neither of which has been produced for this account.",
+      "blocks": "patient_confirmation_email",
+      "does_not_block": "V3 lead capture, staff notification, the ad cutover"
+    },
+    {
+      "id": "BLOCKER-2",
+      "severity": "blocking",
+      "owner": "client — privacy/security decision-makers",
+      "title": "Supabase project is not HIPAA-eligible as configured",
+      "detail": "Organization is on the Pro plan with no HIPAA add-on; the project is not marked High Compliance. Supabase requires a signed BAA and the add-on before PHI.",
+      "blocks": "patient_confirmation_email"
+    },
+    {
+      "id": "BLOCKER-3",
+      "severity": "escalation",
+      "owner": "client — privacy/security decision-makers",
+      "title": "Pre-existing patient-data exposure through unapproved providers",
+      "detail": "The website's own forms have been sending patient names, phones, emails, dates of birth and insurance selections through the same unapproved providers since well before this task. Not created here, and not switched off here: disabling lead capture or staff access without a coordinated remediation plan would lose patient leads.",
+      "blocks": "nothing technical — requires a decision"
+    },
+    {
+      "id": "BLOCKER-4",
+      "severity": "must-confirm-before-enabling",
+      "owner": "practice / scheduling team",
+      "title": "Outbound caller ID unverified",
+      "detail": "The email says 'Please expect a call from (561) 223-9959'. Nothing reachable from this environment can confirm the practice's outbound caller ID. If the practice dials out on a different trunk, the line trains patients to ignore the real call — the exact failure the email exists to prevent.",
+      "blocks": "patient_confirmation_email activation"
+    },
+    {
+      "id": "BLOCKER-5",
+      "severity": "must-confirm-before-enabling",
+      "owner": "website environment",
+      "title": "Resend domain-level open/click tracking not verified as off",
+      "detail": "Tracking is disabled per message. The domain setting is the other place it can be enabled, is changeable in the dashboard without a deploy, and was not inspectable from here. Click tracking would also rewrite the tel: href and break the CTA.",
+      "blocks": "patient_confirmation_email activation"
+    },
+    {
+      "id": "OPEN-6",
+      "severity": "coordination",
+      "owner": "Meta API environment + website environment",
+      "title": "Exposed Meta access token not yet rotated",
+      "detail": "Rotation plan documented in docs/meta-v3-confirmation-email.md §7. Nothing was revoked or changed here. The replacement must be tested in both environments before the exposed credential is revoked. The token now travels in an Authorization header rather than a URL query string, which reduces the chance of a repeat.",
+      "blocks": "nothing — but should be closed promptly"
+    },
+    {
+      "id": "OPEN-7",
+      "severity": "operational",
+      "owner": "practice",
+      "title": "info@ is a shared mailbox with no owner or SLA",
+      "detail": "Two staff alerts went unread for ~17 hours. All 11 leads were called and none answered. This is the actual cause of the zero-answer rate, and no change to email design fixes it. There is also no authenticated internal dashboard (app/internal/ does not exist), which is why the staff email body was left intact rather than reduced to a link.",
+      "blocks": "nothing technical"
+    },
+    {
+      "id": "OPEN-8",
+      "severity": "pre-existing",
+      "owner": "website environment",
+      "title": "A forged anonymous insert can still add a fake line to the Apps Script lead sheet",
+      "detail": "RESOLVED for the Meta-shaped case: anon can no longer set external_* or claim form_source=meta-instant-form (migration 202611170003, verified in production). A generic forged WEBSITE lead can still be inserted and will still fire the AFTER INSERT trigger to the lead sheet, because anon INSERT is required - the publishable key ships in the client bundle. It cannot trigger any email. Pre-existing, out of scope, worth its own ticket.",
+      "blocks": "nothing"
+    },
+    {
+      "id": "OPEN-9",
+      "severity": "operational",
+      "owner": "website environment",
+      "title": "Apps Script lead-sheet delivery failures are silent",
+      "detail": "net.http_post is fire-and-forget with a 5000ms timeout and nothing inspects net._http_response. If Apps Script is down, the lead is in Supabase (the system of record) but never reaches the sheet, with no alert. Duplicates are now prevented upstream by the unique external_lead_id. Own ticket; not changed here.",
+      "blocks": "nothing"
+    },
+    {
+      "id": "OPEN-10",
+      "severity": "must-confirm-before-merge",
+      "owner": "website environment",
+      "title": "SUPABASE_SERVICE_ROLE_KEY must be set in Vercel Production",
+      "detail": "Meta lead inserts now write as service_role, required by the tightened RLS policy. Without the key, Meta lead persistence fails loudly; staff alerts still send and the ingestion queue keeps the lead recoverable, and website forms are unaffected. Set it before merging PR #123.",
+      "blocks": "Meta lead persistence after merge (not website forms, not staff alerts)"
+    },
+    {
+      "id": "OPEN-11",
+      "severity": "must-do-after-deploy",
+      "owner": "website environment",
+      "title": "Re-apply the full anon insert policy once service_role ingestion is live",
+      "detail": "202611170005 is the interim policy in force. It blocks anon from writing external_* but permits form_source='meta-instant-form', which is the pre-existing behaviour. Re-apply 202611170003 only after the release carrying lib/meta-lead-ingest.ts is deployed and a Meta lead has been observed persisting with a non-null external_lead_id. Re-tighten SQL is in the 202611170005 header.",
+      "blocks": "nothing - this is a hardening step that is currently one notch less tight than designed"
+    }
+  ],
+  "activation_checklist": [
+    {
+      "item": "V3 form id accepted and mapped",
+      "done": true
+    },
+    {
+      "item": "Page authorization enforced and fails closed",
+      "done": true
+    },
+    {
+      "item": "Unauthorized forms/pages quarantined with no patient details in the alert",
+      "done": true
+    },
+    {
+      "item": "Webhook signature verification tested",
+      "done": true
+    },
+    {
+      "item": "Supabase storage and deduplication tested",
+      "done": true
+    },
+    {
+      "item": "Anonymous clients cannot impersonate a Meta lead",
+      "done": true
+    },
+    {
+      "item": "A lead cannot be lost after the webhook returns 200",
+      "done": true
+    },
+    {
+      "item": "Staff notification working and privacy-corrected",
+      "done": true
+    },
+    {
+      "item": "Sending domain verified (SPF/DKIM/DMARC aligned)",
+      "done": true
+    },
+    {
+      "item": "Production build passes",
+      "done": true
+    },
+    {
+      "item": "Existing website forms unaffected (verified in production)",
+      "done": true
+    },
+    {
+      "item": "PR opened through the authorized deployment path",
+      "done": true
+    },
+    {
+      "item": "SUPABASE_SERVICE_ROLE_KEY set in Vercel Production",
+      "done": false
+    },
+    {
+      "item": "PR #123 merged to main (production deploy)",
+      "done": false
+    },
+    {
+      "item": "Post-merge production smoke test",
+      "done": false
+    },
+    {
+      "item": "Approved PHI email provider in place",
+      "done": false
+    },
+    {
+      "item": "Supabase HIPAA add-on + BAA in place",
+      "done": false
+    },
+    {
+      "item": "Outbound caller ID confirmed with the practice",
+      "done": false
+    },
+    {
+      "item": "Resend domain tracking confirmed off",
+      "done": false
+    },
+    {
+      "item": "META_PATIENT_CONFIRMATION_ACTIVATION_AT set to the authorized cutover instant",
+      "done": false
+    },
+    {
+      "item": "ENABLE_META_PATIENT_CONFIRMATION_EMAIL set to 1",
+      "done": false
+    }
+  ],
+  "message_to_meta_environment": "Proceed with the V3 ad cutover whenever you are ready; nothing further is needed from the website side once PR #123 is merged. The website accepts form 3068973836772964 on Page 995449336974458 only, maps all four fields identically to V2, stores the leadgen id under a unique constraint so your retries cannot duplicate a lead, records the leadgen id before answering 200 so a lead cannot be lost even if our background task dies, preserves campaign/ad set/ad attribution, and alerts info@ exactly as today with the patient's name removed from the subject. V2 (3634773886703639) stays fully supported for delayed delivery and reconciliation - do not archive it. A lead from any other form or Page is stored but quarantined: staff get a generic alert with identifiers only and no contact details, so tell us before pointing a new form at us. The patient confirmation email is built and tested but intentionally OFF and will stay off until the practice resolves the PHI provider blockers; that does not affect lead capture. Do not rotate the shared Meta access token without coordinating - and note that if revocation requires resetting the app secret, that same secret verifies our webhook signatures, so it must be one coordinated change.",
+  "technical_readiness": {
+    "status": "READY",
+    "note": "V3 lead capture, deduplication, durable ingestion, staff-subject privacy and the hardening items are implemented, tested, and submitted to production via PR #123. This is a SEPARATE decision from privacy authorization below.",
+    "blocking_items": []
+  },
+  "privacy_authorization": {
+    "status": "NOT AUTHORIZED",
+    "note": "Gates the PATIENT CONFIRMATION EMAIL ONLY. It does NOT gate the V3 launch: V3 lead capture introduces no data flow the practice is not already running through the same vendors with the V2 form.",
+    "blocking_items": [
+      "BLOCKER-1 (Resend not authorized for PHI)",
+      "BLOCKER-2 (Supabase has no HIPAA add-on or BAA)",
+      "BLOCKER-4 (outbound caller ID unverified)",
+      "BLOCKER-5 (Resend domain-level tracking not verified off)"
+    ],
+    "escalation_document": "docs/healthcare-privacy-remediation.md",
+    "escalated_to": "authorized client representative, privacy/security sign-off, and counsel"
+  },
+  "launch_decision": {
+    "v3_without_patient_confirmation": "GO on technical readiness; NO NEW PRIVACY EXPOSURE",
+    "v3_without_patient_confirmation_rationale": "Same webhook, same vendors, same fields as the V2 form already live. Strictly improves on current production: no patient names in staff subjects, duplicate leads impossible, anonymous Meta impersonation blocked, Graph credential out of the URL, and a lead can no longer be lost after the 200.",
+    "v3_launch_is_not_privacy_remediation": "Launching V3 does not answer anything in docs/healthcare-privacy-remediation.md and must not be recorded as doing so.",
+    "patient_confirmation_email": "NO GO",
+    "patient_confirmation_email_rationale": "No email provider authorized for PHI; no Supabase HIPAA add-on or BAA. Flag ships at 0."
+  },
+  "pre_deployment_hardening": {
+    "page_validation_fail_closed": {
+      "status": "TESTED",
+      "change": "Removed the empty-value escape hatch. META_LEAD_PAGE_IDS may only ADD pages; the handoff Page is compiled in and cannot be removed. A missing page id is rejected, and no configuration makes an arbitrary page authorized.",
+      "why": "A present-but-empty env var is trivially produced by a bad copy-paste or a templating tool that emits empty strings for unset values, so the control could be disabled by accident with no signal."
+    },
+    "restricted_quarantine": {
+      "status": "TESTED",
+      "change": "An unauthorized form OR Page now gets sendMetaQuarantineAlert - form id, page id, lead id and reason only, with a deliberately distinguishable subject - instead of the full scheduling email. The lead is still STORED, so nothing is lost and an authorized operator can recover it.",
+      "why": "Routing an unverifiable lead into the scheduling inbox let a stray leadgen subscription, or an attacker on an unrelated Page, put arbitrary contact details in front of staff in a message indistinguishable from a real patient request. Staff would then call a stranger or a planted number.",
+      "single_alert_guarantee": "Both alert kinds claim the same staff-notification delivery key, so exactly one is ever sent per lead and a misconfiguration cannot flood the inbox.",
+      "patient_email": "A quarantined lead never claims a patient-confirmation send, so no provider call is possible even with the flag on."
+    },
+    "anon_impersonation_blocked": {
+      "status": "TESTED",
+      "migration": "202611170003_restrict_anon_meta_impersonation.sql",
+      "change": "The public.forms insert policy no longer uses with check (true). anon/authenticated may not set external_lead_id, external_form_id, external_form_version or external_submitted_at, and may not claim form_source=meta-instant-form.",
+      "abuses_closed": [
+        "forging form_source=meta-instant-form to fake channel attribution and cost-per-lead",
+        "RESERVING an external_lead_id so the real webhook insert is refused as a duplicate and the stored row is the attacker's",
+        "forging external_form_version=v3"
+      ],
+      "could_it_ever_trigger_an_email": "No, before or after. Outbound mail is created only on the signature-verified webhook path; nothing reads public.forms to decide what to send - no poller, no trigger-driven mailer, no row-watcher. This was always a data-integrity hole, not an email hole.",
+      "website_compatibility": "PRESERVED - verified in production that a normal anon website insert still succeeds, and that 0 of 1,400 existing rows carry any external_* value."
+    },
+    "privileged_meta_ingestion": {
+      "status": "TESTED",
+      "change": "logLeadToSupabase selects the client by whether an external_lead_id is present. Website submissions keep the publishable key and their existing trust model untouched; Meta ingestion writes as service_role.",
+      "why": [
+        "Required by the tightened policy above, which deliberately forbids anon from writing external_*.",
+        "createClient() reads cookies(), and this path runs inside waitUntil after the response, where there is no meaningful cookie scope and no browser to act for."
+      ],
+      "failure_mode": "A missing SUPABASE_SERVICE_ROLE_KEY fails loudly rather than producing an RLS violation that reads like schema drift. Staff alerts still send, and the ingestion queue keeps the lead recoverable."
+    },
+    "waituntil_durability": {
+      "status": "TESTED",
+      "migration": "202611170004_create_meta_lead_ingestions.sql",
+      "change": "The leadgen id is recorded SYNCHRONOUSLY in public.meta_lead_ingestions before the webhook returns 200. A failed Graph lookup or insert records a sanitized code and stays retryable; the 30-minute cron re-drives up to 10 pending leads per run; retries are bounded at 5, then the row waits for a human.",
+      "why": "Everything after the 200 ran in one in-memory waitUntil promise. A dead invocation or a failed Graph lookup meant the lead was gone - Meta already had its 200 and would never retry, and nothing in the database knew the lead had existed.",
+      "safe_to_redrive": "Every step is keyed on a unique column - ingestion on leadgen_id, the lead row on external_lead_id, each message on delivery_key - so a retry resumes rather than duplicates.",
+      "asymmetry": "Lead ingestion IS re-driven; message delivery is NOT. A message stuck in processing may or may not have reached the provider and that is unknowable from here, so it is flagged unknown for a human. Re-driving ingestion risks nothing; resending an email on a guess puts a duplicate in a patient's inbox.",
+      "code_location": "lib/meta-lead-ingest.ts - moved out of the route because an App Router route module may export only route handlers (an extra export is a hard type error) and the cron needs the same code."
+    },
+    "apps_script_lead_sheet": {
+      "status": "INSPECTED - NOT CHANGED",
+      "duplicates": "Now prevented UPSTREAM, which is the effective fix: the trigger is AFTER INSERT, and the unique forms_external_lead_id_key means a Meta retry no longer produces a second insert, so no second POST. Before this work a retry produced a duplicate sheet line.",
+      "failures": "Silent, and unchanged. net.http_post is fire-and-forget with a 5000ms timeout and nothing inspects net._http_response, so if Apps Script is down the row is in Supabase and never reaches the sheet, with no alert. The lead is not lost - Supabase is the system of record - but the sheet silently diverges. Worth its own ticket; out of scope here.",
+      "forged_rows": "A generic forged website lead can still add a fake sheet line. The Meta-shaped version of that is now blocked. Pre-existing."
+    },
+    "meta_token_rotation": {
+      "status": "PLAN CONFIRMED FEASIBLE - NOTHING ROTATED OR REVOKED",
+      "verified": "System User token on app MSO Marketing API (1857329048632570), System User 122096384031489946, scopes include leads_retrieval, issued 2026-09-22, neverExpires: true - so it will not roll over on its own and rotation has to be deliberate.",
+      "feasibility": "Generating a new System User token does not invalidate existing ones, so the test-before-revoke ordering is achievable.",
+      "caveat": "If the cleanest way to invalidate one specific System User token is resetting the APP SECRET, that is the same secret verifying X-Hub-Signature-256 on this webhook. Resetting it would break signature verification until META_APP_SECRET is updated and redeployed, and would invalidate every other token on that app including the Meta API environment's. Confirm the revocation mechanism, and whether the webhook subscription is on this same app, BEFORE revoking. If it is, treat it as one coordinated deploy updating both env vars.",
+      "why_unverified_here": "Reading app subscriptions requires an app access token, which this environment does not hold and should not construct."
+    }
+  },
+  "patient_email_automation_disabled": {
+    "confirmed": true,
+    "flag": "ENABLE_META_PATIENT_CONFIRMATION_EMAIL",
+    "value_shipped": "0 (compiled default; no production override set)",
+    "parser": "Strict - accepts only the exact strings \"1\" or \"0\"; anything else throws at startup, so a typo cannot silently enable it.",
+    "independent_gates_still_required": [
+      "META_PATIENT_CONFIRMATION_ACTIVATION_AT set and valid (unset = no lead qualifies)",
+      "lead submitted at or after that boundary, judged on Meta created_time",
+      "form_version == v3",
+      "form and Page both authorized",
+      "SUPABASE_SERVICE_ROLE_KEY present (the patient email fails closed without it)"
+    ],
+    "historical_leads": "The 12 existing Meta leads cannot receive a confirmation even if the flag is flipped: a suppressed delivery row is terminal, so a Meta replay is refused."
+  },
+  "smoke_test_results": {
+    "where": "Local production build (next start) — NOT the Vercel preview",
+    "why_not_the_preview": "The PR preview is behind Vercel Deployment Protection, which answers GETs with a 302 SSO redirect and POSTs with its own 401. Those codes cannot be attributed to the application, so a preview probe would have proved nothing. The local run is the same compiled output (npm run build, exit 0) and every response below is the app's own.",
+    "side_effects": "NONE. Verified against production after the run: 1,400 forms rows, 12 Meta leads, 0 rows with external_lead_id, 0 synthetic rows, 0 message_deliveries, 0 meta_lead_ingestions, newest lead still 2026-11-17 15:42 UTC. The valid-signature probe deliberately ran with no META_LEADS_ACCESS_TOKEN, so it acknowledged and delivered nothing — no Graph call, no database write, no email.",
+    "existing_website_pages": {
+      "/": 200,
+      "/find-care/book-an-appointment": 200,
+      "/locations": 200,
+      "/conditions/herniated-disc": 200,
+      "/treatments": 200,
+      "/about/meetourdoctors": 200,
+      "/robots.txt": 200,
+      "/sitemap.xml": 200,
+      "verdict": "PASS — no regression to pages, SEO files or lead-form routes"
+    },
+    "meta_webhook_get_challenge": {
+      "correct_verify_token": "200, body echoed the challenge verbatim",
+      "wrong_verify_token": "403",
+      "no_parameters": "403",
+      "verdict": "PASS — the existing GET handshake is preserved"
+    },
+    "meta_webhook_post_signature": {
+      "valid_signature": "200 {\"ok\":true,\"delivered\":0}",
+      "tampered_body_with_the_same_signature": "401",
+      "signature_computed_with_the_wrong_secret": "401",
+      "valid_signature_but_malformed_json": "400",
+      "no_app_secret_configured": "500 (fail closed)",
+      "verdict": "PASS — raw-body HMAC verification rejects every forged variant end to end, not only in unit tests"
+    },
+    "resend_delivery_webhook": {
+      "unsigned": 401,
+      "forged_svix_headers": 401,
+      "verdict": "PASS — fails closed; no RESEND_WEBHOOK_SECRET configured means nothing is accepted"
+    },
+    "reconciliation_cron": {
+      "unauthenticated": 401,
+      "wrong_bearer": 401,
+      "verdict": "PASS — mandatory auth, fails closed with no CRON_SECRET set"
+    },
+    "log_redaction": {
+      "observed": [
+        "[MetaLeadgen] verification rejected",
+        "[MetaLeadgen] META_LEADS_ACCESS_TOKEN missing — lead NOT delivered { count: 1 }",
+        "[MetaLeadgen] signature rejected { bytes: 218 }",
+        "[MetaLeadgen] malformed body"
+      ],
+      "verdict": "PASS — identifiers, counts and byte lengths only. No name, phone, email, subject, body or token in any line, including the error paths."
+    }
+  },
+  "ci_status": {
+    "workflow": ".github/workflows/typecheck.yml (tsc, 49-error ratchet)",
+    "result_on_pr": "FAILED TO START — not a code failure",
+    "github_annotation": "\"The job was not started because recent account payments have failed or your spending limit needs to be increased. Please check the 'Billing & plans' section in your settings\"",
+    "owner": "AppFlow-Studio GitHub org billing",
+    "replicated_locally": "The exact CI gate was run locally against the same fresh build: 44 errors vs the 49 ceiling — WOULD PASS. Error counts by file are all pre-existing (framer-motion Variants typings, scripts/, temp_conditions_old.tsx); none is in a file this change set touches.",
+    "action_required": "Restore GitHub Actions billing so the gate can actually run before merge. Do not merge on the strength of the local replication alone if the org treats this check as required.",
+    "vercel_preview_deployment": "PASS"
+  },
+  "production_incident_2026_11_17": {
+    "severity": "RESOLVED - no lead lost",
+    "what": "Migration 202611170003 (which forbids anon from writing form_source='meta-instant-form') was applied to production BEFORE the code that switches Meta ingestion to service_role was deployed. The deployed webhook still inserted with the publishable key, so every Meta lead insert was rejected by RLS.",
+    "window": "approximately 17:50 UTC to 22:45 UTC on 2026-11-17",
+    "cause": "Deploy ordering. The repo already documents the mirror-image failure in 202609140001_add_landing_path.sql, where code ran ahead of the schema for ~4 days. An ADDITIVE migration tolerates both versions of the code by construction; a RESTRICTING one does not, and must be applied after the deploy rather than before it.",
+    "blast_radius_verified_by_query": {
+      "meta_leads_lost": 0,
+      "evidence": "The newest Meta lead remained 2026-11-16 23:32 UTC throughout, i.e. before the window opened, so no Meta lead ever hit the closed policy.",
+      "website_forms": "UNAFFECTED - a real modal-appointment lead persisted normally at 19:40 UTC, inside the window.",
+      "staff_notification": "NEVER AT RISK - it does not depend on the insert succeeding, so even a Meta lead arriving in the window would still have reached info@ with full contact details. The loss would have been the database row and lead-sheet line, not the patient."
+    },
+    "fix": "Migration 202611170005 restores the interim policy: anon may set form_source='meta-instant-form' again (the pre-existing production behaviour) but still may NOT write any external_* column, which is the serious abuse (reserving a leadgen_id so the real webhook's insert is refused as a duplicate).",
+    "verified_after_fix": {
+      "deployed_code_can_persist_meta_leads": "PASS",
+      "anon_reserving_a_leadgen_id": "STILL BLOCKED",
+      "website_forms": "PASS",
+      "service_role_ingestion_path": "PASS"
+    },
+    "net_position_vs_before_this_work": "Strictly better. Before: anon could write external_* AND forge form_source. Now: external_* blocked; form_source forgery temporarily possible as it always was.",
+    "follow_up_required": "After the release carrying lib/meta-lead-ingest.ts is live AND a Meta lead is observed persisting with a non-null external_lead_id, re-apply the full policy from 202611170003. Re-tighten SQL is in the header of 202611170005."
+  }
+}

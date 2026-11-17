@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MSO patient confirmation — preview</title>
+<style>
+  body { margin:0; background:#f1f3f7; color:#111827;
+         font:14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+  .wrap { max-width:1180px; margin:0 auto; padding:28px 20px 60px; }
+  h1 { font-size:20px; margin:0 0 4px; }
+  .sub { color:#6b7280; margin:0 0 24px; }
+  .meta { background:#fff; border:1px solid #e5e7eb; border-radius:8px; padding:16px 18px; margin-bottom:24px; }
+  .meta dl { display:grid; grid-template-columns:150px 1fr; gap:8px 16px; margin:0; }
+  .meta dt { color:#6b7280; font-weight:600; }
+  .meta dd { margin:0; }
+  .cols { display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap; }
+  .panel { background:#fff; border:1px solid #e5e7eb; border-radius:8px; overflow:hidden; }
+  .panel > header { background:#f9fafb; border-bottom:1px solid #e5e7eb;
+                    padding:9px 14px; font-weight:600; font-size:12px;
+                    letter-spacing:.04em; text-transform:uppercase; color:#6b7280; }
+  .desktop { flex:1 1 620px; min-width:360px; }
+  .mobile  { flex:0 0 390px; }
+  .mobile .frame { width:390px; }
+  pre { margin:0; padding:16px; white-space:pre-wrap; font:13px/1.6 ui-monospace, Menlo, Consolas, monospace; }
+  .note { background:#fffbeb; border:1px solid #fde68a; border-radius:8px;
+          padding:14px 16px; margin-bottom:24px; color:#713f12; }
+  .note strong { color:#854d0e; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Meta V3 patient confirmation — email preview</h1>
+  <p class="sub">Rendered from the production template. Synthetic review copy; no patient data involved.</p>
+
+  <div class="note">
+    <strong>Not enabled in production.</strong>
+    ENABLE_META_PATIENT_CONFIRMATION_EMAIL defaults to 0. Resend's security page
+    states it is not HIPAA compliant and cannot sign a BAA, and the Supabase
+    organization has no HIPAA add-on. This preview exists so the design and copy
+    can be approved while that is resolved.
+  </div>
+
+  <div class="meta">
+    <dl>
+      <dt>From</dt><dd>Mountain Spine &amp; Orthopedics &lt;info@mountainspineorthopedics.com&gt;</dd>
+      <dt>Reply-To</dt><dd>info@mountainspineorthopedics.com</dd>
+      <dt>Subject</dt><dd>We've received your request</dd>
+      <dt>Preview text</dt><dd>Our scheduling team will be in touch during business hours.</dd>
+      <dt>Open tracking</dt><dd>disabled (no pixel; verify domain setting too)</dd>
+      <dt>Click tracking</dt><dd>disabled (no redirector; <code>tel:</code> must not be rewritten)</dd>
+      <dt>Remote assets</dt><dd>logo only, from the practice's own CDN</dd>
+    </dl>
+  </div>
+
+  <div class="cols">
+    <section class="panel desktop">
+      <header>Desktop / webmail</header>
+      <div class="frame"><div lang="en" style="background-color:#ffffff;margin:0;padding:0"><div style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden">Our scheduling team will be in touch during business hours.</div><table role="presentation" width="100%" cellPadding="0" cellSpacing="0" border="0" style="background-color:#ffffff;border-collapse:collapse;width:100%"><tbody><tr><td align="center" style="padding:24px 12px"><table role="presentation" cellPadding="0" cellSpacing="0" border="0" width="100%" style="border-collapse:collapse;max-width:560px;width:100%;text-align:left;font-family:Arial, Helvetica, sans-serif"><tbody><tr><td style="border-top:4px solid #0A50EC;padding-top:20px"><img src="https://mountainspineortho.b-cdn.net/newlogo4.png" width="132" alt="Mountain Spine &amp; Orthopedics" style="border:0;display:block;height:auto;max-width:100%;width:132px"/><div style="color:#0A50EC;font-size:17px;font-weight:700;letter-spacing:0.2px;line-height:24px;padding-top:10px">Mountain Spine &amp; Orthopedics</div></td></tr><tr><td style="padding-top:24px"><h1 style="color:#111827;font-size:23px;font-weight:700;line-height:31px;margin:0">We&#x27;ve Received Your Appointment Request!</h1></td></tr><tr><td style="padding-top:16px"><p style="color:#4b5563;font-size:16px;line-height:26px;margin:0">Thank you for contacting Mountain Spine &amp; Orthopedics.</p></td></tr><tr><td style="padding-top:12px"><p style="color:#4b5563;font-size:16px;line-height:26px;margin:0">We&#x27;ve successfully received your request, and a member of our scheduling team will contact you during business hours to help arrange your appointment.</p></td></tr><tr><td style="padding-top:24px"><table role="presentation" width="100%" cellPadding="0" cellSpacing="0" border="0" style="border-collapse:collapse;width:100%"><tbody><tr><td style="background-color:#f3f6fd;border-left:4px solid #0A50EC;border-radius:4px;padding:18px 20px"><p style="color:#4b5563;font-size:14px;font-weight:700;letter-spacing:0.3px;line-height:20px;margin:0;text-transform:uppercase">Please expect a call from:</p><p style="margin:8px 0 0 0"><a href="tel:+15612239959" style="color:#0A50EC;font-size:26px;font-weight:700;line-height:32px;text-decoration:none;white-space:nowrap">(561) 223-9959</a></p><p style="color:#4b5563;font-size:15px;line-height:22px;margin:8px 0 0 0">Save this number so you recognize our call.</p></td></tr></tbody></table></td></tr><tr><td style="padding-top:24px"><table role="presentation" cellPadding="0" cellSpacing="0" border="0" style="border-collapse:collapse"><tbody><tr><td align="center" style="background-color:#0A50EC;border-radius:6px;padding:15px 26px"><a href="tel:+15612239959" style="color:#ffffff;display:inline-block;font-size:16px;font-weight:700;line-height:20px;text-decoration:none">Call Our Scheduling Team</a></td></tr></tbody></table></td></tr><tr><td style="padding-top:24px"><p style="color:#4b5563;font-size:16px;line-height:26px;margin:0">Prefer to speak with us directly? You can also contact our scheduling team during business hours.</p></td></tr><tr><td style="padding-top:12px"><p style="color:#4b5563;font-size:16px;line-height:26px;margin:0">Your appointment is not confirmed until you speak with our scheduling team.</p></td></tr><tr><td style="padding-top:12px"><p style="color:#4b5563;font-size:16px;line-height:26px;margin:0">We look forward to assisting you.</p></td></tr><tr><td style="padding-top:24px"><hr style="border:0;border-top:1px solid #e5e7eb;height:1px;margin:0"/></td></tr><tr><td style="padding-bottom:8px;padding-top:16px"><p style="color:#4b5563;font-size:14px;line-height:22px;margin:0"><strong style="color:#111827">Mountain Spine &amp; Orthopedics</strong><br/><a href="tel:+15612239959" style="color:#4b5563;text-decoration:none">(561) 223-9959</a><br/><a href="https://mountainspineorthopedics.com" style="color:#0A50EC;text-decoration:none">mountainspineorthopedics.com</a></p></td></tr></tbody></table></td></tr></tbody></table></div></div>
+    </section>
+    <section class="panel mobile">
+      <header>Mobile — 390px</header>
+      <div class="frame"><div lang="en" style="background-color:#ffffff;margin:0;padding:0"><div style="display:none;font-size:1px;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden">Our scheduling team will be in touch during business hours.</div><table role="presentation" width="100%" cellPadding="0" cellSpacing="0" border="0" style="background-color:#ffffff;border-collapse:collapse;width:100%"><tbody><tr><td align="center" style="padding:24px 12px"><table role="presentation" cellPadding="0" cellSpacing="0" border="0" width="100%" style="border-collapse:collapse;max-width:560px;width:100%;text-align:left;font-family:Arial, Helvetica, sans-serif"><tbody><tr><td style="border-top:4px solid #0A50EC;padding-top:20px"><img src="https://mountainspineortho.b-cdn.net/newlogo4.png" width="132" alt="Mountain Spine &amp; Orthopedics" style="border:0;display:block;height:auto;max-width:100%;width:132px"/><div style="color:#0A50EC;font-size:17px;font-weight:700;letter-spacing:0.2px;line-height:24px;padding-top:10px">Mountain Spine &amp; Orthopedics</div></td></tr><tr><td style="padding-top:24px"><h1 style="color:#111827;font-size:23px;font-weight:700;line-height:31px;margin:0">We&#x27;ve Received Your Appointment Request!</h1></td></tr><tr><td style="padding-top:16px"><p style="color:#4b5563;font-size:16px;line-height:26px;margin:0">Thank you for contacting Mountain Spine &amp; Orthopedics.</p></td></tr><tr><td style="padding-top:12px"><p style="color:#4b5563;font-size:16px;line-height:26px;margin:0">We&#x27;ve successfully received your request, and a member of our scheduling team will contact you during business hours to help arrange your appointment.</p></td></tr><tr><td style="padding-top:24px"><table role="presentation" width="100%" cellPadding="0" cellSpacing="0" border="0" style="border-collapse:collapse;width:100%"><tbody><tr><td style="background-color:#f3f6fd;border-left:4px solid #0A50EC;border-radius:4px;padding:18px 20px"><p style="color:#4b5563;font-size:14px;font-weight:700;letter-spacing:0.3px;line-height:20px;margin:0;text-transform:uppercase">Please expect a call from:</p><p style="margin:8px 0 0 0"><a href="tel:+15612239959" style="color:#0A50EC;font-size:26px;font-weight:700;line-height:32px;text-decoration:none;white-space:nowrap">(561) 223-9959</a></p><p style="color:#4b5563;font-size:15px;line-height:22px;margin:8px 0 0 0">Save this number so you recognize our call.</p></td></tr></tbody></table></td></tr><tr><td style="padding-top:24px"><table role="presentation" cellPadding="0" cellSpacing="0" border="0" style="border-collapse:collapse"><tbody><tr><td align="center" style="background-color:#0A50EC;border-radius:6px;padding:15px 26px"><a href="tel:+15612239959" style="color:#ffffff;display:inline-block;font-size:16px;font-weight:700;line-height:20px;text-decoration:none">Call Our Scheduling Team</a></td></tr></tbody></table></td></tr><tr><td style="padding-top:24px"><p style="color:#4b5563;font-size:16px;line-height:26px;margin:0">Prefer to speak with us directly? You can also contact our scheduling team during business hours.</p></td></tr><tr><td style="padding-top:12px"><p style="color:#4b5563;font-size:16px;line-height:26px;margin:0">Your appointment is not confirmed until you speak with our scheduling team.</p></td></tr><tr><td style="padding-top:12px"><p style="color:#4b5563;font-size:16px;line-height:26px;margin:0">We look forward to assisting you.</p></td></tr><tr><td style="padding-top:24px"><hr style="border:0;border-top:1px solid #e5e7eb;height:1px;margin:0"/></td></tr><tr><td style="padding-bottom:8px;padding-top:16px"><p style="color:#4b5563;font-size:14px;line-height:22px;margin:0"><strong style="color:#111827">Mountain Spine &amp; Orthopedics</strong><br/><a href="tel:+15612239959" style="color:#4b5563;text-decoration:none">(561) 223-9959</a><br/><a href="https://mountainspineorthopedics.com" style="color:#0A50EC;text-decoration:none">mountainspineorthopedics.com</a></p></td></tr></tbody></table></td></tr></tbody></table></div></div>
+    </section>
+  </div>
+
+  <section class="panel" style="margin-top:24px">
+    <header>text/plain alternative</header>
+    <pre>We've Received Your Appointment Request!
+
+Thank you for contacting Mountain Spine &amp; Orthopedics.
+
+We've successfully received your request, and a member of our scheduling team will contact you during business hours to help arrange your appointment.
+
+Please expect a call from:
+(561) 223-9959
+
+Save this number so you recognize our call.
+
+Prefer to speak with us directly? You can also contact our scheduling team during business hours.
+
+Your appointment is not confirmed until you speak with our scheduling team.
+
+We look forward to assisting you.
+
+--
+Mountain Spine &amp; Orthopedics
+(561) 223-9959
+mountainspineorthopedics.com
+</pre>
+  </section>
+</div>
+</body>
+</html>
