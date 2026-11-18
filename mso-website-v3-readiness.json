@@ -1,7 +1,7 @@
 {
   "artifact": "mso-website-v3-readiness",
-  "schema_version": "1.2.0",
-  "generated_at": "2026-11-17 (rev 3 - DEPLOYED to production)",
+  "schema_version": "1.3.0",
+  "generated_at": "2026-11-17 (rev 4 - DEPLOYED, END-TO-END VERIFIED IN PRODUCTION)",
   "generated_by": "website environment (Next.js / Supabase / Resend)",
   "consumer": "mso-meta-v3-handoff environment",
   "business": "Mountain Spine & Orthopedics",
@@ -139,6 +139,13 @@
         "applied_to_production": true,
         "destructive": false,
         "note": "Interim policy correcting the deploy-ordering incident above. Supersedes 202611170003 until the service_role ingestion code is live."
+      },
+      {
+        "file": "supabase/migrations/202611170006_retighten_anon_insert_policy.sql",
+        "status": "DEPLOYED",
+        "applied_to_production": true,
+        "destructive": false,
+        "note": "Restores the full 202611170003 policy after the service_role ingestion path was verified end to end in production."
       }
     ],
     "columns_dropped": [],
@@ -470,14 +477,6 @@
       "title": "SUPABASE_SERVICE_ROLE_KEY must be set in Vercel Production",
       "detail": "Meta lead inserts now write as service_role, required by the tightened RLS policy. Without the key, Meta lead persistence fails loudly; staff alerts still send and the ingestion queue keeps the lead recoverable, and website forms are unaffected. Set it before merging PR #123.",
       "blocks": "Meta lead persistence after merge (not website forms, not staff alerts)"
-    },
-    {
-      "id": "OPEN-11",
-      "severity": "must-do-after-deploy",
-      "owner": "website environment",
-      "title": "Re-apply the full anon insert policy once service_role ingestion is live",
-      "detail": "202611170005 is the interim policy in force. It blocks anon from writing external_* but permits form_source='meta-instant-form', which is the pre-existing behaviour. Re-apply 202611170003 only after the release carrying lib/meta-lead-ingest.ts is deployed and a Meta lead has been observed persisting with a non-null external_lead_id. Re-tighten SQL is in the 202611170005 header.",
-      "blocks": "nothing - this is a hardening step that is currently one notch less tight than designed"
     }
   ],
   "activation_checklist": [
@@ -494,7 +493,7 @@
       "done": true
     },
     {
-      "item": "Webhook signature verification tested (locally and live)",
+      "item": "Webhook signature verification tested (local and live)",
       "done": true
     },
     {
@@ -502,7 +501,7 @@
       "done": true
     },
     {
-      "item": "Anonymous clients cannot write external_* identity columns",
+      "item": "Anonymous clients cannot write external_* or claim meta-instant-form",
       "done": true
     },
     {
@@ -526,11 +525,7 @@
       "done": true
     },
     {
-      "item": "PR #123 merged to main",
-      "done": true
-    },
-    {
-      "item": "Production deployment Ready and confirmed serving the new code",
+      "item": "PR #123 merged and deployed to production",
       "done": true
     },
     {
@@ -539,11 +534,23 @@
     },
     {
       "item": "A Meta lead observed persisting with a non-null external_lead_id",
-      "done": false
+      "done": true
     },
     {
-      "item": "Full RLS tightening re-applied (OPEN-11, gated on the line above)",
-      "done": false
+      "item": "V2 lead verified end to end in production",
+      "done": true
+    },
+    {
+      "item": "V3 lead verified end to end in production",
+      "done": true
+    },
+    {
+      "item": "Patient confirmation verified SUPPRESSED in production",
+      "done": true
+    },
+    {
+      "item": "Full RLS tightening re-applied and verified",
+      "done": true
     },
     {
       "item": "SUPABASE_SERVICE_ROLE_KEY scope narrowed to Production only",
@@ -574,11 +581,16 @@
       "done": false
     }
   ],
-  "message_to_meta_environment": "The website side is DEPLOYED and verified as of 2026-11-17 23:24 UTC (merge d2e5119). You can attach ads to V3 (3068973836772964) whenever you are ready. The site accepts V2 and V3 on Page 995449336974458 only, maps all four fields identically, stores the leadgen id under a unique constraint so your retries cannot duplicate a lead, records the leadgen id before answering 200 so a lead survives even if our background task dies, preserves campaign/ad set/ad attribution, and alerts info@ with the patient name removed from the subject. V2 (3634773886703639) stays fully supported for delayed delivery and reconciliation - do not archive it. A lead from any other form or Page is stored but quarantined: staff get a generic alert with identifiers only, so tell us before pointing a new form at us. ONE ASK: tell us when the first V3 lead goes through, because we need to observe one persisting with a non-null external_lead_id before we re-apply the final database hardening step. The patient confirmation email remains built, tested and OFF pending the practice resolving the PHI provider blockers; it does not affect lead capture. Do not rotate the shared Meta access token without coordinating - if revocation requires resetting the app secret, that same secret verifies our webhook signatures.",
+  "message_to_meta_environment": "The website side is COMPLETE, deployed and verified end to end against real production traffic as of 2026-11-17. Attach ads to V3 (3068973836772964) whenever you are ready - nothing further is needed from us. Verified in production: a real V2 lead and a synthetic V3 test lead both stored in under 2 seconds with the correct form_version, full campaign/ad set/ad attribution, a deduplicating unique constraint on the leadgen id, a durable receipt written before our 200 so a lead survives even if our background task dies, and a staff alert to info@ with the patient name removed from the subject. V2 (3634773886703639) remains fully supported for delayed delivery and reconciliation - do not archive it. A lead from any other form or Page is stored but quarantined: staff get a generic alert carrying identifiers only, so tell us before pointing a new form at us. The patient confirmation email is built, tested, and verified OFF in production (suppressed, zero provider calls); it stays off pending the practice resolving the PHI provider blockers, and it does not affect lead capture. Do not rotate the shared Meta access token without coordinating - if revocation requires resetting the app secret, that same secret verifies our webhook signatures.",
   "technical_readiness": {
-    "status": "DEPLOYED AND VERIFIED",
-    "note": "V3 lead capture, deduplication, durable ingestion, staff-subject privacy and the hardening items are LIVE in production as of 2026-11-17 23:24 UTC and verified by smoke test against the live domain. Two hardening steps remain open and are listed in post_deploy_outstanding: the full RLS tightening (gated on observing a real Meta lead persist) and narrowing the service-role key scope. This remains a SEPARATE decision from privacy authorization, which is unchanged: NOT AUTHORIZED.",
-    "blocking_items": []
+    "status": "COMPLETE - DEPLOYED AND VERIFIED END TO END",
+    "note": "V2 and V3 lead capture, deduplication, durable ingestion, privileged Meta ingestion, staff-subject privacy, the restricted quarantine, the fail-closed Page check and the full RLS tightening are all LIVE and verified against real production traffic. Nothing technical is outstanding for the V3 cutover.",
+    "blocking_items": [],
+    "remaining_non_blocking": [
+      "Narrow SUPABASE_SERVICE_ROLE_KEY to Production only (currently also Preview and Development).",
+      "Rotate the service_role key after its transcript exposure - see docs/healthcare-privacy-remediation.md 2.6.",
+      "Restore GitHub Actions billing so the tsc ratchet can run on PRs."
+    ]
   },
   "privacy_authorization": {
     "status": "NOT AUTHORIZED",
@@ -668,7 +680,8 @@
       "form and Page both authorized",
       "SUPABASE_SERVICE_ROLE_KEY present (the patient email fails closed without it)"
     ],
-    "historical_leads": "The 12 existing Meta leads cannot receive a confirmation even if the flag is flipped: a suppressed delivery row is terminal, so a Meta replay is refused."
+    "historical_leads": "The 12 existing Meta leads cannot receive a confirmation even if the flag is flipped: a suppressed delivery row is terminal, so a Meta replay is refused.",
+    "verified_in_production": "CONFIRMED by observation, not by reading config: both Meta leads processed on 2026-11-17 produced a patient-confirmation delivery row with status 'suppressed', error_code 'flag_disabled', attempt_count 0 and no provider message id. No email provider call was made for the patient email."
   },
   "smoke_test_results": {
     "where": "Local production build (next start) — NOT the Vercel preview",
@@ -784,12 +797,17 @@
   },
   "post_deploy_outstanding": {
     "OPEN-11_re_tighten_rls": {
-      "status": "STILL OPEN - BLOCKED ON A REAL META LEAD",
-      "what": "Re-apply the full anon insert policy from 202611170003, which also forbids anon from writing form_source='meta-instant-form'.",
-      "why_not_yet": "The gate is evidence, not time: it must be done only after a Meta lead has been observed persisting with a NON-NULL external_lead_id, which proves the deployed service_role ingestion path actually works end to end. Re-applying it before that proof risks repeating the 5-hour outage this work already caused once.",
-      "how_to_check": "select count(*) from public.forms where external_lead_id is not null;  -- must be >= 1",
-      "sql": "In the header of supabase/migrations/202611170005_restore_meta_insert_pending_service_role_deploy.sql",
-      "current_exposure_while_open": "A public client can forge form_source='meta-instant-form' (channel attribution and cost-per-lead). It CANNOT write any external_* column and CANNOT cause an email. This is the pre-existing behaviour, not a new exposure."
+      "status": "CLOSED - RE-APPLIED AND VERIFIED",
+      "closed_at": "2026-11-17",
+      "migration": "supabase/migrations/202611170006_retighten_anon_insert_policy.sql",
+      "evidence_that_unblocked_it": "Real V2 lead 1913133206136340 persisted with a non-null external_lead_id, proving the deployed ingestion path runs as service_role.",
+      "verified_after_applying": {
+        "website_form_insert_as_anon": "PASS",
+        "anon_claiming_form_source_meta_instant_form": "BLOCKED",
+        "anon_writing_external_lead_id": "BLOCKED",
+        "service_role_writing_external_columns": "PASS"
+      },
+      "rollback": "Restore the interim policy from 202611170005, which omits only the form_source clause. Do NOT relax the external_* clauses."
     },
     "env_var_scope": {
       "status": "RECOMMENDED CHANGE",
@@ -808,5 +826,36 @@
     "cause": "next/font/google downloads font CSS at build time. The redeploy ran with 'Skipping build cache, deployment was triggered without cache', so it had to re-fetch from Google Fonts and hit a transient failure.",
     "not_related_to": "This change set, and the new environment variables. The #123 build three minutes later, with the same environment, succeeded.",
     "why_it_is_worth_recording": "A cache-less production build of this repo can fail on a Google Fonts hiccup. That is a deploy-reliability risk precisely when it would hurt most: an emergency rollback or redeploy. Mitigation if it recurs: retry the build, or self-host the font via next/font/local. Out of scope here; no change made."
+  },
+  "end_to_end_production_verification": {
+    "status": "PASS",
+    "summary": "Two Meta leads flowed through the deployed pipeline on 2026-11-17: one REAL patient lead on V2, and one synthetic test lead on V3 created through Meta's own test_leads endpoint. Both completed. This is the evidence the final hardening step was gated on.",
+    "real_v2_lead": {
+      "leadgen_id": "1913133206136340",
+      "form_id": "3634773886703639",
+      "form_version": "v2",
+      "submitted_at_utc": "23:31:51",
+      "stored_at_utc": "23:31:56",
+      "ingestion_duration": "1.79s",
+      "attribution": "campaign, ad set and ad all captured",
+      "note": "A genuine patient, not a test. Arrived ~7 minutes after the production deploy. Staff were notified normally. It is retained in public.forms and must be worked like any other lead."
+    },
+    "synthetic_v3_lead": {
+      "leadgen_id": "2135196257099074",
+      "form_id": "3068973836772964",
+      "form_version": "v3",
+      "ingestion_duration": "1.21s",
+      "attribution": "campaign/ad set/ad NULL — correct, a test lead has no ad behind it, and the code left them empty rather than fabricating values",
+      "cleanup": "The public.forms row was deleted after verification, scoped by its exact leadgen id. The ingestion and delivery audit rows were deliberately KEPT: they hold no patient data and they are the proof the pipeline worked."
+    },
+    "what_this_proves": [
+      "The deployed code really does write Meta leads as service_role — external_lead_id is unwritable by anon, so a non-null value on a real row can only have come from the privileged path.",
+      "V2 and V3 both map correctly and are labelled with the right form_version, derived server-side.",
+      "Page authorization accepted the configured Page (995449336974458) for both.",
+      "The durable ingestion queue works: both rows reached status 'completed' with attempt_count 1 and are linked to their lead via submission_id.",
+      "Staff notification sent for both: status 'accepted' with a provider message id.",
+      "The patient confirmation did NOT send: status 'suppressed', error_code 'flag_disabled', attempt_count 0, no provider message id. The feature flag gate works in production, and the suppressed rows are terminal so flipping the flag later cannot retroactively mail these two."
+    ],
+    "timing": "Webhook receipt to fully stored and notified: under 2 seconds for both leads."
   }
 }
