@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { FRAME_ANCESTORS_CSP } from "./lib/security/frame-ancestors";
 
 const nextConfig: NextConfig = {
   // --- SEO OPTIMIZATION: Enforce consistent URLs ---
@@ -268,8 +269,11 @@ const nextConfig: NextConfig = {
         source: '/:path*',
         headers: [
           {
-            key: 'X-Frame-Options',
-            value: 'DENY',
+            // Replaces `X-Frame-Options: DENY`, which could not allowlist the
+            // press-release wires that embed our pages under a release.
+            // Allowlist lives in lib/security/frame-ancestors.ts.
+            key: 'Content-Security-Policy',
+            value: FRAME_ANCESTORS_CSP,
           },
           {
             key: 'X-Content-Type-Options',
